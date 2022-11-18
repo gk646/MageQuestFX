@@ -9,25 +9,41 @@ import java.awt.*;
 
 public class PlayerAttack extends Projectile {
 
-
+    private Point updateVector;
 
     public PlayerAttack(Display display, MouseHandler mouseHandler) {
         super(display, mouseHandler);
-        this.projectileSpeed = 6;
+        this.projectileSpeed = 10;
         this.mousePosition = mouseHandler.getMouseLocation();
-        this.xPosition = display.player.getPlayerPosition().x;
-        this.yPosition = display.player.getPlayerPosition().y;
-
+        this.playerPosition = display.player.getPlayerPosition();
+        this.xPosition = playerPosition.x;
+        this.yPosition = playerPosition.y;
+        this.updateVector = getUpdateVector();
     }
 
     @Override
     public void draw(Graphics2D g2) {
+        g2.fillOval( xPosition,yPosition, 20, 20);
         g2.setColor(Color.green);
-        g2.drawOval(xPosition, yPosition, 20, 20);
     }
-
     @Override
     public void update() {
-        xPosition += projectileSpeed;
+        xPosition += updateVector.x;
+        yPosition += updateVector.y;
+
+    }
+    private double maxgetUpdateVector() {
+
+        return ((double) -(mousePosition.y - playerPosition.y) / (double) (mousePosition.x - playerPosition.x));
+
+    }
+
+    private Point getUpdateVector() {
+        double deltax = mousePosition.x - playerPosition.x;
+        double deltay = mousePosition.y - playerPosition.y;
+        double length = Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));
+        double normalizedy = (deltay/ length)*projectileSpeed;
+        double normalizedx = (deltax /length)*projectileSpeed;
+        return new Point((int) normalizedx, (int)normalizedy);
     }
 }

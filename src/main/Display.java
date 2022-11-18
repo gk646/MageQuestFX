@@ -19,7 +19,7 @@ public class Display extends JPanel implements Runnable {
     Thread gameThread;
 
     KeyHandler keyHandler = new KeyHandler();
-    MouseHandler mouseHandler = new MouseHandler();
+    public MouseHandler mouseHandler = new MouseHandler();
     Projectile projectile = new Projectile(this, mouseHandler);
 
     public Player player = new Player(this, keyHandler);
@@ -31,9 +31,6 @@ public class Display extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
-
-
-
     }
 
     /**
@@ -81,7 +78,6 @@ public class Display extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
 
 
     public void update() {

@@ -9,6 +9,8 @@ public class MouseHandler implements MouseListener {
 
     public Point getMouseLocation() {
         Point p = MouseInfo.getPointerInfo().getLocation();
+        p.x-=75;
+        p.y-= 35;
         return p;
     }
 
@@ -21,6 +23,7 @@ public class MouseHandler implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == 1) {
             mousePressed = true;
+
         }
 
 

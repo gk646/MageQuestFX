@@ -6,7 +6,7 @@ import main.Display;
 import projectile.projectiles.PlayerAttack;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+// import java.awt.image.BufferedImage;
 
 
 public class Projectile {
@@ -16,9 +16,9 @@ public class Projectile {
     public int counter;
     public int projectileSpeed;
 
-    public BufferedImage pellet;
-    Display display;
-    public Point mousePosition;
+    //public BufferedImage pellet;
+    public Display display;
+    public Point mousePosition,playerPosition;
 
     public Projectile(Display display, MouseHandler mouseHandler) {
         this.mouseHandler = mouseHandler;
@@ -26,16 +26,16 @@ public class Projectile {
     }
 
     public void draw(Graphics2D g2) {
-        for(Projectile projectile : projectiles){
-            if(projectile!=null){
+        for (Projectile projectile : projectiles) {
+            if (projectile != null) {
                 projectile.draw(g2);
             }
         }
     }
 
     public void update() {
-        for(Projectile projectile : projectiles){
-            if(projectile!=null){
+        for (Projectile projectile : projectiles) {
+            if (projectile != null) {
                 projectile.update();
             }
         }

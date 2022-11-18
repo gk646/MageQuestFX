@@ -66,7 +66,7 @@ public class Player extends Entity {
 
     }
     public Point getPlayerPosition(){
-        return new Point(xPosition+entityWidth/2,yPosition+entityHeight/2);
+        return new Point(xPosition+entityWidth/4,yPosition+entityHeight/4);
     }
 
 }
