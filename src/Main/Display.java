@@ -1,9 +1,13 @@
 package Main;
 
 import Entitys.Player;
+import Projectiles.FirstBullet;
+import Projectiles.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static Projectiles.Projectile.projectiles;
 
 public class Display extends JPanel implements Runnable {
     //Screen setting
@@ -17,7 +21,7 @@ public class Display extends JPanel implements Runnable {
     MouseHandler mouseHandler = new MouseHandler();
 
     Player player = new Player(this, keyHandler);
-
+    Projectile projectile = new Projectile(this, mouseHandler);
     public Display() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
@@ -25,6 +29,7 @@ public class Display extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
+
     }
 
     /**
@@ -76,14 +81,23 @@ public class Display extends JPanel implements Runnable {
 
     public void update() {
         player.update();
-
+        projectile.update();
+        for(Projectile projectile1 : projectiles) {
+            if (projectile1 != null) {
+                projectile1.yPosition += projectile1.projectileSpeed;
+            }
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
-
+        for(Projectile projectile : projectiles) {
+            if (projectile != null) {
+                projectile.draw(g2);
+            }
+        }
         g2.dispose();
     }
 }

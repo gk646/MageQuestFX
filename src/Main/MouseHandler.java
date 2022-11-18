@@ -16,13 +16,16 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("e");
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        mousePressed = true;
-        System.out.println("e");
+        if (e.getButton() == 1) {
+            mousePressed = true;
+        }
+
+
     }
 
 
@@ -31,7 +34,7 @@ public class MouseHandler implements MouseListener {
         if (e.getButton() == 1) {
             mousePressed = false;
         }
-        System.out.println("e");
+
     }
 
     @Override
