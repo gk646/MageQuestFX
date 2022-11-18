@@ -1,7 +1,6 @@
 package Main;
 
 import Entitys.Player;
-import Projectiles.FirstBullet;
 import Projectiles.Projectile;
 
 import javax.swing.*;
@@ -22,6 +21,7 @@ public class Display extends JPanel implements Runnable {
 
     Player player = new Player(this, keyHandler);
     Projectile projectile = new Projectile(this, mouseHandler);
+
     public Display() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
@@ -64,7 +64,7 @@ public class Display extends JPanel implements Runnable {
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks+" "+mouseHandler.getMouseLocation());
+                System.out.println(fps + " " + logic_ticks + " " + mouseHandler.getMouseLocation());
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
@@ -82,7 +82,7 @@ public class Display extends JPanel implements Runnable {
     public void update() {
         player.update();
         projectile.update();
-        for(Projectile projectile1 : projectiles) {
+        for (Projectile projectile1 : projectiles) {
             if (projectile1 != null) {
                 projectile1.yPosition += projectile1.projectileSpeed;
             }
@@ -93,7 +93,7 @@ public class Display extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
-        for(Projectile projectile : projectiles) {
+        for (Projectile projectile : projectiles) {
             if (projectile != null) {
                 projectile.draw(g2);
             }
