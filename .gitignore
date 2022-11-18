@@ -9,4 +9,4 @@
 out
 .idea
 *.iml
-*.png
+/src/resources
