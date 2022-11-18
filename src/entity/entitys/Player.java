@@ -65,13 +65,10 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage playerSprite;
-        switch (direction) {
-            case "facingUp":
-                playerSprite = up1;
-            case default:
-                playerSprite = up1;
-
+        if ("facingUp".equals(direction)) {
+            playerSprite = up1;
         }
+        playerSprite = up1;
         g2.drawImage(playerSprite, xPosition, yPosition, 48, 48, null);
 
     }

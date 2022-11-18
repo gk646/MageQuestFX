@@ -1,8 +1,7 @@
 package main;
 
 import javax.swing.*;
-
-public class Main {
+public class Game {
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

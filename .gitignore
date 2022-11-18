@@ -10,3 +10,4 @@ out
 .idea
 *.iml
 /src/resources
+META-INF
