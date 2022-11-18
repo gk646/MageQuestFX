@@ -1,10 +1,8 @@
-package Main;
+package handlers;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
 
 public class MouseHandler implements MouseListener {
     public boolean mousePressed, mousedReleased;

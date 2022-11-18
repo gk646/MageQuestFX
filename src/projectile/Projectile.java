@@ -1,14 +1,15 @@
-package Projectiles;
+package projectile;
 
-import Main.Display;
-import Main.MouseHandler;
+
+import handlers.MouseHandler;
+import main.Display;
+import projectile.projectiles.PlayerAttack;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Vector;
 
 
-public class Projectile implements Runnable {
+public class Projectile {
     public static Projectile[] projectiles = new Projectile[1000];
     public int xPosition, yPosition;
     MouseHandler mouseHandler;
@@ -17,30 +18,34 @@ public class Projectile implements Runnable {
 
     public BufferedImage pellet;
     Display display;
-    public Vector direction;
+    public Point mousePosition;
 
     public Projectile(Display display, MouseHandler mouseHandler) {
-        this.mouseHandler =mouseHandler;
+        this.mouseHandler = mouseHandler;
         this.display = display;
     }
 
     public void draw(Graphics2D g2) {
-
+        for(Projectile projectile : projectiles){
+            if(projectile!=null){
+                projectile.draw(g2);
+            }
+        }
     }
 
     public void update() {
+        for(Projectile projectile : projectiles){
+            if(projectile!=null){
+                projectile.update();
+            }
+        }
         if (mouseHandler.mousePressed) {
-
             if (projectiles.length == counter) {
                 counter = 0;
             }
-            projectiles[counter++] = new FirstBullet(display, mouseHandler);
+            projectiles[counter++] = new PlayerAttack(display, mouseHandler);
         }
     }
 
 
-    @Override
-    public void run() {
-
-    }
 }

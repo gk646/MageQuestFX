@@ -1,26 +1,28 @@
-package Main;
+package main;
 
-import Entitys.Player;
-import Projectiles.Projectile;
+import entity.entitys.Player;
+import handlers.KeyHandler;
+import handlers.MouseHandler;
+import projectile.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static Projectiles.Projectile.projectiles;
 
 public class Display extends JPanel implements Runnable {
-    //Screen setting
 
+    //Screen setting
     public static final double FRAMES_PER_SECOND = 120;
     public static final int SCREEN_WIDTH = 1400;
     public static final int SCREEN_HEIGHT = 900;
+
     Thread gameThread;
 
     KeyHandler keyHandler = new KeyHandler();
     MouseHandler mouseHandler = new MouseHandler();
-
-    Player player = new Player(this, keyHandler);
     Projectile projectile = new Projectile(this, mouseHandler);
+
+    public Player player = new Player(this, keyHandler);
 
     public Display() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -30,6 +32,8 @@ public class Display extends JPanel implements Runnable {
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
 
+
+
     }
 
     /**
@@ -37,7 +41,6 @@ public class Display extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
@@ -64,7 +67,7 @@ public class Display extends JPanel implements Runnable {
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks + " " + mouseHandler.getMouseLocation());
+                System.out.println(fps + " " + logic_ticks);
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
@@ -79,25 +82,20 @@ public class Display extends JPanel implements Runnable {
         gameThread.start();
     }
 
+
+
     public void update() {
-        player.update();
         projectile.update();
-        for (Projectile projectile1 : projectiles) {
-            if (projectile1 != null) {
-                projectile1.yPosition += projectile1.projectileSpeed;
-            }
-        }
+        player.update();
+
+
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        projectile.draw(g2);
         player.draw(g2);
-        for (Projectile projectile : projectiles) {
-            if (projectile != null) {
-                projectile.draw(g2);
-            }
-        }
         g2.dispose();
     }
 }

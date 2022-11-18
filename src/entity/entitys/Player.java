@@ -1,12 +1,14 @@
-package Entitys;
+package entity.entitys;
 
-import Main.Display;
-import Main.KeyHandler;
+import main.Display;
+import handlers.KeyHandler;
+import entity.Entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
     Display display;
@@ -18,11 +20,13 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
         direction = "facingUp";
+        this.entityHeight = 48;
+        this.entityWidth = 48;
     }
 
     public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/boy_down_1.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/boy_down_1.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,6 +64,9 @@ public class Player extends Entity {
         }
         g2.drawImage(playerSprite, xPosition, yPosition, 48, 48, null);
 
+    }
+    public Point getPlayerPosition(){
+        return new Point(xPosition+entityWidth/2,yPosition+entityHeight/2);
     }
 
 }
