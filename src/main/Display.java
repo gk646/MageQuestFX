@@ -50,9 +50,9 @@ public class Display extends JPanel implements Runnable {
             firstTimeGate = System.nanoTime();
             delta += (firstTimeGate - lastTime) / interval;
             fpsCounter += (firstTimeGate - lastTime);
-            timer += delta;
+            timer += (firstTimeGate - lastTime) / interval;
             lastTime = firstTimeGate;
-            if (timer >= 130000) {
+            if (timer >= 2) {
                 update();
                 timer = 0;
                 logic_ticks++;
@@ -69,8 +69,6 @@ public class Display extends JPanel implements Runnable {
                 fps = 0;
                 logic_ticks = 0;
             }
-
-
         }
     }
 
