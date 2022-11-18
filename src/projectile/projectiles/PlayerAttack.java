@@ -13,7 +13,7 @@ public class PlayerAttack extends Projectile {
 
     public PlayerAttack(Display display, MouseHandler mouseHandler) {
         super(display, mouseHandler);
-        this.projectileSpeed = 10;
+        this.projectileSpeed = 11;
         this.mousePosition = mouseHandler.getMouseLocation();
         this.playerPosition = display.player.getPlayerPosition();
         this.xPosition = playerPosition.x;

@@ -1,6 +1,7 @@
 package main;
 
 import entity.entitys.Player;
+import gameworld.tiles.TileManager;
 import handlers.KeyHandler;
 import handlers.MouseHandler;
 import projectile.Projectile;
@@ -19,6 +20,7 @@ public class Display extends JPanel implements Runnable {
     Thread gameThread;
 
     KeyHandler keyHandler = new KeyHandler();
+    TileManager tileManager = new TileManager(this);
     public MouseHandler mouseHandler = new MouseHandler();
     Projectile projectile = new Projectile(this, mouseHandler);
 
@@ -82,12 +84,12 @@ public class Display extends JPanel implements Runnable {
         projectile.update();
         player.update();
 
-
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        tileManager.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
         g2.dispose();

@@ -15,13 +15,20 @@ public class Player extends Entity {
     KeyHandler keyHandler;
 
     public Player(Display display, KeyHandler keyHandler) {
+        //Handlers
         this.display = display;
         this.keyHandler = keyHandler;
+
+        //Initialize default values
         setDefaultValues();
         getPlayerImage();
-        direction = "facingUp";
-        this.entityHeight = 48;
-        this.entityWidth = 48;
+
+        //Collision
+        this.solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width= entityWidth- solidArea.x;
+        solidArea.height = 32;
     }
 
     public void getPlayerImage() {
@@ -36,6 +43,9 @@ public class Player extends Entity {
         xPosition = 100;
         yPosition = 100;
         movementSpeed = 4;
+        direction = "facingUp";
+        this.entityHeight = 48;
+        this.entityWidth = 48;
     }
 
     public void update() {
@@ -54,9 +64,9 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        BufferedImage playerSprite = null;
+        BufferedImage playerSprite;
         switch (direction) {
-            case "up":
+            case "facingUp":
                 playerSprite = up1;
             case default:
                 playerSprite = up1;
