@@ -23,7 +23,6 @@ public class Player extends Entity {
     public void getPlayerImage() {
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/boy_down_1.png"));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,14 +51,14 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage playerSprite = null;
-        switch (direction){
+        switch (direction) {
             case "up":
-                playerSprite  = up1;
+                playerSprite = up1;
             case default:
                 playerSprite = up1;
 
         }
-        g2.drawImage(playerSprite,xPosition,yPosition,48,48,null);
+        g2.drawImage(playerSprite, xPosition, yPosition, 48, 48, null);
 
     }
 
