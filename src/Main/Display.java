@@ -14,6 +14,8 @@ public class Display extends JPanel implements Runnable {
     Thread gameThread;
 
     KeyHandler keyHandler = new KeyHandler();
+    MouseHandler mouseHandler = new MouseHandler();
+
     Player player = new Player(this, keyHandler);
 
     public Display() {
@@ -21,17 +23,21 @@ public class Display extends JPanel implements Runnable {
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
+        this.addMouseListener(mouseHandler);
         this.setFocusable(true);
     }
-    /**Main game loop*/
+
+    /**
+     * Main game loop
+     */
     @Override
     public void run() {
 
         double delta = 0;
-        long firstTimeGate = 0;
+        long firstTimeGate;
         double timer = 0;
         int fps = 0;
-        int logicticks = 0;
+        int logic_ticks = 0;
         double fpsCounter = 0;
         long lastTime = System.nanoTime();
         double interval = 1000000000 / FRAMES_PER_SECOND;
@@ -44,7 +50,7 @@ public class Display extends JPanel implements Runnable {
             if (timer >= 130000) {
                 update();
                 timer = 0;
-                logicticks++;
+                logic_ticks++;
             }
             if (delta >= 1) {
                 repaint();
@@ -53,10 +59,10 @@ public class Display extends JPanel implements Runnable {
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps+" "+logicticks);
+                System.out.println(fps + " " + logic_ticks+" "+mouseHandler.getMouseLocation());
                 fpsCounter = 0;
                 fps = 0;
-                logicticks = 0;
+                logic_ticks = 0;
             }
 
 
@@ -69,7 +75,7 @@ public class Display extends JPanel implements Runnable {
     }
 
     public void update() {
-       player.update();
+        player.update();
 
     }
 
@@ -77,6 +83,7 @@ public class Display extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
+
         g2.dispose();
     }
 }
