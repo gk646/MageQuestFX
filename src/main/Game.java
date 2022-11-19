@@ -1,6 +1,8 @@
 package main;
 
 import javax.swing.*;
+import java.awt.*;
+
 public class Game {
     public static void main(String[] args) {
         JFrame window = new JFrame();
@@ -8,6 +10,7 @@ public class Game {
         window.setResizable(false);
         window.setTitle("Game");
         Display display = new Display();
+        window.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         window.add(display);
         window.pack();
         window.setLocationRelativeTo(null);

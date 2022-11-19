@@ -3,11 +3,14 @@ package main;
 import entity.entitys.Player;
 import gameworld.tiles.TileManager;
 import handlers.KeyHandler;
+import handlers.MotionHandler;
 import handlers.MouseHandler;
 import projectile.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 
 public class Display extends JPanel implements Runnable {
@@ -17,14 +20,18 @@ public class Display extends JPanel implements Runnable {
     public static final int SCREEN_WIDTH = 1400;
     public static final int SCREEN_HEIGHT = 900;
 
+    //World settings
+    public final int  worldWidth = 100*48;
+    public final int worldHeight = 100 *48;
     Thread gameThread;
-
     KeyHandler keyHandler = new KeyHandler();
     TileManager tileManager = new TileManager(this);
     public MouseHandler mouseHandler = new MouseHandler();
-    Projectile projectile = new Projectile(this, mouseHandler);
+
 
     public Player player = new Player(this, keyHandler);
+    public MotionHandler motionHandler = new MotionHandler();
+    Projectile projectile = new Projectile(this,motionHandler, mouseHandler);
 
     public Display() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -33,6 +40,8 @@ public class Display extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
+        this.addMouseMotionListener(motionHandler);
+
     }
 
     /**

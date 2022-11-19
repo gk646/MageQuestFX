@@ -1,5 +1,6 @@
 package projectile.projectiles;
 
+import handlers.MotionHandler;
 import main.Display;
 import handlers.MouseHandler;
 import projectile.Projectile;
@@ -11,14 +12,16 @@ public class PlayerAttack extends Projectile {
 
     private final Point updateVector;
 
-    public PlayerAttack(Display display, MouseHandler mouseHandler) {
-        super(display, mouseHandler);
+    public PlayerAttack(Display display,MotionHandler motionHandler, MouseHandler mouseHandler) {
+        super(display,motionHandler,mouseHandler);
         this.projectileSpeed = 11;
-        this.mousePosition = mouseHandler.getMouseLocation();
+
+        this.mousePosition = display.motionHandler.mousePosition;
         this.playerPosition = display.player.getPlayerPosition();
         this.xPosition = playerPosition.x;
         this.yPosition = playerPosition.y;
         this.updateVector = getUpdateVector();
+
     }
 
     @Override
@@ -35,6 +38,9 @@ public class PlayerAttack extends Projectile {
     }
 
     private Point getUpdateVector() {
+        if(mousePosition==null){
+            mousePosition = mouseHandler.mousePosition;
+        }
         double deltax = mousePosition.x - playerPosition.x;
         double deltay = mousePosition.y - playerPosition.y;
         double length = Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));

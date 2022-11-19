@@ -13,11 +13,16 @@ import java.util.Objects;
 public class Player extends Entity {
     Display display;
     KeyHandler keyHandler;
+    public final int screenX;
+    public final int screenY;
+
 
     public Player(Display display, KeyHandler keyHandler) {
         //Handlers
         this.display = display;
         this.keyHandler = keyHandler;
+        screenX = Display.SCREEN_WIDTH/2;
+        screenY = Display.SCREEN_HEIGHT/2;
 
         //Initialize default values
         setDefaultValues();
@@ -40,8 +45,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        xPosition = 100;
-        yPosition = 100;
+        worldX = 1000;
+        worldY = 1000;
         movementSpeed = 4;
         direction = "facingUp";
         this.entityHeight = 48;
@@ -50,16 +55,16 @@ public class Player extends Entity {
 
     public void update() {
         if (keyHandler.upPressed) {
-            yPosition -= movementSpeed;
+            worldY -= movementSpeed;
         }
         if (keyHandler.downPressed) {
-            yPosition += movementSpeed;
+            worldY += movementSpeed;
         }
         if (keyHandler.leftPressed) {
-            xPosition -= movementSpeed;
+            worldX -= movementSpeed;
         }
         if (keyHandler.rightPressed) {
-            xPosition += movementSpeed;
+            worldX += movementSpeed;
         }
     }
 
@@ -69,11 +74,11 @@ public class Player extends Entity {
             playerSprite = up1;
         }
         playerSprite = up1;
-        g2.drawImage(playerSprite, xPosition, yPosition, 48, 48, null);
+        g2.drawImage(playerSprite, screenX, screenY, 48, 48, null);
 
     }
     public Point getPlayerPosition(){
-        return new Point(xPosition+entityWidth/4,yPosition+entityHeight/4);
+        return new Point(worldX+entityWidth/4,worldY+entityHeight/4);
     }
 
 }

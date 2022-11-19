@@ -1,6 +1,7 @@
 package projectile;
 
 
+import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.Display;
 import projectile.projectiles.PlayerAttack;
@@ -12,17 +13,20 @@ import java.awt.*;
 public class Projectile {
     public static Projectile[] projectiles = new Projectile[1000];
     public int xPosition, yPosition;
-    MouseHandler mouseHandler;
     public int counter;
     public int projectileSpeed;
 
     //public BufferedImage pellet;
     public Display display;
-    public Point mousePosition,playerPosition;
+    public Point mousePosition, playerPosition;
+    public MotionHandler motionHandler;
+    public MouseHandler mouseHandler;
 
-    public Projectile(Display display, MouseHandler mouseHandler) {
-        this.mouseHandler = mouseHandler;
+    public Projectile(Display display, MotionHandler motionHandler, MouseHandler mouseHandler) {
         this.display = display;
+        this.motionHandler = motionHandler;
+        this.mouseHandler = mouseHandler;
+
     }
 
     public void draw(Graphics2D g2) {
@@ -39,11 +43,12 @@ public class Projectile {
                 projectile.update();
             }
         }
-        if (mouseHandler.mousePressed) {
+        if (this.mouseHandler.mousePressed) {
             if (projectiles.length == counter) {
                 counter = 0;
             }
-            projectiles[counter++] = new PlayerAttack(display, mouseHandler);
+            projectiles[counter++] = new PlayerAttack(display, motionHandler, mouseHandler);
+            motionHandler.mousePressed = false;
         }
     }
 
