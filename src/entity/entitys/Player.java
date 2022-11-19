@@ -45,8 +45,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = 1000;
-        worldY = 1000;
+        worldX = 2400;
+        worldY = 2400;
         movementSpeed = 4;
         direction = "facingUp";
         this.entityHeight = 48;
