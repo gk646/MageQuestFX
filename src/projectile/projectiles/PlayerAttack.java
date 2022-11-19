@@ -18,22 +18,20 @@ public class PlayerAttack extends Projectile {
 
         this.mousePosition = display.motionHandler.mousePosition;
         this.playerPosition = display.player.getPlayerPosition();
-        this.xPosition = playerPosition.x;
-        this.yPosition = playerPosition.y;
         this.updateVector = getUpdateVector();
 
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.fillOval(xPosition, yPosition, 20, 20);
+        g2.fillOval(playerPosition.x, playerPosition.y, 20, 20);
         g2.setColor(Color.green);
     }
 
     @Override
     public void update() {
-        xPosition += updateVector.x;
-        yPosition += updateVector.y;
+        playerPosition.x += updateVector.x;
+        playerPosition.y += updateVector.y;
 
     }
 

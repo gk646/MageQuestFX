@@ -45,13 +45,18 @@ public class Projectile {
                 projectile.update();
             }
         }
-        if (this.mouseHandler.mousePressed) {
+        if (this.mouseHandler.mouse1Pressed&&display.globalLogicTicks%10 ==0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
             PROJECTILES[counter++] = new PlayerAttack(display, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
-        }
+        }else if(this.mouseHandler.mouse2Pressed&&display.globalLogicTicks%30 ==0)
+            if (PROJECTILES.length == counter) {
+                counter = 0;
+            }
+            PROJECTILES[counter++] = new AltFire(display, motionHandler, mouseHandler);
+            motionHandler.mousePressed = false;
     }
 
 
