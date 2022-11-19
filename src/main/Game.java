@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Game {
+    /**
+     * @author Lukas Gilch
+     */
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

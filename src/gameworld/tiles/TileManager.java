@@ -38,14 +38,17 @@ public class TileManager {
         }
     }
 
+    /**
+     * Loading the map data from a .txt-File. Iam using Tiled as a level editor.
+     */
     public void loadMap() {
         try {
             InputStream inputStream = getClass().getResourceAsStream("/resources/maps/map1.txt");
+            assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             int row = 0;
             int col = 0;
-            while (row < 100 && row < 100) {
-
+            while (row < 100 && col < 100) {
                 String line = bufferedReader.readLine();
                 while (col < 100) {
                     String[] numbers = line.split(" ");
@@ -66,23 +69,25 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-        int col = 0;
-        int row = 0;
-        int xPositionTile = 0;
-        int yPositionTile = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while (col <= 100 && row <= 100) {
-            int tileNum = mapData[col][row];
+        while (worldCol <= 100 && worldRow <= 100) {
+            //reading out tile data
+            int tileNum = mapData[worldCol][worldRow];
+            //making world camera
+            int worldX = worldCol * 48;
+            int worldY = worldRow * 48;
+            //
+            int screenX = worldX - display.player.worldX + display.player.screenX;
+            int screenY = worldY - display.player.worldY + display.player.screenY;
 
-            g2.drawImage(tileArray[tileNum].tileImage, xPositionTile, yPositionTile, tileArray[0].tileSize, tileArray[0].tileSize, null);
-            xPositionTile+= tileArray[tileNum].tileSize;
-            col++;
-            if (col == 100) {
-                col = 0;
-                xPositionTile =0;
-                row++;
-                yPositionTile+= tileArray[tileNum].tileSize;
+            g2.drawImage(tileArray[tileNum].tileImage, screenX, screenY, tileArray[0].tileSize, tileArray[0].tileSize, null);
 
+            worldCol++;
+            if (worldCol == 100) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }

@@ -9,9 +9,11 @@ import projectile.projectiles.PlayerAttack;
 import java.awt.*;
 // import java.awt.image.BufferedImage;
 
-
+/**
+ * Main inheritable class for all projectiles
+ */
 public class Projectile {
-    public static Projectile[] projectiles = new Projectile[1000];
+    public final static Projectile[] PROJECTILES = new Projectile[1000];
     public int xPosition, yPosition;
     public int counter;
     public int projectileSpeed;
@@ -30,7 +32,7 @@ public class Projectile {
     }
 
     public void draw(Graphics2D g2) {
-        for (Projectile projectile : projectiles) {
+        for (Projectile projectile : PROJECTILES) {
             if (projectile != null) {
                 projectile.draw(g2);
             }
@@ -38,16 +40,16 @@ public class Projectile {
     }
 
     public void update() {
-        for (Projectile projectile : projectiles) {
+        for (Projectile projectile : PROJECTILES) {
             if (projectile != null) {
                 projectile.update();
             }
         }
         if (this.mouseHandler.mousePressed) {
-            if (projectiles.length == counter) {
+            if (PROJECTILES.length == counter) {
                 counter = 0;
             }
-            projectiles[counter++] = new PlayerAttack(display, motionHandler, mouseHandler);
+            PROJECTILES[counter++] = new PlayerAttack(display, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
         }
     }

@@ -3,6 +3,9 @@ package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Main inheritable class for all entity's
+ */
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight;
     public int movementSpeed;

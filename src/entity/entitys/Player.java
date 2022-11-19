@@ -21,8 +21,8 @@ public class Player extends Entity {
         //Handlers
         this.display = display;
         this.keyHandler = keyHandler;
-        screenX = Display.SCREEN_WIDTH/2;
-        screenY = Display.SCREEN_HEIGHT/2;
+        screenX = Display.SCREEN_WIDTH / 2;
+        screenY = Display.SCREEN_HEIGHT / 2;
 
         //Initialize default values
         setDefaultValues();
@@ -32,7 +32,7 @@ public class Player extends Entity {
         this.solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
-        solidArea.width= entityWidth- solidArea.x;
+        solidArea.width = entityWidth - solidArea.x;
         solidArea.height = 32;
     }
 
@@ -70,15 +70,13 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage playerSprite;
-        if ("facingUp".equals(direction)) {
-            playerSprite = up1;
-        }
         playerSprite = up1;
         g2.drawImage(playerSprite, screenX, screenY, 48, 48, null);
 
     }
-    public Point getPlayerPosition(){
-        return new Point(worldX+entityWidth/4,worldY+entityHeight/4);
+
+    public Point getPlayerPosition() {
+        return new Point(screenX + entityWidth / 4, screenY + entityHeight / 4);
     }
 
 }

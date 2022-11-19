@@ -41,11 +41,11 @@ public class PlayerAttack extends Projectile {
         if(mousePosition==null){
             mousePosition = mouseHandler.mousePosition;
         }
-        double deltax = mousePosition.x - playerPosition.x;
-        double deltay = mousePosition.y - playerPosition.y;
-        double length = Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));
-        double normalizedy = (deltay / length) * projectileSpeed;
-        double normalizedx = (deltax / length) * projectileSpeed;
-        return new Point((int) normalizedx, (int) normalizedy);
+        double deltaX = mousePosition.x - playerPosition.x;
+        double deltaY = mousePosition.y - playerPosition.y;
+        double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double normalizedY = (deltaY / length) * projectileSpeed;
+        double normalizedX = (deltaX / length) * projectileSpeed;
+        return new Point((int) normalizedX, (int) normalizedY);
     }
 }
