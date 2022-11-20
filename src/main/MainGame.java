@@ -42,7 +42,7 @@ public class MainGame extends JPanel implements Runnable {
     public int globalLogicTicks;
 
     /**
-     * Main game loop
+     * Main game loop class
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -52,8 +52,11 @@ public class MainGame extends JPanel implements Runnable {
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-
+        this.isOptimizedDrawingEnabled();
+        this.setOpaque(true);//todo check performance
+        this.setIgnoreRepaint(true);
     }
+
 
     /**
      * Main game loop
@@ -74,6 +77,8 @@ public class MainGame extends JPanel implements Runnable {
             fpsCounter += (firstTimeGate - lastTime);
             timer += (firstTimeGate - lastTime) / interval;
             lastTime = firstTimeGate;
+            fps++;
+
             if (timer >= 2) {
                 update();
                 timer = 0;
@@ -83,7 +88,7 @@ public class MainGame extends JPanel implements Runnable {
             if (delta >= 1) {
                 repaint();
                 delta--;
-                fps++;
+
             }
 
             if (fpsCounter >= 1000000000) {
@@ -103,6 +108,7 @@ public class MainGame extends JPanel implements Runnable {
     /**
      * Main update method
      */
+
     public void update() {
         projectile.update();
         player.update();
@@ -112,8 +118,9 @@ public class MainGame extends JPanel implements Runnable {
     /**
      * @param g the <code>Graphics</code> object to protect
      */
+    @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponent(g);//todo check performance
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
         projectile.draw(g2);
