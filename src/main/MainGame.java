@@ -55,6 +55,7 @@ public class MainGame extends JPanel implements Runnable {
         this.isOptimizedDrawingEnabled();
         this.setOpaque(true);//todo check performance
         this.setIgnoreRepaint(true);
+
     }
 
 
@@ -122,6 +123,7 @@ public class MainGame extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);//todo check performance
         Graphics2D g2 = (Graphics2D) g;
+        g2.setPaintMode();
         tileManager.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
