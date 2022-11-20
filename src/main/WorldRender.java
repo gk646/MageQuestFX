@@ -11,13 +11,14 @@ import java.util.Objects;
 
 public class WorldRender {
     public Tile[] tileStorage;
-    public int[][] worldData;
+    public static int[][] worldData;
     MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
         this.tileStorage = new Tile[5];
         getTileImage();
+        World.setWorldData();
 
     }
 
@@ -46,7 +47,7 @@ public class WorldRender {
         int worldCol = Math.min(Math.max(mainGame.player.worldX / 48 - 16, 0), World.worldSize.x);
         int worldRow = Math.min(Math.max(mainGame.player.worldY / 48 - 11, 0), World.worldSize.y);
 
-        while (worldCol <= mainGame.player.worldX / 48 + 15 && worldRow <= mainGame.player.worldY / 48 + 8) {
+        while (worldCol <= mainGame.player.worldX / 48 + 16 && worldRow <= mainGame.player.worldY / 48 + 8) {
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
@@ -59,10 +60,11 @@ public class WorldRender {
             g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
 
             worldCol++;
-            if (worldCol == mainGame.player.worldX / 48 + 15) {
+            if (worldCol == mainGame.player.worldX / 48 + 16) {
                 worldCol = Math.max(mainGame.player.worldX / 48 - 16, 0);
                 worldRow++;
             }
+
 
         }
 

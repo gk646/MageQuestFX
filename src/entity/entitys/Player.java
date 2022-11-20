@@ -21,20 +21,20 @@ public class Player extends Entity {
         //Handlers
         this.mainGame = mainGame;
         this.keyHandler = keyHandler;
-        screenX = MainGame.SCREEN_WIDTH / 2 - 12;
-        screenY = MainGame.SCREEN_HEIGHT / 2 - 12;
+        screenX = MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
 
         //Initialize default values
         setDefaultValues();
         getPlayerImage();
 
         //Collision
-        this.collisionBox = new Rectangle(0, 0, 48, 48);
+        this.collisionBox = new Rectangle(8, 16, 32, 32);
     }
 
     public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/boy_down_1.png")));
+            this.up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/boy_down_1.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,9 +85,8 @@ public class Player extends Entity {
 
 
     public void draw(Graphics2D g2) {
-        BufferedImage playerSprite;
-        playerSprite = up1;
-        g2.drawImage(playerSprite, screenX, screenY, 48, 48, null);
+        g2.drawRect(screenX, screenY, 48, 48);
+        g2.drawRect(screenX+8,screenY+16,32,32);
 
     }
 

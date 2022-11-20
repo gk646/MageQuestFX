@@ -1,13 +1,16 @@
 package gameworld;
 
 
+import gameworld.maps.OverWorld;
+import main.WorldRender;
+
 import java.awt.*;
 
 public class World {
     public static int[][] worldData;
     public static Point worldSize;
 
-    public void worldUpdate() {
-
+    public static void setWorldData() {
+        WorldRender.worldData = OverWorld.loadMap();
     }
 }

@@ -106,7 +106,6 @@ public class MainGame extends JPanel implements Runnable {
     public void update() {
         projectile.update();
         player.update();
-
     }
 
     /**

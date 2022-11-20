@@ -13,7 +13,6 @@ public class Runner {
         window.setResizable(false);
         window.setTitle("Game");
         MainGame mainGame = new MainGame();
-        window.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         window.add(mainGame);
         window.pack();
         window.setLocationRelativeTo(null);
