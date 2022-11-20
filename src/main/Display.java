@@ -23,15 +23,23 @@ public class Display extends JPanel implements Runnable {
     public final int worldWidth = 100 * 48;
     public final int worldHeight = 100 * 48;
      */
+    //Game thread
     Thread gameThread;
+
+    //Input handlers
+    public MotionHandler motionHandler = new MotionHandler();
     KeyHandler keyHandler = new KeyHandler();
-    TileManager tileManager = new TileManager(this);
     public MouseHandler mouseHandler = new MouseHandler();
 
+    //Instances of important classes
+    TileManager tileManager = new TileManager(this);
 
     public Player player = new Player(this, keyHandler);
-    public MotionHandler motionHandler = new MotionHandler();
+
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
+
+    //Variables
+    public int globalLogicTicks;
 
     public Display() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -67,6 +75,7 @@ public class Display extends JPanel implements Runnable {
                 update();
                 timer = 0;
                 logic_ticks++;
+                globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
                 repaint();

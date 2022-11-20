@@ -4,7 +4,8 @@ package projectile;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.Display;
-import projectile.projectiles.PlayerAttack;
+import projectile.projectiles.SecondaryFire;
+import projectile.projectiles.PrimaryFire;
 
 import java.awt.*;
 // import java.awt.image.BufferedImage;
@@ -45,18 +46,20 @@ public class Projectile {
                 projectile.update();
             }
         }
-        if (this.mouseHandler.mouse1Pressed&&display.globalLogicTicks%10 ==0) {
+        if (this.mouseHandler.mouse1Pressed && display.globalLogicTicks % 10 == 0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
-            PROJECTILES[counter++] = new PlayerAttack(display, motionHandler, mouseHandler);
+            PROJECTILES[counter++] = new PrimaryFire(display, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
-        }else if(this.mouseHandler.mouse2Pressed&&display.globalLogicTicks%30 ==0)
+        }
+        if (this.mouseHandler.mouse2Pressed && display.globalLogicTicks % 30 == 0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
-            PROJECTILES[counter++] = new AltFire(display, motionHandler, mouseHandler);
+            PROJECTILES[counter++] = new SecondaryFire(display, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
+        }
     }
 
 

@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 
 /**
  * Can detect mouse dragging and moving
+ *
  * @Methods mouseDragged();
  * mouseMoved();
  */
@@ -27,7 +28,6 @@ public class MotionHandler implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         mousePosition = new Point(e.getX(), e.getY());
         mousePressed = true;
-
     }
 
     @Override

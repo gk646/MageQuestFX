@@ -1,0 +1,55 @@
+package projectile.projectiles;
+
+import handlers.MotionHandler;
+import main.Display;
+import handlers.MouseHandler;
+import projectile.Projectile;
+
+
+import java.awt.*;
+
+public class PrimaryFire extends Projectile {
+
+    private final Point updateVector;
+
+    /**
+     * What happens when you press main mouse button
+     * @param display
+     * @param motionHandler
+     * @param mouseHandler
+     */
+    public PrimaryFire(Display display, MotionHandler motionHandler, MouseHandler mouseHandler) {
+        super(display,motionHandler,mouseHandler);
+        this.projectileSpeed = 11;
+
+        this.mousePosition = display.motionHandler.mousePosition;
+        this.playerPosition = display.player.getPlayerPosition();
+        this.updateVector = getUpdateVector();
+
+    }
+
+    @Override
+    public void draw(Graphics2D g2) {
+        g2.fillOval(playerPosition.x, playerPosition.y, 20, 20);
+        g2.setColor(Color.green);
+    }
+
+    @Override
+    public void update() {
+        playerPosition.x += updateVector.x;
+        playerPosition.y += updateVector.y;
+
+    }
+
+    private Point getUpdateVector() {
+        if(mousePosition==null){
+            mousePosition = mouseHandler.mouse1Position;
+        }
+        double deltaX = mousePosition.x - playerPosition.x;
+        double deltaY = mousePosition.y - playerPosition.y;
+        double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double normalizedY = (deltaY / length) * projectileSpeed;
+        double normalizedX = (deltaX / length) * projectileSpeed;
+        return new Point((int) normalizedX, (int) normalizedY);
+    }
+}
