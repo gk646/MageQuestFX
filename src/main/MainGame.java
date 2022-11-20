@@ -78,8 +78,10 @@ public class MainGame extends JPanel implements Runnable {
             fpsCounter += (firstTimeGate - lastTime);
             timer += (firstTimeGate - lastTime) / interval;
             lastTime = firstTimeGate;
+            //12677853 fps with optimized render
+            //
+            repaint();
             fps++;
-
             if (timer >= 2) {
                 update();
                 timer = 0;
@@ -87,13 +89,13 @@ public class MainGame extends JPanel implements Runnable {
                 globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
-                repaint();
+
                 delta--;
 
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks);
+                System.out.println(fps + " " + logic_ticks+" "+ tileManager.counter);
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;

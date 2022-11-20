@@ -15,7 +15,7 @@ public class TileManager {
     MainGame mainGame;
     Tile[] tileArray;
     int[][] mapData;
-
+    public int counter = 0;
     public TileManager(MainGame mainGame) {
         this.mainGame = mainGame;
         this.tileArray = new Tile[5];
@@ -69,27 +69,31 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-        int worldCol = 0;
-        int worldRow = 0;
+        counter=0;
+        int worldCol = mainGame.player.worldX / 48-16 ;
+        int worldRow = mainGame.player.worldY / 48 -11;
 
-        while (worldCol <= 100 && worldRow <= 100) {
+        while (worldCol  <= mainGame.player.worldX / 48 +15&& worldRow  <= mainGame.player.worldY / 48 + 7) {
             //reading out tile data
             int tileNum = mapData[worldCol][worldRow];
             //making world camera
-            int worldX = worldCol * 48;
-            int worldY = worldRow * 48;
+            int worldX = worldCol * 48 + mainGame.player.worldX / 48;
+            int worldY = worldRow * 48 + mainGame.player.worldY / 48;
             //
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
 
             g2.drawImage(tileArray[tileNum].tileImage, screenX, screenY, tileArray[0].tileSize, tileArray[0].tileSize, null);
-
+            counter++;
             worldCol++;
-            if (worldCol == 100) {
-                worldCol = 0;
+            if (worldCol == mainGame.player.worldX / 48 +15) {
+                worldCol = mainGame.player.worldX / 48-16;
                 worldRow++;
             }
+
         }
+
+
     }
 
 }
