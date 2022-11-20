@@ -3,7 +3,7 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 
-public class Game {
+public class Runner {
     /**
      * @author Lukas Gilch
      */
@@ -12,13 +12,13 @@ public class Game {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Game");
-        Display display = new Display();
+        MainGame mainGame = new MainGame();
         window.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        window.add(display);
+        window.add(mainGame);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        display.startGameThread();
+        mainGame.startGameThread();
 
     }
 }

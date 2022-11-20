@@ -1,6 +1,6 @@
 package gameworld.tiles;
 
-import main.Display;
+import main.MainGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,12 +12,12 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class TileManager {
-    Display display;
+    MainGame mainGame;
     Tile[] tileArray;
     int[][] mapData;
 
-    public TileManager(Display display) {
-        this.display = display;
+    public TileManager(MainGame mainGame) {
+        this.mainGame = mainGame;
         this.tileArray = new Tile[5];
         this.mapData = new int[101][101];
         getTileImage();
@@ -79,8 +79,8 @@ public class TileManager {
             int worldX = worldCol * 48;
             int worldY = worldRow * 48;
             //
-            int screenX = worldX - display.player.worldX + display.player.screenX;
-            int screenY = worldY - display.player.worldY + display.player.screenY;
+            int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
+            int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
 
             g2.drawImage(tileArray[tileNum].tileImage, screenX, screenY, tileArray[0].tileSize, tileArray[0].tileSize, null);
 

@@ -1,6 +1,6 @@
 package entity.entitys;
 
-import main.Display;
+import main.MainGame;
 import handlers.KeyHandler;
 import entity.Entity;
 
@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity {
-    Display display;
+    MainGame mainGame;
     KeyHandler keyHandler;
     public final int screenX;
     public final int screenY;
 
 
-    public Player(Display display, KeyHandler keyHandler) {
+    public Player(MainGame mainGame, KeyHandler keyHandler) {
         //Handlers
-        this.display = display;
+        this.mainGame = mainGame;
         this.keyHandler = keyHandler;
-        screenX = Display.SCREEN_WIDTH / 2;
-        screenY = Display.SCREEN_HEIGHT / 2;
+        screenX = MainGame.SCREEN_WIDTH / 2 - 12;
+        screenY = MainGame.SCREEN_HEIGHT / 2 - 12;
 
         //Initialize default values
         setDefaultValues();
@@ -73,10 +73,6 @@ public class Player extends Entity {
         playerSprite = up1;
         g2.drawImage(playerSprite, screenX, screenY, 48, 48, null);
 
-    }
-
-    public Point getPlayerPosition() {
-        return new Point(screenX + entityWidth / 4, screenY + entityHeight / 4);
     }
 
 }

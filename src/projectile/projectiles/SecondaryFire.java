@@ -2,47 +2,48 @@ package projectile.projectiles;
 
 import handlers.MotionHandler;
 import handlers.MouseHandler;
-import main.Display;
+import main.MainGame;
 import projectile.Projectile;
 
 import java.awt.*;
 
-public class SecondaryFire extends Projectile{
-    /**
-     * What happens when you press secondary mouse button
-     * @param display
-     * @param motionHandler
-     * @param mouseHandler
-     */
+public class SecondaryFire extends Projectile {
+
     private final Point updateVector;
-    public SecondaryFire(Display display, MotionHandler motionHandler, MouseHandler mouseHandler) {
-        super(display,motionHandler,mouseHandler);
-        this.projectileSpeed = 11;
-        this.mousePosition = display.motionHandler.mousePosition;
-        this.playerPosition = display.player.getPlayerPosition();
+
+    /**
+     * What happens when you press secondary mouse button. Part of
+     * {@link Projectile}
+     */
+    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
+        super(mainGame, motionHandler, mouseHandler);
+        this.projectileSpeed = 8;
+        this.mousePosition = mainGame.motionHandler.mousePosition;
+        this.pPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - 2400, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - 2400);
         this.updateVector = getUpdateVector();
 
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.fillOval(playerPosition.x, playerPosition.y, 20, 20);
         g2.setColor(Color.blue);
+        g2.fillRect(pPosition.x - mainGame.player.worldX + 2400, pPosition.y - mainGame.player.worldY + 2400, 30, 30);
+
     }
 
     @Override
     public void update() {
-        playerPosition.x += updateVector.x;
-        playerPosition.y += updateVector.y;
+        pPosition.x += updateVector.x;
+        pPosition.y += updateVector.y;
 
     }
 
     private Point getUpdateVector() {
-        if(mousePosition==null){
+        if (mousePosition == null) {
             mousePosition = mouseHandler.mouse2Position;
         }
-        double deltaX = mousePosition.x - playerPosition.x;
-        double deltaY = mousePosition.y - playerPosition.y;
+        int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
+        int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double normalizedY = (deltaY / length) * projectileSpeed;
         double normalizedX = (deltaX / length) * projectileSpeed;

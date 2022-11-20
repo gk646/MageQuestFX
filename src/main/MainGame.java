@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class Display extends JPanel implements Runnable {
+public class MainGame extends JPanel implements Runnable {
 
     //Screen setting
     public static final double FRAMES_PER_SECOND = 120;
@@ -41,7 +41,10 @@ public class Display extends JPanel implements Runnable {
     //Variables
     public int globalLogicTicks;
 
-    public Display() {
+    /**
+     * Main game loop
+     */
+    public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);

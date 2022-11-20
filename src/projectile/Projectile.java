@@ -3,7 +3,7 @@ package projectile;
 
 import handlers.MotionHandler;
 import handlers.MouseHandler;
-import main.Display;
+import main.MainGame;
 import projectile.projectiles.SecondaryFire;
 import projectile.projectiles.PrimaryFire;
 
@@ -15,18 +15,18 @@ import java.awt.*;
  */
 public class Projectile {
     public final static Projectile[] PROJECTILES = new Projectile[1000];
-    public int xPosition, yPosition;
+    public Point pPosition;
     public int counter;
     public int projectileSpeed;
 
     //public BufferedImage pellet;
-    public Display display;
-    public Point mousePosition, playerPosition;
+    public MainGame mainGame;
+    public Point mousePosition;
     public MotionHandler motionHandler;
     public MouseHandler mouseHandler;
 
-    public Projectile(Display display, MotionHandler motionHandler, MouseHandler mouseHandler) {
-        this.display = display;
+    public Projectile(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
+        this.mainGame = mainGame;
         this.motionHandler = motionHandler;
         this.mouseHandler = mouseHandler;
 
@@ -46,18 +46,18 @@ public class Projectile {
                 projectile.update();
             }
         }
-        if (this.mouseHandler.mouse1Pressed && display.globalLogicTicks % 10 == 0) {
+        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
-            PROJECTILES[counter++] = new PrimaryFire(display, motionHandler, mouseHandler);
+            PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
         }
-        if (this.mouseHandler.mouse2Pressed && display.globalLogicTicks % 30 == 0) {
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 30 == 0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
-            PROJECTILES[counter++] = new SecondaryFire(display, motionHandler, mouseHandler);
+            PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
         }
     }
