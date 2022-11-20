@@ -24,21 +24,21 @@ public class MouseHandler implements MouseListener {
             mouse1Pressed = true;
             mouse1Position = new Point(e.getX(), e.getY());
         }
-        if(e.getButton()==3){
+        if (e.getButton() == 3) {
             mouse2Pressed = true;
-            mouse2Position = new Point(e.getX(),e.getYOnScreen());
+            mouse2Position = new Point(e.getX(), e.getYOnScreen());
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton()==1){
-        mouse1Pressed = false;
+        if (e.getButton() == 1) {
+            mouse1Pressed = false;
         }
-        if(e.getButton()==3){
+        if (e.getButton() == 3) {
             mouse2Pressed = false;
         }
-        
+
     }
 
     @Override

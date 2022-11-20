@@ -1,8 +1,8 @@
 package entity.entitys;
 
-import main.MainGame;
-import handlers.KeyHandler;
 import entity.Entity;
+import handlers.KeyHandler;
+import main.MainGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Player extends Entity {
-    MainGame mainGame;
-    KeyHandler keyHandler;
     public final int screenX;
     public final int screenY;
+    MainGame mainGame;
+    KeyHandler keyHandler;
 
 
     public Player(MainGame mainGame, KeyHandler keyHandler) {
@@ -29,7 +29,7 @@ public class Player extends Entity {
         getPlayerImage();
 
         //Collision
-        this.collisionBox = new Rectangle(8, 4, 32, 40);
+        this.collisionBox = new Rectangle(0, 0, 48, 48);
     }
 
     public void getPlayerImage() {

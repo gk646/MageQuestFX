@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class OverWorld extends World {
+public class Dungeon1 extends World {
 
     public static int[][] loadMap() {
-        worldSize = new Point(100, 100);
-        worldData = new int[worldSize.x + 1][worldSize.y + 1];
+        worldSize = new Point(50, 50);
+        worldData = new int[worldSize.x][worldSize.y];
         try {
             InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/map1.txt");
             assert inputStream != null;

@@ -1,7 +1,6 @@
 package main;
 
 import entity.entitys.Player;
-import gameworld.WorldRender;
 import handlers.KeyHandler;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
@@ -17,7 +16,13 @@ public class MainGame extends JPanel implements Runnable {
     public static final double FRAMES_PER_SECOND = 120;
     public static final int SCREEN_WIDTH = 1400;
     public static final int SCREEN_HEIGHT = 900;
-
+    //Input handlers
+    public MotionHandler motionHandler = new MotionHandler();
+    public MouseHandler mouseHandler = new MouseHandler();
+    //Instances of important classes
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
+    //Variables
+    public int globalLogicTicks;
     //World settings
     /*
     public final int worldWidth = 100 * 48;
@@ -25,21 +30,10 @@ public class MainGame extends JPanel implements Runnable {
      */
     //Game thread
     Thread gameThread;
-
-    //Input handlers
-    public MotionHandler motionHandler = new MotionHandler();
     KeyHandler keyHandler = new KeyHandler();
-    public MouseHandler mouseHandler = new MouseHandler();
-
-    //Instances of important classes
-    public CollisionChecker collisionChecker = new CollisionChecker(this);
-    WorldRender wRender = new WorldRender(this);
     public Player player = new Player(this, keyHandler);
+    WorldRender wRender = new WorldRender(this);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
-
-
-    //Variables
-    public int globalLogicTicks;
 
     /**
      * Main game loop class
@@ -78,8 +72,7 @@ public class MainGame extends JPanel implements Runnable {
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
             //
-            repaint();
-            fps++;
+
             if (timer >= 2) {
                 update();
                 timer = 0;
@@ -87,7 +80,8 @@ public class MainGame extends JPanel implements Runnable {
                 globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
-
+                repaint();
+                fps++;
                 delta--;
             }
 

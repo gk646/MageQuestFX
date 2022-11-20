@@ -1,10 +1,9 @@
 package projectile.projectiles;
 
 import handlers.MotionHandler;
-import main.MainGame;
 import handlers.MouseHandler;
+import main.MainGame;
 import projectile.Projectile;
-
 
 import java.awt.*;
 

@@ -1,25 +1,23 @@
-package gameworld;
+package main;
 
-import gameworld.maps.OverWorld;
+import gameworld.World;
 import gameworld.tiles.Tile;
-import main.MainGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-
 import java.io.IOException;
 import java.util.Objects;
 
+
 public class WorldRender {
-    MainGame mainGame;
     public Tile[] tileStorage;
     public int[][] worldData;
+    MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
         this.tileStorage = new Tile[5];
         getTileImage();
-        loadMap();
 
     }
 
@@ -31,7 +29,7 @@ public class WorldRender {
             tileStorage[0].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/wall.png")));
             tileStorage[2] = new Tile();
             tileStorage[2].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/water.png")));
-            tileStorage[2].collision=true;
+            tileStorage[2].collision = true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,15 +38,13 @@ public class WorldRender {
     /**
      * Loading the map data from a .txt-File. Iam using Tiled as a level editor.
      */
-    public void loadMap() {
-        this.worldData = OverWorld.loadMap();
-    }
+
 
     public void draw(Graphics2D g2) {
 
 
-        int worldCol = Math.max(mainGame.player.worldX / 48 - 16, 0);
-        int worldRow = Math.max(mainGame.player.worldY / 48 - 11, 0);
+        int worldCol = Math.min(Math.max(mainGame.player.worldX / 48 - 16, 0), World.worldSize.x);
+        int worldRow = Math.min(Math.max(mainGame.player.worldY / 48 - 11, 0), World.worldSize.y);
 
         while (worldCol <= mainGame.player.worldX / 48 + 15 && worldRow <= mainGame.player.worldY / 48 + 8) {
             //reading out tile data

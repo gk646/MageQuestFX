@@ -4,8 +4,8 @@ package projectile;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.MainGame;
-import projectile.projectiles.SecondaryFire;
 import projectile.projectiles.PrimaryFire;
+import projectile.projectiles.SecondaryFire;
 
 import java.awt.*;
 // import java.awt.image.BufferedImage;
