@@ -12,8 +12,8 @@ import java.util.Objects;
 
 public class WorldRender {
     MainGame mainGame;
-    Tile[] tileStorage;
-    int[][] worldData;
+    public Tile[] tileStorage;
+    public int[][] worldData;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
@@ -25,12 +25,13 @@ public class WorldRender {
 
     private void getTileImage() {
         try {
-            tileStorage[1] = new Tile(48);
+            tileStorage[1] = new Tile();
             tileStorage[1].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/grass.png")));
-            tileStorage[0] = new Tile(48);
+            tileStorage[0] = new Tile();
             tileStorage[0].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/wall.png")));
-            tileStorage[2] = new Tile(48);
+            tileStorage[2] = new Tile();
             tileStorage[2].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/water.png")));
+            tileStorage[2].collision=true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -45,10 +46,11 @@ public class WorldRender {
 
     public void draw(Graphics2D g2) {
 
-        int worldCol = Math.max(mainGame.player.worldX / 48 - 16,0);
-        int worldRow = Math.max(mainGame.player.worldY / 48 - 11,0);
 
-        while ( worldCol <= mainGame.player.worldX / 48 + 15 && worldRow <= mainGame.player.worldY / 48 + 8) {
+        int worldCol = Math.max(mainGame.player.worldX / 48 - 16, 0);
+        int worldRow = Math.max(mainGame.player.worldY / 48 - 11, 0);
+
+        while (worldCol <= mainGame.player.worldX / 48 + 15 && worldRow <= mainGame.player.worldY / 48 + 8) {
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
@@ -58,11 +60,11 @@ public class WorldRender {
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
 
-            g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, tileStorage[0].tileSize, tileStorage[0].tileSize, null);
+            g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
 
             worldCol++;
             if (worldCol == mainGame.player.worldX / 48 + 15) {
-                worldCol = Math.max(mainGame.player.worldX / 48 - 16,0);
+                worldCol = Math.max(mainGame.player.worldX / 48 - 16, 0);
                 worldRow++;
             }
 

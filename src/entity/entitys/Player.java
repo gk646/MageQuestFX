@@ -29,11 +29,7 @@ public class Player extends Entity {
         getPlayerImage();
 
         //Collision
-        this.solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
-        solidArea.width = entityWidth - solidArea.x;
-        solidArea.height = 32;
+        this.collisionBox = new Rectangle(8, 4, 32, 40);
     }
 
     public void getPlayerImage() {
@@ -48,25 +44,45 @@ public class Player extends Entity {
         worldX = 2400;
         worldY = 2400;
         movementSpeed = 4;
-        direction = "facingUp";
+        direction = "up";
         this.entityHeight = 48;
         this.entityWidth = 48;
     }
 
     public void update() {
+        direction = "";
+
         if (keyHandler.upPressed) {
-            worldY -= movementSpeed;
+            direction += "up";
         }
         if (keyHandler.downPressed) {
-            worldY += movementSpeed;
+            direction += "down";
         }
         if (keyHandler.leftPressed) {
-            worldX -= movementSpeed;
+            direction += "left";
         }
         if (keyHandler.rightPressed) {
-            worldX += movementSpeed;
+            direction += "right";
+        }
+        //check tile collision
+        collision = false;
+        mainGame.collisionChecker.checkEntity(this);
+        if (!collision) {
+            if (direction.contains("up")) {
+                worldY -= movementSpeed;
+            }
+            if (direction.contains("down")) {
+                worldY += movementSpeed;
+            }
+            if (direction.contains("right")) {
+                worldX += movementSpeed;
+            }
+            if (direction.contains("left")) {
+                worldX -= movementSpeed;
+            }
         }
     }
+
 
     public void draw(Graphics2D g2) {
         BufferedImage playerSprite;

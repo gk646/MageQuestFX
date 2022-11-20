@@ -1,7 +1,7 @@
 package main;
 
 import entity.entitys.Player;
-import gameworld.tiles.TileManager;
+import gameworld.WorldRender;
 import handlers.KeyHandler;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
@@ -32,11 +32,11 @@ public class MainGame extends JPanel implements Runnable {
     public MouseHandler mouseHandler = new MouseHandler();
 
     //Instances of important classes
-    TileManager tileManager = new TileManager(this);
-
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
+    WorldRender wRender = new WorldRender(this);
     public Player player = new Player(this, keyHandler);
-
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
+
 
     //Variables
     public int globalLogicTicks;
@@ -52,9 +52,7 @@ public class MainGame extends JPanel implements Runnable {
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-        this.isOptimizedDrawingEnabled();
-        this.setOpaque(true);//todo check performance
-        this.setIgnoreRepaint(true);
+
 
     }
 
@@ -91,11 +89,10 @@ public class MainGame extends JPanel implements Runnable {
             if (delta >= 1) {
 
                 delta--;
-
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks+" "+ tileManager.counter);
+                System.out.println(fps + " " + logic_ticks + " ");
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
@@ -123,10 +120,9 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);//todo check performance
+        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setPaintMode();
-        tileManager.draw(g2);
+        wRender.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
         g2.dispose();
