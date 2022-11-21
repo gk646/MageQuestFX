@@ -11,10 +11,10 @@ public class CollisionChecker {
     }
 
     public void checkEntity(Entity entity) {
-        int entityLeftWorldX = entity.worldX - entity.collisionBox.x-48;
-        int entityRightWorldX = entity.worldX + entity.collisionBox.x -entity.collisionBox.width+7;
-        int entityTopWorldY = entity.worldY - entity.collisionBox.y-23;
-        int entityBottomWorldY = entity.worldY +entity.collisionBox.y -entity.collisionBox.height+12;
+        int entityLeftWorldX = entity.worldX + entity.collisionBox.x;
+        int entityRightWorldX = entity.worldX + entity.collisionBox.x + entity.collisionBox.width;
+        int entityTopWorldY = entity.worldY + entity.collisionBox.y;
+        int entityBottomWorldY = entity.worldY + entity.collisionBox.y + entity.collisionBox.height;
 
         int entityLeftCol = entityLeftWorldX / 48;
         int entityRightCol = entityRightWorldX / 48;
@@ -22,43 +22,50 @@ public class CollisionChecker {
         int entityBottomRow = entityBottomWorldY / 48;
 
         int tileNum1, tileNum2;
+        if (entity.direction.contains("right")) {
+            entityRightCol = (entityRightWorldX + entity.movementSpeed) / 48;
+            tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
+            tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
+                entity.collisionright = true;
 
-        switch (entity.direction) {
-            case "up":
-                entityTopRow = (entityTopWorldY + entity.movementSpeed) / 48;
-                tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
-                tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
-                if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
-                    entity.collision = true;
-                }
-                break;
-            case "down":
-                entityBottomRow = (entityBottomWorldY + entity.movementSpeed) / 48;
-                tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
-                tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
-                if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
-                    entity.collision = true;
-                }
-                break;
-            case "left":
-                entityLeftCol = (entityLeftWorldX + entity.movementSpeed) / 48;
-                tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
-                tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
-                if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
-                    entity.collision = true;
-                }
-                break;
-            case "right":
-                entityRightCol = (entityRightWorldX + entity.movementSpeed) / 48;
-                tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
-                tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
-                if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
-                    entity.collision = true;
-                }
-                break;
+            }
 
         }
+
+        if (entity.direction.contains("left")) {
+            entityLeftCol = (entityLeftWorldX - entity.movementSpeed) / 48;
+            tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
+            tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
+            if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
+                entity.collisionleft = true;
+            }
+        }
+        entityLeftCol = entityLeftWorldX / 48;
+        entityRightCol = entityRightWorldX / 48;
+        if (entity.direction.contains("up")) {
+
+            entityTopRow = (entityTopWorldY - entity.movementSpeed) / 48;
+            tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
+            tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
+            if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
+                entity.collisionup = true;
+            }
+
+        }
+        entityLeftCol = entityLeftWorldX / 48;
+
+        if (entity.direction.contains("down")) {
+            entityBottomRow = (entityBottomWorldY + entity.movementSpeed) / 48;
+            tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
+            tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
+                entity.collisiondown = true;
+            }
+        }
+
+
     }
-
-
 }
+
+

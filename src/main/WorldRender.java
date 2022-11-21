@@ -12,6 +12,7 @@ import java.util.Objects;
 public class WorldRender {
     public Tile[] tileStorage;
     public static int[][] worldData;
+    public static Point worldSize;
     MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
@@ -44,24 +45,31 @@ public class WorldRender {
     public void draw(Graphics2D g2) {
 
 
-        int worldCol = Math.min(Math.max(mainGame.player.worldX / 48 - 16, 0), World.worldSize.x);
-        int worldRow = Math.min(Math.max(mainGame.player.worldY / 48 - 11, 0), World.worldSize.y);
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while (worldCol <= mainGame.player.worldX / 48 + 16 && worldRow <= mainGame.player.worldY / 48 + 8) {
+
+        while (worldCol <= worldSize.x  && worldRow <= worldSize.y) {
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
-            int worldX = worldCol * 48 + mainGame.player.worldX / 48;
-            int worldY = worldRow * 48 + mainGame.player.worldY / 48;
+            int worldX = worldCol * 48;
+            int worldY = worldRow * 48;
             //
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
 
-            g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
+            if (worldX +48> mainGame.player.worldX - mainGame.player.screenX &&
+                    worldX-48 < mainGame.player.worldX + mainGame.player.screenX &&
+                    worldY +48> mainGame.player.worldY - mainGame.player.screenY &&
+                    worldY -48< mainGame.player.worldY + mainGame.player.screenY) {
+                g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
+            }
+
 
             worldCol++;
-            if (worldCol == mainGame.player.worldX / 48 + 16) {
-                worldCol = Math.max(mainGame.player.worldX / 48 - 16, 0);
+            if (worldCol == 100) {
+                worldCol = 0;
                 worldRow++;
             }
 

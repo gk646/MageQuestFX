@@ -71,8 +71,10 @@ public class MainGame extends JPanel implements Runnable {
             timer += (firstTimeGate - lastTime) / interval;
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
+            //18491828 fps with "old" render
             //
-
+            repaint();
+            fps++;
             if (timer >= 2) {
                 update();
                 timer = 0;
@@ -80,8 +82,7 @@ public class MainGame extends JPanel implements Runnable {
                 globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
-                repaint();
-                fps++;
+
                 delta--;
             }
 

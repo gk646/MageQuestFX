@@ -36,9 +36,11 @@ public class OverWorld extends World {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(worldData[0][0]+" "+worldData[1][0]+" "+worldData[2][0]);
         return worldData;
 
+    }
+    public static Point loadMapSize(){
+        return new Point(worldSize.x, worldSize.y);
     }
 
 }

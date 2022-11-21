@@ -12,6 +12,6 @@ public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
     public Rectangle collisionBox;
-    public boolean collision = false;
+    public boolean collisionup, collisiondown, collisionleft, collisionright;
 
 }

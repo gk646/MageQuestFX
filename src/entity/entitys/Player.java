@@ -6,7 +6,6 @@ import main.MainGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -29,7 +28,7 @@ public class Player extends Entity {
         getPlayerImage();
 
         //Collision
-        this.collisionBox = new Rectangle(8, 16, 32, 32);
+        this.collisionBox = new Rectangle(8, 16, 31, 31);
     }
 
     public void getPlayerImage() {
@@ -51,43 +50,56 @@ public class Player extends Entity {
 
     public void update() {
         direction = "";
-
+        if (keyHandler.leftPressed) {
+            direction += "left";
+        }
         if (keyHandler.upPressed) {
             direction += "up";
         }
         if (keyHandler.downPressed) {
             direction += "down";
         }
-        if (keyHandler.leftPressed) {
-            direction += "left";
-        }
+
         if (keyHandler.rightPressed) {
             direction += "right";
         }
         //check tile collision
-        collision = false;
+        collisionright = false;
+        collisionleft = false;
+        collisiondown = false;
+        collisionup = false;
+
         mainGame.collisionChecker.checkEntity(this);
-        if (!collision) {
-            if (direction.contains("up")) {
+
+        if (direction.contains("left")) {
+            if (!collisionleft) {
+                worldX -= movementSpeed;
+            }
+        }
+
+        if (direction.contains("up")) {
+            if (!collisionup) {
                 worldY -= movementSpeed;
             }
-            if (direction.contains("down")) {
+        }
+
+        if (direction.contains("down")) {
+            if (!collisiondown) {
                 worldY += movementSpeed;
             }
-            if (direction.contains("right")) {
+        }
+
+        if (direction.contains("right")) {
+
+            if (!collisionright) {
                 worldX += movementSpeed;
-            }
-            if (direction.contains("left")) {
-                worldX -= movementSpeed;
             }
         }
     }
 
 
     public void draw(Graphics2D g2) {
-        g2.drawRect(screenX, screenY, 48, 48);
-        g2.drawRect(screenX+8,screenY+16,32,32);
-
+        g2.drawImage(up1, screenX, screenY, 48, 48, null);
     }
 
 }

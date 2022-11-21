@@ -12,5 +12,6 @@ public class World {
 
     public static void setWorldData() {
         WorldRender.worldData = OverWorld.loadMap();
+        WorldRender.worldSize = OverWorld.loadMapSize();
     }
 }
