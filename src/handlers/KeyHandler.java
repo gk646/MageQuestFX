@@ -29,6 +29,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if (code == KeyEvent.VK_C) {
+            System.out.println("hey");
             debugfps = true;
         }
     }
@@ -46,6 +47,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
         if (code == KeyEvent.VK_C) {
+
             debugfps = false;
         }
     }

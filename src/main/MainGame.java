@@ -121,7 +121,7 @@ public class MainGame extends JPanel implements Runnable {
         wRender.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
-        g2.dispose();
+
         //RENDER END
 
         long drawEnd = System.nanoTime();
@@ -130,6 +130,7 @@ public class MainGame extends JPanel implements Runnable {
             g2.setColor(Color.white);
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
+        g2.dispose();
 
     }
 }
