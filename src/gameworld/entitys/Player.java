@@ -14,23 +14,28 @@ import java.util.Objects;
 public class Player extends Entity {
     public final int screenX;
     public final int screenY;
-    MainGame mainGame;
-    KeyHandler keyHandler;
+    public static Point startingPoint;
+    private final MainGame mainGame;
+    private final KeyHandler keyHandler;
 
 
     public Player(MainGame mainGame, KeyHandler keyHandler) {
+
+        //Setting default values
+        worldX = startingPoint.x;
+        worldY = startingPoint.y;
+        movementSpeed = 4;
+        direction = "up";
+        this.entityHeight = 48;
+        this.entityWidth = 48;
+        getPlayerImage();
+        this.collisionBox = new Rectangle(8, 16, 31, 31);
+
         //Handlers
         this.mainGame = mainGame;
         this.keyHandler = keyHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
-
-        //Initialize default values
-        setDefaultValues();
-        getPlayerImage();
-
-        //Collision
-        this.collisionBox = new Rectangle(8, 16, 31, 31);
     }
 
     public void getPlayerImage() {
@@ -50,15 +55,6 @@ public class Player extends Entity {
             e.printStackTrace();
         }
         return scaledImage;
-    }
-
-    public void setDefaultValues() {
-        worldX = 2400;
-        worldY = 2400;
-        movementSpeed = 4;
-        direction = "up";
-        this.entityHeight = 48;
-        this.entityWidth = 48;
     }
 
     public void update() {
@@ -82,7 +78,7 @@ public class Player extends Entity {
         collisiondown = false;
         collisionup = false;
 
-        mainGame.collisionChecker.checkEntity(this);
+        mainGame.collisionChecker.checkEntityAgainstTile(this);
 
         if (direction.contains("left")) {
             if (!collisionleft) {

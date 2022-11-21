@@ -18,17 +18,18 @@ public class MainGame extends JPanel implements Runnable {
     public static final int SCREEN_HEIGHT = 900;
     //Input handlers
     public MotionHandler motionHandler = new MotionHandler();
-    public MouseHandler mouseHandler = new MouseHandler();
+    public MouseHandler mouseHandler = new MouseHandler(motionHandler);
 
     //Variables
     public int globalLogicTicks;
     //Game thread
     Thread gameThread;
+
     //Instances of important classes
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     KeyHandler keyHandler = new KeyHandler();
-    public Player player = new Player(this, keyHandler);
     WorldRender wRender = new WorldRender(this);
+    public Player player = new Player(this, keyHandler);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
 
     /**
@@ -83,7 +84,7 @@ public class MainGame extends JPanel implements Runnable {
             }
 
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks + " ");
+                //System.out.println(fps + " " + logic_ticks + " ");
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
@@ -114,15 +115,21 @@ public class MainGame extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         //Debug
         long drawStart = System.nanoTime();
+
+        //RENDER START
+
         wRender.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
+        g2.dispose();
+        //RENDER END
+
         long drawEnd = System.nanoTime();
         long difference = drawEnd - drawStart;
         if (keyHandler.debugfps) {
             g2.setColor(Color.white);
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
-        g2.dispose();
+
     }
 }

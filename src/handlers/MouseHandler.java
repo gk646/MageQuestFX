@@ -8,9 +8,10 @@ import java.awt.event.MouseListener;
 public class MouseHandler implements MouseListener {
     public boolean mouse1Pressed, mouse2Pressed;
     public Point mouse1Position, mouse2Position;
+    public MotionHandler motionHandler;
 
-    public MouseHandler() {
-
+    public MouseHandler(MotionHandler motionHandler) {
+this.motionHandler = motionHandler;
     }
 
 
@@ -34,9 +35,11 @@ public class MouseHandler implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == 1) {
             mouse1Pressed = false;
+            motionHandler.mousePosition=null;
         }
         if (e.getButton() == 3) {
             mouse2Pressed = false;
+            motionHandler.mousePosition=null;
         }
 
     }

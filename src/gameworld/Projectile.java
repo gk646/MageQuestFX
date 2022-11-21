@@ -11,13 +11,13 @@ import java.awt.*;
 // import java.awt.image.BufferedImage;
 
 /**
+ * Inherits Entity
  * Main inheritable class for all projectiles
  */
 public class Projectile extends Entity{
     public final static Projectile[] PROJECTILES = new Projectile[1000];
     public Point pPosition;
     public int counter;
-    public int projectileSpeed;
 
     //public BufferedImage pellet;
     public MainGame mainGame;
@@ -53,13 +53,14 @@ public class Projectile extends Entity{
             PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
         }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 30 == 0) {
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
             if (PROJECTILES.length == counter) {
                 counter = 0;
             }
             PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler);
             motionHandler.mousePressed = false;
         }
+
     }
 
 

@@ -10,7 +10,7 @@ public class CollisionChecker {
 
     }
 
-    public void checkEntity(Entity entity) {
+    public void checkEntityAgainstTile(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.collisionBox.x;
         int entityRightWorldX = entity.worldX + entity.collisionBox.x + entity.collisionBox.width;
         int entityTopWorldY = entity.worldY + entity.collisionBox.y;
@@ -28,11 +28,8 @@ public class CollisionChecker {
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 entity.collisionright = true;
-
             }
-
         }
-
         if (entity.direction.contains("left")) {
             entityLeftCol = (entityLeftWorldX - entity.movementSpeed) / 48;
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
@@ -66,6 +63,10 @@ public class CollisionChecker {
 
 
     }
+    public void checkEntityAgainstEntity(){
+
+    }
+
 }
 
 

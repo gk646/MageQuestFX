@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class OverWorld extends World {
 
     public static int[][] loadMap() {
-        worldSize = new Point(1000, 100);
+        worldSize = new Point(100, 100);
         worldData = new int[worldSize.x + 1][worldSize.y + 1];
         try {
             InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/map1.txt");
@@ -43,5 +43,7 @@ public class OverWorld extends World {
     public static Point loadMapSize() {
         return new Point(worldSize.x, worldSize.y);
     }
-
+    public static Point loadMapStartPoint(){
+        return new Point(2400,2400);
+    }
 }
