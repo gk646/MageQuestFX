@@ -49,7 +49,7 @@ public class WorldRender {
         int worldRow = 0;
 
 
-        while (worldCol <= worldSize.x  && worldRow <= worldSize.y) {
+        while (worldCol < worldSize.x && worldRow < worldSize.y) {
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
@@ -67,16 +67,20 @@ public class WorldRender {
             }
 
 
-            worldCol++;
-            if (worldCol == 100) {
-                worldCol = 0;
-                worldRow++;
+
+
+
+                worldCol++;
+                if (worldCol == worldSize.x) {
+                    worldCol = 0;
+                    worldRow++;
+                }
+
+
             }
 
 
         }
 
-
     }
 
-}
