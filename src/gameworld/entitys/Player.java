@@ -1,4 +1,4 @@
-package gameworld.entity.entitys;
+package gameworld.entitys;
 
 import gameworld.Entity;
 import handlers.KeyHandler;

@@ -1,8 +1,8 @@
 package gameworld;
 
 
-import gameworld.projectile.projectiles.PrimaryFire;
-import gameworld.projectile.projectiles.SecondaryFire;
+import gameworld.projectiles.PrimaryFire;
+import gameworld.projectiles.SecondaryFire;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.MainGame;
@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  * Main inheritable class for all projectiles
  */
-public class Projectile {
+public class Projectile extends Entity{
     public final static Projectile[] PROJECTILES = new Projectile[1000];
     public Point pPosition;
     public int counter;

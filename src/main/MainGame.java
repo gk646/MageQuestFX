@@ -1,7 +1,7 @@
 package main;
 
 import gameworld.Projectile;
-import gameworld.entity.entitys.Player;
+import gameworld.entitys.Player;
 import handlers.KeyHandler;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
@@ -19,12 +19,13 @@ public class MainGame extends JPanel implements Runnable {
     //Input handlers
     public MotionHandler motionHandler = new MotionHandler();
     public MouseHandler mouseHandler = new MouseHandler();
-    //Instances of important classes
-    public CollisionChecker collisionChecker = new CollisionChecker(this);
+
     //Variables
     public int globalLogicTicks;
     //Game thread
     Thread gameThread;
+    //Instances of important classes
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
     KeyHandler keyHandler = new KeyHandler();
     public Player player = new Player(this, keyHandler);
     WorldRender wRender = new WorldRender(this);
@@ -35,12 +36,12 @@ public class MainGame extends JPanel implements Runnable {
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
+        this.setOpaque(true);
 
 
     }
@@ -113,7 +114,6 @@ public class MainGame extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
         //Debug
         long drawStart = System.nanoTime();
-
         wRender.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
@@ -122,7 +122,6 @@ public class MainGame extends JPanel implements Runnable {
         if (keyHandler.debugfps) {
             g2.setColor(Color.white);
             g2.drawString(("Draw Time" + difference), 500, 600);
-            System.out.println(difference);
         }
         g2.dispose();
     }
