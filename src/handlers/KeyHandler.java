@@ -4,7 +4,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+    //Keys
     public boolean upPressed, downPressed, rightPressed, leftPressed;
+    //debug
+    public boolean debugfps;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -25,6 +28,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_C) {
+            debugfps = true;
+        }
     }
 
     @Override
@@ -38,6 +44,9 @@ public class KeyHandler implements KeyListener {
             downPressed = false;
         } else if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+        if (code == KeyEvent.VK_C) {
+            debugfps = false;
         }
     }
 }

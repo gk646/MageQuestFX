@@ -1,10 +1,10 @@
 package main;
 
-import entity.entitys.Player;
+import gameworld.Projectile;
+import gameworld.entity.entitys.Player;
 import handlers.KeyHandler;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
-import projectile.Projectile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,11 +23,6 @@ public class MainGame extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     //Variables
     public int globalLogicTicks;
-    //World settings
-    /*
-    public final int worldWidth = 100 * 48;
-    public final int worldHeight = 100 * 48;
-     */
     //Game thread
     Thread gameThread;
     KeyHandler keyHandler = new KeyHandler();
@@ -116,9 +111,19 @@ public class MainGame extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        //Debug
+        long drawStart = System.nanoTime();
+
         wRender.draw(g2);
         projectile.draw(g2);
         player.draw(g2);
+        long drawEnd = System.nanoTime();
+        long difference = drawEnd - drawStart;
+        if (keyHandler.debugfps) {
+            g2.setColor(Color.white);
+            g2.drawString(("Draw Time" + difference), 500, 600);
+            System.out.println(difference);
+        }
         g2.dispose();
     }
 }

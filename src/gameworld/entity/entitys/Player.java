@@ -1,11 +1,13 @@
-package entity.entitys;
+package gameworld.entity.entitys;
 
-import entity.Entity;
+import gameworld.Entity;
 import handlers.KeyHandler;
 import main.MainGame;
+import main.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -32,11 +34,22 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+        up1 = setup("boy_down_1.png");
+
+
+    }
+
+    private BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
+        BufferedImage scaledImage = null;
         try {
-            this.up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/boy_down_1.png")));
+            scaledImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources//player/" + imagePath)));
+            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return scaledImage;
     }
 
     public void setDefaultValues() {

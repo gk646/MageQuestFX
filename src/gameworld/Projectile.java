@@ -1,11 +1,11 @@
-package projectile;
+package gameworld;
 
 
+import gameworld.projectile.projectiles.PrimaryFire;
+import gameworld.projectile.projectiles.SecondaryFire;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.MainGame;
-import projectile.projectiles.PrimaryFire;
-import projectile.projectiles.SecondaryFire;
 
 import java.awt.*;
 // import java.awt.image.BufferedImage;

@@ -14,7 +14,7 @@ public class OverWorld extends World {
         worldSize = new Point(1000, 100);
         worldData = new int[worldSize.x + 1][worldSize.y + 1];
         try {
-            InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/1.txt");
+            InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/map1.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             int row = 0;
@@ -39,7 +39,8 @@ public class OverWorld extends World {
         return worldData;
 
     }
-    public static Point loadMapSize(){
+
+    public static Point loadMapSize() {
         return new Point(worldSize.x, worldSize.y);
     }
 

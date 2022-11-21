@@ -1,26 +1,23 @@
-package projectile.projectiles;
+package gameworld.projectile.projectiles;
 
+import gameworld.Projectile;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 import main.MainGame;
-import projectile.Projectile;
 
 import java.awt.*;
 
-public class PrimaryFire extends Projectile {
+public class SecondaryFire extends Projectile {
 
     private final Point updateVector;
 
     /**
-     * What happens when you press main mouse button
-     *
-     * @param mainGame      to access display functions
-     * @param motionHandler to get mouse input
-     * @param mouseHandler  to get mouse input
+     * What happens when you press secondary mouse button. Part of
+     * {@link Projectile}
      */
-    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
+    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
         super(mainGame, motionHandler, mouseHandler);
-        this.projectileSpeed = 11;
+        this.projectileSpeed = 8;
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.pPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - 2400, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - 2400);
         this.updateVector = getUpdateVector();
@@ -29,8 +26,8 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.green);
-        g2.fillOval(pPosition.x - mainGame.player.worldX + 2400, pPosition.y - mainGame.player.worldY + 2400, 20, 20);
+        g2.setColor(Color.blue);
+        g2.fillRect(pPosition.x - mainGame.player.worldX + 2400, pPosition.y - mainGame.player.worldY + 2400, 30, 30);
 
     }
 
@@ -43,7 +40,7 @@ public class PrimaryFire extends Projectile {
 
     private Point getUpdateVector() {
         if (mousePosition == null) {
-            mousePosition = mouseHandler.mouse1Position;
+            mousePosition = mouseHandler.mouse2Position;
         }
         int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
         int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;

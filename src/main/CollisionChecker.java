@@ -1,6 +1,6 @@
 package main;
 
-import entity.Entity;
+import gameworld.Entity;
 
 public class CollisionChecker {
     MainGame mainGame;
@@ -16,8 +16,8 @@ public class CollisionChecker {
         int entityTopWorldY = entity.worldY + entity.collisionBox.y;
         int entityBottomWorldY = entity.worldY + entity.collisionBox.y + entity.collisionBox.height;
 
-        int entityLeftCol = entityLeftWorldX / 48;
-        int entityRightCol = entityRightWorldX / 48;
+        int entityLeftCol;
+        int entityRightCol;
         int entityTopRow = entityTopWorldY / 48;
         int entityBottomRow = entityBottomWorldY / 48;
 

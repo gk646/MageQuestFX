@@ -1,10 +1,10 @@
-package entity;
+package gameworld;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Main inheritable class for all entity's
+ * Main inheritable class for all gameworld.entity's
  */
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight;

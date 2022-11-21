@@ -10,9 +10,9 @@ import java.util.Objects;
 
 
 public class WorldRender {
-    public Tile[] tileStorage;
     public static int[][] worldData;
     public static Point worldSize;
+    public Tile[] tileStorage;
     MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
@@ -23,24 +23,24 @@ public class WorldRender {
 
     }
 
-    private void getTileImage() {
+    private void setup(int index, String imagePath, boolean collision) {
+        Utilities utilities = new Utilities();
         try {
-            tileStorage[1] = new Tile();
-            tileStorage[1].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/grass.png")));
-            tileStorage[0] = new Tile();
-            tileStorage[0].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/wall.png")));
-            tileStorage[2] = new Tile();
-            tileStorage[2].tileImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/water.png")));
-            tileStorage[2].collision = true;
+            tileStorage[index] = new Tile();
+            tileStorage[index].tileImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/" + imagePath))));
+            tileStorage[index].tileImage = utilities.scaleImage(tileStorage[index].tileImage, 48, 48);
+            tileStorage[index].collision = collision;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Loading the map data from a .txt-File. Iam using Tiled as a level editor.
-     */
+    private void getTileImage() {
+        setup(1, "grass.png", false);
+        setup(0, "wall.png", true);
+        setup(2, "water.png", true);
 
+    }
 
     public void draw(Graphics2D g2) {
 
@@ -59,28 +59,22 @@ public class WorldRender {
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
 
-            if (worldX +48> mainGame.player.worldX - mainGame.player.screenX &&
-                    worldX-48 < mainGame.player.worldX + mainGame.player.screenX &&
-                    worldY +48> mainGame.player.worldY - mainGame.player.screenY &&
-                    worldY -48< mainGame.player.worldY + mainGame.player.screenY) {
+            if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
                 g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
             }
 
 
-
-
-
-                worldCol++;
-                if (worldCol == worldSize.x) {
-                    worldCol = 0;
-                    worldRow++;
-                }
-
-
+            worldCol++;
+            if (worldCol == worldSize.x) {
+                worldCol = 0;
+                worldRow++;
             }
 
 
         }
 
+
     }
+
+}
 
