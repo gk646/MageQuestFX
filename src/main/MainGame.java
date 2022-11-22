@@ -2,12 +2,14 @@ package main;
 
 import gameworld.Projectile;
 import gameworld.entitys.Player;
+import gameworld.entitys.Player2;
 import handlers.KeyHandler;
 import handlers.MotionHandler;
 import handlers.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 public class MainGame extends JPanel implements Runnable {
@@ -16,21 +18,26 @@ public class MainGame extends JPanel implements Runnable {
     public static final double FRAMES_PER_SECOND = 120;
     public static final int SCREEN_WIDTH = 1400;
     public static final int SCREEN_HEIGHT = 900;
-    //Input handlers
-    public MotionHandler motionHandler = new MotionHandler();
-    public MouseHandler mouseHandler = new MouseHandler(motionHandler);
+
+
 
     //Variables
     public int globalLogicTicks;
+    public String player2Information;
+
     //Game thread
     Thread gameThread;
 
     //Instances of important classes
+    public MotionHandler motionHandler = new MotionHandler();
+    public MouseHandler mouseHandler = new MouseHandler(motionHandler);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     KeyHandler keyHandler = new KeyHandler();
     WorldRender wRender = new WorldRender(this);
     public Player player = new Player(this, keyHandler);
+    public Player2 player2= new Player2(this);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
+    Multiplayer multiplayer = new Multiplayer(this, player2);
 
     /**
      * Main game loop class
@@ -70,11 +77,11 @@ public class MainGame extends JPanel implements Runnable {
             //12677853 fps with optimized render
             //18491828 fps with "old" render
             //
-
             if (timer >= 2) {
                 update();
                 timer = 0;
                 logic_ticks++;
+
                 globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
@@ -104,6 +111,7 @@ public class MainGame extends JPanel implements Runnable {
     public void update() {
         projectile.update();
         player.update();
+        multiplayer.update();
     }
 
     /**
@@ -120,6 +128,7 @@ public class MainGame extends JPanel implements Runnable {
 
         wRender.draw(g2);
         projectile.draw(g2);
+        player2.draw(g2);
         player.draw(g2);
 
         //RENDER END

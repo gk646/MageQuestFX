@@ -42,8 +42,10 @@ public class Projectile extends Entity{
 
     public void update() {
         for (Projectile projectile : PROJECTILES) {
-            if (projectile != null) {
+            if (projectile != null && !projectile.dead) {
                 projectile.update();
+            }else{
+                projectile= null;
             }
         }
         if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {

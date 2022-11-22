@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+
 public class Player extends Entity {
     public final int screenX;
     public final int screenY;
@@ -38,24 +39,6 @@ public class Player extends Entity {
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
-    public void getPlayerImage() {
-        up1 = setup("boy_down_1.png");
-
-
-    }
-
-    private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read((getClass().getResourceAsStream("/resources/player/" + imagePath)));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
-    }
 
     public void update() {
         direction = "";
@@ -109,6 +92,26 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(up1, screenX, screenY, 48, 48, null);
+    }
+    public void getPlayerImage() {
+        up1 = setup("boy_down_1.png");
+
+
+
+    }
+
+
+    private BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/" + imagePath))));
+            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
     }
 
 }

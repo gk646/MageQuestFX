@@ -23,33 +23,39 @@ public class PrimaryFire extends Projectile {
 
         //Setting default values
         this.movementSpeed = 7;
-        this.entityHeight = 20;
-        this.entityWidth= 20;
+        this.entityHeight = 16;
+        this.entityWidth = 16;
 
         //handlers etc.
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.pPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
+        this.worldX = pPosition.x + 1700;
+        this.worldY = pPosition.y + 1950;
         this.updateVector = getUpdateVector();
-        this.collisionBox= new Rectangle(0,0,20,20);
-
+        this.collisionBox = new Rectangle(0, 0, 16, 16);
+        direction = "downleftrightup";
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.green);
-        g2.fillOval(pPosition.x - mainGame.player.worldX+2400, pPosition.y - mainGame.player.worldY + 2400, entityWidth, entityHeight);
+        g2.drawRect(pPosition.x - mainGame.player.worldX + Player.startingPoint.x, pPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
 
     }
 
     @Override
     public void update() {
-
-        if(!collisionup) {
-            pPosition.x += updateVector.x;
-            pPosition.y += updateVector.y;
+        mainGame.collisionChecker.checkProjectile(this);
+        if (collisionup || collisiondown || collisionleft || collisionright) {
+            this.dead = true;
         }
+        pPosition.x += updateVector.x;
+        pPosition.y += updateVector.y;
+        worldX = pPosition.x + 1700;
+        worldY = pPosition.y + 1950;
     }
+
     //Get normalized vector
     private Point getUpdateVector() {
         if (mousePosition == null) {
@@ -58,8 +64,8 @@ public class PrimaryFire extends Projectile {
         int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
         int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        double normalizedY = (deltaY / length) * movementSpeed*2;
-        double normalizedX = (deltaX / length) * movementSpeed*2;
+        double normalizedY = (deltaY / length) * movementSpeed * 2;
+        double normalizedX = (deltaX / length) * movementSpeed * 2;
         return new Point((int) normalizedX, (int) normalizedY);
     }
 }
