@@ -44,14 +44,14 @@ public class SecondaryFire extends Projectile {
 
     @Override
     public void update() {
-        mainGame.collisionChecker.checkProjectile(this);
+        mainGame.collisionChecker.checkEntityAgainstTile(this);
         if (collisionup||collisiondown||collisionleft||collisionright) {
             this.dead = true;
         }
         pPosition.x += updateVector.x;
         pPosition.y += updateVector.y;
-        worldX = pPosition.x + 1700;
-        worldY = pPosition.y + 1950;
+        worldX = pPosition.x + 1700+24;
+        worldY = pPosition.y + 1950+24;
     }
 
     //Get normalized vector

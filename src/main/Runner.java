@@ -24,7 +24,8 @@ public class Runner {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-        try {
+        /*try {
+
             //ServerSocket serverSocket = new ServerSocket(2525);
             // s =  serverSocket.accept() ;
             Socket s = new Socket("192.168.2.47",2525);
@@ -33,6 +34,9 @@ public class Runner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+         */
+
         mainGame.startGameThread();
 
     }
