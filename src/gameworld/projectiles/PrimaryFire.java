@@ -20,7 +20,7 @@ public class PrimaryFire extends Projectile {
      * @param mouseHandler  to get mouse input
      */
     public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
-        super(mainGame, motionHandler, mouseHandler,entity);
+        super(mainGame, motionHandler, mouseHandler, entity);
 
         //Setting default values
         this.movementSpeed = 7;
@@ -48,7 +48,7 @@ public class PrimaryFire extends Projectile {
     @Override
     public void update() {
         mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (collisionup || collisiondown || collisionleft || collisionright) {
+        if (collisionUp || collisiondown || collisionleft || collisionright) {
             this.dead = true;
         }
 

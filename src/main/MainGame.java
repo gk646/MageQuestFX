@@ -37,7 +37,7 @@ public class MainGame extends JPanel implements Runnable {
     public Player player = new Player(this, keyHandler);
     public Player2 player2 = new Player2(this);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity);
-    Multiplayer multiplayer = new Multiplayer(this, player2);
+    Multiplayer multiplayer = new Multiplayer(this, player2,entity);
 
     /**
      * Main game loop class
@@ -114,8 +114,7 @@ public class MainGame extends JPanel implements Runnable {
         projectile.update();
         player.update();
         entity.update();
-
-        // multiplayer.update();
+        multiplayer.update();
     }
 
     /**

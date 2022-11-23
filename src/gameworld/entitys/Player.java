@@ -58,7 +58,7 @@ public class Player extends Entity {
         collisionright = false;
         collisionleft = false;
         collisiondown = false;
-        collisionup = false;
+        collisionUp = false;
 
         mainGame.collisionChecker.checkEntityAgainstTile(this);
 
@@ -69,7 +69,7 @@ public class Player extends Entity {
         }
 
         if (direction.contains("up")) {
-            if (!collisionup) {
+            if (!collisionUp) {
                 worldY -= movementSpeed;
             }
         }
@@ -92,9 +92,9 @@ public class Player extends Entity {
     public void draw(Graphics2D g2) {
         g2.drawImage(up1, screenX, screenY, 48, 48, null);
     }
+
     public void getPlayerImage() {
         up1 = setup("boy_down_1.png");
-
 
 
     }

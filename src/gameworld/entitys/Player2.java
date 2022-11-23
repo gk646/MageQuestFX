@@ -23,8 +23,8 @@ public class Player2 extends Entity {
         //Setting default values
         worldX = startingPoint.x;
         worldY = startingPoint.y;
-        screenX = worldX ;
-        screenY = worldY ;
+        screenX = worldX;
+        screenY = worldY;
         getPlayerImage();
 
         this.entityHeight = 48;
@@ -34,9 +34,11 @@ public class Player2 extends Entity {
         //Handlers
         this.mainGame = mainGame;
     }
+
     private void getPlayerImage() {
         player2 = setup("player_2.png");
     }
+
     private BufferedImage setup(String imagePath) {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
@@ -49,9 +51,10 @@ public class Player2 extends Entity {
         }
         return scaledImage;
     }
+
     public void draw(Graphics2D g2) {
 
-        g2.drawImage(player2,screenX+startingPoint.x-mainGame.player.worldX, screenY+startingPoint.y-mainGame.player.worldY, 48, 48,null);
+        g2.drawImage(player2, screenX + startingPoint.x - mainGame.player.worldX, screenY + startingPoint.y - mainGame.player.worldY, 48, 48, null);
     }
 
 }

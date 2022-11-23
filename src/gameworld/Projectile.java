@@ -4,7 +4,6 @@ package gameworld;
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
 import handlers.MotionHandler;
-import gameworld.entitys.Enemy;
 import handlers.MouseHandler;
 import main.MainGame;
 
@@ -23,7 +22,7 @@ public class Projectile extends Entity {
     //public BufferedImage pellet;
     public MainGame mainGame;
     public Point mousePosition;
-    private Entity entity;
+    private final Entity entity;
     public MotionHandler motionHandler;
     public MouseHandler mouseHandler;
 
@@ -52,41 +51,41 @@ public class Projectile extends Entity {
                 projectile.update();
             }
         }
-        for (Entity entity1 : entity.entities) {
-            if (entity1 != null) {
-                for (Projectile projectile1 : PROJECTILES) {
-                    if (projectile1 != null) {
-                        if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1) && !projectile1.dead) {
-                            if (projectile1.getClass() == PrimaryFire.class) {
-                                entity1.health -= 1;
-                                projectile1.dead = true;
-                                projectile1 = null;
-                            } else if (projectile1.getClass() == SecondaryFire.class) {
-                                entity1.health -= 5;
-                                projectile1.dead = true;
-                                projectile1 = null;
+            for (Entity entity1 : entity.entities) {
+                if (entity1 != null) {
+                    for (Projectile projectile1 : PROJECTILES) {
+                        if (projectile1 != null&&!projectile1.dead) {
+                            if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
+                                if (projectile1.getClass() == PrimaryFire.class) {
+                                    entity1.health -= 1;
+                                    projectile1.dead = true;
+                                    projectile1 = null;
+                                } else if (projectile1.getClass() == SecondaryFire.class) {
+                                    entity1.health -= 5;
+                                    projectile1.dead = true;
+                                    projectile1 = null;
+                                }
                             }
-                            System.out.println(entity.entities[1].health);
+
                         }
                     }
-                }
-                if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
-                    if (PROJECTILES.length == counter) {
-                        counter = 0;
+                    if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
+                        if (PROJECTILES.length == counter) {
+                            counter = 0;
+                        }
+                        PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler, entity);
+                        motionHandler.mousePressed = false;
                     }
-                    PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler, entity);
-                    motionHandler.mousePressed = false;
-                }
-                if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
-                    if (PROJECTILES.length == counter) {
-                        counter = 0;
+                    if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
+                        if (PROJECTILES.length == counter) {
+                            counter = 0;
+                        }
+                        PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler, entity);
+                        motionHandler.mousePressed = false;
                     }
-                    PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler, entity);
-                    motionHandler.mousePressed = false;
-                }
 
+                }
             }
         }
-
     }
-}
+

@@ -18,7 +18,7 @@ public class SecondaryFire extends Projectile {
      * {@link Projectile}
      */
     public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
-        super(mainGame, motionHandler, mouseHandler,entity);
+        super(mainGame, motionHandler, mouseHandler, entity);
 
         //Setting default values
         this.movementSpeed = 5;
@@ -29,8 +29,8 @@ public class SecondaryFire extends Projectile {
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x+1700;
-        this.worldY = screenPosition.y+1950;
+        this.worldX = screenPosition.x + 1700;
+        this.worldY = screenPosition.y + 1950;
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         direction = "downleftrightup";
@@ -46,14 +46,14 @@ public class SecondaryFire extends Projectile {
     @Override
     public void update() {
         mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (collisionup||collisiondown||collisionleft||collisionright) {
+        if (collisionUp || collisiondown || collisionleft || collisionright) {
             this.dead = true;
         }
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + 1700+24;
-        worldY = screenPosition.y + 1950+24;
+        worldX = screenPosition.x + 1700 + 24;
+        worldY = screenPosition.y + 1950 + 24;
     }
 
     //Get normalized vector

@@ -43,7 +43,8 @@ public class OverWorld extends World {
     public static Point loadMapSize() {
         return new Point(worldSize.x, worldSize.y);
     }
-    public static Point loadMapStartPoint(){
-        return new Point(2400,2400);
+
+    public static Point loadMapStartPoint() {
+        return new Point(2400, 2400);
     }
 }

@@ -11,6 +11,7 @@ import java.net.Socket;
 public class Runner {
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
+
     /**
      * @author Lukas Gilch
      */
@@ -25,18 +26,16 @@ public class Runner {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-       /* try {
+       try {
 
-            //ServerSocket serverSocket = new ServerSocket(2525);
-            // s =  serverSocket.accept() ;
-            Socket s = new Socket("172.24.8.141",2525);
+            ServerSocket serverSocket = new ServerSocket(2525);
+           Socket s =  serverSocket.accept() ;
             outputStream= new DataOutputStream(s.getOutputStream());
             inputStream = new DataInputStream(s.getInputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        */
 
 
 

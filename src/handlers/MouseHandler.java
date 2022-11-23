@@ -11,7 +11,7 @@ public class MouseHandler implements MouseListener {
     public MotionHandler motionHandler;
 
     public MouseHandler(MotionHandler motionHandler) {
-this.motionHandler = motionHandler;
+        this.motionHandler = motionHandler;
     }
 
 
@@ -35,11 +35,11 @@ this.motionHandler = motionHandler;
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == 1) {
             mouse1Pressed = false;
-            motionHandler.mousePosition=null;
+            motionHandler.mousePosition = null;
         }
         if (e.getButton() == 3) {
             mouse2Pressed = false;
-            motionHandler.mousePosition=null;
+            motionHandler.mousePosition = null;
         }
 
     }

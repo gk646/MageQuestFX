@@ -48,7 +48,7 @@ public class CollisionChecker {
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
-                entity.collisionup = true;
+                entity.collisionUp = true;
             }
 
         }
@@ -66,13 +66,10 @@ public class CollisionChecker {
 
     }
 
-    public boolean checkEntityAgainstEntity(Entity checkingForHit, Entity incomingToHit){
+    public boolean checkEntityAgainstEntity(Entity checkingForHit, Entity incomingToHit) {
 
-        if(new Rectangle(checkingForHit.worldX,checkingForHit.worldY,checkingForHit.collisionBox.width,checkingForHit.collisionBox.height).intersects(new Rectangle(
-                incomingToHit.worldX,incomingToHit.worldY,incomingToHit.collisionBox.width,incomingToHit.collisionBox.height))){
-            return true;
-        }
-        return false;
+        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(
+                incomingToHit.worldX, incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 }
 

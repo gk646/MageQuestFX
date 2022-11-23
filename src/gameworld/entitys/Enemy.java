@@ -15,8 +15,9 @@ public class Enemy extends Entity {
     public int screenX;
     public int screenY;
     private BufferedImage enemyImage;
-    private Point startingPoint;
-    public Enemy(MainGame mainGame,int worldX, int worldY,int health,Point startingPoint) {
+    private final Point startingPoint;
+
+    public Enemy(MainGame mainGame, int worldX, int worldY, int health, Point startingPoint) {
         super(mainGame);
 
         this.mainGame = mainGame;
@@ -30,23 +31,25 @@ public class Enemy extends Entity {
         this.entityHeight = 48;
         this.entityWidth = 48;
         getPlayerImage();
-        this.collisionBox = new Rectangle(8, 8, 40, 40);
+        this.collisionBox = new Rectangle(6, 6, 42, 42);
         this.health = health;
 
     }
 
     public void update() {
-        screenX = worldX-mainGame.player.worldX+ MainGame.SCREEN_WIDTH /2 -24;
-        screenY = worldX-mainGame.player.worldY+MainGame.SCREEN_HEIGHT/2-24;
-
+        screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
 
     }
+
     public void draw(Graphics2D g2) {
         g2.drawImage(enemyImage, screenX, screenY, 48, 48, null);
     }
+
     public void getPlayerImage() {
         enemyImage = setup("enemy01.png");
     }
+
     private BufferedImage setup(String imagePath) {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
