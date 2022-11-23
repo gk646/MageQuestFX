@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
  */
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight;
-    Entity  [] entities;
-    public int movementSpeed;
+    public Entity  [] entities;
+    public int movementSpeed,health;
     public MainGame mainGame;
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2,player2;
     public String direction;
@@ -28,6 +28,7 @@ public class Entity {
         if(initializeEnemies){
             spawnEnemies();
             initializeEnemies =false;
+
         }
         for(Entity entity : entities){
             if(entity !=null) {
@@ -36,14 +37,17 @@ public class Entity {
         }
     }
     public void draw(Graphics2D g2){
-        for (Entity entity : entities){
-            if(entity !=null) {
-                entity.draw(g2);
+        for (Entity entity1 : entities){
+            if(entity1 !=null) {
+                entity1.draw(g2);
+
             }
         }
     }
     public void spawnEnemies(){
-        entities[0]= new Enemy(mainGame,2400,2400,50,new Point(2400,2400));
+        entities[1]= new Enemy(mainGame,2400,2400,50,new Point(2400,2400));
+
+
     }
 
 }

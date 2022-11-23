@@ -1,5 +1,6 @@
 package gameworld.projectiles;
 
+import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import handlers.MotionHandler;
@@ -16,8 +17,8 @@ public class SecondaryFire extends Projectile {
      * What happens when you press secondary mouse button. Part of
      * {@link Projectile}
      */
-    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
-        super(mainGame, motionHandler, mouseHandler);
+    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
+        super(mainGame, motionHandler, mouseHandler,entity);
 
         //Setting default values
         this.movementSpeed = 5;
@@ -26,10 +27,10 @@ public class SecondaryFire extends Projectile {
 
         //handlers etc.
         this.mousePosition = mainGame.motionHandler.mousePosition;
-        this.worldPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
+        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = worldPosition.x+1700;
-        this.worldY = worldPosition.y+1950;
+        this.worldX = screenPosition.x+1700;
+        this.worldY = screenPosition.y+1950;
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         direction = "downleftrightup";
@@ -38,7 +39,7 @@ public class SecondaryFire extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.blue);
-        g2.drawRect(worldPosition.x - mainGame.player.worldX + Player.startingPoint.x, worldPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+        g2.drawRect(screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
 
     }
 
@@ -48,16 +49,17 @@ public class SecondaryFire extends Projectile {
         if (collisionup||collisiondown||collisionleft||collisionright) {
             this.dead = true;
         }
-        worldPosition.x += updateVector.x;
-        worldPosition.y += updateVector.y;
-        worldX = worldPosition.x + 1700+24;
-        worldY = worldPosition.y + 1950+24;
+
+        screenPosition.x += updateVector.x;
+        screenPosition.y += updateVector.y;
+        worldX = screenPosition.x + 1700+24;
+        worldY = screenPosition.y + 1950+24;
     }
 
     //Get normalized vector
     private Point getUpdateVector() {
         if (mousePosition == null) {
-            mousePosition = mouseHandler.mouse1Position;
+            mousePosition = mouseHandler.mouse2Position;
         }
         int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
         int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;

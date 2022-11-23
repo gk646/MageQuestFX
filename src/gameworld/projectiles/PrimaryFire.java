@@ -1,5 +1,6 @@
 package gameworld.projectiles;
 
+import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import handlers.MotionHandler;
@@ -18,8 +19,8 @@ public class PrimaryFire extends Projectile {
      * @param motionHandler to get mouse input
      * @param mouseHandler  to get mouse input
      */
-    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
-        super(mainGame, motionHandler, mouseHandler);
+    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
+        super(mainGame, motionHandler, mouseHandler,entity);
 
         //Setting default values
         this.movementSpeed = 7;
@@ -28,10 +29,10 @@ public class PrimaryFire extends Projectile {
 
         //handlers etc.
         this.mousePosition = mainGame.motionHandler.mousePosition;
-        this.worldPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
+        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = worldPosition.x + 1700;
-        this.worldY = worldPosition.y + 1950;
+        this.worldX = screenPosition.x + 1700;
+        this.worldY = screenPosition.y + 1950;
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 16, 16);
         direction = "downleftrightup";
@@ -40,7 +41,7 @@ public class PrimaryFire extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.green);
-        g2.drawRect(worldPosition.x - mainGame.player.worldX + Player.startingPoint.x, worldPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+        g2.drawRect(screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
 
     }
 
@@ -51,10 +52,10 @@ public class PrimaryFire extends Projectile {
             this.dead = true;
         }
 
-        worldPosition.x += updateVector.x;
-        worldPosition.y += updateVector.y;
-        worldX = worldPosition.x + 1700 + 24;
-        worldY = worldPosition.y + 1950 + 24;
+        screenPosition.x += updateVector.x;
+        screenPosition.y += updateVector.y;
+        worldX = screenPosition.x + 1700 + 24;
+        worldY = screenPosition.y + 1950 + 24;
 
     }
 

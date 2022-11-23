@@ -2,6 +2,8 @@ package main;
 
 import gameworld.Entity;
 
+import java.awt.*;
+
 public class CollisionChecker {
     MainGame mainGame;
 
@@ -64,8 +66,13 @@ public class CollisionChecker {
 
     }
 
-    public void checkEntityAgainstEntity(Entity checking, Entity toBeChecked){
+    public boolean checkEntityAgainstEntity(Entity checkingForHit, Entity incomingToHit){
 
+        if(new Rectangle(checkingForHit.worldX,checkingForHit.worldY,checkingForHit.collisionBox.width,checkingForHit.collisionBox.height).intersects(new Rectangle(
+                incomingToHit.worldX,incomingToHit.worldY,incomingToHit.collisionBox.width,incomingToHit.collisionBox.height))){
+            return true;
+        }
+        return false;
     }
 }
 

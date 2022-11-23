@@ -2,7 +2,6 @@ package main;
 
 import gameworld.Entity;
 import gameworld.Projectile;
-import gameworld.entitys.Enemy;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
 import handlers.KeyHandler;
@@ -11,7 +10,6 @@ import handlers.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 
 public class MainGame extends JPanel implements Runnable {
@@ -20,7 +18,6 @@ public class MainGame extends JPanel implements Runnable {
     public static final double FRAMES_PER_SECOND = 120;
     public static final int SCREEN_WIDTH = 1400;
     public static final int SCREEN_HEIGHT = 900;
-
 
 
     //Variables
@@ -38,8 +35,8 @@ public class MainGame extends JPanel implements Runnable {
     WorldRender wRender = new WorldRender(this);
     Entity entity = new Entity(this);
     public Player player = new Player(this, keyHandler);
-    public Player2 player2= new Player2(this);
-    Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
+    public Player2 player2 = new Player2(this);
+    Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity);
     Multiplayer multiplayer = new Multiplayer(this, player2);
 
     /**
@@ -63,6 +60,7 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
+
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
@@ -112,10 +110,12 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
+
         projectile.update();
         player.update();
         entity.update();
-       // multiplayer.update();
+
+        // multiplayer.update();
     }
 
     /**

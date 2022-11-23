@@ -14,15 +14,16 @@ import java.util.Objects;
 public class Enemy extends Entity {
     public int screenX;
     public int screenY;
-    private int health;
     private BufferedImage enemyImage;
     private Point startingPoint;
     public Enemy(MainGame mainGame,int worldX, int worldY,int health,Point startingPoint) {
         super(mainGame);
+
+        this.mainGame = mainGame;
         //Setting default values
         this.worldX = worldX;
         this.worldY = worldY;
-        this.health = 50;
+
         movementSpeed = 4;
         direction = "up";
         this.startingPoint = startingPoint;
@@ -30,14 +31,15 @@ public class Enemy extends Entity {
         this.entityWidth = 48;
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 8, 40, 40);
+        this.health = health;
 
-        //Handlers
-        this.mainGame = mainGame;
     }
 
     public void update() {
         screenX = worldX-mainGame.player.worldX+ MainGame.SCREEN_WIDTH /2 -24;
         screenY = worldX-mainGame.player.worldY+MainGame.SCREEN_HEIGHT/2-24;
+
+
     }
     public void draw(Graphics2D g2) {
         g2.drawImage(enemyImage, screenX, screenY, 48, 48, null);
