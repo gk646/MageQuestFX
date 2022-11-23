@@ -40,10 +40,10 @@ public class Multiplayer {
                     index += 5;
                     entity1.health = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
                     index += 5;
-                    debug += entity1.health;
+
                 }
             }
-            System.out.println(debug);
+
         }catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -57,9 +57,7 @@ public class Multiplayer {
             for (Entity entity1 : entity.entities) {
                 if (entity1 != null) {
                     outputString += (entity1.worldX + 50000) + "" + (entity1.worldY + 50000) + "" + (entity1.health + 50000);
-
                 }
-
             }
 
             Multiplayer.outputStream.writeUTF(outputString);
