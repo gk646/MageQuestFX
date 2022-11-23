@@ -64,7 +64,9 @@ public class CollisionChecker {
 
     }
 
+    public void checkEntityAgainstEntity(Entity checking, Entity toBeChecked){
 
+    }
 }
 
 

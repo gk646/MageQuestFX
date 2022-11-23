@@ -16,12 +16,11 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public static Point startingPoint;
-    private final MainGame mainGame;
     private final KeyHandler keyHandler;
 
 
     public Player(MainGame mainGame, KeyHandler keyHandler) {
-
+        super(mainGame);
         //Setting default values
         worldX = startingPoint.x;
         worldY = startingPoint.y;

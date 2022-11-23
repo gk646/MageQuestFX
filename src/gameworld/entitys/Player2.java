@@ -16,11 +16,10 @@ public class Player2 extends Entity {
     public int screenX;
     public int screenY;
     public static Point startingPoint;
-    private final MainGame mainGame;
     private BufferedImage player2;
 
     public Player2(MainGame mainGame) {
-
+        super(mainGame);
         //Setting default values
         worldX = startingPoint.x;
         worldY = startingPoint.y;

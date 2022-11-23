@@ -15,7 +15,7 @@ public class Multiplayer {
     public void update() {
         try {
 
-            Runner.outputStream.writeUTF((mainGame.player.worldX +50000)+ "" +(mainGame.player.worldY+50000));
+            Runner.outputStream.writeUTF((mainGame.player.worldX +50000)+"" +(mainGame.player.worldY+50000));
             mainGame.player2Information = Runner.inputStream.readUTF();
             player2.worldX= Integer.parseInt(mainGame.player2Information,0,5,10)-50000;
             player2.worldY= Integer.parseInt(mainGame.player2Information,5,10,10)-50000;

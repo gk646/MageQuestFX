@@ -14,9 +14,9 @@ import java.awt.*;
  * Inherits Entity
  * Main inheritable class for all projectiles
  */
-public class Projectile extends Entity{
+public class Projectile extends Entity {
     public final static Projectile[] PROJECTILES = new Projectile[1000];
-    public Point pPosition;
+    public Point worldPosition;
     public int counter;
 
     //public BufferedImage pellet;
@@ -26,12 +26,13 @@ public class Projectile extends Entity{
     public MouseHandler mouseHandler;
 
     public Projectile(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler) {
+        super(mainGame);
         this.mainGame = mainGame;
         this.motionHandler = motionHandler;
         this.mouseHandler = mouseHandler;
 
     }
-
+    @Override
     public void draw(Graphics2D g2) {
         for (Projectile projectile : PROJECTILES) {
             if (projectile != null) {
@@ -39,13 +40,11 @@ public class Projectile extends Entity{
             }
         }
     }
-
+    @Override
     public void update() {
         for (Projectile projectile : PROJECTILES) {
             if (projectile != null && !projectile.dead) {
                 projectile.update();
-            }else{
-                projectile= null;
             }
         }
         if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {

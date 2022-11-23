@@ -1,6 +1,8 @@
 package main;
 
+import gameworld.Entity;
 import gameworld.Projectile;
+import gameworld.entitys.Enemy;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
 import handlers.KeyHandler;
@@ -34,6 +36,7 @@ public class MainGame extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     KeyHandler keyHandler = new KeyHandler();
     WorldRender wRender = new WorldRender(this);
+    Entity entity = new Entity(this);
     public Player player = new Player(this, keyHandler);
     public Player2 player2= new Player2(this);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler);
@@ -111,6 +114,7 @@ public class MainGame extends JPanel implements Runnable {
     public void update() {
         projectile.update();
         player.update();
+        entity.update();
        // multiplayer.update();
     }
 
@@ -128,6 +132,7 @@ public class MainGame extends JPanel implements Runnable {
 
         wRender.draw(g2);
         projectile.draw(g2);
+        entity.draw(g2);
         player2.draw(g2);
         player.draw(g2);
 

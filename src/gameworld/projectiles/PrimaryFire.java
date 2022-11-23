@@ -28,10 +28,10 @@ public class PrimaryFire extends Projectile {
 
         //handlers etc.
         this.mousePosition = mainGame.motionHandler.mousePosition;
-        this.pPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
+        this.worldPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = pPosition.x + 1700;
-        this.worldY = pPosition.y + 1950;
+        this.worldX = worldPosition.x + 1700;
+        this.worldY = worldPosition.y + 1950;
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 16, 16);
         direction = "downleftrightup";
@@ -40,7 +40,7 @@ public class PrimaryFire extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.green);
-        g2.drawRect(pPosition.x - mainGame.player.worldX + Player.startingPoint.x, pPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+        g2.drawRect(worldPosition.x - mainGame.player.worldX + Player.startingPoint.x, worldPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
 
     }
 
@@ -50,10 +50,12 @@ public class PrimaryFire extends Projectile {
         if (collisionup || collisiondown || collisionleft || collisionright) {
             this.dead = true;
         }
-        pPosition.x += updateVector.x;
-        pPosition.y += updateVector.y;
-        worldX = pPosition.x + 1700+24;
-        worldY = pPosition.y + 1950+24;
+
+        worldPosition.x += updateVector.x;
+        worldPosition.y += updateVector.y;
+        worldX = worldPosition.x + 1700 + 24;
+        worldY = worldPosition.y + 1950 + 24;
+
     }
 
     //Get normalized vector
