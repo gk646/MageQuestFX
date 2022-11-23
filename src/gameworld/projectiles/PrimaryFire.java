@@ -3,8 +3,8 @@ package gameworld.projectiles;
 import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
-import handlers.MotionHandler;
-import handlers.MouseHandler;
+import input.MotionHandler;
+import input.MouseHandler;
 import main.MainGame;
 
 import java.awt.*;

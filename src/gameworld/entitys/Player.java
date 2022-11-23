@@ -1,7 +1,7 @@
 package gameworld.entitys;
 
 import gameworld.Entity;
-import handlers.KeyHandler;
+import input.KeyHandler;
 import main.MainGame;
 import main.Utilities;
 

@@ -9,8 +9,7 @@ import java.net.Socket;
 
 
 public class Runner {
-    public static DataOutputStream outputStream;
-    public static DataInputStream inputStream;
+
 
     /**
      * @author Lukas Gilch
@@ -25,18 +24,6 @@ public class Runner {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-       try {
-
-            ServerSocket serverSocket = new ServerSocket(2525);
-           Socket s =  serverSocket.accept() ;
-            outputStream= new DataOutputStream(s.getOutputStream());
-            inputStream = new DataInputStream(s.getInputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
 
 
         mainGame.startGameThread();

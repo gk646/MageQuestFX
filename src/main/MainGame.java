@@ -4,9 +4,9 @@ import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
-import handlers.KeyHandler;
-import handlers.MotionHandler;
-import handlers.MouseHandler;
+import input.KeyHandler;
+import input.MotionHandler;
+import input.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +37,7 @@ public class MainGame extends JPanel implements Runnable {
     public Player player = new Player(this, keyHandler);
     public Player2 player2 = new Player2(this);
     Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity);
-    Multiplayer multiplayer = new Multiplayer(this, player2,entity);
+    Multiplayer multiplayer = new Multiplayer(this, player2, entity);
 
     /**
      * Main game loop class
@@ -100,21 +100,28 @@ public class MainGame extends JPanel implements Runnable {
         }
     }
 
-    public void startGameThread() {
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
 
     /**
-     * Main update method
+     * Main updateMultiInput method
      */
 
     public void update() {
+        if (keyHandler.debugfps && keyHandler.multiplayer) {
+            multiplayer.startMultiplayer();
+        }
+        if (keyHandler.multiplayer) {
 
+            multiplayer.updateMultiInput();
+        }
         projectile.update();
         player.update();
         entity.update();
-        multiplayer.update();
+
+
+        if (keyHandler.multiplayer) {
+
+            multiplayer.updateOutput();
+        }
     }
 
     /**
@@ -146,4 +153,11 @@ public class MainGame extends JPanel implements Runnable {
         g2.dispose();
 
     }
+
+    public void startGameThread() {
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+
 }

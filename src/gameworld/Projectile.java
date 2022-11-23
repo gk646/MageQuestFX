@@ -3,8 +3,8 @@ package gameworld;
 
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
-import handlers.MotionHandler;
-import handlers.MouseHandler;
+import input.MotionHandler;
+import input.MouseHandler;
 import main.MainGame;
 
 import java.awt.*;
@@ -51,41 +51,44 @@ public class Projectile extends Entity {
                 projectile.update();
             }
         }
-            for (Entity entity1 : entity.entities) {
-                if (entity1 != null) {
-                    for (Projectile projectile1 : PROJECTILES) {
-                        if (projectile1 != null&&!projectile1.dead) {
-                            if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
-                                if (projectile1.getClass() == PrimaryFire.class) {
-                                    entity1.health -= 1;
-                                    projectile1.dead = true;
-                                    projectile1 = null;
-                                } else if (projectile1.getClass() == SecondaryFire.class) {
-                                    entity1.health -= 5;
-                                    projectile1.dead = true;
-                                    projectile1 = null;
-                                }
+        for (Entity entity1 : entity.entities) {
+            if (entity1 != null) {
+                for (Projectile projectile1 : PROJECTILES) {
+                    if (projectile1 != null && !projectile1.dead) {
+
+                        if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1) && !projectile1.dead) {
+                            if (projectile1.getClass() == PrimaryFire.class) {
+                                entity1.health -= 1;
+                                projectile1.dead = true;
+                                projectile1 = null;
+                            } else if (projectile1.getClass() == SecondaryFire.class) {
+                                entity1.health -= 5;
+                                projectile1.dead = true;
+                                projectile1 = null;
                             }
+                        }
 
-                        }
                     }
-                    if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
-                        if (PROJECTILES.length == counter) {
-                            counter = 0;
-                        }
-                        PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler, entity);
-                        motionHandler.mousePressed = false;
-                    }
-                    if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
-                        if (PROJECTILES.length == counter) {
-                            counter = 0;
-                        }
-                        PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler, entity);
-                        motionHandler.mousePressed = false;
-                    }
-
                 }
             }
         }
+        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
+            if (PROJECTILES.length == counter) {
+                counter = 0;
+            }
+            PROJECTILES[counter++] = new PrimaryFire(mainGame, motionHandler, mouseHandler, entity);
+            motionHandler.mousePressed = false;
+        }
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
+            if (PROJECTILES.length == counter) {
+                counter = 0;
+            }
+            PROJECTILES[counter++] = new SecondaryFire(mainGame, motionHandler, mouseHandler, entity);
+            motionHandler.mousePressed = false;
+        }
+
     }
+}
+
+
 
