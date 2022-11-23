@@ -46,8 +46,6 @@ public class Entity {
     }
     public void spawnEnemies(){
         entities[1]= new Enemy(mainGame,2400,2400,50,new Point(2400,2400));
-
-
     }
 
 }
