@@ -44,14 +44,14 @@ public class Multiplayer {
                 }
             }
 
-        }catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
-    public void updateOutput(){
-        try{
+    public void updateOutput() {
+        try {
             outputString = "";
             outputString += (mainGame.player.worldX + 50000) + "" + (mainGame.player.worldY + 50000);
             for (Entity entity1 : entity.entities) {
@@ -72,8 +72,8 @@ public class Multiplayer {
         }
     }
 
-    public void startMultiplayer(){
-        if(mainGame.keyHandler.multiplayer){
+    public void startMultiplayer() {
+        if (mainGame.keyHandler.multiplayer) {
             try {
                 ServerSocket serverSocket = new ServerSocket(2525);
                 Socket s = serverSocket.accept();
