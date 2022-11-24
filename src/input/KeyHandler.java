@@ -5,9 +5,9 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     //Keys
-    public boolean upPressed, downPressed, rightPressed, leftPressed;
+    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed;
     //debug
-    public boolean debugfps,multiplayer;
+    public boolean debugFps, multiplayer;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -29,10 +29,13 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if (code == KeyEvent.VK_C) {
-            debugfps = true;
+            debugFps = true;
         }
-        if(code == KeyEvent.VK_M){
+        if (code == KeyEvent.VK_M) {
             multiplayer = true;
+        }
+        if (code == KeyEvent.VK_1) {
+            OnePressed = true;
         }
     }
 
@@ -50,7 +53,10 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_C) {
 
-            debugfps = false;
+            debugFps = false;
+        }
+        if (code == KeyEvent.VK_1) {
+            OnePressed = false;
         }
     }
 }

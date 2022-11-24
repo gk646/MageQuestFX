@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Dungeon1 extends World {
-
     public static int[][] loadMap() {
         worldSize = new Point(50, 50);
         worldData = new int[worldSize.x][worldSize.y];

@@ -3,6 +3,7 @@ package gameworld.projectiles;
 import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
+import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
@@ -19,8 +20,8 @@ public class PrimaryFire extends Projectile {
      * @param motionHandler to get mouse input
      * @param mouseHandler  to get mouse input
      */
-    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
-        super(mainGame, motionHandler, mouseHandler, entity);
+    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
+        super(mainGame, motionHandler, mouseHandler, entity,keyHandler);
 
         //Setting default values
         this.movementSpeed = 7;
@@ -48,7 +49,7 @@ public class PrimaryFire extends Projectile {
     @Override
     public void update() {
         mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (collisionUp || collisiondown || collisionleft || collisionright) {
+        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
 

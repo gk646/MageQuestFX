@@ -55,15 +55,15 @@ public class Player extends Entity {
             direction += "right";
         }
         //check tile collision
-        collisionright = false;
-        collisionleft = false;
-        collisiondown = false;
+        collisionRight = false;
+        collisionLeft = false;
+        collisionDown = false;
         collisionUp = false;
 
         mainGame.collisionChecker.checkEntityAgainstTile(this);
 
         if (direction.contains("left")) {
-            if (!collisionleft) {
+            if (!collisionLeft) {
                 worldX -= movementSpeed;
             }
         }
@@ -75,14 +75,14 @@ public class Player extends Entity {
         }
 
         if (direction.contains("down")) {
-            if (!collisiondown) {
+            if (!collisionDown) {
                 worldY += movementSpeed;
             }
         }
 
         if (direction.contains("right")) {
 
-            if (!collisionright) {
+            if (!collisionRight) {
                 worldX += movementSpeed;
             }
         }

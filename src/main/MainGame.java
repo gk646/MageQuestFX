@@ -36,7 +36,7 @@ public class MainGame extends JPanel implements Runnable {
     Entity entity = new Entity(this);
     public Player player = new Player(this, keyHandler);
     public Player2 player2 = new Player2(this);
-    Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity);
+    Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity,keyHandler);
     Multiplayer multiplayer = new Multiplayer(this, player2, entity);
 
     /**
@@ -106,7 +106,7 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
-        if (keyHandler.debugfps && keyHandler.multiplayer) {
+        if (keyHandler.debugFps && keyHandler.multiplayer) {
             multiplayer.startMultiplayer();
         }
         if (keyHandler.multiplayer) {
@@ -146,7 +146,7 @@ public class MainGame extends JPanel implements Runnable {
 
         long drawEnd = System.nanoTime();
         long difference = drawEnd - drawStart;
-        if (keyHandler.debugfps) {
+        if (keyHandler.debugFps) {
             g2.setColor(Color.white);
             g2.drawString(("Draw Time" + difference), 500, 600);
         }

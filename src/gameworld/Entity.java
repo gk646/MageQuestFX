@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Main inheritable class for all gameworld.entity's
+ * Main inheritable class for all game world entity's
  */
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight;
@@ -15,11 +15,11 @@ public class Entity {
     public int movementSpeed, health;
     public MainGame mainGame;
     public BufferedImage up1;
-    public int screenX, screenY;
+    
     public String direction;
     public Rectangle collisionBox;
     private boolean initializeEnemies = true;
-    public boolean collisionUp, collisiondown, collisionleft, collisionright, dead;
+    public boolean collisionUp, collisionDown, collisionLeft, collisionRight, dead;
 
     public Entity(MainGame mainGame) {
         this.entities = new Enemy[100];

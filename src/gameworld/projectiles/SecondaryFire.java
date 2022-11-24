@@ -3,6 +3,7 @@ package gameworld.projectiles;
 import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
+import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
@@ -17,8 +18,8 @@ public class SecondaryFire extends Projectile {
      * What happens when you press secondary mouse button. Part of
      * {@link Projectile}
      */
-    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity) {
-        super(mainGame, motionHandler, mouseHandler, entity);
+    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
+        super(mainGame, motionHandler, mouseHandler, entity,keyHandler);
 
         //Setting default values
         this.movementSpeed = 5;
@@ -46,7 +47,7 @@ public class SecondaryFire extends Projectile {
     @Override
     public void update() {
         mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (collisionUp || collisiondown || collisionleft || collisionright) {
+        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
 

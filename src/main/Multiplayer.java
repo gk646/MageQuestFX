@@ -28,7 +28,6 @@ public class Multiplayer {
 
     public void updateMultiInput() {
         try {
-            String debug = "";
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
@@ -40,7 +39,6 @@ public class Multiplayer {
                     index += 5;
                     entity1.health = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
                     index += 5;
-
                 }
             }
 
