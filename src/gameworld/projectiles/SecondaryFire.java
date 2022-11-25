@@ -7,8 +7,13 @@ import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
+import main.Utilities;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class SecondaryFire extends Projectile {
 
@@ -35,12 +40,13 @@ public class SecondaryFire extends Projectile {
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         direction = "downleftrightup";
+        getPlayerImage();
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.blue);
-        g2.drawRect(screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+        g2.drawImage(up1,screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight,null);
 
     }
 
@@ -53,8 +59,8 @@ public class SecondaryFire extends Projectile {
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + 1700 + 24;
-        worldY = screenPosition.y + 1950 + 24;
+        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
     }
 
     //Get normalized vector
@@ -68,5 +74,24 @@ public class SecondaryFire extends Projectile {
         double normalizedY = (deltaY / length) * movementSpeed * 2;
         double normalizedX = (deltaX / length) * movementSpeed * 2;
         return new Point((int) normalizedX, (int) normalizedY);
+    }
+    public void getPlayerImage() {
+        up1 = setup("SecondaryFire01.png");
+
+
+    }
+
+
+    private BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/projectiles/" + imagePath))));
+            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
     }
 }

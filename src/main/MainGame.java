@@ -16,8 +16,8 @@ public class MainGame extends JPanel implements Runnable {
 
     //Screen setting
     public static final double FRAMES_PER_SECOND = 120;
-    public static final int SCREEN_WIDTH = 1400;
-    public static final int SCREEN_HEIGHT = 900;
+    public static final int SCREEN_WIDTH = 1920;
+    public static final int SCREEN_HEIGHT = 1080;
 
 
     //Variables
@@ -158,6 +158,10 @@ public class MainGame extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
+    private void setFullScreen(){
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(Runner.window);
+    }
 
 }

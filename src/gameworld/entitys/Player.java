@@ -94,12 +94,10 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1 = setup("boy_down_1.png");
+        up1 = setup("Mage_down01.png");
 
 
     }
-
-
     private BufferedImage setup(String imagePath) {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;

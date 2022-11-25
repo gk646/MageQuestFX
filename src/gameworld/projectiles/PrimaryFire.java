@@ -1,5 +1,6 @@
 package gameworld.projectiles;
 
+import com.sun.tools.javac.Main;
 import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
@@ -7,8 +8,13 @@ import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
+import main.Utilities;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class PrimaryFire extends Projectile {
     private final Point updateVector;
@@ -32,17 +38,18 @@ public class PrimaryFire extends Projectile {
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + 1700;
-        this.worldY = screenPosition.y + 1950;
+        this.worldX = screenPosition.x + Player.startingPoint.x-MainGame.SCREEN_WIDTH/2;
+        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT/2;
         this.updateVector = getUpdateVector();
         this.collisionBox = new Rectangle(0, 0, 16, 16);
         direction = "downleftrightup";
+        getPlayerImage();
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.green);
-        g2.drawRect(screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+
+        g2.drawImage(up1,screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight,null);
 
     }
 
@@ -55,8 +62,8 @@ public class PrimaryFire extends Projectile {
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + 1700 + 24;
-        worldY = screenPosition.y + 1950 + 24;
+        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
 
     }
 
@@ -72,4 +79,24 @@ public class PrimaryFire extends Projectile {
         double normalizedX = (deltaX / length) * movementSpeed * 2;
         return new Point((int) normalizedX, (int) normalizedY);
     }
+    public void getPlayerImage() {
+        up1 = setup("PrimaryFire01.png");
+
+
+    }
+
+
+    private BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/projectiles/" + imagePath))));
+            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
+    }
+
 }

@@ -51,8 +51,8 @@ public class Ability1 extends Projectile {
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + 1700 + 24;
-        worldY = screenPosition.y + 1950 + 24;
+        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
     }
 
     private void getUpdateVector() {
