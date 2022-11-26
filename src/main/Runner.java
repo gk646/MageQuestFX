@@ -14,7 +14,7 @@ public class Runner {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Game");
+        window.setTitle("SERVER");
         window.setUndecorated(true);
         MainGame mainGame = new MainGame();
         window.add(mainGame);

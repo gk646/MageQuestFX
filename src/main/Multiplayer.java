@@ -17,6 +17,7 @@ public class Multiplayer {
     private int index = 10;
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
+    public boolean multiplayerstarted;
 
 
     public Multiplayer(MainGame mainGame, Player2 player2, Entity entity) {
@@ -61,8 +62,8 @@ public class Multiplayer {
             Multiplayer.outputStream.writeUTF(outputString);
 
             index = 10;
-            player2.screenX = player2.worldX - 1700 - 24;
-            player2.screenY = player2.worldY - 1950 - 24;
+            player2.screenX = player2.worldX - 1440 - 24;
+            player2.screenY = player2.worldY - 1860 -24;
 
 
         } catch (IOException e) {
@@ -71,9 +72,10 @@ public class Multiplayer {
     }
 
     public void startMultiplayer() {
+        multiplayerstarted= true;
         if (mainGame.keyHandler.multiplayer) {
             try {
-                ServerSocket serverSocket = new ServerSocket(2525);
+                ServerSocket serverSocket = new ServerSocket(2555);
                 Socket s = serverSocket.accept();
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());

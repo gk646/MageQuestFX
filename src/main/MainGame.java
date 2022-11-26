@@ -52,6 +52,7 @@ public class MainGame extends JPanel implements Runnable {
         this.setOpaque(true);
 
 
+
     }
 
 
@@ -109,8 +110,7 @@ public class MainGame extends JPanel implements Runnable {
         if (keyHandler.debugFps && keyHandler.multiplayer) {
             multiplayer.startMultiplayer();
         }
-        if (keyHandler.multiplayer) {
-
+        if (multiplayer.multiplayerstarted) {
             multiplayer.updateMultiInput();
         }
         projectile.update();
@@ -118,7 +118,7 @@ public class MainGame extends JPanel implements Runnable {
         entity.update();
 
 
-        if (keyHandler.multiplayer) {
+        if (multiplayer.multiplayerstarted) {
 
             multiplayer.updateOutput();
         }
