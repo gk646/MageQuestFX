@@ -15,7 +15,7 @@ public class Runner {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("SERVER");
-        window.setUndecorated(false);
+        window.setUndecorated(true);
         MainGame mainGame = new MainGame();
         window.add(mainGame);
         window.pack();
