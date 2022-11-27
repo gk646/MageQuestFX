@@ -8,5 +8,5 @@ WASD -Movement
 
 Left-/Right- MouseButtons to shoot
 
-no jar as of yet
+no jar yet
 

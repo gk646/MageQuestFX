@@ -1,6 +1,5 @@
 package gameworld.projectiles;
 
-import com.sun.tools.javac.Main;
 import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class PrimaryFire extends Projectile {
-    private final Point updateVector;
 
     /**
      * What happens when you press main mouse button
@@ -27,29 +25,29 @@ public class PrimaryFire extends Projectile {
      * @param mouseHandler  to get mouse input
      */
     public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, entity,keyHandler);
+        super(mainGame, motionHandler, mouseHandler, entity, keyHandler);
 
-        //Setting default values
+        //-------VALUES-----------
         this.movementSpeed = 7;
         this.entityHeight = 16;
         this.entityWidth = 16;
+        this.collisionBox = new Rectangle(0, 0, 16, 16);
+        this.direction = "downleftrightup";
 
-        //handlers etc.
+        //------POSITION-----------
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + Player.startingPoint.x-MainGame.SCREEN_WIDTH/2;
-        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT/2;
+        this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
+        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.updateVector = getUpdateVector();
-        this.collisionBox = new Rectangle(0, 0, 16, 16);
-        direction = "downleftrightup";
         getPlayerImage();
+
     }
 
     @Override
     public void draw(Graphics2D g2) {
-
-        g2.drawImage(up1,screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight,null);
+        g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
 
     }
 
@@ -59,11 +57,10 @@ public class PrimaryFire extends Projectile {
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
-
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
-        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
+        worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
 
     }
 
@@ -79,6 +76,7 @@ public class PrimaryFire extends Projectile {
         double normalizedX = (deltaX / length) * movementSpeed * 2;
         return new Point((int) normalizedX, (int) normalizedY);
     }
+
     public void getPlayerImage() {
         up1 = setup("PrimaryFire01.png");
 

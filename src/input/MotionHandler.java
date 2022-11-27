@@ -15,10 +15,8 @@ public class MotionHandler implements MouseMotionListener {
      * Mouse position as Point
      */
     public Point mousePosition;
-    public boolean mousePressed;
 
     public MotionHandler() {
-        mousePressed = false;
     }
 
     /**
@@ -27,7 +25,6 @@ public class MotionHandler implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         mousePosition = new Point(e.getX(), e.getY());
-        mousePressed = true;
     }
 
     @Override

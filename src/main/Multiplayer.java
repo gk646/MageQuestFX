@@ -12,19 +12,19 @@ import java.net.Socket;
 public class Multiplayer {
     private final MainGame mainGame;
     private final Player2 player2;
-    private String outputString;
-    private Entity entity;
+    private final Entity entity;
     private int index = 10;
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
-    public boolean multiplayerstarted;
+    public boolean multiplayerStarted;
 
+    final StringBuilder outputString;
 
     public Multiplayer(MainGame mainGame, Player2 player2, Entity entity) {
         this.mainGame = mainGame;
         this.player2 = player2;
         this.entity = entity;
-
+        this.outputString = new StringBuilder();
     }
 
     public void updateMultiInput() {
@@ -51,19 +51,18 @@ public class Multiplayer {
 
     public void updateOutput() {
         try {
-            outputString = "";
-            outputString += (mainGame.player.worldX + 50000) + "" + (mainGame.player.worldY + 50000);
+            outputString.append(mainGame.player.worldX + 50000).append(mainGame.player.worldY + 50000);
             for (Entity entity1 : entity.entities) {
                 if (entity1 != null) {
-                    outputString += (entity1.worldX + 50000) + "" + (entity1.worldY + 50000) + "" + (entity1.health + 50000);
+                    outputString.append(entity1.worldX + 50000).append(entity1.worldY + 50000).append(entity1.health + 50000);
                 }
             }
 
-            Multiplayer.outputStream.writeUTF(outputString);
+            Multiplayer.outputStream.writeUTF(outputString.toString());
 
             index = 10;
             player2.screenX = player2.worldX - 1440 - 24;
-            player2.screenY = player2.worldY - 1860 -24;
+            player2.screenY = player2.worldY - 1860 - 24;
 
 
         } catch (IOException e) {
@@ -72,7 +71,7 @@ public class Multiplayer {
     }
 
     public void startMultiplayer() {
-        multiplayerstarted= true;
+        multiplayerStarted = true;
         if (mainGame.keyHandler.multiplayer) {
             try {
                 ServerSocket serverSocket = new ServerSocket(2555);

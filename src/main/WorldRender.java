@@ -12,8 +12,8 @@ import java.util.Objects;
 public class WorldRender {
     public static int[][] worldData;
     public static Point worldSize;
-    public Tile[] tileStorage;
-    MainGame mainGame;
+    public final Tile[] tileStorage;
+    final MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;

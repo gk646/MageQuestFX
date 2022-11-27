@@ -28,16 +28,16 @@ public class MainGame extends JPanel implements Runnable {
     Thread gameThread;
 
     //Instances of important classes
-    public MotionHandler motionHandler = new MotionHandler();
-    public MouseHandler mouseHandler = new MouseHandler(motionHandler);
-    public CollisionChecker collisionChecker = new CollisionChecker(this);
-    KeyHandler keyHandler = new KeyHandler();
-    WorldRender wRender = new WorldRender(this);
-    Entity entity = new Entity(this);
-    public Player player = new Player(this, keyHandler);
-    public Player2 player2 = new Player2(this);
-    Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity,keyHandler);
-    Multiplayer multiplayer = new Multiplayer(this, player2, entity);
+    public final MotionHandler motionHandler = new MotionHandler();
+    public final MouseHandler mouseHandler = new MouseHandler(motionHandler);
+    public final CollisionChecker collisionChecker = new CollisionChecker(this);
+    final KeyHandler keyHandler = new KeyHandler();
+    final WorldRender wRender = new WorldRender(this);
+    final Entity entity = new Entity(this);
+    public final Player player = new Player(this, keyHandler);
+    public final Player2 player2 = new Player2(this);
+    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity,keyHandler);
+    final Multiplayer multiplayer = new Multiplayer(this, player2, entity);
 
     /**
      * Main game loop class
@@ -110,7 +110,7 @@ public class MainGame extends JPanel implements Runnable {
         if (keyHandler.debugFps && keyHandler.multiplayer) {
             multiplayer.startMultiplayer();
         }
-        if (multiplayer.multiplayerstarted) {
+        if (multiplayer.multiplayerStarted) {
             multiplayer.updateMultiInput();
         }
         projectile.update();
@@ -118,7 +118,7 @@ public class MainGame extends JPanel implements Runnable {
         entity.update();
 
 
-        if (multiplayer.multiplayerstarted) {
+        if (multiplayer.multiplayerStarted) {
 
             multiplayer.updateOutput();
         }

@@ -17,36 +17,34 @@ import java.util.Objects;
 
 public class SecondaryFire extends Projectile {
 
-    private final Point updateVector;
-
     /**
      * What happens when you press secondary mouse button. Part of
      * {@link Projectile}
      */
     public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, entity,keyHandler);
+        super(mainGame, motionHandler, mouseHandler, entity, keyHandler);
 
-        //Setting default values
+        //-------VALUES-----------
         this.movementSpeed = 5;
         this.entityHeight = 25;
         this.entityWidth = 25;
+        this.collisionBox = new Rectangle(0, 0, 25, 25);
+        this.direction = "downleftrightup";
 
-        //handlers etc.
+        //------POSITION-----------
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
         this.worldX = screenPosition.x + 1700;
         this.worldY = screenPosition.y + 1950;
         this.updateVector = getUpdateVector();
-        this.collisionBox = new Rectangle(0, 0, 25, 25);
-        direction = "downleftrightup";
         getPlayerImage();
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.blue);
-        g2.drawImage(up1,screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight,null);
+        g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
 
     }
 
@@ -59,8 +57,8 @@ public class SecondaryFire extends Projectile {
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
-        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
+        worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
     }
 
     //Get normalized vector
@@ -75,6 +73,7 @@ public class SecondaryFire extends Projectile {
         double normalizedX = (deltaX / length) * movementSpeed * 2;
         return new Point((int) normalizedX, (int) normalizedY);
     }
+
     public void getPlayerImage() {
         up1 = setup("SecondaryFire01.png");
 

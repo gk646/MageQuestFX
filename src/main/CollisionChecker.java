@@ -5,7 +5,7 @@ import gameworld.Entity;
 import java.awt.*;
 
 public class CollisionChecker {
-    MainGame mainGame;
+    final MainGame mainGame;
 
     CollisionChecker(MainGame mainGame) {
         this.mainGame = mainGame;

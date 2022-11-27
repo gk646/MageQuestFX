@@ -12,28 +12,31 @@ import java.util.Objects;
 
 
 public class Enemy extends Entity {
-    public int screenX;
-    public int screenY;
     private BufferedImage enemyImage;
-    private final Point startingPoint;
 
-    public Enemy(MainGame mainGame, int worldX, int worldY, int health, Point startingPoint) {
+    /**
+     * Main Enemy class
+     *
+     * @param mainGame super();
+     * @param worldX   coordinates X
+     * @param worldY   coordinates Y
+     * @param health   amount of health
+     */
+    public Enemy(MainGame mainGame, int worldX, int worldY, int health) {
         super(mainGame);
 
-        this.mainGame = mainGame;
         //Setting default values
+        this.health = health;
         this.worldX = worldX;
         this.worldY = worldY;
-
         movementSpeed = 4;
-        direction = "up";
-        this.startingPoint = startingPoint;
+        direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-        getPlayerImage();
-        this.collisionBox = new Rectangle(6, 6, 42, 42);
-        this.health = health;
 
+        this.collisionBox = new Rectangle(6, 6, 42, 42);
+
+        getDisplayImage();
     }
 
     public void update() {
@@ -46,7 +49,7 @@ public class Enemy extends Entity {
         g2.drawImage(enemyImage, screenX, screenY, 48, 48, null);
     }
 
-    public void getPlayerImage() {
+    public void getDisplayImage() {
         enemyImage = setup("enemy01.png");
     }
 
