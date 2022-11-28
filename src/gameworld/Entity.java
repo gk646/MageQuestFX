@@ -38,10 +38,7 @@ public class Entity {
             initializeEnemies = false;
         }
         for (Entity entity : entities) {
-            if (entity != null) {
                 entity.update();
-
-            }
         }
     }
 

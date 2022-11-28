@@ -13,15 +13,12 @@ public class Runner {
     public static void main(String[] args) {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("SERVER");
         window.setUndecorated(true);
+        window.setTitle("SERVER");
         MainGame mainGame = new MainGame();
         window.add(mainGame);
         window.pack();
-        window.setLocationRelativeTo(null);
         window.setVisible(true);
         mainGame.startGameThread();
-
     }
 }

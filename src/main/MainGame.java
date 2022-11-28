@@ -36,7 +36,7 @@ public class MainGame extends JPanel implements Runnable {
     final Entity entity = new Entity(this);
     public final Player player = new Player(this, keyHandler);
     public final Player2 player2 = new Player2(this);
-    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity,keyHandler);
+    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity, keyHandler);
     final Multiplayer multiplayer = new Multiplayer(this, player2, entity);
 
     /**
@@ -44,14 +44,12 @@ public class MainGame extends JPanel implements Runnable {
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setDoubleBuffered(true);
+        //this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-        this.setOpaque(true);
-
-
+        //this.setOpaque(true);
 
     }
 
@@ -70,34 +68,38 @@ public class MainGame extends JPanel implements Runnable {
         double fpsCounter = 0;
         long lastTime = System.nanoTime();
         double interval = 1000000000 / FRAMES_PER_SECOND;
+        double timeDifference;
+        int logicvsFPS = (int) (FRAMES_PER_SECOND / 60);
         while (gameThread != null) {
             firstTimeGate = System.nanoTime();
-            delta += (firstTimeGate - lastTime) / interval;
-            fpsCounter += (firstTimeGate - lastTime);
-            timer += (firstTimeGate - lastTime) / interval;
+            timeDifference = (firstTimeGate - lastTime) / interval;
+            delta += timeDifference;
+            // fpsCounter += (firstTimeGate - lastTime);
+            timer += timeDifference / logicvsFPS;
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
             //18491828 fps with "old" render
             //
-            if (timer >= 2) {
+            if (timer >= 1) {
+                globalLogicTicks = logic_ticks;
                 update();
                 timer = 0;
                 logic_ticks++;
 
-                globalLogicTicks = logic_ticks;
             }
             if (delta >= 1) {
                 repaint();
-                fps++;
+                //fps++;
                 delta--;
             }
-
+/*
             if (fpsCounter >= 1000000000) {
-                //System.out.println(fps + " " + logic_ticks + " ");
+                System.out.println(fps + " " + logic_ticks + " ");
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
             }
+ */
         }
     }
 
@@ -158,10 +160,6 @@ public class MainGame extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-    private void setFullScreen(){
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(Runner.window);
-    }
+
 
 }
