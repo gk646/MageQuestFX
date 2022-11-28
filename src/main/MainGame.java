@@ -28,9 +28,9 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final static ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public static final ArrayList<Entity> ENTITIES = new ArrayList<>();
-    public int gameState;
-    public int globalLogicTicks;
+    public int gameState, globalLogicTicks;
     public String player2Information;
+    public boolean validate;
 
 
     //Game thread
@@ -174,8 +174,7 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        }
-        else if(gameState == titleState){
+        } else if (gameState == titleState) {
             ui.draw(g2);
         }
 
@@ -196,6 +195,5 @@ public class MainGame extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
 
 }
