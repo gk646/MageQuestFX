@@ -74,7 +74,7 @@ public class MainGame extends JPanel implements Runnable {
             firstTimeGate = System.nanoTime();
             timeDifference = (firstTimeGate - lastTime) / interval;
             delta += timeDifference;
-            // fpsCounter += (firstTimeGate - lastTime);
+            fpsCounter += (firstTimeGate - lastTime);
             timer += timeDifference / logicvsFPS;
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
@@ -89,17 +89,17 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (delta >= 1) {
                 repaint();
-                //fps++;
+                fps++;
                 delta--;
             }
-/*
+
             if (fpsCounter >= 1000000000) {
                 System.out.println(fps + " " + logic_ticks + " ");
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
             }
- */
+
         }
     }
 
