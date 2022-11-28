@@ -1,8 +1,10 @@
 package ui;
 
+import com.sun.tools.javac.Main;
 import main.MainGame;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class UI {
     Graphics2D g2;
@@ -26,7 +28,6 @@ public class UI {
         } else if (mg.gameState == mg.titleState) {
             drawTitleScreen();
 
-
         }
     }
 
@@ -35,6 +36,12 @@ public class UI {
         String text = "Bit Adventure 2d";
         int x = getXforCenteredText(text);
         int y = 48*3;
+        g2.setColor(new Color(108, 170, 229));
+        g2.fillRect(0,0, MainGame.SCREEN_WIDTH,MainGame.SCREEN_HEIGHT);
+        g2.setColor(Color.black);
+        g2.drawString(text,x+5,y+5);
+        g2.setColor(Color.white);
+        g2.drawString(text,x,y);
     }
 
     private void drawGameUI() {

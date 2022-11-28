@@ -71,7 +71,7 @@ public class MainGame extends JPanel implements Runnable {
         this.addMouseMotionListener(motionHandler);
         this.setOpaque(true);
         this.setFocusable(true);
-        gameState = playState;
+        gameState = titleState;
     }
 
 
@@ -131,27 +131,25 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
+        if (multiplayer.multiplayerStarted) {
+            multiplayer.updateMultiInput();
+        }
         if (gameState == playState) {
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayer();
-            }
-            if (multiplayer.multiplayerStarted) {
-                multiplayer.updateMultiInput();
             }
 
             projectile.update();
             player.update();
             entity.update();
-
-
-            if (multiplayer.multiplayerStarted) {
-                multiplayer.updateOutput();
-            }
         }
         if (gameState == pauseState) {
             projectile.update();
             entity.update();
 
+        }
+        if (multiplayer.multiplayerStarted) {
+            multiplayer.updateOutput();
         }
 
     }
@@ -169,13 +167,19 @@ public class MainGame extends JPanel implements Runnable {
         long drawStart = System.nanoTime();
 
         //RENDER START
+        if (gameState == playState || gameState == pauseState) {
+            wRender.draw(g2);
+            projectile.draw(g2);
+            entity.draw(g2);
+            player2.draw(g2);
+            player.draw(g2);
+            ui.draw(g2);
+        }
+        else if(gameState == titleState){
+            ui.draw(g2);
+        }
 
-        wRender.draw(g2);
-        projectile.draw(g2);
-        entity.draw(g2);
-        player2.draw(g2);
-        player.draw(g2);
-        ui.draw(g2);
+
         //RENDER END
 
         long drawEnd = System.nanoTime();

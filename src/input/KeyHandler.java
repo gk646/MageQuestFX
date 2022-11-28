@@ -44,7 +44,10 @@ public class KeyHandler implements KeyListener {
             OnePressed = true;
         }
         if (code == KeyEvent.VK_ESCAPE) {
-            if (mg.gameState == mg.playState) {
+            if (mg.gameState == mg.titleState) {
+                mg.gameState = mg.playState;
+            }
+            else if (mg.gameState == mg.playState) {
                 mg.gameState = mg.pauseState;
             } else if (mg.gameState == mg.pauseState) {
                 mg.gameState = mg.playState;

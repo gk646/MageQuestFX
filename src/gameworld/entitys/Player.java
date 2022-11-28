@@ -94,13 +94,13 @@ public class Player extends Entity {
                 worldX += movementSpeed;
             }
         }
-        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
+        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 5 == 0) {
             PROJECTILES.add(new PrimaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
         }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 5 == 0) {
             PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler,  keyHandler));
         }
-        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0) {
+        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 5 == 0) {
             for (int i = 0; i <= 7; i++) {
                 PROJECTILES.add(new Ability1(mainGame, motionHandler, mouseHandler, keyHandler, i));
             }

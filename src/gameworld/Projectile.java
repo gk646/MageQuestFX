@@ -55,9 +55,7 @@ public class Projectile extends Entity {
                 }
             }
             projectile1.update();
-
         }
-
         PROJECTILES.removeIf(projectile -> projectile.dead);
     }
 }
