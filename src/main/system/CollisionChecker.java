@@ -1,13 +1,15 @@
-package main;
+package main.system;
 
 import gameworld.Entity;
+import main.MainGame;
+import main.system.WorldRender;
 
 import java.awt.*;
 
 public class CollisionChecker {
     final MainGame mainGame;
 
-    CollisionChecker(MainGame mainGame) {
+    public CollisionChecker(MainGame mainGame) {
         this.mainGame = mainGame;
 
     }

@@ -7,9 +7,14 @@ import gameworld.entitys.Player2;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
+import main.system.CollisionChecker;
+import main.system.Multiplayer;
+import main.system.WorldRender;
+import ui.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class MainGame extends JPanel implements Runnable {
@@ -21,9 +26,12 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------VARIABLES----------
+    public final static ArrayList<Projectile> PROJECTILES = new ArrayList<>();
+    public static final ArrayList<Entity> ENTITIES = new ArrayList<>();
     public int gameState;
     public int globalLogicTicks;
     public String player2Information;
+
 
     //Game thread
     Thread gameThread;
@@ -32,7 +40,7 @@ public class MainGame extends JPanel implements Runnable {
 
     public final MotionHandler motionHandler = new MotionHandler();
     public final MouseHandler mouseHandler = new MouseHandler(motionHandler);
-    final KeyHandler keyHandler = new KeyHandler(this);
+    public final KeyHandler keyHandler = new KeyHandler(this);
 
     //---------GAMESTATES-----------
 
@@ -43,12 +51,13 @@ public class MainGame extends JPanel implements Runnable {
     //---------System---------
 
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
-    final WorldRender wRender = new WorldRender(this);
+    public final WorldRender wRender = new WorldRender(this);
     final Entity entity = new Entity(this);
-    public final Player player = new Player(this, keyHandler);
+    public final Player player = new Player(this, keyHandler, mouseHandler, motionHandler);
     public final Player2 player2 = new Player2(this);
-    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, entity, keyHandler);
-    final Multiplayer multiplayer = new Multiplayer(this, player2, entity);
+    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, keyHandler);
+    final Multiplayer multiplayer = new Multiplayer(this, player2);
+    public UI ui = new UI(this);
 
     /**
      * Main game loop class
@@ -74,9 +83,9 @@ public class MainGame extends JPanel implements Runnable {
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
-        int fps = 0;
+        //int fps = 0;
         int logic_ticks = 0;
-        double fpsCounter = 0;
+        // double fpsCounter = 0;
         long lastTime = System.nanoTime();
         double interval = 1000000000 / FRAMES_PER_SECOND;
         double timeDifference;
@@ -85,7 +94,7 @@ public class MainGame extends JPanel implements Runnable {
             firstTimeGate = System.nanoTime();
             timeDifference = (firstTimeGate - lastTime) / interval;
             delta += timeDifference;
-            fpsCounter += (firstTimeGate - lastTime);
+            // fpsCounter += (firstTimeGate - lastTime);
             timer += timeDifference / logicvsFPS;
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
@@ -100,7 +109,7 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (delta >= 1) {
                 repaint();
-                fps++;
+                //     fps++;
                 delta--;
             }
 /*
@@ -136,7 +145,6 @@ public class MainGame extends JPanel implements Runnable {
 
 
             if (multiplayer.multiplayerStarted) {
-
                 multiplayer.updateOutput();
             }
         }
@@ -167,7 +175,7 @@ public class MainGame extends JPanel implements Runnable {
         entity.draw(g2);
         player2.draw(g2);
         player.draw(g2);
-
+        ui.draw(g2);
         //RENDER END
 
         long drawEnd = System.nanoTime();

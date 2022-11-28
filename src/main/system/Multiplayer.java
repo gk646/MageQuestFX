@@ -1,7 +1,8 @@
-package main;
+package main.system;
 
 import gameworld.Entity;
 import gameworld.entitys.Player2;
+import main.MainGame;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,21 +10,20 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static main.MainGame.ENTITIES;
+
 
 public class Multiplayer {
     private final MainGame mainGame;
     private final Player2 player2;
-    private final Entity entity;
     private int index = 10;
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
 
-    public Multiplayer(MainGame mainGame, Player2 player2, Entity entity) {
+    public Multiplayer(MainGame mainGame, Player2 player2) {
         this.mainGame = mainGame;
         this.player2 = player2;
-        this.entity = entity;
-
     }
 
     public void updateMultiInput() {
@@ -31,7 +31,7 @@ public class Multiplayer {
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
-            for (Entity entity1 : entity.entities) {
+            for (Entity entity1 : ENTITIES) {
                 entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
                 index += 5;
                 entity1.worldY = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
@@ -49,7 +49,7 @@ public class Multiplayer {
         try {
             StringBuilder outputString = new StringBuilder();
             outputString.append(mainGame.player.worldX + 50000).append(mainGame.player.worldY + 50000);
-            for (Entity entity1 : entity.entities) {
+            for (Entity entity1 : ENTITIES) {
                 outputString.append(entity1.worldX + 50000).append(entity1.worldY + 50000).append(entity1.health + 50000);
             }
             //System.out.println(outputString);

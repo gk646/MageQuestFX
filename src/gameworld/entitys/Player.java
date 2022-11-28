@@ -1,9 +1,14 @@
 package gameworld.entitys;
 
 import gameworld.Entity;
+import gameworld.projectiles.Ability1;
+import gameworld.projectiles.PrimaryFire;
+import gameworld.projectiles.SecondaryFire;
 import input.KeyHandler;
+import input.MotionHandler;
+import input.MouseHandler;
 import main.MainGame;
-import main.Utilities;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,15 +16,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+import static main.MainGame.PROJECTILES;
+
 
 public class Player extends Entity {
     public static Point startingPoint;
     private final KeyHandler keyHandler;
+    private final MouseHandler mouseHandler;
+    private final MotionHandler motionHandler;
 
-
-    public Player(MainGame mainGame, KeyHandler keyHandler) {
+    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
-        //Setting default values
+        //-------VALUES-----------
         worldX = startingPoint.x;
         worldY = startingPoint.y;
         movementSpeed = 4;
@@ -32,6 +40,8 @@ public class Player extends Entity {
         //Handlers
         this.mainGame = mainGame;
         this.keyHandler = keyHandler;
+        this.motionHandler = motionHandler;
+        this.mouseHandler = mouseHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
     }
@@ -82,6 +92,17 @@ public class Player extends Entity {
 
             if (!collisionRight) {
                 worldX += movementSpeed;
+            }
+        }
+        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
+            PROJECTILES.add(new PrimaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
+        }
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
+            PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler,  keyHandler));
+        }
+        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0) {
+            for (int i = 0; i <= 7; i++) {
+                PROJECTILES.add(new Ability1(mainGame, motionHandler, mouseHandler, keyHandler, i));
             }
         }
     }

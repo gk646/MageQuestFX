@@ -1,13 +1,12 @@
 package gameworld.projectiles;
 
-import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
-import main.Utilities;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,8 +20,8 @@ public class SecondaryFire extends Projectile {
      * What happens when you press secondary mouse button. Part of
      * {@link Projectile}
      */
-    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, entity, keyHandler);
+    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
+        super(mainGame, motionHandler, mouseHandler, keyHandler);
 
         //-------VALUES-----------
         this.movementSpeed = 5;

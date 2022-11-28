@@ -2,7 +2,7 @@ package gameworld.entitys;
 
 import gameworld.Entity;
 import main.MainGame;
-import main.Utilities;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

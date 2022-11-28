@@ -10,25 +10,25 @@ import input.MouseHandler;
 import main.MainGame;
 
 import java.awt.*;
-import java.util.ArrayList;
+
+import static main.MainGame.ENTITIES;
+import static main.MainGame.PROJECTILES;
 
 /**
  * Inherits Entity
  * Main inheritable class for all projectiles
  */
 public class Projectile extends Entity {
-    public final static ArrayList<Projectile> PROJECTILES = new ArrayList<>();
+
     public Point screenPosition, updateVector, mousePosition;
     public final MainGame mainGame;
-    private final Entity entity;
     public final MotionHandler motionHandler;
     public final KeyHandler keyHandler;
     public final MouseHandler mouseHandler;
 
-    public Projectile(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entityC, KeyHandler keyHandler) {
+    public Projectile(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
         super(mainGame);
         this.mainGame = mainGame;
-        this.entity = entityC;
         this.motionHandler = motionHandler;
         this.mouseHandler = mouseHandler;
         this.keyHandler = keyHandler;
@@ -42,7 +42,7 @@ public class Projectile extends Entity {
     @Override
     public void update() {
         for (Projectile projectile1 : PROJECTILES) {
-            for (Entity entity1 : entity.entities) {
+            for (Entity entity1 : ENTITIES) {
                 if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
                     if (projectile1.getClass() == PrimaryFire.class) {
                         entity1.health -= 1;
@@ -57,17 +57,7 @@ public class Projectile extends Entity {
             projectile1.update();
 
         }
-        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
-            PROJECTILES.add(new PrimaryFire(mainGame, motionHandler, mouseHandler, entity, keyHandler));
-        }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
-            PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler, entity, keyHandler));
-        }
-        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0) {
-            for (int i = 0; i <= 7; i++) {
-                PROJECTILES.add(new Ability1(mainGame, motionHandler, mouseHandler, entity, keyHandler, i));
-            }
-        }
+
         PROJECTILES.removeIf(projectile -> projectile.dead);
     }
 }

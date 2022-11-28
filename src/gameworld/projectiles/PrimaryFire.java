@@ -7,7 +7,7 @@ import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
-import main.Utilities;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -24,8 +24,8 @@ public class PrimaryFire extends Projectile {
      * @param motionHandler to get mouse input
      * @param mouseHandler  to get mouse input
      */
-    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, entity, keyHandler);
+    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
+        super(mainGame, motionHandler, mouseHandler, keyHandler);
 
         //-------VALUES-----------
         this.movementSpeed = 7;

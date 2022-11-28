@@ -4,7 +4,7 @@ package gameworld;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
 import gameworld.maps.OverWorld;
-import main.WorldRender;
+import main.system.WorldRender;
 
 import java.awt.*;
 

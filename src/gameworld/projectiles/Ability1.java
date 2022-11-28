@@ -1,6 +1,5 @@
 package gameworld.projectiles;
 
-import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import input.KeyHandler;
@@ -15,28 +14,24 @@ public class Ability1 extends Projectile {
     private final int version;
 
     /**
-     * What happens when you press 1. Part of
+     * What happens when you press (1). Part of
      * {@link Projectile}
      */
-    public Ability1(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, Entity entity, KeyHandler keyHandler, int version) {
-        super(mainGame, motionHandler, mouseHandler, entity, keyHandler);
+    public Ability1(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler, int version) {
+        super(mainGame, motionHandler, mouseHandler, keyHandler);
 
         //-------VALUES-----------
-
         this.movementSpeed = 8;
         this.entityHeight = 25;
         this.entityWidth = 25;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
-
-
         this.version = version;
-        //handlers etc.
-        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
-                MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
+
+        //------POSITION-----------
+        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
         this.worldX = screenPosition.x + 1700;
         this.worldY = screenPosition.y + 1950;
-
-        direction = "downleftrightup";
+        this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();
     }
@@ -56,8 +51,8 @@ public class Ability1 extends Projectile {
 
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
-        worldX = screenPosition.x +Player.startingPoint.x-MainGame.SCREEN_WIDTH/2 + 24;
-        worldY = screenPosition.y + Player.startingPoint.y-MainGame.SCREEN_HEIGHT/2+ 24;
+        worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
+        worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
     }
 
     private void getUpdateVector() {
@@ -91,13 +86,8 @@ public class Ability1 extends Projectile {
         }
         if (version == 7) {
             this.updateVector.x = 0;
-            this.updateVector.y = -1* movementSpeed;
+            this.updateVector.y = -1 * movementSpeed;
         }
-
-
-
-
-
     }
 
 }

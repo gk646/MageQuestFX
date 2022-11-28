@@ -1,7 +1,9 @@
-package main;
+package main.system;
 
 import gameworld.World;
 import gameworld.tiles.Tile;
+import main.MainGame;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
