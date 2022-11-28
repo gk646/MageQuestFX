@@ -54,7 +54,6 @@ public class Multiplayer {
             }
             //System.out.println(outputString);
             Multiplayer.outputStream.writeUTF(outputString.toString());
-
             index = 10;
             player2.screenX = player2.worldX - 1440 - 24;
             player2.screenY = player2.worldY - 1860 - 24;

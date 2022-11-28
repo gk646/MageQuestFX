@@ -1,7 +1,7 @@
 package input;
 
 import main.MainGame;
-import ui.UI;
+import main.Runner;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,27 +22,12 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
         int code = e.getKeyCode();
-
-
-        if (code == KeyEvent.VK_W) {
-            mg.ui.commandNum--;
-            if(mg.ui.commandNum<0){
-                mg.ui.commandNum =0;
-            }
-        }
-        if (code == KeyEvent.VK_S) {
-            downPressed = true;
-            mg.ui.commandNum++;
-            if(mg.ui.commandNum>2){
-                mg.ui.commandNum =2;
-            }
-        }
 
         //Player Controls
         if (code == KeyEvent.VK_W) {
             upPressed = true;
+
         }
         if (code == KeyEvent.VK_A) {
             leftPressed = true;
@@ -63,13 +48,62 @@ public class KeyHandler implements KeyListener {
             OnePressed = true;
         }
         if (code == KeyEvent.VK_ESCAPE) {
-            if (mg.gameState == mg.titleState) {
-                mg.gameState = mg.playState;
-            }
-            else if (mg.gameState == mg.playState) {
+            if (mg.gameState == mg.playState) {
                 mg.gameState = mg.pauseState;
             } else if (mg.gameState == mg.pauseState) {
                 mg.gameState = mg.playState;
+            }
+        }
+        //TITLE SCREEN
+        if (mg.gameState == mg.titleState &&mg.ui.titleState==0) {
+            if (code == KeyEvent.VK_W) {
+                mg.ui.commandNum--;
+                if (mg.ui.commandNum < 0) {
+                    mg.ui.commandNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_S) {
+                mg.ui.commandNum++;
+                if (mg.ui.commandNum > 2) {
+                    mg.ui.commandNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if(mg.ui.commandNum == 1){
+                    mg.ui.titleState=1;
+                    mg.revalidate();
+                }
+                else if(mg.ui.commandNum ==0){
+                    mg.gameState = mg.playState;
+                }
+                else if(mg.ui.commandNum == 2){
+                    System.exit(1);
+                }
+            }
+        }
+        if (mg.gameState == mg.titleState &&mg.ui.titleState==1) {
+            if (code == KeyEvent.VK_W) {
+
+                if (mg.ui.commandNum < 0) {
+                    mg.ui.commandNum = 0;
+                }
+            }
+            if (code == KeyEvent.VK_S) {
+
+                if (mg.ui.commandNum > 2) {
+                    mg.ui.commandNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if(mg.ui.commandNum == 1){
+                    mg.revalidate();
+                }
+                else if(mg.ui.commandNum ==0){
+                    mg.gameState = mg.playState;
+                }
+                else if(mg.ui.commandNum == 2){
+                    System.exit(1);
+                }
             }
         }
     }

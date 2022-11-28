@@ -9,8 +9,8 @@ import input.MotionHandler;
 import input.MouseHandler;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
+import main.system.UI;
 import main.system.WorldRender;
-import ui.UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,11 +30,10 @@ public class MainGame extends JPanel implements Runnable {
     public static final ArrayList<Entity> ENTITIES = new ArrayList<>();
     public int gameState, globalLogicTicks;
     public String player2Information;
-    public boolean validate;
 
 
     //Game thread
-    Thread gameThread;
+    public Thread gameThread;
 
     //---------Input-----------
 
@@ -59,18 +58,21 @@ public class MainGame extends JPanel implements Runnable {
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public UI ui = new UI(this);
 
+
+
     /**
      * Main game loop class
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        this.setDoubleBuffered(true);
+        //this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-        this.setOpaque(true);
-        this.setFocusable(true);
+        //this.setOpaque(true);
+        //this.setFocusable(true);
+
         gameState = titleState;
     }
 
@@ -108,7 +110,7 @@ public class MainGame extends JPanel implements Runnable {
 
             }
             if (delta >= 1) {
-                repaint();
+                this.repaint();
                 //     fps++;
                 delta--;
             }
@@ -178,13 +180,13 @@ public class MainGame extends JPanel implements Runnable {
             ui.draw(g2);
         }
 
-
         //RENDER END
 
         long drawEnd = System.nanoTime();
         long difference = drawEnd - drawStart;
         if (keyHandler.debugFps) {
             g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,50f));
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
         g2.dispose();
