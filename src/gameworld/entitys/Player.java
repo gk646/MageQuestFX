@@ -13,8 +13,6 @@ import java.util.Objects;
 
 
 public class Player extends Entity {
-    public final int screenX;
-    public final int screenY;
     public static Point startingPoint;
     private final KeyHandler keyHandler;
 

@@ -53,7 +53,6 @@ public class Player2 extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-
         g2.drawImage(player2, screenX + startingPoint.x - mainGame.player.worldX, screenY + startingPoint.y - mainGame.player.worldY, 48, 48, null);
     }
 

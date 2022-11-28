@@ -1,13 +1,19 @@
 package input;
 
+import main.MainGame;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+    public MainGame mg;
     //Keys
-    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed;
-    //debug
-    public boolean debugFps, multiplayer;
+    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer;
+
+    public KeyHandler(MainGame mainGame) {
+        this.mg = mainGame;
+
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -36,6 +42,13 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_1) {
             OnePressed = true;
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
+            if (mg.gameState == mg.playState) {
+                mg.gameState = mg.pauseState;
+            } else if (mg.gameState == mg.pauseState) {
+                mg.gameState = mg.playState;
+            }
         }
     }
 

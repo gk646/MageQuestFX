@@ -14,24 +14,35 @@ import java.awt.*;
 
 public class MainGame extends JPanel implements Runnable {
 
-    //Screen setting
-    public static final double FRAMES_PER_SECOND = 120;
+    //----------SCREEN SETTINGS---------------
+    public static double FRAMES_PER_SECOND = 120;
     public static final int SCREEN_WIDTH = 1920;
     public static final int SCREEN_HEIGHT = 1080;
 
 
-    //Variables
+    //---------VARIABLES----------
+    public int gameState;
     public int globalLogicTicks;
     public String player2Information;
 
     //Game thread
     Thread gameThread;
 
-    //Instances of important classes
+    //---------Input-----------
+
     public final MotionHandler motionHandler = new MotionHandler();
     public final MouseHandler mouseHandler = new MouseHandler(motionHandler);
+    final KeyHandler keyHandler = new KeyHandler(this);
+
+    //---------GAMESTATES-----------
+
+    public int playState = 1;
+    public int pauseState = 2;
+    public int titleState = 0;
+
+    //---------System---------
+
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
-    final KeyHandler keyHandler = new KeyHandler();
     final WorldRender wRender = new WorldRender(this);
     final Entity entity = new Entity(this);
     public final Player player = new Player(this, keyHandler);
@@ -44,13 +55,14 @@ public class MainGame extends JPanel implements Runnable {
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        //this.setDoubleBuffered(true);
+        this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-        //this.setOpaque(true);
-
+        this.setOpaque(true);
+        this.setFocusable(true);
+        gameState = playState;
     }
 
 
@@ -59,7 +71,6 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
@@ -92,7 +103,7 @@ public class MainGame extends JPanel implements Runnable {
                 fps++;
                 delta--;
             }
-
+/*
             if (fpsCounter >= 1000000000) {
                 System.out.println(fps + " " + logic_ticks + " ");
                 fpsCounter = 0;
@@ -100,33 +111,46 @@ public class MainGame extends JPanel implements Runnable {
                 logic_ticks = 0;
             }
 
+ */
+
         }
     }
 
 
     /**
-     * Main updateMultiInput method
+     * Game loop update method
      */
 
     public void update() {
-        if (keyHandler.debugFps && keyHandler.multiplayer) {
-            multiplayer.startMultiplayer();
-        }
-        if (multiplayer.multiplayerStarted) {
-            multiplayer.updateMultiInput();
-        }
-        projectile.update();
-        player.update();
-        entity.update();
+        if (gameState == playState) {
+            if (keyHandler.debugFps && keyHandler.multiplayer) {
+                multiplayer.startMultiplayer();
+            }
+            if (multiplayer.multiplayerStarted) {
+                multiplayer.updateMultiInput();
+            }
+
+            projectile.update();
+            player.update();
+            entity.update();
 
 
-        if (multiplayer.multiplayerStarted) {
+            if (multiplayer.multiplayerStarted) {
 
-            multiplayer.updateOutput();
+                multiplayer.updateOutput();
+            }
         }
+        if (gameState == pauseState) {
+            projectile.update();
+            entity.update();
+
+        }
+
     }
 
     /**
+     * repaint method
+     *
      * @param g the <code>Graphics</code> object to protect
      */
     @Override
