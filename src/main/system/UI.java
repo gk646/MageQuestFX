@@ -89,7 +89,7 @@ public class UI implements ActionListener {
         y = 900;
         g2.drawString(text, x, y);
 
-        text = "\u00A9 2022 Lukas Gilch";
+        text = "\u00A9 2022 ";
         x = getXforCenteredText(text);
         y = 900;
         g2.drawString(text, x, y);
