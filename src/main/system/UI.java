@@ -27,7 +27,6 @@ public class UI implements ActionListener {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void draw(Graphics2D g2) {
@@ -85,6 +84,16 @@ public class UI implements ActionListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
+        text = "1.0.0";
+        x = 150;
+        y = 900;
+        g2.drawString(text, x, y);
+
+        text = "\u00A9 2022 Lukas Gilch";
+        x = getXforCenteredText(text);
+        y = 900;
+        g2.drawString(text, x, y);
+
 
     }
 
