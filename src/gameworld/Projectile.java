@@ -11,8 +11,7 @@ import main.MainGame;
 
 import java.awt.*;
 
-import static main.MainGame.ENTITIES;
-import static main.MainGame.PROJECTILES;
+
 
 /**
  * Inherits Entity
@@ -36,13 +35,15 @@ public class Projectile extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        PROJECTILES.forEach((n) -> n.draw(g2));
+        for (Projectile projectile : mainGame.PROJECTILES) {
+            projectile.draw(g2);
+        }
     }
 
     @Override
     public void update() {
-        for (Projectile projectile1 : PROJECTILES) {
-            for (Entity entity1 : ENTITIES) {
+        for (Projectile projectile1 : mainGame.PROJECTILES) {
+            for (Entity entity1 : mainGame.ENTITIES) {
                 if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
                     if (projectile1.getClass() == PrimaryFire.class) {
                         entity1.health -= 1;
@@ -51,12 +52,13 @@ public class Projectile extends Entity {
                     } else if (projectile1.getClass() == Ability1.class) {
                         entity1.health -= 5;
                     }
+                    entity1.hpBarOn = true;
                     projectile1.dead = true;
                 }
             }
             projectile1.update();
         }
-        PROJECTILES.removeIf(projectile -> projectile.dead);
+        mainGame.PROJECTILES.removeIf(projectile -> projectile.dead);
     }
 }
 

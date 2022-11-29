@@ -12,7 +12,7 @@ import java.io.InputStream;
 public class UI implements ActionListener {
     Graphics2D g2;
     MainGame mg;
-    Font arial_40, arial_80b, maruMonica;
+    public Font arial_40, arial_80b, maruMonica;
     public int titleState = 0, commandNum = 0;
     private boolean once = false;
     JTextField textField;
@@ -123,7 +123,7 @@ public class UI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == textField) {
-            Multiplayer.ipAdress = textField.getText();
+            Multiplayer.portNumber = Integer.parseInt(textField.getText());
             textField.transferFocus();
         }
     }

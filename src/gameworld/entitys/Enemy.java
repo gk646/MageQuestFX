@@ -22,11 +22,12 @@ public class Enemy extends Entity {
      * @param worldY   coordinates Y
      * @param health   amount of health
      */
-    public Enemy(MainGame mainGame, int worldX, int worldY, int health) {
+    public Enemy(MainGame mainGame, int worldX, int worldY, int maxHealth) {
         super(mainGame);
 
         //Setting default values
-        this.health = health;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
         movementSpeed = 4;

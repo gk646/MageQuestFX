@@ -26,8 +26,8 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------VARIABLES----------
-    public final static ArrayList<Projectile> PROJECTILES = new ArrayList<>();
-    public static final ArrayList<Entity> ENTITIES = new ArrayList<>();
+    public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
+    public final ArrayList<Entity> ENTITIES = new ArrayList<>();
     public int gameState, globalLogicTicks;
     public String player2Information;
 
@@ -51,7 +51,7 @@ public class MainGame extends JPanel implements Runnable {
 
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final WorldRender wRender = new WorldRender(this);
-    final Entity entity = new Entity(this);
+    public final Entity entity = new Entity(this);
     public final Player player = new Player(this, keyHandler, mouseHandler, motionHandler);
     public final Player2 player2 = new Player2(this);
     final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, keyHandler);
@@ -59,19 +59,18 @@ public class MainGame extends JPanel implements Runnable {
     public UI ui = new UI(this);
 
 
-
     /**
      * Main game loop class
      */
     public MainGame() {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        //this.setDoubleBuffered(true);
+        this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.addMouseListener(mouseHandler);
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
-        //this.setOpaque(true);
-        //this.setFocusable(true);
+        this.setOpaque(false);
+
 
         gameState = titleState;
     }
@@ -133,18 +132,21 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
-        if (multiplayer.multiplayerStarted) {
-            multiplayer.updateMultiInput();
-        }
+
         if (gameState == playState) {
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayer();
             }
-
-            projectile.update();
-            player.update();
-            entity.update();
         }
+
+        if (multiplayer.multiplayerStarted) {
+            multiplayer.updateMultiInput();
+        }
+        projectile.update();
+        player.update();
+        entity.update();
+
+
         if (gameState == pauseState) {
             projectile.update();
             entity.update();
@@ -186,7 +188,7 @@ public class MainGame extends JPanel implements Runnable {
         long difference = drawEnd - drawStart;
         if (keyHandler.debugFps) {
             g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD,50f));
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
         g2.dispose();

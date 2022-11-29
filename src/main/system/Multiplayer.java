@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import static main.MainGame.ENTITIES;
-
 
 public class Multiplayer {
     private final MainGame mainGame;
@@ -33,7 +31,7 @@ public class Multiplayer {
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
-            for (Entity entity1 : ENTITIES) {
+            for (Entity entity1 : mainGame.ENTITIES) {
                 entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
                 index += 5;
                 entity1.worldY = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
@@ -51,7 +49,7 @@ public class Multiplayer {
         try {
             StringBuilder outputString = new StringBuilder();
             outputString.append(mainGame.player.worldX + 50000).append(mainGame.player.worldY + 50000);
-            for (Entity entity1 : ENTITIES) {
+            for (Entity entity1 : mainGame.ENTITIES) {
                 outputString.append(entity1.worldX + 50000).append(entity1.worldY + 50000).append(entity1.health + 50000);
             }
             //System.out.println(outputString);
@@ -70,9 +68,10 @@ public class Multiplayer {
         multiplayerStarted = true;
         if (mainGame.keyHandler.multiplayer) {
             try {
+                System.out.println(portNumber);
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket s = serverSocket.accept();
-                s.setSoTimeout(5);
+                //s.setSoTimeout(5);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {

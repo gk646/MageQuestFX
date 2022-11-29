@@ -5,9 +5,7 @@ import main.MainGame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import static main.MainGame.ENTITIES;
 
 /**
  * Only used for handling Enemies atm.
@@ -16,13 +14,13 @@ import static main.MainGame.ENTITIES;
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight, screenX, screenY;
 
-    public int movementSpeed, health;
+    public int movementSpeed, health, maxHealth, hpBarCounter, entityHealthbarLength;
     public MainGame mainGame;
     public BufferedImage up1;
 
     public String direction;
     public Rectangle collisionBox;
-    private boolean initializeEnemies = true;
+    public boolean initializeEnemies, hpBarOn;
     public boolean collisionUp, collisionDown, collisionLeft, collisionRight, dead;
 
     public Entity(MainGame mainGame) {
@@ -35,33 +33,48 @@ public class Entity {
      * Only really updates enemy position
      */
     public void update() {
-        if (initializeEnemies) {
+        if (!initializeEnemies) {
             spawnEnemies();
-            initializeEnemies = false;
+            initializeEnemies = true;
         }
-        for (Entity entity : ENTITIES) {
-                entity.update();
+        for (Entity entity : mainGame.ENTITIES) {
+            entity.update();
+            if (entity.hpBarCounter >= 600) {
+                entity.hpBarOn = false;
+                entity.hpBarCounter = 0;
+            }
+            if(entity.hpBarOn){
+                entity.hpBarCounter++;
+            }
         }
+
     }
 
     /**
      * Used for drawing health bars
      */
     public void draw(Graphics2D g2) {
-        for (Entity entity1 : ENTITIES) {
+        for (Entity entity1 : mainGame.ENTITIES) {
             entity1.draw(g2);
-            g2.setColor(Color.black);
-            g2.drawString(entity1.health + "", entity1.screenX, entity1.screenY);
+            entityHealthbarLength = entity1.maxHealth / entity1.entityWidth;
+            if (entity1.hpBarOn) {
+                g2.setColor(new Color(0xFF0044));
+                g2.fillRect(entity1.screenX, entity1.screenY - 10, entity1.health / entityHealthbarLength, 8);
+                g2.setColor(new Color(0xFFFFFF));
+                g2.setFont(mainGame.ui.maruMonica);
+                g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
+                g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
+            }
         }
     }
 
     public void spawnEnemies() {
-        ENTITIES.add(new Enemy(mainGame, 2300, 2400, 50));
-        ENTITIES.add(new Enemy(mainGame, 2550, 2400, 99));
-        ENTITIES.add(new Enemy(mainGame, 2650, 2400, 99));
-        ENTITIES.add(new Enemy(mainGame, 2760, 2500, 99));
-        ENTITIES.add(new Enemy(mainGame, 2800, 2550, 99));
-        ENTITIES.add(new Enemy(mainGame, 2900, 2600, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2300, 2400, 50));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2550, 2400, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2650, 2400, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2760, 2500, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2800, 2550, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2900, 2600, 99));
     }
 
 }
