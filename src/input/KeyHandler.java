@@ -96,7 +96,7 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if(mg.ui.commandNum == 1){
-                    mg.revalidate();
+
                 }
                 else if(mg.ui.commandNum ==0){
                     mg.gameState = mg.playState;
@@ -105,6 +105,10 @@ public class KeyHandler implements KeyListener {
                     System.exit(1);
                 }
             }
+            if (code == KeyEvent.VK_ESCAPE) {
+                mg.ui.titleState = 0;
+            }
+
         }
     }
 
