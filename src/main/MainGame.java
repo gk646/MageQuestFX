@@ -60,7 +60,6 @@ public class MainGame extends JPanel implements Runnable {
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public UI ui = new UI(this);
 
-
     /**
      * Main game loop class
      */
@@ -72,11 +71,8 @@ public class MainGame extends JPanel implements Runnable {
         this.setFocusable(true);
         this.addMouseMotionListener(motionHandler);
         this.setOpaque(false);
-
-
         gameState = titleState;
     }
-
 
     /**
      * Main game loop
@@ -123,10 +119,7 @@ public class MainGame extends JPanel implements Runnable {
                 fps = 0;
                 logic_ticks = 0;
             }
-
  */
-
-
         }
     }
 
@@ -141,7 +134,6 @@ public class MainGame extends JPanel implements Runnable {
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayer();
             }
-
 
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiInput();

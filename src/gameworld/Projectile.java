@@ -4,8 +4,6 @@ package gameworld;
 import gameworld.projectiles.Ability1;
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
-import input.KeyHandler;
-import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 
