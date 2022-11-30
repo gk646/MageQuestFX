@@ -17,9 +17,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-
 public class Player extends Entity {
     public static Point startingPoint;
+    public float mana;
+    public int maxMana;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
     private final MotionHandler motionHandler;
@@ -27,12 +28,16 @@ public class Player extends Entity {
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
         //-------VALUES-----------
-        worldX = startingPoint.x;
-        worldY = startingPoint.y;
         movementSpeed = 4;
-        direction = "up";
+        this.maxHealth = 10;
+        this.health = 7;
+        this.maxMana = 20;
+        this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
+        worldX = startingPoint.x;
+        worldY = startingPoint.y;
+        direction = "up";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 16, 31, 31);
 
@@ -96,19 +101,25 @@ public class Player extends Entity {
         if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
             mainGame.PROJECTILES.add(new PrimaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
         }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0) {
-            mainGame.PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler,  keyHandler));
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0&&this.mana>=10) {
+            mainGame.PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
+            mana-= 10;
         }
-        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0) {
+        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0&&this.mana>=10) {
             for (int i = 0; i <= 7; i++) {
                 mainGame.PROJECTILES.add(new Ability1(mainGame, motionHandler, mouseHandler, keyHandler, i));
             }
+            mana-= 10;
+        }
+        if(mana< maxMana) {
+            mana += 0.05;
         }
     }
 
 
     public void draw(Graphics2D g2) {
         g2.drawImage(up1, screenX, screenY, 48, 48, null);
+
     }
 
     public void getPlayerImage() {
@@ -116,6 +127,7 @@ public class Player extends Entity {
 
 
     }
+
     private BufferedImage setup(String imagePath) {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;

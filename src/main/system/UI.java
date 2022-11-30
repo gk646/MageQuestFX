@@ -2,12 +2,15 @@ package main.system;
 
 import main.MainGame;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class UI implements ActionListener {
     Graphics2D g2;
@@ -15,6 +18,7 @@ public class UI implements ActionListener {
     public Font arial_40, arial_80b, maruMonica;
     public int titleState = 0, commandNum = 0;
     private boolean once = false;
+    private BufferedImage playerUI;
     JTextField textField;
 
     public UI(MainGame mainGame) {
@@ -27,6 +31,7 @@ public class UI implements ActionListener {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
+        getUIImage();
     }
 
     public void draw(Graphics2D g2) {
@@ -89,7 +94,7 @@ public class UI implements ActionListener {
         y = 900;
         g2.drawString(text, x, y);
 
-        text = "\u00A9 2022 ";
+        text = "\u00A9 2022 Lukas Gilch";
         x = getXforCenteredText(text);
         y = 900;
         g2.drawString(text, x, y);
@@ -98,6 +103,15 @@ public class UI implements ActionListener {
     }
 
     private void drawGameUI() {
+        g2.setColor(new Color(0xFF0044));
+        g2.fillRect(123,70,(int)(((float)mg.player.health/(float)mg.player.maxHealth)*225),11);
+        g2.setColor(new Color(0x0099DB));
+        g2.fillRect(123,90, (int) ((mg.player.mana/mg.player.maxMana)*162),11);
+        g2.drawImage(playerUI, 40, 40, 330, 200, null);
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD,20f));
+        g2.drawString(mg.player.health+"/"+mg.player.maxHealth,200,79);
+        g2.drawString((int)mg.player.mana+"/"+mg.player.maxMana,180,99);
 
     }
 
@@ -135,5 +149,23 @@ public class UI implements ActionListener {
             Multiplayer.portNumber = Integer.parseInt(textField.getText());
             textField.transferFocus();
         }
+    }
+
+    public void getUIImage() {
+        playerUI = setup("player_ui.png");
+
+
+    }
+    private BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + imagePath))));
+            scaledImage = utilities.scaleImage(scaledImage, 330, 200);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
     }
 }
