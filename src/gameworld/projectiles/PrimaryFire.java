@@ -2,8 +2,6 @@ package gameworld.projectiles;
 
 import gameworld.Projectile;
 import gameworld.entitys.Player;
-import input.KeyHandler;
-import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
@@ -19,12 +17,11 @@ public class PrimaryFire extends Projectile {
     /**
      * What happens when you press main mouse button
      *
-     * @param mainGame      to access display functions
-     * @param motionHandler to get mouse input
-     * @param mouseHandler  to get mouse input
+     * @param mainGame     to access display functions
+     * @param mouseHandler to get mouse input
      */
-    public PrimaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, keyHandler);
+    public PrimaryFire(MainGame mainGame, MouseHandler mouseHandler) {
+        super(mainGame, mouseHandler);
 
         //-------VALUES-----------
         this.movementSpeed = 7;
@@ -47,7 +44,6 @@ public class PrimaryFire extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
-
     }
 
     @Override

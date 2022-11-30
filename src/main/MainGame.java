@@ -43,10 +43,10 @@ public class MainGame extends JPanel implements Runnable {
 
     //---------GAMESTATES-----------
 
-    public int titleState = 0;
-    public int playState = 1;
-    public int optionState = 2;
-    public int titleOption = -1;
+    public final int titleState = 0;
+    public final int playState = 1;
+    public final int optionState = 2;
+    public final int titleOption = -1;
 
 
     //---------System---------
@@ -54,9 +54,9 @@ public class MainGame extends JPanel implements Runnable {
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final WorldRender wRender = new WorldRender(this);
     public final Entity entity = new Entity(this);
-    public final Player player = new Player(this, keyHandler, mouseHandler, motionHandler);
+    public final Player player = new Player(this, keyHandler, mouseHandler);
     public final Player2 player2 = new Player2(this);
-    final Projectile projectile = new Projectile(this, motionHandler, mouseHandler, keyHandler);
+    final Projectile projectile = new Projectile(this, mouseHandler);
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public UI ui = new UI(this);
 
@@ -154,13 +154,6 @@ public class MainGame extends JPanel implements Runnable {
                 multiplayer.updateOutput();
             }
         }
-
-        if (gameState == optionState||gameState == titleOption) {
-
-
-        }
-
-
     }
 
     /**
@@ -183,7 +176,7 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        } else if (gameState == titleState||gameState ==titleOption) {
+        } else if (gameState == titleState || gameState == titleOption) {
             ui.draw(g2);
         }
 

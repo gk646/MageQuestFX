@@ -2,8 +2,6 @@ package gameworld.projectiles;
 
 import gameworld.Projectile;
 import gameworld.entitys.Player;
-import input.KeyHandler;
-import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 
@@ -17,8 +15,8 @@ public class Ability1 extends Projectile {
      * What happens when you press (1). Part of
      * {@link Projectile}
      */
-    public Ability1(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler, int version) {
-        super(mainGame, motionHandler, mouseHandler, keyHandler);
+    public Ability1(MainGame mainGame, MouseHandler mouseHandler, int version) {
+        super(mainGame, mouseHandler);
 
         //-------VALUES-----------
         this.movementSpeed = 8;
@@ -49,7 +47,6 @@ public class Ability1 extends Projectile {
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
-
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
         worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;

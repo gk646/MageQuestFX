@@ -6,21 +6,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public MainGame mg;
+    public final MainGame mg;
     //Keys
     public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer;
 
     public KeyHandler(MainGame mainGame) {
         this.mg = mainGame;
-
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
         //TITLE SCREEN
         char code = e.getKeyChar();
-
         if (mg.gameState == mg.titleState) {
             if (code == ('w')) {
                 mg.ui.commandNum--;
@@ -115,7 +112,6 @@ public class KeyHandler implements KeyListener {
 
         }
     }
-
 
     @Override
     public void keyPressed(KeyEvent e) {

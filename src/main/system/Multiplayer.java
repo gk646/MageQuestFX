@@ -18,7 +18,7 @@ public class Multiplayer {
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
-    public static String ipAdress;
+    public static String ipAddress;
     public static int portNumber;
 
     public Multiplayer(MainGame mainGame, Player2 player2) {
@@ -71,7 +71,7 @@ public class Multiplayer {
                 System.out.println(portNumber);
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket s = serverSocket.accept();
-                //s.setSoTimeout(5);
+                s.setSoTimeout(5);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {

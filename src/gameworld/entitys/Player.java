@@ -5,7 +5,6 @@ import gameworld.projectiles.Ability1;
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
 import input.KeyHandler;
-import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
@@ -23,9 +22,8 @@ public class Player extends Entity {
     public int maxMana;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
-    private final MotionHandler motionHandler;
 
-    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
+    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler) {
         super(mainGame);
         //-------VALUES-----------
         movementSpeed = 4;
@@ -44,7 +42,6 @@ public class Player extends Entity {
         //Handlers
         this.mainGame = mainGame;
         this.keyHandler = keyHandler;
-        this.motionHandler = motionHandler;
         this.mouseHandler = mouseHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
@@ -99,19 +96,19 @@ public class Player extends Entity {
             }
         }
         if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
-            mainGame.PROJECTILES.add(new PrimaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
+            mainGame.PROJECTILES.add(new PrimaryFire(mainGame, mouseHandler));
         }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0&&this.mana>=10) {
-            mainGame.PROJECTILES.add(new SecondaryFire(mainGame, motionHandler, mouseHandler, keyHandler));
-            mana-= 10;
+        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0 && this.mana >= 10) {
+            mainGame.PROJECTILES.add(new SecondaryFire(mainGame, mouseHandler));
+            mana -= 10;
         }
-        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0&&this.mana>=10) {
+        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {
-                mainGame.PROJECTILES.add(new Ability1(mainGame, motionHandler, mouseHandler, keyHandler, i));
+                mainGame.PROJECTILES.add(new Ability1(mainGame, mouseHandler, i));
             }
-            mana-= 10;
+            mana -= 10;
         }
-        if(mana< maxMana) {
+        if (mana < maxMana) {
             mana += 0.05;
         }
     }

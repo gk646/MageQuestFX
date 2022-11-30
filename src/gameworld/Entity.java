@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight, screenX, screenY;
 
-    public int movementSpeed, health, maxHealth, hpBarCounter, entityHealthbarLength;
+    public int movementSpeed, health, maxHealth, hpBarCounter, entityHealthBarLength;
     public MainGame mainGame;
     public BufferedImage up1;
 
@@ -56,10 +56,10 @@ public class Entity {
     public void draw(Graphics2D g2) {
         for (Entity entity1 : mainGame.ENTITIES) {
             entity1.draw(g2);
-            entityHealthbarLength = entity1.maxHealth / entity1.entityWidth;
+            entityHealthBarLength = entity1.maxHealth / entity1.entityWidth;
             if (entity1.hpBarOn) {
                 g2.setColor(new Color(0xFF0044));
-                g2.fillRect(entity1.screenX, entity1.screenY - 10, entity1.health / entityHealthbarLength, 8);
+                g2.fillRect(entity1.screenX, entity1.screenY - 10, entity1.health / entityHealthBarLength, 8);
                 g2.setColor(new Color(0xFFFFFF));
                 g2.setFont(mainGame.ui.maruMonica);
                 g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));

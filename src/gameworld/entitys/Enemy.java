@@ -20,7 +20,7 @@ public class Enemy extends Entity {
      * @param mainGame super();
      * @param worldX   coordinates X
      * @param worldY   coordinates Y
-     * @param health   amount of health
+     * @param maxHealth max amount of health
      */
     public Enemy(MainGame mainGame, int worldX, int worldY, int maxHealth) {
         super(mainGame);

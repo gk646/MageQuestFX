@@ -21,16 +21,12 @@ public class Projectile extends Entity {
 
     public Point screenPosition, updateVector, mousePosition;
     public final MainGame mainGame;
-    public final MotionHandler motionHandler;
-    public final KeyHandler keyHandler;
     public final MouseHandler mouseHandler;
 
-    public Projectile(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
+    public Projectile(MainGame mainGame,MouseHandler mouseHandler) {
         super(mainGame);
         this.mainGame = mainGame;
-        this.motionHandler = motionHandler;
         this.mouseHandler = mouseHandler;
-        this.keyHandler = keyHandler;
     }
 
     @Override

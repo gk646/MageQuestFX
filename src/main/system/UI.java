@@ -4,7 +4,6 @@ import main.MainGame;
 import main.Runner;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -19,7 +18,7 @@ public class UI implements ActionListener, ChangeListener {
     Graphics2D g2;
     MainGame mg;
     public Font arial_40, arial_80b, maruMonica;
-    public int titleState = 0, commandNum = 0;
+    public int commandNum = 0;
     private boolean once = false;
     private BufferedImage playerUI;
     public Color lightBackground = new Color(192, 203, 220), darkBackground = new Color(90, 105, 136), lightBackgroundAlpha = new Color(0xCAC0CBDC, true);
@@ -30,6 +29,7 @@ public class UI implements ActionListener, ChangeListener {
         arial_80b = new Font("Arial", Font.BOLD, 80);
         InputStream is = getClass().getResourceAsStream("/resources/font/x12y16pxMaruMonica.ttf");
         try {
+            assert is != null;
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
@@ -43,9 +43,9 @@ public class UI implements ActionListener, ChangeListener {
 
         if (mg.gameState == mg.playState) {
             drawGameUI();
-        } else if (mg.gameState == mg.optionState||mg.gameState == mg.titleOption) {
+        } else if (mg.gameState == mg.optionState || mg.gameState == mg.titleOption) {
             drawOptions();
-        } else if (mg.gameState == mg.titleState ) {
+        } else if (mg.gameState == mg.titleState) {
             drawTitleScreen();
         }
 
@@ -99,10 +99,7 @@ public class UI implements ActionListener, ChangeListener {
 
         text = "\u00A9 2022 Lukas Gilch";
         x = getXForCenteredText(text);
-        y = 900;
         g2.drawString(text, x, y);
-
-
     }
 
     private void drawGameUI() {
@@ -130,21 +127,20 @@ public class UI implements ActionListener, ChangeListener {
         g2.setFont(g2.getFont().deriveFont(30f));
         g2.drawString("Framerate: ", 500, 300);
         g2.drawString("Network Settings: ", 500, 450);
-        g2.drawString("Quit Game?",500,700);
+        g2.drawString("Quit Game?", 500, 700);
         if (commandNum == 0) {
             g2.drawString(">", 450 - 25, 700);
         }
         if (commandNum == 1) {
             g2.drawString(">", 500 - 25, 700);
         }
-
         if (!once) {
             Runner.textField.setFocusable(true);
             Runner.textField.setBackground(lightBackgroundAlpha);
             Runner.textField.setForeground(darkBackground);
             Runner.textField.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
             Runner.textField.addActionListener(this);
-            Runner.textField.setLocation(500,460);
+            Runner.textField.setLocation(500, 460);
             Runner.slider.addChangeListener(this);
             Runner.slider.setMajorTickSpacing(30);
             Runner.slider.setPaintLabels(true);
@@ -152,7 +148,7 @@ public class UI implements ActionListener, ChangeListener {
             Runner.slider.setBackground(lightBackgroundAlpha);
             Runner.slider.setForeground(darkBackground);
             Runner.slider.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
-            Runner.slider.setLocation(500,310);
+            Runner.slider.setLocation(500, 310);
             once = true;
         }
         Runner.slider.setVisible(true);
@@ -179,16 +175,14 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     public void getUIImage() {
-        playerUI = setup("player_ui.png");
-
-
+        playerUI = setup();
     }
 
-    private BufferedImage setup(String imagePath) {
+    private BufferedImage setup() {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui.png"))));
             scaledImage = utilities.scaleImage(scaledImage, 330, 200);
 
         } catch (IOException e) {

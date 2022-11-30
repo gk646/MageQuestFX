@@ -2,8 +2,6 @@ package gameworld.projectiles;
 
 import gameworld.Projectile;
 import gameworld.entitys.Player;
-import input.KeyHandler;
-import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
@@ -20,8 +18,8 @@ public class SecondaryFire extends Projectile {
      * What happens when you press secondary mouse button. Part of
      * {@link Projectile}
      */
-    public SecondaryFire(MainGame mainGame, MotionHandler motionHandler, MouseHandler mouseHandler, KeyHandler keyHandler) {
-        super(mainGame, motionHandler, mouseHandler, keyHandler);
+    public SecondaryFire(MainGame mainGame, MouseHandler mouseHandler) {
+        super(mainGame, mouseHandler);
 
         //-------VALUES-----------
         this.movementSpeed = 5;
@@ -51,7 +49,6 @@ public class SecondaryFire extends Projectile {
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
-
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
         worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
@@ -73,8 +70,6 @@ public class SecondaryFire extends Projectile {
 
     public void getPlayerImage() {
         up1 = setup("SecondaryFire01.png");
-
-
     }
 
 
