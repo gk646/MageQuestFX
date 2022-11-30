@@ -17,77 +17,18 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-    }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-
-        //Player Controls
-        if (code == KeyEvent.VK_W) {
-            upPressed = true;
-
-        }
-        if (code == KeyEvent.VK_A) {
-            leftPressed = true;
-        }
-        if (code == KeyEvent.VK_S) {
-            downPressed = true;
-        }
-        if (code == KeyEvent.VK_D) {
-            rightPressed = true;
-        }
-        if (code == KeyEvent.VK_C) {
-            debugFps = true;
-        }
-        if (code == KeyEvent.VK_M) {
-            multiplayer = true;
-        }
-        if (code == KeyEvent.VK_1) {
-            OnePressed = true;
-        }
-        if (code == KeyEvent.VK_ESCAPE) {
-            if (mg.gameState == mg.playState) {
-                mg.gameState = mg.pauseState;
-            } else if (mg.gameState == mg.pauseState) {
-                mg.gameState = mg.playState;
-            }
-        }
         //TITLE SCREEN
-        if (mg.gameState == mg.titleState && mg.ui.titleState == 0) {
-            if (code == KeyEvent.VK_W) {
-                mg.ui.commandNum--;
-                if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 0;
-                }
-            }
-            if (code == KeyEvent.VK_S) {
-                mg.ui.commandNum++;
-                if (mg.ui.commandNum > 2) {
-                    mg.ui.commandNum = 2;
-                }
-            }
-            if (code == KeyEvent.VK_ENTER) {
-                if (mg.ui.commandNum == 1) {
-                    mg.ui.titleState = 1;
-                    mg.ui.commandNum = 0;
-                } else if (mg.ui.commandNum == 0) {
-                    mg.gameState = mg.playState;
-                    mg.ui.commandNum = 0;
-                } else if (mg.ui.commandNum == 2) {
-                    System.exit(1);
-                }
-            }
-        }
-        if (mg.gameState == mg.titleState && mg.ui.titleState == mg.ui.optionState) {
+        char code = e.getKeyChar();
 
-            if (code == KeyEvent.VK_W) {
+        if (mg.gameState == mg.titleState) {
+            if (code == ('w')) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 0;
                 }
             }
-            if (code == KeyEvent.VK_S) {
+            if (code == ('s')) {
                 mg.ui.commandNum++;
                 if (mg.ui.commandNum > 2) {
                     mg.ui.commandNum = 2;
@@ -95,18 +36,120 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
+                    mg.gameState = mg.playState;
+                } else if (mg.ui.commandNum == 1) {
+                    mg.gameState = mg.titleOption;
+                    mg.ui.commandNum = 0;
+                } else if (mg.ui.commandNum == 2) {
+                    System.exit(1);
+                }
+            }
+        }
 
+        if (mg.gameState == mg.titleOption) {
+            if (code == ('w')) {
+                mg.ui.commandNum--;
+                if (mg.ui.commandNum < 0) {
+                    mg.ui.commandNum = 0;
+                }
+            }
+            if (code == ('s')) {
+                mg.ui.commandNum++;
+                if (mg.ui.commandNum > 2) {
+                    mg.ui.commandNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (mg.ui.commandNum == 0) {
+                } else if (mg.ui.commandNum == 1) {
+                    mg.gameState = mg.playState;
+                } else if (mg.ui.commandNum == 2) {
+                    System.exit(1);
+                }
+            }
+            if (code == '\u001B') {
+                mg.gameState = mg.titleState;
+                mg.ui.commandNum = 0;
+            }
+        }
+        if (mg.gameState == mg.optionState) {
+            if (code == ('w')) {
+                mg.ui.commandNum--;
+                if (mg.ui.commandNum < 0) {
+                    mg.ui.commandNum = 0;
+                }
+            }
+            if (code == ('s')) {
+
+                mg.ui.commandNum++;
+                if (mg.ui.commandNum > 2) {
+                    mg.ui.commandNum = 2;
+                }
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (mg.ui.commandNum == 0) {
                 } else if (mg.ui.commandNum == 1) {
                     System.exit(1);
                 } else if (mg.ui.commandNum == 2) {
 
                 }
             }
-            if (code == KeyEvent.VK_ESCAPE) {
-                mg.ui.titleState = 0;
+        }
+
+        if (code == '\u001B') {
+            if (mg.gameState == mg.optionState) {
+                mg.gameState = mg.playState;
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else if (mg.gameState == mg.playState) {
+                mg.gameState = mg.optionState;
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
         }
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        if (mg.gameState == mg.playState) {
+            //Player Controls
+            if (code == KeyEvent.VK_W) {
+                upPressed = true;
+            }
+            if (code == KeyEvent.VK_A) {
+                leftPressed = true;
+            }
+            if (code == KeyEvent.VK_S) {
+                downPressed = true;
+            }
+            if (code == KeyEvent.VK_D) {
+                rightPressed = true;
+            }
+
+            if (code == KeyEvent.VK_M) {
+                multiplayer = true;
+            }
+            if (code == KeyEvent.VK_1) {
+                OnePressed = true;
+            }
+
+
+        }
+        if (code == KeyEvent.VK_C) {
+            debugFps = true;
+            mg.player.mana = mg.player.maxMana;
+        }
+
+
     }
 
     @Override

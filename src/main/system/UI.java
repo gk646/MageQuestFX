@@ -19,11 +19,9 @@ public class UI implements ActionListener, ChangeListener {
     Graphics2D g2;
     MainGame mg;
     public Font arial_40, arial_80b, maruMonica;
-    public int titleState = 0, commandNum = 0,optionState = 1;
+    public int titleState = 0, commandNum = 0;
     private boolean once = false;
     private BufferedImage playerUI;
-    JTextField textField;
-    JSlider slider;
     public Color lightBackground = new Color(192, 203, 220), darkBackground = new Color(90, 105, 136), lightBackgroundAlpha = new Color(0xCAC0CBDC, true);
 
     public UI(MainGame mainGame) {
@@ -45,12 +43,10 @@ public class UI implements ActionListener, ChangeListener {
 
         if (mg.gameState == mg.playState) {
             drawGameUI();
-        } else if (mg.gameState == mg.pauseState) {
+        } else if (mg.gameState == mg.optionState||mg.gameState == mg.titleOption) {
             drawOptions();
-        } else if (mg.gameState == mg.titleState && titleState == 0) {
+        } else if (mg.gameState == mg.titleState ) {
             drawTitleScreen();
-        } else if (mg.gameState == mg.titleState && titleState == 1) {
-            drawOptions();
         }
 
     }

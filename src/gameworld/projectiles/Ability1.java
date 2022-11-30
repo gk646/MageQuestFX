@@ -28,9 +28,10 @@ public class Ability1 extends Projectile {
         this.version = version;
 
         //------POSITION-----------
-        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + 1700;
-        this.worldY = screenPosition.y + 1950;
+        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
+                MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
+        this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
+        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();

@@ -34,17 +34,15 @@ public class SecondaryFire extends Projectile {
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + 1700;
-        this.worldY = screenPosition.y + 1950;
+        this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
+        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.updateVector = getUpdateVector();
         getPlayerImage();
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.blue);
         g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
-
     }
 
     @Override

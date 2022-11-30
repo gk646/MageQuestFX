@@ -43,9 +43,11 @@ public class MainGame extends JPanel implements Runnable {
 
     //---------GAMESTATES-----------
 
-    public int playState = 1;
-    public int pauseState = 2;
     public int titleState = 0;
+    public int playState = 1;
+    public int optionState = 2;
+    public int titleOption = -1;
+
 
     //---------System---------
 
@@ -139,24 +141,25 @@ public class MainGame extends JPanel implements Runnable {
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayer();
             }
-        }
-
-        if (multiplayer.multiplayerStarted) {
-            multiplayer.updateMultiInput();
-        }
-        projectile.update();
-        player.update();
-        entity.update();
 
 
-        if (gameState == pauseState) {
+            if (multiplayer.multiplayerStarted) {
+                multiplayer.updateMultiInput();
+            }
             projectile.update();
+            player.update();
             entity.update();
 
+            if (multiplayer.multiplayerStarted) {
+                multiplayer.updateOutput();
+            }
         }
-        if (multiplayer.multiplayerStarted) {
-            multiplayer.updateOutput();
+
+        if (gameState == optionState||gameState == titleOption) {
+
+
         }
+
 
     }
 
@@ -173,14 +176,14 @@ public class MainGame extends JPanel implements Runnable {
         long drawStart = System.nanoTime();
 
         //RENDER START
-        if (gameState == playState || gameState == pauseState) {
+        if (gameState == playState || gameState == optionState) {
             wRender.draw(g2);
             projectile.draw(g2);
             entity.draw(g2);
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        } else if (gameState == titleState) {
+        } else if (gameState == titleState||gameState ==titleOption) {
             ui.draw(g2);
         }
 
@@ -190,7 +193,7 @@ public class MainGame extends JPanel implements Runnable {
         long difference = drawEnd - drawStart;
         if (keyHandler.debugFps) {
             g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
         g2.dispose();

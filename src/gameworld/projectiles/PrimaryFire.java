@@ -1,6 +1,5 @@
 package gameworld.projectiles;
 
-import gameworld.Entity;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import input.KeyHandler;
