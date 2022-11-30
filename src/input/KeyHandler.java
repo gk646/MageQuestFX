@@ -1,7 +1,6 @@
 package input;
 
 import main.MainGame;
-import main.Runner;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -55,7 +54,7 @@ public class KeyHandler implements KeyListener {
             }
         }
         //TITLE SCREEN
-        if (mg.gameState == mg.titleState &&mg.ui.titleState==0) {
+        if (mg.gameState == mg.titleState && mg.ui.titleState == 0) {
             if (code == KeyEvent.VK_W) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
@@ -69,40 +68,38 @@ public class KeyHandler implements KeyListener {
                 }
             }
             if (code == KeyEvent.VK_ENTER) {
-                if(mg.ui.commandNum == 1){
-                    mg.ui.titleState=1;
-                    mg.revalidate();
-                }
-                else if(mg.ui.commandNum ==0){
+                if (mg.ui.commandNum == 1) {
+                    mg.ui.titleState = 1;
+                    mg.ui.commandNum = 0;
+                } else if (mg.ui.commandNum == 0) {
                     mg.gameState = mg.playState;
-                }
-                else if(mg.ui.commandNum == 2){
+                    mg.ui.commandNum = 0;
+                } else if (mg.ui.commandNum == 2) {
                     System.exit(1);
                 }
             }
         }
-        if (mg.gameState == mg.titleState &&mg.ui.titleState==1) {
-            if (code == KeyEvent.VK_W) {
+        if (mg.gameState == mg.titleState && mg.ui.titleState == mg.ui.optionState) {
 
+            if (code == KeyEvent.VK_W) {
+                mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 0;
                 }
             }
             if (code == KeyEvent.VK_S) {
-
+                mg.ui.commandNum++;
                 if (mg.ui.commandNum > 2) {
                     mg.ui.commandNum = 2;
                 }
             }
             if (code == KeyEvent.VK_ENTER) {
-                if(mg.ui.commandNum == 1){
+                if (mg.ui.commandNum == 0) {
 
-                }
-                else if(mg.ui.commandNum ==0){
-                    mg.gameState = mg.playState;
-                }
-                else if(mg.ui.commandNum == 2){
+                } else if (mg.ui.commandNum == 1) {
                     System.exit(1);
+                } else if (mg.ui.commandNum == 2) {
+
                 }
             }
             if (code == KeyEvent.VK_ESCAPE) {

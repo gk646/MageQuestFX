@@ -84,19 +84,20 @@ public class MainGame extends JPanel implements Runnable {
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
-        //int fps = 0;
+        int fps = 0;
         int logic_ticks = 0;
-        // double fpsCounter = 0;
+        double fpsCounter = 0;
         long lastTime = System.nanoTime();
-        double interval = 1000000000 / FRAMES_PER_SECOND;
+        double interval;
+        float logicvsFPS = 1000000000 / 60f;
         double timeDifference;
-        int logicvsFPS = (int) (FRAMES_PER_SECOND / 60);
         while (gameThread != null) {
+            interval = 1000000000 / FRAMES_PER_SECOND;
             firstTimeGate = System.nanoTime();
             timeDifference = (firstTimeGate - lastTime) / interval;
             delta += timeDifference;
-            // fpsCounter += (firstTimeGate - lastTime);
-            timer += timeDifference / logicvsFPS;
+            //fpsCounter += (firstTimeGate - lastTime);
+            timer += (firstTimeGate - lastTime) / logicvsFPS;
             lastTime = firstTimeGate;
             //12677853 fps with optimized render
             //18491828 fps with "old" render
@@ -110,7 +111,7 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (delta >= 1) {
                 this.repaint();
-                //     fps++;
+                // fps++;
                 delta--;
             }
 /*
@@ -122,6 +123,7 @@ public class MainGame extends JPanel implements Runnable {
             }
 
  */
+
 
         }
     }
