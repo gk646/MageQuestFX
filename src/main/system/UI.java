@@ -92,7 +92,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.0.0";
+        text = "1.1.0";
         x = 150;
         y = 900;
         g2.drawString(text, x, y);
@@ -163,7 +163,7 @@ public class UI implements ActionListener, ChangeListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Runner.textField) {
-            Multiplayer.portNumber = Integer.parseInt(Runner.textField.getText());
+            Multiplayer.ipAddress = Runner.textField.getText();
             mg.requestFocus();
         }
     }

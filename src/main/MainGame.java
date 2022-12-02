@@ -129,23 +129,27 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
-
         if (gameState == playState) {
+            if (keyHandler.debugFps && keyHandler.fpressed) {
+                multiplayer.startMultiplayerClient();
+            }
+
             if (keyHandler.debugFps && keyHandler.multiplayer) {
-                multiplayer.startMultiplayer();
+                multiplayer.startMultiplayerServer();
             }
 
             if (multiplayer.multiplayerStarted) {
-                multiplayer.updateMultiInput();
+                multiplayer.updateMultiplayerInput();
             }
             projectile.update();
             player.update();
             entity.update();
 
             if (multiplayer.multiplayerStarted) {
-                multiplayer.updateOutput();
+                multiplayer.updateMultiplayerOutput();
             }
         }
+
     }
 
     /**

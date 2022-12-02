@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     public final MainGame mg;
     //Keys
-    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer;
+    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, fpressed;
 
     public KeyHandler(MainGame mainGame) {
         this.mg = mainGame;
@@ -137,15 +137,14 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_1) {
                 OnePressed = true;
             }
-
-
+            if (code == KeyEvent.VK_F) {
+                fpressed = true;
+            }
         }
         if (code == KeyEvent.VK_C) {
             debugFps = true;
             mg.player.mana = mg.player.maxMana;
         }
-
-
     }
 
     @Override
@@ -166,6 +165,12 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_1) {
             OnePressed = false;
+        }
+        if (code == KeyEvent.VK_F) {
+            fpressed = false;
+        }
+        if (code == KeyEvent.VK_M) {
+            multiplayer = false;
         }
     }
 }

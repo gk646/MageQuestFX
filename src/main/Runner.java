@@ -30,7 +30,6 @@ public class Runner {
         window.add(jTextField);
         window.add(jSlider);
         window.add(mainGame);
-
         window.pack();
         window.setVisible(true);
         mainGame.startGameThread();

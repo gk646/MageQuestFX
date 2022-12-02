@@ -33,6 +33,7 @@ public class Entity {
      * Only really updates enemy position
      */
     public void update() {
+
         if (!initializeEnemies) {
             spawnEnemies();
             initializeEnemies = true;
@@ -47,6 +48,7 @@ public class Entity {
                 entity.hpBarCounter++;
             }
         }
+        mainGame.ENTITIES.removeIf(entity -> entity.dead);
 
     }
 
@@ -56,10 +58,9 @@ public class Entity {
     public void draw(Graphics2D g2) {
         for (Entity entity1 : mainGame.ENTITIES) {
             entity1.draw(g2);
-            entityHealthBarLength = entity1.maxHealth / entity1.entityWidth;
             if (entity1.hpBarOn) {
                 g2.setColor(new Color(0xFF0044));
-                g2.fillRect(entity1.screenX, entity1.screenY - 10, entity1.health / entityHealthBarLength, 8);
+                g2.fillRect(entity1.screenX, entity1.screenY - 10,  (int) (((float) entity1.health / (float) entity1.maxHealth) * entity1.entityWidth), 8);
                 g2.setColor(new Color(0xFFFFFF));
                 g2.setFont(mainGame.ui.maruMonica);
                 g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
@@ -69,7 +70,7 @@ public class Entity {
     }
 
     public void spawnEnemies() {
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2300, 2400, 50));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 2300, 2400, 1));
         mainGame.ENTITIES.add(new Enemy(mainGame, 2550, 2400, 99));
         mainGame.ENTITIES.add(new Enemy(mainGame, 2650, 2400, 99));
         mainGame.ENTITIES.add(new Enemy(mainGame, 2760, 2500, 99));

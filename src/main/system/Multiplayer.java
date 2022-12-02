@@ -1,6 +1,7 @@
 package main.system;
 
 import gameworld.Entity;
+import gameworld.entitys.Enemy;
 import gameworld.entitys.Player2;
 import main.MainGame;
 
@@ -19,25 +20,31 @@ public class Multiplayer {
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
     public static String ipAddress;
-    public static int portNumber;
+    public static int portNumber = 2555;
 
     public Multiplayer(MainGame mainGame, Player2 player2) {
         this.mainGame = mainGame;
         this.player2 = player2;
     }
 
-    public void updateMultiInput() {
+    public void updateMultiplayerInput() {
         try {
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
-            for (Entity entity1 : mainGame.ENTITIES) {
-                entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
-                index += 5;
-                entity1.worldY = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
-                index += 5;
-                entity1.health = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
-                index += 5;
+            try {
+                System.out.println(mainGame.ENTITIES.size());
+                mainGame.ENTITIES.clear();
+                for (int i = 0; i < mainGame.player2Information.length() - 10; i += 15) {
+                    mainGame.ENTITIES.add(new Enemy(mainGame, Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000,
+                            Integer.parseInt(mainGame.player2Information, index + 5, index + 10, 10) - 50000,
+                            Integer.parseInt(mainGame.player2Information, index + 10, index + 15, 10) - 50000
+                    ));
+                    index += 15;
+                }
+
+            } catch (IndexOutOfBoundsException ignored) {
+
             }
         } catch (IOException e) {
             mainGame.player2Information = mainGame.player2Information;
@@ -45,7 +52,7 @@ public class Multiplayer {
     }
 
 
-    public void updateOutput() {
+    public void updateMultiplayerOutput() {
         try {
             StringBuilder outputString = new StringBuilder();
             outputString.append(mainGame.player.worldX + 50000).append(mainGame.player.worldY + 50000);
@@ -60,18 +67,37 @@ public class Multiplayer {
 
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("failed");
         }
     }
 
-    public void startMultiplayer() {
+    public void startMultiplayerServer() {
         multiplayerStarted = true;
         if (mainGame.keyHandler.multiplayer) {
             try {
-                System.out.println(portNumber);
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket s = serverSocket.accept();
-                s.setSoTimeout(5);
+                s.setSoTimeout(2);
+                outputStream = new DataOutputStream(s.getOutputStream());
+                inputStream = new DataInputStream(s.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void startMultiplayerClient() {
+        multiplayerStarted = true;
+        ipAddress = "localhost";
+        if (mainGame.keyHandler.fpressed) {
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Socket s = new Socket(ipAddress, portNumber);
+                //s.setSoTimeout(2);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {

@@ -17,9 +17,9 @@ public class Enemy extends Entity {
     /**
      * Main Enemy class
      *
-     * @param mainGame super();
-     * @param worldX   coordinates X
-     * @param worldY   coordinates Y
+     * @param mainGame  super();
+     * @param worldX    coordinates X
+     * @param worldY    coordinates Y
      * @param maxHealth max amount of health
      */
     public Enemy(MainGame mainGame, int worldX, int worldY, int maxHealth) {
@@ -43,7 +43,9 @@ public class Enemy extends Entity {
     public void update() {
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-
+        if (health <= 0) {
+            dead = true;
+        }
     }
 
     public void draw(Graphics2D g2) {
