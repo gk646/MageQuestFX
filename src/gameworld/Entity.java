@@ -49,7 +49,8 @@ public class Entity {
                 entity.hpBarCounter++;
             }
         }
-        mainGame.ENTITIES.removeIf(entity -> entity.dead);
+        mainGame.ENTITIES.removeIf(entity -> entity.health<0);
+
     }
 
     /**

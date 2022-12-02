@@ -43,9 +43,6 @@ public class Enemy extends Entity {
     public void update() {
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (health <= 0) {
-            dead = true;
-        }
     }
 
     public void draw(Graphics2D g2) {
