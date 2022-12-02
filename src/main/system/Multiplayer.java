@@ -15,7 +15,7 @@ import java.net.Socket;
 public class Multiplayer {
     private final MainGame mainGame;
     private final Player2 player2;
-    private int index = 10;
+    private int index = 10, messageLength;
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
@@ -29,25 +29,32 @@ public class Multiplayer {
 
     public void updateMultiplayerInput() {
         try {
+            messageLength  = mainGame.player2Information.length();
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
-            try {
-                System.out.println(mainGame.ENTITIES.size());
+
+            //System.out.println(mainGame.ENTITIES.size());
+            if (mainGame.player2Information.length() != messageLength) {
                 mainGame.ENTITIES.clear();
                 for (int i = 0; i < mainGame.player2Information.length() - 10; i += 15) {
                     mainGame.ENTITIES.add(new Enemy(mainGame, Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000,
                             Integer.parseInt(mainGame.player2Information, index + 5, index + 10, 10) - 50000,
-                            Integer.parseInt(mainGame.player2Information, index + 10, index + 15, 10) - 50000
-                    ));
+                            Integer.parseInt(mainGame.player2Information, index + 10, index + 15, 10) - 50000));
                     index += 15;
                 }
-
-            } catch (IndexOutOfBoundsException ignored) {
-
+            } else {
+                for (Entity entity1 : mainGame.ENTITIES) {
+                    entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
+                    index += 5;
+                    entity1.worldY = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
+                    index += 5;
+                    entity1.health = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
+                    index += 5;
+                }
             }
         } catch (IOException e) {
-            mainGame.player2Information = mainGame.player2Information;
+            // mainGame.player2Information = mainGame.player2Information;
         }
     }
 
@@ -77,7 +84,7 @@ public class Multiplayer {
             try {
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket s = serverSocket.accept();
-                s.setSoTimeout(2);
+                //s.setSoTimeout(5);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {
@@ -97,7 +104,7 @@ public class Multiplayer {
             }
             try {
                 Socket s = new Socket(ipAddress, portNumber);
-                //s.setSoTimeout(2);
+                s.setSoTimeout(2);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {

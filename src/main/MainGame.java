@@ -29,7 +29,7 @@ public class MainGame extends JPanel implements Runnable {
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
     public int gameState, globalLogicTicks;
-    public String player2Information;
+    public String player2Information = "";
 
 
     //Game thread

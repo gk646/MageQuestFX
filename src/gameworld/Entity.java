@@ -5,6 +5,7 @@ import main.MainGame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ConcurrentModificationException;
 
 
 /**
@@ -49,23 +50,26 @@ public class Entity {
             }
         }
         mainGame.ENTITIES.removeIf(entity -> entity.dead);
-
     }
 
     /**
      * Used for drawing health bars
      */
     public void draw(Graphics2D g2) {
+        try{
         for (Entity entity1 : mainGame.ENTITIES) {
             entity1.draw(g2);
             if (entity1.hpBarOn) {
                 g2.setColor(new Color(0xFF0044));
-                g2.fillRect(entity1.screenX, entity1.screenY - 10,  (int) (((float) entity1.health / (float) entity1.maxHealth) * entity1.entityWidth), 8);
+                g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
                 g2.setColor(new Color(0xFFFFFF));
                 g2.setFont(mainGame.ui.maruMonica);
                 g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
                 g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
             }
+        }
+        }catch (ConcurrentModificationException ignored){
+
         }
     }
 
