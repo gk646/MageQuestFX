@@ -30,9 +30,9 @@ public class Multiplayer {
     public void updateMultiplayerInput() {
         try {
             messageLength  = mainGame.player2Information.length();
-            System.out.println("before");
+
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
-            System.out.println(mainGame.player2Information);
+           //System.out.println(mainGame.player2Information);
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
             if (mainGame.player2Information.length() != messageLength) {
@@ -44,7 +44,7 @@ public class Multiplayer {
                     index += 15;
                 }
             }
-            System.out.println(mainGame.ENTITIES.size());
+
             index = 10;
             for (Entity entity1 : mainGame.ENTITIES) {
                 entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
@@ -100,7 +100,6 @@ public class Multiplayer {
 
     public void startMultiplayerClient() {
         multiplayerStarted = true;
-        ipAddress = "localhost";
         if (mainGame.keyHandler.fpressed) {
             try {
                 Thread.sleep(500);
