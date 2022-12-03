@@ -19,7 +19,7 @@ public class WorldRender {
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
-        this.tileStorage = new Tile[5];
+        this.tileStorage = new Tile[30];
         getTileImage();
         World.setWorldData();
 
@@ -38,20 +38,27 @@ public class WorldRender {
     }
 
     private void getTileImage() {
-        setup(1, "grass.png", false);
-        setup(0, "wall.png", true);
-        setup(2, "water.png", true);
+        setup(1, "grass01.png", false);
+        setup(2, "grass02.png", false);
+        setup(3, "grass03.png", false);
+        setup(4, "grass04.png", false);
+        setup(14, "grass01.png", true);
+        setup(15, "grass15.png", false);
+        setup(16, "grass01.png", true);
+        setup(28, "grass28.png", false);
+        setup(29, "grass01.png", true);
+
 
     }
 
     public void draw(Graphics2D g2) {
 
 
-        int worldCol = 0;
-        int worldRow = 0;
+        int worldCol = (mainGame.player.worldX/48 ) -10;
+        int worldRow = (mainGame.player.worldY/48 ) -10;
 
 
-        while (worldCol < worldSize.x && worldRow < worldSize.y) {
+        while (worldCol < worldCol+10 && worldRow < worldRow+10 ){
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
@@ -60,15 +67,12 @@ public class WorldRender {
             //
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
-
             if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
                 g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
             }
-
-
             worldCol++;
             if (worldCol == worldSize.x) {
-                worldCol = 0;
+                worldCol = (mainGame.player.worldX/48 ) -10;
                 worldRow++;
             }
 

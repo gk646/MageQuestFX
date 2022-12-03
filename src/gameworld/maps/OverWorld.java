@@ -11,23 +11,23 @@ import java.io.InputStreamReader;
 public class OverWorld extends World {
 
     public static int[][] loadMap() {
-        worldSize = new Point(100, 100);
-        worldData = new int[worldSize.x + 1][worldSize.y + 1];
+        worldSize = new Point(500, 500);
+        worldData = new int[worldSize.x][worldSize.y];
         try {
-            InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/map1.txt");
+            InputStream inputStream = OverWorld.class.getResourceAsStream("/resources/maps/map01.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             int row = 0;
             int col = 0;
-            while (row < 100 && col < 100) {
+            while (row < worldSize.x && col < worldSize.y) {
                 String line = bufferedReader.readLine();
-                while (col < 100) {
+                while (col < worldSize.y) {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     worldData[col][row] = num;
                     col++;
                 }
-                if (col == 100) {
+                if (col == worldSize.x) {
                     col = 0;
                     row++;
                 }
@@ -45,6 +45,6 @@ public class OverWorld extends World {
     }
 
     public static Point loadMapStartPoint() {
-        return new Point(2400, 2400);
+        return new Point(12000, 12000);
     }
 }
