@@ -15,7 +15,10 @@ import java.util.ConcurrentModificationException;
 public class Entity {
     public int worldY, worldX, entityWidth, entityHeight, screenX, screenY;
 
-    public int movementSpeed, health, maxHealth, hpBarCounter, entityHealthBarLength;
+    public int movementSpeed;
+    public int health;
+    public int maxHealth;
+    public int hpBarCounter;
     public MainGame mainGame;
     public BufferedImage up1;
 

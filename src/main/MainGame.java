@@ -28,7 +28,7 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
-    public int gameState, globalLogicTicks;
+    public int gameState;
     public String player2Information = "";
 
 
@@ -58,7 +58,7 @@ public class MainGame extends JPanel implements Runnable {
     public final Player2 player2 = new Player2(this);
     final Projectile projectile = new Projectile(this, mouseHandler);
     final Multiplayer multiplayer = new Multiplayer(this, player2);
-    public UI ui = new UI(this);
+    public final UI ui = new UI(this);
 
     /**
      * Main game loop class
@@ -101,7 +101,6 @@ public class MainGame extends JPanel implements Runnable {
             //18491828 fps with "old" render
             //
             if (timer >= 1) {
-                globalLogicTicks = logic_ticks;
                 update();
                 timer = 0;
                 logic_ticks++;

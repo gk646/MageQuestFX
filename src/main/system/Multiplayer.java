@@ -20,7 +20,7 @@ public class Multiplayer {
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
     public static String ipAddress;
-    public static int portNumber = 60069;
+    public static final int portNumber = 60069;
 
     public Multiplayer(MainGame mainGame, Player2 player2) {
         this.mainGame = mainGame;

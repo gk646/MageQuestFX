@@ -16,17 +16,15 @@ import java.util.Objects;
 
 public class UI implements ActionListener, ChangeListener {
     Graphics2D g2;
-    MainGame mg;
-    public Font arial_40, arial_80b, maruMonica;
+    final MainGame mg;
+    public Font maruMonica;
     public int commandNum = 0;
     private boolean once = false;
     private BufferedImage playerUI;
-    public Color lightBackground = new Color(192, 203, 220), darkBackground = new Color(90, 105, 136), lightBackgroundAlpha = new Color(0xCAC0CBDC, true);
+    public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(0xCAC0CBDC, true), darkBackground = new Color(90, 105, 136);
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80b = new Font("Arial", Font.BOLD, 80);
         InputStream is = getClass().getResourceAsStream("/resources/font/x12y16pxMaruMonica.ttf");
         try {
             assert is != null;
@@ -106,13 +104,13 @@ public class UI implements ActionListener, ChangeListener {
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setColor(new Color(0xFF0044));
-        g2.fillRect(123, 70, (int) (((float) mg.player.health / (float) mg.player.maxHealth) * 225), 11);
+        g2.fillRect(123, 70, (int) ((mg.player.health / (float) mg.player.maxHealth) * 225), 11);
         g2.setColor(new Color(0x0099DB));
         g2.fillRect(123, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         g2.drawImage(playerUI, 40, 40, 330, 200, null);
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
-        g2.drawString((int)mg.player.health + "/" + mg.player.maxHealth, 200, 79);
+        g2.drawString((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
 
     }
