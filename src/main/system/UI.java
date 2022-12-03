@@ -92,7 +92,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.1.0";
+        text = "1.1.1";
         x = 150;
         y = 900;
         g2.drawString(text, x, y);
@@ -112,7 +112,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawImage(playerUI, 40, 40, 330, 200, null);
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
-        g2.drawString(mg.player.health + "/" + mg.player.maxHealth, 200, 79);
+        g2.drawString((int)mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
 
     }

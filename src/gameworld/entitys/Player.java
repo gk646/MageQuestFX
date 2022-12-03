@@ -18,8 +18,8 @@ import java.util.Objects;
 
 public class Player extends Entity {
     public static Point startingPoint;
-    public float mana;
-    public int maxMana;
+    public float mana, health;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
 
@@ -88,28 +88,42 @@ public class Player extends Entity {
                 worldY += movementSpeed;
             }
         }
-
         if (direction.contains("right")) {
 
             if (!collisionRight) {
                 worldX += movementSpeed;
             }
         }
-        if (this.mouseHandler.mouse1Pressed && mainGame.globalLogicTicks % 10 == 0) {
+        if (this.mouseHandler.mouse1Pressed && cooldownPrimary == 10) {
             mainGame.PROJECTILES.add(new PrimaryFire(mainGame, mouseHandler));
+            cooldownPrimary = 0;
         }
-        if (this.mouseHandler.mouse2Pressed && mainGame.globalLogicTicks % 40 == 0 && this.mana >= 10) {
+        if (this.mouseHandler.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10) {
             mainGame.PROJECTILES.add(new SecondaryFire(mainGame, mouseHandler));
             mana -= 10;
+            cooldownOneSecond = 0;
         }
-        if (this.keyHandler.OnePressed && mainGame.globalLogicTicks % 40 == 0 && this.mana >= 10) {
+        if (this.keyHandler.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {
                 mainGame.PROJECTILES.add(new Ability1(mainGame, mouseHandler, i));
             }
             mana -= 10;
+            cooldownTwoSecond = 0;
         }
         if (mana < maxMana) {
             mana += 0.05;
+        }
+        if (health < maxHealth) {
+            health += 0.002;
+        }
+        if(cooldownPrimary <10){
+            cooldownPrimary++;
+        }
+        if (cooldownOneSecond < 60) {
+            cooldownOneSecond++;
+        }
+        if (cooldownTwoSecond < 120) {
+            cooldownTwoSecond++;
         }
     }
 

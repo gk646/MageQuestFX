@@ -34,22 +34,28 @@ public class Entity {
      * Only really updates enemy position
      */
     public void update() {
+        try {
+            if (!initializeEnemies) {
+                spawnEnemies();
+                initializeEnemies = true;
+            }
+            for (Entity entity : mainGame.ENTITIES) {
+                entity.update();
+                if (entity.hpBarCounter >= 600) {
+                    entity.hpBarOn = false;
+                    entity.hpBarCounter = 0;
+                }
+                if (entity.hpBarOn) {
+                    entity.hpBarCounter++;
+                }
+                if (entity.health <= 0) {
+                    mainGame.ENTITIES.remove(entity);
+                }
+            }
+        } catch (ConcurrentModificationException ignored) {
 
-        if (!initializeEnemies) {
-            spawnEnemies();
-            initializeEnemies = true;
         }
-        for (Entity entity : mainGame.ENTITIES) {
-            entity.update();
-            if (entity.hpBarCounter >= 600) {
-                entity.hpBarOn = false;
-                entity.hpBarCounter = 0;
-            }
-            if(entity.hpBarOn){
-                entity.hpBarCounter++;
-            }
-        }
-        mainGame.ENTITIES.removeIf(entity -> entity.health<0);
+
 
     }
 
@@ -57,19 +63,19 @@ public class Entity {
      * Used for drawing health bars
      */
     public void draw(Graphics2D g2) {
-        try{
-        for (Entity entity1 : mainGame.ENTITIES) {
-            entity1.draw(g2);
-            if (entity1.hpBarOn) {
-                g2.setColor(new Color(0xFF0044));
-                g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
-                g2.setColor(new Color(0xFFFFFF));
-                g2.setFont(mainGame.ui.maruMonica);
-                g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
-                g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
+        try {
+            for (Entity entity1 : mainGame.ENTITIES) {
+                entity1.draw(g2);
+                if (entity1.hpBarOn) {
+                    g2.setColor(new Color(0xFF0044));
+                    g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
+                    g2.setColor(new Color(0xFFFFFF));
+                    g2.setFont(mainGame.ui.maruMonica);
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
+                    g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
+                }
             }
-        }
-        }catch (ConcurrentModificationException ignored){
+        } catch (ConcurrentModificationException ignored) {
 
         }
     }

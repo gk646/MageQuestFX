@@ -1,5 +1,6 @@
 package input;
 
+import gameworld.entitys.Enemy;
 import main.MainGame;
 
 import java.awt.event.KeyEvent;
@@ -18,6 +19,9 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
         //TITLE SCREEN
         char code = e.getKeyChar();
+        if(code == 'G'){
+            mg.ENTITIES.add(new Enemy(mg,2500,2600,15));
+        }
         if (mg.gameState == mg.titleState) {
             if (code == ('w')) {
                 mg.ui.commandNum--;

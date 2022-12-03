@@ -15,12 +15,12 @@ import java.net.Socket;
 public class Multiplayer {
     private final MainGame mainGame;
     private final Player2 player2;
-    private int index = 10, messageLength;
+    private int index = 10;
     public static DataOutputStream outputStream;
     public static DataInputStream inputStream;
     public boolean multiplayerStarted;
     public static String ipAddress;
-    public static int portNumber = 2555;
+    public static int portNumber = 60069;
 
     public Multiplayer(MainGame mainGame, Player2 player2) {
         this.mainGame = mainGame;
@@ -29,10 +29,9 @@ public class Multiplayer {
 
     public void updateMultiplayerInput() {
         try {
-            messageLength  = mainGame.player2Information.length();
-
+            int messageLength = mainGame.player2Information.length();
             mainGame.player2Information = Multiplayer.inputStream.readUTF();
-           //System.out.println(mainGame.player2Information);
+            //System.out.println(mainGame.player2Information);
             player2.worldX = Integer.parseInt(mainGame.player2Information, 0, 5, 10) - 50000;
             player2.worldY = Integer.parseInt(mainGame.player2Information, 5, 10, 10) - 50000;
             if (mainGame.player2Information.length() != messageLength) {
@@ -44,7 +43,6 @@ public class Multiplayer {
                     index += 15;
                 }
             }
-
             index = 10;
             for (Entity entity1 : mainGame.ENTITIES) {
                 entity1.worldX = Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000;
@@ -56,10 +54,8 @@ public class Multiplayer {
             }
             index = 10;
 
-        } catch (IOException e) {
-            System.out.println("hey");
-        } catch (IndexOutOfBoundsException e ){
-            System.out.println("OUt of bounds!");
+        } catch (IOException | IndexOutOfBoundsException ignored) {
+
         }
     }
 
@@ -89,7 +85,7 @@ public class Multiplayer {
             try {
                 ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket s = serverSocket.accept();
-               // s.setSoTimeout(5);
+                // s.setSoTimeout(5);
                 outputStream = new DataOutputStream(s.getOutputStream());
                 inputStream = new DataInputStream(s.getInputStream());
             } catch (IOException e) {

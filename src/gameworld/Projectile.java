@@ -8,7 +8,7 @@ import input.MouseHandler;
 import main.MainGame;
 
 import java.awt.*;
-
+import java.util.ConcurrentModificationException;
 
 
 /**
@@ -21,7 +21,7 @@ public class Projectile extends Entity {
     public final MainGame mainGame;
     public final MouseHandler mouseHandler;
 
-    public Projectile(MainGame mainGame,MouseHandler mouseHandler) {
+    public Projectile(MainGame mainGame, MouseHandler mouseHandler) {
         super(mainGame);
         this.mainGame = mainGame;
         this.mouseHandler = mouseHandler;
@@ -36,23 +36,30 @@ public class Projectile extends Entity {
 
     @Override
     public void update() {
-        for (Projectile projectile1 : mainGame.PROJECTILES) {
-            for (Entity entity1 : mainGame.ENTITIES) {
-                if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
-                    if (projectile1.getClass() == PrimaryFire.class) {
-                        entity1.health -= 1;
-                    } else if (projectile1.getClass() == SecondaryFire.class) {
-                        entity1.health -= 5;
-                    } else if (projectile1.getClass() == Ability1.class) {
-                        entity1.health -= 5;
+        try {
+            for (Projectile projectile1 : mainGame.PROJECTILES) {
+                for (Entity entity1 : mainGame.ENTITIES) {
+                    if (mainGame.collisionChecker.checkEntityAgainstEntity(entity1, projectile1)) {
+                        if (projectile1.getClass() == PrimaryFire.class) {
+                            entity1.health -= 1;
+                        } else if (projectile1.getClass() == SecondaryFire.class) {
+                            entity1.health -= 5;
+                        } else if (projectile1.getClass() == Ability1.class) {
+                            entity1.health -= 5;
+                        }
+                        entity1.hpBarOn = true;
+                        projectile1.dead = true;
                     }
-                    entity1.hpBarOn = true;
-                    projectile1.dead = true;
                 }
+                if (projectile1.dead) {
+                    mainGame.PROJECTILES.remove(projectile1);
+                }
+                projectile1.update();
             }
-            projectile1.update();
+        } catch (ConcurrentModificationException ignored) {
+
         }
-        mainGame.PROJECTILES.removeIf(projectile -> projectile.dead);
+
     }
 }
 
