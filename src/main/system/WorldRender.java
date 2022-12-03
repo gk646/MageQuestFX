@@ -54,11 +54,13 @@ public class WorldRender {
     public void draw(Graphics2D g2) {
 
 
-        int worldCol = (mainGame.player.worldX/48 ) -10;
-        int worldRow = (mainGame.player.worldY/48 ) -10;
+        int worldCol = (mainGame.player.worldX/48 ) -20;
+        int worldRow = (mainGame.player.worldY/48 ) -12;
+        int endx = worldCol +42;
+        int endy = worldRow +25;
 
 
-        while (worldCol < worldCol+10 && worldRow < worldRow+10 ){
+        while (worldCol < endx && worldRow < endy ){
             //reading out tile data
             int tileNum = worldData[worldCol][worldRow];
             //making world camera
@@ -67,12 +69,12 @@ public class WorldRender {
             //
             int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
             int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
-            if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
+            //if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
                 g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
-            }
+           // }
             worldCol++;
-            if (worldCol == worldSize.x) {
-                worldCol = (mainGame.player.worldX/48 ) -10;
+            if (worldCol == endx) {
+                worldCol = (mainGame.player.worldX/48 ) -20;
                 worldRow++;
             }
 
