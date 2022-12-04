@@ -40,8 +40,10 @@ public class Entity {
         int startCol = (worldX + collisionBox.x) / mainGame.tileSize;
         int starRow = (worldY + collisionBox.y) / mainGame.tileSize;
         mainGame.pathFinder.setNodes(startCol, starRow, goalCol, goalRow);
+        if(startCol == goalCol && starRow == goalRow ){
 
-        if (mainGame.pathFinder.search()) {
+        }
+        else if(mainGame.pathFinder.search()) {
 
             int nextX = mainGame.pathFinder.pathList.get(0).col * mainGame.tileSize;
             int nextY = mainGame.pathFinder.pathList.get(0).row * mainGame.tileSize;

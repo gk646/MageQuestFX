@@ -24,7 +24,7 @@ public class Runner {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setUndecorated(true);
-        window.setTitle("SERVER");
+        window.setTitle("Game");
         try {
             Image image = ImageIO.read((Objects.requireNonNull(Runner.class.getResourceAsStream("/resources/icon/icon.png"))));
             window.setIconImage(image);

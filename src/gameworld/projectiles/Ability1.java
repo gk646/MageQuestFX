@@ -36,6 +36,7 @@ public class Ability1 extends Projectile {
         this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();
+        this.endPosition = new Point(screenPosition.x +1000, screenPosition.y +1000);
     }
 
     @Override
@@ -46,6 +47,9 @@ public class Ability1 extends Projectile {
 
     @Override
     public void update() {
+        if(screenPosition.x >= endPosition.x || screenPosition.y >= endPosition.y){
+            this.dead = true;
+        }
         mainGame.collisionChecker.checkEntityAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
