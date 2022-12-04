@@ -1,7 +1,9 @@
-package main.system;
+package main.system.ui;
 
 import main.MainGame;
 import main.Runner;
+import main.system.Multiplayer;
+import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeEvent;

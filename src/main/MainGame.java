@@ -10,7 +10,7 @@ import input.MouseHandler;
 import main.system.AI.PathFinder;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
-import main.system.UI;
+import main.system.ui.UI;
 import main.system.WorldRender;
 
 import javax.swing.JPanel;

@@ -12,7 +12,6 @@ import java.util.Objects;
 
 
 public class Runner {
-
     public static JFrame window;
     public static JTextField textField;
     public static JSlider slider;
