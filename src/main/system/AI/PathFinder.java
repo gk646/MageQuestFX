@@ -44,11 +44,15 @@ public class PathFinder {
         step = 0;
     }
 
+    //Method for setting the start and goal nodes for the search
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow) {
+        //Reset all nodes in the map
         resetNodes();
+        //Set the start and goal nodes based on the given coordinates
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
+        //Iterate through all nodes in the map
         for (int i = 0; i < OverWorld.worldSize.x; i++) {
             for (int b = 0; b < OverWorld.worldSize.y; b++) {
                 int tileNum = OverWorld.worldData[i][b];
@@ -62,6 +66,7 @@ public class PathFinder {
         }
 
     }
+
 
     public void getCost(Node node) {
         //G cost
@@ -144,8 +149,5 @@ public class PathFinder {
             node.parent = currentNode;
             openList.add(node);
         }
-    }
-    public void searchPath(int goalCol, int goalRow){
-
     }
 }
