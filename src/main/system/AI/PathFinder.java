@@ -31,7 +31,6 @@ public class PathFinder {
     }
 
     public void resetNodes() {
-
         for (int i = 0; i < OverWorld.worldSize.x; i++) {
             for (int b = 0; b < OverWorld.worldSize.y; b++) {
                 nodes[i][b].open = false;
