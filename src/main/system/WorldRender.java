@@ -5,7 +5,8 @@ import gameworld.tiles.Tile;
 import main.MainGame;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.io.IOException;
 import java.util.Objects;
 

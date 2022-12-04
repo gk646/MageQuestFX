@@ -13,8 +13,12 @@ import main.system.Multiplayer;
 import main.system.UI;
 import main.system.WorldRender;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 
@@ -84,9 +88,9 @@ public class MainGame extends JPanel implements Runnable {
         double delta = 0;
         long firstTimeGate;
         double timer = 0;
-        int fps = 0;
-        int logic_ticks = 0;
-        double fpsCounter = 0;
+        // int fps = 0;
+        //int logic_ticks = 0;
+        //double fpsCounter = 0;
         long lastTime = System.nanoTime();
         double interval;
         float logicvsFPS = 1000000000 / 60f;
@@ -105,7 +109,7 @@ public class MainGame extends JPanel implements Runnable {
             if (timer >= 1) {
                 update();
                 timer = 0;
-                logic_ticks++;
+                //logic_ticks++;
 
             }
             if (delta >= 1) {

@@ -3,7 +3,10 @@ package gameworld;
 import gameworld.entitys.Enemy;
 import main.MainGame;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;
 
@@ -49,45 +52,45 @@ public class Entity {
             int enBottomY = worldY + collisionBox.y + collisionBox.height;
 
             if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
-               // direction = "up";
-                worldY-= movementSpeed;
+                // direction = "up";
+                worldY -= movementSpeed;
             } else if (enTopY < nextX && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
                 //direction = "down";
-                worldY+= movementSpeed;
+                worldY += movementSpeed;
             } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
 
                 if (enLeftX > nextX) {
                     //direction = "left";
-                    worldX-= movementSpeed;
+                    worldX -= movementSpeed;
                 }
                 if (enLeftX < nextX) {
                     //direction = "right";
-                    worldX+= movementSpeed;
+                    worldX += movementSpeed;
                 }
             } else if (enTopY > nextY && enLeftX > nextX) {
                 //direction = "up";
-                worldY-= movementSpeed;
+                worldY -= movementSpeed;
                 //collision?
 
             } else if (enTopY > nextY && enLeftX < nextX) {
                 //collision?
                 //direction = "up";
-                worldY-= movementSpeed;
+                worldY -= movementSpeed;
             } else if (enTopY < nextY && enLeftX > nextX) {
                 //collision?
                 //direction = "down";
-                worldY+= movementSpeed;
+                worldY += movementSpeed;
 
             } else if (enTopY < nextY && enLeftX < nextX) {
                 //collision?
                 //direction = "down";
-                worldY+= movementSpeed;
+                worldY += movementSpeed;
 
             }
 
             int nextCol = mainGame.pathFinder.pathList.get(0).col;
             int nextRow = mainGame.pathFinder.pathList.get(0).row;
-            if(nextCol == goalCol && nextRow == goalRow){
+            if (nextCol == goalCol && nextRow == goalRow) {
                 onPath = false;
             }
         }

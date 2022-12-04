@@ -5,7 +5,8 @@ import main.MainGame;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -43,13 +44,13 @@ public class Enemy extends Entity {
 
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if(worldX/mainGame.tileSize != mainGame.player.worldX/mainGame.tileSize && worldY / mainGame.tileSize != mainGame.player.worldY/ mainGame.tileSize){
+        if (worldX / mainGame.tileSize != mainGame.player.worldX / mainGame.tileSize && worldY / mainGame.tileSize != mainGame.player.worldY / mainGame.tileSize) {
             onPath = true;
         }
         if (onPath) {
             int goalCol = mainGame.player.worldX / mainGame.tileSize;
             int goalRow = mainGame.player.worldY / mainGame.tileSize;
-            searchPath(goalCol,goalRow);
+            searchPath(goalCol, goalRow);
         }
     }
 

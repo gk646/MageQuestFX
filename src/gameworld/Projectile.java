@@ -7,7 +7,8 @@ import gameworld.projectiles.SecondaryFire;
 import input.MouseHandler;
 import main.MainGame;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ConcurrentModificationException;
 
 

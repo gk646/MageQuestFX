@@ -6,7 +6,7 @@ import gameworld.entitys.Player2;
 import gameworld.maps.OverWorld;
 import main.system.WorldRender;
 
-import java.awt.*;
+import java.awt.Point;
 
 public class World {
     public static int[][] worldData;

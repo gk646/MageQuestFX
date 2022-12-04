@@ -2,7 +2,7 @@ package gameworld.maps;
 
 import gameworld.World;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

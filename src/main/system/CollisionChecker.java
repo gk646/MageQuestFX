@@ -3,7 +3,7 @@ package main.system;
 import gameworld.Entity;
 import main.MainGame;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 public class CollisionChecker {
     final MainGame mainGame;

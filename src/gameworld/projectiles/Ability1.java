@@ -5,7 +5,10 @@ import gameworld.entitys.Player;
 import input.MouseHandler;
 import main.MainGame;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 public class Ability1 extends Projectile {
 
