@@ -3,8 +3,8 @@ package main.system.AI;
 
 public class Node {
     Node parent;
-    int col;
-    int row;
+    public int col;
+    public int row;
     int gCost;
     int hCost;
     int fCost;

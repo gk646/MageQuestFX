@@ -34,15 +34,23 @@ public class Enemy extends Entity {
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-
         this.collisionBox = new Rectangle(6, 6, 42, 42);
-
+        this.onPath = true;
         getDisplayImage();
     }
 
     public void update() {
+
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        if(worldX/mainGame.tileSize != mainGame.player.worldX/mainGame.tileSize && worldY / mainGame.tileSize != mainGame.player.worldY/ mainGame.tileSize){
+            onPath = true;
+        }
+        if (onPath) {
+            int goalCol = mainGame.player.worldX / mainGame.tileSize;
+            int goalRow = mainGame.player.worldY / mainGame.tileSize;
+            searchPath(goalCol,goalRow);
+        }
     }
 
     public void draw(Graphics2D g2) {

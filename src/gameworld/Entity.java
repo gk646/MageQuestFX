@@ -24,13 +24,73 @@ public class Entity {
 
     public String direction;
     public Rectangle collisionBox;
-    public boolean initializeEnemies, hpBarOn;
+    public boolean initializeEnemies, hpBarOn, onPath;
     public boolean collisionUp, collisionDown, collisionLeft, collisionRight, dead;
 
     public Entity(MainGame mainGame) {
 
         this.mainGame = mainGame;
 
+    }
+
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + collisionBox.x) / mainGame.tileSize;
+        int starRow = (worldY + collisionBox.y) / mainGame.tileSize;
+        mainGame.pathFinder.setNodes(startCol, starRow, goalCol, goalRow);
+
+        if (mainGame.pathFinder.search()) {
+
+            int nextX = mainGame.pathFinder.pathList.get(0).col * mainGame.tileSize;
+            int nextY = mainGame.pathFinder.pathList.get(0).row * mainGame.tileSize;
+
+            int enLeftX = worldX + collisionBox.x;
+            int enRightX = worldX + collisionBox.x + collisionBox.width;
+            int enTopY = worldY + collisionBox.y;
+            int enBottomY = worldY + collisionBox.y + collisionBox.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+               // direction = "up";
+                worldY-= movementSpeed;
+            } else if (enTopY < nextX && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+                //direction = "down";
+                worldY+= movementSpeed;
+            } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
+
+                if (enLeftX > nextX) {
+                    //direction = "left";
+                    worldX-= movementSpeed;
+                }
+                if (enLeftX < nextX) {
+                    //direction = "right";
+                    worldX+= movementSpeed;
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                //direction = "up";
+                worldY-= movementSpeed;
+                //collision?
+
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                //collision?
+                //direction = "up";
+                worldY-= movementSpeed;
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                //collision?
+                //direction = "down";
+                worldY+= movementSpeed;
+
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                //collision?
+                //direction = "down";
+                worldY+= movementSpeed;
+
+            }
+
+            int nextCol = mainGame.pathFinder.pathList.get(0).col;
+            int nextRow = mainGame.pathFinder.pathList.get(0).row;
+            if(nextCol == goalCol && nextRow == goalRow){
+                onPath = false;
+            }
+        }
     }
 
     /**
@@ -84,12 +144,12 @@ public class Entity {
     }
 
     public void spawnEnemies() {
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2300, 2400, 1));
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2550, 2400, 99));
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2650, 2400, 99));
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2760, 2500, 99));
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2800, 2550, 99));
-        mainGame.ENTITIES.add(new Enemy(mainGame, 2900, 2600, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12100, 12200, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12200, 12200, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12300, 12300, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12400, 12400, 99));
+        mainGame.ENTITIES.add(new Enemy(mainGame, 12500, 12500, 99));
     }
 
 }
