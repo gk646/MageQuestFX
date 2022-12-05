@@ -10,6 +10,7 @@ import input.MouseHandler;
 import main.system.AI.PathFinder;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
+import main.system.ui.DragListener;
 import main.system.ui.UI;
 import main.system.WorldRender;
 
@@ -49,10 +50,12 @@ public class MainGame extends JPanel implements Runnable {
 
     //---------GAMESTATES-----------
 
+    public final int titleOption = -1;
     public final int titleState = 0;
     public final int playState = 1;
     public final int optionState = 2;
-    public final int titleOption = -1;
+    public final int talentState = 3;
+
 
 
     //---------System---------
@@ -179,7 +182,7 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        } else if (gameState == titleState || gameState == titleOption) {
+        } else if (gameState == titleState || gameState == titleOption|| gameState == talentState) {
             ui.draw(g2);
         }
 

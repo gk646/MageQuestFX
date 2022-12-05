@@ -32,6 +32,7 @@ public class PrimaryFire extends Projectile {
         this.collisionBox = new Rectangle(0, 0, 16, 16);
         this.direction = "downleftrightup";
 
+
         //------POSITION-----------
         this.mousePosition = mainGame.motionHandler.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
@@ -40,6 +41,8 @@ public class PrimaryFire extends Projectile {
         this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.updateVector = getUpdateVector();
         getPlayerImage();
+        this.endPositionX = worldX +1000;
+        this.endPositionY = worldY +1000;
 
     }
 
@@ -50,6 +53,10 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void update() {
+        if(worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY-2000 || worldX <= endPositionX -2000){
+            this.dead = true;
+        }
+
         mainGame.collisionChecker.checkEntityAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;

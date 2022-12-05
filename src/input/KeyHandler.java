@@ -2,6 +2,8 @@ package input;
 
 import gameworld.entitys.Enemy;
 import main.MainGame;
+import main.Runner;
+import main.system.ui.SkilltreeWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -15,12 +17,13 @@ public class KeyHandler implements KeyListener {
         this.mg = mainGame;
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
         //TITLE SCREEN
         char code = e.getKeyChar();
-        if(code == 'G'){
-            mg.ENTITIES.add(new Enemy(mg,2500,2600,15));
+        if (code == 'G') {
+            mg.ENTITIES.add(new Enemy(mg, 2500, 2600, 15));
         }
         if (mg.gameState == mg.titleState) {
             if (code == ('w')) {
@@ -96,7 +99,6 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
         if (code == '\u001B') {
             if (mg.gameState == mg.optionState) {
                 mg.gameState = mg.playState;
@@ -114,6 +116,17 @@ public class KeyHandler implements KeyListener {
                 }
             }
 
+        }
+        //Drawing talent window
+        if (code == 'n') {
+            if (mg.gameState == mg.playState) {
+                mg.gameState = mg.talentState;
+            }
+            else if(mg.gameState == mg.talentState){
+                mg.gameState = mg.playState;
+                Runner.skillTree.setVisible(false);
+                mg.requestFocusInWindow();
+            }
         }
     }
 
@@ -134,7 +147,6 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_D) {
                 rightPressed = true;
             }
-
             if (code == KeyEvent.VK_M) {
                 multiplayer = true;
             }

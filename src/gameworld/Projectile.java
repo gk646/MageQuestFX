@@ -19,7 +19,8 @@ import java.util.Iterator;
  */
 public class Projectile extends Entity {
 
-    public Point screenPosition, updateVector, mousePosition,endPosition;
+    public Point screenPosition, updateVector, mousePosition;
+    public int endPositionX, endPositionY;
     public final MainGame mainGame;
     public final MouseHandler mouseHandler;
 

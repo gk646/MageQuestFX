@@ -6,6 +6,7 @@ import main.system.Multiplayer;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.Color;
@@ -24,8 +25,13 @@ public class UI implements ActionListener, ChangeListener {
     final MainGame mg;
     public Font maruMonica;
     public int commandNum = 0;
-    private boolean once = false;
+    private boolean once= false, onceSecond= false;
+    JPanel sWindow;
     private BufferedImage playerUI;
+    public DragListener dragListener;
+    //public SkilltreeWindow skillTree;
+
+
     public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(0xCAC0CBDC, true), darkBackground = new Color(90, 105, 136);
 
     public UI(MainGame mainGame) {
@@ -38,6 +44,8 @@ public class UI implements ActionListener, ChangeListener {
             throw new RuntimeException(e);
         }
         getUIImage();
+        this.dragListener = new DragListener();
+        //skillTree = new SkilltreeWindow();
     }
 
     public void draw(Graphics2D g2) {
@@ -50,11 +58,14 @@ public class UI implements ActionListener, ChangeListener {
             drawOptions();
         } else if (mg.gameState == mg.titleState) {
             drawTitleScreen();
+        } else if (mg.gameState == mg.talentState) {
+            drawTalentTree();
         }
 
     }
 
     private void drawTitleScreen() {
+
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
@@ -106,6 +117,7 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     private void drawGameUI() {
+
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setColor(new Color(0xFF0044));
@@ -117,7 +129,6 @@ public class UI implements ActionListener, ChangeListener {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
         g2.drawString((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
-
     }
 
     public void drawOptions() {
@@ -158,10 +169,19 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
+    public void drawTalentTree() {
+        if (!onceSecond) {
+            Runner.skillTree.setFocusable(true);
+            onceSecond = true;
+        }
+        Runner. skillTree.setVisible(true);
+    }
+
     public int getXForCenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return MainGame.SCREEN_WIDTH / 2 - length / 2;
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

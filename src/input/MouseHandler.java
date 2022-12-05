@@ -9,6 +9,7 @@ public class MouseHandler implements MouseListener {
     public boolean mouse1Pressed, mouse2Pressed;
     public Point mouse1Position, mouse2Position;
     public final MotionHandler motionHandler;
+    public static MouseEvent pressed;
 
     public MouseHandler(MotionHandler motionHandler) {
         this.motionHandler = motionHandler;
@@ -29,6 +30,7 @@ public class MouseHandler implements MouseListener {
             mouse2Pressed = true;
             mouse2Position = new Point(e.getX(), e.getYOnScreen());
         }
+        pressed = e;
     }
 
     @Override
