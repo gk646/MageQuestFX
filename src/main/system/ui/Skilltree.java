@@ -30,7 +30,7 @@ public class Skilltree {
     private JButton button23;
     private JButton button24;
     private JButton button25;
-    private JButton button26;
+    private JButton skill1Button;
     private JButton button27;
     private JButton button28;
     private JButton button29;
