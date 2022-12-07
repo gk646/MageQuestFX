@@ -22,6 +22,9 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
         //TITLE SCREEN
         char code = e.getKeyChar();
+        if(code == 'f'){
+            System.out.println("F");
+        }
         if (code == 'G') {
             mg.ENTITIES.add(new Enemy(mg, 2500, 2600, 15));
         }

@@ -28,8 +28,8 @@ public class MainGame extends JPanel implements Runnable {
 
     //----------SCREEN SETTINGS---------------
     public static double FRAMES_PER_SECOND = 120;
-    public static final int SCREEN_WIDTH = 1920;
-    public static final int SCREEN_HEIGHT = 1080;
+    public static int SCREEN_WIDTH = 1920;
+    public static int SCREEN_HEIGHT = 1080;
 
 
     //---------VARIABLES----------
@@ -73,7 +73,9 @@ public class MainGame extends JPanel implements Runnable {
     /**
      * Main game loop class
      */
-    public MainGame() {
+    public MainGame(int width, int height) {
+        SCREEN_WIDTH = width;
+        SCREEN_HEIGHT = height;
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
