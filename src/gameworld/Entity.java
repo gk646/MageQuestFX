@@ -16,19 +16,14 @@ import java.util.ConcurrentModificationException;
  * Main inheritable class for all game world entity's
  */
 public class Entity {
-    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY;
-
-    public int movementSpeed;
-    public int health;
-    public int maxHealth;
-    public int hpBarCounter;
+    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter;
+    public int nextCol1, nextRow1, nextCol2, nextRow2, nextCol3, nextRow3, nextCol4, nextRow4;
     public MainGame mainGame;
     public BufferedImage up1;
-
     public String direction;
     public Rectangle collisionBox;
-    public boolean initializeEnemies, hpBarOn, onPath;
-    public boolean collisionUp, collisionDown, collisionLeft, collisionRight, dead;
+    public boolean initializeEnemies, hpBarOn, onPath, collisionUp, collisionDown, collisionLeft, collisionRight, dead;
+
 
     public Entity(MainGame mainGame) {
 
@@ -40,10 +35,9 @@ public class Entity {
         int startCol = (worldX + collisionBox.x) / mainGame.tileSize;
         int starRow = (worldY + collisionBox.y) / mainGame.tileSize;
         mainGame.pathFinder.setNodes(startCol, starRow, goalCol, goalRow);
-        if(startCol == goalCol && starRow == goalRow ){
+        if (startCol == goalCol && starRow == goalRow) {
 
-        }
-        else if(mainGame.pathFinder.search()) {
+        } else if (mainGame.pathFinder.search()) {
 
             int nextX = mainGame.pathFinder.pathList.get(0).col * mainGame.tileSize;
             int nextY = mainGame.pathFinder.pathList.get(0).row * mainGame.tileSize;
@@ -64,8 +58,7 @@ public class Entity {
                 if (enLeftX > nextX) {
                     //direction = "left";
                     worldX -= movementSpeed;
-                }
-                if (enLeftX < nextX) {
+                } else if (enLeftX < nextX) {
                     //direction = "right";
                     worldX += movementSpeed;
                 }
@@ -89,13 +82,86 @@ public class Entity {
                 worldY += movementSpeed;
 
             }
-
-            int nextCol = mainGame.pathFinder.pathList.get(0).col;
-            int nextRow = mainGame.pathFinder.pathList.get(0).row;
-            if (nextCol == goalCol && nextRow == goalRow) {
+            nextCol1 = mainGame.pathFinder.pathList.get(0).col;
+            nextRow1 = mainGame.pathFinder.pathList.get(0).row;
+            if (mainGame.pathFinder.pathList.size() >= 2) {
+                nextCol2 = mainGame.pathFinder.pathList.get(1).col;
+                nextRow2 = mainGame.pathFinder.pathList.get(1).row;
+            }
+            if (mainGame.pathFinder.pathList.size() >= 3) {
+                nextCol3 = mainGame.pathFinder.pathList.get(2).col;
+                nextRow3 = mainGame.pathFinder.pathList.get(2).row;
+            }
+            if (mainGame.pathFinder.pathList.size() >= 4) {
+                nextCol4 = mainGame.pathFinder.pathList.get(3).col;
+                nextRow4 = mainGame.pathFinder.pathList.get(3).row;
+            }
+            if (nextCol1 == goalCol && nextRow1 == goalRow) {
                 onPath = false;
             }
         }
+    }
+
+    public void trackPath() {
+        int nextX = nextCol1 * mainGame.tileSize;
+        int nextY = nextRow1 * mainGame.tileSize;
+        if (worldX / mainGame.tileSize == nextCol1 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow1 * mainGame.tileSize) {
+            nextX = nextCol2 * mainGame.tileSize;
+            nextY = nextRow2 * mainGame.tileSize;
+            if (worldX / mainGame.tileSize == nextCol2 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow2 * mainGame.tileSize) {
+                nextX = nextCol3 * mainGame.tileSize;
+                nextY = nextRow3 * mainGame.tileSize;
+                if (worldX / mainGame.tileSize == nextCol3 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow3 * mainGame.tileSize) {
+                    nextX = nextCol4 * mainGame.tileSize;
+                    nextY = nextRow4 * mainGame.tileSize;
+                }
+            }
+        }
+
+        int enLeftX = worldX + collisionBox.x;
+        int enRightX = worldX + collisionBox.x + collisionBox.width;
+        int enTopY = worldY + collisionBox.y;
+        int enBottomY = worldY + collisionBox.y + collisionBox.height;
+
+        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+            // direction = "up";
+            worldY -= movementSpeed;
+        } else if (enTopY < nextX && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+            //direction = "down";
+            worldY += movementSpeed;
+        } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
+            if (enLeftX > nextX) {
+                //direction = "left";
+                worldX -= movementSpeed;
+            } else if (enLeftX < nextX) {
+                //direction = "right";
+                worldX += movementSpeed;
+            }
+        } else if (enTopY > nextY && enLeftX > nextX) {
+            //direction = "up";
+            worldY -= movementSpeed;
+            //collision?
+
+        } else if (enTopY > nextY && enLeftX < nextX) {
+            //collision?
+            //direction = "up";
+            worldY -= movementSpeed;
+        } else if (enTopY < nextY && enLeftX > nextX) {
+            //collision?
+            //direction = "down";
+            worldY += movementSpeed;
+
+        } else if (enTopY < nextY && enLeftX < nextX) {
+            //collision?
+            //direction = "down";
+            worldY += movementSpeed;
+
+        }
+        /*if (nextCol1 == goalCol && nextRow1 == goalRow) {
+                onPath = false;
+            }
+
+         */
     }
 
     /**

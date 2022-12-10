@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public class Enemy extends Entity {
     private BufferedImage enemyImage;
+    private int searchTicks;
 
     /**
      * Main Enemy class
@@ -38,20 +39,26 @@ public class Enemy extends Entity {
         this.collisionBox = new Rectangle(6, 6, 42, 42);
         this.onPath = true;
         getDisplayImage();
+        this.searchTicks = 60;
     }
 
     public void update() {
-
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (worldX / mainGame.tileSize != mainGame.player.worldX / mainGame.tileSize && worldY / mainGame.tileSize != mainGame.player.worldY / mainGame.tileSize) {
+        if (((worldX / mainGame.tileSize) != (mainGame.player.worldX / mainGame.tileSize)) ||(
+                (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
             onPath = true;
+            System.out.println(true);
         }
-        if (onPath) {
+        if (onPath && searchTicks >= Math.random()*30) {
             int goalCol = mainGame.player.worldX / mainGame.tileSize;
             int goalRow = mainGame.player.worldY / mainGame.tileSize;
             searchPath(goalCol, goalRow);
+            searchTicks  = 0;
+        }else if(onPath){
+            trackPath();
         }
+        searchTicks ++;
     }
 
     public void draw(Graphics2D g2) {

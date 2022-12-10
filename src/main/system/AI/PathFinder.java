@@ -127,20 +127,24 @@ public class PathFinder {
 
             currentNode = openList.get(bestNodesIndex);
 
-            if(currentNode == goalNode){
+            if (currentNode == goalNode) {
                 goalReached = true;
                 trackPath();
             }
         }
         return true;
     }
-    public void trackPath(){
-        Node current = goalNode;
 
-        while(current != startNode){
-            pathList.add(0,current);
+    public void trackPath() {
+        Node current = goalNode;
+        int counter = 0;
+        while (current != startNode) {
+            pathList.add(counter,current);
             current = current.parent;
+            counter++;
         }
+        counter = 0;
+        // System.out.println(pathList.size());
     }
 
     public void openNode(Node node) {
