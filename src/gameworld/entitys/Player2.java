@@ -1,5 +1,6 @@
 package gameworld.entitys;
 
+import com.sun.tools.javac.Main;
 import gameworld.Entity;
 import main.MainGame;
 import main.system.Utilities;
@@ -16,18 +17,14 @@ public class Player2 extends Entity {
 
     public int screenX;
     public int screenY;
-    public static Point startingPoint;
     private BufferedImage player2;
 
     public Player2(MainGame mainGame) {
         super(mainGame);
         //Setting default values
-        worldX = startingPoint.x;
-        worldY = startingPoint.y;
-        screenX = worldX;
-        screenY = worldY;
         getPlayerImage();
-
+        worldX = 1;
+        worldY = 1;
         this.entityHeight = 48;
         this.entityWidth = 48;
 
@@ -54,8 +51,10 @@ public class Player2 extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(player2, screenX + startingPoint.x - mainGame.player.worldX, screenY + startingPoint.y - mainGame.player.worldY, 48, 48, null);
+        g2.drawImage(player2, worldX - mainGame.player.worldX +  MainGame.SCREEN_WIDTH / 2 - 24 , worldY- mainGame.player.worldY + MainGame.SCREEN_HEIGHT/2 -24 , 48, 48, null);
+
     }
+
 
 }
 

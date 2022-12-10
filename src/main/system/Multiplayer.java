@@ -2,6 +2,7 @@ package main.system;
 
 import gameworld.Entity;
 import gameworld.entitys.Enemy;
+import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
 import main.MainGame;
 
@@ -70,8 +71,6 @@ public class Multiplayer {
             //System.out.println(outputString);
             Multiplayer.outputStream.writeUTF(outputString.toString());
             index = 10;
-            player2.screenX = player2.worldX - 1440 - 24;
-            player2.screenY = player2.worldY - 1860 - 24;
 
 
         } catch (IOException e) {
