@@ -32,7 +32,7 @@ public class Enemy extends Entity {
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = 4;
+        movementSpeed = 3;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
@@ -45,20 +45,19 @@ public class Enemy extends Entity {
     public void update() {
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (((worldX / mainGame.tileSize) != (mainGame.player.worldX / mainGame.tileSize)) ||(
+        if (((worldX / mainGame.tileSize) != (mainGame.player.worldX / mainGame.tileSize)) || (
                 (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
             onPath = true;
-            System.out.println(true);
         }
-        if (onPath && searchTicks >= Math.random()*30) {
+        if (onPath && searchTicks >= Math.random() * 30) {
             int goalCol = mainGame.player.worldX / mainGame.tileSize;
             int goalRow = mainGame.player.worldY / mainGame.tileSize;
             searchPath(goalCol, goalRow);
-            searchTicks  = 0;
-        }else if(onPath){
+            searchTicks = 0;
+        } else if (onPath) {
             trackPath();
         }
-        searchTicks ++;
+        searchTicks++;
     }
 
     public void draw(Graphics2D g2) {

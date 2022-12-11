@@ -19,7 +19,7 @@ public class WorldRender {
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
-        this.tileStorage = new Tile[30];
+        this.tileStorage = new Tile[50];
         getTileImage();
         World.setWorldData();
 
@@ -38,15 +38,55 @@ public class WorldRender {
     }
 
     private void getTileImage() {
+        //GRASS
         setup(1, "grass01.png", false);
         setup(2, "grass02.png", false);
         setup(3, "grass03.png", false);
         setup(4, "grass04.png", false);
-        setup(14, "grass01.png", true);
+
+        //WATER
+        setup(5, "water05.png", true);
+        setup(6, "water06.png", true);
+        setup(7, "water07.png", true);
+        //GRASS
+        setup(14, "grass14.png", false);
         setup(15, "grass15.png", false);
-        setup(16, "grass01.png", true);
+        setup(16, "grass16.png", false);
+        setup(17, "grass17.png", false);
+        //WATER
+        setup(18, "water18.png", true);
+        setup(19, "water19.png", true);
+        setup(20, "water20.png", true);
+        //setup(21, "water.png", false);
+        //setup(22, "grass22.png", false);
+        //setup(24, "grass24.png", false);
+
+        //GRASS
+        setup(27, "grass27.png", false);
+        setup(28, "grass27.png", false);
         setup(28, "grass28.png", false);
-        setup(29, "grass01.png", true);
+        setup(29, "grass29.png", false);
+        setup(30, "grass30.png", false);
+
+        //WATER
+        setup(31, "water31.png", true);
+        setup(32, "water32.png", true);
+        setup(33, "water33.png", true);
+
+        /*
+        setup(14, "grass14.png", false);
+
+        setup(2, "grass02.png", false);
+        setup(3, "grass03.png", false);
+        setup(4, "grass04.png", false);
+        setup(14, "grass14.png", false);
+        setup(15, "grass15.png", false);
+        setup(17, "grass17.png", false);
+        setup(16, "grass16.png", false);
+        setup(28, "grass28.png", false);
+        setup(29, "grass29.png", false);
+
+         */
 
 
     }
