@@ -8,7 +8,7 @@ I took some inspiration from his implementation but started to develop my own id
 
 ## FEATURES:  
 ### Multiplayer:  
-You can start the same programm twice on the same pc or different PC's ( in the same network) and play together!  
+You can start the same programm twice on the same PC (localhost) or different PC's ( in the same network) and play together!  
 The host need to press c + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press c + f.  
 I used java sockets with a static port (60069).  
 I didnt yet update it to work correctly with the newest pathfinding updates.  
