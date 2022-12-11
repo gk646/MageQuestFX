@@ -22,8 +22,22 @@ D - RIGHT
 
 ## Combat:
 
+Left Mous Button - Primary Fire ( 1 Damage)  
+Right Mouse Button - Secondary Fire ( 5 Damage)  
+1 - Ability 1 ( 5 Damage)  
 
-Left-/Right- MouseButtons to shoot
+## Graphics:  
 
-no jar yet
+Most of the "Pixel Art" i made myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege.  
+
+
+## Roadmap:  
+
+Level system  
+skills / skill pane  
+dropped items  
+inventory   
+npcs / bartering  
+
+
 
