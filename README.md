@@ -1,4 +1,4 @@
-# Mage Quest_2d
+# Mage Quest_2D
 
 Welcome to Mage Quest_2D my second Java game project!
 
