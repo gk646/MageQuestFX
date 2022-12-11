@@ -1,9 +1,12 @@
 # Mage Quest_2D
 
 Welcome to Mage Quest_2D my second Java game project!
+Now with playable .jar!  
 
 Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which allowed me to start initially.  
 I took some inspiration from his implementation but started to develop my own ideas early on. That said for example the pathfinding is more heavily copied and only a modified a bit.  
+
+
 
 
 ## FEATURES:  
