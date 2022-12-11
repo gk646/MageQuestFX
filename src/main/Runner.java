@@ -70,7 +70,9 @@ public class Runner implements ActionListener {
         window.setVisible(true);
         mainGame.startGameThread();
     }
-
+ /* TODO: 11.12.2022  make pathfinding respect collision
+    TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
+  */
     @Override
     public void actionPerformed(ActionEvent e) {
 
