@@ -69,7 +69,7 @@ public class UI implements ActionListener, ChangeListener {
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
-        String text = "Title Screen";
+        String text = "Mage Quest_2D";
         int x = getXForCenteredText(text);
         int y = 48 * 3;
 
@@ -106,7 +106,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.1.1";
+        text = "1.1.2";
         x = 150;
         y = 900;
         g2.drawString(text, x, y);

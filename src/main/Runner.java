@@ -30,7 +30,7 @@ public class Runner implements ActionListener {
     public static void main(String[] args) {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        window.setTitle("Game");
+        window.setTitle("Mage Quest_2D");
 
         //Fullscreen
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
