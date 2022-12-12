@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class Enemy extends Entity {
+public class Grunt extends Entity {
     private BufferedImage enemyImage;
     private int searchTicks;
 
@@ -24,7 +24,7 @@ public class Enemy extends Entity {
      * @param worldY    coordinates Y
      * @param maxHealth max amount of health
      */
-    public Enemy(MainGame mainGame, int worldX, int worldY, int maxHealth) {
+    public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth) {
         super(mainGame);
 
         //Setting default values
@@ -50,14 +50,15 @@ public class Enemy extends Entity {
             onPath = true;
         }
         if (onPath && searchTicks >= Math.random() * 30) {
-            int goalCol = mainGame.player.worldX / mainGame.tileSize;
-            int goalRow = mainGame.player.worldY / mainGame.tileSize;
+            int goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            int goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
             searchPath(goalCol, goalRow);
             searchTicks = 0;
         } else if (onPath) {
             trackPath();
         }
         searchTicks++;
+
     }
 
     public void draw(Graphics2D g2) {

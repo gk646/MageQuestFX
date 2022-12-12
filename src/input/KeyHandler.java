@@ -1,9 +1,8 @@
 package input;
 
-import gameworld.entitys.Enemy;
+import gameworld.entitys.Grunt;
 import main.MainGame;
 import main.Runner;
-import main.system.ui.SkilltreeWindow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,7 +25,7 @@ public class KeyHandler implements KeyListener {
             System.out.println("F");
         }
         if (code == 'G') {
-            mg.ENTITIES.add(new Enemy(mg, 2500, 2600, 15));
+            mg.ENTITIES.add(new Grunt(mg, 2500, 2600, 15));
         }
         if (mg.gameState == mg.titleState) {
             if (code == ('w')) {
