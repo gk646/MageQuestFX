@@ -137,14 +137,10 @@ public class PathFinder {
 
     public void trackPath() {
         Node current = goalNode;
-        int counter = 0;
         while (current != startNode) {
-            pathList.add(counter,current);
+            pathList.add(0, current);
             current = current.parent;
-            counter++;
         }
-        counter = 0;
-        // System.out.println(pathList.size());
     }
 
     public void openNode(Node node) {

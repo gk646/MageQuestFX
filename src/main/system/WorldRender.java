@@ -5,6 +5,7 @@ import gameworld.tiles.Tile;
 import main.MainGame;
 
 import javax.imageio.ImageIO;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class WorldRender {
     public static Point worldSize;
     public final Tile[] tileStorage;
     final MainGame mainGame;
+    private boolean drawPath = true;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
@@ -117,12 +119,20 @@ public class WorldRender {
                 worldCol = (mainGame.player.worldX / 48) - 20;
                 worldRow++;
             }
-
-
         }
+        if (drawPath) {
+            g2.setColor((new Color(255, 0, 0, 70)));
 
-
+            for (int i = 0; i < mainGame.pathFinder.pathList.size(); i++) {
+                int worldX = mainGame.pathFinder.pathList.get(i).col * mainGame.tileSize;
+                int worldY = mainGame.pathFinder.pathList.get(i).row * mainGame.tileSize;
+                int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
+                int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
+                g2.fillRect(screenX, screenY, mainGame.tileSize, mainGame.tileSize);
+            }
+        }
     }
+
 
 }
 

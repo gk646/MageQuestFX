@@ -54,6 +54,7 @@ public class Grunt extends Entity {
             int goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
             searchPath(goalCol, goalRow);
             searchTicks = 0;
+
         } else if (onPath) {
             trackPath();
         }

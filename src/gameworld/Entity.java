@@ -33,70 +33,16 @@ public class Entity {
 
     public void searchPath(int goalCol, int goalRow) {
         int startCol = (worldX + collisionBox.x) / mainGame.tileSize;
-        int starRow = (worldY + collisionBox.y) / mainGame.tileSize;
-        mainGame.pathFinder.setNodes(startCol, starRow, goalCol, goalRow);
-        if (startCol == goalCol && starRow == goalRow) {
+        int startRow = (worldY + collisionBox.y) / mainGame.tileSize;
+        mainGame.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+        if (startCol == goalCol && startRow == goalRow) {
 
         } else if (mainGame.pathFinder.search()) {
             int nextX = mainGame.pathFinder.pathList.get(0).col * mainGame.tileSize;
             int nextY = mainGame.pathFinder.pathList.get(0).row * mainGame.tileSize;
 
-            int enLeftX = worldX + collisionBox.x;
-            int enRightX = worldX + collisionBox.x + collisionBox.width;
-            int enTopY = worldY + collisionBox.y;
-            int enBottomY = worldY + collisionBox.y + collisionBox.height;
-            mainGame.collisionChecker.checkEntityAgainstTile(this);
-            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
-                // direction = "up";
-                worldY -= movementSpeed;
-            } else if (enTopY < nextX && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
-                //direction = "down";
-                worldY += movementSpeed;
-            } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
+            decideMovement(nextX, nextY);
 
-                if (enLeftX > nextX) {
-                    //direction = "left";
-                    worldX -= movementSpeed;
-                }
-                if (enLeftX < nextX) {
-                    //direction = "right";
-                    worldX += movementSpeed;
-                }
-            } else if (enTopY > nextY && enLeftX > nextX) {
-                //direction = "up";
-                if (collisionUp) {
-                    worldX -= movementSpeed;
-
-                } else {
-                    worldY -= movementSpeed;
-                }
-
-            } else if (enTopY > nextY && enLeftX < nextX) {
-                //direction = "up";
-
-                if (collisionUp) {
-                    worldX += movementSpeed;
-                }else{
-                    worldY -= movementSpeed;
-                }
-            } else if (enTopY < nextY && enLeftX > nextX) {
-                //direction = "down";
-
-                if (collisionDown) {
-                    worldX -= movementSpeed;
-                }else{
-                    worldY += movementSpeed;
-                }
-
-            } else if (enTopY < nextY && enLeftX < nextX) {
-                //direction = "down";
-
-                if (collisionDown) {
-                    worldX += movementSpeed;
-                }else{
-                    worldY += movementSpeed;
-                }
-            }
             nextCol1 = mainGame.pathFinder.pathList.get(0).col;
             nextRow1 = mainGame.pathFinder.pathList.get(0).row;
             if (mainGame.pathFinder.pathList.size() >= 2) {
@@ -120,76 +66,20 @@ public class Entity {
     public void trackPath() {
         int nextX = nextCol1 * mainGame.tileSize;
         int nextY = nextRow1 * mainGame.tileSize;
-        if (worldX / mainGame.tileSize == nextCol1 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow1 * mainGame.tileSize) {
+        if ((worldX + collisionBox.x) / mainGame.tileSize / mainGame.tileSize == nextCol1 * mainGame.tileSize && (worldY + collisionBox.y) / mainGame.tileSize / mainGame.tileSize == nextRow1 * mainGame.tileSize) {
+            System.out.println("hey");
             nextX = nextCol2 * mainGame.tileSize;
             nextY = nextRow2 * mainGame.tileSize;
-            if (worldX / mainGame.tileSize == nextCol2 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow2 * mainGame.tileSize) {
+            if ((worldX + collisionBox.x) / mainGame.tileSize / mainGame.tileSize == nextCol2 * mainGame.tileSize && (worldY + collisionBox.y) / mainGame.tileSize / mainGame.tileSize == nextRow2 * mainGame.tileSize) {
                 nextX = nextCol3 * mainGame.tileSize;
                 nextY = nextRow3 * mainGame.tileSize;
-                if (worldX / mainGame.tileSize == nextCol3 * mainGame.tileSize && worldY / mainGame.tileSize == nextRow3 * mainGame.tileSize) {
+                if ((worldX + collisionBox.x) / mainGame.tileSize / mainGame.tileSize == nextCol3 * mainGame.tileSize && (worldY + collisionBox.y) / mainGame.tileSize / mainGame.tileSize == nextRow3 * mainGame.tileSize) {
                     nextX = nextCol4 * mainGame.tileSize;
                     nextY = nextRow4 * mainGame.tileSize;
                 }
             }
         }
-
-        int enLeftX = worldX + collisionBox.x;
-        int enRightX = worldX + collisionBox.x + collisionBox.width;
-        int enTopY = worldY + collisionBox.y;
-        int enBottomY = worldY + collisionBox.y + collisionBox.height;
-
-        mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
-            // direction = "up";
-            worldY -= movementSpeed;
-        } else if (enTopY < nextX && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
-            //direction = "down";
-            worldY += movementSpeed;
-        } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
-
-            if (enLeftX > nextX) {
-                //direction = "left";
-                worldX -= movementSpeed;
-            }
-            if (enLeftX < nextX) {
-                //direction = "right";
-                worldX += movementSpeed;
-            }
-        } else if (enTopY > nextY && enLeftX > nextX) {
-            //direction = "up";
-            if (collisionUp) {
-                worldX -= movementSpeed;
-
-            } else {
-                worldY -= movementSpeed;
-            }
-
-        } else if (enTopY > nextY && enLeftX < nextX) {
-            //direction = "up";
-
-            if (collisionUp) {
-                worldX += movementSpeed;
-            }else{
-                worldY -= movementSpeed;
-            }
-        } else if (enTopY < nextY && enLeftX > nextX) {
-            //direction = "down";
-
-            if (collisionDown) {
-                worldX -= movementSpeed;
-            }else{
-                worldY += movementSpeed;
-            }
-
-        } else if (enTopY < nextY && enLeftX < nextX) {
-            //direction = "down";
-
-            if (collisionDown) {
-                worldX += movementSpeed;
-            }else{
-                worldY += movementSpeed;
-            }
-        }
+        decideMovement(nextX, nextY);
         /*if (nextCol1 == goalCol && nextRow1 == goalRow) {
                 onPath = false;
             }
@@ -200,6 +90,58 @@ public class Entity {
     /**
      * Only really updates enemy position
      */
+    private void decideMovement(int nextX, int nextY) {
+        int enLeftX = worldX + collisionBox.x;
+        int enRightX = worldX + collisionBox.x + collisionBox.width;
+        int enTopY = worldY + collisionBox.y;
+        int enBottomY = worldY + collisionBox.y + collisionBox.height;
+        collisionRight = false;
+        collisionLeft = false;
+        collisionDown = false;
+        collisionUp = false;
+        mainGame.collisionChecker.checkEntityAgainstTile(this);
+
+        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+            worldY -= movementSpeed;
+        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mainGame.tileSize) {
+            worldY += movementSpeed;
+        } else if (enTopY >= nextY && enBottomY < nextY + mainGame.tileSize) {
+            if (enLeftX > nextX) {
+                worldX -= movementSpeed;
+            }
+            if (enLeftX < nextX) {
+                worldX += movementSpeed;
+            }
+
+        } else if (enTopY > nextY && enLeftX > nextX) {
+            if (collisionUp) {
+                worldX -= movementSpeed;
+            } else {
+                worldY -= movementSpeed;
+            }
+
+        } else if (enTopY > nextY && enLeftX < nextX) {
+            if (collisionUp) {
+                worldX += movementSpeed;
+            } else {
+                worldY -= movementSpeed;
+            }
+        } else if (enTopY < nextY && enLeftX > nextX) {
+            if (collisionDown) {
+                worldX -= movementSpeed;
+            } else {
+                worldY += movementSpeed;
+            }
+        } else if (enTopY < nextY && enLeftX < nextX) {
+            if (collisionDown) {
+                worldX += movementSpeed;
+            } else {
+                worldY += movementSpeed;
+            }
+        }
+    }
+
+
     public void update() {
         try {
             if (!initializeEnemies) {
@@ -249,11 +191,7 @@ public class Entity {
 
     public void spawnEnemies() {
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12100, 12200, 99));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12200, 12200, 99));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12300, 12300, 99));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12400, 12400, 99));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12500, 12500, 99));
+
     }
 
 }
