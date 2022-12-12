@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class Grunt extends Entity {
     private BufferedImage enemyImage;
-    private int searchTicks;
+
 
     /**
      * Main Enemy class
@@ -49,14 +49,14 @@ public class Grunt extends Entity {
                 (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
             onPath = true;
         }
-        if (onPath && searchTicks >= Math.random() * 30) {
-            int goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
-            int goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
+        if (onPath && searchTicks >= Math.random() * 45) {
+            this.goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
             searchPath(goalCol, goalRow);
             searchTicks = 0;
 
         } else if (onPath) {
-            trackPath();
+            trackPath(goalCol, goalRow);
         }
         searchTicks++;
 

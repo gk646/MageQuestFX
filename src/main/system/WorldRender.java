@@ -5,7 +5,6 @@ import gameworld.tiles.Tile;
 import main.MainGame;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class WorldRender {
     public static Point worldSize;
     public final Tile[] tileStorage;
     final MainGame mainGame;
-    private boolean drawPath = true;
+    private boolean drawPath;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
@@ -74,61 +73,23 @@ public class WorldRender {
         setup(31, "water31.png", true);
         setup(32, "water32.png", true);
         setup(33, "water33.png", true);
-
-        /*
-        setup(14, "grass14.png", false);
-
-        setup(2, "grass02.png", false);
-        setup(3, "grass03.png", false);
-        setup(4, "grass04.png", false);
-        setup(14, "grass14.png", false);
-        setup(15, "grass15.png", false);
-        setup(17, "grass17.png", false);
-        setup(16, "grass16.png", false);
-        setup(28, "grass28.png", false);
-        setup(29, "grass29.png", false);
-
-         */
-
-
     }
 
     public void draw(Graphics2D g2) {
-
-
         int worldCol = (mainGame.player.worldX / 48) - 20;
         int worldRow = (mainGame.player.worldY / 48) - 12;
-        int endx = worldCol + 42;
-        int endy = worldRow + 25;
-
-
-        while (worldCol < endx && worldRow < endy) {
-            //reading out tile data
-            int tileNum = worldData[worldCol][worldRow];
-            //making world camera
-            int worldX = worldCol * 48;
-            int worldY = worldRow * 48;
-            //
-            int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
-            int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
-            //if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
-            g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
-            // }
-            worldCol++;
-            if (worldCol == endx) {
-                worldCol = (mainGame.player.worldX / 48) - 20;
-                worldRow++;
-            }
-        }
-        if (drawPath) {
-            g2.setColor((new Color(255, 0, 0, 70)));
-
-            for (int i = 0; i < mainGame.pathFinder.pathList.size(); i++) {
-                int worldX = mainGame.pathFinder.pathList.get(i).col * mainGame.tileSize;
-                int worldY = mainGame.pathFinder.pathList.get(i).row * mainGame.tileSize;
+        for (int i = worldCol; i < worldCol + 42; i++) {
+            for (int b = worldRow; b < worldRow + 25; b++) {
+                //reading out tile data
+                int tileNum = worldData[i][b];
+                //making world camera
+                int worldX = i * 48;
+                int worldY = b * 48;
+                //
                 int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
                 int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
-                g2.fillRect(screenX, screenY, mainGame.tileSize, mainGame.tileSize);
+                //if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
+                g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
             }
         }
     }
