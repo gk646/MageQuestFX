@@ -10,9 +10,8 @@ import input.MouseHandler;
 import main.system.AI.PathFinder;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
-import main.system.ui.DragListener;
-import main.system.ui.UI;
 import main.system.WorldRender;
+import main.system.ui.UI;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -42,6 +41,7 @@ public class MainGame extends JPanel implements Runnable {
     //Game thread
     public Thread gameThread;
 
+
     //---------Input-----------
 
     public final MotionHandler motionHandler = new MotionHandler();
@@ -55,7 +55,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int playState = 1;
     public final int optionState = 2;
     public final int talentState = 3;
-
+    public final int gameOver = 4;
 
 
     //---------System---------
@@ -96,41 +96,58 @@ public class MainGame extends JPanel implements Runnable {
         double timer = 0;
         // int fps = 0;
         //int logic_ticks = 0;
-        //double fpsCounter = 0;
+        // double fpsCounter = 0;
         long lastTime = System.nanoTime();
         double interval;
         float logicvsFPS = 1000000000 / 60f;
         double timeDifference;
+        //int repeats = 0;
+        Thread entityThread = new Thread(() -> {
+            long firstTimeGate1;
+            double timer1 = 0;
+            long lastTime1 = System.nanoTime();
+            double difference;
+
+            while (true) {
+                firstTimeGate1 = System.nanoTime();
+                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                lastTime1 = firstTimeGate1;
+                timer1 += difference;
+                if (timer1 >= 1) {
+                    entity.update();
+                    timer1 = 0;
+                }
+            }
+        });
+        entityThread.start();
         while (gameThread != null) {
             interval = 1000000000 / FRAMES_PER_SECOND;
             firstTimeGate = System.nanoTime();
             timeDifference = (firstTimeGate - lastTime) / interval;
             delta += timeDifference;
-            //fpsCounter += (firstTimeGate - lastTime);
+            // fpsCounter += (firstTimeGate - lastTime);
             timer += (firstTimeGate - lastTime) / logicvsFPS;
             lastTime = firstTimeGate;
-            //12677853 fps with optimized render
-            //18491828 fps with "old" render
-            //
             if (timer >= 1) {
                 update();
                 timer = 0;
                 //logic_ticks++;
-
             }
             if (delta >= 1) {
                 this.repaint();
                 // fps++;
                 delta--;
             }
-/*
+            /*
+            repeats++;
             if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks + " ");
+                System.out.println(fps + " " + logic_ticks + " "+repeats);
                 fpsCounter = 0;
                 fps = 0;
                 logic_ticks = 0;
             }
- */
+
+             */
         }
     }
 
@@ -153,9 +170,8 @@ public class MainGame extends JPanel implements Runnable {
                 multiplayer.updateMultiplayerInput();
             }
             projectile.update();
-            player.update();
-            entity.update();
 
+            player.update();
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerOutput();
             }
@@ -171,7 +187,6 @@ public class MainGame extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         //Debug
         long drawStart = System.nanoTime();
@@ -184,7 +199,7 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        } else if (gameState == titleState || gameState == titleOption|| gameState == talentState) {
+        } else if (gameState == titleState || gameState == titleOption || gameState == talentState) {
             ui.draw(g2);
         }
 

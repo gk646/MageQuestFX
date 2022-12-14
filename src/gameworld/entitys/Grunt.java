@@ -32,7 +32,7 @@ public class Grunt extends Entity {
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = 3;
+        movementSpeed = 2;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;

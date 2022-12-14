@@ -10,7 +10,6 @@ import main.MainGame;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ConcurrentModificationException;
-import java.util.Iterator;
 
 
 /**
@@ -31,7 +30,7 @@ public class Projectile extends Entity {
     }
 
     @Override
-    public synchronized void draw(Graphics2D g2) {
+    public void draw(Graphics2D g2) {
         for (Projectile projectile : mainGame.PROJECTILES) {
             projectile.draw(g2);
         }

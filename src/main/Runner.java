@@ -28,13 +28,16 @@ public class Runner implements ActionListener {
      * @author Lukas Gilch
      */
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.opengl", "true");
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Mage Quest_2D");
 
         //Fullscreen
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(),gE.getDefaultScreenDevice().getDisplayMode().getHeight());
+        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
+        window.setSize(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
+
         window.addKeyListener(new KeyHandler(mainGame));
         //gE.getDefaultScreenDevice().setFullScreenWindow(window);
         SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
@@ -70,9 +73,10 @@ public class Runner implements ActionListener {
         window.setVisible(true);
         mainGame.startGameThread();
     }
- /* TODO: 11.12.2022  make pathfinding respect collision
-    TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
-  */
+
+    /* TODO: 11.12.2022  make pathfinding respect collision
+       TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

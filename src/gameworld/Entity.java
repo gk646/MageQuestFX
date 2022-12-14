@@ -26,11 +26,8 @@ public class Entity {
 
 
     public Entity(MainGame mainGame) {
-
         this.mainGame = mainGame;
-
     }
-
 
     /**
      * Only really updates enemy position
@@ -43,8 +40,15 @@ public class Entity {
                 spawnEnemies();
                 initializeEnemies = true;
             }
+
             for (Entity entity : mainGame.ENTITIES) {
                 entity.update();
+                if(mainGame.collisionChecker.checkEntityAgainstEntity(mainGame.player, entity)){
+                    mainGame.player.health-=1;
+                    if(mainGame.player.health <= 0){
+                        mainGame.gameState = mainGame.gameOver;
+                    }
+                }
                 if (entity.hpBarCounter >= 600) {
                     entity.hpBarOn = false;
                     entity.hpBarCounter = 0;
@@ -57,10 +61,7 @@ public class Entity {
                 }
             }
         } catch (ConcurrentModificationException ignored) {
-
         }
-
-
     }
 
     /**
@@ -85,18 +86,6 @@ public class Entity {
     }
 
     public void spawnEnemies() {
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));

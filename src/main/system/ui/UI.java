@@ -6,7 +6,6 @@ import main.system.Multiplayer;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.Color;
@@ -25,12 +24,9 @@ public class UI implements ActionListener, ChangeListener {
     final MainGame mg;
     public Font maruMonica;
     public int commandNum = 0;
-    private boolean once= false, onceSecond= false;
-    JPanel sWindow;
+    private boolean once = false, onceSecond = false;
     private BufferedImage playerUI;
     public DragListener dragListener;
-    //public SkilltreeWindow skillTree;
-
 
     public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(0xCAC0CBDC, true), darkBackground = new Color(90, 105, 136);
 
@@ -117,7 +113,6 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     private void drawGameUI() {
-
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setColor(new Color(0xFF0044));
@@ -132,7 +127,6 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     public void drawOptions() {
-
         g2.setColor(lightBackgroundAlpha);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 59f));
@@ -169,12 +163,16 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
+    public void drawGameOver() {
+
+    }
+
     public void drawTalentTree() {
         if (!onceSecond) {
             Runner.skillTree.setFocusable(true);
             onceSecond = true;
         }
-        Runner. skillTree.setVisible(true);
+        Runner.skillTree.setVisible(true);
     }
 
     public int getXForCenteredText(String text) {
