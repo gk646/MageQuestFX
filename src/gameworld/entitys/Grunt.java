@@ -53,7 +53,10 @@ public class Grunt extends Entity {
 
         searchTicks++;
     }
-
+    public void updatePos(){
+        screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+    }
     public void draw(Graphics2D g2) {
         g2.drawImage(enemyImage, screenX, screenY, 48, 48, null);
     }
@@ -80,18 +83,14 @@ public class Grunt extends Entity {
             if (onPath && searchTicks >= Math.random() * 45) {
                 getNearestPlayerMultiplayer();
                 searchPath(goalCol, goalRow);
-                System.out.println(goalCol+" "+goalRow);
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);
             }
         } else {
             if (onPath && searchTicks >= Math.random() * 45) {
-                getNearestPlayerMultiplayer();
-                System.out.println(goalCol+" "+goalRow);
                 getNearestPlayer();
                 searchPath(goalCol, goalRow);
-                System.out.println("Normal "+goalCol+" "+goalRow);
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);

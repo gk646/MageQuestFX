@@ -28,7 +28,7 @@ public class Runner implements ActionListener {
      * @author Lukas Gilch
      */
     public static void main(String[] args) {
-        System.setProperty("sun.java2d.opengl", "true");
+      //System.setProperty("sun.java2d.opengl", "true");
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Mage Quest_2D");

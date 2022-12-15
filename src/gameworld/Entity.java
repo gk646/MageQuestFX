@@ -40,11 +40,38 @@ public class Entity {
                 spawnEnemies();
                 initializeEnemies = true;
             }
-
             for (Entity entity : mainGame.ENTITIES) {
                 entity.update();
                 if (mainGame.collisionChecker.checkEntityAgainstEntity(mainGame.player, entity)) {
-                    mainGame.player.health -= 1;
+                   // mainGame.player.health -= 1;
+                    if (mainGame.player.health <= 0) {
+                        mainGame.gameState = mainGame.gameOver;
+                    }
+                }
+                if (entity.hpBarCounter >= 600) {
+                    entity.hpBarOn = false;
+                    entity.hpBarCounter = 0;
+                }
+                if (entity.hpBarOn) {
+                    entity.hpBarCounter++;
+                }
+                if (entity.health <= 0) {
+                    mainGame.ENTITIES.remove(entity);
+                }
+            }
+        } catch (ConcurrentModificationException ignored) {
+        }
+    }
+    public void updatePos(){
+        try {
+            if (!initializeEnemies) {
+                spawnEnemies();
+                initializeEnemies = true;
+            }
+            for (Entity entity : mainGame.ENTITIES) {
+                entity.updatePos();
+                if (mainGame.collisionChecker.checkEntityAgainstEntity(mainGame.player, entity)) {
+                    // mainGame.player.health -= 1;
                     if (mainGame.player.health <= 0) {
                         mainGame.gameState = mainGame.gameOver;
                     }
@@ -86,6 +113,25 @@ public class Entity {
     }
 
     public void spawnEnemies() {
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
 
     }
@@ -205,11 +251,12 @@ public class Entity {
 
     public void getNearestPlayerMultiplayer() {
         if (Math.abs(mainGame.player.worldX - this.worldX + mainGame.player.worldY - this.worldY) < Math.abs(mainGame.player2.worldX - this.worldX + mainGame.player2.worldY - this.worldY)) {
-            this.goalCol = (mainGame.player2.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
-            this.goalRow = (mainGame.player2.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
-        } else {
             this.goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
             this.goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
+        } else {
+
+            this.goalCol = (mainGame.player2.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player2.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
         }
     }
 }

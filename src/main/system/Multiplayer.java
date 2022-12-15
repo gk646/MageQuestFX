@@ -70,8 +70,6 @@ public class Multiplayer {
             //System.out.println(outputString);
             Multiplayer.outputStream.writeUTF(outputString.toString());
             index = 10;
-
-
         } catch (IOException e) {
             throw new RuntimeException("failed");
         }

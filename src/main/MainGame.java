@@ -77,6 +77,7 @@ public class MainGame extends JPanel implements Runnable {
     public MainGame(int width, int height) {
         SCREEN_WIDTH = width;
         SCREEN_HEIGHT = height;
+
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
@@ -92,66 +93,91 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double delta = 0;
         long firstTimeGate;
-        double timer = 0;
-        // int fps = 0;
-        //int logic_ticks = 0;
-        // double fpsCounter = 0;
+        int fps = 0;
+        int logic_ticks = 0;
+        double fpsCounter = 0;
         long lastTime = System.nanoTime();
+        int repeats = 0;
+        double delta = 1;
         double interval;
-        float logicvsFPS = 1000000000 / 60f;
         double timeDifference;
-        //int repeats = 0;
-        Thread entityThread = new Thread(() -> {
+        double timer = 1;
+        startThreads();
+        float logicvsFPS = 1000000000f / 60;
+        while (gameThread != null) {
+            interval = 1000000000 / FRAMES_PER_SECOND;
+            firstTimeGate = System.nanoTime();
+            timeDifference = (firstTimeGate - lastTime) / interval;
+            delta += timeDifference;
+            fpsCounter += (firstTimeGate - lastTime);
+            timer += (firstTimeGate - lastTime) / logicvsFPS;
+            lastTime = firstTimeGate;
+            if (timer >= 1) {
+                //update();
+                timer = 0;
+                //logic_ticks++;
+            }
+            if (delta >= 1) {
+                //repaint();
+                // fps++;
+                delta--;
+            }
+
+            repeats++;
+            if (fpsCounter >= 1000000000) {
+                System.out.println(fps + " " + logic_ticks + " " + repeats);
+                fpsCounter = 0;
+                fps = 0;
+                logic_ticks = 0;
+            }
+        }
+    }
+
+    public void startThreads() {
+
+        Thread updateThread = new Thread(() -> {
+            float logicvsFPS = 1000000000 / 60f;
             long firstTimeGate1;
             double timer1 = 0;
-            long lastTime1 = System.nanoTime();
+            long lastTime1 = 0;
             double difference;
-
+            int counter = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
                 difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
                 lastTime1 = firstTimeGate1;
                 timer1 += difference;
                 if (timer1 >= 1) {
-                    entity.update();
+                    update();
+                    counter++;
                     timer1 = 0;
                 }
             }
         });
-        entityThread.start();
-        while (gameThread != null) {
-            interval = 1000000000 / FRAMES_PER_SECOND;
-            firstTimeGate = System.nanoTime();
-            timeDifference = (firstTimeGate - lastTime) / interval;
-            delta += timeDifference;
-            // fpsCounter += (firstTimeGate - lastTime);
-            timer += (firstTimeGate - lastTime) / logicvsFPS;
-            lastTime = firstTimeGate;
-            if (timer >= 1) {
-                update();
-                timer = 0;
-                //logic_ticks++;
-            }
-            if (delta >= 1) {
-                this.repaint();
-                // fps++;
-                delta--;
-            }
-            /*
-            repeats++;
-            if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks + " "+repeats);
-                fpsCounter = 0;
-                fps = 0;
-                logic_ticks = 0;
-            }
+        updateThread.start();
 
-             */
-        }
+
+        Thread drawThread = new Thread(() -> {
+            long firstTimeGate1;
+            double timer1 = 0;
+            long lastTime1 = System.nanoTime();
+            double difference;
+            double interval;
+            while (true) {
+                interval = 1000000000 / FRAMES_PER_SECOND;
+                firstTimeGate1 = System.nanoTime();
+                difference = (firstTimeGate1 - lastTime1) / interval;
+                lastTime1 = firstTimeGate1;
+                timer1 += difference;
+                if (timer1 >= 1) {
+                    this.repaint();
+                    timer1 = 0;
+                }
+            }
+        });
+        drawThread.start();
     }
-
 
     /**
      * Game loop update method
@@ -166,19 +192,23 @@ public class MainGame extends JPanel implements Runnable {
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayerServer();
             }
-
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerInput();
             }
             projectile.update();
+            if (!client) {
+                entity.update();
+            } else {
+                entity.updatePos();
+            }
 
             player.update();
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerOutput();
             }
         }
-
     }
+
 
     /**
      * repaint method
