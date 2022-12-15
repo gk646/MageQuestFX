@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class MainGame extends JPanel implements Runnable {
 
     //----------SCREEN SETTINGS---------------
-    public static double FRAMES_PER_SECOND = 120;
+    public static float FRAMES_PER_SECOND = 120;
     public static int SCREEN_WIDTH = 1920;
     public static int SCREEN_HEIGHT = 1080;
 
@@ -103,7 +103,6 @@ public class MainGame extends JPanel implements Runnable {
             double timer1 = 0;
             long lastTime1 = 0;
             double difference;
-            int counter = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
                 difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
@@ -111,7 +110,6 @@ public class MainGame extends JPanel implements Runnable {
                 timer1 += difference;
                 if (timer1 >= 1) {
                     update();
-                    counter++;
                     timer1 = 0;
                 }
             }
@@ -121,8 +119,8 @@ public class MainGame extends JPanel implements Runnable {
             long firstTimeGate1;
             double timer1 = 0;
             long lastTime1 = System.nanoTime();
-            double difference;
-            double interval;
+            float difference;
+            float interval;
             while (true) {
                 interval = 1000000000 / FRAMES_PER_SECOND;
                 firstTimeGate1 = System.nanoTime();
