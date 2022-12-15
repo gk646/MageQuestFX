@@ -49,17 +49,9 @@ public class Grunt extends Entity {
                 (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
             onPath = true;
         }
-        if (onPath && searchTicks >= Math.random() * 45) {
-            this.goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
-            this.goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
-            searchPath(goalCol, goalRow);
-            searchTicks = 0;
+        gruntMovement();
 
-        } else if (onPath) {
-            trackPath(goalCol, goalRow);
-        }
         searchTicks++;
-
     }
 
     public void draw(Graphics2D g2) {
@@ -83,4 +75,27 @@ public class Grunt extends Entity {
         return scaledImage;
     }
 
+    private void gruntMovement() {
+        if (mainGame.client) {
+            if (onPath && searchTicks >= Math.random() * 45) {
+                getNearestPlayerMultiplayer();
+                searchPath(goalCol, goalRow);
+                System.out.println(goalCol+" "+goalRow);
+                searchTicks = 0;
+            } else if (onPath) {
+                trackPath(goalCol, goalRow);
+            }
+        } else {
+            if (onPath && searchTicks >= Math.random() * 45) {
+                getNearestPlayerMultiplayer();
+                System.out.println(goalCol+" "+goalRow);
+                getNearestPlayer();
+                searchPath(goalCol, goalRow);
+                System.out.println("Normal "+goalCol+" "+goalRow);
+                searchTicks = 0;
+            } else if (onPath) {
+                trackPath(goalCol, goalRow);
+            }
+        }
+    }
 }

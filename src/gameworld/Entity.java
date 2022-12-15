@@ -43,9 +43,9 @@ public class Entity {
 
             for (Entity entity : mainGame.ENTITIES) {
                 entity.update();
-                if(mainGame.collisionChecker.checkEntityAgainstEntity(mainGame.player, entity)){
-                    mainGame.player.health-=1;
-                    if(mainGame.player.health <= 0){
+                if (mainGame.collisionChecker.checkEntityAgainstEntity(mainGame.player, entity)) {
+                    mainGame.player.health -= 1;
+                    if (mainGame.player.health <= 0) {
                         mainGame.gameState = mainGame.gameOver;
                     }
                 }
@@ -87,17 +87,7 @@ public class Entity {
 
     public void spawnEnemies() {
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+
     }
 
     private void decideMovement(int nextX, int nextY) {
@@ -200,6 +190,26 @@ public class Entity {
             onPath = false;
         } else {
             decideMovement(nextX, nextY);
+        }
+    }
+
+    public void getNearestPlayer() {
+        if (Math.abs(mainGame.player.worldX - this.worldX + mainGame.player.worldY - this.worldY) < Math.abs(mainGame.player2.worldX - this.worldX + mainGame.player2.worldY - this.worldY)) {
+            this.goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
+        } else {
+            this.goalCol = (mainGame.player2.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player2.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
+        }
+    }
+
+    public void getNearestPlayerMultiplayer() {
+        if (Math.abs(mainGame.player.worldX - this.worldX + mainGame.player.worldY - this.worldY) < Math.abs(mainGame.player2.worldX - this.worldX + mainGame.player2.worldY - this.worldY)) {
+            this.goalCol = (mainGame.player2.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player2.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
+        } else {
+            this.goalCol = (mainGame.player.worldX + mainGame.player.collisionBox.x) / mainGame.tileSize;
+            this.goalRow = (mainGame.player.worldY + mainGame.player.collisionBox.y) / mainGame.tileSize;
         }
     }
 }

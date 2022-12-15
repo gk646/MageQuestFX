@@ -36,6 +36,7 @@ public class MainGame extends JPanel implements Runnable {
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
     public int gameState, tileSize = 48;
     public String player2Information = "";
+    public boolean client = false;
 
 
     //Game thread
