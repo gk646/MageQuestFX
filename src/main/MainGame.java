@@ -77,7 +77,6 @@ public class MainGame extends JPanel implements Runnable {
     public MainGame(int width, int height) {
         SCREEN_WIDTH = width;
         SCREEN_HEIGHT = height;
-
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
@@ -97,8 +96,8 @@ public class MainGame extends JPanel implements Runnable {
     }
 
     public void startThreads() {
+        float logicvsFPS = 1000000000 / 60f;
         Thread updateThread = new Thread(() -> {
-            float logicvsFPS = 1000000000 / 60f;
             long firstTimeGate1;
             double timer1 = 0;
             long lastTime1 = 0;
@@ -128,12 +127,32 @@ public class MainGame extends JPanel implements Runnable {
                 lastTime1 = firstTimeGate1;
                 timer1 += difference;
                 if (timer1 >= 1) {
-                    this.repaint();
+                    repaint();
                     timer1 = 0;
                 }
             }
         });
         drawThread.start();
+        Thread playerAProjectileThread = new Thread(() -> {
+            long firstTimeGate1;
+            double timer1 = 0;
+            long lastTime1 = System.nanoTime();
+            float difference;
+            while (true) {
+                firstTimeGate1 = System.nanoTime();
+                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                lastTime1 = firstTimeGate1;
+                timer1 += difference;
+                if (timer1 >= 1) {
+                    player.update();
+                    projectile.update();
+                    entity.updatePos();
+                    timer1 = 0;
+                }
+            }
+        });
+        playerAProjectileThread.start();
+
     }
 
     /**
@@ -145,15 +164,12 @@ public class MainGame extends JPanel implements Runnable {
             if (keyHandler.debugFps && keyHandler.fpressed) {
                 multiplayer.startMultiplayerClient();
             }
-
             if (keyHandler.debugFps && keyHandler.multiplayer) {
                 multiplayer.startMultiplayerServer();
             }
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerInput();
             }
-            player.update();
-            projectile.update();
             if (!client) {
                 entity.update();
             } else {
@@ -164,8 +180,6 @@ public class MainGame extends JPanel implements Runnable {
             }
         }
     }
-
-
     /**
      * repaint method
      *
@@ -177,7 +191,6 @@ public class MainGame extends JPanel implements Runnable {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         //Debug
         long drawStart = System.nanoTime();
-
         //RENDER START
         if (gameState == playState || gameState == optionState) {
             wRender.draw(g2);

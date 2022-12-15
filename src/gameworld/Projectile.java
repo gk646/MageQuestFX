@@ -31,8 +31,11 @@ public class Projectile extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        for (Projectile projectile : mainGame.PROJECTILES) {
-            projectile.draw(g2);
+        try {
+            for (Projectile projectile : mainGame.PROJECTILES) {
+                projectile.draw(g2);
+            }
+        } catch (ConcurrentModificationException ignored) {
         }
     }
 
