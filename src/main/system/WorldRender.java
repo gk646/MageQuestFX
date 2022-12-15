@@ -16,14 +16,12 @@ public class WorldRender {
     public static Point worldSize;
     public final Tile[] tileStorage;
     final MainGame mainGame;
-    private boolean drawPath;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;
         this.tileStorage = new Tile[50];
         getTileImage();
         World.setWorldData();
-
     }
 
     private void setup(int index, String imagePath, boolean collision) {

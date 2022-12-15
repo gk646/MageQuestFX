@@ -2,7 +2,6 @@ package gameworld;
 
 
 import gameworld.entitys.Player;
-import gameworld.entitys.Player2;
 import gameworld.maps.OverWorld;
 import main.system.WorldRender;
 

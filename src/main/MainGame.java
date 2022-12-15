@@ -152,14 +152,13 @@ public class MainGame extends JPanel implements Runnable {
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerInput();
             }
+            player.update();
             projectile.update();
             if (!client) {
                 entity.update();
             } else {
                 entity.updatePos();
             }
-
-            player.update();
             if (multiplayer.multiplayerStarted) {
                 multiplayer.updateMultiplayerOutput();
             }
