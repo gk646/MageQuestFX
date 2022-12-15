@@ -23,6 +23,7 @@ public class Entity {
     public String direction;
     public Rectangle collisionBox;
     public boolean initializeEnemies, hpBarOn, onPath, collisionUp, collisionDown, collisionLeft, collisionRight, dead;
+    public BufferedImage enemyImage;
 
 
     public Entity(MainGame mainGame) {
@@ -142,20 +143,7 @@ public class Entity {
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
-        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+       /* mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
@@ -178,6 +166,19 @@ public class Entity {
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
+        mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 11));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
@@ -215,6 +216,8 @@ public class Entity {
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
         mainGame.ENTITIES.add(new Grunt(mainGame, 12000, 12100, 1));
+
+        */
 
     }
 

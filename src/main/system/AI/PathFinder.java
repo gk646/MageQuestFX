@@ -6,10 +6,10 @@ import main.MainGame;
 import java.util.ArrayList;
 
 public class PathFinder {
-    MainGame mg;
+    public final ArrayList<Node> pathList = new ArrayList<>();
     Node[][] nodes;
-    ArrayList<Node> openList = new ArrayList<>();
-    public ArrayList<Node> pathList = new ArrayList<>();
+    final MainGame mg;
+    final ArrayList<Node> openList = new ArrayList<>();
     Node startNode, goalNode, currentNode;
     boolean goalReached = false;
     int step = 0;

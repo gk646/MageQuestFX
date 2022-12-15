@@ -34,7 +34,8 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
-    public int gameState, tileSize = 48;
+    public final int tileSize = 48;
+    public int gameState;
     public String player2Information = "";
     public boolean client = false;
 

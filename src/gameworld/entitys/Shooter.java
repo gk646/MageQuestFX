@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class Grunt extends Entity {
+public class Shooter extends Entity {
+
+
     /**
      * Main Enemy class
      *
@@ -21,7 +23,7 @@ public class Grunt extends Entity {
      * @param worldY    coordinates Y
      * @param maxHealth max amount of health
      */
-    public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth) {
+    public Shooter(MainGame mainGame, int worldX, int worldY, int maxHealth) {
         super(mainGame);
 
         //Setting default values
@@ -29,12 +31,12 @@ public class Grunt extends Entity {
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = 2;
+        movementSpeed = 1;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
         this.collisionBox = new Rectangle(6, 6, 42, 42);
-        this.onPath = true;
+        this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
     }
@@ -46,7 +48,7 @@ public class Grunt extends Entity {
                 (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
             onPath = true;
         }
-        gruntMovement();
+        shooterMovement();
 
         searchTicks++;
     }
@@ -77,9 +79,9 @@ public class Grunt extends Entity {
         return scaledImage;
     }
 
-    private void gruntMovement() {
+    private void shooterMovement() {
         if (mainGame.client) {
-            if (onPath && searchTicks >= Math.random() * 45) {
+            if (onPath && searchTicks >= Math.random() * 55) {
                 getNearestPlayerMultiplayer();
                 searchPath(goalCol, goalRow);
                 searchTicks = 0;
@@ -87,7 +89,7 @@ public class Grunt extends Entity {
                 trackPath(goalCol, goalRow);
             }
         } else {
-            if (onPath && searchTicks >= Math.random() * 45) {
+            if (onPath && searchTicks >= Math.random() * 55) {
                 getNearestPlayer();
                 searchPath(goalCol, goalRow);
                 searchTicks = 0;

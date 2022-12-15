@@ -21,7 +21,10 @@ import java.util.Objects;
 public class Player extends Entity {
     public static Point startingPoint;
     public float mana, health;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary;
+    public final int maxMana;
+    public int cooldownOneSecond;
+    public int cooldownTwoSecond;
+    public int cooldownPrimary;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
 
