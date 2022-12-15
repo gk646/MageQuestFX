@@ -93,49 +93,10 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        long firstTimeGate;
-        int fps = 0;
-        int logic_ticks = 0;
-        double fpsCounter = 0;
-        long lastTime = System.nanoTime();
-        int repeats = 0;
-        double delta = 1;
-        double interval;
-        double timeDifference;
-        double timer = 1;
         startThreads();
-        float logicvsFPS = 1000000000f / 60;
-        while (gameThread != null) {
-            interval = 1000000000 / FRAMES_PER_SECOND;
-            firstTimeGate = System.nanoTime();
-            timeDifference = (firstTimeGate - lastTime) / interval;
-            delta += timeDifference;
-            fpsCounter += (firstTimeGate - lastTime);
-            timer += (firstTimeGate - lastTime) / logicvsFPS;
-            lastTime = firstTimeGate;
-            if (timer >= 1) {
-                //update();
-                timer = 0;
-                //logic_ticks++;
-            }
-            if (delta >= 1) {
-                //repaint();
-                // fps++;
-                delta--;
-            }
-
-            repeats++;
-            if (fpsCounter >= 1000000000) {
-                System.out.println(fps + " " + logic_ticks + " " + repeats);
-                fpsCounter = 0;
-                fps = 0;
-                logic_ticks = 0;
-            }
-        }
     }
 
     public void startThreads() {
-
         Thread updateThread = new Thread(() -> {
             float logicvsFPS = 1000000000 / 60f;
             long firstTimeGate1;
@@ -156,8 +117,6 @@ public class MainGame extends JPanel implements Runnable {
             }
         });
         updateThread.start();
-
-
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
             double timer1 = 0;
