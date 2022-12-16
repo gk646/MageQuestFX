@@ -1,6 +1,6 @@
 # Mage Quest_2D
 
-![alt text](https://github.com/gk646/Mage-Quest_2D/edit/master/README.md?raw=true)
+![alt text](https://github.com/gk646/Mage-Quest_2D/picture1.png?raw=true)
 
 Welcome to Mage Quest_2D my second Java game project!  
 Now with playable .jar!  
