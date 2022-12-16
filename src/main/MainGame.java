@@ -13,13 +13,8 @@ import main.system.Multiplayer;
 import main.system.WorldRender;
 import main.system.ui.UI;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -98,23 +93,7 @@ public class MainGame extends JPanel implements Runnable {
 
     public void startThreads() {
         float logicvsFPS = 1000000000 / 60f;
-        Thread updateThread = new Thread(() -> {
-            long firstTimeGate1;
-            double timer1 = 0;
-            long lastTime1 = 0;
-            double difference;
-            while (true) {
-                firstTimeGate1 = System.nanoTime();
-                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
-                lastTime1 = firstTimeGate1;
-                timer1 += difference;
-                if (timer1 >= 1) {
-                    update();
-                    timer1 = 0;
-                }
-            }
-        });
-        updateThread.start();
+
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
             double timer1 = 0;
@@ -134,7 +113,7 @@ public class MainGame extends JPanel implements Runnable {
             }
         });
         drawThread.start();
-        Thread playerAProjectileThread = new Thread(() -> {
+        Thread playerThread = new Thread(() -> {
             long firstTimeGate1;
             double timer1 = 0;
             long lastTime1 = System.nanoTime();
@@ -146,13 +125,66 @@ public class MainGame extends JPanel implements Runnable {
                 timer1 += difference;
                 if (timer1 >= 1) {
                     player.update();
-                    projectile.update();
                     entity.updatePos();
                     timer1 = 0;
                 }
             }
         });
-        playerAProjectileThread.start();
+        playerThread.start();
+        Thread ProjectileThread = new Thread(() -> {
+            long firstTimeGate1;
+            double timer1 = 0;
+            long lastTime1 = System.nanoTime();
+            float difference;
+            while (true) {
+                firstTimeGate1 = System.nanoTime();
+                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                lastTime1 = firstTimeGate1;
+                timer1 += difference;
+                if (timer1 >= 1) {
+
+                    timer1 = 0;
+                }
+            }
+        });
+        //ProjectileThread.start();
+        Thread updateThread = new Thread(() -> {
+            long firstTimeGate1;
+            double timer1 = 0;
+            long lastTime1 = 0;
+            double difference;
+            while (true) {
+                firstTimeGate1 = System.nanoTime();
+                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                lastTime1 = firstTimeGate1;
+                timer1 += difference;
+                if (timer1 >= 1) {
+                    if (gameState == playState) {
+                        if (keyHandler.debugFps && keyHandler.fpressed) {
+                            multiplayer.startMultiplayerClient();
+                        }
+                        if (keyHandler.debugFps && keyHandler.multiplayer) {
+                            multiplayer.startMultiplayerServer();
+                        }
+                        if (multiplayer.multiplayerStarted) {
+                            multiplayer.updateMultiplayerInput();
+                        }
+                        projectile.update();
+                        if (!client) {
+                            entity.update();
+                        } else {
+                            entity.updatePos();
+                        }
+                        if (multiplayer.multiplayerStarted) {
+                            multiplayer.updateMultiplayerOutput();
+                        }
+                    }
+                    timer1 = 0;
+                }
+            }
+        });
+        updateThread.start();
+
     }
 
     /**
@@ -160,25 +192,7 @@ public class MainGame extends JPanel implements Runnable {
      */
 
     public void update() {
-        if (gameState == playState) {
-            if (keyHandler.debugFps && keyHandler.fpressed) {
-                multiplayer.startMultiplayerClient();
-            }
-            if (keyHandler.debugFps && keyHandler.multiplayer) {
-                multiplayer.startMultiplayerServer();
-            }
-            if (multiplayer.multiplayerStarted) {
-                multiplayer.updateMultiplayerInput();
-            }
-            if (!client) {
-                entity.update();
-            } else {
-                entity.updatePos();
-            }
-            if (multiplayer.multiplayerStarted) {
-                multiplayer.updateMultiplayerOutput();
-            }
-        }
+
     }
 
     /**
