@@ -1,5 +1,7 @@
 # Mage Quest_2D
 
+![Screenshot](picture2.png)
+
 Welcome to Mage Quest_2D my second Java game project!  
 Now with playable .jar!  
 
@@ -27,11 +29,12 @@ D - RIGHT
 
 Left Mouse Button - Primary Fire (1 Damage)  
 Right Mouse Button - Secondary Fire (5 Damage)  
-1 - Ability 1 (5 Damage)  
+1 - Ability 1 (5 Damage) 
+2 - Ability 1 (about 60 Damage)  
 N - opens talent window (stub for now)  
 ## Graphics:  
 
-Most of the "Pixel Art" i made myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege.  
+I made most of the environment Pixel Art myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege and other sources for some abilities etc.  
 
 
 ## Roadmap:  
