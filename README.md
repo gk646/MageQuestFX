@@ -34,7 +34,7 @@ Right Mouse Button - Secondary Fire (5 Damage)
 N - opens talent window (stub for now)  
 ## Graphics:  
 
-Most of the "Pixel Art" i made myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege.  
+I made most of the environment Pixel Art myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege and other sources for some abilities etc.  
 
 
 ## Roadmap:  
