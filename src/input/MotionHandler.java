@@ -14,7 +14,7 @@ public class MotionHandler implements MouseMotionListener {
     /**
      * Mouse position as Point
      */
-    public Point mousePosition;
+    public Point mousePosition, lastMousePosition = (new Point(500, 500));
 
     public MotionHandler() {
     }
@@ -25,9 +25,11 @@ public class MotionHandler implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         mousePosition = new Point(e.getX(), e.getY());
+        lastMousePosition = e.getLocationOnScreen();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        lastMousePosition = e.getLocationOnScreen();
     }
 }

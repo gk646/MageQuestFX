@@ -102,7 +102,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.1.2";
+        text = "1.1.3";
         x = 150;
         y = 900;
         g2.drawString(text, x, y);

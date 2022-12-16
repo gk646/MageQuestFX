@@ -2,9 +2,11 @@ package gameworld.entitys;
 
 import gameworld.Entity;
 import gameworld.projectiles.Ability1;
+import gameworld.projectiles.Lightning;
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
 import input.KeyHandler;
+import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
@@ -21,15 +23,14 @@ import java.util.Objects;
 public class Player extends Entity {
     public static Point startingPoint;
     public float mana, health;
-    public final int maxMana;
-    public int cooldownOneSecond;
-    public int cooldownTwoSecond;
-    public int cooldownPrimary;
+    public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightining;
 
-    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler) {
+    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
+        this.motionHandler = motionHandler;
         //-------VALUES-----------
         movementSpeed = 4;
         this.maxHealth = 10;
@@ -50,10 +51,23 @@ public class Player extends Entity {
         this.mouseHandler = mouseHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
+
     }
 
-
     public void update() {
+        movement();
+        skills();
+    }
+
+    public void draw(Graphics2D g2) {
+        g2.drawImage(entityImage1, screenX, screenY, 48, 48, null);
+    }
+
+    public void getPlayerImage() {
+        entityImage1 = setup("Mage_down01.png");
+    }
+
+    private void movement() {
         direction = "";
         if (keyHandler.leftPressed) {
             direction += "left";
@@ -99,6 +113,9 @@ public class Player extends Entity {
                 worldX += movementSpeed;
             }
         }
+    }
+
+    private void skills() {
         if (this.mouseHandler.mouse1Pressed && cooldownPrimary == 10) {
             mainGame.PROJECTILES.add(new PrimaryFire(mainGame, mouseHandler));
             cooldownPrimary = 0;
@@ -115,13 +132,18 @@ public class Player extends Entity {
             mana -= 10;
             cooldownTwoSecond = 0;
         }
+        if (keyHandler.TwoPressed && mana >= 20 && cdLightining == 20) {
+            mainGame.PROJECTILES.add(new Lightning(mainGame, mouseHandler, motionHandler));
+            mana -= 0;
+            cdLightining = 0;
+        }
         if (mana < maxMana) {
             mana += 0.05;
         }
         if (health < maxHealth) {
             health += 0.002;
         }
-        if(cooldownPrimary <10){
+        if (cooldownPrimary < 10) {
             cooldownPrimary++;
         }
         if (cooldownOneSecond < 60) {
@@ -130,18 +152,9 @@ public class Player extends Entity {
         if (cooldownTwoSecond < 120) {
             cooldownTwoSecond++;
         }
-    }
-
-
-    public void draw(Graphics2D g2) {
-        g2.drawImage(entityImage1, screenX, screenY, 48, 48, null);
-
-    }
-
-    public void getPlayerImage() {
-        entityImage1 = setup("Mage_down01.png");
-
-
+        if (cdLightining < 20) {
+            cdLightining++;
+        }
     }
 
     private BufferedImage setup(String imagePath) {
@@ -156,5 +169,4 @@ public class Player extends Entity {
         }
         return scaledImage;
     }
-
 }

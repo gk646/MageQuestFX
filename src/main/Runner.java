@@ -16,7 +16,6 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.Objects;
 
-
 public class Runner {
     public static JFrame window;
     public static JTextField textField;
@@ -31,7 +30,6 @@ public class Runner {
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Mage Quest_2D");
-
         //Fullscreen
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
         MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
@@ -70,9 +68,7 @@ public class Runner {
         window.pack();
         window.setVisible(true);
         mainGame.startGameThread();
-
     }
-
     /* TODO: 11.12.2022  make pathfinding respect collision
        TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
      */

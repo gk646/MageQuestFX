@@ -65,7 +65,7 @@ public class MainGame extends JPanel implements Runnable {
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final WorldRender wRender = new WorldRender(this);
     public final Entity entity = new Entity(this);
-    public final Player player = new Player(this, keyHandler, mouseHandler);
+    public final Player player = new Player(this, keyHandler, mouseHandler, motionHandler);
     public final Player2 player2 = new Player2(this);
     final Projectile projectile = new Projectile(this, mouseHandler);
     final Multiplayer multiplayer = new Multiplayer(this, player2);

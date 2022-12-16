@@ -2,6 +2,7 @@ package gameworld;
 
 
 import gameworld.projectiles.Ability1;
+import gameworld.projectiles.Lightning;
 import gameworld.projectiles.PrimaryFire;
 import gameworld.projectiles.SecondaryFire;
 import input.MouseHandler;
@@ -50,13 +51,17 @@ public class Projectile extends Entity {
                         // Update the entity's health based on the type of projectile
                         if (projectile instanceof PrimaryFire) {
                             entity.health -= 1;
+                            projectile.dead = true;
                         } else if (projectile instanceof SecondaryFire) {
                             entity.health -= 5;
+                            projectile.dead = true;
                         } else if (projectile instanceof Ability1) {
                             entity.health -= 5;
+                            projectile.dead = true;
+                        } else if (projectile instanceof Lightning) {
+                            entity.health -= 1;
                         }
                         entity.hpBarOn = true;
-                        projectile.dead = true;
                     }
                 }
                 projectile.update();
