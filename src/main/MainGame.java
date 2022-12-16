@@ -153,7 +153,6 @@ public class MainGame extends JPanel implements Runnable {
             }
         });
         playerAProjectileThread.start();
-
     }
 
     /**
@@ -181,6 +180,7 @@ public class MainGame extends JPanel implements Runnable {
             }
         }
     }
+
     /**
      * repaint method
      *

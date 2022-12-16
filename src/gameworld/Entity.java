@@ -16,10 +16,10 @@ import java.util.ConcurrentModificationException;
  * Main inheritable class for all game world entity's
  */
 public class Entity {
-    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter, searchTicks;
+    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter, searchTicks, spriteCounter;
     public int goalCol, goalRow, nextCol1, nextRow1, nextCol2, nextRow2, nextCol3, nextRow3, nextCol4, nextRow4;
     public MainGame mainGame;
-    public BufferedImage up1;
+    public BufferedImage entityImage1, entityImage2, entityImage3, entityImage4, entityImage5, entityImage6, entityImage7;
     public String direction;
     public Rectangle collisionBox;
     public boolean initializeEnemies, hpBarOn, onPath, collisionUp, collisionDown, collisionLeft, collisionRight, dead;

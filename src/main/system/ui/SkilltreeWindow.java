@@ -14,14 +14,15 @@ import java.awt.event.ActionListener;
 public class SkilltreeWindow extends JPanel implements ActionListener {
 
        public  SkilltreeWindow(MainGame mainGame){
-        JPanel panel1 = new Skilltree().skillwindow;
+        JPanel panel1 = new Skilltree(mainGame).skillwindow;
         //Set the frame's size and make it visible
         panel1.setPreferredSize(new Dimension(2000, 2000));
         panel1.setBackground(Color.yellow);
         panel1.setVisible(true);
 
         setSize(1500, 800);
-        this.add(panel1);
+           this.add(panel1);
+           this.setBackground(new Color(192, 203, 220));
         KeyHandler keyHandler = new KeyHandler(mainGame);
         DragListener drag = new DragListener();
         panel1.addMouseListener(drag);
@@ -34,6 +35,6 @@ public class SkilltreeWindow extends JPanel implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            System.out.println(e.getSource());
         }
 }

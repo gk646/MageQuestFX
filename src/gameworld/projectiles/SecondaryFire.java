@@ -24,7 +24,7 @@ public class SecondaryFire extends Projectile {
         super(mainGame, mouseHandler);
 
         //-------VALUES-----------
-        this.movementSpeed = 5;
+        this.movementSpeed = 3;
         this.entityHeight = 25;
         this.entityWidth = 25;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
@@ -38,18 +38,39 @@ public class SecondaryFire extends Projectile {
         this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.updateVector = getUpdateVector();
         getPlayerImage();
-        this.endPositionX = worldX +1000;
-        this.endPositionY = worldY +1000;
+        this.endPositionX = worldX + 1000;
+        this.endPositionY = worldY + 1000;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
+        screenX = screenPosition.x - mainGame.player.worldX + Player.startingPoint.x;
+        screenY = screenPosition.y - mainGame.player.worldY + Player.startingPoint.y;
+        if (spriteCounter <= 13) {
+            g2.drawImage(entityImage1, screenX, screenY, entityWidth, entityHeight, null);
+        }
+        if (spriteCounter >= 13) {
+            g2.drawImage(entityImage2, screenX, screenY, entityWidth, entityHeight, null);
+        }
+        if (spriteCounter >= 26) {
+            g2.drawImage(entityImage3, screenX, screenY, entityWidth, entityHeight, null);
+        }
+        if (spriteCounter >= 39) {
+            g2.drawImage(entityImage4, screenX, screenY, entityWidth, entityHeight, null);
+        }
+        if (spriteCounter >= 52) {
+            g2.drawImage(entityImage5, screenX, screenY, entityWidth, entityHeight, null);
+        }
+        if (spriteCounter >= 65) {
+            g2.drawImage(entityImage6, screenX, screenY, entityWidth, entityHeight, null);
+            spriteCounter = 0;
+        }
+        spriteCounter++;
     }
 
     @Override
     public void update() {
-        if(worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY-2000 || worldX <= endPositionX -2000){
+        if (worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY - 2000 || worldX <= endPositionX - 2000) {
             this.dead = true;
         }
         mainGame.collisionChecker.checkEntityAgainstTile(this);
@@ -76,7 +97,12 @@ public class SecondaryFire extends Projectile {
     }
 
     public void getPlayerImage() {
-        up1 = setup("SecondaryFire01.png");
+        entityImage1 = setup("SecondaryFire01.png");
+        entityImage2 = setup("SecondaryFire02.png");
+        entityImage3 = setup("SecondaryFire03.png");
+        entityImage4 = setup("SecondaryFire04.png");
+        entityImage5 = setup("SecondaryFire05.png");
+        entityImage6 = setup("SecondaryFire06.png");
     }
 
 

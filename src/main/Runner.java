@@ -13,13 +13,11 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
 
 
-public class Runner implements ActionListener {
+public class Runner {
     public static JFrame window;
     public static JTextField textField;
     public static JSlider slider;
@@ -38,7 +36,6 @@ public class Runner implements ActionListener {
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
         MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         window.setSize(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
-
         window.addKeyListener(new KeyHandler(mainGame));
         //gE.getDefaultScreenDevice().setFullScreenWindow(window);
         SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
@@ -73,13 +70,11 @@ public class Runner implements ActionListener {
         window.pack();
         window.setVisible(true);
         mainGame.startGameThread();
+
     }
 
     /* TODO: 11.12.2022  make pathfinding respect collision
        TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
      */
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-    }
 }

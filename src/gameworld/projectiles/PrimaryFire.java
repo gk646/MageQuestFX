@@ -48,7 +48,7 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(up1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
+        g2.drawImage(entityImage1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class PrimaryFire extends Projectile {
     }
 
     public void getPlayerImage() {
-        up1 = setup("PrimaryFire01.png");
+        entityImage1 = setup("PrimaryFire01.png");
 
 
     }

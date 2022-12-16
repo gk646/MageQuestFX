@@ -21,7 +21,7 @@ public class KeyHandler implements KeyListener {
     public void keyTyped(KeyEvent e) {
         //TITLE SCREEN
         char code = e.getKeyChar();
-        if(code == 'f'){
+        if (code == 'f') {
             System.out.println("F");
         }
         if (code == 'G') {
@@ -123,8 +123,7 @@ public class KeyHandler implements KeyListener {
         if (code == 'n') {
             if (mg.gameState == mg.playState) {
                 mg.gameState = mg.talentState;
-            }
-            else if(mg.gameState == mg.talentState){
+            } else if (mg.gameState == mg.talentState) {
                 mg.gameState = mg.playState;
                 Runner.skillTree.setVisible(false);
                 mg.requestFocusInWindow();

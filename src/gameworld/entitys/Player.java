@@ -134,12 +134,12 @@ public class Player extends Entity {
 
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(up1, screenX, screenY, 48, 48, null);
+        g2.drawImage(entityImage1, screenX, screenY, 48, 48, null);
 
     }
 
     public void getPlayerImage() {
-        up1 = setup("Mage_down01.png");
+        entityImage1 = setup("Mage_down01.png");
 
 
     }
