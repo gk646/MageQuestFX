@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Lightning extends Projectile {
-    private final MotionHandler motionHandler;
 
     /**
      * What happens when you press "2". Part of
@@ -22,7 +21,6 @@ public class Lightning extends Projectile {
      */
     public Lightning(MainGame mainGame, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame, mouseHandler);
-        this.motionHandler = motionHandler;
 
         //-------VALUES-----------
         this.entityHeight = 92;

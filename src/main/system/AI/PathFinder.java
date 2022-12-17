@@ -30,9 +30,9 @@ public class PathFinder {
 
     }
 
-    public void resetNodes() {
-        for (int i = 0; i < OverWorld.worldSize.x; i++) {
-            for (int b = 0; b < OverWorld.worldSize.y; b++) {
+    public void resetNodes(int startCol, int startRow) {
+        for (int i = startCol - 16; i < startCol + 16; i++) {
+            for (int b = startRow - 16; b < startRow + 16; b++) {
                 nodes[i][b].open = false;
                 nodes[i][b].checked = false;
                 nodes[i][b].solid = false;
@@ -47,14 +47,14 @@ public class PathFinder {
     //Method for setting the start and goal nodes for the search
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow) {
         //Reset all nodes in the map
-        resetNodes();
+        resetNodes(startCol, startRow);
         //Set the start and goal nodes based on the given coordinates
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
         //Iterate through all nodes in the map
-        for (int i = 0; i < OverWorld.worldSize.x; i++) {
-            for (int b = 0; b < OverWorld.worldSize.y; b++) {
+        for (int i = startCol - 16; i < startCol + 16; i++) {
+            for (int b = startRow - 16; b < startRow + 16; b++) {
                 int tileNum = OverWorld.worldData[i][b];
                 if (mg.wRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;
@@ -84,9 +84,14 @@ public class PathFinder {
 
     public boolean search() {
         while (!goalReached && step < 2000) {
+            if (playerTooFar()) {
+                return false;
 
+
+            }
             int col = currentNode.col;
             int row = currentNode.row;
+
 
             currentNode.checked = true;
             openList.remove(currentNode);
@@ -129,10 +134,12 @@ public class PathFinder {
 
             if (currentNode == goalNode) {
                 goalReached = true;
+
                 trackPath();
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void trackPath() {
@@ -149,5 +156,9 @@ public class PathFinder {
             node.parent = currentNode;
             openList.add(node);
         }
+    }
+
+    private boolean playerTooFar() {
+        return Math.abs(currentNode.col - goalNode.col) >= 15 || Math.abs(currentNode.row - goalNode.row) >= 15;
     }
 }

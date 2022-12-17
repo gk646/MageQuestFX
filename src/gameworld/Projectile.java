@@ -73,6 +73,19 @@ public class Projectile extends Entity {
         } catch (ConcurrentModificationException ignored) {
         }
     }
+
+    public void tileCollision() {
+        mainGame.collisionChecker.checkEntityAgainstTile(this);
+        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
+            this.dead = true;
+        }
+    }
+
+    public void outOfBounds(int size) {
+        if (worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY - size * 2 || worldX <= endPositionX - size * 2) {
+            this.dead = true;
+        }
+    }
 }
 
 

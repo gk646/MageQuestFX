@@ -13,8 +13,13 @@ import main.system.Multiplayer;
 import main.system.WorldRender;
 import main.system.ui.UI;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 
@@ -96,69 +101,61 @@ public class MainGame extends JPanel implements Runnable {
 
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
-            double timer1 = 0;
             long lastTime1 = System.nanoTime();
-            float difference;
+            float difference = 0;
             float interval;
             while (true) {
                 interval = 1000000000 / FRAMES_PER_SECOND;
                 firstTimeGate1 = System.nanoTime();
-                difference = (firstTimeGate1 - lastTime1) / interval;
+                difference += (firstTimeGate1 - lastTime1) / interval;
                 lastTime1 = firstTimeGate1;
-                timer1 += difference;
-                if (timer1 >= 1) {
+                if (difference >= 1) {
                     repaint();
-                    timer1 = 0;
+                    difference = 0;
                 }
             }
         });
         drawThread.start();
         Thread playerThread = new Thread(() -> {
             long firstTimeGate1;
-            double timer1 = 0;
             long lastTime1 = System.nanoTime();
-            float difference;
+            float difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
                 lastTime1 = firstTimeGate1;
-                timer1 += difference;
-                if (timer1 >= 1) {
+                if (difference >= 1) {
                     player.update();
                     entity.updatePos();
-                    timer1 = 0;
+                    difference = 0;
                 }
             }
         });
         playerThread.start();
         Thread ProjectileThread = new Thread(() -> {
             long firstTimeGate1;
-            double timer1 = 0;
             long lastTime1 = System.nanoTime();
-            float difference;
+            float difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
                 lastTime1 = firstTimeGate1;
-                timer1 += difference;
-                if (timer1 >= 1) {
-
-                    timer1 = 0;
+                if (difference >= 1) {
+                    projectile.update();
+                    difference = 0;
                 }
             }
         });
         //ProjectileThread.start();
         Thread updateThread = new Thread(() -> {
             long firstTimeGate1;
-            double timer1 = 0;
             long lastTime1 = 0;
-            double difference;
+            double difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference = (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
                 lastTime1 = firstTimeGate1;
-                timer1 += difference;
-                if (timer1 >= 1) {
+                if (difference >= 1) {
                     if (gameState == playState) {
                         if (keyHandler.debugFps && keyHandler.fpressed) {
                             multiplayer.startMultiplayerClient();
@@ -179,7 +176,7 @@ public class MainGame extends JPanel implements Runnable {
                             multiplayer.updateMultiplayerOutput();
                         }
                     }
-                    timer1 = 0;
+                    difference = 0;
                 }
             }
         });

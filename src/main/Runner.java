@@ -4,8 +4,15 @@ import input.KeyHandler;
 import main.system.ui.SkilltreeWindow;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -19,7 +26,7 @@ public class Runner {
      * @author Lukas Gilch
      */
     public static void main(String[] args) {
-        System.setProperty("sun.java2d.opengl", "true");
+        //System.setProperty("sun.java2d.opengl", "true");
         window = new JFrame();
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setTitle("Mage Quest_2D");

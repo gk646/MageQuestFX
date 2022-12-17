@@ -36,8 +36,8 @@ public class Ability1 extends Projectile {
         this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();
-        this.endPositionX = worldX + 1000;
-        this.endPositionY = worldY + 1000;
+        this.endPositionX = worldX + 650;
+        this.endPositionY = worldY + 650;
     }
 
     @Override
@@ -48,13 +48,8 @@ public class Ability1 extends Projectile {
 
     @Override
     public void update() {
-        if(worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY-2000 || worldX <= endPositionX -2000){
-            this.dead = true;
-        }
-        mainGame.collisionChecker.checkEntityAgainstTile(this);
-        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
-            this.dead = true;
-        }
+        outOfBounds(650);
+        tileCollision();
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
         worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
