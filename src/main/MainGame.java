@@ -97,8 +97,7 @@ public class MainGame extends JPanel implements Runnable {
     }
 
     public void startThreads() {
-        float logicvsFPS = 1000000000 / 60f;
-
+        float logicCounter = 1000000000 / 60f;
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
@@ -122,7 +121,7 @@ public class MainGame extends JPanel implements Runnable {
             float difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     player.update();
@@ -138,7 +137,7 @@ public class MainGame extends JPanel implements Runnable {
             float difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     projectile.update();
@@ -150,10 +149,10 @@ public class MainGame extends JPanel implements Runnable {
         Thread updateThread = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = 0;
-            double difference = 0;
+            float difference = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicvsFPS;
+                difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     if (gameState == playState) {
@@ -181,15 +180,6 @@ public class MainGame extends JPanel implements Runnable {
             }
         });
         updateThread.start();
-
-    }
-
-    /**
-     * Game loop update method
-     */
-
-    public void update() {
-
     }
 
     /**
