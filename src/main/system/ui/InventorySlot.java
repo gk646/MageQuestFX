@@ -20,8 +20,8 @@ public class InventorySlot {
         this.yCo = yCo;
     }
 
-    public void setItem(InventorySlot invSlot, Item item) {
-        invSlot.item = item;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public void drawIcon(Graphics2D g2, int x, int y, int slotSize) {

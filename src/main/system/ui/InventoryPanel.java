@@ -47,13 +47,12 @@ public class InventoryPanel extends JPanel {
         draggedSlot = -1;
         this.grabbedItem = null;
         createCharSlots(260, 200);
-        char_Slots[1].setItem(char_Slots[1], new ARM_chest01());
+        char_Slots[1].setItem(new ARM_chest01());
     }
 
 
     public void draw(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
-
         drawInventoryWindow(g2);
         drawDragandDrop();
         drawCharacterSlots(g2, 260, 200);
@@ -61,38 +60,34 @@ public class InventoryPanel extends JPanel {
 
 
     public int drawDragandDrop() {
-        for (InventorySlot invSlot : char_Slots) {
-            if (invSlot.grabbed) {
-                return 0;
-            }
-        }
         if (grabbedItem == null && mg.mouseHandler.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
                 if (invSlot.boundBox.contains(mg.mouseHandler.mouse1Position) && invSlot.item != null) {
                     invSlot.grabbed = true;
                     grabbedSlot = invSlot;
                     grabbedItem = invSlot.item;
-                    System.out.println("grabbed");
+                    return 1;
                 }
             }
         }
         if (grabbedItem != null && !mg.mouseHandler.mouse1Pressed) {
-            System.out.println("set");
             for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.motionHandler.lastMousePosition)) {
-                    invSlot.setItem(grabbedSlot, grabbedItem);
+                if (invSlot.boundBox.contains(mg.motionHandler.lastMousePosition) && invSlot != grabbedSlot) {
+                    invSlot.setItem(grabbedItem);
                     grabbedSlot.item = null;
                     grabbedItem = null;
                     grabbedSlot = null;
-
-                } else {
-                    System.out.println("reset");
-                    grabbedSlot.grabbed = false;
-                    grabbedItem = null;
+                    return 1;
                 }
             }
+            grabbedSlot.grabbed = false;
+            grabbedItem = null;
         }
-        return 1;
+        if (mg.mouseHandler.mouse2Pressed) {
+            grabbedSlot.grabbed = false;
+            grabbedItem = null;
+        }
+        return 0;
     }
 
 
@@ -110,6 +105,13 @@ public class InventoryPanel extends JPanel {
                 invSlot.drawIcon(g2, invSlot.xCo, invSlot.yCo, SLOT_SIZE);
             }
         }
+        /*for (int i = 0; i < CHAR_SLOTS; i++) {
+            if (char_Slots[i].item != null) {
+                System.out.println(i);
+            }
+        }
+
+         */
         //Stats Text
         g2.setColor(darkBackground);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
