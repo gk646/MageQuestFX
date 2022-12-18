@@ -33,7 +33,7 @@ Right Mouse Button - Secondary Fire (5 Damage)
 2 - Ability 1 (about 60 Damage)  
 N - opens talent window (stub for now)  
 
-##Inventory
+## Inventory
 
 You can drag and drop Items to different slots  
 No slot restrictions yet, no bag window yet and no item and player stats yet  
