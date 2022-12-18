@@ -10,7 +10,6 @@ public class CollisionChecker {
 
     public CollisionChecker(MainGame mainGame) {
         this.mainGame = mainGame;
-
     }
 
     public void checkEntityAgainstTile(Entity entity) {
@@ -63,14 +62,10 @@ public class CollisionChecker {
                 entity.collisionDown = true;
             }
         }
-
-
     }
 
     public boolean checkEntityAgainstEntity(Entity checkingForHit, Entity incomingToHit) {
-
-        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(
-                incomingToHit.worldX, incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(incomingToHit.worldX, incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 }
 

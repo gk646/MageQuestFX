@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class PathFinder {
     public final ArrayList<Node> pathList = new ArrayList<>();
-    Node[][] nodes;
     final MainGame mg;
     final ArrayList<Node> openList = new ArrayList<>();
+    Node[][] nodes;
     Node startNode, goalNode, currentNode;
     boolean goalReached = false;
     int step = 0;
@@ -42,27 +42,20 @@ public class PathFinder {
         step = 0;
     }
 
-    //Method for setting the start and goal nodes for the search
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow) {
-        //Reset all nodes in the map
         resetNodes(startCol, startRow);
-        //Set the start and goal nodes based on the given coordinates
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        //Iterate through all nodes in the map
         for (int i = startCol - 16; i < startCol + 16; i++) {
             for (int b = startRow - 16; b < startRow + 16; b++) {
                 int tileNum = OverWorld.worldData[i][b];
                 if (mg.wRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;
                 }
-                //Set cost
                 getCost(nodes[i][b]);
-
             }
         }
-
     }
 
 
@@ -84,16 +77,12 @@ public class PathFinder {
         while (!goalReached && step < 2000) {
             if (playerTooFar()) {
                 return false;
-
-
             }
             int col = currentNode.col;
             int row = currentNode.row;
 
-
             currentNode.checked = true;
             openList.remove(currentNode);
-
 
             if (row - 1 >= 0) {
                 openNode(nodes[col][row - 1]);
@@ -109,30 +98,22 @@ public class PathFinder {
             }
 
             int bestNodesIndex = 0;
-            int bestNodesfCost = 999;
+            int bestNodesFCost = 999;
 
             for (int i = 0; i < openList.size(); i++) {
-
-                //check f cost
-                if (openList.get(i).fCost < bestNodesfCost) {
+                if (openList.get(i).fCost < bestNodesFCost) {
                     bestNodesIndex = i;
-                    bestNodesfCost = openList.get(i).fCost;
-                }
-                //F cost equal check
-                else if (openList.get(i).fCost == bestNodesfCost) {
-                    if (openList.get(i).gCost < openList.get(bestNodesIndex).gCost)
-                        bestNodesIndex = i;
+                    bestNodesFCost = openList.get(i).fCost;
+                } else if (openList.get(i).fCost == bestNodesFCost) {
+                    if (openList.get(i).gCost < openList.get(bestNodesIndex).gCost) bestNodesIndex = i;
                 }
             }
             if (openList.size() == 0) {
-                break;
+                return false;
             }
-
             currentNode = openList.get(bestNodesIndex);
-
             if (currentNode == goalNode) {
                 goalReached = true;
-
                 trackPath();
                 return true;
             }
