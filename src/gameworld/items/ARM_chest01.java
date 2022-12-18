@@ -5,7 +5,7 @@ import main.system.ImageSetup;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -18,6 +18,7 @@ public class ARM_chest01 extends Item implements ImageSetup {
         this.durability = 100;
         this.quality = 70 + (int) (Math.random() * 30);
         this.rarity = 1;
+        this.type = 'C';
         getImages();
     }
 

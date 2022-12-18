@@ -24,7 +24,7 @@ public class MotionHandler implements MouseMotionListener {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        mousePosition = new Point(e.getX(), e.getY());
+        mousePosition = e.getLocationOnScreen();
         lastMousePosition = e.getLocationOnScreen();
     }
 
