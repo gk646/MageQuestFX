@@ -3,7 +3,10 @@ package gameworld;
 import gameworld.entitys.Grunt;
 import main.MainGame;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;
 
@@ -13,7 +16,7 @@ import java.util.ConcurrentModificationException;
  * Main inheritable class for all game world entity's
  */
 public class Entity {
-    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter, searchTicks, spriteCounter, hitDelay;
+    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter, searchTicks, spriteCounter, hitDelay, level;
     public int goalCol, goalRow, nextCol1, nextRow1, nextCol2, nextRow2, nextCol3, nextRow3, nextCol4, nextRow4;
     public MainGame mainGame;
     public BufferedImage entityImage1, entityImage2, entityImage3, entityImage4, entityImage5, entityImage6, entityImage7, entityImage8, entityImage9, entityImage10;

@@ -44,6 +44,7 @@ public class Player extends Entity {
         direction = "up";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 16, 31, 31);
+        this.level = 1;
 
         //Handlers
         this.mainGame = mainGame;
