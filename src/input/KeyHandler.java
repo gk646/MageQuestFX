@@ -1,6 +1,5 @@
 package input;
 
-import gameworld.entitys.Grunt;
 import main.MainGame;
 import main.Runner;
 
@@ -16,17 +15,10 @@ public class KeyHandler implements KeyListener {
         this.mg = mainGame;
     }
 
-
     @Override
     public void keyTyped(KeyEvent e) {
         //TITLE SCREEN
         char code = e.getKeyChar();
-        if (code == 'f') {
-            System.out.println("F");
-        }
-        if (code == 'G') {
-            mg.ENTITIES.add(new Grunt(mg, 2500, 2600, 15));
-        }
         if (mg.gameState == mg.titleState) {
             if (code == ('w')) {
                 mg.ui.commandNum--;
@@ -51,7 +43,6 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
         if (mg.gameState == mg.titleOption) {
             if (code == ('w')) {
                 mg.ui.commandNum--;
@@ -129,6 +120,16 @@ public class KeyHandler implements KeyListener {
                 mg.requestFocusInWindow();
             }
         }
+        //Drawing Inventor Panel
+        if (code == 'c') {
+            if (mg.gameState == mg.playState) {
+                mg.gameState = mg.inventory;
+            } else if (mg.gameState == mg.inventory) {
+                mg.gameState = mg.playState;
+                Runner.inventP.setVisible(false);
+                mg.requestFocusInWindow();
+            }
+        }
     }
 
     @Override
@@ -161,7 +162,7 @@ public class KeyHandler implements KeyListener {
                 fpressed = true;
             }
         }
-        if (code == KeyEvent.VK_C) {
+        if (code == KeyEvent.VK_B) {
             debugFps = true;
             mg.player.mana = mg.player.maxMana;
         }
@@ -170,30 +171,32 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-        if (code == KeyEvent.VK_W) {
-            upPressed = false;
-        } else if (code == KeyEvent.VK_A) {
-            leftPressed = false;
-        } else if (code == KeyEvent.VK_S) {
-            downPressed = false;
-        } else if (code == KeyEvent.VK_D) {
-            rightPressed = false;
+        if (mg.gameState == mg.playState) {
+            if (code == KeyEvent.VK_W) {
+                upPressed = false;
+            } else if (code == KeyEvent.VK_A) {
+                leftPressed = false;
+            } else if (code == KeyEvent.VK_S) {
+                downPressed = false;
+            } else if (code == KeyEvent.VK_D) {
+                rightPressed = false;
+            }
+            if (code == KeyEvent.VK_1) {
+                OnePressed = false;
+            }
+            if (code == KeyEvent.VK_2) {
+                TwoPressed = false;
+            }
         }
-        if (code == KeyEvent.VK_C) {
-
+        if (code == KeyEvent.VK_B) {
             debugFps = false;
-        }
-        if (code == KeyEvent.VK_1) {
-            OnePressed = false;
+            mg.player.mana = mg.player.maxMana;
         }
         if (code == KeyEvent.VK_F) {
             fpressed = false;
         }
         if (code == KeyEvent.VK_M) {
             multiplayer = false;
-        }
-        if (code == KeyEvent.VK_2) {
-            TwoPressed = false;
         }
     }
 }

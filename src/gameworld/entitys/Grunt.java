@@ -5,8 +5,7 @@ import main.MainGame;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -42,12 +41,11 @@ public class Grunt extends Entity {
     public void update() {
         screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (((worldX / mainGame.tileSize) != (mainGame.player.worldX / mainGame.tileSize)) || (
-                (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
+        if (worldX / mainGame.tileSize != mainGame.player.worldX / mainGame.tileSize || worldY / mainGame.tileSize != mainGame.player.worldY / mainGame.tileSize) {
             onPath = true;
         }
         gruntMovement();
-
+        hitDelay++;
         searchTicks++;
     }
 

@@ -7,19 +7,15 @@ import gameworld.entitys.Player2;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
-import main.system.AI.PathFinder;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
 import main.system.WorldRender;
+import main.system.ai.PathFinder;
+import main.system.ui.InventoryPanel;
 import main.system.ui.UI;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -50,7 +46,7 @@ public class MainGame extends JPanel implements Runnable {
     public final MouseHandler mouseHandler = new MouseHandler(motionHandler);
     public final KeyHandler keyHandler = new KeyHandler(this);
 
-    //---------GAMESTATES-----------
+    //---------GAME-STATES-----------
 
     public final int titleOption = -1;
     public final int titleState = 0;
@@ -58,6 +54,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int optionState = 2;
     public final int talentState = 3;
     public final int gameOver = 4;
+    public final int inventory = 5;
 
 
     //---------System---------
@@ -71,6 +68,7 @@ public class MainGame extends JPanel implements Runnable {
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final UI ui = new UI(this);
     public final PathFinder pathFinder = new PathFinder(this);
+    InventoryPanel inventoryPanel;
 
     /**
      * Main game loop class
@@ -86,6 +84,7 @@ public class MainGame extends JPanel implements Runnable {
         this.addMouseMotionListener(motionHandler);
         this.setOpaque(false);
         gameState = titleState;
+
     }
 
     /**
@@ -124,10 +123,15 @@ public class MainGame extends JPanel implements Runnable {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-                    player.update();
-                    entity.updatePos();
+                    if (gameState == playState) {
+                        player.update();
+                        entity.updatePos();
+                    } else if (gameState == optionState || gameState == inventory) {
+                        entity.updatePos();
+                    }
                     difference = 0;
                 }
+
             }
         });
         playerThread.start();
@@ -140,8 +144,10 @@ public class MainGame extends JPanel implements Runnable {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-                    projectile.update();
-                    difference = 0;
+                    if (gameState == playState || gameState == optionState || gameState == inventory) {
+                        projectile.update();
+                        difference = 0;
+                    }
                 }
             }
         });
@@ -155,7 +161,7 @@ public class MainGame extends JPanel implements Runnable {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-                    if (gameState == playState) {
+                    if (gameState == playState || gameState == optionState || gameState == inventory || gameState == talentState) {
                         if (keyHandler.debugFps && keyHandler.fpressed) {
                             multiplayer.startMultiplayerClient();
                         }
@@ -201,12 +207,29 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        } else if (gameState == titleState || gameState == titleOption || gameState == talentState) {
+        }
+        if (gameState == inventory) {
+            wRender.draw(g2);
+            projectile.draw(g2);
+            entity.draw(g2);
+            player2.draw(g2);
+            player.draw(g2);
+            ui.draw(g2);
+            Runner.inventP.draw(g2);
+        }
+        if (gameState == talentState) {
+            wRender.draw(g2);
+            projectile.draw(g2);
+            entity.draw(g2);
+            player2.draw(g2);
+            player.draw(g2);
+            g2.setColor(this.ui.lightBackgroundAlpha);
+            g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
+            ui.draw(g2);
+        } else if (gameState == titleState || gameState == titleOption) {
             ui.draw(g2);
         }
-
         //RENDER END
-
         long drawEnd = System.nanoTime();
         long difference = drawEnd - drawStart;
         if (keyHandler.debugFps) {
@@ -215,7 +238,6 @@ public class MainGame extends JPanel implements Runnable {
             g2.drawString(("Draw Time" + difference), 500, 600);
         }
         g2.dispose();
-
     }
 
     public void startGameThread() {

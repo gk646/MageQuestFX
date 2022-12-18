@@ -1,4 +1,4 @@
-package main.system.AI;
+package main.system.ai;
 
 import gameworld.maps.OverWorld;
 import main.MainGame;
@@ -24,10 +24,8 @@ public class PathFinder {
         for (int i = 0; i < OverWorld.worldSize.x; i++) {
             for (int b = 0; b < OverWorld.worldSize.y; b++) {
                 nodes[i][b] = new Node(i, b);
-
             }
         }
-
     }
 
     public void resetNodes(int startCol, int startRow) {

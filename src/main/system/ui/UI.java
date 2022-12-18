@@ -8,10 +8,7 @@ import main.system.Utilities;
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -47,7 +44,6 @@ public class UI implements ActionListener, ChangeListener {
     public void draw(Graphics2D g2) {
         this.g2 = g2;
         g2.setFont(maruMonica);
-
         if (mg.gameState == mg.playState) {
             drawGameUI();
         } else if (mg.gameState == mg.optionState || mg.gameState == mg.titleOption) {
@@ -56,6 +52,8 @@ public class UI implements ActionListener, ChangeListener {
             drawTitleScreen();
         } else if (mg.gameState == mg.talentState) {
             drawTalentTree();
+        } else if (mg.gameState == mg.inventory) {
+            drawInventory();
         }
 
     }
@@ -125,7 +123,6 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawString((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
     }
-
     public void drawOptions() {
         g2.setColor(lightBackgroundAlpha);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
@@ -163,16 +160,20 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
-    public void drawGameOver() {
-
-    }
-
     public void drawTalentTree() {
         if (!onceSecond) {
             Runner.skillTree.setFocusable(true);
             onceSecond = true;
         }
         Runner.skillTree.setVisible(true);
+    }
+
+    public void drawGameOver() {
+
+    }
+
+    public void drawInventory() {
+
     }
 
     public int getXForCenteredText(String text) {

@@ -1,18 +1,11 @@
 package main;
 
-import input.KeyHandler;
+import main.system.ui.InventoryPanel;
 import main.system.ui.SkilltreeWindow;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -21,6 +14,7 @@ public class Runner {
     public static JTextField textField;
     public static JSlider slider;
     public static JPanel skillTree;
+    public static InventoryPanel inventP;
 
     /**
      * @author Lukas Gilch
@@ -34,9 +28,7 @@ public class Runner {
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
         MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         window.setSize(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
-        window.addKeyListener(new KeyHandler(mainGame));
-        //gE.getDefaultScreenDevice().setFullScreenWindow(window);
-        SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
+        //window.addKeyListener(new KeyHandler(mainGame));
         window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
         try {
             Image image = ImageIO.read((Objects.requireNonNull(Runner.class.getResourceAsStream("/resources/icon/icon.png"))));
@@ -46,8 +38,12 @@ public class Runner {
         }
         //Main Game
         mainGame.setDoubleBuffered(true);
+        //InventoryPanel
+        InventoryPanel inventP = new InventoryPanel(mainGame);
+        inventP.setVisible(false);
+        inventP.setLocation(150, 150);
         //Skill tree
-        skilltreeWindow.setLocation(250, 250);
+        SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
         skilltreeWindow.setVisible(false);
         //TEXT FIELD
         JTextField jTextField = new JTextField();
@@ -60,16 +56,18 @@ public class Runner {
         Runner.slider = jSlider;
         Runner.textField = jTextField;
         Runner.skillTree = skilltreeWindow;
+        Runner.inventP = inventP;
         window.add(jTextField);
         window.add(jSlider);
         window.add(skilltreeWindow);
+        window.add(inventP);
         window.add(mainGame);
         window.setUndecorated(true);
         window.pack();
         window.setVisible(true);
         mainGame.startGameThread();
     }
-    /* TODO: 11.12.2022  make pathfinding respect collision
+    /*
        TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
      */
 

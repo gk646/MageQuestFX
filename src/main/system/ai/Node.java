@@ -1,4 +1,4 @@
-package main.system.AI;
+package main.system.ai;
 
 
 public class Node {
@@ -8,8 +8,6 @@ public class Node {
     int gCost;
     int hCost;
     int fCost;
-    boolean start;
-    boolean goal;
     boolean solid;
     boolean open;
     boolean checked;
