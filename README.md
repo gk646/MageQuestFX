@@ -14,7 +14,7 @@ I took some inspiration from his implementation but started to develop my own id
 ## FEATURES:  
 ### Multiplayer:  
 You can start the same programm twice on the same PC (localhost) or different PC's ( in the same network) and play together!  
-The host needs to press c + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press c + f.  
+The host needs to press b + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press b + f.  
 I used java sockets with a static port (60069).  
 I didnt yet update it to work correctly with the newest pathfinding updates.  
  
@@ -32,6 +32,13 @@ Right Mouse Button - Secondary Fire (5 Damage)
 1 - Ability 1 (5 Damage) 
 2 - Ability 1 (about 60 Damage)  
 N - opens talent window (stub for now)  
+
+## Inventory
+
+You can drag and drop Items to different slots  
+No slot restrictions yet, no bag window yet and no item and player stats yet  
+
+
 ## Graphics:  
 
 I made most of the environment Pixel Art myself, i did take inspiration from @RyiSnow's textures and games like HeroSiege and other sources for some abilities etc.  
