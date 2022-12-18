@@ -1,14 +1,10 @@
 package main.system.ui;
 
 import gameworld.Item;
-import gameworld.items.ARM_chest01;
 import main.MainGame;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
@@ -47,7 +43,7 @@ public class InventoryPanel extends JPanel {
         draggedSlot = -1;
         this.grabbedItem = null;
         createCharSlots(260, 200);
-        char_Slots[1].setItem(new ARM_chest01());
+        char_Slots[1].setItem(new ARM_head02());
     }
 
 

@@ -1,10 +1,11 @@
 package gameworld;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Item {
     public int i_id;
+    public String s_id, name;
     public int quality;
     public int rarity;
     public int durability;
