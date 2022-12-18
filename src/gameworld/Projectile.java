@@ -43,12 +43,9 @@ public class Projectile extends Entity {
     @Override
     public void update() {
         try {
-            // Iterate over the PROJECTILES and ENTITIES collections
             for (Projectile projectile : mainGame.PROJECTILES) {
                 for (Entity entity : mainGame.ENTITIES) {
-                    // Check for collisions between the projectile and entity
                     if (mainGame.collisionChecker.checkEntityAgainstEntity(entity, projectile)) {
-                        // Update the entity's health based on the type of projectile
                         if (projectile instanceof PrimaryFire) {
                             entity.health -= 1;
                             projectile.dead = true;
@@ -68,7 +65,6 @@ public class Projectile extends Entity {
                 if (projectile.dead) {
                     mainGame.PROJECTILES.remove(projectile);
                 }
-
             }
         } catch (ConcurrentModificationException ignored) {
         }

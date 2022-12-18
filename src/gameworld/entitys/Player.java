@@ -135,7 +135,7 @@ public class Player extends Entity {
         }
         if (keyHandler.TwoPressed && mana >= 20 && cdLightining == 20) {
             mainGame.PROJECTILES.add(new Lightning(mainGame, mouseHandler, motionHandler));
-            mana -= 0;
+            mana -= 20;
             cdLightining = 0;
         }
         if (mana < maxMana) {

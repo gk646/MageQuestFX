@@ -8,7 +8,10 @@ import main.system.Utilities;
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -100,7 +103,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.1.3";
+        text = "1.1.4";
         x = 150;
         y = 900;
         g2.drawString(text, x, y);
