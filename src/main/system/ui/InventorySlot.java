@@ -10,7 +10,7 @@ public class InventorySlot {
     public boolean grabbed;
     int xCo;
     int yCo;
-    Rectangle boundBox;
+    public Rectangle boundBox;
     Item item;
 
     InventorySlot(Item item, int xCo, int yCo) {
@@ -30,6 +30,11 @@ public class InventorySlot {
 
     public void drawSlot(Graphics2D g2) {
         g2.drawRoundRect(this.xCo, this.yCo, SLOT_SIZE, SLOT_SIZE, 20, 20);
+
+    }
+
+    public void drawSlot(Graphics2D g2, int startX, int startY) {
+        g2.drawRoundRect(startX, startY, SLOT_SIZE, SLOT_SIZE, 20, 20);
 
     }
 }

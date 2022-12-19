@@ -1,11 +1,17 @@
 package main;
 
-import main.system.ui.InventoryPanel;
 import main.system.ui.SkilltreeWindow;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -14,7 +20,6 @@ public class Runner {
     public static JTextField textField;
     public static JSlider slider;
     public static JPanel skillTree;
-    public static InventoryPanel inventP;
 
     /**
      * @author Lukas Gilch
@@ -38,10 +43,6 @@ public class Runner {
         }
         //Main Game
         mainGame.setDoubleBuffered(true);
-        //InventoryPanel
-        InventoryPanel inventP = new InventoryPanel(mainGame);
-        inventP.setVisible(false);
-        inventP.setLocation(150, 150);
         //Skill tree
         SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
         skilltreeWindow.setVisible(false);
@@ -56,11 +57,9 @@ public class Runner {
         Runner.slider = jSlider;
         Runner.textField = jTextField;
         Runner.skillTree = skilltreeWindow;
-        Runner.inventP = inventP;
         window.add(jTextField);
         window.add(jSlider);
         window.add(skilltreeWindow);
-        window.add(inventP);
         window.add(mainGame);
         window.setUndecorated(true);
         window.pack();

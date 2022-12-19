@@ -14,8 +14,13 @@ import main.system.ai.PathFinder;
 import main.system.ui.InventoryPanel;
 import main.system.ui.UI;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 
@@ -68,7 +73,7 @@ public class MainGame extends JPanel implements Runnable {
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final UI ui = new UI(this);
     public final PathFinder pathFinder = new PathFinder(this);
-    InventoryPanel inventoryPanel;
+    InventoryPanel inventoryPanel = new InventoryPanel(this);
 
     /**
      * Main game loop class
@@ -214,8 +219,7 @@ public class MainGame extends JPanel implements Runnable {
             entity.draw(g2);
             player2.draw(g2);
             player.draw(g2);
-            ui.draw(g2);
-            Runner.inventP.draw(g2);
+            inventoryPanel.drawCharacterWindow(g2);
         }
         if (gameState == talentState) {
             wRender.draw(g2);

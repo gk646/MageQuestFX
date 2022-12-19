@@ -3,7 +3,7 @@ package input;
 import main.MainGame;
 import main.Runner;
 
-import java.awt.*;
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -136,7 +136,6 @@ public class KeyHandler implements KeyListener {
             } else if (mg.gameState == mg.inventory) {
                 mg.gameState = mg.playState;
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-                Runner.inventP.setVisible(false);
                 mg.requestFocusInWindow();
             }
         }
