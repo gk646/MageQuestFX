@@ -24,7 +24,7 @@ public class Player2 extends Entity {
 
 
         //Handlers
-        this.mainGame = mainGame;
+        this.mg = mainGame;
     }
 
     private void getPlayerImage() {
@@ -45,7 +45,7 @@ public class Player2 extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        g2.drawImage(player2, worldX - mainGame.player.worldX +  MainGame.SCREEN_WIDTH / 2 - 24 , worldY- mainGame.player.worldY + MainGame.SCREEN_HEIGHT/2 -24 , 48, 48, null);
+        g2.drawImage(player2, worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24, worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24, 48, 48, null);
 
     }
 

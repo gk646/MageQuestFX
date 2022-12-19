@@ -26,7 +26,7 @@ public class Player extends Entity {
     public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightining;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning;
 
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
@@ -47,7 +47,7 @@ public class Player extends Entity {
         this.level = 1;
 
         //Handlers
-        this.mainGame = mainGame;
+        this.mg = mainGame;
         this.keyHandler = keyHandler;
         this.mouseHandler = mouseHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
@@ -89,7 +89,7 @@ public class Player extends Entity {
         collisionDown = false;
         collisionUp = false;
 
-        mainGame.collisionChecker.checkEntityAgainstTile(this);
+        mg.collisionChecker.checkEntityAgainstTile(this);
 
         if (direction.contains("left")) {
             if (!collisionLeft) {
@@ -117,26 +117,26 @@ public class Player extends Entity {
     }
 
     private void skills() {
-        if (this.mouseHandler.mouse1Pressed && cooldownPrimary == 10) {
-            mainGame.PROJECTILES.add(new PrimaryFire(mainGame, mouseHandler));
+        if (this.mouseHandler.mouse1Pressed && cooldownPrimary == 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
+            mg.PROJECTILES.add(new PrimaryFire(mg, mouseHandler));
             cooldownPrimary = 0;
         }
-        if (this.mouseHandler.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10) {
-            mainGame.PROJECTILES.add(new SecondaryFire(mainGame, mouseHandler));
+        if (this.mouseHandler.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
+            mg.PROJECTILES.add(new SecondaryFire(mg, mouseHandler));
             mana -= 10;
             cooldownOneSecond = 0;
         }
         if (this.keyHandler.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {
-                mainGame.PROJECTILES.add(new Ability1(mainGame, mouseHandler, i));
+                mg.PROJECTILES.add(new Ability1(mg, mouseHandler, i));
             }
             mana -= 10;
             cooldownTwoSecond = 0;
         }
-        if (keyHandler.TwoPressed && mana >= 20 && cdLightining == 20) {
-            mainGame.PROJECTILES.add(new Lightning(mainGame, mouseHandler, motionHandler));
+        if (keyHandler.TwoPressed && mana >= 20 && cdLightning == 20) {
+            mg.PROJECTILES.add(new Lightning(mg, mouseHandler, motionHandler));
             mana -= 20;
-            cdLightining = 0;
+            cdLightning = 0;
         }
         if (mana < maxMana) {
             mana += 0.05;
@@ -153,8 +153,8 @@ public class Player extends Entity {
         if (cooldownTwoSecond < 120) {
             cooldownTwoSecond++;
         }
-        if (cdLightining < 20) {
-            cdLightining++;
+        if (cdLightning < 20) {
+            cdLightning++;
         }
     }
 

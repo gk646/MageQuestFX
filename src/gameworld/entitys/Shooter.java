@@ -42,10 +42,10 @@ public class Shooter extends Entity {
     }
 
     public void update() {
-        screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (((worldX / mainGame.tileSize) != (mainGame.player.worldX / mainGame.tileSize)) || (
-                (worldY / mainGame.tileSize) != (mainGame.player.worldY / mainGame.tileSize))) {
+        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        if (((worldX / mg.tileSize) != (mg.player.worldX / mg.tileSize)) || (
+                (worldY / mg.tileSize) != (mg.player.worldY / mg.tileSize))) {
             onPath = true;
         }
         shooterMovement();
@@ -54,8 +54,8 @@ public class Shooter extends Entity {
     }
 
     public void updatePos() {
-        screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
     public void draw(Graphics2D g2) {
@@ -80,7 +80,7 @@ public class Shooter extends Entity {
     }
 
     private void shooterMovement() {
-        if (mainGame.client) {
+        if (mg.client) {
             if (onPath && searchTicks >= Math.random() * 55) {
                 getNearestPlayerMultiplayer();
                 searchPath(goalCol, goalRow);

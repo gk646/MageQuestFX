@@ -31,7 +31,7 @@ public class SecondaryFire extends Projectile {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePosition = mainGame.motionHandler.mousePosition;
+        this.mousePosition = mainGame.motionH.mousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
         this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;

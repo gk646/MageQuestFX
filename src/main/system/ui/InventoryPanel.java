@@ -18,10 +18,10 @@ public class InventoryPanel {
     public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600;
     public MainGame mg;
     public InventorySlot[] char_Slots;
-    public Point previousMousePosition = new Point(300, 300);
+    public Point previousMousePosition = new Point(300, 300), lastCharPosition = new Point(charPanelX, charPanelY), lastBagPosition = new Point(bagPanelX, bagPanelY);
     Item grabbedItem;
     InventorySlot grabbedSlot;
-    public Rectangle charPanelCloser, bagPanelCloser, charPanelMover, bagPanelMover;
+    public Rectangle charPanelCloser, bagPanelCloser, charPanelMover, bagPanelMover, wholeCharWindow, wholeBagWindow;
 
     public InventoryPanel(MainGame mainGame) {
         this.mg = mainGame;
@@ -35,6 +35,9 @@ public class InventoryPanel {
         charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 410, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
+        wholeCharWindow = new Rectangle(charPanelX, charPanelY, 500, 650);
+        wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 310, 410);
+        hideCollision();
     }
 
     //todo add moveable windows and recenter button
@@ -42,9 +45,9 @@ public class InventoryPanel {
         g2.setFont(mg.ui.maruMonica);
         interactWithWindows();
         drawDragandDrop();
-        drawBagPanel(g2, bagPanelX, bagPanelY);
         drawCharPanel(g2, charPanelX, charPanelY);
-
+        lastCharPosition.x = charPanelX;
+        lastCharPosition.y = charPanelY;
     }
 
     public void drawBagWindow(Graphics2D g2) {
@@ -52,6 +55,8 @@ public class InventoryPanel {
         interactWithWindows();
         drawDragandDrop();
         drawBagPanel(g2, bagPanelX, bagPanelY);
+        lastBagPosition.x = bagPanelX;
+        lastBagPosition.y = bagPanelY;
     }
 
     public void drawCharPanel(Graphics2D g2, int startX, int startY) {
@@ -65,9 +70,9 @@ public class InventoryPanel {
     }
 
     public int drawDragandDrop() {
-        if (grabbedItem == null && mg.mouseHandler.mouse1Pressed) {
+        if (grabbedItem == null && mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.mouseHandler.mouse1Position) && invSlot.item != null) {
+                if (invSlot.boundBox.contains(mg.mouseH.mouse1Position) && invSlot.item != null) {
                     invSlot.grabbed = true;
                     grabbedSlot = invSlot;
                     grabbedItem = invSlot.item;
@@ -75,7 +80,7 @@ public class InventoryPanel {
                 }
             }
             for (InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.boundBox.contains(mg.mouseHandler.mouse1Position) && bagSlot.item != null) {
+                if (bagSlot.boundBox.contains(mg.mouseH.mouse1Position) && bagSlot.item != null) {
                     bagSlot.grabbed = true;
                     grabbedSlot = bagSlot;
                     grabbedItem = bagSlot.item;
@@ -83,9 +88,9 @@ public class InventoryPanel {
                 }
             }
         }
-        if (grabbedItem != null && !mg.mouseHandler.mouse1Pressed) {
+        if (grabbedItem != null && !mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.motionHandler.lastMousePosition) && invSlot != grabbedSlot) {
+                if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
                     invSlot.setItem(grabbedItem);
                     grabbedSlot.item = null;
                     grabbedItem = null;
@@ -94,7 +99,7 @@ public class InventoryPanel {
                 }
             }
             for (InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.boundBox.contains(mg.motionHandler.lastMousePosition) && bagSlot != grabbedSlot) {
+                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot != grabbedSlot) {
                     bagSlot.setItem(grabbedItem);
                     grabbedSlot.item = null;
                     grabbedItem = null;
@@ -105,43 +110,41 @@ public class InventoryPanel {
             grabbedSlot.grabbed = false;
             grabbedItem = null;
         }
-        if (mg.mouseHandler.mouse2Pressed) {
-            grabbedSlot.grabbed = false;
-            grabbedItem = null;
-        }
         return 0;
     }
 
     public void interactWithWindows() {
-        if (mg.mouseHandler.mouse1Pressed && charPanelMover.contains(mg.motionHandler.lastMousePosition)) {
-            charPanelX += mg.motionHandler.lastMousePosition.x - previousMousePosition.x;
-            charPanelY += mg.motionHandler.lastMousePosition.y - previousMousePosition.y;
-        } else if (mg.mouseHandler.mouse1Pressed && bagPanelMover.contains(mg.motionHandler.lastMousePosition)) {
-            bagPanelX += mg.motionHandler.lastMousePosition.x - previousMousePosition.x;
-            bagPanelY += mg.motionHandler.lastMousePosition.y - previousMousePosition.y;
-        } else if (mg.mouseHandler.mouse1Pressed && charPanelCloser.contains(mg.motionHandler.lastMousePosition)) {
+        if (mg.mouseH.mouse1Pressed && charPanelMover.contains(mg.motionH.lastMousePosition)) {
+            charPanelX += mg.motionH.lastMousePosition.x - previousMousePosition.x;
+            charPanelY += mg.motionH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.mouseH.mouse1Pressed && bagPanelMover.contains(mg.motionH.lastMousePosition)) {
+            bagPanelX += mg.motionH.lastMousePosition.x - previousMousePosition.x;
+            bagPanelY += mg.motionH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.mouseH.mouse1Pressed && charPanelCloser.contains(mg.motionH.lastMousePosition)) {
             //close char
-        } else if (mg.mouseHandler.mouse1Pressed && bagPanelCloser.contains(mg.motionHandler.lastMousePosition)) {
+        } else if (mg.mouseH.mouse1Pressed && bagPanelCloser.contains(mg.motionH.lastMousePosition)) {
             //close bag
         }
-        previousMousePosition = mg.motionHandler.lastMousePosition;
+        previousMousePosition = mg.motionH.lastMousePosition;
     }
 
     public void drawCharacterBackground(Graphics2D g2, int startX, int startY) {
         //inventory background
         //big background
+        wholeCharWindow.x = startX - 65;
+        wholeCharWindow.y = startY - 65;
         g2.setColor(new Color(192, 203, 220, 220));
-        g2.fillRoundRect(startX - 50, startY - 65, 500, 600, 25, 25);
+        g2.fillRoundRect(startX - 50, startY - 65, 500, 650, 25, 25);
         //outline
         g2.setColor(darkBackground);
-        g2.drawRoundRect(startX, startY, 400, 550, 30, 30);
+        g2.drawRoundRect(startX - 50, startY - 65, 500, 650, 30, 30);
         //window mover
         g2.setColor(darkBackground);
-        g2.drawRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
+        g2.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
         charPanelMover.x = startX - 50;
         charPanelMover.y = startY - 65 + 2 - 10;
         //window close button
-        g2.setColor(Color.gray);
+        g2.setColor(Color.red);
         g2.drawRoundRect(startX + 500 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
         charPanelCloser.x = startX - 50 + 500 - 30;
         charPanelCloser.y = startY - 65 + 2;
@@ -165,7 +168,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = (i * 50 + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + startX, (i * 50 + 130 + startY));
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionHandler.lastMousePosition.x - SLOT_SIZE / 2, mg.motionHandler.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, 40 + startX, ((i * 50) + 130 + startY), SLOT_SIZE);
             }
@@ -175,7 +178,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = (((i - 4) * 50) + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + 270 + startX, (((i - 4) * 50) + 130 + startY));
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionHandler.lastMousePosition.x - SLOT_SIZE / 2, mg.motionHandler.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, 40 + 270 + startX, ((i - 4) * 50) + 130 + startY, SLOT_SIZE);
             }
@@ -185,7 +188,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = 110 + 240 + startY;
             char_Slots[i].drawSlot(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY);
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionHandler.lastMousePosition.x - SLOT_SIZE / 2, mg.motionHandler.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY, SLOT_SIZE);
             }
@@ -194,6 +197,8 @@ public class InventoryPanel {
     }
 
     public void drawBagBackground(Graphics2D g2, int startX, int startY) {
+        wholeBagWindow.x = startX;
+        wholeBagWindow.y = startY;
         //big background
         g2.setColor(new Color(192, 203, 220, 220));
         g2.fillRoundRect(startX, startY, 310, 410, 15, 15);
@@ -210,6 +215,7 @@ public class InventoryPanel {
         g2.fillRoundRect(startX + 310 - 30, startY, 30, 30, 15, 15);
         bagPanelCloser.x = startX + 310;
         bagPanelCloser.y = startY;
+
     }
 
     public void drawBagSlots(Graphics2D g2, int startX, int startY) {
@@ -219,7 +225,7 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 40 + startY;
                 bag_Slots[i].drawSlot(g2, i * 50 + startX + 20, 40 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    bag_Slots[i].drawIcon(g2, mg.motionHandler.lastMousePosition.x - SLOT_SIZE / 2, mg.motionHandler.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                    bag_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, i * 50 + startX + 20, 40 + startY, SLOT_SIZE);
                 }
@@ -228,12 +234,26 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 90 + startY;
                 bag_Slots[i].drawSlot(g2, (i - 7) * 50 + startX + 20, 90 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    bag_Slots[i].drawIcon(g2, mg.motionHandler.lastMousePosition.x - SLOT_SIZE / 2, mg.motionHandler.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                    bag_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, (i - 7) * 50 + startX + 20, 90 + startY, SLOT_SIZE);
                 }
             }
         }
+    }
+
+    public void hideCollision() {
+        wholeCharWindow.x = -1000;
+        wholeCharWindow.y = -1000;
+        wholeBagWindow.x = -1000;
+        wholeBagWindow.y = -1000;
+    }
+
+    public void resetCollision() {
+        wholeCharWindow.x = lastCharPosition.x;
+        wholeCharWindow.y = lastCharPosition.y;
+        wholeBagWindow.x = lastBagPosition.x;
+        wholeBagWindow.y = lastBagPosition.y;
     }
 
     private void createCharSlots() {

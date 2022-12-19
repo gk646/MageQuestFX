@@ -130,15 +130,28 @@ public class KeyHandler implements KeyListener {
         }
         //Drawing Inventor Panel
         if (code == 'c') {
-            if (mg.gameState == mg.playState) {
-                mg.gameState = mg.inventory;
+            if (!mg.showChar) {
+                mg.inventP.resetCollision();
+                mg.showChar = true;
                 window.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            } else if (mg.gameState == mg.inventory) {
-                mg.gameState = mg.playState;
+            } else {
+                mg.inventP.hideCollision();
+                mg.showChar = false;
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-                mg.requestFocusInWindow();
             }
         }
+        if (code == 'b') {
+            if (!mg.showBag) {
+                mg.inventP.resetCollision();
+                mg.showBag = true;
+                window.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            } else {
+                mg.inventP.hideCollision();
+                mg.showBag = false;
+                window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+            }
+        }
+
     }
 
     @Override
@@ -171,7 +184,7 @@ public class KeyHandler implements KeyListener {
                 fpressed = true;
             }
         }
-        if (code == KeyEvent.VK_B) {
+        if (code == KeyEvent.VK_H) {
             debugFps = true;
             mg.player.mana = mg.player.maxMana;
         }
@@ -197,7 +210,7 @@ public class KeyHandler implements KeyListener {
                 TwoPressed = false;
             }
         }
-        if (code == KeyEvent.VK_B) {
+        if (code == KeyEvent.VK_H) {
             debugFps = false;
             mg.player.mana = mg.player.maxMana;
         }

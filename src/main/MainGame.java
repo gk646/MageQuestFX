@@ -38,7 +38,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int tileSize = 48;
     public int gameState;
     public String player2Information = "";
-    public boolean client = false;
+    public final MotionHandler motionH = new MotionHandler();
 
 
     //Game thread
@@ -46,10 +46,10 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------Input-----------
-
-    public final MotionHandler motionHandler = new MotionHandler();
-    public final MouseHandler mouseHandler = new MouseHandler(motionHandler);
+    public final MouseHandler mouseH = new MouseHandler(motionH);
     public final KeyHandler keyHandler = new KeyHandler(this);
+    public final Player player = new Player(this, keyHandler, mouseH, motionH);
+
 
     //---------GAME-STATES-----------
 
@@ -59,7 +59,6 @@ public class MainGame extends JPanel implements Runnable {
     public final int optionState = 2;
     public final int talentState = 3;
     public final int gameOver = 4;
-    public final int inventory = 5;
 
 
     //---------System---------
@@ -67,13 +66,13 @@ public class MainGame extends JPanel implements Runnable {
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final WorldRender wRender = new WorldRender(this);
     public final Entity entity = new Entity(this);
-    public final Player player = new Player(this, keyHandler, mouseHandler, motionHandler);
+    final Projectile projectile = new Projectile(this, mouseH);
     public final Player2 player2 = new Player2(this);
-    final Projectile projectile = new Projectile(this, mouseHandler);
+    public final PathFinder pathF = new PathFinder(this);
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final UI ui = new UI(this);
-    public final PathFinder pathFinder = new PathFinder(this);
-    InventoryPanel inventoryPanel = new InventoryPanel(this);
+    public boolean client = false, showBag, showChar;
+    public InventoryPanel inventP = new InventoryPanel(this);
 
     /**
      * Main game loop class
@@ -84,9 +83,9 @@ public class MainGame extends JPanel implements Runnable {
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
-        this.addMouseListener(mouseHandler);
+        this.addMouseListener(mouseH);
         this.setFocusable(true);
-        this.addMouseMotionListener(motionHandler);
+        this.addMouseMotionListener(motionH);
         this.setOpaque(false);
         gameState = titleState;
 
@@ -131,7 +130,7 @@ public class MainGame extends JPanel implements Runnable {
                     if (gameState == playState) {
                         player.update();
                         entity.updatePos();
-                    } else if (gameState == optionState || gameState == inventory) {
+                    } else if (gameState == optionState) {
                         entity.updatePos();
                     }
                     difference = 0;
@@ -149,7 +148,7 @@ public class MainGame extends JPanel implements Runnable {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-                    if (gameState == playState || gameState == optionState || gameState == inventory) {
+                    if (gameState == playState || gameState == optionState) {
                         projectile.update();
                         difference = 0;
                     }
@@ -166,7 +165,7 @@ public class MainGame extends JPanel implements Runnable {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-                    if (gameState == playState || gameState == optionState || gameState == inventory || gameState == talentState) {
+                    if (gameState == playState || gameState == optionState || gameState == talentState) {
                         if (keyHandler.debugFps && keyHandler.fpressed) {
                             multiplayer.startMultiplayerClient();
                         }
@@ -212,14 +211,12 @@ public class MainGame extends JPanel implements Runnable {
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
-        }
-        if (gameState == inventory) {
-            wRender.draw(g2);
-            projectile.draw(g2);
-            entity.draw(g2);
-            player2.draw(g2);
-            player.draw(g2);
-            inventoryPanel.drawCharacterWindow(g2);
+            if (showBag) {
+                inventP.drawBagWindow(g2);
+            }
+            if (showChar) {
+                inventP.drawCharacterWindow(g2);
+            }
         }
         if (gameState == talentState) {
             wRender.draw(g2);

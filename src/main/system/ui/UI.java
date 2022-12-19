@@ -54,8 +54,6 @@ public class UI implements ActionListener, ChangeListener {
             drawTitleScreen();
         } else if (mg.gameState == mg.talentState) {
             drawTalentTree();
-        } else if (mg.gameState == mg.inventory) {
-            drawInventory();
         }
 
     }
@@ -172,10 +170,6 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     public void drawGameOver() {
-
-    }
-
-    public void drawInventory() {
 
     }
 
