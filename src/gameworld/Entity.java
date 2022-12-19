@@ -67,10 +67,6 @@ public class Entity {
 
     public void updatePos() {
         try {
-            if (!initializeEnemies) {
-                spawnEnemies();
-                initializeEnemies = true;
-            }
             for (Entity entity : mg.ENTITIES) {
                 entity.updatePos();
                 if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
@@ -91,6 +87,12 @@ public class Entity {
                 }
             }
         } catch (ConcurrentModificationException ignored) {
+        }
+    }
+
+    public void updatePosSingleplayer() {
+        for (Entity entity : mg.ENTITIES) {
+            entity.updatePos();
         }
     }
 
