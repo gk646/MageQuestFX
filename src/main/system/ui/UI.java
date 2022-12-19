@@ -41,7 +41,6 @@ public class UI implements ActionListener, ChangeListener {
         }
         getUIImage();
         this.dragListener = new DragListener();
-        //skillTree = new SkilltreeWindow();
     }
 
     public void draw(Graphics2D g2) {
@@ -126,6 +125,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawString((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
     }
+
     public void drawOptions() {
         g2.setColor(lightBackgroundAlpha);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
