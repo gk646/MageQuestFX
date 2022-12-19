@@ -48,7 +48,7 @@ public class MainGame extends JPanel implements Runnable {
     //---------Input-----------
     public final MouseHandler mouseH = new MouseHandler(motionH);
     public final KeyHandler keyHandler = new KeyHandler(this);
-    public final Player player = new Player(this, keyHandler, mouseH, motionH);
+
 
 
     //---------GAME-STATES-----------
@@ -67,6 +67,7 @@ public class MainGame extends JPanel implements Runnable {
     public final WorldRender wRender = new WorldRender(this);
     public final Entity entity = new Entity(this);
     final Projectile projectile = new Projectile(this, mouseH);
+    public final Player player = new Player(this, keyHandler, mouseH, motionH);
     public final Player2 player2 = new Player2(this);
     public final PathFinder pathF = new PathFinder(this);
     final Multiplayer multiplayer = new Multiplayer(this, player2);

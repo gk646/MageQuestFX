@@ -178,9 +178,7 @@ public class Entity {
         } else if (mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * mg.tileSize;
             int nextY = mg.pathF.pathList.get(0).row * mg.tileSize;
-
             decideMovement(nextX, nextY);
-
             nextCol1 = mg.pathF.pathList.get(0).col;
             nextRow1 = mg.pathF.pathList.get(0).row;
             if (mg.pathF.pathList.size() >= 2) {
