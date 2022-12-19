@@ -50,7 +50,6 @@ public class MainGame extends JPanel implements Runnable {
     public final KeyHandler keyHandler = new KeyHandler(this);
 
 
-
     //---------GAME-STATES-----------
 
     public final int titleOption = -1;

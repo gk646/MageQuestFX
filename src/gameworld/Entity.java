@@ -1,6 +1,7 @@
 package gameworld;
 
 import gameworld.entitys.Grunt;
+import gameworld.entitys.Owly;
 import main.MainGame;
 
 import java.awt.Color;
@@ -118,6 +119,7 @@ public class Entity {
         for (int i = 0; i < 100; i++) {
             mg.ENTITIES.add(new Grunt(mg, 11200, 11200, 11111));
         }
+        mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));
     }
 
     private void decideMovement(int nextX, int nextY) {

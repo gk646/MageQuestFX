@@ -25,8 +25,8 @@ public class SecondaryFire extends Projectile {
 
         //-------VALUES-----------
         this.movementSpeed = 3;
-        this.entityHeight = 25;
-        this.entityWidth = 25;
+        this.entityHeight = 32;
+        this.entityWidth = 32;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.direction = "downleftrightup";
 
