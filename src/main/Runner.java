@@ -29,7 +29,7 @@ public class Runner {
         MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         window.setSize(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         //window.addKeyListener(new KeyHandler(mainGame));
-        window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+        window.setCursor(new Cursor(Cursor.HAND_CURSOR));
         try {
             Image image = ImageIO.read((Objects.requireNonNull(Runner.class.getResourceAsStream("/resources/icon/icon.png"))));
             window.setIconImage(image);

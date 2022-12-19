@@ -24,7 +24,6 @@ public class InventoryPanel extends JPanel {
     public InventoryPanel(MainGame mainGame) {
         this.setSize(new Dimension(1000, 750));
         setBackground(new Color(192, 203, 220, 255));
-        //todo panel inside panel
         this.mg = mainGame;
         this.motionL = mg.motionHandler;
         this.mouseL = mg.mouseHandler;
@@ -39,7 +38,7 @@ public class InventoryPanel extends JPanel {
         char_Slots[1].setItem(new ARM_head02());
     }
 
-
+    //todo add moveable windows and recenter button
     public void draw(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
         drawDragandDrop();

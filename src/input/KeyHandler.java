@@ -3,9 +3,11 @@ package input;
 import main.MainGame;
 import main.Runner;
 
-import java.awt.Cursor;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import static main.Runner.window;
 
 public class KeyHandler implements KeyListener {
     public final MainGame mg;
@@ -36,6 +38,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
                     mg.gameState = mg.playState;
+                    window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
                 } else if (mg.ui.commandNum == 1) {
                     mg.gameState = mg.titleOption;
                     mg.ui.commandNum = 0;
@@ -95,6 +98,7 @@ public class KeyHandler implements KeyListener {
         }
         if (code == '\u001B') {
             if (mg.gameState == mg.optionState) {
+                window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
                 mg.gameState = mg.playState;
                 try {
                     Thread.sleep(15);
@@ -102,6 +106,7 @@ public class KeyHandler implements KeyListener {
                     throw new RuntimeException(ex);
                 }
             } else if (mg.gameState == mg.playState) {
+                window.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 mg.gameState = mg.optionState;
                 try {
                     Thread.sleep(15);
@@ -115,10 +120,10 @@ public class KeyHandler implements KeyListener {
         if (code == 'n') {
             if (mg.gameState == mg.playState) {
                 mg.gameState = mg.talentState;
-                Runner.window.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                window.setCursor(new Cursor(Cursor.HAND_CURSOR));
             } else if (mg.gameState == mg.talentState) {
                 mg.gameState = mg.playState;
-                Runner.window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+                window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
                 Runner.skillTree.setVisible(false);
                 mg.requestFocusInWindow();
             }
@@ -127,10 +132,10 @@ public class KeyHandler implements KeyListener {
         if (code == 'c') {
             if (mg.gameState == mg.playState) {
                 mg.gameState = mg.inventory;
-                Runner.window.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                window.setCursor(new Cursor(Cursor.HAND_CURSOR));
             } else if (mg.gameState == mg.inventory) {
                 mg.gameState = mg.playState;
-                Runner.window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+                window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
                 Runner.inventP.setVisible(false);
                 mg.requestFocusInWindow();
             }
