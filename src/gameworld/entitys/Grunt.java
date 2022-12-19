@@ -22,7 +22,6 @@ public class Grunt extends Entity {
      */
     public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth) {
         super(mainGame);
-
         //Setting default values
         this.maxHealth = maxHealth;
         this.health = maxHealth;
@@ -36,6 +35,7 @@ public class Grunt extends Entity {
         this.onPath = true;
         getDisplayImage();
         this.searchTicks = 60;
+        updatePos();
     }
 
     public void update() {
