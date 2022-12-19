@@ -131,6 +131,7 @@ public class MainGame extends JPanel implements Runnable {
                     if (gameState == playState) {
                         player.update();
                         entity.updatePos();
+                        projectile.updateProjectilePos();
                     } else if (gameState == optionState) {
                         entity.updatePos();
                     }
@@ -217,6 +218,9 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (showChar) {
                 inventP.drawCharacterWindow(g2);
+            }
+            if (showBag || showChar) {
+                inventP.drawDragAndDrop(g2);
             }
         }
         if (gameState == talentState) {

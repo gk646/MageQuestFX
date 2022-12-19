@@ -44,7 +44,6 @@ public class InventoryPanel {
     public void drawCharacterWindow(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
         interactWithWindows();
-        drawDragAndDrop();
         drawCharPanel(g2, charPanelX, charPanelY);
         lastCharPosition.x = charPanelX;
         lastCharPosition.y = charPanelY;
@@ -53,7 +52,6 @@ public class InventoryPanel {
     public void drawBagWindow(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
         interactWithWindows();
-        drawDragAndDrop();
         drawBagPanel(g2, bagPanelX, bagPanelY);
         lastBagPosition.x = bagPanelX;
         lastBagPosition.y = bagPanelY;
@@ -69,7 +67,10 @@ public class InventoryPanel {
         drawBagSlots(g2, startX, startY);
     }
 
-    public int drawDragAndDrop() {
+    public int drawDragAndDrop(Graphics2D g2) {
+        if (grabbedItem != null) {
+            g2.drawImage(grabbedItem.icon, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE, SLOT_SIZE, null);
+        }
         if (grabbedItem == null && mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
                 if (invSlot.boundBox.contains(mg.mouseH.mouse1Position) && invSlot.item != null) {
@@ -93,6 +94,7 @@ public class InventoryPanel {
                 if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
                     invSlot.setItem(grabbedItem);
                     grabbedSlot.item = null;
+                    grabbedSlot.grabbed = false;
                     grabbedItem = null;
                     grabbedSlot = null;
                     return 1;
@@ -102,6 +104,7 @@ public class InventoryPanel {
                 if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot != grabbedSlot) {
                     bagSlot.setItem(grabbedItem);
                     grabbedSlot.item = null;
+                    grabbedSlot.grabbed = false;
                     grabbedItem = null;
                     grabbedSlot = null;
                     return 1;
@@ -109,6 +112,7 @@ public class InventoryPanel {
             }
             grabbedSlot.grabbed = false;
             grabbedItem = null;
+            grabbedSlot = null;
         }
         return 0;
     }
@@ -172,7 +176,6 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = (i * 50 + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + startX, (i * 50 + 130 + startY));
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, 40 + startX, ((i * 50) + 130 + startY), SLOT_SIZE);
             }
@@ -182,7 +185,6 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = (((i - 4) * 50) + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + 270 + startX, (((i - 4) * 50) + 130 + startY));
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, 40 + 270 + startX, ((i - 4) * 50) + 130 + startY, SLOT_SIZE);
             }
@@ -192,7 +194,6 @@ public class InventoryPanel {
             char_Slots[i].boundBox.y = 110 + 240 + startY;
             char_Slots[i].drawSlot(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY);
             if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
             } else if (char_Slots[i].item != null) {
                 char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY, SLOT_SIZE);
             }
@@ -232,7 +233,7 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 60 + startY;
                 bag_Slots[i].drawSlot(g2, i * 50 + startX + 10, 60 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    bag_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
+                    System.out.println("hey");
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, i * 50 + startX + 10, 60 + startY, SLOT_SIZE);
                 }
@@ -241,7 +242,6 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 110 + startY;
                 bag_Slots[i].drawSlot(g2, (i - 7) * 50 + startX + 10, 110 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    bag_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, (i - 7) * 50 + startX + 10, 110 + startY, SLOT_SIZE);
                 }
@@ -250,7 +250,6 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 160 + startY;
                 bag_Slots[i].drawSlot(g2, (i - 14) * 50 + startX + 10, 160 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    bag_Slots[i].drawIcon(g2, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE);
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, (i - 14) * 50 + startX + 10, 160 + startY, SLOT_SIZE);
                 }

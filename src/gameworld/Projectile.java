@@ -60,11 +60,22 @@ public class Projectile extends Entity {
                         }
                         entity.hpBarOn = true;
                     }
+                    if (projectile.dead && projectile instanceof PrimaryFire) {
+                        mainGame.PROJECTILES.remove(projectile);
+                    }
                 }
-                projectile.update();
                 if (projectile.dead) {
                     mainGame.PROJECTILES.remove(projectile);
                 }
+            }
+        } catch (ConcurrentModificationException ignored) {
+        }
+    }
+
+    public void updateProjectilePos() {
+        try {
+            for (Projectile projectile : mainGame.PROJECTILES) {
+                projectile.update();
             }
         } catch (ConcurrentModificationException ignored) {
         }

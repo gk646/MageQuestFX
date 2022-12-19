@@ -57,6 +57,7 @@ public class Ability1 extends Projectile {
 
     }
 
+
     private void getUpdateVector() {
         if (version == 0) {
             this.updateVector.x = movementSpeed;

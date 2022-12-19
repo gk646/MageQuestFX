@@ -50,8 +50,8 @@ class ARM_chest01 extends Item implements ImageSetup {
 
     @Override
     public void getImages() {
-        icon = setup("items", "ARM_chest01.png");
-        droppedIcon = setup("items", "ARM_chest01_icon.png");
+        icon = setup("items/chest", "4.png");
+
     }
 
 }
@@ -94,8 +94,7 @@ class ARM_chest02 extends Item implements ImageSetup {
 
     @Override
     public void getImages() {
-        icon = setup("items", "ARM_chest01.png");
-        droppedIcon = setup("items", "ARM_chest01_icon.png");
+        icon = setup("items/chest", "4.png");
     }
 
 }
