@@ -18,7 +18,6 @@ public class InventoryPanel {
     public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600;
     public MainGame mg;
     public InventorySlot[] char_Slots;
-    public boolean showBags;
     public Point previousMousePosition = new Point(300, 300);
     Item grabbedItem;
     InventorySlot grabbedSlot;
@@ -29,8 +28,8 @@ public class InventoryPanel {
         bag_Slots = new InventorySlot[BAG_SLOTS];
         char_Slots = new InventorySlot[CHAR_SLOTS];
         this.grabbedItem = null;
-        createCharSlots(260, 200);
-        createBagSlots(770, 200);
+        createCharSlots();
+        createBagSlots();
         char_Slots[1].setItem(new ARM_chest02());
         charPanelMover = new Rectangle(charPanelX, charPanelY, 500, 50);
         charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
@@ -195,7 +194,6 @@ public class InventoryPanel {
     }
 
     public void drawBagBackground(Graphics2D g2, int startX, int startY) {
-        //inventory background
         //big background
         g2.setColor(new Color(192, 203, 220, 220));
         g2.fillRoundRect(startX, startY, 310, 410, 15, 15);
@@ -238,25 +236,25 @@ public class InventoryPanel {
         }
     }
 
-    private void createCharSlots(int startX, int startY) {
+    private void createCharSlots() {
         for (int i = 0; i <= 3; i++) {
-            char_Slots[i] = new InventorySlot(null, 40 + startX, (i * 50) + 130 + startY);
+            char_Slots[i] = new InventorySlot(null, 40 + 260, (i * 50) + 130 + 200);
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i] = new InventorySlot(null, 40 + 270 + startX, ((i - 4) * 50) + 130 + startY);
+            char_Slots[i] = new InventorySlot(null, 40 + 270 + 260, ((i - 4) * 50) + 130 + 200);
         }
         for (int i = 8; i <= 9; i++) {
-            char_Slots[i] = new InventorySlot(null, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY);
+            char_Slots[i] = new InventorySlot(null, ((i - 8) * 50) + 140 + 260, 110 + 240 + 200);
         }
     }
 
 
-    private void createBagSlots(int startX, int startY) {
+    private void createBagSlots() {
         for (int i = 0; i <= 9; i++) {
-            bag_Slots[i] = new InventorySlot(null, (i * 50) + 40 + startX, 130 + startY);
+            bag_Slots[i] = new InventorySlot(null, (i * 50) + 40 + 770, 130 + 200);
         }
         for (int i = 10; i < 15; i++) {
-            bag_Slots[i] = new InventorySlot(null, ((i - 10) * 50) + 40 + startX, 130 + startY + 50);
+            bag_Slots[i] = new InventorySlot(null, ((i - 10) * 50) + 40 + 770, 130 + 200 + 50);
 
         }
     }
