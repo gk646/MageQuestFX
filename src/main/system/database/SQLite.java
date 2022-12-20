@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Comparator;
 
+
 public class SQLite {
 
 
@@ -39,8 +40,10 @@ public class SQLite {
             // }
             searchARM_CHEST(stmt);
             inverseArrayLists();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (conn != null) {
@@ -71,7 +74,6 @@ public class SQLite {
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
-                System.out.println(new_item.description);
             }
             new_item.stats = rs.getString("stats");
 

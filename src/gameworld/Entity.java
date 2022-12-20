@@ -76,7 +76,7 @@ public class Entity {
             for (Entity entity : mg.ENTITIES) {
                 entity.updatePos();
                 if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
-                    // mainGame.player.health -= 1;
+                    mg.player.health -= 1;
                     if (mg.player.health <= 0) {
                         mg.gameState = mg.gameOver;
                     }
@@ -130,8 +130,8 @@ public class Entity {
     }
 
     public void spawnEnemies() {
-        for (int i = 0; i < 100; i++) {
-            mg.ENTITIES.add(new Grunt(mg, 11200, 11200, 100));
+        for (int i = 0; i < 10; i++) {
+            mg.ENTITIES.add(new Grunt(mg, 11500, 11500, 100));
         }
         mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));
     }
