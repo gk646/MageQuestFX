@@ -1,7 +1,12 @@
 package gameworld;
 
+import main.system.Utilities;
+
+import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
 public class Item {
     public int i_id;
@@ -24,7 +29,7 @@ public class Item {
        W - weapon
        O - offhand
 
-     */ String imagePath;
+     */ public String imagePath;
     public BufferedImage icon;
 
     public BufferedImage droppedIcon;
@@ -40,10 +45,25 @@ public class Item {
 
 
     public void drawIcon(Graphics2D g2, int x, int y, int slotSize) {
+        g2.drawImage(icon, x, y, slotSize, slotSize, null);
+
     }
 
     public void draw() {
 
+    }
+
+    public BufferedImage setup(Utilities utilities, String imagePath) {
+
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
+            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
     }
 
 }

@@ -37,6 +37,7 @@ public class InventoryPanel {
         wholeCharWindow = new Rectangle(charPanelX, charPanelY, 500, 650);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         hideCollision();
+        bag_Slots[3].item = mg.CHEST.get(1);
     }
 
     //todo add movable windows and recenter button
@@ -232,7 +233,6 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.y = 60 + startY;
                 bag_Slots[i].drawSlot(g2, i * 50 + startX + 10, 60 + startY);
                 if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                    System.out.println("hey");
                 } else if (bag_Slots[i].item != null) {
                     bag_Slots[i].drawIcon(g2, i * 50 + startX + 10, 60 + startY, SLOT_SIZE);
                 }

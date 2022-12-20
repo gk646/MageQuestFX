@@ -37,7 +37,7 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
-    public final ArrayList<Item> ITEMS = new ArrayList<>();
+    public final ArrayList<Item> CHEST = new ArrayList<>();
     public final int tileSize = 48;
     public int gameState;
     public String player2Information = "";
@@ -75,8 +75,9 @@ public class MainGame extends JPanel implements Runnable {
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar;
-    public InventoryPanel inventP = new InventoryPanel(this);
     public SQLite sqLite = new SQLite(this);
+    public InventoryPanel inventP = new InventoryPanel(this);
+
 
     /**
      * Main game loop class

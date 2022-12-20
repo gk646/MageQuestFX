@@ -2,6 +2,7 @@ package main.system.database;
 
 import gameworld.Item;
 import main.MainGame;
+import main.system.Utilities;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -9,15 +10,21 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.Comparator;
 
 public class SQLite {
-    public void readItemsfromDB
-    MainGame mg;
 
-    {
-        ArrayList<Item> ITEMS = new ArrayList<>();
 
+    public MainGame mg;
+    public Utilities utilities;
+
+    public SQLite(MainGame mg) {
+        this.mg = mg;
+        this.utilities = new Utilities();
+        readItemsfromDB();
+    }
+
+    public void readItemsfromDB() {
         Connection conn = null;
         try {
             // Load the SQLite JDBC driver
@@ -35,17 +42,12 @@ public class SQLite {
             ResultSet tablesResultSet = metaData.getTables(null, null, "%", new String[]{"TABLE"});
 
             // Iterate through the ResultSet and print the table names
-            while (tablesResultSet.next()) {
-            }
+            // while (tablesResultSet.next()) {
+            // }
             // Execute a SELECT query
+            searchARM_CHEST(stmt);
             //this.s_id = String.format("%04d", i_id);
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_CHEST");
-
-            // Iterate through the results
-            while (rs.next()) {
-                Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("stats"));
-                ITEMS.add(0, new_item);
-            }
+            inverseArrayLists();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
@@ -57,12 +59,30 @@ public class SQLite {
                 e.printStackTrace();
             }
         }
-        for (Item item : ITEMS) {
-            System.out.println(item.stats);
+        for (Item item : mg.CHEST) {
+            // System.out.println(item.imagePath);
         }
     }
 
-    SQLite(MainGame mg) {
-        this.mg = mg;
+
+    private void inverseArrayLists() {
+        mg.CHEST.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.CHEST.add(0, new Item(0, "FILLER", 10, "2", "d", "INT 1000"));
+    }
+
+    private void searchARM_CHEST(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_CHEST");
+
+        // Iterate through the results
+        while (rs.next()) {
+            if (rs.getInt("i_id") == 0 || rs.getString("imagePath") == null || rs.getString("name") == null) {
+                continue;
+            }
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("stats"));
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.CHEST.add(0, new_item);
+        }
+
     }
 }
+
