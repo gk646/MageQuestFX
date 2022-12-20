@@ -70,25 +70,26 @@ public class Owly extends Entity {
     }
 
     public void draw(Graphics2D g2) {
-        if (spriteCounter <= 13) {
+        if (spriteCounter <= 8) {
             g2.drawImage(entityImage1, screenX, screenY, entityWidth, entityHeight, null);
         }
-        if (spriteCounter >= 13) {
+        if (spriteCounter >= 9 && spriteCounter <= 17) {
             g2.drawImage(entityImage2, screenX, screenY, entityWidth, entityHeight, null);
         }
-        if (spriteCounter >= 26) {
+        if (spriteCounter >= 18 && spriteCounter <= 24) {
             g2.drawImage(entityImage3, screenX, screenY, entityWidth, entityHeight, null);
         }
-        if (spriteCounter >= 39) {
+        if (spriteCounter >= 25 && spriteCounter <= 33) {
             g2.drawImage(entityImage4, screenX, screenY, entityWidth, entityHeight, null);
         }
-        if (spriteCounter >= 52) {
+        if (spriteCounter >= 34 && spriteCounter <= 42) {
             g2.drawImage(entityImage5, screenX, screenY, entityWidth, entityHeight, null);
         }
-        if (spriteCounter >= 65) {
+        if (spriteCounter >= 43 && spriteCounter <= 51) {
             g2.drawImage(entityImage6, screenX, screenY, entityWidth, entityHeight, null);
             spriteCounter = 0;
         }
+
         spriteCounter++;
     }
 

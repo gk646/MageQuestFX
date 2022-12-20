@@ -1,9 +1,23 @@
 package main.system.database;
 
-import java.sql.*;
+import gameworld.Item;
+import main.MainGame;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SQLite {
-    public static void main(String[] args) {
+    public void readItemsfromDB
+    MainGame mg;
+
+    {
+        ArrayList<Item> ITEMS = new ArrayList<>();
+
         Connection conn = null;
         try {
             // Load the SQLite JDBC driver
@@ -22,22 +36,15 @@ public class SQLite {
 
             // Iterate through the ResultSet and print the table names
             while (tablesResultSet.next()) {
-                String tableName = tablesResultSet.getString("TABLE_NAME");
-                System.out.println("Table name: " + tableName);
             }
-
             // Execute a SELECT query
+            //this.s_id = String.format("%04d", i_id);
             ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_CHEST");
 
             // Iterate through the results
             while (rs.next()) {
-                int i_id = rs.getInt("i_id");
-                String name = rs.getString("name");
-                int rarity = rs.getInt("rarity");
-                String type = rs.getString("type");
-                String imagePath = rs.getString("imagePath");
-                System.out.println(name);
-                // Process the retrieved values ...
+                Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("stats"));
+                ITEMS.add(0, new_item);
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -50,5 +57,12 @@ public class SQLite {
                 e.printStackTrace();
             }
         }
+        for (Item item : ITEMS) {
+            System.out.println(item.stats);
+        }
+    }
+
+    SQLite(MainGame mg) {
+        this.mg = mg;
     }
 }

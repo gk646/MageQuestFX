@@ -1,6 +1,7 @@
 package main;
 
 import gameworld.Entity;
+import gameworld.Item;
 import gameworld.Projectile;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
@@ -11,6 +12,7 @@ import main.system.CollisionChecker;
 import main.system.Multiplayer;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
+import main.system.database.SQLite;
 import main.system.ui.InventoryPanel;
 import main.system.ui.UI;
 
@@ -35,6 +37,7 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
+    public final ArrayList<Item> ITEMS = new ArrayList<>();
     public final int tileSize = 48;
     public int gameState;
     public String player2Information = "";
@@ -73,6 +76,7 @@ public class MainGame extends JPanel implements Runnable {
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar;
     public InventoryPanel inventP = new InventoryPanel(this);
+    public SQLite sqLite = new SQLite(this);
 
     /**
      * Main game loop class

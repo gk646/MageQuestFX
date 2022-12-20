@@ -30,7 +30,6 @@ public class InventoryPanel {
         this.grabbedItem = null;
         createCharSlots();
         createBagSlots();
-        char_Slots[1].setItem(new ARM_chest02());
         charPanelMover = new Rectangle(charPanelX, charPanelY, 500, 50);
         charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);

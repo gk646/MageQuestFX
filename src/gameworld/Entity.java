@@ -43,26 +43,32 @@ public class Entity {
                 initializeEnemies = true;
             }
             for (Entity entity : mg.ENTITIES) {
+
                 entity.update();
-                if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
-                    // mainGame.player.health -= 1;
-                    if (mg.player.health <= 0) {
-                        mg.gameState = mg.gameOver;
+                if (!(entity instanceof Owly)) {
+
+                    if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
+                        // mainGame.player.health -= 1;
+                        if (mg.player.health <= 0) {
+                            mg.gameState = mg.gameOver;
+                        }
+                    }
+                    if (entity.hpBarCounter >= 600) {
+                        entity.hpBarOn = false;
+                        entity.hpBarCounter = 0;
+                    }
+                    if (entity.hpBarOn) {
+                        entity.hpBarCounter++;
+                    }
+                    if (entity.health <= 0) {
+                        mg.ENTITIES.remove(entity);
                     }
                 }
-                if (entity.hpBarCounter >= 600) {
-                    entity.hpBarOn = false;
-                    entity.hpBarCounter = 0;
-                }
-                if (entity.hpBarOn) {
-                    entity.hpBarCounter++;
-                }
-                if (entity.health <= 0) {
-                    mg.ENTITIES.remove(entity);
-                }
+
             }
         } catch (ConcurrentModificationException ignored) {
         }
+
     }
 
     public void updatePos() {
@@ -91,8 +97,12 @@ public class Entity {
     }
 
     public void updatePosSingleplayer() {
-        for (Entity entity : mg.ENTITIES) {
-            entity.updatePos();
+        try {
+            for (Entity entity : mg.ENTITIES) {
+                entity.updatePos();
+            }
+        } catch (ConcurrentModificationException ignored) {
+
         }
     }
 
@@ -103,13 +113,15 @@ public class Entity {
         try {
             for (Entity entity1 : mg.ENTITIES) {
                 entity1.draw(g2);
-                if (entity1.hpBarOn) {
-                    g2.setColor(new Color(0xFF0044));
-                    g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
-                    g2.setColor(new Color(0xFFFFFF));
-                    g2.setFont(mg.ui.maruMonica);
-                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
-                    g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
+                if (!(entity1 instanceof Owly)) {
+                    if (entity1.hpBarOn) {
+                        g2.setColor(new Color(0xFF0044));
+                        g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
+                        g2.setColor(new Color(0xFFFFFF));
+                        g2.setFont(mg.ui.maruMonica);
+                        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
+                        g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
+                    }
                 }
             }
         } catch (ConcurrentModificationException ignored) {
@@ -119,7 +131,7 @@ public class Entity {
 
     public void spawnEnemies() {
         for (int i = 0; i < 100; i++) {
-            mg.ENTITIES.add(new Grunt(mg, 11200, 11200, 11111));
+            mg.ENTITIES.add(new Grunt(mg, 11200, 11200, 100));
         }
         mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));
     }
