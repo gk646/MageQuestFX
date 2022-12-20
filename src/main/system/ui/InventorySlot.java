@@ -11,7 +11,9 @@ public class InventorySlot {
     int xCo;
     int yCo;
     public Rectangle boundBox;
-    Item item;
+
+    public Item item;
+    public int toolTipTimer;
 
     InventorySlot(Item item, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);

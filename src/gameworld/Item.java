@@ -13,7 +13,7 @@ public class Item {
     public String s_id, name;
     public int quality;
     public int rarity;
-    public int durability;
+    public int durability = 100;
     public String type;
     public String stats;
     /* H - Head slot
@@ -26,31 +26,32 @@ public class Item {
        R - ring
        T - relic / talisman
 
-       W - weapon
+       W - one hand
+       2 - two hand
        O - offhand
 
      */ public String imagePath;
+    public String description;
     public BufferedImage icon;
 
     public BufferedImage droppedIcon;
 
-    public Item(int i_id, String name, int rarity, String type, String imagePath, String stats) {
+    public Item(int i_id, String name, int rarity, String type, String imagePath, String description, String stats) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
         this.type = type;
         this.imagePath = imagePath;
+        this.description = description;
         this.stats = stats;
     }
 
 
     public void drawIcon(Graphics2D g2, int x, int y, int slotSize) {
         g2.drawImage(icon, x, y, slotSize, slotSize, null);
-
     }
 
     public void draw() {
-
     }
 
     public BufferedImage setup(Utilities utilities, String imagePath) {

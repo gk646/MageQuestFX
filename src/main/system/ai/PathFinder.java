@@ -27,7 +27,7 @@ public class PathFinder {
             }
         }
     }
-
+    //todo check for end of map
     public void resetNodes(int startCol, int startRow) {
         for (int i = startCol - 16; i < startCol + 16; i++) {
             for (int b = startRow - 16; b < startRow + 16; b++) {

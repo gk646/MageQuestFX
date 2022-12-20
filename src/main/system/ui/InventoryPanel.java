@@ -3,6 +3,7 @@ package main.system.ui;
 import gameworld.Item;
 import main.MainGame;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -13,7 +14,8 @@ public class InventoryPanel {
     private static final int SLOT_SIZE = 45;
     private static final int BAG_SLOTS = 15;
     private static final int CHAR_SLOTS = 10;
-    public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(0xCAC0CBDC, true), darkBackground = new Color(90, 105, 136);
+    public final Color darkBackgroundAlpha = new Color(90, 105, 136, 200);
+    public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     private final InventorySlot[] bag_Slots;
     public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600;
     public MainGame mg;
@@ -21,6 +23,7 @@ public class InventoryPanel {
     public Point previousMousePosition = new Point(300, 300), lastCharPosition = new Point(charPanelX, charPanelY), lastBagPosition = new Point(bagPanelX, bagPanelY);
     Item grabbedItem;
     InventorySlot grabbedSlot;
+    BasicStroke width2 = new BasicStroke(2), width5 = new BasicStroke(5), width1 = new BasicStroke(1);
     public Rectangle charPanelCloser, bagPanelCloser, charPanelMover, bagPanelMover, wholeCharWindow, wholeBagWindow;
 
     public InventoryPanel(MainGame mainGame) {
@@ -43,7 +46,6 @@ public class InventoryPanel {
     //todo add movable windows and recenter button
     public void drawCharacterWindow(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
-        interactWithWindows();
         drawCharPanel(g2, charPanelX, charPanelY);
         lastCharPosition.x = charPanelX;
         lastCharPosition.y = charPanelY;
@@ -51,7 +53,6 @@ public class InventoryPanel {
 
     public void drawBagWindow(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
-        interactWithWindows();
         drawBagPanel(g2, bagPanelX, bagPanelY);
         lastBagPosition.x = bagPanelX;
         lastBagPosition.y = bagPanelY;
@@ -66,6 +67,103 @@ public class InventoryPanel {
         drawBagBackground(g2, startX, startY);
         drawBagSlots(g2, startX, startY);
     }
+
+    public void getTooltip(Graphics2D g2) {
+        if (grabbedItem == null && !mg.mouseH.mouse1Pressed) {
+            for (InventorySlot invSlot : char_Slots) {
+                if (invSlot.item != null && invSlot.toolTipTimer >= 40) {
+                    //BACKGROUND
+                    g2.setColor(lightBackgroundAlpha);
+                    g2.fillRoundRect(mg.motionH.lastMousePosition.x, mg.motionH.lastMousePosition.y, 200, 250, 15, 15);
+                    //OUTLINE
+                    if (invSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (invSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setStroke(width2);
+                    g2.drawRoundRect(mg.motionH.lastMousePosition.x + 3, mg.motionH.lastMousePosition.y + 3, 194, 244, 15, 15);
+                    g2.setStroke(width1);
+                    //NAME
+                    if (invSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (invSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23));
+                    g2.drawString(invSlot.item.name, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 35);
+                    g2.setColor(darkBackground);
+                    //STATS
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+                    g2.drawString(invSlot.item.stats, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
+                    //DESCRIPTION
+                    g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 17));
+                    g2.drawString("\"" + invSlot.item.description + "\"", mg.motionH.lastMousePosition.x + 8, mg.motionH.lastMousePosition.y + 150);
+                    //ID
+                    if (invSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (invSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 16));
+                    g2.drawString("ID: " + String.format("%04d", invSlot.item.i_id), mg.motionH.lastMousePosition.x + 151, mg.motionH.lastMousePosition.y + 237);
+
+                }
+                if (invSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
+                    invSlot.toolTipTimer++;
+                    break;
+                } else {
+                    invSlot.toolTipTimer = 0;
+                }
+            }
+            for (InventorySlot bagSlot : bag_Slots) {
+                if (bagSlot.item != null && bagSlot.toolTipTimer >= 40) {
+                    //BACKGROUND
+                    g2.setColor(lightBackgroundAlpha);
+                    g2.fillRoundRect(mg.motionH.lastMousePosition.x, mg.motionH.lastMousePosition.y, 200, 250, 15, 15);
+                    //OUTLINE
+                    if (bagSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (bagSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setStroke(width2);
+                    g2.drawRoundRect(mg.motionH.lastMousePosition.x + 3, mg.motionH.lastMousePosition.y + 3, 194, 244, 15, 15);
+                    g2.setStroke(width1);
+                    //NAME
+                    if (bagSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (bagSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23));
+                    g2.drawString(bagSlot.item.name, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 35);
+                    g2.setColor(darkBackground);
+                    //STATS
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+                    g2.drawString(bagSlot.item.stats, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
+                    //DESCRIPTION
+                    g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 17));
+                    g2.drawString("\"" + bagSlot.item.description + "\"", mg.motionH.lastMousePosition.x + 8, mg.motionH.lastMousePosition.y + 150);
+                    //ID
+                    if (bagSlot.item.rarity == 1) {
+                        g2.setColor(Color.gray);
+                    } else if (bagSlot.item.rarity == 4) {
+                        g2.setColor(Color.orange);
+                    }
+                    g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 16));
+                    g2.drawString("ID: " + String.format("%04d", bagSlot.item.i_id), mg.motionH.lastMousePosition.x + 151, mg.motionH.lastMousePosition.y + 237);
+                }
+                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
+                    bagSlot.toolTipTimer++;
+                    break;
+                } else {
+                    bagSlot.toolTipTimer = 0;
+                }
+            }
+        }
+    }
+
 
     public int drawDragAndDrop(Graphics2D g2) {
         if (grabbedItem != null) {
@@ -141,11 +239,13 @@ public class InventoryPanel {
         //big background
         wholeCharWindow.x = startX - 65;
         wholeCharWindow.y = startY - 65;
-        g2.setColor(new Color(192, 203, 220, 220));
-        g2.fillRoundRect(startX - 50, startY - 65, 500, 650, 25, 25);
+        g2.setColor(lightBackgroundAlpha);
+        g2.fillRoundRect(startX - 50, startY - 65, 500, 650, 35, 35);
         //outline
         g2.setColor(darkBackground);
-        g2.drawRoundRect(startX - 50, startY - 65, 500, 650, 30, 30);
+        g2.setStroke(width5);
+        g2.drawRoundRect(startX - 50 + 5, startY - 65 + 5, 500 - 10, 650 - 10, 30, 30);
+        g2.setStroke(width1);
         //window mover
         g2.setColor(darkBackground);
         g2.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
@@ -171,6 +271,7 @@ public class InventoryPanel {
 
     public void drawCharacterSlots(Graphics2D g2, int startX, int startY) {
         //Character Slots
+        g2.setStroke(width2);
         for (int i = 0; i <= 3; i++) {
             char_Slots[i].boundBox.x = 40 + startX;
             char_Slots[i].boundBox.y = (i * 50 + 130 + startY);
@@ -205,11 +306,13 @@ public class InventoryPanel {
         wholeBagWindow.x = startX;
         wholeBagWindow.y = startY;
         //big background
-        g2.setColor(new Color(192, 203, 220, 220));
+        g2.setColor(lightBackgroundAlpha);
         g2.fillRoundRect(startX, startY, 365, 410, 15, 15);
         //outline
+        g2.setStroke(width5);
         g2.setColor(darkBackground);
         g2.drawRoundRect(startX + 5, startY + 5, 355, 400, 25, 25);
+        g2.setStroke(width2);
         //feature pane
         g2.setColor(darkBackground);
         g2.drawRoundRect(startX + 5, startY + 31, 355, 20, 15, 15);

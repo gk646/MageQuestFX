@@ -225,6 +225,8 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (showBag || showChar) {
                 inventP.drawDragAndDrop(g2);
+                inventP.interactWithWindows();
+                inventP.getTooltip(g2);
             }
         }
         if (gameState == talentState) {
