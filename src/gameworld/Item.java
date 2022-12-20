@@ -36,14 +36,13 @@ public class Item {
 
     public BufferedImage droppedIcon;
 
-    public Item(int i_id, String name, int rarity, String type, String imagePath, String description, String stats) {
+    public Item(int i_id, String name, int rarity, String type, String imagePath, String description) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
         this.type = type;
         this.imagePath = imagePath;
         this.description = description;
-        this.stats = stats;
     }
 
 

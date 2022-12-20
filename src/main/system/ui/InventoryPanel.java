@@ -17,7 +17,7 @@ public class InventoryPanel {
     public final Color darkBackgroundAlpha = new Color(90, 105, 136, 200);
     public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     private final InventorySlot[] bag_Slots;
-    public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600;
+    public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
     public MainGame mg;
     public InventorySlot[] char_Slots;
     public Point previousMousePosition = new Point(300, 300), lastCharPosition = new Point(charPanelX, charPanelY), lastBagPosition = new Point(bagPanelX, bagPanelY);
@@ -98,7 +98,10 @@ public class InventoryPanel {
                     g2.drawString(invSlot.item.stats, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
                     //DESCRIPTION
                     g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 17));
-                    g2.drawString("\"" + invSlot.item.description + "\"", mg.motionH.lastMousePosition.x + 8, mg.motionH.lastMousePosition.y + 150);
+                    stringY = mg.motionH.lastMousePosition.y + 150;
+                    for (String string : invSlot.item.description.split("\n")) {
+                        g2.drawString(string, mg.motionH.lastMousePosition.x + 5, stringY += g2.getFontMetrics().getHeight());
+                    }
                     //ID
                     if (invSlot.item.rarity == 1) {
                         g2.setColor(Color.gray);
@@ -144,7 +147,10 @@ public class InventoryPanel {
                     g2.drawString(bagSlot.item.stats, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
                     //DESCRIPTION
                     g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 17));
-                    g2.drawString("\"" + bagSlot.item.description + "\"", mg.motionH.lastMousePosition.x + 8, mg.motionH.lastMousePosition.y + 150);
+                    stringY = mg.motionH.lastMousePosition.y + 150;
+                    for (String string : bagSlot.item.description.split("\n")) {
+                        g2.drawString(string, mg.motionH.lastMousePosition.x + 5, stringY += g2.getFontMetrics().getHeight());
+                    }
                     //ID
                     if (bagSlot.item.rarity == 1) {
                         g2.setColor(Color.gray);
