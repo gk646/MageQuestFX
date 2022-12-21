@@ -32,7 +32,6 @@ public class Player extends Entity {
     //STATS
     public int INT, VIT, REG, SPD;
 
-
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
         this.motionHandler = motionHandler;
