@@ -9,23 +9,23 @@ Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which a
 I took some inspiration from his implementation but started to develop my own ideas early on. That said for example the
 pathfinding is more heavily copied and only a modified a bit.
 
-## FEATURES:  
+## FEATURES:
+
 ### Multiplayer:
 
 You can start the same programm twice on the same PC (localhost) or different PC's ( in the same network) and play
 together!  
-The host needs to press b + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press
-b + f.  
+The host needs to press h + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press
+h + f.  
 I used java sockets with a static port (60069).  
 I didn't yet update it to work correctly with the newest pathfinding updates.
 
- 
 ## Movement:
 
 W - UP  
 A - LEFT  
 S - DOWN  
-D - RIGHT  
+D - RIGHT
 
 ## Combat:
 
@@ -42,12 +42,12 @@ B - opens bag panel
 You can drag and drop Items to different slots  
 No slot restrictions yet, no bag window yet and no item and player stats yet
 
-## Graphics:  
+## Graphics:
 
-I made most of the environment Pixel Art myself, I did take inspiration from @RyiSnow's textures and games like
-HeroSiege and other sources for some abilities etc.
+I made most of the background tiles myself, I did take inspiration from @RyiSnow's textures and games like
+HeroSiege and other sources for some abilities etc. The pixel font called x12y16pxMaruMonica was made by hicc.
 
-## Roadmap:  
+## Roadmap:
 
 Level system  
 skills / skill pane  
