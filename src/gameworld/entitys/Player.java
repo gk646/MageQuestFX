@@ -28,6 +28,7 @@ public class Player extends Entity {
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
     public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning;
+
     //STATS
     public int INT, VIT, REG, SPD;
 
