@@ -12,9 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Comparator;
 
-
 public class SQLite {
-
 
     public MainGame mg;
     public Utilities utilities;
@@ -30,7 +28,7 @@ public class SQLite {
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:src/resources/items.sqlite");
+            conn = DriverManager.getConnection("jdbc:sqlite:items.sqlite");
             Statement stmt = conn.createStatement();
             DatabaseMetaData metaData = conn.getMetaData();
             // Use the getTables method to retrieve a ResultSet containing information about the tables in the database
