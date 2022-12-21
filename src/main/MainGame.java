@@ -37,7 +37,19 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
+
+    //ITEMS
+    public final ArrayList<Item> AMULET = new ArrayList<>();
+    public final ArrayList<Item> BOOTS = new ArrayList<>();
     public final ArrayList<Item> CHEST = new ArrayList<>();
+    public final ArrayList<Item> HEAD = new ArrayList<>();
+    public final ArrayList<Item> OFFHAND = new ArrayList<>();
+    public final ArrayList<Item> ONEHAND = new ArrayList<>();
+    public final ArrayList<Item> PANTS = new ArrayList<>();
+    public final ArrayList<Item> RELICS = new ArrayList<>();
+    public final ArrayList<Item> RINGS = new ArrayList<>();
+    public final ArrayList<Item> TWOHANDS = new ArrayList<>();
+
     public final int tileSize = 48;
     public int gameState;
     public String player2Information = "";

@@ -10,6 +10,7 @@ import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
+import main.system.ui.InventorySlot;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -22,11 +23,15 @@ import java.util.Objects;
 
 public class Player extends Entity {
     public static Point startingPoint;
-    public float mana, health;
+    public float mana, health, manaRegeneration = 0.05f, healthRegeneration = 0.002f;
     public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
     public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning;
+
+    //STATS
+    public int INT, VIT, REG, SPD;
+
 
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
@@ -53,6 +58,23 @@ public class Player extends Entity {
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
 
+    }
+
+    public void updateEquippedItems() {
+        INT = 0;
+        VIT = 0;
+        SPD = 0;
+        REG = 0;
+        for (InventorySlot invSlot : mg.inventP.char_Slots) {
+            INT += invSlot.item.INT;
+            VIT += invSlot.item.VIT;
+            SPD += invSlot.item.SPD;
+            REG += invSlot.item.REG;
+        }
+        maxHealth = (int) (9f + ((10f + VIT) / (10f) + VIT) * (level + (0.5f * VIT)));
+        maxMana = (int) (9f + ((10f + INT) / (10f) + INT) * (level + (0.7 * INT)));
+        manaRegeneration = (0.05f + INT / 40f) * level;
+        movementSpeed = 4 + SPD;
     }
 
     public void update() {
@@ -139,10 +161,10 @@ public class Player extends Entity {
             cdLightning = 0;
         }
         if (mana < maxMana) {
-            mana += 0.05;
+            mana += manaRegeneration;
         }
         if (health < maxHealth) {
-            health += 0.002;
+            health += healthRegeneration;
         }
         if (cooldownPrimary < 10) {
             cooldownPrimary++;

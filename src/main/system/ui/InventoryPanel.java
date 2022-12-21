@@ -41,6 +41,8 @@ public class InventoryPanel {
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         hideCollision();
         bag_Slots[3].item = mg.CHEST.get(1);
+        bag_Slots[3].item = mg.CHEST.get(1);
+        bag_Slots[3].item = mg.CHEST.get(1);
     }
 
     //todo add movable windows and recenter button
@@ -197,6 +199,7 @@ public class InventoryPanel {
             for (InventorySlot invSlot : char_Slots) {
                 if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
                     invSlot.setItem(grabbedItem);
+                    mg.player.updateEquippedItems();
                     grabbedSlot.item = null;
                     grabbedSlot.grabbed = false;
                     grabbedItem = null;

@@ -10,12 +10,25 @@ import java.util.Objects;
 
 public class Item {
     public int i_id;
-    public String s_id, name;
+    public String name;
     public int quality;
     public int rarity;
     public int durability = 100;
-    public String type;
     public String stats;
+    /*
+        INT intellect + max mana / more damage on abilities
+        VIT vitality + max health / more health regen
+        REG mana regen + mana regeneration
+        SPD speed + movement speed
+
+     */
+    public int INT;
+    public int VIT;
+    public int REG;
+    public int SPD;
+
+    public String type;
+
     /* H - Head slot
        C - chest
        P - pants
@@ -33,8 +46,6 @@ public class Item {
      */ public String imagePath;
     public String description;
     public BufferedImage icon;
-
-    public BufferedImage droppedIcon;
 
     public Item(int i_id, String name, int rarity, String type, String imagePath, String description) {
         this.i_id = i_id;

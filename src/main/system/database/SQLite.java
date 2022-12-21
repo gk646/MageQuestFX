@@ -31,12 +31,18 @@ public class SQLite {
             conn = DriverManager.getConnection("jdbc:sqlite:items.sqlite");
             Statement stmt = conn.createStatement();
             DatabaseMetaData metaData = conn.getMetaData();
-            // Use the getTables method to retrieve a ResultSet containing information about the tables in the database
             ResultSet tablesResultSet = metaData.getTables(null, null, "%", new String[]{"TABLE"});
-            // Iterate through the ResultSet and print the table names
-            // while (tablesResultSet.next()) {
-            // }
-            searchARM_CHEST(stmt);
+            //search through all tables
+            searchAMULET(stmt);
+            searchBOOTS(stmt);
+            searchCHEST(stmt);
+            searchHEAD(stmt);
+            searchOFFHAND(stmt);
+            searchONEHAND(stmt);
+            searchPANTS(stmt);
+            searchRELICS(stmt);
+            searchRINGS(stmt);
+            searchTWOHANDS(stmt);
             inverseArrayLists();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,8 +64,26 @@ public class SQLite {
 
 
     private void inverseArrayLists() {
+        mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.BOOTS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.CHEST.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.HEAD.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.OFFHAND.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.ONEHAND.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.PANTS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.RELICS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.RINGS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.AMULET.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.BOOTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
         mg.CHEST.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.HEAD.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.OFFHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.ONEHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.PANTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.RELICS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.RINGS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
     }
 
     private void searchARM_CHEST(Statement stmt) throws SQLException {
@@ -77,6 +101,186 @@ public class SQLite {
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.CHEST.add(0, new_item);
+        }
+    }
+
+    private void searchAMULET(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_AMULET");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.AMULET.add(0, new_item);
+        }
+    }
+
+    private void searchBOOTS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_BOOTS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.BOOTS.add(0, new_item);
+        }
+    }
+
+    private void searchCHEST(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_CHEST");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.CHEST.add(0, new_item);
+        }
+    }
+
+    private void searchHEAD(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_HEAD");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.HEAD.add(0, new_item);
+        }
+    }
+
+    private void searchOFFHAND(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_OFFHAND");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.OFFHAND.add(0, new_item);
+        }
+    }
+
+    private void searchONEHAND(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_ONEHAND");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.ONEHAND.add(0, new_item);
+        }
+    }
+
+    private void searchPANTS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_PANTS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.PANTS.add(0, new_item);
+        }
+    }
+
+    private void searchRELICS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_RELICS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.RELICS.add(0, new_item);
+        }
+    }
+
+    private void searchRINGS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_RINGS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.RINGS.add(0, new_item);
+        }
+    }
+
+    private void searchTWOHANDS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_TWOHANDS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            if (new_item.description.length() >= 30) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            }
+            new_item.stats = rs.getString("stats");
+
+            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
+            mg.TWOHANDS.add(0, new_item);
         }
     }
 }
