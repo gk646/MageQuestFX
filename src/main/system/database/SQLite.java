@@ -57,11 +57,7 @@ public class SQLite {
                 e.printStackTrace();
             }
         }
-        for (Item item : mg.CHEST) {
-            // System.out.println(item.imagePath);
-        }
     }
-
 
     private void inverseArrayLists() {
         mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));
@@ -84,24 +80,6 @@ public class SQLite {
         mg.RELICS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
         mg.RINGS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
         mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-    }
-
-    private void searchARM_CHEST(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_CHEST");
-        while (rs.next()) {
-            if (rs.getString("name") == null) {
-                continue;
-            }
-            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
-            }
-            new_item.stats = rs.getString("stats");
-
-            new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
-            mg.CHEST.add(0, new_item);
-        }
     }
 
     private void searchAMULET(Statement stmt) throws SQLException {
