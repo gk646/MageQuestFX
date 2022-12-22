@@ -1,16 +1,17 @@
 package gameworld.maps;
 
-import gameworld.World;
-
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class OverWorld extends World {
+public class OverWorld {
+    public static Point worldSize;
+    public static int[][] worldData;
 
-    public static int[][] loadMap() {
+
+    public static int[][] loadOverWorld() {
         worldSize = new Point(500, 500);
         worldData = new int[worldSize.x][worldSize.y];
         try {
@@ -44,7 +45,5 @@ public class OverWorld extends World {
         return new Point(worldSize.x, worldSize.y);
     }
 
-    public static Point loadMapStartPoint() {
-        return new Point(12000, 12000);
-    }
+
 }

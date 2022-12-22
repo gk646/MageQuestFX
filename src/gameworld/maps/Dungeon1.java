@@ -1,14 +1,15 @@
 package gameworld.maps;
 
-import gameworld.World;
-
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class Dungeon1 extends World {
+public class Dungeon1 {
+    public static int[][] worldData;
+    public static Point worldSize;
+
     public static int[][] loadMap() {
         worldSize = new Point(50, 50);
         worldData = new int[worldSize.x][worldSize.y];

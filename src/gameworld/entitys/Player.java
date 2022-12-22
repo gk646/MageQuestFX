@@ -23,14 +23,15 @@ import java.util.Objects;
 
 public class Player extends Entity {
     public static Point startingPoint;
-    public float mana, health, manaRegeneration = 0.05f, healthRegeneration = 0.002f;
+    //STATS
+    public int INT, VIT, REG, SPD;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience;
+    public float mana, health, manaRegeneration = 0.02f, healthRegeneration = 0.002f;
+
     public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience;
 
-    //STATS
-    public int INT, VIT, REG, SPD;
 
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
         super(mainGame);
@@ -43,8 +44,8 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = startingPoint.x;
-        worldY = startingPoint.y;
+        worldX = 12000;
+        worldY = 12000;
         direction = "up";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 16, 31, 31);
@@ -72,9 +73,10 @@ public class Player extends Entity {
                 REG += invSlot.item.REG;
             }
         }
-        maxHealth = (int) (9f + ((10f + VIT) / (10f) + VIT) * (level + (0.5f * VIT)));
-        maxMana = (int) (19f + ((10f + INT) / (10f) + INT) * (level + (0.7 * INT)));
-        manaRegeneration = (0.05f + INT / 40f) * level;
+        maxHealth = (int) (9f + ((10f + VIT) / (10f) + VIT) * (level + (0.3f * VIT)));
+        maxMana = (int) (19f + ((10f + INT) / (10f) + INT) * (level + (0.5 * INT)));
+        manaRegeneration = ((0.3f + INT / 10f) * (level + level - 1)) / 60;
+        healthRegeneration = (0.05f * level) / 60;
         movementSpeed = 4 + SPD;
         //System.out.println(maxHealth + " " + VIT + " " + maxMana + " " + INT);
     }
@@ -92,6 +94,7 @@ public class Player extends Entity {
         }
         if (experience >= levelUpExperience) {
             level++;
+            updateEquippedItems();
         }
     }
 

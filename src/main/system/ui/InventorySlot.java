@@ -8,8 +8,7 @@ import java.awt.Rectangle;
 public class InventorySlot {
     private final int SLOT_SIZE = 45;
     public boolean grabbed;
-    int xCo;
-    int yCo;
+
     public Rectangle boundBox;
 
     public Item item;
@@ -18,8 +17,7 @@ public class InventorySlot {
     InventorySlot(Item item, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
         this.item = item;
-        this.xCo = xCo;
-        this.yCo = yCo;
+
     }
 
     public void setItem(Item item) {

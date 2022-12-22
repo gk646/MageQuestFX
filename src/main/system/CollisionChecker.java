@@ -26,16 +26,16 @@ public class CollisionChecker {
         int tileNum1, tileNum2;
         if (entity.direction.contains("right")) {
             entityRightCol = Math.max((entityRightWorldX + entity.movementSpeed) / 48, 0);
-            tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
-            tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNum1 = mainGame.wRender.worldData[entityRightCol][entityTopRow];
+            tileNum2 = mainGame.wRender.worldData[entityRightCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 entity.collisionRight = true;
             }
         }
         if (entity.direction.contains("left")) {
             entityLeftCol = Math.max((entityLeftWorldX - entity.movementSpeed) / 48, 0);
-            tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
-            tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
+            tileNum1 = mainGame.wRender.worldData[entityLeftCol][entityTopRow];
+            tileNum2 = mainGame.wRender.worldData[entityLeftCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 entity.collisionLeft = true;
             }
@@ -45,8 +45,8 @@ public class CollisionChecker {
         if (entity.direction.contains("up")) {
 
             entityTopRow = Math.max((entityTopWorldY - entity.movementSpeed) / 48, 0);
-            tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
-            tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
+            tileNum1 = mainGame.wRender.worldData[entityLeftCol][entityTopRow];
+            tileNum2 = mainGame.wRender.worldData[entityRightCol][entityTopRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 entity.collisionUp = true;
             }
@@ -56,8 +56,8 @@ public class CollisionChecker {
 
         if (entity.direction.contains("down")) {
             entityBottomRow = Math.max((entityBottomWorldY + entity.movementSpeed) / 48, 0);
-            tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
-            tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNum1 = mainGame.wRender.worldData[entityLeftCol][entityBottomRow];
+            tileNum2 = mainGame.wRender.worldData[entityRightCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 entity.collisionDown = true;
             }

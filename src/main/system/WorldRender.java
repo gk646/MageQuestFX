@@ -1,6 +1,5 @@
 package main.system;
 
-import gameworld.World;
 import gameworld.tiles.Tile;
 import main.MainGame;
 
@@ -12,8 +11,8 @@ import java.util.Objects;
 
 
 public class WorldRender {
-    public static int[][] worldData;
-    public static Point worldSize;
+    public int[][] worldData;
+    public Point worldSize;
     public final Tile[] tileStorage;
     final MainGame mainGame;
 
@@ -21,7 +20,7 @@ public class WorldRender {
         this.mainGame = mainGame;
         this.tileStorage = new Tile[50];
         getTileImage();
-        World.setWorldData();
+
     }
 
     private void setup(int index, String imagePath, boolean collision) {

@@ -3,6 +3,7 @@ package main;
 import gameworld.Entity;
 import gameworld.Item;
 import gameworld.Projectile;
+import gameworld.WorldController;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
 import input.KeyHandler;
@@ -78,7 +79,9 @@ public class MainGame extends JPanel implements Runnable {
     //---------System---------
 
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
+
     public final WorldRender wRender = new WorldRender(this);
+    public final WorldController wControl = new WorldController(this);
     public final Entity entity = new Entity(this);
     final Projectile projectile = new Projectile(this, mouseH);
     public final Player player = new Player(this, keyHandler, mouseH, motionH);
@@ -88,7 +91,7 @@ public class MainGame extends JPanel implements Runnable {
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar;
     public SQLite sqLite = new SQLite(this);
-    public InventoryPanel inventP = new InventoryPanel(this);
+    public InventoryPanel inventP;
 
 
     /**
@@ -113,6 +116,11 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
+        sqLite.readItemsFromDB();
+        wControl.getWorldsData();
+        wControl.load_OverworldMap();
+        pathF.instantiateNodes();
+        inventP = new InventoryPanel(this);
         startThreads();
     }
 
