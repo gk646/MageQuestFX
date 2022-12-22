@@ -16,7 +16,7 @@ public class PathFinder {
 
     public PathFinder(MainGame mg) {
         this.mg = mg;
-        instantiateNodes();
+
     }
 
     public void instantiateNodes() {

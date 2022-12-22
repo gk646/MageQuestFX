@@ -21,7 +21,7 @@ public class SQLite {
     public SQLite(MainGame mg) {
         this.mg = mg;
         this.utilities = new Utilities();
-        readItemsFromDB();
+
     }
 
     public void readItemsFromDB() {
