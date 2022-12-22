@@ -220,6 +220,7 @@ public class InventoryPanel {
                     grabbedSlot.grabbed = false;
                     grabbedItem = null;
                     grabbedSlot = null;
+                    mg.player.updateEquippedItems();
                     return 1;
                 }
             }

@@ -65,30 +65,40 @@ public class Item {
         g2.drawImage(icon, x, y, slotSize, slotSize, null);
     }
 
+
     public void getStats() {
         Pattern p;
         Matcher m;
         if (stats.contains("INT")) {
             p = Pattern.compile("INT([0-9]+)");
             m = p.matcher(stats);
-            INT = Integer.parseInt(m.group(1));
+            while (m.find()) {
+                INT = Integer.parseInt(m.group(1));
+            }
         }
         if (stats.contains("VIT")) {
             p = Pattern.compile("VIT([0-9]+)");
             m = p.matcher(stats);
-            VIT = Integer.parseInt(m.group(1));
+            while (m.find()) {
+                VIT = Integer.parseInt(m.group(1));
+            }
         }
         if (stats.contains("REG")) {
             p = Pattern.compile("REG([0-9]+)");
             m = p.matcher(stats);
-            REG = Integer.parseInt(m.group(1));
+            while (m.find()) {
+                REG = Integer.parseInt(m.group(1));
+            }
         }
         if (stats.contains("SPD")) {
             p = Pattern.compile("SPD([0-9]+)");
             m = p.matcher(stats);
-            SPD = Integer.parseInt(m.group(1));
+            while (m.find()) {
+                SPD = Integer.parseInt(m.group(1));
+            }
         }
     }
+
 
     public BufferedImage setup(Utilities utilities, String imagePath) {
 

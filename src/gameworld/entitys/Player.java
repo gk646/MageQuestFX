@@ -164,9 +164,13 @@ public class Player extends Entity {
         }
         if (mana < maxMana) {
             mana += manaRegeneration;
+        } else if (mana > maxMana) {
+            mana = maxMana;
         }
         if (health < maxHealth) {
             health += healthRegeneration;
+        } else if (health > maxHealth) {
+            health = maxHealth;
         }
         if (cooldownPrimary < 10) {
             cooldownPrimary++;
