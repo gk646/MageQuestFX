@@ -31,7 +31,7 @@ D - RIGHT
 
 Left Mouse Button - Primary Fire (1 Damage)  
 Right Mouse Button - Secondary Fire (5 Damage)  
-1 - Ability 1 (5 Damage)
+1 - Ability 1 (5 Damage)  
 2 - Lightning (about 60 Damage)  
 N - opens talent window (stub for now)
 
