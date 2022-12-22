@@ -27,7 +27,7 @@ public class Player extends Entity {
     public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience;
 
     //STATS
     public int INT, VIT, REG, SPD;
@@ -82,6 +82,17 @@ public class Player extends Entity {
     public void update() {
         movement();
         skills();
+    }
+
+    public void getExperience(Entity entity) {
+        experience += entity.level;
+        levelUpExperience = 0;
+        for (int i = 1; i <= level; i++) {
+            levelUpExperience += (i + i - 1) * (10 + i - 1);
+        }
+        if (experience >= levelUpExperience) {
+            level++;
+        }
     }
 
     public void draw(Graphics2D g2) {

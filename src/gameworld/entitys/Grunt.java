@@ -21,7 +21,7 @@ public class Grunt extends Entity {
      * @param worldY    coordinates Y
      * @param maxHealth max amount of health
      */
-    public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth) {
+    public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth, int level) {
         super(mainGame);
         //Setting default values
         this.maxHealth = maxHealth;
@@ -29,6 +29,7 @@ public class Grunt extends Entity {
         this.worldX = worldX;
         this.worldY = worldY;
         movementSpeed = 2;
+        this.level = level;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;

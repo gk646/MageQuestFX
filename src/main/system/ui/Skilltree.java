@@ -102,7 +102,6 @@ public class Skilltree implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getSource());
         mg.requestFocus();
     }
 }

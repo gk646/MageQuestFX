@@ -131,22 +131,22 @@ public class KeyHandler implements KeyListener {
         //Drawing Inventor Panel
         if (code == 'c') {
             if (!mg.showChar) {
-                mg.inventP.resetCollision();
+                mg.inventP.resetCharCollision();
                 mg.showChar = true;
                 window.setCursor(new Cursor(Cursor.HAND_CURSOR));
             } else {
-                mg.inventP.hideCollision();
+                mg.inventP.hideCharCollision();
                 mg.showChar = false;
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }
         }
         if (code == 'b') {
             if (!mg.showBag) {
-                mg.inventP.resetCollision();
+                mg.inventP.resetBagCollision();
                 mg.showBag = true;
                 window.setCursor(new Cursor(Cursor.HAND_CURSOR));
             } else {
-                mg.inventP.hideCollision();
+                mg.inventP.hideBagCollision();
                 mg.showBag = false;
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }

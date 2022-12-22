@@ -60,7 +60,12 @@ public class Projectile extends Entity {
                             } else if (projectile instanceof Lightning) {
                                 entity.health -= 1;
                             }
-                            entity.hpBarOn = true;
+                            if (entity.health <= 0) {
+                                mg.player.getExperience(entity);
+                            } else {
+                                entity.hpBarOn = true;
+                            }
+
                         }
                     }
                     if (projectile.dead && projectile instanceof PrimaryFire) {

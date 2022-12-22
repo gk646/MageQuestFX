@@ -37,7 +37,7 @@ public class Multiplayer {
             if (mainGame.player2Information.length() != messageLength) {
                 mainGame.ENTITIES.clear();
                 for (int i = 0; i < mainGame.player2Information.length() - 10; i += 15) {
-                    mainGame.ENTITIES.add(new Grunt(mainGame, Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000, Integer.parseInt(mainGame.player2Information, index + 5, index + 10, 10) - 50000, Integer.parseInt(mainGame.player2Information, index + 10, index + 15, 10) - 50000));
+                    mainGame.ENTITIES.add(new Grunt(mainGame, Integer.parseInt(mainGame.player2Information, index, index + 5, 10) - 50000, Integer.parseInt(mainGame.player2Information, index + 5, index + 10, 10) - 50000, Integer.parseInt(mainGame.player2Information, index + 10, index + 15, 10) - 50000, 1));
                     index += 15;
                 }
             }

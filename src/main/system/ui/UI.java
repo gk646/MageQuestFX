@@ -54,6 +54,8 @@ public class UI implements ActionListener, ChangeListener {
             drawTitleScreen();
         } else if (mg.gameState == mg.talentState) {
             drawTalentTree();
+        } else if (mg.gameState == mg.gameOver) {
+            drawGameOver();
         }
 
     }
@@ -170,7 +172,7 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     public void drawGameOver() {
-
+        g2.drawString("Game Over!", 500, 500);
     }
 
     public int getXForCenteredText(String text) {

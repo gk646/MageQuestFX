@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("GrazieInspection")
 public class Item {
     public int i_id;
     public String name;
