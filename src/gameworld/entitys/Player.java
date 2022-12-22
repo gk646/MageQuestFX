@@ -65,15 +65,18 @@ public class Player extends Entity {
         SPD = 0;
         REG = 0;
         for (InventorySlot invSlot : mg.inventP.char_Slots) {
-            INT += invSlot.item.INT;
-            VIT += invSlot.item.VIT;
-            SPD += invSlot.item.SPD;
-            REG += invSlot.item.REG;
+            if (invSlot.item != null) {
+                INT += invSlot.item.INT;
+                VIT += invSlot.item.VIT;
+                SPD += invSlot.item.SPD;
+                REG += invSlot.item.REG;
+            }
         }
         maxHealth = (int) (9f + ((10f + VIT) / (10f) + VIT) * (level + (0.5f * VIT)));
-        maxMana = (int) (9f + ((10f + INT) / (10f) + INT) * (level + (0.7 * INT)));
+        maxMana = (int) (19f + ((10f + INT) / (10f) + INT) * (level + (0.7 * INT)));
         manaRegeneration = (0.05f + INT / 40f) * level;
         movementSpeed = 4 + SPD;
+        //System.out.println(maxHealth + " " + VIT + " " + maxMana + " " + INT);
     }
 
     public void update() {

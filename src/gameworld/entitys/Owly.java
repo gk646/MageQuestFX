@@ -20,7 +20,7 @@ public class Owly extends Entity {
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = mg.player.movementSpeed;
+        movementSpeed = 4;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;

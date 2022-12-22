@@ -70,16 +70,16 @@ public class SQLite {
         mg.RELICS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.RINGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
-        mg.AMULET.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.BOOTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.CHEST.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.HEAD.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.OFFHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.ONEHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.PANTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.RELICS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.RINGS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
-        mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA"));
+        mg.AMULET.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.BOOTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.CHEST.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.HEAD.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.OFFHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.ONEHAND.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.PANTS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.RELICS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.RINGS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+        mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
     }
 
     private void searchAMULET(Statement stmt) throws SQLException {
@@ -89,11 +89,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.AMULET.add(0, new_item);
@@ -107,11 +107,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.BOOTS.add(0, new_item);
@@ -125,12 +125,10 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
-
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.CHEST.add(0, new_item);
         }
@@ -143,12 +141,10 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
-
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.HEAD.add(0, new_item);
         }
@@ -161,12 +157,10 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
-
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.OFFHAND.add(0, new_item);
         }
@@ -179,11 +173,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.ONEHAND.add(0, new_item);
@@ -197,11 +191,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.PANTS.add(0, new_item);
@@ -215,11 +209,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.RELICS.add(0, new_item);
@@ -233,11 +227,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.RINGS.add(0, new_item);
@@ -251,11 +245,11 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"));
+            Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             if (new_item.description.length() >= 30) {
                 new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
             }
-            new_item.stats = rs.getString("stats");
+
 
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.TWOHANDS.add(0, new_item);

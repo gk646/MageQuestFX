@@ -40,17 +40,20 @@ public class InventoryPanel {
         wholeCharWindow = new Rectangle(charPanelX, charPanelY, 500, 650);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         hideCollision();
-        bag_Slots[3].item = mg.CHEST.get(1);
-        bag_Slots[3].item = mg.CHEST.get(1);
-        bag_Slots[3].item = mg.CHEST.get(1);
+        bag_Slots[0].item = mg.CHEST.get(1);
+        bag_Slots[1].item = mg.CHEST.get(2);
+        bag_Slots[2].item = mg.CHEST.get(3);
+        bag_Slots[3].item = mg.CHEST.get(4);
+        bag_Slots[4].item = mg.RINGS.get(1);
+        bag_Slots[5].item = mg.RINGS.get(2);
     }
 
-    //todo add movable windows and recenter button
     public void drawCharacterWindow(Graphics2D g2) {
         g2.setFont(mg.ui.maruMonica);
         drawCharPanel(g2, charPanelX, charPanelY);
         lastCharPosition.x = charPanelX;
         lastCharPosition.y = charPanelY;
+
     }
 
     public void drawBagWindow(Graphics2D g2) {
@@ -87,6 +90,7 @@ public class InventoryPanel {
                     g2.drawRoundRect(mg.motionH.lastMousePosition.x + 3, mg.motionH.lastMousePosition.y + 3, 194, 244, 15, 15);
                     g2.setStroke(width1);
                     //NAME
+                    g2.setColor(darkBackground);
                     if (invSlot.item.rarity == 1) {
                         g2.setColor(Color.gray);
                     } else if (invSlot.item.rarity == 4) {
@@ -136,6 +140,7 @@ public class InventoryPanel {
                     g2.drawRoundRect(mg.motionH.lastMousePosition.x + 3, mg.motionH.lastMousePosition.y + 3, 194, 244, 15, 15);
                     g2.setStroke(width1);
                     //NAME
+                    g2.setColor(darkBackground);
                     if (bagSlot.item.rarity == 1) {
                         g2.setColor(Color.gray);
                     } else if (bagSlot.item.rarity == 4) {
@@ -179,7 +184,8 @@ public class InventoryPanel {
         }
         if (grabbedItem == null && mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.mouseH.mouse1Position) && invSlot.item != null) {
+                if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot.item != null) {
+                    mg.player.updateEquippedItems();
                     invSlot.grabbed = true;
                     grabbedSlot = invSlot;
                     grabbedItem = invSlot.item;
@@ -187,7 +193,7 @@ public class InventoryPanel {
                 }
             }
             for (InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.boundBox.contains(mg.mouseH.mouse1Position) && bagSlot.item != null) {
+                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot.item != null) {
                     bagSlot.grabbed = true;
                     grabbedSlot = bagSlot;
                     grabbedItem = bagSlot.item;
@@ -224,7 +230,7 @@ public class InventoryPanel {
         return 0;
     }
 
-    public void interactWithWindows() {
+    public void interactWithWindows(Graphics2D g2) {
         if (mg.mouseH.mouse1Pressed && charPanelMover.contains(mg.motionH.lastMousePosition)) {
             charPanelX += mg.motionH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.motionH.lastMousePosition.y - previousMousePosition.y;

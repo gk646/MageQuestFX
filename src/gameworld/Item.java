@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Item {
     public int i_id;
@@ -47,13 +49,15 @@ public class Item {
     public String description;
     public BufferedImage icon;
 
-    public Item(int i_id, String name, int rarity, String type, String imagePath, String description) {
+    public Item(int i_id, String name, int rarity, String type, String imagePath, String description, String stats) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
         this.type = type;
         this.imagePath = imagePath;
         this.description = description;
+        this.stats = stats;
+        getStats();
     }
 
 
@@ -61,7 +65,29 @@ public class Item {
         g2.drawImage(icon, x, y, slotSize, slotSize, null);
     }
 
-    public void draw() {
+    public void getStats() {
+        Pattern p;
+        Matcher m;
+        if (stats.contains("INT")) {
+            p = Pattern.compile("INT([0-9]+)");
+            m = p.matcher(stats);
+            INT = Integer.parseInt(m.group(1));
+        }
+        if (stats.contains("VIT")) {
+            p = Pattern.compile("VIT([0-9]+)");
+            m = p.matcher(stats);
+            VIT = Integer.parseInt(m.group(1));
+        }
+        if (stats.contains("REG")) {
+            p = Pattern.compile("REG([0-9]+)");
+            m = p.matcher(stats);
+            REG = Integer.parseInt(m.group(1));
+        }
+        if (stats.contains("SPD")) {
+            p = Pattern.compile("SPD([0-9]+)");
+            m = p.matcher(stats);
+            SPD = Integer.parseInt(m.group(1));
+        }
     }
 
     public BufferedImage setup(Utilities utilities, String imagePath) {
