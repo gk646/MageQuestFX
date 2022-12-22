@@ -27,10 +27,11 @@ public class PathFinder {
             }
         }
     }
+
     //todo check for end of map
     public void resetNodes(int startCol, int startRow) {
-        for (int i = startCol - 16; i < startCol + 16; i++) {
-            for (int b = startRow - 16; b < startRow + 16; b++) {
+        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x - 1, startCol + 16); i++) {
+            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y - 1, startRow + 16); b++) {
                 nodes[i][b].open = false;
                 nodes[i][b].checked = false;
                 nodes[i][b].solid = false;
@@ -47,8 +48,8 @@ public class PathFinder {
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        for (int i = startCol - 16; i < startCol + 16; i++) {
-            for (int b = startRow - 16; b < startRow + 16; b++) {
+        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x - 1, startCol + 16); i++) {
+            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y - 1, startRow + 16); b++) {
                 int tileNum = OverWorld.worldData[i][b];
                 if (mg.wRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;

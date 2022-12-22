@@ -116,9 +116,11 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
+
         sqLite.readItemsFromDB();
         wControl.getWorldsData();
         wControl.load_OverworldMap();
+        wControl.makeQuadrants();
         pathF.instantiateNodes();
         inventP = new InventoryPanel(this);
         startThreads();

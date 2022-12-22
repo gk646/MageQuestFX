@@ -34,7 +34,7 @@ public class Grunt extends Entity {
         this.entityHeight = 48;
         this.entityWidth = 48;
         this.collisionBox = new Rectangle(6, 6, 42, 42);
-        this.onPath = true;
+        this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
         updatePos();
@@ -43,7 +43,7 @@ public class Grunt extends Entity {
     public void update() {
         screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize) {
+        if ((worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize) && !playerTooFar()) {
             onPath = true;
         }
         gruntMovement();

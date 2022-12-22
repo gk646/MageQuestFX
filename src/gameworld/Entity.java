@@ -43,10 +43,8 @@ public class Entity {
                 initializeEnemies = true;
             }
             for (Entity entity : mg.ENTITIES) {
-
                 entity.update();
                 if (!(entity instanceof Owly)) {
-
                     if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
                         // mainGame.player.health -= 1;
                         if (mg.player.health <= 0) {
@@ -130,13 +128,15 @@ public class Entity {
     }
 
     public void spawnEnemies() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             mg.ENTITIES.add(new Grunt(mg, 11500, 11500, 1, 1));
         }
-        for (int i = 0; i < 10; i++) {
-            mg.ENTITIES.add(new Grunt(mg, 11800, 11800, 1, 1));
-        }
+
         mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));
+    }
+
+    public boolean playerTooFar() {
+        return Math.abs(worldX / mg.tileSize - mg.player.worldX / mg.tileSize) >= 15 || Math.abs(worldY / mg.tileSize - mg.player.worldY / mg.tileSize) >= 15;
     }
 
     private void decideMovement(int nextX, int nextY) {
