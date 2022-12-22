@@ -16,14 +16,15 @@ public class SQLite {
 
     public MainGame mg;
     public Utilities utilities;
+    int limit = 32;
 
     public SQLite(MainGame mg) {
         this.mg = mg;
         this.utilities = new Utilities();
-        readItemsfromDB();
+        readItemsFromDB();
     }
 
-    public void readItemsfromDB() {
+    public void readItemsFromDB() {
         Connection conn = null;
         try {
             // Load the SQLite JDBC driver
@@ -90,11 +91,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.AMULET.add(0, new_item);
         }
@@ -108,11 +110,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.BOOTS.add(0, new_item);
         }
@@ -126,8 +129,11 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
+            }
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.CHEST.add(0, new_item);
@@ -142,8 +148,11 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
+            }
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.HEAD.add(0, new_item);
@@ -158,8 +167,11 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
+            }
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.OFFHAND.add(0, new_item);
@@ -174,11 +186,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.ONEHAND.add(0, new_item);
         }
@@ -192,11 +205,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.PANTS.add(0, new_item);
         }
@@ -210,11 +224,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.RELICS.add(0, new_item);
         }
@@ -228,11 +243,12 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.RINGS.add(0, new_item);
         }
@@ -246,14 +262,14 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             Item new_item = new Item(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            if (new_item.description.length() >= 30) {
-                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(30, "\n").toString();
+            if (new_item.description.length() >= limit) {
+                new_item.description = new StringBuilder("\"" + new_item.description + "\"").insert(limit, "\n").toString();
             }
-
-
+            if (new_item.description.length() >= limit * 2) {
+                new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
+            }
             new_item.icon = new_item.setup(utilities, new_item.imagePath + ".png");
             mg.TWOHANDS.add(0, new_item);
         }
     }
 }
-

@@ -14,8 +14,8 @@ public class InventoryPanel {
     private static final int SLOT_SIZE = 45;
     private static final int BAG_SLOTS = 15;
     private static final int CHAR_SLOTS = 10;
-    public final Color darkBackgroundAlpha = new Color(90, 105, 136, 200);
-    public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
+    public final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
+    public final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     private final InventorySlot[] bag_Slots;
     public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
     public MainGame mg;
@@ -131,41 +131,42 @@ public class InventoryPanel {
                     g2.setColor(lightBackgroundAlpha);
                     g2.fillRoundRect(mg.motionH.lastMousePosition.x, mg.motionH.lastMousePosition.y, 200, 250, 15, 15);
                     //OUTLINE
-                    if (bagSlot.item.rarity == 1) {
-                        g2.setColor(Color.gray);
-                    } else if (bagSlot.item.rarity == 4) {
-                        g2.setColor(Color.orange);
-                    }
+                    setRarityColor(g2, bagSlot);
                     g2.setStroke(width2);
                     g2.drawRoundRect(mg.motionH.lastMousePosition.x + 3, mg.motionH.lastMousePosition.y + 3, 194, 244, 15, 15);
                     g2.setStroke(width1);
                     //NAME
-                    g2.setColor(darkBackground);
-                    if (bagSlot.item.rarity == 1) {
-                        g2.setColor(Color.gray);
-                    } else if (bagSlot.item.rarity == 4) {
-                        g2.setColor(Color.orange);
-                    }
+                    setRarityColor(g2, bagSlot);
                     g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23));
                     g2.drawString(bagSlot.item.name, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 35);
                     g2.setColor(darkBackground);
                     //STATS
+
                     g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
-                    g2.drawString(bagSlot.item.stats, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
+                    g2.drawString("INT: " + bagSlot.item.INT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
+
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+                    g2.drawString("VIT: " + bagSlot.item.VIT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 85);
+
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+                    g2.drawString("REG: " + bagSlot.item.REG, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 65);
+
+                    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+                    g2.drawString("SPD: " + bagSlot.item.SPD, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 85);
+
+                    //EFFECTS
+
+
                     //DESCRIPTION
                     g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 17));
                     stringY = mg.motionH.lastMousePosition.y + 150;
                     for (String string : bagSlot.item.description.split("\n")) {
-                        g2.drawString(string, mg.motionH.lastMousePosition.x + 5, stringY += g2.getFontMetrics().getHeight());
+                        g2.drawString(string, mg.motionH.lastMousePosition.x + 7, stringY += g2.getFontMetrics().getHeight());
                     }
                     //ID
-                    if (bagSlot.item.rarity == 1) {
-                        g2.setColor(Color.gray);
-                    } else if (bagSlot.item.rarity == 4) {
-                        g2.setColor(Color.orange);
-                    }
-                    g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 16));
-                    g2.drawString("ID: " + String.format("%04d", bagSlot.item.i_id), mg.motionH.lastMousePosition.x + 151, mg.motionH.lastMousePosition.y + 237);
+                    setRarityColor(g2, bagSlot);
+                    g2.setFont(g2.getFont().deriveFont(Font.PLAIN + Font.ITALIC, 16));
+                    g2.drawString("ID: " + String.format("%04d", bagSlot.item.i_id) + bagSlot.item.type, mg.motionH.lastMousePosition.x + 145, mg.motionH.lastMousePosition.y + 240);
                 }
                 if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
                     bagSlot.toolTipTimer++;
@@ -175,8 +176,21 @@ public class InventoryPanel {
                 }
             }
         }
+
     }
 
+    private void setRarityColor(Graphics2D g2, InventorySlot slot) {
+        g2.setColor(darkBackground);
+        if (slot.item.rarity == 1) {
+            g2.setColor(normalColor);
+        } else if (slot.item.rarity == 2) {
+            g2.setColor(rareColor);
+        } else if (slot.item.rarity == 3) {
+            g2.setColor(epicColor);
+        } else if (slot.item.rarity == 4) {
+            g2.setColor(legendaryColor);
+        }
+    }
 
     public int drawDragAndDrop(Graphics2D g2) {
         if (grabbedItem != null) {
