@@ -22,7 +22,7 @@ import java.util.Objects;
 public class UI implements ActionListener, ChangeListener {
     Graphics2D g2;
     final MainGame mg;
-    public Font maruMonica;
+    public Font maruMonica, publicPixel;
     public int commandNum = 0;
     private boolean once = false, onceSecond = false;
     private BufferedImage playerUI;
@@ -33,9 +33,12 @@ public class UI implements ActionListener, ChangeListener {
     public UI(MainGame mainGame) {
         this.mg = mainGame;
         InputStream is = getClass().getResourceAsStream("/resources/font/x12y16pxMaruMonica.ttf");
+        InputStream font2 = getClass().getResourceAsStream("/resources/font/PublicPixel-z84yD.ttf");
         try {
             assert is != null;
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
+            assert font2 != null;
+            publicPixel = Font.createFont(Font.TRUETYPE_FONT, font2);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
