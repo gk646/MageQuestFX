@@ -16,10 +16,10 @@ public class Talent {
     public String imagePath;
     public BufferedImage icon;
 
-    public Talent(int i_id, String name, String type, String imagePath, String description) {
+    public Talent(int i_id, String name, String imagePath, String description) {
         this.i_id = i_id;
         this.name = name;
-        this.imagePath = imagePath;
+        this.icon = setup(imagePath);
         this.description = description;
     }
 
@@ -29,10 +29,11 @@ public class Talent {
     }
 
 
-    public BufferedImage setup(Utilities utilities, String imagePath) {
+    public BufferedImage setup(String imagePath) {
+        Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/TalentIcons/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
         } catch (IOException e) {
             e.printStackTrace();

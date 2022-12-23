@@ -15,7 +15,7 @@ public class TalentPanel {
     public final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
     public final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     private final TalentNode[] talent_Nodes;
-    public int talentPanelX = 300, talentPanelY = 300, stringY = 0, pointsToSpend;
+    public int talentPanelX = 300, talentPanelY = 300, stringY = 0, pointsToSpend, talentPanelWidth = 1200, talentPanelHeight = 700;
     public InventorySlot[] char_Slots;
     public Point previousMousePosition = new Point(300, 300), lastTalentPosition = new Point(talentPanelX, talentPanelY);
     public Rectangle talentPanelCloser, talentPanelMover, wholeTalentWindow;
@@ -25,6 +25,11 @@ public class TalentPanel {
     public TalentPanel(MainGame mg) {
         this.mg = mg;
         this.talent_Nodes = new TalentNode[50];
+        createTalentNodes();
+        talentPanelMover = new Rectangle(talentPanelX, talentPanelY, talentPanelWidth, talentPanelHeight);
+        talentPanelCloser = new Rectangle(talentPanelX, talentPanelY, 30, 30);
+        wholeTalentWindow = new Rectangle(talentPanelX - 20, talentPanelY - 20, talentPanelWidth + 20, talentPanelHeight + 20);
+        hideTalentCollision();
     }
 
     public void drawTalentWindow(Graphics2D g2) {
@@ -43,29 +48,31 @@ public class TalentPanel {
     private void drawTalentBackground(Graphics2D g2, int startX, int startY) {
         wholeTalentWindow.x = startX - 65;
         wholeTalentWindow.y = startY - 65;
-        //
+        //drawing window background
         g2.setColor(lightBackgroundAlpha);
-        g2.fillRoundRect(startX - 50, startY - 65, 500, 650, 35, 35);
+        g2.fillRoundRect(startX - 50, startY - 65, 1200, 700, 35, 35);
         //outline
         g2.setColor(darkBackground);
         g2.setStroke(width5);
-        g2.drawRoundRect(startX - 50 + 5, startY - 65 + 5, 500 - 10, 650 - 10, 30, 30);
+        g2.drawRoundRect(startX - 50 + 5, startY - 65 + 5, 1200 - 10, 700 - 10, 30, 30);
         g2.setStroke(width1);
         //window mover
         g2.setColor(darkBackground);
-        g2.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
+        g2.fillRoundRect(startX - 50, startY - 65 + 2, 1200, 30, 15, 15);
         talentPanelMover.x = startX - 50;
         talentPanelMover.y = startY - 65 + 2 - 10;
         //window close button
         g2.setColor(Color.red);
-        g2.drawRoundRect(startX + 500 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
+        g2.drawRoundRect(startX + 1200 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
         talentPanelCloser.x = startX - 50 + 500 - 30;
         talentPanelCloser.y = startY - 65 + 2;
 
     }
 
     private void drawTalentNodes(Graphics2D g2, int startX, int startY) {
-
+        for (TalentNode node : talent_Nodes) {
+            node.drawNode(g2, startX, startY, TALENT_SIZE);
+        }
     }
 
     private void drawToolTip(Graphics2D g2, TalentNode talentNode) {
@@ -102,6 +109,7 @@ public class TalentPanel {
 
 
     private void createTalentNodes() {
+        talent_Nodes[0] = new TalentNode(new Talent(1, "Increase maximum mana", "ManaTalentIcon.png", "Increases maximum mana by 5%"), 300, 300);
 
     }
 

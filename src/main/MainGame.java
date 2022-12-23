@@ -90,7 +90,7 @@ public class MainGame extends JPanel implements Runnable {
     public final PathFinder pathF = new PathFinder(this);
     final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final UI ui = new UI(this);
-    public boolean client = false, showBag, showChar;
+    public boolean client = false, showBag, showChar, showTalents;
     public SQLite sqLite = new SQLite(this);
     public InventoryPanel inventP;
     public TalentPanel talentP;
@@ -121,7 +121,7 @@ public class MainGame extends JPanel implements Runnable {
         sqLite.readItemsFromDB();
         wControl.getWorldsData();
         wControl.load_OverworldMap();
-        wControl.makeQuadrants();
+        wControl.makeOverworldQuadrants();
         pathF.instantiateNodes();
         inventP = new InventoryPanel(this);
         talentP = new TalentPanel(this);
@@ -251,6 +251,9 @@ public class MainGame extends JPanel implements Runnable {
                 inventP.drawDragAndDrop(g2);
                 inventP.interactWithWindows();
                 inventP.getTooltip(g2);
+            }
+            if (showTalents) {
+                talentP.drawTalentWindow(g2);
             }
         }
         if (gameState == talentState) {

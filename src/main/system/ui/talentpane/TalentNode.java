@@ -1,6 +1,5 @@
 package main.system.ui.talentpane;
 
-import gameworld.Item;
 import main.system.Utilities;
 
 import javax.imageio.ImageIO;
@@ -18,23 +17,18 @@ public class TalentNode {
     int pointsSpent;
     String name;
     BufferedImage nodeImage;
-    private BufferedImage talentIcon;
 
-    TalentNode(Item item, int xCo, int yCo) {
+
+    TalentNode(Talent talent, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, TALENT_SIZE, TALENT_SIZE);
         this.nodeImage = setup();
+        this.talent = talent;
     }
 
 
     public void drawNode(Graphics2D g2, int x, int y, int slotSize) {
-        g2.drawImage(talentIcon, x, y, slotSize, slotSize, null);
+        g2.drawImage(nodeImage, x, y, slotSize, slotSize, null);
         talent.drawIcon(g2, x + slotSize / 2 - 8, y + slotSize / 2 - 8, slotSize);
-    }
-
-
-    public void drawNode(Graphics2D g2, int startX, int startY) {
-        g2.drawRoundRect(startX, startY, TALENT_SIZE, TALENT_SIZE, 20, 20);
-
     }
 
     public BufferedImage setup() {

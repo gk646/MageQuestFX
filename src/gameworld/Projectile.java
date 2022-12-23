@@ -53,10 +53,8 @@ public class Projectile extends Entity {
                                 projectile.dead = true;
                             } else if (projectile instanceof SecondaryFire) {
                                 entity.health -= 5;
-                                projectile.dead = true;
                             } else if (projectile instanceof Ability1) {
                                 entity.health -= 5;
-                                projectile.dead = true;
                             } else if (projectile instanceof Lightning) {
                                 entity.health -= 1;
                             }

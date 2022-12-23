@@ -1,10 +1,7 @@
 package main;
 
-import main.system.ui.SkilltreeWindow;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -19,7 +16,7 @@ public class Runner {
     public static JFrame window;
     public static JTextField textField;
     public static JSlider slider;
-    public static JPanel skillTree;
+
 
     /**
      * @author Lukas Gilch
@@ -43,9 +40,6 @@ public class Runner {
         }
         //Main Game
         mainGame.setDoubleBuffered(true);
-        //Skill tree
-        SkilltreeWindow skilltreeWindow = new SkilltreeWindow(mainGame);
-        skilltreeWindow.setVisible(false);
         //TEXT FIELD
         JTextField jTextField = new JTextField();
         jTextField.setVisible(false);
@@ -56,10 +50,8 @@ public class Runner {
         jSlider.setSize(new Dimension(200, 100));
         Runner.slider = jSlider;
         Runner.textField = jTextField;
-        Runner.skillTree = skilltreeWindow;
         window.add(jTextField);
         window.add(jSlider);
-        window.add(skilltreeWindow);
         window.add(mainGame);
         window.setUndecorated(true);
         window.pack();

@@ -25,12 +25,13 @@ public class Player extends Entity {
     public static Point startingPoint;
     //STATS
     public int INT, VIT, REG, SPD;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience;
+    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience, playerQuadrant, quadrantTimer;
     public float mana, health, manaRegeneration = 0.02f, healthRegeneration = 0.002f;
 
     public final MotionHandler motionHandler;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
+    public boolean respawnsDone;
 
 
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
@@ -84,17 +85,64 @@ public class Player extends Entity {
     public void update() {
         movement();
         skills();
+        if (quadrantTimer >= 100) {
+            dynamicSpawns();
+            if (respawnsDone) {
+                quadrantTimer = 0;
+                respawnsDone = false;
+            }
+        }
+
+        quadrantTimer++;
     }
 
     public void getExperience(Entity entity) {
         experience += entity.level;
-        levelUpExperience = 0;
-        for (int i = 1; i <= level; i++) {
-            levelUpExperience += (i + i - 1) * (10 + i - 1);
-        }
         if (experience >= levelUpExperience) {
             level++;
             updateEquippedItems();
+            levelUpExperience = 0;
+            for (int i = 1; i <= level; i++) {
+                levelUpExperience += (i + i - 1) * (10 + i - 1);
+            }
+        }
+    }
+
+    public void dynamicSpawns() {
+        getPlayerQuadrant();
+        respawnCloseQuadrants();
+    }
+
+    public void getPlayerQuadrant() {
+        for (int i = 99; i >= 0; i--) {
+            if (worldX / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileX && worldY / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileY
+                    && worldX / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileY + 50) {
+                playerQuadrant = i;
+                break;
+            }
+        }
+    }
+
+
+    public void respawnCloseQuadrants() {
+        mg.wControl.overworldMapQuadrants[playerQuadrant].spawnEnemies();
+        if (quadrantTimer < 210) {
+            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 1, 99)].spawnEnemies();
+        } else if (quadrantTimer < 220) {
+            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 1, 0)].spawnEnemies();
+        } else if (quadrantTimer < 230) {
+            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 9, 99)].spawnEnemies();
+        } else if (quadrantTimer < 240) {
+            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 10, 99)].spawnEnemies();
+        } else if (quadrantTimer < 250) {
+            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 11, 99)].spawnEnemies();
+        } else if (quadrantTimer < 260) {
+            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 9, 0)].spawnEnemies();
+        } else if (quadrantTimer < 270) {
+            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 10, 0)].spawnEnemies();
+        } else if (quadrantTimer < 280) {
+            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 11, 0)].spawnEnemies();
+            respawnsDone = true;
         }
     }
 

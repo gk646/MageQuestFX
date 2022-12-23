@@ -1,7 +1,6 @@
 package input;
 
 import main.MainGame;
-import main.Runner;
 
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
@@ -118,14 +117,14 @@ public class KeyHandler implements KeyListener {
         }
         //Drawing talent window
         if (code == 'n') {
-            if (mg.gameState == mg.playState) {
-                mg.gameState = mg.talentState;
+            if (!mg.showTalents) {
+                mg.talentP.resetTalentCollision();
+                mg.showTalents = true;
                 window.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            } else if (mg.gameState == mg.talentState) {
-                mg.gameState = mg.playState;
+            } else {
+                mg.talentP.hideTalentCollision();
+                mg.showTalents = false;
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-                Runner.skillTree.setVisible(false);
-                mg.requestFocusInWindow();
             }
         }
         //Drawing Inventor Panel
@@ -140,6 +139,7 @@ public class KeyHandler implements KeyListener {
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }
         }
+        //Drawing bag panel
         if (code == 'b') {
             if (!mg.showBag) {
                 mg.inventP.resetBagCollision();

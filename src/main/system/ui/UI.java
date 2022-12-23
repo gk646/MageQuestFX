@@ -24,7 +24,8 @@ public class UI implements ActionListener, ChangeListener {
     final MainGame mg;
     public Font maruMonica;
     public int commandNum = 0;
-    private boolean once = false, onceSecond = false;
+    private final boolean onceSecond = false;
+    private boolean once = false;
     private BufferedImage playerUI;
     public DragListener dragListener;
 
@@ -52,8 +53,6 @@ public class UI implements ActionListener, ChangeListener {
             drawOptions();
         } else if (mg.gameState == mg.titleState) {
             drawTitleScreen();
-        } else if (mg.gameState == mg.talentState) {
-            drawTalentTree();
         } else if (mg.gameState == mg.gameOver) {
             drawGameOver();
         }
@@ -163,13 +162,6 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
-    public void drawTalentTree() {
-        if (!onceSecond) {
-            Runner.skillTree.setFocusable(true);
-            onceSecond = true;
-        }
-        Runner.skillTree.setVisible(true);
-    }
 
     public void drawGameOver() {
         g2.drawString("Game Over!", 500, 500);
