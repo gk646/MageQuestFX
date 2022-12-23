@@ -51,7 +51,7 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void update() {
-        outOfBounds(650);
+        outOfBounds();
         tileCollision();
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;
@@ -72,7 +72,7 @@ public class PrimaryFire extends Projectile {
         return new Point((int) normalizedX, (int) normalizedY);
     }
 
-    public void getPlayerImage() {
+    private void getPlayerImage() {
         entityImage1 = setup("PrimaryFire01.png");
     }
 

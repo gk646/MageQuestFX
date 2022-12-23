@@ -14,7 +14,7 @@ public class WorldRender {
     public int[][] worldData;
     public Point worldSize;
     public final Tile[] tileStorage;
-    final MainGame mainGame;
+    private final MainGame mainGame;
 
     public WorldRender(MainGame mainGame) {
         this.mainGame = mainGame;

@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import static main.Runner.window;
 
 public class KeyHandler implements KeyListener {
-    public final MainGame mg;
+    private final MainGame mg;
     //Keys
     public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, fpressed, TwoPressed;
 

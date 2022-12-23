@@ -5,14 +5,14 @@ import main.MainGame;
 
 import java.awt.Color;
 
-public class Particles extends Entity {
-    Entity generator;
-    Color color;
-    int xd;
-    int yd;
-    int size;
-    int speed;
-    int maxLife;
+class Particles extends Entity {
+    private final Entity generator;
+    private final Color color;
+    private final int xd;
+    private final int yd;
+    private final int size;
+    private final int speed;
+    private final int maxLife;
 
     public Particles(MainGame mainGame, Entity generator, Color color, int size, int speed, int maxLife, int xd, int yd) {
         super(mainGame);

@@ -9,14 +9,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class TalentNode {
+class TalentNode {
     private final int TALENT_SIZE = 45;
     public Rectangle boundBox;
     public int toolTipTimer;
-    public Talent talent;
+    private final Talent talent;
     int pointsSpent;
     String name;
-    BufferedImage nodeImage;
+    private final BufferedImage nodeImage;
 
 
     TalentNode(Talent talent, int xCo, int yCo) {
@@ -31,7 +31,7 @@ public class TalentNode {
         talent.drawIcon(g2, x + slotSize / 2 - 8, y + slotSize / 2 - 8, slotSize);
     }
 
-    public BufferedImage setup() {
+    private BufferedImage setup() {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {

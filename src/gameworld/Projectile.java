@@ -22,8 +22,8 @@ public class Projectile extends Entity {
 
     public Point screenPosition, updateVector, mousePosition;
     public int endPositionX, endPositionY;
-    public final MainGame mainGame;
-    public final MouseHandler mouseHandler;
+    protected final MainGame mainGame;
+    protected final MouseHandler mouseHandler;
 
     public Projectile(MainGame mainGame, MouseHandler mouseHandler) {
         super(mainGame);
@@ -45,38 +45,50 @@ public class Projectile extends Entity {
     public void update() {
         try {
             for (Projectile projectile : mainGame.PROJECTILES) {
+                if (projectile.dead) {
+                    mg.ENTITIES.remove(projectile);
+                    continue;
+                }
                 for (Entity entity : mainGame.ENTITIES) {
-                    if (!(entity instanceof Owly)) {
-                        if (mainGame.collisionChecker.checkEntityAgainstEntity(entity, projectile)) {
-                            if (projectile instanceof PrimaryFire) {
-                                entity.health -= 1;
-                                projectile.dead = true;
-                            } else if (projectile instanceof SecondaryFire) {
-                                entity.health -= 5;
-                            } else if (projectile instanceof Ability1) {
-                                entity.health -= 5;
-                            } else if (projectile instanceof Lightning) {
-                                entity.health -= 1;
-                            }
-                            if (entity.health <= 0) {
-                                mg.player.getExperience(entity);
-                            } else {
-                                entity.hpBarOn = true;
-                            }
-
-                        }
+                    if (entity.dead) {
+                        mg.ENTITIES.remove(entity);
+                        continue;
+                    }
+                    if (!(entity instanceof Owly) && entityIsClose(entity) && mainGame.collisionChecker.checkEntityAgainstEntity(entity, projectile)) {
+                        calcProjectileDamage(projectile, entity);
                     }
                     if (projectile.dead && projectile instanceof PrimaryFire) {
                         mainGame.PROJECTILES.remove(projectile);
                     }
                 }
-                if (projectile.dead) {
-                    mainGame.PROJECTILES.remove(projectile);
-                }
             }
         } catch (ConcurrentModificationException ignored) {
         }
     }
+
+    private boolean entityIsClose(Entity entity) {
+        return entity.playerTooFarAbsolute();
+    }
+
+    private void calcProjectileDamage(Projectile projectile, Entity entity) {
+        if (projectile instanceof PrimaryFire) {
+            entity.health -= 1;
+            projectile.dead = true;
+        } else if (projectile instanceof SecondaryFire) {
+            entity.health -= 1;
+        } else if (projectile instanceof Ability1) {
+            entity.health -= 5;
+        } else if (projectile instanceof Lightning) {
+            entity.health -= 1;
+        }
+        if (entity.health <= 0) {
+            mg.player.getExperience(entity);
+            entity.dead = true;
+        } else {
+            entity.hpBarOn = true;
+        }
+    }
+
 
     public void updateProjectilePos() {
         try {
@@ -87,15 +99,15 @@ public class Projectile extends Entity {
         }
     }
 
-    public void tileCollision() {
+    protected void tileCollision() {
         mainGame.collisionChecker.checkEntityAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
     }
 
-    public void outOfBounds(int size) {
-        if (worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY - size * 2 || worldX <= endPositionX - size * 2) {
+    protected void outOfBounds() {
+        if (worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY - 650 * 2 || worldX <= endPositionX - 650 * 2) {
             this.dead = true;
         }
     }

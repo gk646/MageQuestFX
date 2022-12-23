@@ -14,9 +14,9 @@ import java.util.Comparator;
 
 public class SQLite {
 
-    public MainGame mg;
-    public Utilities utilities;
-    int limit = 32;
+    private final MainGame mg;
+    private final Utilities utilities;
+    private final int limit = 32;
 
     public SQLite(MainGame mg) {
         this.mg = mg;

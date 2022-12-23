@@ -5,9 +5,13 @@ import main.MainGame;
 
 public class MapQuadrant {
 
-    public int size, difficulty, numberOfEnemies, startTileX, startTileY;
-    public boolean spawned;
-    MainGame mg;
+    private final int size;
+    private final int difficulty;
+    private final int numberOfEnemies;
+    private final MainGame mg;
+    public int startTileX;
+    public int startTileY;
+    private boolean spawned;
 
     public MapQuadrant(int difficulty, MainGame mg, int startTileX, int startTileY, int size, int numberOfEnemies) {
         this.startTileX = startTileX;

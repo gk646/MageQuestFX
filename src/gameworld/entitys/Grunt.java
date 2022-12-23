@@ -60,7 +60,7 @@ public class Grunt extends Entity {
         g2.drawImage(enemyImage, screenX, screenY, 48, 48, null);
     }
 
-    public void getDisplayImage() {
+    private void getDisplayImage() {
         enemyImage = setup("enemy01.png");
     }
 

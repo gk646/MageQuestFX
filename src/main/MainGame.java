@@ -58,8 +58,7 @@ public class MainGame extends JPanel implements Runnable {
     public final MotionHandler motionH = new MotionHandler();
 
 
-    //Game thread
-    public Thread gameThread;
+    private final int talentState = 3;
 
 
     //---------Input-----------
@@ -73,7 +72,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int titleState = 0;
     public final int playState = 1;
     public final int optionState = 2;
-    public final int talentState = 3;
+    private final Entity entity = new Entity(this);
     public final int gameOver = 4;
 
 
@@ -83,15 +82,16 @@ public class MainGame extends JPanel implements Runnable {
 
     public final WorldRender wRender = new WorldRender(this);
     public final WorldController wControl = new WorldController(this);
-    public final Entity entity = new Entity(this);
-    final Projectile projectile = new Projectile(this, mouseH);
+    private final Projectile projectile = new Projectile(this, mouseH);
+    private final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final Player player = new Player(this, keyHandler, mouseH, motionH);
     public final Player2 player2 = new Player2(this);
     public final PathFinder pathF = new PathFinder(this);
-    final Multiplayer multiplayer = new Multiplayer(this, player2);
+    private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents;
-    public SQLite sqLite = new SQLite(this);
+    //Game thread
+    private Thread gameThread;
     public InventoryPanel inventP;
     public TalentPanel talentP;
 
@@ -122,13 +122,14 @@ public class MainGame extends JPanel implements Runnable {
         wControl.getWorldsData();
         wControl.load_OverworldMap();
         wControl.makeOverworldQuadrants();
+        player.dynamicSpawns();
         pathF.instantiateNodes();
         inventP = new InventoryPanel(this);
         talentP = new TalentPanel(this);
         startThreads();
     }
 
-    public void startThreads() {
+    private void startThreads() {
         float logicCounter = 1000000000 / 60f;
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
@@ -243,14 +244,15 @@ public class MainGame extends JPanel implements Runnable {
             ui.draw(g2);
             if (showBag) {
                 inventP.drawBagWindow(g2);
+                inventP.drawBagTooltip(g2);
             }
             if (showChar) {
                 inventP.drawCharacterWindow(g2);
+                inventP.drawCharTooltip(g2);
             }
             if (showBag || showChar) {
                 inventP.drawDragAndDrop(g2);
                 inventP.interactWithWindows();
-                inventP.getTooltip(g2);
             }
             if (showTalents) {
                 talentP.drawTalentWindow(g2);

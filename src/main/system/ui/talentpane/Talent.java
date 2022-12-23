@@ -8,18 +8,19 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Talent {
+class Talent {
 
-    public int i_id;
-    public String name, description;
+    private final int i_id;
+    private final String name;
+    private final String description;
 
     public String imagePath;
-    public BufferedImage icon;
+    private final BufferedImage icon;
 
-    public Talent(int i_id, String name, String imagePath, String description) {
+    public Talent(int i_id, String name, String imagePath, String description, int sizeX, int sizeY) {
         this.i_id = i_id;
         this.name = name;
-        this.icon = setup(imagePath);
+        this.icon = setup(imagePath, sizeX, sizeY);
         this.description = description;
     }
 
@@ -29,12 +30,12 @@ public class Talent {
     }
 
 
-    public BufferedImage setup(String imagePath) {
+    private BufferedImage setup(String imagePath, int sizeX, int sizeY) {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/TalentIcons/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+            scaledImage = utilities.scaleImage(scaledImage, sizeX, sizeY);
         } catch (IOException e) {
             e.printStackTrace();
         }

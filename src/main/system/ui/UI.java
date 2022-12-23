@@ -20,16 +20,18 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class UI implements ActionListener, ChangeListener {
-    Graphics2D g2;
-    final MainGame mg;
+    public final Color lightBackgroundAlpha = new Color(0xCAC0CBDC, true);
+    private final MainGame mg;
     public Font maruMonica;
     public int commandNum = 0;
     private final boolean onceSecond = false;
     private boolean once = false;
     private BufferedImage playerUI;
-    public DragListener dragListener;
+    private final DragListener dragListener;
 
-    public final Color lightBackground = new Color(192, 203, 220), lightBackgroundAlpha = new Color(0xCAC0CBDC, true), darkBackground = new Color(90, 105, 136);
+    private final Color lightBackground = new Color(192, 203, 220);
+    private final Color darkBackground = new Color(90, 105, 136);
+    private Graphics2D g2;
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
@@ -125,7 +127,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
     }
 
-    public void drawOptions() {
+    private void drawOptions() {
         g2.setColor(lightBackgroundAlpha);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 59f));
@@ -163,11 +165,11 @@ public class UI implements ActionListener, ChangeListener {
     }
 
 
-    public void drawGameOver() {
+    private void drawGameOver() {
         g2.drawString("Game Over!", 500, 500);
     }
 
-    public int getXForCenteredText(String text) {
+    private int getXForCenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return MainGame.SCREEN_WIDTH / 2 - length / 2;
     }
@@ -187,7 +189,7 @@ public class UI implements ActionListener, ChangeListener {
         mg.requestFocus();
     }
 
-    public void getUIImage() {
+    private void getUIImage() {
         playerUI = setup();
     }
 

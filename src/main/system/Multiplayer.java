@@ -16,11 +16,11 @@ public class Multiplayer {
     private final MainGame mainGame;
     private final Player2 player2;
     private int index = 10;
-    public static DataOutputStream outputStream;
-    public static DataInputStream inputStream;
+    private static final int portNumber = 60069;
+    private static DataOutputStream outputStream;
     public boolean multiplayerStarted;
     public static String ipAddress;
-    public static final int portNumber = 60069;
+    private static DataInputStream inputStream;
 
     public Multiplayer(MainGame mainGame, Player2 player2) {
         this.mainGame = mainGame;

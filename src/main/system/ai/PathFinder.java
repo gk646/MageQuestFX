@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 public class PathFinder {
     public final ArrayList<Node> pathList = new ArrayList<>();
-    final MainGame mg;
-    final ArrayList<Node> openList = new ArrayList<>();
-    Node[][] nodes;
-    Node startNode, goalNode, currentNode;
-    boolean goalReached = false;
-    int step = 0;
+    private final MainGame mg;
+    private final ArrayList<Node> openList = new ArrayList<>();
+    private Node[][] nodes;
+    private Node startNode;
+    private Node goalNode;
+    private Node currentNode;
+    private boolean goalReached = false;
+    private int step = 0;
 
     public PathFinder(MainGame mg) {
         this.mg = mg;
@@ -29,7 +31,7 @@ public class PathFinder {
     }
 
     //todo check for end of map
-    public void resetNodes(int startCol, int startRow) {
+    private void resetNodes(int startCol, int startRow) {
         for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x - 1, startCol + 16); i++) {
             for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y - 1, startRow + 16); b++) {
                 nodes[i][b].open = false;
@@ -60,7 +62,7 @@ public class PathFinder {
     }
 
 
-    public void getCost(Node node) {
+    private void getCost(Node node) {
         //G cost
         int xDistance = Math.abs(node.col - startNode.col);
         int yDistance = Math.abs(node.row - startNode.row);
@@ -122,7 +124,7 @@ public class PathFinder {
         return false;
     }
 
-    public void trackPath() {
+    private void trackPath() {
         Node current = goalNode;
         while (current != startNode) {
             pathList.add(0, current);
@@ -130,7 +132,7 @@ public class PathFinder {
         }
     }
 
-    public void openNode(Node node) {
+    private void openNode(Node node) {
         if (!node.open && !node.checked && !node.solid) {
             node.open = true;
             node.parent = currentNode;

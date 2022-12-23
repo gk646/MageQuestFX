@@ -7,9 +7,11 @@ import java.awt.event.MouseListener;
 
 public class MouseHandler implements MouseListener {
     public boolean mouse1Pressed, mouse2Pressed;
-    public Point mouse1Position, mouse2Position, mouse1Released;
-    public final MotionHandler motionHandler;
-    public static MouseEvent pressed;
+    private static MouseEvent pressed;
+    private final MotionHandler motionHandler;
+    public Point mouse1Position;
+    public Point mouse2Position;
+    private Point mouse1Released;
 
     public MouseHandler(MotionHandler motionHandler) {
         this.motionHandler = motionHandler;

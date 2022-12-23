@@ -6,7 +6,7 @@ import main.MainGame;
 import java.awt.Rectangle;
 
 public class CollisionChecker {
-    final MainGame mainGame;
+    private final MainGame mainGame;
 
     public CollisionChecker(MainGame mainGame) {
         this.mainGame = mainGame;
@@ -20,7 +20,7 @@ public class CollisionChecker {
 
         int entityLeftCol;
         int entityRightCol;
-        int entityTopRow = Math.min(entityTopWorldY / 48, 499);
+        int entityTopRow = Math.max(Math.min(entityTopWorldY / 48, 499), 0);
         int entityBottomRow = Math.min(entityBottomWorldY / 48, 499);
 
         int tileNum1, tileNum2;

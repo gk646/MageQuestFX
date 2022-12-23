@@ -1,6 +1,5 @@
 package gameworld;
 
-import gameworld.entitys.Grunt;
 import gameworld.entitys.Owly;
 import main.MainGame;
 
@@ -17,14 +16,52 @@ import java.util.ConcurrentModificationException;
  * Main inheritable class for all game world entity's
  */
 public class Entity {
-    public int worldY, worldX, entityWidth, entityHeight, screenX, screenY, health, maxHealth, movementSpeed, hpBarCounter, searchTicks, spriteCounter, hitDelay, level;
-    public int goalCol, goalRow, nextCol1, nextRow1, nextCol2, nextRow2, nextCol3, nextRow3, nextCol4, nextRow4;
+    public int worldY;
+    public int worldX;
+    public int entityWidth;
+    public int entityHeight;
+    public int screenX;
+    public int screenY;
+    public int health;
+    public int maxHealth;
+    public int movementSpeed;
+    public int searchTicks;
+    public int hitDelay;
+    public int level;
+    public BufferedImage entityImage1;
+    public boolean onPath;
+    public boolean collisionUp;
+    public boolean collisionDown;
+    public boolean collisionLeft;
+    public boolean collisionRight;
+    public boolean dead;
+    protected int spriteCounter;
+    protected int goalCol;
+    protected int goalRow;
+    protected BufferedImage entityImage2;
+    protected BufferedImage entityImage3;
     public MainGame mg;
-    public BufferedImage entityImage1, entityImage2, entityImage3, entityImage4, entityImage5, entityImage6, entityImage7, entityImage8, entityImage9, entityImage10;
+    protected BufferedImage entityImage4;
+    protected BufferedImage entityImage5;
+    protected BufferedImage entityImage6;
+    protected BufferedImage entityImage7;
+    protected BufferedImage entityImage8;
+    protected BufferedImage entityImage9;
+    protected BufferedImage entityImage10;
+    protected BufferedImage enemyImage;
+    boolean hpBarOn;
+    private int hpBarCounter;
     public String direction;
     public Rectangle collisionBox;
-    public boolean initializeEnemies, hpBarOn, onPath, collisionUp, collisionDown, collisionLeft, collisionRight, dead;
-    public BufferedImage enemyImage;
+    private int nextCol1;
+    private int nextRow1;
+    private int nextCol2;
+    private int nextRow2;
+    private int nextCol3;
+    private int nextRow3;
+    private int nextCol4;
+    private int nextRow4;
+    private boolean initializeEnemies;
 
 
     public Entity(MainGame mg) {
@@ -47,9 +84,6 @@ public class Entity {
                 if (!(entity instanceof Owly)) {
                     if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
                         // mainGame.player.health -= 1;
-                        if (mg.player.health <= 0) {
-                            mg.gameState = mg.gameOver;
-                        }
                     }
                     if (entity.hpBarCounter >= 600) {
                         entity.hpBarOn = false;
@@ -58,15 +92,10 @@ public class Entity {
                     if (entity.hpBarOn) {
                         entity.hpBarCounter++;
                     }
-                    if (entity.health <= 0) {
-                        mg.ENTITIES.remove(entity);
-                    }
                 }
-
             }
         } catch (ConcurrentModificationException ignored) {
         }
-
     }
 
     public void updatePos() {
@@ -127,16 +156,16 @@ public class Entity {
         }
     }
 
-    public void spawnEnemies() {
-        for (int i = 0; i < 1; i++) {
-            mg.ENTITIES.add(new Grunt(mg, 11500, 11500, 1));
-        }
-
-        mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));
+    private void spawnEnemies() {
+        mg.ENTITIES.add(new Owly(mg, 23900, 23900, 15));
     }
 
-    public boolean playerTooFar() {
+    protected boolean playerTooFar() {
         return Math.abs(worldX / mg.tileSize - mg.player.worldX / mg.tileSize) >= 15 || Math.abs(worldY / mg.tileSize - mg.player.worldY / mg.tileSize) >= 15;
+    }
+
+    boolean playerTooFarAbsolute() {
+        return true;
     }
 
     private void decideMovement(int nextX, int nextY) {
@@ -188,7 +217,7 @@ public class Entity {
         }
     }
 
-    public void searchPath(int goalCol, int goalRow) {
+    protected void searchPath(int goalCol, int goalRow) {
         int startCol = (worldX + collisionBox.x) / mg.tileSize;
         int startRow = (worldY + collisionBox.y) / mg.tileSize;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow);
@@ -218,7 +247,7 @@ public class Entity {
         }
     }
 
-    public void trackPath(int goalCol, int goalRow) {
+    protected void trackPath(int goalCol, int goalRow) {
         int nextX = nextCol1 * mg.tileSize;
         int nextY = nextRow1 * mg.tileSize;
         if ((worldX + collisionBox.x) / mg.tileSize == nextCol1 && (worldY + collisionBox.y) / mg.tileSize == nextRow1) {
@@ -240,7 +269,7 @@ public class Entity {
         }
     }
 
-    public void getNearestPlayer() {
+    protected void getNearestPlayer() {
         if (Math.abs(mg.player.worldX - this.worldX + mg.player.worldY - this.worldY) < Math.abs(mg.player2.worldX - this.worldX + mg.player2.worldY - this.worldY)) {
             this.goalCol = (mg.player.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.player.worldY + mg.player.collisionBox.y) / mg.tileSize;
@@ -250,7 +279,7 @@ public class Entity {
         }
     }
 
-    public void getNearestPlayerMultiplayer() {
+    protected void getNearestPlayerMultiplayer() {
         if (Math.abs(mg.player.worldX - this.worldX + mg.player.worldY - this.worldY) < Math.abs(mg.player2.worldX - this.worldX + mg.player2.worldY - this.worldY)) {
             this.goalCol = (mg.player.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.player.worldY + mg.player.collisionBox.y) / mg.tileSize;

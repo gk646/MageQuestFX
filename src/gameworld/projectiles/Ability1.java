@@ -48,7 +48,7 @@ public class Ability1 extends Projectile {
 
     @Override
     public void update() {
-        outOfBounds(650);
+        outOfBounds();
         tileCollision();
         screenPosition.x += updateVector.x;
         screenPosition.y += updateVector.y;

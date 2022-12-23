@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class Dungeon1 {
-    public static int[][] worldData;
-    public static Point worldSize;
+class Dungeon1 {
+    private static int[][] worldData;
+    private static Point worldSize;
 
     public static int[][] loadMap() {
         worldSize = new Point(50, 50);

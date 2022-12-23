@@ -14,23 +14,33 @@ public class InventoryPanel {
     private static final int SLOT_SIZE = 45;
     private static final int BAG_SLOTS = 15;
     private static final int CHAR_SLOTS = 10;
-    public final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
-    public final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
+    private final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
+    private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     private final InventorySlot[] bag_Slots;
-    public int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
-    public MainGame mg;
+    private final MainGame mg;
+
     public InventorySlot[] char_Slots;
-    public Point previousMousePosition = new Point(300, 300), lastCharPosition = new Point(charPanelX, charPanelY), lastBagPosition = new Point(bagPanelX, bagPanelY);
-    Item grabbedItem;
-    InventorySlot grabbedSlot;
-    BasicStroke width2 = new BasicStroke(2), width5 = new BasicStroke(5), width1 = new BasicStroke(1);
-    public Rectangle charPanelCloser, bagPanelCloser, charPanelMover, bagPanelMover, wholeCharWindow, wholeBagWindow;
+    private final BasicStroke width2 = new BasicStroke(2);
+    private final BasicStroke width5 = new BasicStroke(5);
+    private final BasicStroke width1 = new BasicStroke(1);
+    private final Rectangle charPanelCloser;
+    private final Rectangle bagPanelCloser;
+    private final Rectangle charPanelMover;
+    private final Rectangle bagPanelMover;
+    private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
+    public Rectangle wholeCharWindow;
+    public Rectangle wholeBagWindow;
+    private int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
+    private final Point lastCharPosition = new Point(charPanelX, charPanelY);
+    private Point previousMousePosition = new Point(300, 300);
+    private Item grabbedItem;
+    private InventorySlot grabbedSlot;
 
     public InventoryPanel(MainGame mainGame) {
-        this.mg = mainGame;
+        mg = mainGame;
         bag_Slots = new InventorySlot[BAG_SLOTS];
         char_Slots = new InventorySlot[CHAR_SLOTS];
-        this.grabbedItem = null;
+        grabbedItem = null;
         createCharSlots();
         createBagSlots();
         charPanelMover = new Rectangle(charPanelX, charPanelY, 500, 50);
@@ -64,21 +74,11 @@ public class InventoryPanel {
         lastBagPosition.y = bagPanelY;
     }
 
-    public void drawCharPanel(Graphics2D g2, int startX, int startY) {
-        drawCharacterBackground(g2, startX, startY);
-        drawCharacterSlots(g2, startX, startY);
-    }
-
-    public void drawBagPanel(Graphics2D g2, int startX, int startY) {
-        drawBagBackground(g2, startX, startY);
-        drawBagSlots(g2, startX, startY);
-    }
-
-    public void getTooltip(Graphics2D g2) {
+    public void drawCharTooltip(Graphics2D g2) {
         if (grabbedItem == null && !mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
                 if (invSlot.item != null && invSlot.toolTipTimer >= 40) {
-                    drawToolTip(g2, invSlot);
+                    getTooltip(g2, invSlot);
                 }
                 if (invSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
                     invSlot.toolTipTimer++;
@@ -88,20 +88,37 @@ public class InventoryPanel {
                 }
             }
         }
-        for (InventorySlot bagSlot : bag_Slots) {
-            if (bagSlot.item != null && bagSlot.toolTipTimer >= 40) {
-                drawToolTip(g2, bagSlot);
-            }
-            if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
-                bagSlot.toolTipTimer++;
-                break;
-            } else {
-                bagSlot.toolTipTimer = 0;
+
+    }
+
+    public void drawBagTooltip(Graphics2D g2) {
+        if (grabbedItem == null && !mg.mouseH.mouse1Pressed) {
+            for (InventorySlot bagSlot : bag_Slots) {
+                if (bagSlot.item != null && bagSlot.toolTipTimer >= 40) {
+                    getTooltip(g2, bagSlot);
+                }
+                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
+                    bagSlot.toolTipTimer++;
+                    break;
+                } else {
+                    bagSlot.toolTipTimer = 0;
+                }
             }
         }
     }
 
-    private void drawToolTip(Graphics2D g2, InventorySlot invSlot) {
+    private void drawCharPanel(Graphics2D g2, int startX, int startY) {
+        drawCharacterBackground(g2, startX, startY);
+        drawCharacterSlots(g2, startX, startY);
+    }
+
+    private void drawBagPanel(Graphics2D g2, int startX, int startY) {
+        drawBagBackground(g2, startX, startY);
+        drawBagSlots(g2, startX, startY);
+    }
+
+
+    private void getTooltip(Graphics2D g2, InventorySlot invSlot) {
         //BACKGROUND
         g2.setColor(lightBackgroundAlpha);
         g2.fillRoundRect(mg.motionH.lastMousePosition.x, mg.motionH.lastMousePosition.y, 200, 250, 15, 15);
@@ -163,45 +180,53 @@ public class InventoryPanel {
             g2.drawImage(grabbedItem.icon, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE, SLOT_SIZE, null);
         }
         if (grabbedItem == null && mg.mouseH.mouse1Pressed) {
-            for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot.item != null) {
-                    mg.player.updateEquippedItems();
-                    invSlot.grabbed = true;
-                    grabbedSlot = invSlot;
-                    grabbedItem = invSlot.item;
-                    return 1;
+            if (mg.showChar) {
+                for (InventorySlot invSlot : char_Slots) {
+                    if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot.item != null) {
+                        mg.player.updateEquippedItems();
+                        invSlot.grabbed = true;
+                        grabbedSlot = invSlot;
+                        grabbedItem = invSlot.item;
+                        return 1;
+                    }
                 }
             }
-            for (InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot.item != null) {
-                    bagSlot.grabbed = true;
-                    grabbedSlot = bagSlot;
-                    grabbedItem = bagSlot.item;
-                    return 1;
+            if (mg.showBag) {
+                for (InventorySlot bagSlot : bag_Slots) {
+                    if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot.item != null) {
+                        bagSlot.grabbed = true;
+                        grabbedSlot = bagSlot;
+                        grabbedItem = bagSlot.item;
+                        return 1;
+                    }
                 }
             }
         }
         if (grabbedItem != null && !mg.mouseH.mouse1Pressed) {
-            for (InventorySlot invSlot : char_Slots) {
-                if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
-                    invSlot.item = (grabbedItem);
-                    mg.player.updateEquippedItems();
-                    grabbedSlot.item = null;
-                    grabbedSlot.grabbed = false;
-                    grabbedItem = null;
-                    grabbedSlot = null;
-                    return 1;
+            if (mg.showChar) {
+                for (InventorySlot invSlot : char_Slots) {
+                    if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
+                        invSlot.item = (grabbedItem);
+                        mg.player.updateEquippedItems();
+                        grabbedSlot.item = null;
+                        grabbedSlot.grabbed = false;
+                        grabbedItem = null;
+                        grabbedSlot = null;
+                        return 1;
+                    }
                 }
             }
-            for (InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot != grabbedSlot) {
-                    bagSlot.item = grabbedItem;
-                    grabbedSlot.item = null;
-                    grabbedSlot.grabbed = false;
-                    grabbedItem = null;
-                    grabbedSlot = null;
-                    mg.player.updateEquippedItems();
-                    return 1;
+            if (mg.showBag) {
+                for (InventorySlot bagSlot : bag_Slots) {
+                    if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot != grabbedSlot) {
+                        bagSlot.item = grabbedItem;
+                        grabbedSlot.item = null;
+                        grabbedSlot.grabbed = false;
+                        grabbedItem = null;
+                        grabbedSlot = null;
+                        mg.player.updateEquippedItems();
+                        return 1;
+                    }
                 }
             }
             grabbedSlot.grabbed = false;
@@ -230,7 +255,7 @@ public class InventoryPanel {
         previousMousePosition = mg.motionH.lastMousePosition;
     }
 
-    public void drawCharacterBackground(Graphics2D g2, int startX, int startY) {
+    private void drawCharacterBackground(Graphics2D g2, int startX, int startY) {
         //inventory background
         //big background
         wholeCharWindow.x = startX - 65;
@@ -265,7 +290,7 @@ public class InventoryPanel {
         g2.drawString("Health:" + mg.player.maxHealth, startX + 110, startY + 420);
     }
 
-    public void drawCharacterSlots(Graphics2D g2, int startX, int startY) {
+    private void drawCharacterSlots(Graphics2D g2, int startX, int startY) {
         //Character Slots
         g2.setStroke(width2);
         for (int i = 0; i <= 3; i++) {
@@ -298,7 +323,7 @@ public class InventoryPanel {
 
     }
 
-    public void drawBagBackground(Graphics2D g2, int startX, int startY) {
+    private void drawBagBackground(Graphics2D g2, int startX, int startY) {
         wholeBagWindow.x = startX;
         wholeBagWindow.y = startY;
         //big background
@@ -324,7 +349,7 @@ public class InventoryPanel {
         bagPanelCloser.y = startY;
     }
 
-    public void drawBagSlots(Graphics2D g2, int startX, int startY) {
+    private void drawBagSlots(Graphics2D g2, int startX, int startY) {
         g2.setColor(darkBackground);
         for (int i = 0; i < bag_Slots.length; i++) {
             if (i <= 6) {

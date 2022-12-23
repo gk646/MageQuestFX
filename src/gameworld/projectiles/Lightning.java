@@ -79,7 +79,7 @@ public class Lightning extends Projectile {
     public void update() {
     }
 
-    public void getPlayerImage() {
+    private void getPlayerImage() {
         entityImage1 = setup("lightn01.png");
         entityImage2 = setup("lightn02.png");
         entityImage3 = setup("lightn03.png");

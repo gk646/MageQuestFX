@@ -17,7 +17,7 @@ public class Item {
     public int quality;
     public int rarity;
     public int durability = 100;
-    public String stats;
+    private final String stats;
     /*
         INT intellect + max mana / more damage on abilities
         VIT vitality + max health / more health regen
@@ -67,7 +67,7 @@ public class Item {
     }
 
 
-    public void getStats() {
+    private void getStats() {
         Pattern p;
         Matcher m;
         if (stats.contains("INT")) {

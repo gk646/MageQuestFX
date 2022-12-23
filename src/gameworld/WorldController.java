@@ -9,10 +9,11 @@ import main.MainGame;
 import java.awt.Point;
 
 public class WorldController {
+    //main game
+    private final MainGame mg;
     //-----OVERWORLD
-    public int[][] overWorldMapData;
-    public Point overWorldSize;
-    public Point overWorldStartPoint;
+    private int[][] overWorldMapData;
+    private Point overWorldSize;
     public MapQuadrant[] overworldMapQuadrants;
 
     //-----HELL
@@ -25,9 +26,7 @@ public class WorldController {
     public int[][] valhalla_MapData;
     public Point valhalla_Size;
     public Point valhalla_StartPoint;
-
-    //main game
-    public MainGame mg;
+    private Point overWorldStartPoint;
 
 
     public WorldController(MainGame mg) {

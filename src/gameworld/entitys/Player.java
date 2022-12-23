@@ -23,15 +23,28 @@ import java.util.Objects;
 
 public class Player extends Entity {
     public static Point startingPoint;
+    private final MotionHandler motionHandler;
+    public int maxMana;
+    public float mana;
+    public float health;
     //STATS
-    public int INT, VIT, REG, SPD;
-    public int maxMana, cooldownOneSecond, cooldownTwoSecond, cooldownPrimary, cdLightning, experience, levelUpExperience, playerQuadrant, quadrantTimer;
-    public float mana, health, manaRegeneration = 0.02f, healthRegeneration = 0.002f;
-
-    public final MotionHandler motionHandler;
+    private int INT;
+    private int VIT;
+    private int REG;
+    private int SPD;
+    private int cooldownOneSecond;
+    private int cooldownTwoSecond;
+    private int cooldownPrimary;
+    private int cdLightning;
+    private int experience;
+    private int levelUpExperience;
+    private int playerQuadrant;
+    private int quadrantTimer;
+    private float manaRegeneration = 0.02f;
+    private float healthRegeneration = 0.002f;
     private final KeyHandler keyHandler;
     private final MouseHandler mouseHandler;
-    public boolean respawnsDone;
+    private boolean respawnsDone;
 
 
     public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
@@ -58,7 +71,6 @@ public class Player extends Entity {
         this.mouseHandler = mouseHandler;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
-
     }
 
     public void updateEquippedItems() {
@@ -113,7 +125,7 @@ public class Player extends Entity {
         respawnCloseQuadrants();
     }
 
-    public void getPlayerQuadrant() {
+    private void getPlayerQuadrant() {
         for (int i = 99; i >= 0; i--) {
             if (worldX / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileX && worldY / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileY
                     && worldX / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileY + 50) {
@@ -124,7 +136,7 @@ public class Player extends Entity {
     }
 
 
-    public void respawnCloseQuadrants() {
+    private void respawnCloseQuadrants() {
         mg.wControl.overworldMapQuadrants[playerQuadrant].spawnEnemies();
         if (quadrantTimer < 210) {
             mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 1, 99)].spawnEnemies();
@@ -150,7 +162,7 @@ public class Player extends Entity {
         g2.drawImage(entityImage1, screenX, screenY, 48, 48, null);
     }
 
-    public void getPlayerImage() {
+    private void getPlayerImage() {
         entityImage1 = setup("Mage_down01.png");
     }
 
