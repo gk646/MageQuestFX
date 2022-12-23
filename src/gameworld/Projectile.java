@@ -61,7 +61,7 @@ public class Projectile {
                         mg.ENTITIES.remove(entity);
                         continue;
                     }
-                    if (!(entity instanceof Owly) && !entity.playerTooFarAbsolute() && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
+                    if (!entity.playerTooFarAbsolute() && !(entity instanceof Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
                         calcProjectileDamage(projectile, entity);
                     }
                 }
