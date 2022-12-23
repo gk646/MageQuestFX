@@ -94,12 +94,12 @@ public class MainGame extends JPanel implements Runnable {
 
     private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
-    public boolean client = false, showBag, showChar, showTalents;
+    public boolean client = false, showBag, showChar, showTalents, loadingScreen;
     //Game thread
     private Thread gameThread;
     public InventoryPanel inventP;
     public TalentPanel talentP;
-
+    String text;
 
     /**
      * Main game loop class
@@ -114,7 +114,8 @@ public class MainGame extends JPanel implements Runnable {
         this.setFocusable(true);
         this.addMouseMotionListener(motionH);
         this.setOpaque(false);
-        gameState = titleState;
+        this.loadingScreen = true;
+        gameState = -2;
     }
 
     /**
@@ -122,17 +123,29 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        imageSto.loadImages();
         sqLite.readItemsFromDB();
+        ui.updateLoadingScreen(12);
         wControl.getWorldsData();
+
+        ui.updateLoadingScreen(12);
         wControl.load_OverworldMap();
+        ui.updateLoadingScreen(12);
         wControl.makeOverworldQuadrants();
+        imageSto.loadImages();
+        ui.updateLoadingScreen(12);
         player.dynamicSpawns();
+        ui.updateLoadingScreen(12);
         pathF.instantiateNodes();
+        ui.updateLoadingScreen(12);
         inventP = new InventoryPanel(this);
+        ui.updateLoadingScreen(12);
         talentP = new TalentPanel(this);
-        System.out.println("hey");
+
+        ui.updateLoadingScreen(100);
+        loadingScreen = false;
+        gameState = titleState;
         startThreads();
+        gameThread.stop();
     }
 
     private void startThreads() {
@@ -272,7 +285,7 @@ public class MainGame extends JPanel implements Runnable {
             g2.setColor(this.ui.lightBackgroundAlpha);
             g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
             ui.draw(g2);
-        } else if (gameState == titleState || gameState == titleOption) {
+        } else if (gameState == titleState || gameState == titleOption || loadingScreen) {
             ui.draw(g2);
         }
         //RENDER END

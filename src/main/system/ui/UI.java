@@ -8,6 +8,7 @@ import main.system.Utilities;
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -24,14 +25,14 @@ public class UI implements ActionListener, ChangeListener {
     private final MainGame mg;
     public Font maruMonica;
     public int commandNum = 0;
-    private final boolean onceSecond = false;
     private boolean once = false;
     private BufferedImage playerUI;
     private final DragListener dragListener;
+    public int loadingProgress = 0;
 
     private final Color lightBackground = new Color(192, 203, 220);
     private final Color darkBackground = new Color(90, 105, 136);
-    private Graphics2D g2;
+
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
@@ -46,58 +47,54 @@ public class UI implements ActionListener, ChangeListener {
         this.dragListener = new DragListener();
     }
 
+
     public void draw(Graphics2D g2) {
-        this.g2 = g2;
         g2.setFont(maruMonica);
         if (mg.gameState == mg.playState) {
-            drawGameUI();
+            drawGameUI(g2);
         } else if (mg.gameState == mg.optionState || mg.gameState == mg.titleOption) {
-            drawOptions();
+            drawOptions(g2);
         } else if (mg.gameState == mg.titleState) {
-            drawTitleScreen();
+            drawTitleScreen(g2);
         } else if (mg.gameState == mg.gameOver) {
-            drawGameOver();
+            drawGameOver(g2);
+        } else if (mg.loadingScreen) {
+            drawLoadingScreen(g2);
         }
-
     }
 
-    private void drawTitleScreen() {
-
+    private void drawTitleScreen(Graphics2D g2) {
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
         String text = "Mage Quest_2D";
-        int x = getXForCenteredText(text);
+        int x = getXForCenteredText(text, g2);
         int y = 48 * 3;
-
         //FILL BACKGROUND WITH COLOR
         g2.setColor(lightBackground);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
-
         //DRAW TEXT
         g2.setColor(darkBackground);
         g2.drawString(text, x, y);
         //MENU
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48f));
         text = "START GAME";
-        x = getXForCenteredText(text);
+        x = getXForCenteredText(text, g2);
         y += 5 * 48;
         g2.drawString(text, x, y);
         if (commandNum == 0) {
             g2.drawString(">", x - 25, y);
-
         }
         text = "OPTIONS";
 
-        x = getXForCenteredText(text);
+        x = getXForCenteredText(text, g2);
         y += 48;
         g2.drawString(text, x, y);
         if (commandNum == 1) {
             g2.drawString(">", x - 25, y);
-
         }
         text = "QUIT";
-        x = getXForCenteredText(text);
+        x = getXForCenteredText(text, g2);
         y += 48;
         g2.drawString(text, x, y);
         if (commandNum == 2) {
@@ -109,11 +106,11 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawString(text, x, y);
 
         text = "\u00A9 2022 Lukas Gilch";
-        x = getXForCenteredText(text);
+        x = getXForCenteredText(text, g2);
         g2.drawString(text, x, y);
     }
 
-    private void drawGameUI() {
+    private void drawGameUI(Graphics2D g2) {
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
         g2.setColor(new Color(0xFF0044));
@@ -127,7 +124,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.drawString((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
     }
 
-    private void drawOptions() {
+    private void drawOptions(Graphics2D g2) {
         g2.setColor(lightBackgroundAlpha);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 59f));
@@ -164,12 +161,34 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
+    private void drawLoadingScreen(Graphics2D g2) {
+        //FILL BACKGROUND WITH COLOR
+        g2.setColor(lightBackground);
+        g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
+        //Text
+        g2.setColor(darkBackground);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
+        String text = "Loading..." + loadingProgress + "%";
+        int x = getXForCenteredText(text, g2);
+        int y = 600;
+        g2.setStroke(new BasicStroke(4));
+        g2.drawString(text, x, y);
+        g2.setColor(darkBackground);
+        g2.fillRoundRect((int) (MainGame.SCREEN_WIDTH * 0.052f), (int) (MainGame.SCREEN_HEIGHT * 0.83f), (int) ((loadingProgress / 100f) * (int) (MainGame.SCREEN_WIDTH * 0.895f)), (int) (MainGame.SCREEN_HEIGHT * 0.069f), (int) (MainGame.SCREEN_HEIGHT * 0.046f), (int) (MainGame.SCREEN_HEIGHT * 0.046f));
+        g2.setColor(darkBackground);
+        g2.drawRoundRect((int) (MainGame.SCREEN_WIDTH * 0.052f), (int) (MainGame.SCREEN_HEIGHT * 0.83f), (int) (MainGame.SCREEN_WIDTH * 0.895f), (int) (MainGame.SCREEN_HEIGHT * 0.069f), (int) (MainGame.SCREEN_HEIGHT * 0.046f), (int) (MainGame.SCREEN_HEIGHT * 0.046f));
+    }
 
-    private void drawGameOver() {
+    public void updateLoadingScreen(int x) {
+        loadingProgress += x;
+        mg.repaint();
+    }
+
+    private void drawGameOver(Graphics2D g2) {
         g2.drawString("Game Over!", 500, 500);
     }
 
-    private int getXForCenteredText(String text) {
+    private int getXForCenteredText(String text, Graphics2D g2) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return MainGame.SCREEN_WIDTH / 2 - length / 2;
     }
@@ -199,12 +218,9 @@ public class UI implements ActionListener, ChangeListener {
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui.png"))));
             scaledImage = utilities.scaleImage(scaledImage, 330, 200);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         return scaledImage;
     }
-
-
 }
