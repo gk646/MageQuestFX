@@ -51,7 +51,7 @@ public class ImageStorage {
     }
 
     private void getPrimaryFireImages() {
-        primaryFire1 = setup("/projectiles/PrimaryFire/primaryFire01.png");
+        primaryFire1 = setup("/projectiles/PrimaryFire/PrimaryFire01.png");
     }
 
     private BufferedImage setup(String imagePath) {
