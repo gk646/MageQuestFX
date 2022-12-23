@@ -70,7 +70,7 @@ public class Shooter extends Entity {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/entitys/enemies/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
 
         } catch (IOException e) {

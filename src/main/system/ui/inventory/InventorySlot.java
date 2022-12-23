@@ -1,4 +1,4 @@
-package main.system.ui;
+package main.system.ui.inventory;
 
 import gameworld.Item;
 
@@ -18,10 +18,6 @@ public class InventorySlot {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
         this.item = item;
 
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     public void drawIcon(Graphics2D g2, int x, int y, int slotSize) {

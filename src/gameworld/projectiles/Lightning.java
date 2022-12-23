@@ -97,7 +97,7 @@ public class Lightning extends Projectile {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/projectiles/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/projectiles/Lightning/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 70, 92);
 
         } catch (IOException e) {

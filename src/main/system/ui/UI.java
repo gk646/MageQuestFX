@@ -32,7 +32,7 @@ public class UI implements ActionListener, ChangeListener {
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
-        InputStream is = getClass().getResourceAsStream("/resources/font/x12y16pxMaruMonica.ttf");
+        InputStream is = getClass().getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf");
         try {
             assert is != null;
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);

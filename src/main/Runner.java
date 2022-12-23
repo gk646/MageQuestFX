@@ -36,7 +36,7 @@ public class Runner {
         //window.addKeyListener(new KeyHandler(mainGame));
         window.setCursor(new Cursor(Cursor.HAND_CURSOR));
         try {
-            Image image = ImageIO.read((Objects.requireNonNull(Runner.class.getResourceAsStream("/resources/icon/icon.png"))));
+            Image image = ImageIO.read((Objects.requireNonNull(Runner.class.getResourceAsStream("/Icons/icon.png"))));
             window.setIconImage(image);
         } catch (IOException e) {
             throw new RuntimeException(e);

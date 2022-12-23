@@ -10,7 +10,7 @@ import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
 import main.system.Utilities;
-import main.system.ui.InventorySlot;
+import main.system.ui.inventory.InventorySlot;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -44,8 +44,8 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = 12000;
-        worldY = 12000;
+        worldX = 23500;
+        worldY = 23500;
         direction = "up";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 16, 31, 31);
@@ -204,7 +204,7 @@ public class Player extends Entity {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
 
         } catch (IOException e) {

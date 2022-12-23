@@ -16,7 +16,7 @@ public class OverWorld {
         worldSize = new Point(500, 500);
         worldData = new int[worldSize.x][worldSize.y];
         try {
-            InputStream inputStream = OverWorld.class.getResourceAsStream("/maps/overworld.txt");
+            InputStream inputStream = OverWorld.class.getResourceAsStream("/Maps/overworld.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             int row = 0;

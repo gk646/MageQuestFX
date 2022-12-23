@@ -14,7 +14,7 @@ public class Dungeon1 {
         worldSize = new Point(50, 50);
         worldData = new int[worldSize.x][worldSize.y];
         try {
-            InputStream inputStream = Dungeon1.class.getResourceAsStream("/maps/overworld.txt");
+            InputStream inputStream = Dungeon1.class.getResourceAsStream("/Maps/overworld.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             int row = 0;

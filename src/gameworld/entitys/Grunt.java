@@ -16,15 +16,14 @@ public class Grunt extends Entity {
     /**
      * Main Enemy class
      *
-     * @param mainGame  super();
-     * @param worldX    coordinates X
-     * @param worldY    coordinates Y
-     * @param maxHealth max amount of health
+     * @param mainGame super();
+     * @param worldX   coordinates X
+     * @param worldY   coordinates Y
      */
-    public Grunt(MainGame mainGame, int worldX, int worldY, int maxHealth, int level) {
+    public Grunt(MainGame mainGame, int worldX, int worldY, int level) {
         super(mainGame);
         //Setting default values
-        this.maxHealth = maxHealth;
+        this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
@@ -39,6 +38,7 @@ public class Grunt extends Entity {
         this.searchTicks = 60;
         updatePos();
     }
+
 
     public void update() {
         screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
@@ -68,7 +68,7 @@ public class Grunt extends Entity {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/entitys/enemies/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
 
         } catch (IOException e) {

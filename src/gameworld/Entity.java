@@ -129,7 +129,7 @@ public class Entity {
 
     public void spawnEnemies() {
         for (int i = 0; i < 1; i++) {
-            mg.ENTITIES.add(new Grunt(mg, 11500, 11500, 1, 1));
+            mg.ENTITIES.add(new Grunt(mg, 11500, 11500, 1));
         }
 
         mg.ENTITIES.add(new Owly(mg, 11900, 11900, 15));

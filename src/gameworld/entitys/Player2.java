@@ -35,7 +35,7 @@ public class Player2 extends Entity {
         Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/player/" + imagePath))));
+            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/" + imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
 
         } catch (IOException e) {

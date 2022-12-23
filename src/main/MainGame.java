@@ -14,8 +14,9 @@ import main.system.Multiplayer;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
-import main.system.ui.InventoryPanel;
 import main.system.ui.UI;
+import main.system.ui.inventory.InventoryPanel;
+import main.system.ui.talentpane.TalentPanel;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -92,6 +93,7 @@ public class MainGame extends JPanel implements Runnable {
     public boolean client = false, showBag, showChar;
     public SQLite sqLite = new SQLite(this);
     public InventoryPanel inventP;
+    public TalentPanel talentP;
 
 
     /**
@@ -122,6 +124,7 @@ public class MainGame extends JPanel implements Runnable {
         wControl.makeQuadrants();
         pathF.instantiateNodes();
         inventP = new InventoryPanel(this);
+        talentP = new TalentPanel(this);
         startThreads();
     }
 

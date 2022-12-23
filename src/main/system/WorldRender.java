@@ -77,8 +77,8 @@ public class WorldRender {
     public void draw(Graphics2D g2) {
         int worldCol = Math.max((mainGame.player.worldX / 48) - 20, 0);
         int worldRow = Math.max((mainGame.player.worldY / 48) - 12, 0);
-        for (int i = worldCol; i < worldCol + 42; i++) {
-            for (int b = worldRow; b < worldRow + 25; b++) {
+        for (int i = worldCol; i < Math.min(worldCol + 42, 499); i++) {
+            for (int b = worldRow; b < Math.min(worldRow + 25, 499); b++) {
                 //reading out tile data
                 int tileNum = worldData[i][b];
                 //making world camera

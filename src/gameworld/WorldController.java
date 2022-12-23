@@ -51,8 +51,7 @@ public class WorldController {
         int counter = 0;
         for (int i = 0; i <= 10; i++) {
             for (int b = 0; b <= 10; b++) {
-                mapQuadrants[counter++] = new MapQuadrant(20 - (i + b), mg, (overWorldSize.x / 10) * i, (overWorldSize.y / 10) * b, overWorldSize.x / 10, 40);
-
+                mapQuadrants[counter++] = new MapQuadrant(20 - (i + b), mg, (overWorldSize.x / 10) * i, (overWorldSize.y / 10) * b, overWorldSize.x / 10, 30);
             }
         }
         System.out.println(mg.ENTITIES.size());

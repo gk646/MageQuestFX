@@ -1,4 +1,4 @@
-package main.system.ui;
+package main.system.ui.inventory;
 
 import gameworld.Item;
 import main.MainGame;
@@ -184,7 +184,7 @@ public class InventoryPanel {
         if (grabbedItem != null && !mg.mouseH.mouse1Pressed) {
             for (InventorySlot invSlot : char_Slots) {
                 if (invSlot.boundBox.contains(mg.motionH.lastMousePosition) && invSlot != grabbedSlot) {
-                    invSlot.setItem(grabbedItem);
+                    invSlot.item = (grabbedItem);
                     mg.player.updateEquippedItems();
                     grabbedSlot.item = null;
                     grabbedSlot.grabbed = false;
@@ -195,7 +195,7 @@ public class InventoryPanel {
             }
             for (InventorySlot bagSlot : bag_Slots) {
                 if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition) && bagSlot != grabbedSlot) {
-                    bagSlot.setItem(grabbedItem);
+                    bagSlot.item = grabbedItem;
                     grabbedSlot.item = null;
                     grabbedSlot.grabbed = false;
                     grabbedItem = null;
