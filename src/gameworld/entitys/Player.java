@@ -51,8 +51,8 @@ public class Player extends Entity {
         this.motionHandler = motionHandler;
         //-------VALUES-----------
         movementSpeed = 4;
-        this.maxHealth = 10;
-        this.health = 7;
+        this.maxHealth = 100000;
+        this.health = 100000;
         this.maxMana = 20;
         this.mana = maxMana;
         this.entityHeight = 48;
@@ -61,7 +61,7 @@ public class Player extends Entity {
         worldY = 23500;
         direction = "up";
         getPlayerImage();
-        this.collisionBox = new Rectangle(8, 16, 31, 31);
+        this.collisionBox = new Rectangle(8, 8, 32, 32);
         this.level = 1;
 
         //Handlers

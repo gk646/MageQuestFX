@@ -27,7 +27,7 @@ public class Grunt extends Entity {
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.collisionBox = new Rectangle(6, 6, 42, 42);
+        this.collisionBox = new Rectangle(0, 0, 42, 42);
         this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
@@ -38,9 +38,10 @@ public class Grunt extends Entity {
     public void update() {
         screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if ((worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize) && !playerTooFarAbsolute()) {
+        if (!playerTooFarAbsolute() && (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize)) {
             onPath = true;
         }
+
         gruntMovement();
         //hitDelay++;
         searchTicks++;
@@ -63,7 +64,7 @@ public class Grunt extends Entity {
         if (mg.client) {
             if (onPath && searchTicks >= Math.random() * 45) {
                 getNearestPlayerMultiplayer();
-                searchPath(goalCol, goalRow);
+
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);

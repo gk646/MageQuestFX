@@ -81,7 +81,7 @@ public class Entity {
                 entity.update();
                 if (!(entity instanceof Owly)) {
                     if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
-                        // mainGame.player.health -= 1;
+                        mg.player.health -= 1;
                     }
                     if (entity.hpBarCounter >= 600) {
                         entity.hpBarOn = false;
@@ -171,7 +171,6 @@ public class Entity {
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-
         if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mg.tileSize) {
             worldY -= movementSpeed;
         } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mg.tileSize) {
@@ -211,8 +210,8 @@ public class Entity {
     }
 
     protected void searchPath(int goalCol, int goalRow) {
-        int startCol = (worldX + collisionBox.x) / mg.tileSize;
-        int startRow = (worldY + collisionBox.y) / mg.tileSize;
+        int startCol = (worldX + entityWidth / 2) / mg.tileSize;
+        int startRow = (worldY + entityHeight / 2) / mg.tileSize;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow);
         if (startCol == goalCol && startRow == goalRow) {
 
@@ -264,8 +263,8 @@ public class Entity {
 
     protected void getNearestPlayer() {
         if (Math.abs(mg.player.worldX - this.worldX + mg.player.worldY - this.worldY) < Math.abs(mg.player2.worldX - this.worldX + mg.player2.worldY - this.worldY)) {
-            this.goalCol = (mg.player.worldX + mg.player.collisionBox.x) / mg.tileSize;
-            this.goalRow = (mg.player.worldY + mg.player.collisionBox.y) / mg.tileSize;
+            this.goalCol = (mg.player.worldX + mg.player.entityWidth / 2) / mg.tileSize;
+            this.goalRow = (mg.player.worldY + mg.player.entityHeight / 2) / mg.tileSize;
         } else {
             this.goalCol = (mg.player2.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.player2.worldY + mg.player.collisionBox.y) / mg.tileSize;

@@ -77,15 +77,11 @@ public class WorldRender {
         int worldRow = Math.max((mg.player.worldY / 48) - 12, 0);
         for (int i = worldCol; i < Math.min(worldCol + 42, 499); i++) {
             for (int b = worldRow; b < Math.min(worldRow + 25, 499); b++) {
-                //reading out tile data
                 int tileNum = worldData[i][b];
-                //making world camera
                 int worldX = i * 48;
                 int worldY = b * 48;
-                //
                 int screenX = worldX - mg.player.worldX + mg.player.screenX;
                 int screenY = worldY - mg.player.worldY + mg.player.screenY;
-                //if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
                 g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
             }
         }
