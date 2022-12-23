@@ -2,14 +2,9 @@ package gameworld.entitys;
 
 import gameworld.Entity;
 import main.MainGame;
-import main.system.Utilities;
 
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 
 public class Grunt extends Entity {
@@ -61,20 +56,7 @@ public class Grunt extends Entity {
     }
 
     private void getDisplayImage() {
-        enemyImage = setup("enemy01.png");
-    }
-
-    private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
+        enemyImage = mg.imageSto.gruntImage1;
     }
 
     private void gruntMovement() {

@@ -11,6 +11,7 @@ public class ImageStorage {
     public BufferedImage Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
     public BufferedImage secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
     public BufferedImage primaryFire1;
+    public BufferedImage gruntImage1;
     MainGame mg;
 
     public ImageStorage(MainGame mg) {
@@ -19,13 +20,21 @@ public class ImageStorage {
 
     public void loadImages() {
         loadAbilityImages();
-        //loadEntityImages();
+        loadEntityImages();
+    }
+
+    private void loadEntityImages() {
+        getGruntImages();
     }
 
     private void loadAbilityImages() {
         getLightningImages();
         getEnergySphereImages();
         getPrimaryFireImages();
+    }
+
+    private void getGruntImages() {
+        gruntImage1 = setup("/Entitys/enemies/enemy01.png");
     }
 
     private void getEnergySphereImages() {

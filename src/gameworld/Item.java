@@ -100,18 +100,15 @@ public class Item {
         }
     }
 
-
     public BufferedImage setup(Utilities utilities, String imagePath) {
 
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
             scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         return scaledImage;
     }
-
 }

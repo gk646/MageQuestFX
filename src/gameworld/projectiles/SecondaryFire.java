@@ -26,7 +26,7 @@ public class SecondaryFire extends Projectile {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePosition = mainGame.motionH.mousePosition;
+        this.mousePosition = mainGame.motionH.lastMousePosition;
         this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
                 MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
         this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
@@ -76,9 +76,6 @@ public class SecondaryFire extends Projectile {
 
     //Get normalized vector
     private Point getUpdateVector() {
-        if (mousePosition == null) {
-            mousePosition = mouseHandler.mouse2Position;
-        }
         int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
         int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));

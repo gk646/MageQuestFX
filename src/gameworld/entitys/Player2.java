@@ -2,7 +2,6 @@ package gameworld.entitys;
 
 import gameworld.Entity;
 import main.MainGame;
-import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -32,12 +31,10 @@ public class Player2 extends Entity {
     }
 
     private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
+            scaledImage = mg.utilities.scaleImage(scaledImage, 48, 48);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,9 +43,6 @@ public class Player2 extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(player2, worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24, worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24, 48, 48, null);
-
     }
-
-
 }
 

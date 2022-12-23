@@ -14,21 +14,19 @@ public class WorldRender {
     public int[][] worldData;
     public Point worldSize;
     public final Tile[] tileStorage;
-    private final MainGame mainGame;
+    private final MainGame mg;
 
-    public WorldRender(MainGame mainGame) {
-        this.mainGame = mainGame;
+    public WorldRender(MainGame mg) {
+        this.mg = mg;
         this.tileStorage = new Tile[50];
         getTileImage();
-
     }
 
     private void setupTiles(int index, String imagePath, boolean collision) {
-        Utilities utilities = new Utilities();
         try {
             tileStorage[index] = new Tile();
             tileStorage[index].tileImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/" + imagePath))));
-            tileStorage[index].tileImage = utilities.scaleImage(tileStorage[index].tileImage, 48, 48);
+            tileStorage[index].tileImage = mg.utilities.scaleImage(tileStorage[index].tileImage, 48, 48);
             tileStorage[index].collision = collision;
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,8 +73,8 @@ public class WorldRender {
 
 
     public void draw(Graphics2D g2) {
-        int worldCol = Math.max((mainGame.player.worldX / 48) - 20, 0);
-        int worldRow = Math.max((mainGame.player.worldY / 48) - 12, 0);
+        int worldCol = Math.max((mg.player.worldX / 48) - 20, 0);
+        int worldRow = Math.max((mg.player.worldY / 48) - 12, 0);
         for (int i = worldCol; i < Math.min(worldCol + 42, 499); i++) {
             for (int b = worldRow; b < Math.min(worldRow + 25, 499); b++) {
                 //reading out tile data
@@ -85,15 +83,12 @@ public class WorldRender {
                 int worldX = i * 48;
                 int worldY = b * 48;
                 //
-                int screenX = worldX - mainGame.player.worldX + mainGame.player.screenX;
-                int screenY = worldY - mainGame.player.worldY + mainGame.player.screenY;
+                int screenX = worldX - mg.player.worldX + mg.player.screenX;
+                int screenY = worldY - mg.player.worldY + mg.player.screenY;
                 //if (worldX + 48 > mainGame.player.worldX - mainGame.player.screenX && worldX - 48 < mainGame.player.worldX + mainGame.player.screenX && worldY + 48 > mainGame.player.worldY - mainGame.player.screenY && worldY - 48 < mainGame.player.worldY + mainGame.player.screenY) {
                 g2.drawImage(tileStorage[tileNum].tileImage, screenX, screenY, 48, 48, null);
-
             }
         }
     }
-
-
 }
 

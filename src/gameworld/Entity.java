@@ -150,7 +150,6 @@ public class Entity {
                 }
             }
         } catch (ConcurrentModificationException ignored) {
-
         }
     }
 

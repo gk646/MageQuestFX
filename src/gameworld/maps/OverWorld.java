@@ -10,8 +10,6 @@ public class OverWorld {
     public static Point worldSize;
     public static int[][] worldData;
 
-
-
     public static int[][] loadOverWorld() {
         worldSize = new Point(500, 500);
         worldData = new int[worldSize.x][worldSize.y];
@@ -19,19 +17,12 @@ public class OverWorld {
             InputStream inputStream = OverWorld.class.getResourceAsStream("/Maps/overworld.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            int row = 0;
-            int col = 0;
-            while (row < worldSize.x && col < worldSize.y) {
-                String line = bufferedReader.readLine();
-                while (col < worldSize.y) {
-                    String[] numbers = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]);
-                    worldData[col][row] = num;
-                    col++;
-                }
-                if (col == worldSize.x) {
-                    col = 0;
-                    row++;
+            int num;
+            for (int i = 0; i < worldSize.y; i++) {
+                String[] numbers = bufferedReader.readLine().split(" ");
+                for (int b = 0; b < worldSize.x; b++) {
+                    num = Integer.parseInt(numbers[b]);
+                    worldData[b][i] = num;
                 }
             }
             bufferedReader.close();
@@ -39,13 +30,10 @@ public class OverWorld {
             throw new RuntimeException(e);
         }
         return worldData;
-
     }
 
 
     public static Point loadMapSize() {
         return new Point(worldSize.x, worldSize.y);
     }
-
-
 }

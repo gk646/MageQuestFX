@@ -3,7 +3,6 @@ package main.system.ui;
 import main.MainGame;
 import main.Runner;
 import main.system.Multiplayer;
-import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.event.ChangeEvent;
@@ -213,11 +212,10 @@ public class UI implements ActionListener, ChangeListener {
     }
 
     private BufferedImage setup() {
-        Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui.png"))));
-            scaledImage = utilities.scaleImage(scaledImage, 330, 200);
+            scaledImage = mg.utilities.scaleImage(scaledImage, 330, 200);
         } catch (IOException e) {
             e.printStackTrace();
         }

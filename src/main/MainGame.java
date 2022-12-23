@@ -126,7 +126,6 @@ public class MainGame extends JPanel implements Runnable {
         sqLite.readItemsFromDB();
         ui.updateLoadingScreen(12);
         wControl.getWorldsData();
-
         ui.updateLoadingScreen(12);
         wControl.load_OverworldMap();
         ui.updateLoadingScreen(12);
@@ -140,7 +139,6 @@ public class MainGame extends JPanel implements Runnable {
         inventP = new InventoryPanel(this);
         ui.updateLoadingScreen(12);
         talentP = new TalentPanel(this);
-
         ui.updateLoadingScreen(100);
         loadingScreen = false;
         gameState = titleState;
