@@ -17,12 +17,10 @@ public class OverWorld {
             InputStream inputStream = OverWorld.class.getResourceAsStream("/Maps/overworld.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            int num;
             for (int i = 0; i < worldSize.y; i++) {
                 String[] numbers = bufferedReader.readLine().split(" ");
                 for (int b = 0; b < worldSize.x; b++) {
-                    num = Integer.parseInt(numbers[b]);
-                    worldData[b][i] = num;
+                    worldData[b][i] = Integer.parseInt(numbers[b]);
                 }
             }
             bufferedReader.close();

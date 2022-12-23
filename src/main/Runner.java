@@ -61,5 +61,4 @@ public class Runner {
     /*
        TODO: 11.12.2022  item drops / level ups / skill pane / more ui / description
      */
-
 }
