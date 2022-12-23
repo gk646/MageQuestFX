@@ -83,9 +83,10 @@ public class MainGame extends JPanel implements Runnable {
     public final WorldRender wRender = new WorldRender(this);
     public final WorldController wControl = new WorldController(this);
     private final Projectile projectile = new Projectile(this, mouseH);
-    private final Multiplayer multiplayer = new Multiplayer(this, player2);
+
     public final Player player = new Player(this, keyHandler, mouseH, motionH);
     public final Player2 player2 = new Player2(this);
+    private final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final PathFinder pathF = new PathFinder(this);
     private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);

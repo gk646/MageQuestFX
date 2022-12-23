@@ -27,10 +27,10 @@ public class InventoryPanel {
     private final Rectangle bagPanelCloser;
     private final Rectangle charPanelMover;
     private final Rectangle bagPanelMover;
-    private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     public Rectangle wholeCharWindow;
     public Rectangle wholeBagWindow;
     private int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
+    private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private final Point lastCharPosition = new Point(charPanelX, charPanelY);
     private Point previousMousePosition = new Point(300, 300);
     private Item grabbedItem;
