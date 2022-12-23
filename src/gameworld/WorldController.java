@@ -51,7 +51,7 @@ public class WorldController {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             for (int b = 0; b < 10; b++) {
-                overworldMapQuadrants[counter] = new MapQuadrant(20 - (i + b), mg, size * i, size * b, size, 30);
+                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30);
                 counter++;
             }
         }

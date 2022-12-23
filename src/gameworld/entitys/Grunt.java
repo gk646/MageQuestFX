@@ -64,7 +64,7 @@ public class Grunt extends Entity {
         if (mg.client) {
             if (onPath && searchTicks >= Math.random() * 45) {
                 getNearestPlayerMultiplayer();
-
+                searchPath(goalCol, goalRow);
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);
