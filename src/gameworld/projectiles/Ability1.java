@@ -23,14 +23,13 @@ public class Ability1 extends Projectile {
 
         //-------VALUES-----------
         this.movementSpeed = 5;
-        this.entityHeight = 25;
-        this.entityWidth = 25;
+        this.projectileHeight = 25;
+        this.projectileWidth = 25;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.version = version;
 
         //------POSITION-----------
-        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
-                MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
+        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
         this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
         this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
         this.direction = "downleftrightup";
@@ -43,7 +42,7 @@ public class Ability1 extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.red);
-        g2.drawRect(screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight);
+        g2.drawRect(screenPosition.x - mg.player.worldX + Player.startingPoint.x, screenPosition.y - mg.player.worldY + Player.startingPoint.y, projectileWidth, projectileHeight);
     }
 
     @Override
@@ -54,7 +53,6 @@ public class Ability1 extends Projectile {
         screenPosition.y += updateVector.y;
         worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
         worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
-
     }
 
 
@@ -92,5 +90,4 @@ public class Ability1 extends Projectile {
             this.updateVector.y = -1 * movementSpeed;
         }
     }
-
 }

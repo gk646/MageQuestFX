@@ -6,11 +6,13 @@ import gameworld.Projectile;
 import gameworld.WorldController;
 import gameworld.entitys.Player;
 import gameworld.entitys.Player2;
+import gameworld.tiles.ImageStorage;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
+import main.system.Utilities;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
@@ -77,17 +79,19 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------System---------
-
+    public final Utilities utilities = new Utilities();
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
-
     public final WorldRender wRender = new WorldRender(this);
+    public final ImageStorage imageSto = new ImageStorage(this);
     public final WorldController wControl = new WorldController(this);
-    private final Projectile projectile = new Projectile(this, mouseH);
+    public final Projectile projectile = new Projectile(this, mouseH);
 
     public final Player player = new Player(this, keyHandler, mouseH, motionH);
     public final Player2 player2 = new Player2(this);
     private final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final PathFinder pathF = new PathFinder(this);
+
+
     private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents;
@@ -111,7 +115,6 @@ public class MainGame extends JPanel implements Runnable {
         this.addMouseMotionListener(motionH);
         this.setOpaque(false);
         gameState = titleState;
-
     }
 
     /**
@@ -119,6 +122,7 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
+        imageSto.loadImages();
         sqLite.readItemsFromDB();
         wControl.getWorldsData();
         wControl.load_OverworldMap();
@@ -127,6 +131,7 @@ public class MainGame extends JPanel implements Runnable {
         pathF.instantiateNodes();
         inventP = new InventoryPanel(this);
         talentP = new TalentPanel(this);
+        System.out.println("hey");
         startThreads();
     }
 
@@ -167,7 +172,6 @@ public class MainGame extends JPanel implements Runnable {
                     }
                     difference = 0;
                 }
-
             }
         });
         playerThread.start();
@@ -286,5 +290,4 @@ public class MainGame extends JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
 }

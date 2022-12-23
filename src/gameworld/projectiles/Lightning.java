@@ -4,14 +4,9 @@ import gameworld.Projectile;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.MainGame;
-import main.system.Utilities;
 
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 public class Lightning extends Projectile {
 
@@ -23,51 +18,51 @@ public class Lightning extends Projectile {
         super(mainGame, mouseHandler);
 
         //-------VALUES-----------
-        this.entityHeight = 92;
-        this.entityWidth = 70;
-        this.collisionBox = new Rectangle(0, 0, 50, 30);
+        this.projectileHeight = 92;
+        this.projectileWidth = 70;
+        this.collisionBox = new Rectangle(30, 30, 30, 30);
 
         //------POSITION-----------
         this.mousePosition = motionHandler.lastMousePosition;
         this.screenPosition = mousePosition;
-        getPlayerImage();
+        getImages();
         worldX = mainGame.player.worldX + screenPosition.x - MainGame.SCREEN_WIDTH / 2 - 24;
         worldY = mainGame.player.worldY + screenPosition.y - MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = worldX - mainGame.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mainGame.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24 - 15;
+        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24 - 15;
         if (spriteCounter <= 8) {
-            g2.drawImage(entityImage1, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 6 && spriteCounter <= 14) {
-            g2.drawImage(entityImage2, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage2, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 14 && spriteCounter <= 22) {
-            g2.drawImage(entityImage3, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage3, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 22 && spriteCounter <= 30) {
-            g2.drawImage(entityImage4, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage4, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 30 && spriteCounter <= 35) {
-            g2.drawImage(entityImage5, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage5, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 35 && spriteCounter <= 40) {
-            g2.drawImage(entityImage6, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage6, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 40 && spriteCounter <= 56) {
-            g2.drawImage(entityImage7, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage7, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 56 && spriteCounter <= 64) {
-            g2.drawImage(entityImage8, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage8, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 64 && spriteCounter <= 72) {
-            g2.drawImage(entityImage9, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage9, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 72 && spriteCounter <= 80) {
-            g2.drawImage(entityImage10, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage10, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 80) {
             this.dead = true;
@@ -75,34 +70,16 @@ public class Lightning extends Projectile {
         spriteCounter++;
     }
 
-    @Override
-    public void update() {
-    }
-
-    private void getPlayerImage() {
-        entityImage1 = setup("lightn01.png");
-        entityImage2 = setup("lightn02.png");
-        entityImage3 = setup("lightn03.png");
-        entityImage4 = setup("lightn04.png");
-        entityImage5 = setup("lightn05.png");
-        entityImage6 = setup("lightn06.png");
-        entityImage7 = setup("lightn07.png");
-        entityImage8 = setup("lightn08.png");
-        entityImage9 = setup("lightn09.png");
-        entityImage10 = setup("lightn10.png");
-    }
-
-
-    private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/projectiles/Lightning/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 70, 92);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
+    private void getImages() {
+        projectileImage1 = mg.imageSto.Lightning1;
+        projectileImage2 = mg.imageSto.Lightning2;
+        projectileImage3 = mg.imageSto.Lightning3;
+        projectileImage4 = mg.imageSto.Lightning4;
+        projectileImage5 = mg.imageSto.Lightning5;
+        projectileImage6 = mg.imageSto.Lightning6;
+        projectileImage7 = mg.imageSto.Lightning7;
+        projectileImage8 = mg.imageSto.Lightning8;
+        projectileImage9 = mg.imageSto.Lightning9;
+        projectileImage10 = mg.imageSto.Lightning10;
     }
 }

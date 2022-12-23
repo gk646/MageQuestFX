@@ -4,15 +4,10 @@ import gameworld.Projectile;
 import gameworld.entitys.Player;
 import input.MouseHandler;
 import main.MainGame;
-import main.system.Utilities;
 
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 public class SecondaryFire extends Projectile {
 
@@ -25,8 +20,8 @@ public class SecondaryFire extends Projectile {
 
         //-------VALUES-----------
         this.movementSpeed = 3;
-        this.entityHeight = 32;
-        this.entityWidth = 32;
+        this.projectileHeight = 32;
+        this.projectileWidth = 32;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.direction = "downleftrightup";
 
@@ -44,25 +39,25 @@ public class SecondaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = screenPosition.x - mainGame.player.worldX + Player.startingPoint.x;
-        screenY = screenPosition.y - mainGame.player.worldY + Player.startingPoint.y;
+        screenX = screenPosition.x - mg.player.worldX + Player.startingPoint.x;
+        screenY = screenPosition.y - mg.player.worldY + Player.startingPoint.y;
         if (spriteCounter <= 13) {
-            g2.drawImage(entityImage1, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 13) {
-            g2.drawImage(entityImage2, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage2, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 26) {
-            g2.drawImage(entityImage3, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage3, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 39) {
-            g2.drawImage(entityImage4, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage4, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 52) {
-            g2.drawImage(entityImage5, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage5, screenX, screenY, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 65) {
-            g2.drawImage(entityImage6, screenX, screenY, entityWidth, entityHeight, null);
+            g2.drawImage(projectileImage6, screenX, screenY, projectileWidth, projectileHeight, null);
             spriteCounter = 0;
         }
         spriteCounter++;
@@ -93,25 +88,11 @@ public class SecondaryFire extends Projectile {
     }
 
     private void getPlayerImage() {
-        entityImage1 = setup("SecondaryFire01.png");
-        entityImage2 = setup("SecondaryFire02.png");
-        entityImage3 = setup("SecondaryFire03.png");
-        entityImage4 = setup("SecondaryFire04.png");
-        entityImage5 = setup("SecondaryFire05.png");
-        entityImage6 = setup("SecondaryFire06.png");
-    }
-
-
-    private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/projectiles/EnergySphere/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
+        projectileImage1 = mg.imageSto.secondaryFire1;
+        projectileImage2 = mg.imageSto.secondaryFire2;
+        projectileImage3 = mg.imageSto.secondaryFire3;
+        projectileImage4 = mg.imageSto.secondaryFire4;
+        projectileImage5 = mg.imageSto.secondaryFire5;
+        projectileImage6 = mg.imageSto.secondaryFire6;
     }
 }

@@ -16,6 +16,19 @@ import java.util.ConcurrentModificationException;
  * Main inheritable class for all game world entity's
  */
 public class Entity {
+    protected int spriteCounter;
+    protected int goalCol;
+    protected int goalRow;
+    protected BufferedImage entityImage2;
+    protected BufferedImage entityImage3;
+    protected BufferedImage entityImage4;
+    protected BufferedImage entityImage5;
+    protected BufferedImage entityImage6;
+    protected BufferedImage entityImage7;
+    protected BufferedImage entityImage8;
+    protected BufferedImage entityImage9;
+    protected BufferedImage entityImage10;
+    protected BufferedImage enemyImage;
     public int worldY;
     public int worldX;
     public int entityWidth;
@@ -30,29 +43,15 @@ public class Entity {
     public int level;
     public BufferedImage entityImage1;
     public boolean onPath;
-    public boolean collisionUp;
-    public boolean collisionDown;
+    public boolean collisionUp, collisionDown;
     public boolean collisionLeft;
     public boolean collisionRight;
     public boolean dead;
-    protected int spriteCounter;
-    protected int goalCol;
-    protected int goalRow;
-    protected BufferedImage entityImage2;
-    protected BufferedImage entityImage3;
     public MainGame mg;
-    protected BufferedImage entityImage4;
-    protected BufferedImage entityImage5;
-    protected BufferedImage entityImage6;
-    protected BufferedImage entityImage7;
-    protected BufferedImage entityImage8;
-    protected BufferedImage entityImage9;
-    protected BufferedImage entityImage10;
-    protected BufferedImage enemyImage;
-    boolean hpBarOn;
-    private int hpBarCounter;
     public String direction;
     public Rectangle collisionBox;
+    boolean hpBarOn;
+    private int hpBarCounter;
     private int nextCol1;
     private int nextRow1;
     private int nextCol2;
@@ -62,7 +61,6 @@ public class Entity {
     private int nextCol4;
     private int nextRow4;
     private boolean initializeEnemies;
-
 
     public Entity(MainGame mg) {
         this.mg = mg;
@@ -160,12 +158,8 @@ public class Entity {
         mg.ENTITIES.add(new Owly(mg, 23900, 23900, 15));
     }
 
-    protected boolean playerTooFar() {
-        return Math.abs(worldX / mg.tileSize - mg.player.worldX / mg.tileSize) >= 15 || Math.abs(worldY / mg.tileSize - mg.player.worldY / mg.tileSize) >= 15;
-    }
-
-    boolean playerTooFarAbsolute() {
-        return true;
+    protected boolean playerTooFarAbsolute() {
+        return Math.abs(worldX - mg.player.worldX) >= 650 || Math.abs(worldY - mg.player.worldY) >= 650;
     }
 
     private void decideMovement(int nextX, int nextY) {

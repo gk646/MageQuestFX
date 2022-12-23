@@ -27,8 +27,8 @@ public class PrimaryFire extends Projectile {
 
         //-------VALUES-----------
         this.movementSpeed = 7;
-        this.entityHeight = 16;
-        this.entityWidth = 16;
+        this.projectileHeight = 16;
+        this.projectileWidth = 16;
         this.collisionBox = new Rectangle(0, 0, 16, 16);
         this.direction = "downleftrightup";
 
@@ -46,7 +46,7 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(entityImage1, screenPosition.x - mainGame.player.worldX + Player.startingPoint.x, screenPosition.y - mainGame.player.worldY + Player.startingPoint.y, entityWidth, entityHeight, null);
+        g2.drawImage(projectileImage1, screenPosition.x - mg.player.worldX + Player.startingPoint.x, screenPosition.y - mg.player.worldY + Player.startingPoint.y, projectileWidth, projectileHeight, null);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class PrimaryFire extends Projectile {
     }
 
     private void getPlayerImage() {
-        entityImage1 = setup("PrimaryFire01.png");
+        projectileImage1 = mg.imageSto.primaryFire1;
     }
 
     private BufferedImage setup(String imagePath) {

@@ -42,12 +42,12 @@ public class Player extends Entity {
     private int quadrantTimer;
     private float manaRegeneration = 0.02f;
     private float healthRegeneration = 0.002f;
-    private final KeyHandler keyHandler;
-    private final MouseHandler mouseHandler;
+    private final KeyHandler keyH;
+    private final MouseHandler mouseH;
     private boolean respawnsDone;
 
 
-    public Player(MainGame mainGame, KeyHandler keyHandler, MouseHandler mouseHandler, MotionHandler motionHandler) {
+    public Player(MainGame mainGame, KeyHandler keyH, MouseHandler mouseH, MotionHandler motionHandler) {
         super(mainGame);
         this.motionHandler = motionHandler;
         //-------VALUES-----------
@@ -67,8 +67,8 @@ public class Player extends Entity {
 
         //Handlers
         this.mg = mainGame;
-        this.keyHandler = keyHandler;
-        this.mouseHandler = mouseHandler;
+        this.keyH = keyH;
+        this.mouseH = mouseH;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
     }
@@ -168,17 +168,17 @@ public class Player extends Entity {
 
     private void movement() {
         direction = "";
-        if (keyHandler.leftPressed) {
+        if (keyH.leftPressed) {
             direction += "left";
         }
-        if (keyHandler.upPressed) {
+        if (keyH.upPressed) {
             direction += "up";
         }
-        if (keyHandler.downPressed) {
+        if (keyH.downPressed) {
             direction += "down";
         }
 
-        if (keyHandler.rightPressed) {
+        if (keyH.rightPressed) {
             direction += "right";
         }
         //check tile collision
@@ -215,24 +215,24 @@ public class Player extends Entity {
     }
 
     private void skills() {
-        if (this.mouseHandler.mouse1Pressed && cooldownPrimary == 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
-            mg.PROJECTILES.add(new PrimaryFire(mg, mouseHandler));
+        if (mouseH.mouse1Pressed && cooldownPrimary == 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
+            mg.PROJECTILES.add(new PrimaryFire(mg, mouseH));
             cooldownPrimary = 0;
         }
-        if (this.mouseHandler.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
-            mg.PROJECTILES.add(new SecondaryFire(mg, mouseHandler));
+        if (mouseH.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
+            mg.PROJECTILES.add(new SecondaryFire(mg, mouseH));
             mana -= 10;
             cooldownOneSecond = 0;
         }
-        if (this.keyHandler.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
+        if (keyH.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {
-                mg.PROJECTILES.add(new Ability1(mg, mouseHandler, i));
+                mg.PROJECTILES.add(new Ability1(mg, mouseH, i));
             }
             mana -= 10;
             cooldownTwoSecond = 0;
         }
-        if (keyHandler.TwoPressed && mana >= 20 && cdLightning == 20) {
-            mg.PROJECTILES.add(new Lightning(mg, mouseHandler, motionHandler));
+        if (keyH.TwoPressed && mana >= 20 && cdLightning == 20) {
+            mg.PROJECTILES.add(new Lightning(mg, mouseH, motionHandler));
             mana -= 20;
             cdLightning = 0;
         }

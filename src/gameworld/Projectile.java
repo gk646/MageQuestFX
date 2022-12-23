@@ -11,6 +11,8 @@ import main.MainGame;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;
 
 
@@ -18,56 +20,54 @@ import java.util.ConcurrentModificationException;
  * Inherits Entity
  * Main inheritable class for all projectiles
  */
-public class Projectile extends Entity {
+public class Projectile {
 
-    public Point screenPosition, updateVector, mousePosition;
-    public int endPositionX, endPositionY;
-    protected final MainGame mainGame;
+    protected final MainGame mg;
     protected final MouseHandler mouseHandler;
+    public boolean dead, collisionUp, collisionDown;
+    public boolean collisionLeft;
+    public boolean collisionRight;
+    public String direction;
+    public Rectangle collisionBox;
+    public Point screenPosition, updateVector, mousePosition;
+    public int endPositionX, endPositionY, worldX, worldY, movementSpeed, projectileHeight, projectileWidth, screenX, screenY, spriteCounter;
+    public BufferedImage projectileImage1, projectileImage2, projectileImage3, projectileImage4, projectileImage5, projectileImage6, projectileImage7, projectileImage8, projectileImage9, projectileImage10;
 
-    public Projectile(MainGame mainGame, MouseHandler mouseHandler) {
-        super(mainGame);
-        this.mainGame = mainGame;
+
+    public Projectile(MainGame mg, MouseHandler mouseHandler) {
+        this.mg = mg;
         this.mouseHandler = mouseHandler;
     }
 
-    @Override
     public void draw(Graphics2D g2) {
         try {
-            for (Projectile projectile : mainGame.PROJECTILES) {
+            for (Projectile projectile : mg.PROJECTILES) {
                 projectile.draw(g2);
             }
         } catch (ConcurrentModificationException ignored) {
         }
     }
 
-    @Override
+
     public void update() {
         try {
-            for (Projectile projectile : mainGame.PROJECTILES) {
+            for (Projectile projectile : mg.PROJECTILES) {
                 if (projectile.dead) {
-                    mg.ENTITIES.remove(projectile);
+                    mg.PROJECTILES.remove(projectile);
                     continue;
                 }
-                for (Entity entity : mainGame.ENTITIES) {
+                for (Entity entity : mg.ENTITIES) {
                     if (entity.dead) {
                         mg.ENTITIES.remove(entity);
                         continue;
                     }
-                    if (!(entity instanceof Owly) && entityIsClose(entity) && mainGame.collisionChecker.checkEntityAgainstEntity(entity, projectile)) {
+                    if (!(entity instanceof Owly) && !entity.playerTooFarAbsolute() && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
                         calcProjectileDamage(projectile, entity);
-                    }
-                    if (projectile.dead && projectile instanceof PrimaryFire) {
-                        mainGame.PROJECTILES.remove(projectile);
                     }
                 }
             }
         } catch (ConcurrentModificationException ignored) {
         }
-    }
-
-    private boolean entityIsClose(Entity entity) {
-        return entity.playerTooFarAbsolute();
     }
 
     private void calcProjectileDamage(Projectile projectile, Entity entity) {
@@ -92,7 +92,7 @@ public class Projectile extends Entity {
 
     public void updateProjectilePos() {
         try {
-            for (Projectile projectile : mainGame.PROJECTILES) {
+            for (Projectile projectile : mg.PROJECTILES) {
                 projectile.update();
             }
         } catch (ConcurrentModificationException ignored) {
@@ -100,7 +100,7 @@ public class Projectile extends Entity {
     }
 
     protected void tileCollision() {
-        mainGame.collisionChecker.checkEntityAgainstTile(this);
+        mg.collisionChecker.checkProjectileAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }
