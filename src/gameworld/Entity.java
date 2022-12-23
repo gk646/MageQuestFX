@@ -121,7 +121,7 @@ public class Entity {
         }
     }
 
-    public void updatePosSingleplayer() {
+    public void upadteOnlyPosition() {
         try {
             for (Entity entity : mg.ENTITIES) {
                 entity.updatePos();

@@ -2,7 +2,6 @@ package gameworld.entitys;
 
 import gameworld.Entity;
 import main.MainGame;
-import main.system.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -39,7 +38,6 @@ public class Owly extends Entity {
         }
         owlyMovement();
         searchTicks++;
-
     }
 
     public void updatePos() {
@@ -57,12 +55,10 @@ public class Owly extends Entity {
     }
 
     private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/owly/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 32, 32);
-
+            scaledImage = mg.utilities.scaleImage(scaledImage, 32, 32);
         } catch (IOException e) {
             e.printStackTrace();
         }

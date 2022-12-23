@@ -176,10 +176,10 @@ public class MainGame extends JPanel implements Runnable {
                 if (difference >= 1) {
                     if (gameState == playState) {
                         player.update();
-                        entity.updatePosSingleplayer();
+                        entity.upadteOnlyPosition();
                         projectile.updateProjectilePos();
                     } else if (gameState == optionState) {
-                        entity.updatePosSingleplayer();
+                        entity.upadteOnlyPosition();
                     }
                     difference = 0;
                 }
