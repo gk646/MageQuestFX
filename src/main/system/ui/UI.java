@@ -26,7 +26,6 @@ public class UI implements ActionListener, ChangeListener {
     public int commandNum = 0;
     private boolean once = false;
     private BufferedImage playerUI;
-    private final DragListener dragListener;
     public int loadingProgress = 0;
 
     private final Color lightBackground = new Color(192, 203, 220);
@@ -43,7 +42,6 @@ public class UI implements ActionListener, ChangeListener {
             throw new RuntimeException(e);
         }
         getUIImage();
-        this.dragListener = new DragListener();
     }
 
 
@@ -79,7 +77,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48f));
         text = "START GAME";
         x = getXForCenteredText(text, g2);
-        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
+        y += 2.5f * (int) (MainGame.SCREEN_HEIGHT * 0.049f);
         g2.drawString(text, x, y);
         if (commandNum == 0) {
             g2.drawString(">", x - 25, y);
@@ -87,14 +85,14 @@ public class UI implements ActionListener, ChangeListener {
         text = "OPTIONS";
 
         x = getXForCenteredText(text, g2);
-        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
+        y += (int) (MainGame.SCREEN_HEIGHT * 0.049f);
         g2.drawString(text, x, y);
         if (commandNum == 1) {
             g2.drawString(">", x - 25, y);
         }
         text = "QUIT";
         x = getXForCenteredText(text, g2);
-        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
+        y += (int) (MainGame.SCREEN_HEIGHT * 0.049f);
         g2.drawString(text, x, y);
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);

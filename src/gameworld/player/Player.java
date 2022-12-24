@@ -1,10 +1,10 @@
-package gameworld.entitys;
+package gameworld.player;
 
 import gameworld.Entity;
-import gameworld.projectiles.Ability1;
-import gameworld.projectiles.Lightning;
-import gameworld.projectiles.PrimaryFire;
-import gameworld.projectiles.SecondaryFire;
+import gameworld.player.abilities.Ability1;
+import gameworld.player.abilities.Lightning;
+import gameworld.player.abilities.PrimaryFire;
+import gameworld.player.abilities.SecondaryFire;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;

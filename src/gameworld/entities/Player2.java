@@ -1,4 +1,4 @@
-package gameworld.entitys;
+package gameworld.entities;
 
 import gameworld.Entity;
 import main.MainGame;

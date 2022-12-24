@@ -1,6 +1,6 @@
 package gameworld;
 
-import gameworld.entitys.Owly;
+import gameworld.entities.Owly;
 import main.MainGame;
 
 import java.awt.Color;

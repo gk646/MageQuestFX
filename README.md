@@ -40,7 +40,7 @@ N - opens talent window (stub for now)
 C - opens character panel  
 B - opens bag panel  
 You can drag and drop Items to different slots  
-No slot restrictions yet, no bag window yet and no item and player stats yet
+No slot restrictions yet, no bag window yet and no item and gameworld.player stats yet
 
 ## Graphics:
 

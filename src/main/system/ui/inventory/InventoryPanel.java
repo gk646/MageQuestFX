@@ -280,7 +280,7 @@ public class InventoryPanel {
         //character image outline
         g2.setColor(darkBackground);
         g2.drawRoundRect(100 + startX, startY + 90, 200, 250, 25, 25);
-        //player image
+        //gameworld.player image
         g2.drawImage(mg.player.entityImage1, startX + 120, startY + 150, 150, 150, null);
         //Stats Text
         g2.setColor(darkBackground);

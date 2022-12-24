@@ -1,7 +1,7 @@
-package gameworld.projectiles;
+package gameworld.player.abilities;
 
 import gameworld.Projectile;
-import gameworld.entitys.Player;
+import gameworld.player.Player;
 import input.MouseHandler;
 import main.MainGame;
 
@@ -9,22 +9,20 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class PrimaryFire extends Projectile {
+public class SecondaryFire extends Projectile {
 
     /**
-     * What happens when you press main mouse button
-     *
-     * @param mainGame     to access display functions
-     * @param mouseHandler to get mouse input
+     * What happens when you press secondary mouse button. Part of
+     * {@link Projectile}
      */
-    public PrimaryFire(MainGame mainGame, MouseHandler mouseHandler) {
+    public SecondaryFire(MainGame mainGame, MouseHandler mouseHandler) {
         super(mainGame, mouseHandler);
 
         //-------VALUES-----------
-        this.movementSpeed = 7;
-        this.projectileHeight = 16;
-        this.projectileWidth = 16;
-        this.collisionBox = new Rectangle(0, 0, 16, 16);
+        this.movementSpeed = 3;
+        this.projectileHeight = 32;
+        this.projectileWidth = 32;
+        this.collisionBox = new Rectangle(0, 0, 32, 32);
         this.direction = "downleftrightup";
 
         //------POSITION-----------
@@ -41,8 +39,30 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(projectileImage1, screenPosition.x - mg.player.worldX + Player.startingPoint.x, screenPosition.y - mg.player.worldY + Player.startingPoint.y, projectileWidth, projectileHeight, null);
+        screenX = screenPosition.x - mg.player.worldX + Player.startingPoint.x;
+        screenY = screenPosition.y - mg.player.worldY + Player.startingPoint.y;
+        if (spriteCounter <= 13) {
+            g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
+        }
+        if (spriteCounter >= 13) {
+            g2.drawImage(projectileImage2, screenX, screenY, projectileWidth, projectileHeight, null);
+        }
+        if (spriteCounter >= 26) {
+            g2.drawImage(projectileImage3, screenX, screenY, projectileWidth, projectileHeight, null);
+        }
+        if (spriteCounter >= 39) {
+            g2.drawImage(projectileImage4, screenX, screenY, projectileWidth, projectileHeight, null);
+        }
+        if (spriteCounter >= 52) {
+            g2.drawImage(projectileImage5, screenX, screenY, projectileWidth, projectileHeight, null);
+        }
+        if (spriteCounter >= 65) {
+            g2.drawImage(projectileImage6, screenX, screenY, projectileWidth, projectileHeight, null);
+            spriteCounter = 0;
+        }
+        spriteCounter++;
     }
+
 
     @Override
     public void update() {
@@ -65,6 +85,11 @@ public class PrimaryFire extends Projectile {
     }
 
     private void getPlayerImage() {
-        projectileImage1 = mg.imageSto.primaryFire1;
+        projectileImage1 = mg.imageSto.secondaryFire1;
+        projectileImage2 = mg.imageSto.secondaryFire2;
+        projectileImage3 = mg.imageSto.secondaryFire3;
+        projectileImage4 = mg.imageSto.secondaryFire4;
+        projectileImage5 = mg.imageSto.secondaryFire5;
+        projectileImage6 = mg.imageSto.secondaryFire6;
     }
 }

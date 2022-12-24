@@ -1,6 +1,4 @@
-package gameworld.tiles;
-
-import main.MainGame;
+package main;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

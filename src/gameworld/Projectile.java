@@ -1,11 +1,11 @@
 package gameworld;
 
 
-import gameworld.entitys.Owly;
-import gameworld.projectiles.Ability1;
-import gameworld.projectiles.Lightning;
-import gameworld.projectiles.PrimaryFire;
-import gameworld.projectiles.SecondaryFire;
+import gameworld.entities.Owly;
+import gameworld.player.abilities.Ability1;
+import gameworld.player.abilities.Lightning;
+import gameworld.player.abilities.PrimaryFire;
+import gameworld.player.abilities.SecondaryFire;
 import input.MouseHandler;
 import main.MainGame;
 

@@ -1,8 +1,8 @@
 package main.system;
 
 import gameworld.Entity;
-import gameworld.entitys.Grunt;
-import gameworld.entitys.Player2;
+import gameworld.entities.Grunt;
+import gameworld.entities.Player2;
 import main.MainGame;
 
 import java.io.DataInputStream;

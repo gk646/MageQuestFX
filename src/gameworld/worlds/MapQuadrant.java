@@ -1,6 +1,6 @@
-package gameworld.maps;
+package gameworld.worlds;
 
-import gameworld.entitys.Grunt;
+import gameworld.entities.Grunt;
 import main.MainGame;
 
 public class MapQuadrant {

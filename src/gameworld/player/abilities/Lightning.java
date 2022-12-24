@@ -1,4 +1,4 @@
-package gameworld.projectiles;
+package gameworld.player.abilities;
 
 import gameworld.Projectile;
 import input.MotionHandler;

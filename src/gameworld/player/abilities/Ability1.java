@@ -1,7 +1,7 @@
-package gameworld.projectiles;
+package gameworld.player.abilities;
 
 import gameworld.Projectile;
-import gameworld.entitys.Player;
+import gameworld.player.Player;
 import input.MouseHandler;
 import main.MainGame;
 
