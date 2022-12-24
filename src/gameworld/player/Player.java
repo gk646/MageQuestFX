@@ -51,8 +51,8 @@ public class Player extends Entity {
         this.motionHandler = motionHandler;
         //-------VALUES-----------
         movementSpeed = 4;
-        this.maxHealth = 100000;
-        this.health = 100000;
+        this.maxHealth = 10;
+        this.health = 10;
         this.maxMana = 20;
         this.mana = maxMana;
         this.entityHeight = 48;
@@ -105,8 +105,8 @@ public class Player extends Entity {
 
     public void getDurabilityDamageWeapon() {
         for (InventorySlot invSlot : mg.inventP.char_Slots) {
-            if (invSlot.item != null) {
-                if (Math.random() >= 0.9) {
+            if (invSlot.item != null && (invSlot.item.type.contains("2") || invSlot.item.type.contains("W") || invSlot.item.type.contains("O"))) {
+                if (Math.random() >= 0.95) {
                     invSlot.item.durability--;
                 }
             }
@@ -220,11 +220,13 @@ public class Player extends Entity {
         if (mouseH.mouse1Pressed && cooldownPrimary == 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
             mg.PROJECTILES.add(new PrimaryFire(mg, mouseH));
             cooldownPrimary = 0;
+            getDurabilityDamageWeapon();
         }
         if (mouseH.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
             mg.PROJECTILES.add(new SecondaryFire(mg, mouseH));
             mana -= 10;
             cooldownOneSecond = 0;
+            getDurabilityDamageWeapon();
         }
         if (keyH.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {
@@ -232,11 +234,13 @@ public class Player extends Entity {
             }
             mana -= 10;
             cooldownTwoSecond = 0;
+            getDurabilityDamageWeapon();
         }
         if (keyH.TwoPressed && mana >= 20 && cdLightning == 20) {
             mg.PROJECTILES.add(new Lightning(mg, mouseH, motionHandler));
             mana -= 20;
             cdLightning = 0;
+            getDurabilityDamageWeapon();
         }
         if (mana < maxMana) {
             mana += manaRegeneration;
