@@ -64,7 +64,6 @@ public class InventoryPanel {
         drawCharPanel(g2, charPanelX, charPanelY);
         lastCharPosition.x = charPanelX;
         lastCharPosition.y = charPanelY;
-
     }
 
     public void drawBagWindow(Graphics2D g2) {
@@ -88,7 +87,6 @@ public class InventoryPanel {
                 }
             }
         }
-
     }
 
     public void drawBagTooltip(Graphics2D g2) {
@@ -132,8 +130,21 @@ public class InventoryPanel {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23));
         g2.drawString(invSlot.item.name, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 35);
         g2.setColor(darkBackground);
-        //STATS
+        //Quality
+        if (invSlot.item.quality < 90) {
+            g2.setColor(darkBackground);
+        }
+        if (invSlot.item.quality >= 90) {
+            g2.setColor(Color.green);
+        }
+        if (invSlot.item.quality == 100) {
+            g2.setColor(Color.red);
+        }
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 18));
+        g2.drawString(invSlot.item.quality + "%", mg.motionH.lastMousePosition.x + 169, mg.motionH.lastMousePosition.y + 20);
 
+        //STATS
+        g2.setColor(darkBackground);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         g2.drawString("INT: " + invSlot.item.INT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
 
@@ -146,6 +157,7 @@ public class InventoryPanel {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         g2.drawString("SPD: " + invSlot.item.SPD, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 85);
 
+
         //EFFECTS
 
 
@@ -156,6 +168,12 @@ public class InventoryPanel {
             g2.drawString(string, mg.motionH.lastMousePosition.x + 7, stringY += g2.getFontMetrics().getHeight());
         }
         g2.setFont(mg.ui.maruMonica);
+
+
+        //Durability
+        setRarityColor(g2, invSlot);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN + Font.ITALIC, 16));
+        g2.drawString("D: " + invSlot.item.durability, mg.motionH.lastMousePosition.x + 5, mg.motionH.lastMousePosition.y + 240);
         //ID
         setRarityColor(g2, invSlot);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN + Font.ITALIC, 16));
@@ -320,7 +338,6 @@ public class InventoryPanel {
                 char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY, SLOT_SIZE);
             }
         }
-
     }
 
     private void drawBagBackground(Graphics2D g2, int startX, int startY) {
@@ -383,7 +400,6 @@ public class InventoryPanel {
     public void hideCharCollision() {
         wholeCharWindow.x = -1000;
         wholeCharWindow.y = -1000;
-
     }
 
     public void hideBagCollision() {
@@ -394,7 +410,6 @@ public class InventoryPanel {
     public void resetCharCollision() {
         wholeCharWindow.x = lastCharPosition.x;
         wholeCharWindow.y = lastCharPosition.y;
-
     }
 
     public void resetBagCollision() {
@@ -421,7 +436,6 @@ public class InventoryPanel {
         }
         for (int i = 10; i < 15; i++) {
             bag_Slots[i] = new InventorySlot(null, ((i - 10) * 50) + 40 + 770, 130 + 200 + 50);
-
         }
     }
 }

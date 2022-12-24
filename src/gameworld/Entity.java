@@ -80,6 +80,7 @@ public class Entity {
                 if (!(entity instanceof Owly)) {
                     if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
                         mg.player.health -= entity.level;
+                        mg.player.getDurabilityDamageArmour();
                         entity.hitDelay = 0;
                     }
                     if (entity.hpBarCounter >= 600) {

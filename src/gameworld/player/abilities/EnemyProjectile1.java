@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 public class EnemyProjectile1 extends Projectile {
-    private final int level;
 
     /**
      * What happens when you press main mouse button

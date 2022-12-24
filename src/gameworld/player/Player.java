@@ -93,6 +93,26 @@ public class Player extends Entity {
         //System.out.println(maxHealth + " " + VIT + " " + maxMana + " " + INT);
     }
 
+    public void getDurabilityDamageArmour() {
+        for (InventorySlot invSlot : mg.inventP.char_Slots) {
+            if (invSlot.item != null && (!invSlot.item.type.contains("2") && !invSlot.item.type.contains("W") && !invSlot.item.type.contains("O"))) {
+                if (Math.random() >= 0.9) {
+                    invSlot.item.durability--;
+                }
+            }
+        }
+    }
+
+    public void getDurabilityDamageWeapon() {
+        for (InventorySlot invSlot : mg.inventP.char_Slots) {
+            if (invSlot.item != null) {
+                if (Math.random() >= 0.9) {
+                    invSlot.item.durability--;
+                }
+            }
+        }
+    }
+
     public void update() {
         movement();
         skills();

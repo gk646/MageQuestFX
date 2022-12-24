@@ -41,8 +41,7 @@ public class Shooter extends Entity {
     public void update() {
         screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (((worldX / mg.tileSize) != (mg.player.worldX / mg.tileSize)) || (
-                (worldY / mg.tileSize) != (mg.player.worldY / mg.tileSize))) {
+        if (((worldX / mg.tileSize) != (mg.player.worldX / mg.tileSize)) || ((worldY / mg.tileSize) != (mg.player.worldY / mg.tileSize))) {
             onPath = true;
         }
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {

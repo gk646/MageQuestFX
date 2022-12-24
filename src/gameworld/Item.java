@@ -6,11 +6,13 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("GrazieInspection")
+
 public class Item {
     public int i_id;
     public String name;
@@ -49,8 +51,10 @@ public class Item {
      */ public String imagePath;
     public String description;
     public BufferedImage icon;
+    MathContext mc = new MathContext(2, RoundingMode.HALF_UP);
 
     public Item(int i_id, String name, int rarity, String type, String imagePath, String description, String stats) {
+        this.quality = 71 + (int) (Math.random() * 30);
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
@@ -76,12 +80,22 @@ public class Item {
             while (m.find()) {
                 INT = Integer.parseInt(m.group(1));
             }
+            if (quality == 100) {
+                INT = (int) (Math.ceil(INT + INT / 10f));
+            } else {
+                INT = (int) (Math.ceil((quality / 100f) * INT));
+            }
         }
         if (stats.contains("VIT")) {
             p = Pattern.compile("VIT([0-9]+)");
             m = p.matcher(stats);
             while (m.find()) {
                 VIT = Integer.parseInt(m.group(1));
+            }
+            if (quality == 100) {
+                VIT = (int) (Math.ceil(INT + INT / 10f));
+            } else {
+                VIT = (int) (Math.ceil((quality / 100f) * INT));
             }
         }
         if (stats.contains("REG")) {
