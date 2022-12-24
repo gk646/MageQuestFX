@@ -41,9 +41,8 @@ public class Grunt extends Entity {
         if (!playerTooFarAbsolute() && (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize)) {
             onPath = true;
         }
-
         gruntMovement();
-        //hitDelay++;
+        hitDelay++;
         searchTicks++;
     }
 

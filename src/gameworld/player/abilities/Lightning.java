@@ -26,6 +26,7 @@ public class Lightning extends Projectile {
         //------POSITION-----------
         this.mousePosition = motionHandler.lastMousePosition;
         this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
+        screenPos = new Point();
         getImages();
     }
 
@@ -38,35 +39,30 @@ public class Lightning extends Projectile {
         }
         if (spriteCounter >= 6 && spriteCounter <= 14) {
             g2.drawImage(projectileImage2, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 14 && spriteCounter <= 22) {
+        } else if (spriteCounter >= 14 && spriteCounter <= 22) {
             g2.drawImage(projectileImage3, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 22 && spriteCounter <= 30) {
+        } else if (spriteCounter >= 22 && spriteCounter <= 30) {
             g2.drawImage(projectileImage4, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 30 && spriteCounter <= 35) {
+        } else if (spriteCounter >= 30 && spriteCounter <= 35) {
             g2.drawImage(projectileImage5, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 35 && spriteCounter <= 40) {
+        } else if (spriteCounter >= 35 && spriteCounter <= 40) {
             g2.drawImage(projectileImage6, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 40 && spriteCounter <= 56) {
+        } else if (spriteCounter >= 40 && spriteCounter <= 56) {
             g2.drawImage(projectileImage7, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 56 && spriteCounter <= 64) {
+        } else if (spriteCounter >= 56 && spriteCounter <= 64) {
             g2.drawImage(projectileImage8, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 64 && spriteCounter <= 72) {
+        } else if (spriteCounter >= 64 && spriteCounter <= 72) {
             g2.drawImage(projectileImage9, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 72 && spriteCounter <= 80) {
+        } else if (spriteCounter >= 72 && spriteCounter <= 80) {
             g2.drawImage(projectileImage10, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 80) {
+        } else if (spriteCounter >= 80) {
             this.dead = true;
         }
         spriteCounter++;
+    }
+
+    public void update() {
+
     }
 
     private void getImages() {

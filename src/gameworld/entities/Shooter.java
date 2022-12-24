@@ -45,8 +45,8 @@ public class Shooter extends Entity {
                 (worldY / mg.tileSize) != (mg.player.worldY / mg.tileSize))) {
             onPath = true;
         }
-        if (shotCooldown >= 60 && !playerTooFarAbsolute()) {
-            mg.PROJECTILES.add(new EnemyProjectile1(mg, mg.mouseH, worldX, worldY));
+        if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
+            mg.PROJECTILES.add(new EnemyProjectile1(mg, mg.mouseH, worldX, worldY, level));
             shotCooldown = 0;
         }
         shooterMovement();

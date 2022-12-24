@@ -34,24 +34,19 @@ public class SecondaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        screenPos.x = worldPos.x - mg.player.worldX + mg.HALF_WIDTH;
-        screenPos.y = worldPos.y - mg.player.worldY + mg.HALF_HEIGHT;
-        if (spriteCounter <= 13) {
+        screenPos.x = worldPos.x - mg.player.worldX + 960;
+        screenPos.y = worldPos.y - mg.player.worldY + 540;
+        if (spriteCounter <= 12) {
             g2.drawImage(projectileImage1, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 13) {
+        } else if (spriteCounter <= 24) {
             g2.drawImage(projectileImage2, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 26) {
+        } else if (spriteCounter <= 36) {
             g2.drawImage(projectileImage3, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 39) {
+        } else if (spriteCounter <= 48) {
             g2.drawImage(projectileImage4, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 52) {
+        } else if (spriteCounter <= 60) {
             g2.drawImage(projectileImage5, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
-        }
-        if (spriteCounter >= 65) {
+        } else if (spriteCounter <= 72) {
             g2.drawImage(projectileImage6, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
             spriteCounter = 0;
         }

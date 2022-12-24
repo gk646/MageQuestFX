@@ -3,6 +3,7 @@ package gameworld;
 
 import gameworld.entities.Owly;
 import gameworld.player.abilities.Ability1;
+import gameworld.player.abilities.EnemyProjectile1;
 import gameworld.player.abilities.Lightning;
 import gameworld.player.abilities.PrimaryFire;
 import gameworld.player.abilities.SecondaryFire;
@@ -30,7 +31,7 @@ public class Projectile {
     public String direction;
     public Rectangle collisionBox;
     public Point updateVector, mousePosition, worldPos, endPos, screenPos;
-    public int movementSpeed, projectileHeight, projectileWidth, spriteCounter;
+    public int movementSpeed, projectileHeight, projectileWidth, spriteCounter, level;
     public BufferedImage projectileImage1, projectileImage2, projectileImage3, projectileImage4, projectileImage5, projectileImage6, projectileImage7, projectileImage8, projectileImage9, projectileImage10;
 
 
@@ -61,8 +62,11 @@ public class Projectile {
                         mg.ENTITIES.remove(entity);
                         continue;
                     }
-                    if (!entity.playerTooFarAbsolute() && !(entity instanceof Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
+                    if (!entity.playerTooFarAbsolute() && !(projectile instanceof EnemyProjectile1) && !(entity instanceof Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
                         calcProjectileDamage(projectile, entity);
+                    } else if (!projectile.dead && projectile instanceof EnemyProjectile1 && mg.collisionChecker.checkEntityAgainstProjectile(mg.player, projectile)) {
+                        mg.player.health -= entity.level;
+                        projectile.dead = true;
                     }
                 }
             }

@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 
 public class EnemyProjectile1 extends Projectile {
+    private final int level;
 
     /**
      * What happens when you press main mouse button
@@ -15,7 +16,7 @@ public class EnemyProjectile1 extends Projectile {
      * @param mg           to access display functions
      * @param mouseHandler to get mouse input
      */
-    public EnemyProjectile1(MainGame mg, MouseHandler mouseHandler, int x, int y) {
+    public EnemyProjectile1(MainGame mg, MouseHandler mouseHandler, int x, int y, int level) {
         super(mg, mouseHandler);
 
         //-------VALUES-----------
@@ -23,6 +24,7 @@ public class EnemyProjectile1 extends Projectile {
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = mg.imageSto.box_primaryFire;
+        this.level = level;
         this.direction = "downleftrightup";
 
         //------POSITION-----------

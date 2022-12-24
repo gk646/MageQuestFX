@@ -78,8 +78,9 @@ public class Entity {
             for (Entity entity : mg.ENTITIES) {
                 entity.update();
                 if (!(entity instanceof Owly)) {
-                    if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
-                        mg.player.health -= 1;
+                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
+                        mg.player.health -= entity.level;
+                        entity.hitDelay = 0;
                     }
                     if (entity.hpBarCounter >= 600) {
                         entity.hpBarOn = false;
@@ -94,40 +95,6 @@ public class Entity {
         }
     }
 
-    public void updatePos() {
-        try {
-            for (Entity entity : mg.ENTITIES) {
-                entity.updatePos();
-                if (mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
-                    mg.player.health -= 1;
-                    if (mg.player.health <= 0) {
-                        mg.gameState = mg.gameOver;
-                    }
-                }
-                if (entity.hpBarCounter >= 600) {
-                    entity.hpBarOn = false;
-                    entity.hpBarCounter = 0;
-                }
-                if (entity.hpBarOn) {
-                    entity.hpBarCounter++;
-                }
-                if (entity.health <= 0) {
-                    mg.ENTITIES.remove(entity);
-                }
-            }
-        } catch (ConcurrentModificationException ignored) {
-        }
-    }
-
-    public void upadteOnlyPosition() {
-        try {
-            for (Entity entity : mg.ENTITIES) {
-                entity.updatePos();
-            }
-        } catch (ConcurrentModificationException ignored) {
-
-        }
-    }
 
     /**
      * Used for drawing health bars
