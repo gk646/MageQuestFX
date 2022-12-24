@@ -35,6 +35,8 @@ public class MainGame extends JPanel implements Runnable {
     public static float FRAMES_PER_SECOND = 120;
     public static int SCREEN_WIDTH = 1920;
     public static int SCREEN_HEIGHT = 1080;
+    public int HALF_WIDTH;
+    public int HALF_HEIGHT;
 
 
     //---------VARIABLES----------
@@ -81,7 +83,6 @@ public class MainGame extends JPanel implements Runnable {
     public final Utilities utilities = new Utilities();
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
     public final WorldRender wRender = new WorldRender(this);
-    public final ImageStorage imageSto = new ImageStorage(this);
     public final WorldController wControl = new WorldController(this);
     public final Projectile projectile = new Projectile(this, mouseH);
 
@@ -90,7 +91,7 @@ public class MainGame extends JPanel implements Runnable {
     private final Multiplayer multiplayer = new Multiplayer(this, player2);
     public final PathFinder pathF = new PathFinder(this);
 
-
+    public Storage imageSto;
     private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents, loadingScreen;
@@ -106,6 +107,8 @@ public class MainGame extends JPanel implements Runnable {
     public MainGame(int width, int height) {
         SCREEN_WIDTH = width;
         SCREEN_HEIGHT = height;
+        HALF_WIDTH = SCREEN_WIDTH / 2;
+        HALF_HEIGHT = SCREEN_HEIGHT / 2;
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
@@ -129,6 +132,7 @@ public class MainGame extends JPanel implements Runnable {
         wControl.load_OverworldMap();
         ui.updateLoadingScreen(12);
         wControl.makeOverworldQuadrants();
+        imageSto = new Storage(this);
         imageSto.loadImages();
         ui.updateLoadingScreen(12);
         player.dynamicSpawns();

@@ -1,6 +1,7 @@
 package gameworld.worlds;
 
 import gameworld.entities.Grunt;
+import gameworld.entities.Shooter;
 import main.MainGame;
 
 public class MapQuadrant {
@@ -31,7 +32,11 @@ public class MapQuadrant {
                 xTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileX, 499));
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
                 if (!mg.wRender.tileStorage[mg.wRender.worldData[xTile][yTile]].collision) {
-                    mg.ENTITIES.add(new Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                    if (Math.random() > 0.4) {
+                        mg.ENTITIES.add(new Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                    } else {
+                        mg.ENTITIES.add(new Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                    }
                     spawnedEnemies++;
                 }
             }

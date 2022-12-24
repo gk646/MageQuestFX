@@ -24,16 +24,15 @@ public class Lightning extends Projectile {
 
         //------POSITION-----------
         this.mousePosition = motionHandler.lastMousePosition;
-        this.screenPosition = mousePosition;
+        this.worldX = mousePosition.x;
+        this.worldY = mousePosition.y;
         getImages();
-        worldX = mainGame.player.worldX + screenPosition.x - MainGame.SCREEN_WIDTH / 2 - 24;
-        worldY = mainGame.player.worldY + screenPosition.y - MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24 - 15;
+        screenX = worldX - mg.player.worldX + mg.HALF_WIDTH;
+        screenY = worldY - mg.player.worldY + mg.HALF_HEIGHT;
         if (spriteCounter <= 8) {
             g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
         }

@@ -1,18 +1,22 @@
 package main;
 
+
 import javax.imageio.ImageIO;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ImageStorage {
+public class Storage {
     public BufferedImage Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
     public BufferedImage secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
     public BufferedImage primaryFire1;
     public BufferedImage gruntImage1;
+    public BufferedImage shooterImage1;
+    public Rectangle box_primaryFire = new Rectangle(0, 0, 16, 16);
     MainGame mg;
 
-    public ImageStorage(MainGame mg) {
+    public Storage(MainGame mg) {
         this.mg = mg;
     }
 
@@ -23,6 +27,7 @@ public class ImageStorage {
 
     private void loadEntityImages() {
         getGruntImages();
+        getShooterImages();
     }
 
     private void loadAbilityImages() {
@@ -33,6 +38,10 @@ public class ImageStorage {
 
     private void getGruntImages() {
         gruntImage1 = setup("/Entitys/enemies/enemy01.png");
+    }
+
+    private void getShooterImages() {
+        shooterImage1 = setup("/Entitys/enemies/shooter/Old_man.png");
     }
 
     private void getEnergySphereImages() {

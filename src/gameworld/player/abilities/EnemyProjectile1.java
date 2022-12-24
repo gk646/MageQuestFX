@@ -7,7 +7,7 @@ import main.MainGame;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-public class PrimaryFire extends Projectile {
+public class EnemyProjectile1 extends Projectile {
 
     /**
      * What happens when you press main mouse button
@@ -15,20 +15,20 @@ public class PrimaryFire extends Projectile {
      * @param mg           to access display functions
      * @param mouseHandler to get mouse input
      */
-    public PrimaryFire(MainGame mg, MouseHandler mouseHandler) {
+    public EnemyProjectile1(MainGame mg, MouseHandler mouseHandler, int x, int y) {
         super(mg, mouseHandler);
 
         //-------VALUES-----------
-        this.movementSpeed = 7;
+        this.movementSpeed = 3;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = mg.imageSto.box_primaryFire;
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePosition = mg.motionH.lastMousePosition;
-        this.worldX = mg.player.worldX;
-        this.worldY = mg.player.worldY;
+        this.mousePosition = new Point(mg.player.worldX, mg.player.worldY);
+        this.worldX = x;
+        this.worldY = y;
         this.updateVector = getUpdateVector();
         getPlayerImage();
         this.endPositionX = worldX + 650;
@@ -50,8 +50,8 @@ public class PrimaryFire extends Projectile {
 
     //Get normalized vector
     private Point getUpdateVector() {
-        int deltaX = mousePosition.x - mg.HALF_WIDTH;
-        int deltaY = mousePosition.y - mg.HALF_HEIGHT;
+        int deltaX = mousePosition.x - worldX;
+        int deltaY = mousePosition.y - worldY;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double normalizedY = (deltaY / length) * movementSpeed * 2;
         double normalizedX = (deltaX / length) * movementSpeed * 2;

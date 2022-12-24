@@ -1,44 +1,41 @@
 package gameworld.entities;
 
 import gameworld.Entity;
+import gameworld.player.abilities.EnemyProjectile1;
 import main.MainGame;
-import main.system.Utilities;
 
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 
 public class Shooter extends Entity {
+    private int shotCooldown;
 
 
     /**
      * Main Enemy class
      *
-     * @param mainGame  super();
-     * @param worldX    coordinates X
-     * @param worldY    coordinates Y
-     * @param maxHealth max amount of health
+     * @param mainGame super();
+     * @param worldX   coordinates X
+     * @param worldY   coordinates Y
      */
-    public Shooter(MainGame mainGame, int worldX, int worldY, int maxHealth) {
+    public Shooter(MainGame mainGame, int worldX, int worldY, int level) {
         super(mainGame);
-
         //Setting default values
-        this.maxHealth = maxHealth;
+        this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = 1;
+        movementSpeed = 2;
+        this.level = level;
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.collisionBox = new Rectangle(6, 6, 42, 42);
+        this.collisionBox = new Rectangle(0, 0, 42, 42);
         this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
+        updatePos();
     }
 
     public void update() {
@@ -48,9 +45,13 @@ public class Shooter extends Entity {
                 (worldY / mg.tileSize) != (mg.player.worldY / mg.tileSize))) {
             onPath = true;
         }
+        if (shotCooldown >= 60 && !playerTooFarAbsolute()) {
+            mg.PROJECTILES.add(new EnemyProjectile1(mg, mg.mouseH, worldX, worldY));
+            shotCooldown = 0;
+        }
         shooterMovement();
-
         searchTicks++;
+        shotCooldown++;
     }
 
     public void updatePos() {
@@ -63,21 +64,9 @@ public class Shooter extends Entity {
     }
 
     private void getDisplayImage() {
-        enemyImage = setup("enemy01.png");
+        enemyImage = mg.imageSto.shooterImage1;
     }
 
-    private BufferedImage setup(String imagePath) {
-        Utilities utilities = new Utilities();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return scaledImage;
-    }
 
     private void shooterMovement() {
         if (mg.client) {
@@ -97,5 +86,9 @@ public class Shooter extends Entity {
                 trackPath(goalCol, goalRow);
             }
         }
+    }
+
+    private void getNearestCircularTile() {
+
     }
 }

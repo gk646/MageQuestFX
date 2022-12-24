@@ -1,7 +1,6 @@
 package gameworld.player.abilities;
 
 import gameworld.Projectile;
-import gameworld.player.Player;
 import input.MouseHandler;
 import main.MainGame;
 
@@ -29,9 +28,8 @@ public class Ability1 extends Projectile {
         this.version = version;
 
         //------POSITION-----------
-        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x, MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
-        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
+        this.worldX = mg.player.worldX;
+        this.worldY = mg.player.worldY;
         this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();
@@ -42,17 +40,15 @@ public class Ability1 extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.red);
-        g2.drawRect(screenPosition.x - mg.player.worldX + Player.startingPoint.x, screenPosition.y - mg.player.worldY + Player.startingPoint.y, projectileWidth, projectileHeight);
+        g2.drawRect(worldX - mg.player.worldX + mg.HALF_WIDTH, worldY - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight);
     }
 
     @Override
     public void update() {
         outOfBounds();
         tileCollision();
-        screenPosition.x += updateVector.x;
-        screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
-        worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
+        worldX += updateVector.x;
+        worldY += updateVector.y;
     }
 
 

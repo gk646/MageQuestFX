@@ -29,7 +29,7 @@ public class Projectile {
     public boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
-    public Point screenPosition, updateVector, mousePosition;
+    public Point updateVector, mousePosition;
     public int endPositionX, endPositionY, worldX, worldY, movementSpeed, projectileHeight, projectileWidth, screenX, screenY, spriteCounter;
     public BufferedImage projectileImage1, projectileImage2, projectileImage3, projectileImage4, projectileImage5, projectileImage6, projectileImage7, projectileImage8, projectileImage9, projectileImage10;
 

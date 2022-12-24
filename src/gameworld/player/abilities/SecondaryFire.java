@@ -1,7 +1,6 @@
 package gameworld.player.abilities;
 
 import gameworld.Projectile;
-import gameworld.player.Player;
 import input.MouseHandler;
 import main.MainGame;
 
@@ -27,10 +26,8 @@ public class SecondaryFire extends Projectile {
 
         //------POSITION-----------
         this.mousePosition = mainGame.motionH.lastMousePosition;
-        this.screenPosition = new Point(MainGame.SCREEN_WIDTH / 2 + mainGame.player.worldX - Player.startingPoint.x,
-                MainGame.SCREEN_HEIGHT / 2 + mainGame.player.worldY - Player.startingPoint.y);
-        this.worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2;
-        this.worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2;
+        this.worldX = mg.player.worldX;
+        this.worldY = mg.player.worldY;
         this.updateVector = getUpdateVector();
         getPlayerImage();
         this.endPositionX = worldX + 650;
@@ -39,8 +36,8 @@ public class SecondaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = screenPosition.x - mg.player.worldX + Player.startingPoint.x;
-        screenY = screenPosition.y - mg.player.worldY + Player.startingPoint.y;
+        screenX = worldX - mg.player.worldX + mg.HALF_WIDTH;
+        screenY = worldY - mg.player.worldY + mg.HALF_HEIGHT;
         if (spriteCounter <= 13) {
             g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
         }
@@ -68,16 +65,14 @@ public class SecondaryFire extends Projectile {
     public void update() {
         outOfBounds();
         tileCollision();
-        screenPosition.x += updateVector.x;
-        screenPosition.y += updateVector.y;
-        worldX = screenPosition.x + Player.startingPoint.x - MainGame.SCREEN_WIDTH / 2 + 24;
-        worldY = screenPosition.y + Player.startingPoint.y - MainGame.SCREEN_HEIGHT / 2 + 24;
+        worldX += updateVector.x;
+        worldY += updateVector.y;
     }
 
     //Get normalized vector
     private Point getUpdateVector() {
-        int deltaX = mousePosition.x - MainGame.SCREEN_WIDTH / 2;
-        int deltaY = mousePosition.y - MainGame.SCREEN_HEIGHT / 2;
+        int deltaX = mousePosition.x - mg.HALF_WIDTH;
+        int deltaY = mousePosition.y - mg.HALF_HEIGHT;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double normalizedY = (deltaY / length) * movementSpeed * 2;
         double normalizedX = (deltaX / length) * movementSpeed * 2;
