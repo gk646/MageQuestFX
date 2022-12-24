@@ -57,9 +57,9 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = 23500;
-        worldY = 23500;
-        direction = "up";
+        worldX = 12500;
+        worldY = 12500;
+        direction = "";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 8, 32, 32);
         this.level = 1;
@@ -166,47 +166,30 @@ public class Player extends Entity {
     }
 
     private void movement() {
-        direction = "";
-        if (keyH.leftPressed) {
-            direction += "left";
-        }
-        if (keyH.upPressed) {
-            direction += "up";
-        }
-        if (keyH.downPressed) {
-            direction += "down";
-        }
-
-        if (keyH.rightPressed) {
-            direction += "right";
-        }
-        //check tile collision
         collisionRight = false;
         collisionLeft = false;
         collisionDown = false;
         collisionUp = false;
-
+        direction = "updownleftright";
         mg.collisionChecker.checkEntityAgainstTile(this);
 
-        if (direction.contains("left")) {
+        if (keyH.leftPressed) {
             if (!collisionLeft) {
                 worldX -= movementSpeed;
             }
         }
-
-        if (direction.contains("up")) {
+        if (keyH.upPressed) {
             if (!collisionUp) {
                 worldY -= movementSpeed;
             }
         }
-
-        if (direction.contains("down")) {
+        if (keyH.downPressed) {
             if (!collisionDown) {
                 worldY += movementSpeed;
             }
         }
-        if (direction.contains("right")) {
 
+        if (keyH.rightPressed) {
             if (!collisionRight) {
                 worldX += movementSpeed;
             }

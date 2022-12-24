@@ -1,9 +1,9 @@
 package gameworld.worlds;
 
 
+import gameworld.maps.OverWorld;
 import gameworld.player.Player;
 import main.MainGame;
-import maps.OverWorld;
 
 import java.awt.Point;
 

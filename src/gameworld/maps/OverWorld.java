@@ -1,4 +1,4 @@
-package maps;
+package gameworld.maps;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -13,12 +13,13 @@ public class OverWorld {
     public static int[][] loadOverWorld() {
         worldSize = new Point(500, 500);
         worldData = new int[worldSize.x][worldSize.y];
+        String[] numbers;
         try {
             InputStream inputStream = OverWorld.class.getResourceAsStream("/Maps/overworld.txt");
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             for (int i = 0; i < worldSize.y; i++) {
-                String[] numbers = bufferedReader.readLine().split(" ");
+                numbers = bufferedReader.readLine().split(" ");
                 for (int b = 0; b < worldSize.x; b++) {
                     worldData[b][i] = Integer.parseInt(numbers[b]);
                 }

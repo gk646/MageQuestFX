@@ -28,7 +28,7 @@ public class UI implements ActionListener, ChangeListener {
     private BufferedImage playerUI;
     public int loadingProgress = 0;
 
-    private final Color lightBackground = new Color(192, 203, 220);
+    private final Color lightBackground = new Color(192, 203, 220), red = new Color(0xFF0044), blue = new Color(0x0099DB);
     private final Color darkBackground = new Color(90, 105, 136);
 
 
@@ -110,9 +110,9 @@ public class UI implements ActionListener, ChangeListener {
     private void drawGameUI(Graphics2D g2) {
         Runner.slider.setVisible(false);
         Runner.textField.setVisible(false);
-        g2.setColor(new Color(0xFF0044));
+        g2.setColor(red);
         g2.fillRect(123, 70, (int) ((mg.player.health / (float) mg.player.maxHealth) * 225), 11);
-        g2.setColor(new Color(0x0099DB));
+        g2.setColor(blue);
         g2.fillRect(123, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         g2.drawImage(playerUI, 40, 40, 330, 200, null);
         g2.setColor(Color.white);

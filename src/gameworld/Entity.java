@@ -19,15 +19,13 @@ public class Entity {
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
+    private final Color red = new Color(0xFF0044);
+    private final Color white = new Color(0xFFFFFF);
     protected BufferedImage entityImage2;
     protected BufferedImage entityImage3;
     protected BufferedImage entityImage4;
     protected BufferedImage entityImage5;
     protected BufferedImage entityImage6;
-    protected BufferedImage entityImage7;
-    protected BufferedImage entityImage8;
-    protected BufferedImage entityImage9;
-    protected BufferedImage entityImage10;
     protected BufferedImage enemyImage;
     public int worldY;
     public int worldX;
@@ -140,9 +138,9 @@ public class Entity {
                 entity1.draw(g2);
                 if (!(entity1 instanceof Owly)) {
                     if (entity1.hpBarOn) {
-                        g2.setColor(new Color(0xFF0044));
+                        g2.setColor(red);
                         g2.fillRect(entity1.screenX, entity1.screenY - 10, (int) (((float) entity1.health / entity1.maxHealth) * 48), 8);
-                        g2.setColor(new Color(0xFFFFFF));
+                        g2.setColor(white);
                         g2.setFont(mg.ui.maruMonica);
                         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
                         g2.drawString(entity1.health + "", entity1.screenX + 14, entity1.screenY);
