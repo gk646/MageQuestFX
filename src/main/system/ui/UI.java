@@ -68,7 +68,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96f));
         String text = "Mage Quest_2D";
         int x = getXForCenteredText(text, g2);
-        int y = 48 * 3;
+        int y = (int) (MainGame.SCREEN_HEIGHT * 0.044f) * 3;
         //FILL BACKGROUND WITH COLOR
         g2.setColor(lightBackground);
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
@@ -79,7 +79,7 @@ public class UI implements ActionListener, ChangeListener {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48f));
         text = "START GAME";
         x = getXForCenteredText(text, g2);
-        y += 5 * 48;
+        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
         g2.drawString(text, x, y);
         if (commandNum == 0) {
             g2.drawString(">", x - 25, y);
@@ -87,21 +87,21 @@ public class UI implements ActionListener, ChangeListener {
         text = "OPTIONS";
 
         x = getXForCenteredText(text, g2);
-        y += 48;
+        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
         g2.drawString(text, x, y);
         if (commandNum == 1) {
             g2.drawString(">", x - 25, y);
         }
         text = "QUIT";
         x = getXForCenteredText(text, g2);
-        y += 48;
+        y += (int) (MainGame.SCREEN_HEIGHT * 0.074f);
         g2.drawString(text, x, y);
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
         text = "1.2.4";
-        x = 150;
-        y = 900;
+        x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         g2.drawString(text, x, y);
 
         text = "\u00A9 2022 Lukas Gilch";
@@ -128,11 +128,11 @@ public class UI implements ActionListener, ChangeListener {
         g2.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 59f));
         g2.setColor(darkBackground);
-        g2.drawString("Settings", 100, 100);
+        g2.drawString("Settings", MainGame.SCREEN_HEIGHT * 0.092f, MainGame.SCREEN_HEIGHT * 0.092f);
         g2.setFont(g2.getFont().deriveFont(30f));
-        g2.drawString("Framerate: ", 500, 300);
-        g2.drawString("Network Settings: ", 500, 450);
-        g2.drawString("Quit Game?", 500, 700);
+        g2.drawString("Framerate: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
+        g2.drawString("Network Settings: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.416f);
+        g2.drawString("Quit Game?", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.648f);
         if (commandNum == 0) {
             g2.drawString(">", 450 - 25, 700);
         }
