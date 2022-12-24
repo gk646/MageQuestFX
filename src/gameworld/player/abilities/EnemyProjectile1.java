@@ -27,31 +27,29 @@ public class EnemyProjectile1 extends Projectile {
 
         //------POSITION-----------
         this.mousePosition = new Point(mg.player.worldX, mg.player.worldY);
-        this.worldX = x;
-        this.worldY = y;
+        this.worldPos = new Point(x, y);
         this.updateVector = getUpdateVector();
         getPlayerImage();
-        this.endPositionX = worldX + 650;
-        this.endPositionY = worldY + 650;
+        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(projectileImage1, worldX - mg.player.worldX + mg.HALF_WIDTH, worldY - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight, null);
+        g2.drawImage(projectileImage1, worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight, null);
     }
 
     @Override
     public void update() {
         outOfBounds();
         tileCollision();
-        worldX += updateVector.x;
-        worldY += updateVector.y;
+        worldPos.x += updateVector.x;
+        worldPos.y += updateVector.y;
     }
 
     //Get normalized vector
     private Point getUpdateVector() {
-        int deltaX = mousePosition.x - worldX;
-        int deltaY = mousePosition.y - worldY;
+        int deltaX = mousePosition.x - worldPos.x;
+        int deltaY = mousePosition.y - worldPos.y;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double normalizedY = (deltaY / length) * movementSpeed * 2;
         double normalizedX = (deltaX / length) * movementSpeed * 2;

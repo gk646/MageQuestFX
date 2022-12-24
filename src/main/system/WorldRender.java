@@ -11,11 +11,11 @@ import java.util.Objects;
 
 
 public class WorldRender {
-    public int[][] worldData;
-    public Point worldSize;
-    private int worldCol, worldRow, tileNum;
     public final Tile[] tileStorage;
     private final MainGame mg;
+    public int[][] worldData;
+    public Point worldSize;
+    private int worldCol, worldRow;
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
@@ -76,12 +76,14 @@ public class WorldRender {
     public void draw(Graphics2D g2) {
         worldCol = Math.max((mg.player.worldX / 48) - 20, 0);
         worldRow = Math.max((mg.player.worldY / 48) - 12, 0);
-        for (int i = worldCol; i < Math.min(worldCol + 42, 499); i++) {
-            for (int b = worldRow; b < Math.min(worldRow + 25, 499); b++) {
-                tileNum = worldData[i][b];
-                g2.drawImage(tileStorage[tileNum].tileImage, i * 48 - mg.player.worldX + mg.player.screenX, b * 48 - mg.player.worldY + mg.player.screenY, 48, 48, null);
+        int maxCol = Math.min(worldCol + 42, 499);
+        int maxRow = Math.min(worldRow + 25, 499);
+        for (int i = worldCol; i < maxCol; i++) {
+            for (int b = worldRow; b < maxRow; b++) {
+                g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - mg.player.worldX + mg.player.screenX, b * 48 - mg.player.worldY + mg.player.screenY, 48, 48, null);
             }
         }
     }
 }
+
 

@@ -29,8 +29,8 @@ public class Projectile {
     public boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
-    public Point updateVector, mousePosition;
-    public int endPositionX, endPositionY, worldX, worldY, movementSpeed, projectileHeight, projectileWidth, screenX, screenY, spriteCounter;
+    public Point updateVector, mousePosition, worldPos, endPos, screenPos;
+    public int movementSpeed, projectileHeight, projectileWidth, spriteCounter;
     public BufferedImage projectileImage1, projectileImage2, projectileImage3, projectileImage4, projectileImage5, projectileImage6, projectileImage7, projectileImage8, projectileImage9, projectileImage10;
 
 
@@ -107,7 +107,7 @@ public class Projectile {
     }
 
     protected void outOfBounds() {
-        if (worldX >= endPositionX || worldY >= endPositionY || worldY <= endPositionY - 650 * 2 || worldX <= endPositionX - 650 * 2) {
+        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 650 * 2 || worldPos.x <= endPos.x - 650 * 2) {
             this.dead = true;
         }
     }

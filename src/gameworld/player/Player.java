@@ -23,6 +23,8 @@ import java.util.Objects;
 public class Player extends Entity {
     public static Point startingPoint;
     private final MotionHandler motionHandler;
+    private final KeyHandler keyH;
+    private final MouseHandler mouseH;
     public int maxMana;
     public float mana;
     public float health;
@@ -41,8 +43,6 @@ public class Player extends Entity {
     private int quadrantTimer;
     private float manaRegeneration = 0.02f;
     private float healthRegeneration = 0.002f;
-    private final KeyHandler keyH;
-    private final MouseHandler mouseH;
     private boolean respawnsDone;
 
 
@@ -57,8 +57,8 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = 12500;
-        worldY = 12500;
+        worldX = 23500;
+        worldY = 23500;
         direction = "";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 8, 32, 32);

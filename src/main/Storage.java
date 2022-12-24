@@ -13,7 +13,7 @@ public class Storage {
     public BufferedImage primaryFire1;
     public BufferedImage gruntImage1;
     public BufferedImage shooterImage1;
-    public Rectangle box_primaryFire = new Rectangle(0, 0, 16, 16);
+    public Rectangle box_primaryFire = new Rectangle(0, 0, 16, 16), box_secondaryFire = new Rectangle(0, 0, 32, 32);
     MainGame mg;
 
     public Storage(MainGame mg) {

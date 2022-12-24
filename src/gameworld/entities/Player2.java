@@ -16,8 +16,8 @@ public class Player2 extends Entity {
         super(mainGame);
         //Setting default values
         getPlayerImage();
-        worldX = 12200;
-        worldY = 12200;
+        worldX = 12500;
+        worldY = 12500;
         this.entityHeight = 48;
         this.entityWidth = 48;
 

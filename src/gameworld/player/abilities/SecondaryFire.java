@@ -6,7 +6,6 @@ import main.MainGame;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 public class SecondaryFire extends Projectile {
 
@@ -21,40 +20,39 @@ public class SecondaryFire extends Projectile {
         this.movementSpeed = 3;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
-        this.collisionBox = new Rectangle(0, 0, 32, 32);
+        this.collisionBox = mg.imageSto.box_secondaryFire;
         this.direction = "downleftrightup";
 
         //------POSITION-----------
         this.mousePosition = mainGame.motionH.lastMousePosition;
-        this.worldX = mg.player.worldX;
-        this.worldY = mg.player.worldY;
+        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
+        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
+        screenPos = new Point();
         this.updateVector = getUpdateVector();
         getPlayerImage();
-        this.endPositionX = worldX + 650;
-        this.endPositionY = worldY + 650;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = worldX - mg.player.worldX + mg.HALF_WIDTH;
-        screenY = worldY - mg.player.worldY + mg.HALF_HEIGHT;
+        screenPos.x = worldPos.x - mg.player.worldX + mg.HALF_WIDTH;
+        screenPos.y = worldPos.y - mg.player.worldY + mg.HALF_HEIGHT;
         if (spriteCounter <= 13) {
-            g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage1, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 13) {
-            g2.drawImage(projectileImage2, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage2, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 26) {
-            g2.drawImage(projectileImage3, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage3, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 39) {
-            g2.drawImage(projectileImage4, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage4, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 52) {
-            g2.drawImage(projectileImage5, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage5, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 65) {
-            g2.drawImage(projectileImage6, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage6, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
             spriteCounter = 0;
         }
         spriteCounter++;
@@ -65,8 +63,8 @@ public class SecondaryFire extends Projectile {
     public void update() {
         outOfBounds();
         tileCollision();
-        worldX += updateVector.x;
-        worldY += updateVector.y;
+        worldPos.x += updateVector.x;
+        worldPos.y += updateVector.y;
     }
 
     //Get normalized vector

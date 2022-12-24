@@ -6,6 +6,7 @@ import input.MouseHandler;
 import main.MainGame;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Lightning extends Projectile {
@@ -24,44 +25,43 @@ public class Lightning extends Projectile {
 
         //------POSITION-----------
         this.mousePosition = motionHandler.lastMousePosition;
-        this.worldX = mousePosition.x;
-        this.worldY = mousePosition.y;
+        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
         getImages();
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = worldX - mg.player.worldX + mg.HALF_WIDTH;
-        screenY = worldY - mg.player.worldY + mg.HALF_HEIGHT;
+        screenPos.x = worldPos.x - mg.player.worldX + mg.HALF_WIDTH;
+        screenPos.y = worldPos.x - mg.player.worldY + mg.HALF_HEIGHT;
         if (spriteCounter <= 8) {
-            g2.drawImage(projectileImage1, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage1, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 6 && spriteCounter <= 14) {
-            g2.drawImage(projectileImage2, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage2, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 14 && spriteCounter <= 22) {
-            g2.drawImage(projectileImage3, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage3, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 22 && spriteCounter <= 30) {
-            g2.drawImage(projectileImage4, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage4, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 30 && spriteCounter <= 35) {
-            g2.drawImage(projectileImage5, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage5, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 35 && spriteCounter <= 40) {
-            g2.drawImage(projectileImage6, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage6, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 40 && spriteCounter <= 56) {
-            g2.drawImage(projectileImage7, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage7, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 56 && spriteCounter <= 64) {
-            g2.drawImage(projectileImage8, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage8, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 64 && spriteCounter <= 72) {
-            g2.drawImage(projectileImage9, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage9, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 72 && spriteCounter <= 80) {
-            g2.drawImage(projectileImage10, screenX, screenY, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage10, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }
         if (spriteCounter >= 80) {
             this.dead = true;

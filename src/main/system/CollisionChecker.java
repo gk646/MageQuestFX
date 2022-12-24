@@ -69,14 +69,14 @@ public class CollisionChecker {
     }
 
     public boolean checkEntityAgainstProjectile(Entity checkingForHit, Projectile incomingToHit) {
-        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(incomingToHit.worldX, incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(incomingToHit.worldPos.x, incomingToHit.worldPos.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
     public void checkProjectileAgainstTile(Projectile projectile) {
-        int entityLeftWorldX = projectile.worldX + projectile.collisionBox.x;
-        int entityRightWorldX = projectile.worldX + projectile.collisionBox.x + projectile.collisionBox.width;
-        int entityTopWorldY = projectile.worldY + projectile.collisionBox.y;
-        int entityBottomWorldY = projectile.worldY + projectile.collisionBox.y + projectile.collisionBox.height;
+        int entityLeftWorldX = projectile.worldPos.x + projectile.collisionBox.x;
+        int entityRightWorldX = projectile.worldPos.x + projectile.collisionBox.x + projectile.collisionBox.width;
+        int entityTopWorldY = projectile.worldPos.y + projectile.collisionBox.y;
+        int entityBottomWorldY = projectile.worldPos.y + projectile.collisionBox.y + projectile.collisionBox.height;
 
         int entityLeftCol;
         int entityRightCol;

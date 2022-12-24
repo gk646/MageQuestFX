@@ -28,27 +28,25 @@ public class Ability1 extends Projectile {
         this.version = version;
 
         //------POSITION-----------
-        this.worldX = mg.player.worldX;
-        this.worldY = mg.player.worldY;
+        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
+        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
         this.direction = "downleftrightup";
         this.updateVector = new Point(1, 1);
         getUpdateVector();
-        this.endPositionX = worldX + 650;
-        this.endPositionY = worldY + 650;
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.red);
-        g2.drawRect(worldX - mg.player.worldX + mg.HALF_WIDTH, worldY - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight);
+        g2.drawRect(worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight);
     }
 
     @Override
     public void update() {
         outOfBounds();
         tileCollision();
-        worldX += updateVector.x;
-        worldY += updateVector.y;
+        worldPos.x += updateVector.x;
+        worldPos.y += updateVector.y;
     }
 
 
