@@ -92,7 +92,6 @@ public class Player extends Entity {
         manaRegeneration = ((0.3f + INT / 10f) * (level + level - 1)) / 60;
         healthRegeneration = (0.05f * level) / 60;
         movementSpeed = 4 + SPD;
-        //System.out.println(maxHealth + " " + VIT + " " + maxMana + " " + INT);
     }
 
     public void pickupDroppedItem() {
