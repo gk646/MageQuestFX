@@ -1,4 +1,4 @@
-package gameworld.worlds;
+package gameworld.world;
 
 import gameworld.entities.Grunt;
 import gameworld.entities.Shooter;

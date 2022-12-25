@@ -1,6 +1,6 @@
 package main.system.ai;
 
-import gameworld.maps.OverWorld;
+import gameworld.world.maps.OverWorld;
 import main.MainGame;
 
 import java.util.ArrayList;

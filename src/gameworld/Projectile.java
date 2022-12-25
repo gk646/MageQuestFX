@@ -7,6 +7,7 @@ import gameworld.player.abilities.EnemyProjectile1;
 import gameworld.player.abilities.Lightning;
 import gameworld.player.abilities.PrimaryFire;
 import gameworld.player.abilities.SecondaryFire;
+import gameworld.world.DroppedItem;
 import input.MouseHandler;
 import main.MainGame;
 
@@ -88,6 +89,7 @@ public class Projectile {
         if (entity.health <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
+            mg.droppedItems.add(new DroppedItem(mg, entity.worldX, entity.worldY));
         } else {
             entity.hpBarOn = true;
         }

@@ -5,7 +5,8 @@ import gameworld.Item;
 import gameworld.Projectile;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
-import gameworld.worlds.WorldController;
+import gameworld.world.DroppedItem;
+import gameworld.world.WorldController;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
@@ -27,6 +28,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MainGame extends JPanel implements Runnable {
@@ -43,7 +45,9 @@ public class MainGame extends JPanel implements Runnable {
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
 
+
     //ITEMS
+    public final ArrayList<DroppedItem> droppedItems = new ArrayList<>();
     public final ArrayList<Item> AMULET = new ArrayList<>();
     public final ArrayList<Item> BOOTS = new ArrayList<>();
     public final ArrayList<Item> CHEST = new ArrayList<>();
@@ -95,6 +99,7 @@ public class MainGame extends JPanel implements Runnable {
     private final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents, loadingScreen;
+    public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
     //Game thread
     private Thread gameThread;
     public InventoryPanel inventP;
@@ -226,6 +231,7 @@ public class MainGame extends JPanel implements Runnable {
                         if (!client) {
                             entity.update();
                         }
+
                         if (multiplayer.multiplayerStarted) {
                             multiplayer.updateMultiplayerOutput();
                         }
@@ -253,6 +259,11 @@ public class MainGame extends JPanel implements Runnable {
             wRender.draw(g2);
             projectile.draw(g2);
             entity.draw(g2);
+            for (DroppedItem dropItem : droppedItems) {
+                if (dropItem.droppedIcon != null) {
+                    dropItem.draw(g2);
+                }
+            }
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);

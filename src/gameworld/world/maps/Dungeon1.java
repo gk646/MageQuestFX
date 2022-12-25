@@ -1,4 +1,4 @@
-package gameworld.maps;
+package gameworld.world.maps;
 
 import java.awt.Point;
 import java.io.BufferedReader;
