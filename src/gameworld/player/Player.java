@@ -5,6 +5,7 @@ import gameworld.player.abilities.Ability1;
 import gameworld.player.abilities.Lightning;
 import gameworld.player.abilities.PrimaryFire;
 import gameworld.player.abilities.SecondaryFire;
+import gameworld.world.DroppedItem;
 import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
@@ -17,6 +18,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 
@@ -93,6 +95,26 @@ public class Player extends Entity {
         //System.out.println(maxHealth + " " + VIT + " " + maxMana + " " + INT);
     }
 
+    public void pickupDroppedItem() {
+        try {
+            for (DroppedItem drop : mg.droppedItems) {
+                if (new Rectangle(mg.player.worldX - 10, mg.player.worldY - 20, mg.player.collisionBox.width, mg.player.collisionBox.height + 10).contains(drop.worldPos)) {
+                    for (InventorySlot invSlot : mg.inventP.bag_Slots) {
+                        if (invSlot.item == null) {
+                            invSlot.item = drop.item;
+                            mg.droppedItems.remove(drop);
+                            break;
+                        }
+                    }
+                }
+                if (drop.item.name.contains("FILLER")) {
+                    mg.droppedItems.remove(drop);
+                }
+            }
+        } catch (ConcurrentModificationException ignored) {
+        }
+    }
+
     public void getDurabilityDamageArmour() {
         for (InventorySlot invSlot : mg.inventP.char_Slots) {
             if (invSlot.item != null && (!invSlot.item.type.contains("2") && !invSlot.item.type.contains("W") && !invSlot.item.type.contains("O"))) {
@@ -146,8 +168,7 @@ public class Player extends Entity {
 
     private void getPlayerQuadrant() {
         for (int i = 99; i >= 0; i--) {
-            if (worldX / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileX && worldY / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileY
-                    && worldX / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileY + 50) {
+            if (worldX / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileX && worldY / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileY && worldX / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileY + 50) {
                 playerQuadrant = i;
                 break;
             }

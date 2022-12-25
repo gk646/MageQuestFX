@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 public class DroppedItem {
     public BufferedImage droppedIcon;
     MainGame mg;
-    Item item;
-    Point worldPos = new Point();
+    public Item item;
+    public Point worldPos = new Point();
 
     public DroppedItem(MainGame mg, int worldX, int worldY) {
         this.mg = mg;
@@ -31,7 +31,7 @@ public class DroppedItem {
             int listIndex = mg.random.nextInt(0, 10);
             item1 = goThroughArrays(listIndex);
             if (!item1.name.equals("FILLER")) {
-                if (mg.random.nextInt(0, 11) == 5) {
+                if (mg.random.nextInt(0, 15) == 5) {
                     if (item1.rarity == 1) {
                         return item1;
                     }

@@ -102,6 +102,8 @@ public class MainGame extends JPanel implements Runnable {
     public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
     //Game thread
     private Thread gameThread;
+    Graphics2D g2;
+    private int renderDecider;
     public InventoryPanel inventP;
     public TalentPanel talentP;
     String text;
@@ -156,6 +158,24 @@ public class MainGame extends JPanel implements Runnable {
 
     private void startThreads() {
         float logicCounter = 1000000000 / 60f;
+        float fastRenderCounter = 1000000000 / 120f;
+        Thread renderHelper = new Thread(() -> {
+            long firstTimeGate1;
+            long lastTime1 = System.nanoTime();
+            float difference = 0;
+            while (true) {
+                firstTimeGate1 = System.nanoTime();
+                difference += (firstTimeGate1 - lastTime1) / fastRenderCounter;
+                lastTime1 = firstTimeGate1;
+                if (difference >= 1) {
+                    if (gameState == playState) {
+                        player.pickupDroppedItem();
+                    }
+                    difference = 0;
+                }
+            }
+        });
+        renderHelper.start();
         Thread drawThread = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
@@ -169,6 +189,10 @@ public class MainGame extends JPanel implements Runnable {
                 if (difference >= 1) {
                     repaint();
                     difference = 0;
+                }
+                if (showBag || showChar) {
+                    repaint();
+                    System.out.println("hey");
                 }
             }
         });
@@ -191,23 +215,6 @@ public class MainGame extends JPanel implements Runnable {
             }
         });
         playerThread.start();
-        Thread ProjectileThread = new Thread(() -> {
-            long firstTimeGate1;
-            long lastTime1 = System.nanoTime();
-            float difference = 0;
-            while (true) {
-                firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicCounter;
-                lastTime1 = firstTimeGate1;
-                if (difference >= 1) {
-                    if (gameState == playState || gameState == optionState) {
-                        projectile.update();
-                        difference = 0;
-                    }
-                }
-            }
-        });
-        //ProjectileThread.start();
         Thread updateThread = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = 0;
@@ -231,7 +238,6 @@ public class MainGame extends JPanel implements Runnable {
                         if (!client) {
                             entity.update();
                         }
-
                         if (multiplayer.multiplayerStarted) {
                             multiplayer.updateMultiplayerOutput();
                         }
@@ -249,7 +255,7 @@ public class MainGame extends JPanel implements Runnable {
      * @param g the <code>Graphics</code> object to protect
      */
     @Override
-    public void paintComponent(Graphics g) {
+    public synchronized void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         //Debug
@@ -257,13 +263,15 @@ public class MainGame extends JPanel implements Runnable {
         //RENDER START
         if (gameState == playState || gameState == optionState) {
             wRender.draw(g2);
-            projectile.draw(g2);
-            entity.draw(g2);
-            for (DroppedItem dropItem : droppedItems) {
-                if (dropItem.droppedIcon != null) {
-                    dropItem.draw(g2);
+            if (droppedItems.size() != 0) {
+                for (DroppedItem dropItem : droppedItems) {
+                    if (dropItem.droppedIcon != null) {
+                        dropItem.draw(g2);
+                    }
                 }
             }
+            projectile.draw(g2);
+            entity.draw(g2);
             player2.draw(g2);
             player.draw(g2);
             ui.draw(g2);
@@ -305,6 +313,7 @@ public class MainGame extends JPanel implements Runnable {
         }
         g2.dispose();
     }
+
 
     public void startGameThread() {
         gameThread = new Thread(this);

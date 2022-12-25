@@ -16,7 +16,7 @@ public class InventoryPanel {
     private static final int CHAR_SLOTS = 10;
     private final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
     private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
-    private final InventorySlot[] bag_Slots;
+    public final InventorySlot[] bag_Slots;
     private final MainGame mg;
 
     public InventorySlot[] char_Slots;
