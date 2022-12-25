@@ -28,28 +28,37 @@ public class DroppedItem {
     private Item rollForItem() {
         Item item1;
         while (true) {
-            int listIndex = mg.random.nextInt(0, 10);
-            item1 = goThroughArrays(listIndex);
+            item1 = goThroughArrays(mg.random.nextInt(0, 10));
             if (!item1.name.equals("FILLER")) {
                 if (mg.random.nextInt(0, 15) == 5) {
                     if (item1.rarity == 1) {
-                        return item1;
+
+                        return cloneItem(item1);
                     }
                     if (item1.rarity == 2 && mg.random.nextInt(0, 2) == 1) {
-                        return item1;
+
+                        return cloneItem(item1);
                     }
 
                     if (item1.rarity == 3 && mg.random.nextInt(0, 5) == 4) {
-                        return item1;
+
+                        return cloneItem(item1);
                     }
 
                     if (item1.rarity == 4 && mg.random.nextInt(0, 11) == 10) {
-                        return item1;
+                        item1.rollQuality();
+                        return cloneItem(item1);
                     }
                     return mg.CHEST.get(0);
                 }
             }
         }
+    }
+
+    public Item cloneItem(Item item) {
+        Item new_item = new Item(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats);
+        new_item.icon = item.icon;
+        return new_item;
     }
 
     private Item goThroughArrays(int listIndex) {

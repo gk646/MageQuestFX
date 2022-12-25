@@ -28,6 +28,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Random;
 
 
@@ -102,11 +103,8 @@ public class MainGame extends JPanel implements Runnable {
     public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
     //Game thread
     private Thread gameThread;
-    Graphics2D g2;
-    private int renderDecider;
     public InventoryPanel inventP;
     public TalentPanel talentP;
-    String text;
 
     /**
      * Main game loop class
@@ -158,7 +156,7 @@ public class MainGame extends JPanel implements Runnable {
 
     private void startThreads() {
         float logicCounter = 1000000000 / 60f;
-        float fastRenderCounter = 1000000000 / 120f;
+        float fastRenderCounter = 1000000000 / 360f;
         Thread renderHelper = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
@@ -170,6 +168,7 @@ public class MainGame extends JPanel implements Runnable {
                 if (difference >= 1) {
                     if (gameState == playState) {
                         player.pickupDroppedItem();
+                        inventP.interactWithWindows();
                     }
                     difference = 0;
                 }
@@ -189,10 +188,6 @@ public class MainGame extends JPanel implements Runnable {
                 if (difference >= 1) {
                     repaint();
                     difference = 0;
-                }
-                if (showBag || showChar) {
-                    repaint();
-                    System.out.println("hey");
                 }
             }
         });
@@ -263,13 +258,7 @@ public class MainGame extends JPanel implements Runnable {
         //RENDER START
         if (gameState == playState || gameState == optionState) {
             wRender.draw(g2);
-            if (droppedItems.size() != 0) {
-                for (DroppedItem dropItem : droppedItems) {
-                    if (dropItem.droppedIcon != null) {
-                        dropItem.draw(g2);
-                    }
-                }
-            }
+            drawDroppedItems(g2);
             projectile.draw(g2);
             entity.draw(g2);
             player2.draw(g2);
@@ -285,7 +274,6 @@ public class MainGame extends JPanel implements Runnable {
             }
             if (showBag || showChar) {
                 inventP.drawDragAndDrop(g2);
-                inventP.interactWithWindows();
             }
             if (showTalents) {
                 talentP.drawTalentWindow(g2);
@@ -318,5 +306,18 @@ public class MainGame extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    private void drawDroppedItems(Graphics2D g2) {
+        if (droppedItems.size() != 0) {
+            try {
+                for (DroppedItem dropItem : droppedItems) {
+                    if (dropItem.droppedIcon != null) {
+                        dropItem.draw(g2);
+                    }
+                }
+            } catch (ConcurrentModificationException ignored) {
+            }
+        }
     }
 }

@@ -43,7 +43,7 @@ public class InventoryPanel {
         grabbedItem = null;
         createCharSlots();
         createBagSlots();
-        charPanelMover = new Rectangle(charPanelX, charPanelY, 500, 50);
+        charPanelMover = new Rectangle(charPanelX - 50, charPanelY - 65 + 2 - 10, 500, 50);
         charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
@@ -51,12 +51,6 @@ public class InventoryPanel {
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         hideCharCollision();
         hideBagCollision();
-        bag_Slots[0].item = mg.CHEST.get(1);
-        bag_Slots[1].item = mg.CHEST.get(2);
-        bag_Slots[2].item = mg.CHEST.get(3);
-        bag_Slots[3].item = mg.CHEST.get(4);
-        bag_Slots[4].item = mg.RINGS.get(1);
-        bag_Slots[5].item = mg.RINGS.get(2);
     }
 
     public void drawCharacterWindow(Graphics2D g2) {
@@ -258,15 +252,17 @@ public class InventoryPanel {
         if (mg.mouseH.mouse1Pressed && charPanelMover.contains(mg.motionH.lastMousePosition)) {
             charPanelX += mg.motionH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.motionH.lastMousePosition.y - previousMousePosition.y;
+            charPanelMover.x = charPanelX - 50;
+            charPanelMover.y = charPanelY - 65 + 2 - 10;
         } else if (mg.mouseH.mouse1Pressed && bagPanelMover.contains(mg.motionH.lastMousePosition)) {
             bagPanelX += mg.motionH.lastMousePosition.x - previousMousePosition.x;
             bagPanelY += mg.motionH.lastMousePosition.y - previousMousePosition.y;
-        }
-        if (mg.mouseH.mouse1Pressed && charPanelCloser.contains(mg.motionH.lastMousePosition)) {
+            bagPanelMover.x = bagPanelX;
+            bagPanelMover.y = bagPanelY - 10;
+        } else if (mg.mouseH.mouse1Pressed && charPanelCloser.contains(mg.motionH.lastMousePosition)) {
             mg.showChar = false;
             hideCharCollision();
-        }
-        if (mg.mouseH.mouse1Pressed && bagPanelCloser.contains(mg.motionH.lastMousePosition)) {
+        } else if (mg.mouseH.mouse1Pressed && bagPanelCloser.contains(mg.motionH.lastMousePosition)) {
             mg.showBag = false;
             hideBagCollision();
         }
@@ -288,8 +284,7 @@ public class InventoryPanel {
         //window mover
         g2.setColor(darkBackground);
         g2.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
-        charPanelMover.x = startX - 50;
-        charPanelMover.y = startY - 65 + 2 - 10;
+
         //window close button
         g2.setColor(Color.red);
         g2.drawRoundRect(startX + 500 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
@@ -357,8 +352,7 @@ public class InventoryPanel {
         //window mover
         g2.setColor(darkBackground);
         g2.fillRoundRect(startX, startY, 365, 30, 15, 15);
-        bagPanelMover.x = startX;
-        bagPanelMover.y = startY - 10;
+
         //window close button
         g2.setColor(Color.red);
         g2.fillRoundRect(startX + 365 - 30, startY, 30, 30, 15, 15);

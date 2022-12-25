@@ -97,7 +97,7 @@ public class Player extends Entity {
     public void pickupDroppedItem() {
         try {
             for (DroppedItem drop : mg.droppedItems) {
-                if (new Rectangle(mg.player.worldX - 10, mg.player.worldY - 20, mg.player.collisionBox.width, mg.player.collisionBox.height + 10).contains(drop.worldPos)) {
+                if (new Rectangle(mg.player.worldX - 10, mg.player.worldY - 20, mg.player.collisionBox.width + 5, mg.player.collisionBox.height + 15).contains(drop.worldPos)) {
                     for (InventorySlot invSlot : mg.inventP.bag_Slots) {
                         if (invSlot.item == null) {
                             invSlot.item = drop.item;
