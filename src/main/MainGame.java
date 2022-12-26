@@ -141,12 +141,13 @@ public class MainGame extends JPanel implements Runnable {
         imageSto.loadImages();
         ui.updateLoadingScreen(12);
         player.dynamicSpawns();
+        sqLite.readItemsFromDB();
         ui.updateLoadingScreen(12);
         pathF.instantiateNodes();
         ui.updateLoadingScreen(12);
         ui.updateLoadingScreen(12);
         talentP = new TalentPanel(this);
-        sqLite.readItemsFromDB();
+        player.updateEquippedItems();
         ui.updateLoadingScreen(100);
         loadingScreen = false;
         gameState = titleState;

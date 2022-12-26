@@ -21,11 +21,11 @@ public class Lightning extends Projectile {
         //-------VALUES-----------
         this.projectileHeight = 92;
         this.projectileWidth = 70;
-        this.collisionBox = new Rectangle(30, 30, 30, 30);
+        this.collisionBox = new Rectangle(30, 30, 40, 30);
 
         //------POSITION-----------
-        this.mousePosition = motionHandler.lastMousePosition;
-        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
+        this.mousePos = motionHandler.lastMousePosition;
+        this.worldPos = new Point(mainGame.player.worldX + mousePos.x - mg.HALF_WIDTH - 24, mainGame.player.worldY + mousePos.y - mg.HALF_HEIGHT - 24);
         screenPos = new Point();
         getImages();
     }
@@ -33,7 +33,7 @@ public class Lightning extends Projectile {
     @Override
     public void draw(Graphics2D g2) {
         screenPos.x = worldPos.x - mg.player.worldX + mg.HALF_WIDTH;
-        screenPos.y = worldPos.x - mg.player.worldY + mg.HALF_HEIGHT;
+        screenPos.y = worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50;
         if (spriteCounter <= 8) {
             g2.drawImage(projectileImage1, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
         }

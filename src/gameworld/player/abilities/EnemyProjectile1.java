@@ -27,7 +27,7 @@ public class EnemyProjectile1 extends Projectile {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePosition = new Point(mg.player.worldX, mg.player.worldY);
+        this.mousePos = new Point(mg.player.worldX, mg.player.worldY);
         this.worldPos = new Point(x, y);
         this.updateVector = getUpdateVector();
         getPlayerImage();
@@ -49,8 +49,8 @@ public class EnemyProjectile1 extends Projectile {
 
     //Get normalized vector
     private Point getUpdateVector() {
-        int deltaX = mousePosition.x - worldPos.x;
-        int deltaY = mousePosition.y - worldPos.y;
+        int deltaX = mousePos.x - worldPos.x;
+        int deltaY = mousePos.y - worldPos.y;
         double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
         double normalizedY = (deltaY / length) * movementSpeed * 2;
         double normalizedX = (deltaX / length) * movementSpeed * 2;

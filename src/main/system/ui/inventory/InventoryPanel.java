@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.text.DecimalFormat;
 
 public class InventoryPanel {
     private static final int SLOT_SIZE = 45;
@@ -18,6 +19,7 @@ public class InventoryPanel {
     private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     public final InventorySlot[] bag_Slots;
     private final MainGame mg;
+    private final DecimalFormat df = new DecimalFormat("#.###");
 
     public InventorySlot[] char_Slots;
     private final BasicStroke width2 = new BasicStroke(2);
@@ -144,19 +146,11 @@ public class InventoryPanel {
         g2.setColor(darkBackground);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         g2.drawString("INT: " + invSlot.item.INT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         g2.drawString("VIT: " + invSlot.item.VIT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 85);
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
-        g2.drawString("REG: " + invSlot.item.REG, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 65);
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+        g2.drawString("WIS: " + invSlot.item.REG, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 65);
         g2.drawString("SPD: " + invSlot.item.SPD, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 85);
 
-
         //EFFECTS
-
 
         //DESCRIPTION
         g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 16));
@@ -284,7 +278,6 @@ public class InventoryPanel {
         //window mover
         g2.setColor(darkBackground);
         g2.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
-
         //window close button
         g2.setColor(Color.red);
         g2.drawRoundRect(startX + 500 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
@@ -294,13 +287,22 @@ public class InventoryPanel {
         g2.setColor(darkBackground);
         g2.drawRoundRect(100 + startX, startY + 90, 200, 250, 25, 25);
         //game world.player image
-        g2.drawImage(mg.player.entityImage1, startX + 120, startY + 150, 150, 150, null);
+        g2.drawImage(mg.player.entityImage1, startX + 150, startY + 150, 120, 120, null);
         //Stats Text
         g2.setColor(darkBackground);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
-        g2.drawString("Mage: Level" + mg.player.level, 120 + startX, 40 + startY);
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
-        g2.drawString("Health:" + mg.player.maxHealth, startX + 110, startY + 420);
+        g2.drawString("No Title", 120 + startX, 20 + startY);
+        g2.drawString("Mage: Level" + mg.player.level, 120 + startX, 50 + startY);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
+        g2.drawString("INT: " + mg.player.INT, startX + 110, startY + 420);
+        g2.drawString("VIT: " + mg.player.VIT, startX + 110, startY + 438);
+        g2.drawString("WIS: " + mg.player.REG, startX + 110, startY + 456);
+        g2.drawString("SPD: " + mg.player.SPD, startX + 110, startY + 474);
+        g2.drawString("Health: " + mg.player.maxHealth, startX + 170, startY + 420);
+        g2.drawString("Mana: " + mg.player.maxMana, startX + 170, startY + 440);
+        g2.drawString("MovmtSPD: " + mg.player.movementSpeed, startX + 170, startY + 460);
+        g2.drawString("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 170, startY + 480);
+        g2.drawString("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 170, startY + 500);
     }
 
     private void drawCharacterSlots(Graphics2D g2, int startX, int startY) {
@@ -308,26 +310,26 @@ public class InventoryPanel {
         g2.setStroke(width2);
         for (int i = 0; i <= 3; i++) {
             char_Slots[i].boundBox.x = 40 + startX;
-            char_Slots[i].boundBox.y = (i * 50 + 130 + startY);
-            char_Slots[i].drawSlot(g2, 40 + startX, (i * 50 + 130 + startY));
+            char_Slots[i].boundBox.y = (i * 50 + 110 + startY);
+            char_Slots[i].drawSlot(g2, 40 + startX, (i * 50 + 110 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, 40 + startX, ((i * 50) + 130 + startY), SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, 40 + startX, ((i * 50) + 110 + startY), SLOT_SIZE);
             }
         }
         for (int i = 4; i <= 7; i++) {
             char_Slots[i].boundBox.x = 40 + 270 + startX;
-            char_Slots[i].boundBox.y = (((i - 4) * 50) + 130 + startY);
-            char_Slots[i].drawSlot(g2, 40 + 270 + startX, (((i - 4) * 50) + 130 + startY));
+            char_Slots[i].boundBox.y = (((i - 4) * 50) + 110 + startY);
+            char_Slots[i].drawSlot(g2, 40 + 270 + startX, (((i - 4) * 50) + 110 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, 40 + 270 + startX, ((i - 4) * 50) + 130 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, 40 + 270 + startX, ((i - 4) * 50) + 110 + startY, SLOT_SIZE);
             }
         }
         for (int i = 8; i <= 9; i++) {
             char_Slots[i].boundBox.x = ((i - 8) * 50) + 140 + startX;
             char_Slots[i].boundBox.y = 110 + 240 + startY;
-            char_Slots[i].drawSlot(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY);
+            char_Slots[i].drawSlot(g2, ((i - 8) * 50) + 145 + startX, 110 + 240 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 145 + startX, 110 + 240 + startY, SLOT_SIZE);
             }
         }
     }
@@ -408,13 +410,13 @@ public class InventoryPanel {
 
     private void createCharSlots() {
         for (int i = 0; i <= 3; i++) {
-            char_Slots[i] = new InventorySlot(null, 40 + 260, (i * 50) + 130 + 200);
+            char_Slots[i] = new InventorySlot(null, 40 + 260, (i * 50) + 110 + 200);
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i] = new InventorySlot(null, 40 + 270 + 260, ((i - 4) * 50) + 130 + 200);
+            char_Slots[i] = new InventorySlot(null, 40 + 270 + 260, ((i - 4) * 50) + 110 + 200);
         }
         for (int i = 8; i <= 9; i++) {
-            char_Slots[i] = new InventorySlot(null, ((i - 8) * 50) + 140 + 260, 110 + 240 + 200);
+            char_Slots[i] = new InventorySlot(null, ((i - 8) * 50) + 160 + 260, 110 + 240 + 200);
         }
     }
 

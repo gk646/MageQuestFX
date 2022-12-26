@@ -31,10 +31,10 @@ public class Player extends Entity {
     public float mana;
     public float health;
     //STATS
-    private int INT;
-    private int VIT;
-    private int REG;
-    private int SPD;
+    public int INT;
+    public int VIT;
+    public int REG;
+    public int SPD;
     private int cooldownOneSecond;
     private int cooldownTwoSecond;
     private int cooldownPrimary;
@@ -43,8 +43,8 @@ public class Player extends Entity {
     private int levelUpExperience;
     private int playerQuadrant;
     private int quadrantTimer;
-    private float manaRegeneration = 0.02f;
-    private float healthRegeneration = 0.002f;
+    public float manaRegeneration = 0.02f;
+    public float healthRegeneration = 0.002f;
     private boolean respawnsDone;
 
 
@@ -97,7 +97,7 @@ public class Player extends Entity {
     public void pickupDroppedItem() {
         try {
             for (DroppedItem drop : mg.droppedItems) {
-                if (new Rectangle(mg.player.worldX - 10, mg.player.worldY - 20, mg.player.collisionBox.width + 5, mg.player.collisionBox.height + 15).contains(drop.worldPos)) {
+                if (new Rectangle(mg.player.worldX - 25, mg.player.worldY - 14, mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
                     for (InventorySlot invSlot : mg.inventP.bag_Slots) {
                         if (invSlot.item == null) {
                             invSlot.item = drop.item;
