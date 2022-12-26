@@ -19,7 +19,7 @@ public class InventoryPanel {
     private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     public final InventorySlot[] bag_Slots;
     private final MainGame mg;
-    private final DecimalFormat df = new DecimalFormat("#.###");
+    private final DecimalFormat df = new DecimalFormat("#.##");
 
     public InventorySlot[] char_Slots;
     private final BasicStroke width2 = new BasicStroke(2);

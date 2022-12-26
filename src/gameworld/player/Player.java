@@ -88,10 +88,10 @@ public class Player extends Entity {
                 REG += invSlot.item.REG;
             }
         }
-        maxHealth = (int) (9f + ((10f + VIT) / (10f) + VIT) * (level + (0.3f * VIT)));
-        maxMana = (int) (19f + ((10f + INT) / (10f) + INT) * (level + (0.5 * INT)));
-        manaRegeneration = ((0.3f + INT / 10f) * (level + level - 1)) / 60;
-        healthRegeneration = (0.05f * level) / 60;
+        maxHealth = (int) (9f + ((10f + VIT / 2) / (10f) + VIT / 2) * (level + (0.1f * VIT)));
+        maxMana = (int) (19f + ((10f + INT) / (10f) + INT / 2f) * (level + (0.2 * INT)));
+        manaRegeneration = ((0.3f + INT / 20f) * (level + level - 1)) / 65;
+        healthRegeneration = (0.05f * level + VIT / 20f) / 60;
         movementSpeed = 4 + SPD;
     }
 
@@ -145,7 +145,6 @@ public class Player extends Entity {
                 respawnsDone = false;
             }
         }
-
         quadrantTimer++;
     }
 

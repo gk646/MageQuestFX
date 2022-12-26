@@ -95,14 +95,14 @@ public class SQLite {
                 stmt.setNull(1, Types.INTEGER);
                 stmt.setString(2, null);
                 stmt.setNull(3, Types.INTEGER);
-                stmt.setInt(4, i);
+                stmt.setInt(4, i + 1);
                 stmt.executeUpdate();
                 continue;
             }
             stmt.setInt(1, mg.inventP.char_Slots[i].item.i_id);
             stmt.setString(2, mg.inventP.char_Slots[i].item.type);
             stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
-            stmt.setInt(4, i);
+            stmt.setInt(4, i + 1);
             stmt.executeUpdate();
         }
     }
