@@ -44,6 +44,7 @@ public class SQLite {
             searchTWOHANDS(stmt);
             inverseArrayLists();
             readPlayerInventory(stmt);
+            readPlayerBags(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -58,6 +59,52 @@ public class SQLite {
             }
         }
     }
+
+    public void savePlayerAndBag() throws SQLException {
+        savePlayerInventory();
+        saveBagInventory();
+    }
+
+    private void saveBagInventory() throws SQLException {
+        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < mg.inventP.bag_Slots.length; i++) {
+            if (mg.inventP.bag_Slots[i].item == null) {
+                stmt.setNull(1, Types.INTEGER);
+                stmt.setString(2, null);
+                stmt.setNull(3, Types.INTEGER);
+                stmt.setInt(4, i);
+                stmt.executeUpdate();
+                continue;
+            }
+            stmt.setInt(1, mg.inventP.bag_Slots[i].item.i_id);
+            stmt.setString(2, mg.inventP.bag_Slots[i].item.type);
+            stmt.setInt(3, mg.inventP.bag_Slots[i].item.quality);
+            stmt.setInt(4, i);
+            stmt.executeUpdate();
+        }
+    }
+
+    private void savePlayerInventory() throws SQLException {
+        String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < 10; i++) {
+            if (mg.inventP.char_Slots[i].item == null) {
+                stmt.setNull(1, Types.INTEGER);
+                stmt.setString(2, null);
+                stmt.setNull(3, Types.INTEGER);
+                stmt.setInt(4, i);
+                stmt.executeUpdate();
+                continue;
+            }
+            stmt.setInt(1, mg.inventP.char_Slots[i].item.i_id);
+            stmt.setString(2, mg.inventP.char_Slots[i].item.type);
+            stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
+            stmt.setInt(4, i);
+            stmt.executeUpdate();
+        }
+    }
+
 
     private void inverseArrayLists() {
         mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));
@@ -82,7 +129,7 @@ public class SQLite {
         mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
     }
 
-    public void readPlayerInventory(Statement stmt) throws SQLException {
+    private void readPlayerInventory(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_INV");
         int counter = 0;
         while (rs.next()) {
@@ -94,23 +141,15 @@ public class SQLite {
         }
     }
 
-    public void savePlayerInventory() throws SQLException {
-        String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 0; i < 10; i++) {
-            if (mg.inventP.char_Slots[i].item == null) {
-                stmt.setNull(1, Types.INTEGER);
-                stmt.setString(2, null);
-                stmt.setNull(3, Types.INTEGER);
-                stmt.setInt(4, i);
-                stmt.executeUpdate();
+    private void readPlayerBags(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");
+        int counter = 0;
+        while (rs.next()) {
+            counter++;
+            if (rs.getString("i_id") == null) {
                 continue;
             }
-            stmt.setInt(1, mg.inventP.char_Slots[i].item.i_id);
-            stmt.setString(2, mg.inventP.char_Slots[i].item.type);
-            stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
-            stmt.setInt(4, i);
-            stmt.executeUpdate();
+            mg.inventP.bag_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
         }
     }
 

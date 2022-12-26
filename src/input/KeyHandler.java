@@ -91,7 +91,7 @@ public class KeyHandler implements KeyListener {
                 if (mg.ui.commandNum == 0) {
                 } else if (mg.ui.commandNum == 1) {
                     try {
-                        mg.sqLite.savePlayerInventory();
+                        mg.sqLite.savePlayerAndBag();
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
