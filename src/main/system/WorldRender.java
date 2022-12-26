@@ -85,8 +85,8 @@ public class WorldRender {
     public void draw(Graphics2D g2) {
         worldCol = Math.max((mg.player.worldX / 48) - 20, 0);
         worldRow = Math.max((mg.player.worldY / 48) - 12, 0);
-        int maxCol = Math.min(worldCol + 42, 499);
-        int maxRow = Math.min(worldRow + 25, 499);
+        int maxCol = Math.min(worldCol + 42, mg.wRender.worldSize.x);
+        int maxRow = Math.min(worldRow + 25, mg.wRender.worldSize.y);
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
                 g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - mg.player.worldX + mg.player.screenX, b * 48 - mg.player.worldY + mg.player.screenY, 48, 48, null);

@@ -13,11 +13,11 @@ public class WorldController {
     private final MainGame mg;
     //CURRENT WORLD
     public int currentWorld;
+
     //-----OVERWORLD
     public int[][] overWorldMapData;
     private Point overWorldSize;
-    public MapQuadrant[] overworldMapQuadrants;
-    public MapQuadrant[] tutorialMapQuadrants;
+    public MapQuadrant[] overworldMapQuadrants = new MapQuadrant[101];
     private Point overWorldStartPoint;
     //-----Tutorial
     private int[][] tutorialMapData;
@@ -38,7 +38,6 @@ public class WorldController {
 
     public WorldController(MainGame mg) {
         this.mg = mg;
-        this.overworldMapQuadrants = new MapQuadrant[450];
     }
 
     public void load_OverworldMap() {

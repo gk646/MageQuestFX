@@ -14,7 +14,6 @@ import main.system.ui.inventory.InventorySlot;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,7 +22,6 @@ import java.util.Objects;
 
 
 public class Player extends Entity {
-    public static Point startingPoint;
     private final MotionHandler motionHandler;
     private final KeyHandler keyH;
     private final MouseHandler mouseH;
@@ -104,14 +102,14 @@ public class Player extends Entity {
         try {
             for (DroppedItem drop : mg.droppedItems) {
                 if (new Rectangle(mg.player.worldX - 25, mg.player.worldY - 14, mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
-                    for (InventorySlot invSlot : mg.inventP.bag_Slots) {
-                        if (invSlot.item.name.equals("FILLER")) {
-                            invSlot.item = null;
-                        }
-                        if (invSlot.item == null) {
-                            invSlot.item = drop.item;
+                    for (InventorySlot bagSlot : mg.inventP.bag_Slots) {
+                        if (bagSlot.item == null) {
+                            bagSlot.item = drop.item;
                             mg.droppedItems.remove(drop);
                             break;
+                        }
+                        if (bagSlot.item.name.equals("FILLER")) {
+                            bagSlot.item = null;
                         }
                     }
                 }
@@ -259,7 +257,7 @@ public class Player extends Entity {
     }
 
     private void skills() {
-        if (mouseH.mouse1Pressed && cooldownPrimary == 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
+        if (mouseH.mouse1Pressed && cooldownPrimary == 20 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
             mg.PROJECTILES.add(new PrimaryFire(mg, mouseH));
             cooldownPrimary = 0;
             getDurabilityDamageWeapon();
@@ -294,7 +292,7 @@ public class Player extends Entity {
         } else if (health > maxHealth) {
             health = maxHealth;
         }
-        if (cooldownPrimary < 10) {
+        if (cooldownPrimary < 20) {
             cooldownPrimary++;
         }
         if (cooldownOneSecond < 60) {
