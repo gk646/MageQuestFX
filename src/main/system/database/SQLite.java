@@ -26,7 +26,6 @@ public class SQLite {
 
 
     public void readItemsFromDB() {
-        Connection conn = null;
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
@@ -49,14 +48,6 @@ public class SQLite {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -153,89 +144,99 @@ public class SQLite {
         }
     }
 
-
     private Item getItemWithQuality(int i_id, String type, int quality) {
         Item new_item;
-        if (type.equals("A")) {
-            for (Item item : mg.AMULET) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+        switch (type) {
+            case "A":
+                for (Item item : mg.AMULET) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("B")) {
-            for (Item item : mg.BOOTS) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "B":
+                for (Item item : mg.BOOTS) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("C")) {
-            for (Item item : mg.CHEST) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "C":
+                for (Item item : mg.CHEST) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("H")) {
-            for (Item item : mg.HEAD) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "H":
+                for (Item item : mg.HEAD) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("O")) {
-            for (Item item : mg.OFFHAND) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "O":
+                for (Item item : mg.OFFHAND) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("W")) {
-            for (Item item : mg.ONEHAND) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "W":
+                for (Item item : mg.ONEHAND) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("P")) {
-            for (Item item : mg.PANTS) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "P":
+                for (Item item : mg.PANTS) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("T")) {
-            for (Item item : mg.RELICS) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "T":
+                for (Item item : mg.RELICS) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("R")) {
-            for (Item item : mg.RINGS) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "R":
+                for (Item item : mg.RINGS) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
-        } else if (type.equals("2")) {
-            for (Item item : mg.TWOHANDS) {
-                if (item.i_id == i_id) {
-                    new_item = DroppedItem.cloneItem(item);
-                    new_item.rollQuality(quality);
-                    return new_item;
+                break;
+            case "2":
+                for (Item item : mg.TWOHANDS) {
+                    if (item.i_id == i_id) {
+                        new_item = DroppedItem.cloneItem(item);
+                        new_item.rollQuality(quality);
+                        return new_item;
+                    }
                 }
-            }
+                break;
         }
         return null;
     }
