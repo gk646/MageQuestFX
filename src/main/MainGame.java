@@ -134,13 +134,12 @@ public class MainGame extends JPanel implements Runnable {
         ui.updateLoadingScreen(12);
         wControl.getWorldsData();
         ui.updateLoadingScreen(12);
-        wControl.load_OverworldMap();
+        wControl.load_tutorial();
         ui.updateLoadingScreen(12);
         wControl.makeOverworldQuadrants();
         imageSto = new Storage(this);
         imageSto.loadImages();
         ui.updateLoadingScreen(12);
-        player.dynamicSpawns();
         sqLite.readItemsFromDB();
         ui.updateLoadingScreen(12);
         pathF.instantiateNodes();

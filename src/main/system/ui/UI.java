@@ -158,6 +158,10 @@ public class UI implements ActionListener, ChangeListener {
         Runner.textField.setVisible(true);
     }
 
+    public void drawQuitTutorial(Graphics2D g2) {
+        g2.drawString("Do you wanna quit the tutorial?", 500, 500);
+    }
+
     private void drawLoadingScreen(Graphics2D g2) {
         //FILL BACKGROUND WITH COLOR
         g2.setColor(lightBackground);

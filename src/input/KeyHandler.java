@@ -89,6 +89,7 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
+                    mg.wControl.load_OverworldMap();
                 } else if (mg.ui.commandNum == 1) {
                     try {
                         mg.sqLite.savePlayerData();

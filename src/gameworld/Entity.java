@@ -120,7 +120,7 @@ public class Entity {
     }
 
     private void spawnEnemies() {
-        mg.ENTITIES.add(new Owly(mg, 23900, 23900, 15));
+        mg.ENTITIES.add(new Owly(mg, mg.player.worldX + 50, mg.player.worldY + 50, 15));
     }
 
     protected boolean playerTooFarAbsolute() {

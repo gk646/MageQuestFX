@@ -31,7 +31,7 @@ public class MapQuadrant {
             while (spawnedEnemies < numberOfEnemies) {
                 xTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileX, 499));
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
-                if (!mg.wRender.tileStorage[mg.wRender.worldData[xTile][yTile]].collision) {
+                if (!mg.wRender.tileStorage[mg.wControl.overWorldMapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
                         mg.ENTITIES.add(new Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
                     } else {

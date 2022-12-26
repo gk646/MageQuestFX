@@ -55,9 +55,6 @@ public class WorldRender {
         setupTiles(18, "water18.png", true);
         setupTiles(19, "water19.png", true);
         setupTiles(20, "water20.png", true);
-        //setup(21, "water.png", false);
-        //setup(22, "grass22.png", false);
-        //setup(24, "grass24.png", false);
 
         //GRASS
         setupTiles(27, "grass27.png", false);
@@ -70,6 +67,18 @@ public class WorldRender {
         setupTiles(31, "water31.png", true);
         setupTiles(32, "water32.png", true);
         setupTiles(33, "water33.png", true);
+        setupTiles(34, "water34.png", false);
+
+
+        setupTiles(40, "grass40.png", false);
+        setupTiles(41, "grass41.png", false);
+        setupTiles(42, "grass42.png", false);
+        setupTiles(43, "grass43.png", false);
+        setupTiles(44, "grass44.png", false);
+        setupTiles(45, "grass45.png", false);
+
+        setupTiles(47, "water47.png", false);
+        setupTiles(48, "water48.png", false);
     }
 
 

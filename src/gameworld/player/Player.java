@@ -60,8 +60,8 @@ public class Player extends Entity {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = 23500;
-        worldY = 23500;
+        worldX = 0;
+        worldY = 0;
         direction = "";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 8, 32, 32);
@@ -73,6 +73,11 @@ public class Player extends Entity {
         this.mouseH = mouseH;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
+    }
+
+    public void setPosition(int x, int y) {
+        worldX = x;
+        worldY = y;
     }
 
     public void updateEquippedItems() {
@@ -100,6 +105,9 @@ public class Player extends Entity {
             for (DroppedItem drop : mg.droppedItems) {
                 if (new Rectangle(mg.player.worldX - 25, mg.player.worldY - 14, mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
                     for (InventorySlot invSlot : mg.inventP.bag_Slots) {
+                        if (invSlot.item.name.equals("FILLER")) {
+                            invSlot.item = null;
+                        }
                         if (invSlot.item == null) {
                             invSlot.item = drop.item;
                             mg.droppedItems.remove(drop);
@@ -138,14 +146,16 @@ public class Player extends Entity {
     public void update() {
         movement();
         skills();
-        if (quadrantTimer >= 100) {
-            dynamicSpawns();
-            if (respawnsDone) {
-                quadrantTimer = 0;
-                respawnsDone = false;
+        if (mg.wControl.currentWorld == 1) {
+            if (quadrantTimer >= 100) {
+                dynamicSpawns();
+                if (respawnsDone) {
+                    quadrantTimer = 0;
+                    respawnsDone = false;
+                }
             }
+            quadrantTimer++;
         }
-        quadrantTimer++;
     }
 
     public void getExperience(Entity entity) {
