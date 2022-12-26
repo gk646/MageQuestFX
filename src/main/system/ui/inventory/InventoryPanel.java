@@ -13,7 +13,7 @@ import java.awt.Rectangle;
 public class InventoryPanel {
     private static final int SLOT_SIZE = 45;
     private static final int BAG_SLOTS = 15;
-    private static final int CHAR_SLOTS = 10;
+    public static final int CHAR_SLOTS = 10;
     private final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
     private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
     public final InventorySlot[] bag_Slots;
@@ -29,7 +29,10 @@ public class InventoryPanel {
     private final Rectangle bagPanelMover;
     public Rectangle wholeCharWindow;
     public Rectangle wholeBagWindow;
-    private int charPanelX = 300, charPanelY = 300, bagPanelX = 1400, bagPanelY = 600, stringY = 0;
+    private int charPanelX = 300;
+    private int charPanelY = 300;
+    private int bagPanelX = 1400;
+    private int bagPanelY = 600;
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private final Point lastCharPosition = new Point(charPanelX, charPanelY);
     private Point previousMousePosition = new Point(300, 300);
@@ -157,7 +160,7 @@ public class InventoryPanel {
 
         //DESCRIPTION
         g2.setFont(g2.getFont().deriveFont(Font.ITALIC, 16));
-        stringY = mg.motionH.lastMousePosition.y + 150;
+        int stringY = mg.motionH.lastMousePosition.y + 150;
         for (String string : invSlot.item.description.split("\n")) {
             g2.drawString(string, mg.motionH.lastMousePosition.x + 7, stringY += g2.getFontMetrics().getHeight());
         }
@@ -187,7 +190,7 @@ public class InventoryPanel {
         }
     }
 
-    public int drawDragAndDrop(Graphics2D g2) {
+    public void drawDragAndDrop(Graphics2D g2) {
         if (grabbedItem != null) {
             g2.drawImage(grabbedItem.icon, mg.motionH.lastMousePosition.x - SLOT_SIZE / 2, mg.motionH.lastMousePosition.y - SLOT_SIZE / 2, SLOT_SIZE, SLOT_SIZE, null);
         }
@@ -199,7 +202,6 @@ public class InventoryPanel {
                         invSlot.grabbed = true;
                         grabbedSlot = invSlot;
                         grabbedItem = invSlot.item;
-                        return 1;
                     }
                 }
             }
@@ -209,7 +211,6 @@ public class InventoryPanel {
                         bagSlot.grabbed = true;
                         grabbedSlot = bagSlot;
                         grabbedItem = bagSlot.item;
-                        return 1;
                     }
                 }
             }
@@ -224,7 +225,6 @@ public class InventoryPanel {
                         grabbedSlot.grabbed = false;
                         grabbedItem = null;
                         grabbedSlot = null;
-                        return 1;
                     }
                 }
             }
@@ -237,15 +237,15 @@ public class InventoryPanel {
                         grabbedItem = null;
                         grabbedSlot = null;
                         mg.player.updateEquippedItems();
-                        return 1;
                     }
                 }
             }
-            grabbedSlot.grabbed = false;
-            grabbedItem = null;
-            grabbedSlot = null;
+            if (grabbedSlot != null) {
+                grabbedSlot.grabbed = false;
+                grabbedItem = null;
+                grabbedSlot = null;
+            }
         }
-        return 0;
     }
 
     public void interactWithWindows() {
@@ -293,7 +293,7 @@ public class InventoryPanel {
         //character image outline
         g2.setColor(darkBackground);
         g2.drawRoundRect(100 + startX, startY + 90, 200, 250, 25, 25);
-        //gameworld.player image
+        //game world.player image
         g2.drawImage(mg.player.entityImage1, startX + 120, startY + 150, 150, 150, null);
         //Stats Text
         g2.setColor(darkBackground);
@@ -310,8 +310,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.x = 40 + startX;
             char_Slots[i].boundBox.y = (i * 50 + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + startX, (i * 50 + 130 + startY));
-            if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-            } else if (char_Slots[i].item != null) {
+            if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(g2, 40 + startX, ((i * 50) + 130 + startY), SLOT_SIZE);
             }
         }
@@ -319,8 +318,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.x = 40 + 270 + startX;
             char_Slots[i].boundBox.y = (((i - 4) * 50) + 130 + startY);
             char_Slots[i].drawSlot(g2, 40 + 270 + startX, (((i - 4) * 50) + 130 + startY));
-            if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-            } else if (char_Slots[i].item != null) {
+            if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(g2, 40 + 270 + startX, ((i - 4) * 50) + 130 + startY, SLOT_SIZE);
             }
         }
@@ -328,8 +326,7 @@ public class InventoryPanel {
             char_Slots[i].boundBox.x = ((i - 8) * 50) + 140 + startX;
             char_Slots[i].boundBox.y = 110 + 240 + startY;
             char_Slots[i].drawSlot(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY);
-            if (char_Slots[i].item != null && char_Slots[i].grabbed) {
-            } else if (char_Slots[i].item != null) {
+            if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(g2, ((i - 8) * 50) + 140 + startX, 110 + 240 + startY, SLOT_SIZE);
             }
         }
@@ -367,24 +364,21 @@ public class InventoryPanel {
                 bag_Slots[i].boundBox.x = i * 50 + startX + 10;
                 bag_Slots[i].boundBox.y = 60 + startY;
                 bag_Slots[i].drawSlot(g2, i * 50 + startX + 10, 60 + startY);
-                if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                } else if (bag_Slots[i].item != null) {
+                if (bag_Slots[i].item != null && !bag_Slots[i].grabbed) {
                     bag_Slots[i].drawIcon(g2, i * 50 + startX + 10, 60 + startY, SLOT_SIZE);
                 }
             } else if (i <= 13) {
                 bag_Slots[i].boundBox.x = (i - 7) * 50 + startX + 10;
                 bag_Slots[i].boundBox.y = 110 + startY;
                 bag_Slots[i].drawSlot(g2, (i - 7) * 50 + startX + 10, 110 + startY);
-                if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                } else if (bag_Slots[i].item != null) {
+                if (bag_Slots[i].item != null && !bag_Slots[i].grabbed) {
                     bag_Slots[i].drawIcon(g2, (i - 7) * 50 + startX + 10, 110 + startY, SLOT_SIZE);
                 }
             } else if (i <= 19) {
                 bag_Slots[i].boundBox.x = (i - 14) * 50 + startX + 10;
                 bag_Slots[i].boundBox.y = 160 + startY;
                 bag_Slots[i].drawSlot(g2, (i - 14) * 50 + startX + 10, 160 + startY);
-                if (bag_Slots[i].item != null && bag_Slots[i].grabbed) {
-                } else if (bag_Slots[i].item != null) {
+                if (bag_Slots[i].item != null && !bag_Slots[i].grabbed) {
                     bag_Slots[i].drawIcon(g2, (i - 14) * 50 + startX + 10, 160 + startY, SLOT_SIZE);
                 }
             }

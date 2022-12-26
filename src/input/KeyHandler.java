@@ -5,6 +5,7 @@ import main.MainGame;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.SQLException;
 
 import static main.Runner.window;
 
@@ -89,6 +90,11 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
                 } else if (mg.ui.commandNum == 1) {
+                    try {
+                        mg.sqLite.savePlayerInventory();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     System.exit(1);
                 } else if (mg.ui.commandNum == 2) {
 
@@ -113,7 +119,6 @@ public class KeyHandler implements KeyListener {
                     throw new RuntimeException(ex);
                 }
             }
-
         }
         //Drawing talent window
         if (code == 'n') {
@@ -151,7 +156,6 @@ public class KeyHandler implements KeyListener {
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }
         }
-
     }
 
     @Override

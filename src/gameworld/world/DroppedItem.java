@@ -32,16 +32,13 @@ public class DroppedItem {
             if (!item1.name.equals("FILLER")) {
                 if (mg.random.nextInt(0, 15) == 5) {
                     if (item1.rarity == 1) {
-
                         return cloneItem(item1);
                     }
                     if (item1.rarity == 2 && mg.random.nextInt(0, 2) == 1) {
-
                         return cloneItem(item1);
                     }
 
                     if (item1.rarity == 3 && mg.random.nextInt(0, 5) == 4) {
-
                         return cloneItem(item1);
                     }
 
@@ -55,7 +52,7 @@ public class DroppedItem {
         }
     }
 
-    public Item cloneItem(Item item) {
+    public static Item cloneItem(Item item) {
         Item new_item = new Item(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats);
         new_item.icon = item.icon;
         return new_item;

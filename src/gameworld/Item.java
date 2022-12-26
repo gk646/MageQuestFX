@@ -17,7 +17,7 @@ public class Item {
     public int quality;
     public int rarity;
     public int durability = 100;
-    public final String stats;
+    public String stats;
     /*
         INT intellect + max mana / more damage on abilities
         VIT vitality + max health / more health regen
@@ -62,7 +62,6 @@ public class Item {
         rollQuality();
     }
 
-
     public void drawIcon(Graphics2D g2, int x, int y, int slotSize) {
         g2.drawImage(icon, x, y, slotSize, slotSize, null);
     }
@@ -103,6 +102,17 @@ public class Item {
 
     public void rollQuality() {
         this.quality = 71 + (int) (Math.random() * 30);
+        if (quality == 100) {
+            VIT = (int) (Math.ceil(INT + INT / 10f));
+            INT = (int) (Math.ceil(INT + INT / 10f));
+        } else {
+            VIT = (int) (Math.ceil((quality / 100f) * INT));
+            INT = (int) (Math.ceil((quality / 100f) * INT));
+        }
+    }
+
+    public void rollQuality(int quality) {
+        this.quality = quality;
         if (quality == 100) {
             VIT = (int) (Math.ceil(INT + INT / 10f));
             INT = (int) (Math.ceil(INT + INT / 10f));

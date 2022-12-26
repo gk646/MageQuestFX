@@ -97,7 +97,7 @@ public class MainGame extends JPanel implements Runnable {
     public final PathFinder pathF = new PathFinder(this);
 
     public Storage imageSto;
-    private final SQLite sqLite = new SQLite(this);
+    public final SQLite sqLite = new SQLite(this);
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents, loadingScreen;
     public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
@@ -130,7 +130,7 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        sqLite.readItemsFromDB();
+        inventP = new InventoryPanel(this);
         ui.updateLoadingScreen(12);
         wControl.getWorldsData();
         ui.updateLoadingScreen(12);
@@ -144,9 +144,9 @@ public class MainGame extends JPanel implements Runnable {
         ui.updateLoadingScreen(12);
         pathF.instantiateNodes();
         ui.updateLoadingScreen(12);
-        inventP = new InventoryPanel(this);
         ui.updateLoadingScreen(12);
         talentP = new TalentPanel(this);
+        sqLite.readItemsFromDB();
         ui.updateLoadingScreen(100);
         loadingScreen = false;
         gameState = titleState;

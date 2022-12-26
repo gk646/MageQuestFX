@@ -1,13 +1,16 @@
 package main.system.database;
 
 import gameworld.Item;
+import gameworld.world.DroppedItem;
 import main.MainGame;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.Comparator;
 
 public class SQLite {
@@ -15,6 +18,7 @@ public class SQLite {
     private final MainGame mg;
 
     private final int limit = 32;
+    private Connection conn;
 
     public SQLite(MainGame mg) {
         this.mg = mg;
@@ -26,8 +30,8 @@ public class SQLite {
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:items.sqlite");
-            Statement stmt = conn.createStatement();
+            this.conn = DriverManager.getConnection("jdbc:sqlite:items.sqlite");
+            Statement stmt = this.conn.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
             searchCHEST(stmt);
@@ -39,6 +43,7 @@ public class SQLite {
             searchRINGS(stmt);
             searchTWOHANDS(stmt);
             inverseArrayLists();
+            readPlayerInventory(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -75,6 +80,125 @@ public class SQLite {
         mg.RELICS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
         mg.RINGS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
         mg.TWOHANDS.add(0, new Item(0, "FILLER", 10, "2", "d", "OMEGA", "hey"));
+    }
+
+    public void readPlayerInventory(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_INV");
+        int counter = 0;
+        while (rs.next()) {
+            counter++;
+            if (rs.getString("i_id") == null) {
+                continue;
+            }
+            mg.inventP.char_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
+        }
+    }
+
+    public void savePlayerInventory() throws SQLException {
+        String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < 10; i++) {
+            if (mg.inventP.char_Slots[i].item == null) {
+                stmt.setNull(1, Types.INTEGER);
+                stmt.setString(2, null);
+                stmt.setNull(3, Types.INTEGER);
+                stmt.setInt(4, i);
+                stmt.executeUpdate();
+                continue;
+            }
+            stmt.setInt(1, mg.inventP.char_Slots[i].item.i_id);
+            stmt.setString(2, mg.inventP.char_Slots[i].item.type);
+            stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
+            stmt.setInt(4, i);
+            stmt.executeUpdate();
+        }
+    }
+
+
+    private Item getItemWithQuality(int i_id, String type, int quality) {
+        Item new_item;
+        if (type.equals("A")) {
+            for (Item item : mg.AMULET) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("B")) {
+            for (Item item : mg.BOOTS) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("C")) {
+            for (Item item : mg.CHEST) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("H")) {
+            for (Item item : mg.HEAD) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("O")) {
+            for (Item item : mg.OFFHAND) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("W")) {
+            for (Item item : mg.ONEHAND) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("P")) {
+            for (Item item : mg.PANTS) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("T")) {
+            for (Item item : mg.RELICS) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("R")) {
+            for (Item item : mg.RINGS) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        } else if (type.equals("2")) {
+            for (Item item : mg.TWOHANDS) {
+                if (item.i_id == i_id) {
+                    new_item = DroppedItem.cloneItem(item);
+                    new_item.rollQuality(quality);
+                    return new_item;
+                }
+            }
+        }
+        return null;
     }
 
     private void searchAMULET(Statement stmt) throws SQLException {
