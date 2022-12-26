@@ -39,9 +39,10 @@ public class Player extends Entity {
     private int cooldownTwoSecond;
     private int cooldownPrimary;
     private int cdLightning;
-    private int experience;
-    private int levelUpExperience;
+    public int experience;
+    public int coins;
     private int playerQuadrant;
+    private int levelUpExperience = 10;
     private int quadrantTimer;
     public float manaRegeneration = 0.02f;
     public float healthRegeneration = 0.002f;
@@ -151,6 +152,18 @@ public class Player extends Entity {
     public void getExperience(Entity entity) {
         experience += entity.level;
         if (experience >= levelUpExperience) {
+            level++;
+            updateEquippedItems();
+            levelUpExperience = 0;
+            for (int i = 1; i <= level; i++) {
+                levelUpExperience += (i + i - 1) * (10 + i - 1);
+            }
+        }
+    }
+
+    public void setLevel(int experience) {
+        this.experience = experience;
+        while (experience >= levelUpExperience) {
             level++;
             updateEquippedItems();
             levelUpExperience = 0;

@@ -43,6 +43,7 @@ public class SQLite {
             searchTWOHANDS(stmt);
             inverseArrayLists();
             readPlayerInventory(stmt);
+            readPlayerStats(stmt);
             readPlayerBags(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,16 +52,26 @@ public class SQLite {
         }
     }
 
-    public void savePlayerAndBag() throws SQLException {
+    public void savePlayerData() throws SQLException {
         savePlayerInventory();
         saveBagInventory();
+        savePlayerStats();
+    }
+
+    private void savePlayerStats() throws SQLException {
+        String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, mg.player.coins);
+        stmt.setInt(2, mg.player.experience);
+        stmt.setInt(3, 1);
+        stmt.executeUpdate();
     }
 
     private void saveBagInventory() throws SQLException {
         String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 0; i < mg.inventP.bag_Slots.length; i++) {
-            if (mg.inventP.bag_Slots[i].item == null) {
+        for (int i = 1; i <= mg.inventP.bag_Slots.length; i++) {
+            if (mg.inventP.bag_Slots[i - 1].item == null) {
                 stmt.setNull(1, Types.INTEGER);
                 stmt.setString(2, null);
                 stmt.setNull(3, Types.INTEGER);
@@ -68,10 +79,10 @@ public class SQLite {
                 stmt.executeUpdate();
                 continue;
             }
-            stmt.setInt(1, mg.inventP.bag_Slots[i].item.i_id);
-            stmt.setString(2, mg.inventP.bag_Slots[i].item.type);
-            stmt.setInt(3, mg.inventP.bag_Slots[i].item.quality);
-            stmt.setInt(4, i);
+            stmt.setInt(1, mg.inventP.bag_Slots[i - 1].item.i_id);
+            stmt.setString(2, mg.inventP.bag_Slots[i - 1].item.type);
+            stmt.setInt(3, mg.inventP.bag_Slots[i - 1].item.quality);
+            stmt.setInt(4, i - 1);
             stmt.executeUpdate();
         }
     }
@@ -124,24 +135,31 @@ public class SQLite {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_INV");
         int counter = 0;
         while (rs.next()) {
-            counter++;
             if (rs.getString("i_id") == null) {
+                counter++;
                 continue;
             }
             mg.inventP.char_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
+            counter++;
         }
     }
 
     private void readPlayerBags(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");
-        int counter = 0;
+        int counter = 1;
         while (rs.next()) {
             counter++;
             if (rs.getString("i_id") == null) {
                 continue;
             }
-            mg.inventP.bag_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
+            mg.inventP.bag_Slots[counter - 1].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
         }
+    }
+
+    public void readPlayerStats(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
+        mg.player.coins = rs.getInt("coins");
+        mg.player.setLevel(rs.getInt("experience"));
     }
 
     private Item getItemWithQuality(int i_id, String type, int quality) {
