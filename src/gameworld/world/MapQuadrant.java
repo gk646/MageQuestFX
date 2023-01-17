@@ -12,7 +12,7 @@ public class MapQuadrant {
     private final MainGame mg;
     public int startTileX;
     public int startTileY;
-    private boolean spawned;
+    boolean spawned;
 
     public MapQuadrant(int difficulty, MainGame mg, int startTileX, int startTileY, int size, int numberOfEnemies) {
         this.startTileX = startTileX;

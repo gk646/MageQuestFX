@@ -81,11 +81,11 @@ public class CollisionChecker {
         int entityLeftCol;
         int entityRightCol;
         int entityTopRow = Math.max(Math.min(entityTopWorldY / 48, 499), 0);
-        int entityBottomRow = Math.min(entityBottomWorldY / 48, 499);
+        int entityBottomRow = Math.max(0, Math.min(entityBottomWorldY / 48, 499));
 
         int tileNum1, tileNum2;
         if (projectile.direction.contains("right")) {
-            entityRightCol = Math.min((entityRightWorldX + projectile.movementSpeed) / 48, 499);
+            entityRightCol = Math.max(0, Math.min((entityRightWorldX + projectile.movementSpeed) / 48, 499));
             tileNum1 = mainGame.wRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = mainGame.wRender.worldData[entityRightCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
@@ -93,15 +93,15 @@ public class CollisionChecker {
             }
         }
         if (projectile.direction.contains("left")) {
-            entityLeftCol = Math.min((entityLeftWorldX - projectile.movementSpeed) / 48, 499);
+            entityLeftCol = Math.max(0, Math.min((entityLeftWorldX - projectile.movementSpeed) / 48, 499));
             tileNum1 = mainGame.wRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = mainGame.wRender.worldData[entityLeftCol][entityBottomRow];
             if (mainGame.wRender.tileStorage[tileNum1].collision || mainGame.wRender.tileStorage[tileNum2].collision) {
                 projectile.collisionLeft = true;
             }
         }
-        entityLeftCol = Math.min(entityLeftWorldX / 48, 499);
-        entityRightCol = Math.min(entityRightWorldX / 48, 499);
+        entityLeftCol = Math.max(0, Math.min(entityLeftWorldX / 48, 499));
+        entityRightCol = Math.max(0, Math.min(entityRightWorldX / 48, 499));
         if (projectile.direction.contains("up")) {
             entityTopRow = Math.min((entityTopWorldY - projectile.movementSpeed) / 48, 499);
             tileNum1 = mainGame.wRender.worldData[entityLeftCol][entityTopRow];
@@ -110,7 +110,7 @@ public class CollisionChecker {
                 projectile.collisionUp = true;
             }
         }
-        entityLeftCol = Math.min(entityLeftWorldX / 48, 499);
+        entityLeftCol = Math.max(0, Math.min(entityLeftWorldX / 48, 499));
 
         if (projectile.direction.contains("down")) {
             entityBottomRow = Math.min((entityBottomWorldY + projectile.movementSpeed) / 48, 499);

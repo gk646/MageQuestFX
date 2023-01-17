@@ -17,13 +17,14 @@ public class WorldController {
     //-----OVERWORLD
     public int[][] overWorldMapData;
     private Point overWorldSize;
-    public MapQuadrant[] overworldMapQuadrants = new MapQuadrant[101];
+    public MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
     private Point overWorldStartPoint;
+    private Point overWorldTeleportCity;
     //-----Tutorial
     private int[][] tutorialMapData;
     private Point tutorialSize;
     private Point tutorialStartPoint;
-
+    private Point tutorialTeleportToOverWorld;
     //-----HELL
     public int[][] hell_MapData;
     public Point hell_Size;
@@ -40,19 +41,29 @@ public class WorldController {
         this.mg = mg;
     }
 
-    public void load_OverworldMap() {
+    public void load_OverworldMap(int xTile, int yTile) {
+        mg.ENTITIES.clear();
+        mg.PROJECTILES.clear();
+        for (MapQuadrant quadrant : overworldMapQuadrants) {
+            if (quadrant.spawned) {
+                quadrant.spawned = false;
+            }
+        }
         mg.wRender.worldData = overWorldMapData;
         mg.wRender.worldSize = overWorldSize;
-        mg.player.setPosition(overWorldStartPoint.x, overWorldStartPoint.y);
+        mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 1;
+        mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
-    public void load_tutorial() {
+    public void load_tutorial(int xTile, int yTile) {
+        mg.ENTITIES.clear();
+        mg.PROJECTILES.clear();
         mg.wRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
-        mg.player.setPosition(tutorialStartPoint.x, tutorialStartPoint.y);
-        mg.ENTITIES.clear();
+        mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 0;
+        mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
     public void getWorldsData() {
@@ -60,11 +71,13 @@ public class WorldController {
         this.overWorldMapData = OverWorld.loadOverWorld();
         this.overWorldSize = OverWorld.loadMapSize();
         this.overWorldStartPoint = new Point(23800, 23800);
+        this.overWorldTeleportCity = new Point(500, 500);
 
         //tutorial
         this.tutorialMapData = Tutorial.loadTutorial();
         this.tutorialSize = Tutorial.loadMapSize();
         this.tutorialStartPoint = new Point(250, 250);
+        this.tutorialTeleportToOverWorld = new Point(95, 95);
     }
 
     public void makeOverworldQuadrants() {

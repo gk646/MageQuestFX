@@ -89,7 +89,7 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
-                    mg.wControl.load_OverworldMap();
+                    mg.wControl.load_OverworldMap(495, 495);
                 } else if (mg.ui.commandNum == 1) {
                     try {
                         mg.sqLite.savePlayerData();
@@ -124,13 +124,21 @@ public class KeyHandler implements KeyListener {
         //Drawing talent window
         if (code == 'n') {
             if (!mg.showTalents) {
-                mg.talentP.resetTalentCollision();
+                mg.wControl.load_OverworldMap(495, 495);
                 mg.showTalents = true;
+                /*
+                mg.talentP.resetTalentCollision();
                 window.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                 */
             } else {
-                mg.talentP.hideTalentCollision();
+                mg.wControl.load_tutorial(4, 4);
                 mg.showTalents = false;
+/*
+                mg.talentP.hideTalentCollision();
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+
+ */
             }
         }
         //Drawing Inventor Panel

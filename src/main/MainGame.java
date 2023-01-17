@@ -134,7 +134,7 @@ public class MainGame extends JPanel implements Runnable {
         ui.updateLoadingScreen(12);
         wControl.getWorldsData();
         ui.updateLoadingScreen(12);
-        wControl.load_tutorial();
+        wControl.load_tutorial(4, 4);
         ui.updateLoadingScreen(12);
         wControl.makeOverworldQuadrants();
         imageSto = new Storage(this);

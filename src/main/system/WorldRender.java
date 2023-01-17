@@ -14,7 +14,7 @@ public class WorldRender {
     public final Tile[] tileStorage;
     private final MainGame mg;
     public int[][] worldData;
-    public Point worldSize;
+    public Point worldSize, teleportPoint1, teleportPoint2;
     private int worldCol, worldRow;
 
     public WorldRender(MainGame mg) {
