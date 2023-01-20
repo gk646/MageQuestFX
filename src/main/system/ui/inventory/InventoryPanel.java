@@ -206,7 +206,9 @@ public class InventoryPanel {
                         mg.player.updateEquippedItems();
                         bag_Slots[i].grabbed = true;
                         grabbedItem = bag_Slots[i].item;
-                        grabbedIndexChar = i;
+
+
+                        grabbedIndexBag = i;
                         bag_Slots[i].item = null;
                     }
                 }
@@ -218,14 +220,10 @@ public class InventoryPanel {
                     if (invSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
                         if (invSlot.item != null) {
                             char_Slots[grabbedIndexChar].item = invSlot.item;
-                            invSlot.item = grabbedItem;
-                            mg.player.updateEquippedItems();
-                            grabbedItem = null;
-                        } else {
-                            invSlot.item = grabbedItem;
-                            mg.player.updateEquippedItems();
-                            grabbedItem = null;
                         }
+                        invSlot.item = grabbedItem;
+                        mg.player.updateEquippedItems();
+                        grabbedItem = null;
                     }
                     invSlot.grabbed = false;
                 }
@@ -234,13 +232,10 @@ public class InventoryPanel {
                 for (InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
                         if (bagSlot.item != null) {
-                            bag_Slots[grabbedIndexChar].item = bagSlot.item;
-                            bagSlot.item = grabbedItem;
-                            grabbedItem = null;
-                        } else {
-                            bagSlot.item = grabbedItem;
-                            grabbedItem = null;
+                            bag_Slots[grabbedIndexBag].item = bagSlot.item;
                         }
+                        bagSlot.item = grabbedItem;
+                        grabbedItem = null;
                     }
                     bagSlot.grabbed = false;
                 }
@@ -318,7 +313,7 @@ public class InventoryPanel {
         g2.drawString("SPD: " + mg.player.SPD, startX + 110, startY + 474);
         g2.drawString("Health: " + mg.player.maxHealth, startX + 170, startY + 420);
         g2.drawString("Mana: " + mg.player.maxMana, startX + 170, startY + 440);
-        g2.drawString("MovmtSPD: " + mg.player.movementSpeed, startX + 170, startY + 460);
+        g2.drawString("MvmtSPD: " + mg.player.movementSpeed, startX + 170, startY + 460);
         g2.drawString("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 170, startY + 480);
         g2.drawString("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 170, startY + 500);
     }

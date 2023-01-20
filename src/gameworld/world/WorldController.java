@@ -1,6 +1,7 @@
 package gameworld.world;
 
 
+import gameworld.world.maps.City1;
 import gameworld.world.maps.OverWorld;
 import gameworld.world.maps.Tutorial;
 import main.MainGame;
@@ -8,6 +9,10 @@ import main.MainGame;
 import java.awt.Point;
 
 public class WorldController {
+
+    // WORLD CODES
+    // 0 = Tutorial // 1 = Grass Lands // 2 = City 1 // 3 =
+    //
 
     //main game
     private final MainGame mg;
@@ -18,13 +23,15 @@ public class WorldController {
     public int[][] overWorldMapData;
     private Point overWorldSize;
     public MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
-    private Point overWorldStartPoint;
     private Point overWorldTeleportCity;
     //-----Tutorial
     private int[][] tutorialMapData;
     private Point tutorialSize;
-    private Point tutorialStartPoint;
     private Point tutorialTeleportToOverWorld;
+
+    //-----CITY 1
+    private int[][] city1_MapData;
+
     //-----HELL
     public int[][] hell_MapData;
     public Point hell_Size;
@@ -66,18 +73,29 @@ public class WorldController {
         mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
+    public void load_city1(int xTile, int yTile) {
+        mg.ENTITIES.clear();
+        mg.PROJECTILES.clear();
+        mg.wRender.worldData = city1_MapData;
+        mg.wRender.worldSize = tutorialSize;
+        mg.player.setPosition(xTile * 48, yTile * 48);
+        currentWorld = 2;
+        mg.wRender.teleportPoint1 = overWorldTeleportCity;
+    }
+
     public void getWorldsData() {
         //overworld
         this.overWorldMapData = OverWorld.loadOverWorld();
         this.overWorldSize = OverWorld.loadMapSize();
-        this.overWorldStartPoint = new Point(23800, 23800);
         this.overWorldTeleportCity = new Point(500, 500);
 
         //tutorial
         this.tutorialMapData = Tutorial.loadTutorial();
         this.tutorialSize = Tutorial.loadMapSize();
-        this.tutorialStartPoint = new Point(250, 250);
         this.tutorialTeleportToOverWorld = new Point(95, 95);
+
+        //
+        this.city1_MapData = City1.loadCity();
     }
 
     public void makeOverworldQuadrants() {

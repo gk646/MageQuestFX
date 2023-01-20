@@ -19,7 +19,7 @@ public class WorldRender {
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
-        this.tileStorage = new Tile[50];
+        this.tileStorage = new Tile[75];
         getTileImage();
     }
 
@@ -36,6 +36,11 @@ public class WorldRender {
 
 
     private void getTileImage() {
+
+        //BRICKS
+        setupTiles(56, "grey_brick_wall.png", true);
+        setupTiles(57, "brick_wall.png", true);
+
         //GRASS
         setupTiles(1, "grass01.png", false);
         setupTiles(2, "grass02.png", false);
