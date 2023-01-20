@@ -6,10 +6,16 @@ Welcome to Mage Quest_2D my second Java game project!
 Now with playable .jar or .exe + JRE (if you don't want to install Java)!
 
 Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which allowed me to start initially.  
-I took some inspiration from his implementation but started to develop my own ideas early on. That said for example the
-pathfinding is more heavily copied and only a modified a bit.
+I took some inspiration from his implementation but started to develop my own ideas early on.
 
 ## FEATURES:
+
+### AI assisted programming
+
+Starting with the release of Chat GPT from OpenAI, I began including AI in performance testing and optimizations,  
+generating comments, generating first drafts of new ideas etc.
+As of late I also started to use AI generated images from  
+the Dall E 2 model. It's great!
 
 ### Multiplayer:
 
@@ -39,7 +45,8 @@ N - opens talent window (stub for now)
 
 C - opens character panel  
 B - opens bag panel  
-You can drag and drop Items to different slots
+N - talent panel
+You can drag and drop Items to different slots and swap them in place
 
 ## Graphics:
 
@@ -49,9 +56,7 @@ HeroSiege and other sources for some abilities etc. The pixel font called x12y16
 ## Roadmap:
 
 Level system  
-skills / skill pane  
-dropped items  
-inventory   
+skills / skill pane
 NPC's / bartering  
 
 
