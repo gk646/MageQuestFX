@@ -131,12 +131,13 @@ public class MainGame extends JPanel implements Runnable {
     @Override
     public void run() {
         inventP = new InventoryPanel(this);
+
         ui.updateLoadingScreen(12);
         wControl.getWorldsData();
-        ui.updateLoadingScreen(12);
-        wControl.load_city1(4, 4);
-        ui.updateLoadingScreen(12);
         wControl.makeOverworldQuadrants();
+        ui.updateLoadingScreen(12);
+        wControl.load_OverworldMap(250, 254);
+        ui.updateLoadingScreen(12);
         imageSto = new Storage(this);
         imageSto.loadImages();
         ui.updateLoadingScreen(12);

@@ -10,7 +10,7 @@ import java.awt.Point;
 public class EnemyProjectile1 extends Projectile {
 
     /**
-     * What happens when you press main mouse button
+     * Projectile of enemy entities
      *
      * @param mg           to access display functions
      * @param mouseHandler to get mouse input

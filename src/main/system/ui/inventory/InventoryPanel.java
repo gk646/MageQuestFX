@@ -219,7 +219,12 @@ public class InventoryPanel {
                 for (InventorySlot invSlot : char_Slots) {
                     if (invSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
                         if (invSlot.item != null) {
-                            char_Slots[grabbedIndexChar].item = invSlot.item;
+                            if (grabbedIndexChar != -1) {
+                                char_Slots[grabbedIndexChar].item = invSlot.item;
+                            }
+                            if (grabbedIndexBag != -1) {
+                                bag_Slots[grabbedIndexBag].item = invSlot.item;
+                            }
                         }
                         invSlot.item = grabbedItem;
                         mg.player.updateEquippedItems();
@@ -231,7 +236,10 @@ public class InventoryPanel {
             if (mg.showBag) {
                 for (InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.motionH.lastMousePosition)) {
-                        if (bagSlot.item != null) {
+                        if (grabbedIndexChar != -1) {
+                            char_Slots[grabbedIndexChar].item = bagSlot.item;
+                        }
+                        if (grabbedIndexBag != -1) {
                             bag_Slots[grabbedIndexBag].item = bagSlot.item;
                         }
                         bagSlot.item = grabbedItem;
