@@ -6,6 +6,7 @@ import gameworld.Projectile;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
 import gameworld.world.DroppedItem;
+import gameworld.world.MiniMap;
 import gameworld.world.WorldController;
 import input.KeyHandler;
 import input.MotionHandler;
@@ -70,8 +71,8 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------Input-----------
-    public final MouseHandler mouseH = new MouseHandler(motionH);
-    public final KeyHandler keyHandler = new KeyHandler(this);
+    public MouseHandler mouseH = new MouseHandler(motionH);
+    public KeyHandler keyHandler = new KeyHandler(this);
 
 
     //---------GAME-STATES-----------
@@ -86,18 +87,19 @@ public class MainGame extends JPanel implements Runnable {
 
     //---------System---------
     public final Utilities utilities = new Utilities();
+    public MiniMap miniM;
     public final CollisionChecker collisionChecker = new CollisionChecker(this);
-    public final WorldRender wRender = new WorldRender(this);
+    public WorldRender wRender;
     public final WorldController wControl = new WorldController(this);
     public final Projectile projectile = new Projectile(this, mouseH);
 
-    public final Player player = new Player(this, keyHandler, mouseH, motionH);
-    public final Player2 player2 = new Player2(this);
+    public Player player;
+    public Player2 player2;
     private final Multiplayer multiplayer = new Multiplayer(this, player2);
-    public final PathFinder pathF = new PathFinder(this);
+    public PathFinder pathF;
 
     public Storage imageSto;
-    public final SQLite sqLite = new SQLite(this);
+    public SQLite sqLite;
     public final UI ui = new UI(this);
     public boolean client = false, showBag, showChar, showTalents, loadingScreen;
     public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
@@ -130,29 +132,7 @@ public class MainGame extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        inventP = new InventoryPanel(this);
-
-        ui.updateLoadingScreen(12);
-        wControl.getWorldsData();
-        wControl.makeOverworldQuadrants();
-        ui.updateLoadingScreen(12);
-        wControl.load_OverworldMap(495, 495);
-        ui.updateLoadingScreen(12);
-        imageSto = new Storage(this);
-        imageSto.loadImages();
-        ui.updateLoadingScreen(12);
-        sqLite.readItemsFromDB();
-        ui.updateLoadingScreen(12);
-        pathF.instantiateNodes();
-        ui.updateLoadingScreen(12);
-        ui.updateLoadingScreen(12);
-        talentP = new TalentPanel(this);
-        player.updateEquippedItems();
-        ui.updateLoadingScreen(100);
-        loadingScreen = false;
-        gameState = titleState;
-        startThreads();
-        gameThread.stop();
+        loadGame();
     }
 
     private void startThreads() {
@@ -251,7 +231,7 @@ public class MainGame extends JPanel implements Runnable {
      * @param g the <code>Graphics</code> object to protect
      */
     @Override
-    public synchronized void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         //Debug
@@ -264,6 +244,7 @@ public class MainGame extends JPanel implements Runnable {
             entity.draw(g2);
             player2.draw(g2);
             player.draw(g2);
+            miniM.draw(g2);
             ui.draw(g2);
             if (showBag) {
                 inventP.drawBagWindow(g2);
@@ -320,5 +301,55 @@ public class MainGame extends JPanel implements Runnable {
             } catch (ConcurrentModificationException ignored) {
             }
         }
+    }
+
+    private void loadGame() {
+        // 0 %
+
+        inventP = new InventoryPanel(this);
+
+        //12 %
+        ui.updateLoadingScreen(12);
+        wRender = new WorldRender(this);
+        wControl.getWorldsData();
+        wControl.makeOverWorldQuadrants();
+
+        //24%
+        ui.updateLoadingScreen(12);
+        miniM = new MiniMap(this);
+
+        //36%
+        ui.updateLoadingScreen(12);
+        player = new Player(this, keyHandler, mouseH, motionH);
+        imageSto = new Storage(this);
+        imageSto.loadImages();
+
+        //48%
+        ui.updateLoadingScreen(12);
+        sqLite = new SQLite(this);
+        sqLite.readItemsFromDB();
+
+        //60%
+        ui.updateLoadingScreen(12);
+        player2 = new Player2(this);
+
+        //72%
+        ui.updateLoadingScreen(12);
+        pathF = new PathFinder(this);
+        pathF.instantiateNodes();
+
+        //84%
+        ui.updateLoadingScreen(12);
+        talentP = new TalentPanel(this);
+        player.updateEquippedItems();
+
+        //100%
+        ui.updateLoadingScreen(100);
+        wControl.load_city1(15, 15);
+
+        loadingScreen = false;
+        gameState = titleState;
+        startThreads();
+        gameThread.stop();
     }
 }

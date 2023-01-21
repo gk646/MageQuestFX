@@ -97,7 +97,7 @@ public class UI implements ActionListener, ChangeListener {
         if (commandNum == 2) {
             g2.drawString(">", x - 25, y);
         }
-        text = "1.2.6";
+        text = "2.2.6";
         x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         g2.drawString(text, x, y);

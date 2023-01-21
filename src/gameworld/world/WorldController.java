@@ -49,8 +49,7 @@ public class WorldController {
     }
 
     public void load_OverworldMap(int xTile, int yTile) {
-        mg.ENTITIES.clear();
-        mg.PROJECTILES.clear();
+        clearWorldArrays();
         for (MapQuadrant quadrant : overworldMapQuadrants) {
             if (quadrant.spawned) {
                 quadrant.spawned = false;
@@ -64,8 +63,7 @@ public class WorldController {
     }
 
     public void load_tutorial(int xTile, int yTile) {
-        mg.ENTITIES.clear();
-        mg.PROJECTILES.clear();
+        clearWorldArrays();
         mg.wRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
@@ -74,8 +72,7 @@ public class WorldController {
     }
 
     public void load_city1(int xTile, int yTile) {
-        mg.ENTITIES.clear();
-        mg.PROJECTILES.clear();
+        clearWorldArrays();
         mg.wRender.worldData = city1_MapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
@@ -84,12 +81,12 @@ public class WorldController {
     }
 
     public void getWorldsData() {
-        //overworld
+        //Over world
         this.overWorldMapData = OverWorld.loadOverWorld();
         this.overWorldSize = OverWorld.loadMapSize();
         this.overWorldTeleportCity = new Point(500, 500);
 
-        //tutorial
+        //Tutorial
         this.tutorialMapData = Tutorial.loadTutorial();
         this.tutorialSize = Tutorial.loadMapSize();
         this.tutorialTeleportToOverWorld = new Point(95, 95);
@@ -98,7 +95,7 @@ public class WorldController {
         this.city1_MapData = City1.loadCity();
     }
 
-    public void makeOverworldQuadrants() {
+    public void makeOverWorldQuadrants() {
         int size = overWorldSize.x / 10;
         int counter = 0;
         for (int i = 0; i < 10; i++) {
@@ -107,6 +104,12 @@ public class WorldController {
                 counter++;
             }
         }
+    }
+
+    private void clearWorldArrays() {
+        mg.droppedItems.clear();
+        mg.ENTITIES.clear();
+        mg.PROJECTILES.clear();
     }
 }
 

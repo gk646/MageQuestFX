@@ -67,6 +67,7 @@ public class Projectile {
                         calcProjectileDamage(projectile, entity);
                     } else if (!projectile.dead && projectile instanceof EnemyProjectile1 && mg.collisionChecker.checkEntityAgainstProjectile(mg.player, projectile)) {
                         mg.player.health -= entity.level;
+                        //System.out.println("hey");
                         projectile.dead = true;
                     }
                 }

@@ -53,7 +53,7 @@ public class Player extends Entity {
         //-------VALUES-----------
         movementSpeed = 4;
         this.maxHealth = 10;
-        this.health = 10;
+        this.health = maxHealth;
         this.maxMana = 20;
         this.mana = maxMana;
         this.entityHeight = 48;
