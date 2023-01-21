@@ -28,7 +28,8 @@ public class MiniMap {
             for (int x = 0; x < 40 * 5; x += 5) {
                 int xTileOffset = xTile - 40 / 2 + x / 5;
                 int yTileOffset = yTile - 40 / 2 + y / 5;
-                if (xTileOffset > 0 && yTileOffset > 0 && mg.wRender.tileStorage[mg.wRender.worldData[xTileOffset][yTileOffset]].collision) {
+                if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y &&
+                        mg.wRender.tileStorage[mg.wRender.worldData[xTileOffset][yTileOffset]].collision) {
                     //System.out.println(yTile - height / 2 + y / 5 + " " + (xTile - width / 2 + x / 5));
                     g2.setColor(grey);
                     g2.fillRect(1700 + x, 25 + y, 5, 5);

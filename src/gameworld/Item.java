@@ -21,13 +21,13 @@ public class Item {
     /*
         INT intellect + max mana / more damage on abilities
         VIT vitality + max health / more health regen
-        REG mana regen + mana regeneration
+        WIS wisdom mana regen + mana regeneration
         SPD speed + movement speed
 
      */
     public int INT;
     public int VIT;
-    public int REG;
+    public int WIS;
     public int SPD;
 
     public String type;
@@ -46,7 +46,8 @@ public class Item {
        2 - two hand
        O - offhand
 
-     */ public String imagePath;
+     */
+    public String imagePath;
     public String description;
     public BufferedImage icon;
 
@@ -84,11 +85,11 @@ public class Item {
                 VIT = Integer.parseInt(m.group(1));
             }
         }
-        if (stats.contains("REG")) {
-            p = Pattern.compile("REG([0-9]+)");
+        if (stats.contains("WIS")) {
+            p = Pattern.compile("WIS([0-9]+)");
             m = p.matcher(stats);
             while (m.find()) {
-                REG = Integer.parseInt(m.group(1));
+                WIS = Integer.parseInt(m.group(1));
             }
         }
         if (stats.contains("SPD")) {
@@ -103,22 +104,26 @@ public class Item {
     public void rollQuality() {
         this.quality = 71 + (int) (Math.random() * 30);
         if (quality == 100) {
-            VIT = (int) (Math.ceil(INT + INT / 10f));
+            VIT = (int) (Math.ceil(VIT + VIT / 10f));
             INT = (int) (Math.ceil(INT + INT / 10f));
+            WIS = (int) (Math.ceil(WIS + WIS / 10f));
         } else {
-            VIT = (int) (Math.ceil((quality / 100f) * INT));
+            VIT = (int) (Math.ceil((quality / 100f) * VIT));
             INT = (int) (Math.ceil((quality / 100f) * INT));
+            WIS = (int) (Math.ceil((quality / 100f) * WIS));
         }
     }
 
     public void rollQuality(int quality) {
         this.quality = quality;
         if (quality == 100) {
-            VIT = (int) (Math.ceil(INT + INT / 10f));
+            VIT = (int) (Math.ceil(VIT + VIT / 10f));
             INT = (int) (Math.ceil(INT + INT / 10f));
+            WIS = (int) (Math.ceil(WIS + WIS / 10f));
         } else {
-            VIT = (int) (Math.ceil((quality / 100f) * INT));
+            VIT = (int) (Math.ceil((quality / 100f) * VIT));
             INT = (int) (Math.ceil((quality / 100f) * INT));
+            WIS = (int) (Math.ceil((quality / 100f) * WIS));
         }
     }
 

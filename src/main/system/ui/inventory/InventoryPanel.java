@@ -147,7 +147,7 @@ public class InventoryPanel {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         g2.drawString("INT: " + invSlot.item.INT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 65);
         g2.drawString("VIT: " + invSlot.item.VIT, mg.motionH.lastMousePosition.x + 10, mg.motionH.lastMousePosition.y + 85);
-        g2.drawString("WIS: " + invSlot.item.REG, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 65);
+        g2.drawString("WIS: " + invSlot.item.WIS, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 65);
         g2.drawString("SPD: " + invSlot.item.SPD, mg.motionH.lastMousePosition.x + 60, mg.motionH.lastMousePosition.y + 85);
 
         //EFFECTS

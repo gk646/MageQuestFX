@@ -88,7 +88,7 @@ public class Player extends Entity {
                 INT += invSlot.item.INT;
                 VIT += invSlot.item.VIT;
                 SPD += invSlot.item.SPD;
-                REG += invSlot.item.REG;
+                REG += invSlot.item.WIS;
             }
         }
         maxHealth = (int) (9f + ((10f + VIT / 2) / (10f) + VIT / 2) * (level + (0.1f * VIT)));
@@ -222,7 +222,7 @@ public class Player extends Entity {
     }
 
     private void getPlayerImage() {
-        entityImage1 = setup("Mage_down01.png");
+        entityImage1 = setup("magier_down01.png");
     }
 
     private void movement() {
