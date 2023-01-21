@@ -1,6 +1,6 @@
 # Mage Quest_2D
 
-![Screenshot](picture2.png)
+![Screenshot](thumbnail.png)
 
 Welcome to Mage Quest_2D my second Java game project!  
 Now with playable .jar or .exe + JRE (if you don't want to install Java)!
