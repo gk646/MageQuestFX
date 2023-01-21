@@ -27,7 +27,7 @@ public class PrimaryFire extends Projectile {
 
         //------POSITION-----------
         this.mousePos = mg.motionH.lastMousePosition;
-        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
+        this.worldPos = new Point(mg.player.worldX + 24, mg.player.worldY + 24);
         this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
         this.updateVector = getUpdateVector();
         getPlayerImage();
@@ -35,7 +35,7 @@ public class PrimaryFire extends Projectile {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(projectileImage1, worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight, null);
+        g2.drawImage(projectileImage1, worldPos.x - mg.player.worldX + mg.HALF_WIDTH - 24, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 24, projectileWidth, projectileHeight, null);
     }
 
     @Override
