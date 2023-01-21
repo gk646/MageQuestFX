@@ -64,7 +64,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int tileSize = 48;
     public int gameState;
     public String player2Information = "";
-    public final MotionHandler motionH = new MotionHandler();
+    public MotionHandler motionH = new MotionHandler();
 
 
     private final int talentState = 3;
@@ -81,21 +81,21 @@ public class MainGame extends JPanel implements Runnable {
     public final int titleState = 0;
     public final int playState = 1;
     public final int optionState = 2;
-    private final Entity entity = new Entity(this);
+    public CollisionChecker collisionChecker;
     public final int gameOver = 4;
 
 
     //---------System---------
     public final Utilities utilities = new Utilities();
     public MiniMap miniM;
-    public final CollisionChecker collisionChecker = new CollisionChecker(this);
+    public WorldController wControl;
     public WorldRender wRender;
-    public final WorldController wControl = new WorldController(this);
-    public final Projectile projectile = new Projectile(this, mouseH);
+    public Projectile projectile;
+    private Entity entity;
 
     public Player player;
     public Player2 player2;
-    private final Multiplayer multiplayer = new Multiplayer(this, player2);
+    private Multiplayer multiplayer;
     public PathFinder pathF;
 
     public Storage imageSto;
@@ -305,8 +305,8 @@ public class MainGame extends JPanel implements Runnable {
 
     private void loadGame() {
         // 0 %
-
         inventP = new InventoryPanel(this);
+        wControl = new WorldController(this);
 
         //12 %
         ui.updateLoadingScreen(12);
@@ -317,12 +317,16 @@ public class MainGame extends JPanel implements Runnable {
         //24%
         ui.updateLoadingScreen(12);
         miniM = new MiniMap(this);
+        entity = new Entity(this);
+        collisionChecker = new CollisionChecker(this);
+
 
         //36%
         ui.updateLoadingScreen(12);
-        player = new Player(this, keyHandler, mouseH, motionH);
         imageSto = new Storage(this);
         imageSto.loadImages();
+        projectile = new Projectile(this, mouseH);
+        player = new Player(this, keyHandler, mouseH, motionH);
 
         //48%
         ui.updateLoadingScreen(12);
@@ -333,6 +337,7 @@ public class MainGame extends JPanel implements Runnable {
         ui.updateLoadingScreen(12);
         player2 = new Player2(this);
 
+
         //72%
         ui.updateLoadingScreen(12);
         pathF = new PathFinder(this);
@@ -340,8 +345,10 @@ public class MainGame extends JPanel implements Runnable {
 
         //84%
         ui.updateLoadingScreen(12);
+        multiplayer = new Multiplayer(this, player2);
         talentP = new TalentPanel(this);
         player.updateEquippedItems();
+
 
         //100%
         ui.updateLoadingScreen(100);
