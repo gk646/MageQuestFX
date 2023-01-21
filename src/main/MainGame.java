@@ -346,10 +346,14 @@ public class MainGame extends JPanel implements Runnable {
         //100%
         ui.updateLoadingScreen(100);
         wControl.load_city1(15, 15);
-
+        countItems();
         loadingScreen = false;
         gameState = titleState;
         startThreads();
         gameThread.stop();
+    }
+
+    private void countItems() {
+        System.out.println(AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
     }
 }
