@@ -145,18 +145,26 @@ public class MainGame extends JPanel implements Runnable {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
             float difference = 0;
+            float difference1 = 0;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
                 difference += (firstTimeGate1 - lastTime1) / fastRenderCounter;
+                difference1 += (firstTimeGate1 - lastTime1) / 1000000000f;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     if (gameState == playState) {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
-                        gameMap.dragMap();
-                        proximitySorterENTITIES();
+                        if (showMap) {
+                            gameMap.dragMap();
+                            gameMap.getImage();
+                        }
                     }
                     difference = 0;
+                }
+                if (difference1 >= 1) {
+                    proximitySorterENTITIES();
+                    difference1 = 0;
                 }
             }
         });

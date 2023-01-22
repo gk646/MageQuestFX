@@ -82,7 +82,7 @@ public class SQLite {
             stmt.setInt(1, mg.inventP.bag_Slots[i - 1].item.i_id);
             stmt.setString(2, mg.inventP.bag_Slots[i - 1].item.type);
             stmt.setInt(3, mg.inventP.bag_Slots[i - 1].item.quality);
-            stmt.setInt(4, i - 1);
+            stmt.setInt(4, i);
             stmt.executeUpdate();
         }
     }
@@ -148,11 +148,12 @@ public class SQLite {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");
         int counter = 1;
         while (rs.next()) {
-            counter++;
+
             if (rs.getString("i_id") == null) {
                 continue;
             }
             mg.inventP.bag_Slots[counter - 1].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"));
+            counter++;
         }
     }
 
