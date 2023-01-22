@@ -20,7 +20,6 @@ public class InventoryPanel {
     public final InventorySlot[] bag_Slots;
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.##");
-
     public InventorySlot[] char_Slots;
     private final BasicStroke width2 = new BasicStroke(2);
     private final BasicStroke width5 = new BasicStroke(5);
@@ -39,7 +38,6 @@ public class InventoryPanel {
     private final Point lastCharPosition = new Point(charPanelX, charPanelY);
     private Point previousMousePosition = new Point(300, 300);
     private Item grabbedItem;
-    //private InventorySlot grabbedSlot;
 
     public InventoryPanel(MainGame mainGame) {
         mg = mainGame;

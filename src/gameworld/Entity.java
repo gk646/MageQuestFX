@@ -1,5 +1,6 @@
 package gameworld;
 
+import gameworld.entities.Grunt;
 import gameworld.entities.Owly;
 import main.MainGame;
 
@@ -121,6 +122,7 @@ public class Entity {
 
     private void spawnEnemies() {
         mg.ENTITIES.add(new Owly(mg, mg.player.worldX + 50, mg.player.worldY + 50, 15));
+        mg.ENTITIES.add(new Grunt(mg, 250, 250, 100));
     }
 
     protected boolean playerTooFarAbsolute() {

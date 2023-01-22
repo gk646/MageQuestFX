@@ -6,7 +6,6 @@ import gameworld.Projectile;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
 import gameworld.world.DroppedItem;
-import gameworld.world.MiniMap;
 import gameworld.world.WorldController;
 import input.KeyHandler;
 import input.MotionHandler;
@@ -17,6 +16,8 @@ import main.system.Utilities;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
+import main.system.ui.GameMap;
+import main.system.ui.MiniMap;
 import main.system.ui.UI;
 import main.system.ui.inventory.InventoryPanel;
 import main.system.ui.talentpane.TalentPanel;
@@ -101,12 +102,13 @@ public class MainGame extends JPanel implements Runnable {
     public Storage imageSto;
     public SQLite sqLite;
     public final UI ui = new UI(this);
-    public boolean client = false, showBag, showChar, showTalents, loadingScreen;
+    public boolean client = false, showBag, showChar, showTalents, loadingScreen, showMap;
     public Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3000));
     //Game thread
     private Thread gameThread;
     public InventoryPanel inventP;
     public TalentPanel talentP;
+    public GameMap gameMap;
 
     /**
      * Main game loop class
@@ -150,6 +152,7 @@ public class MainGame extends JPanel implements Runnable {
                     if (gameState == playState) {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
+                        gameMap.dragMap();
                     }
                     difference = 0;
                 }
@@ -246,6 +249,9 @@ public class MainGame extends JPanel implements Runnable {
             player.draw(g2);
             miniM.draw(g2);
             ui.draw(g2);
+            if (showMap) {
+                gameMap.draw(g2);
+            }
             if (showBag) {
                 inventP.drawBagWindow(g2);
                 inventP.drawBagTooltip(g2);
@@ -348,7 +354,7 @@ public class MainGame extends JPanel implements Runnable {
         multiplayer = new Multiplayer(this, player2);
         talentP = new TalentPanel(this);
         player.updateEquippedItems();
-
+        gameMap = new GameMap(this);
 
         //100%
         ui.updateLoadingScreen(100);

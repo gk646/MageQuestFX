@@ -165,6 +165,17 @@ public class KeyHandler implements KeyListener {
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }
         }
+        if (code == 'm') {
+            if (!mg.showMap) {
+                mg.gameMap.resetMapCollision();
+                mg.showMap = true;
+                window.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            } else {
+                mg.gameMap.hideMapCollision();
+                mg.showMap = false;
+                window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+            }
+        }
     }
 
     @Override

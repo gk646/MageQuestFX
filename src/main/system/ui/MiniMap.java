@@ -1,4 +1,4 @@
-package gameworld.world;
+package main.system.ui;
 
 import main.MainGame;
 
