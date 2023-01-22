@@ -18,22 +18,20 @@ public class PathFinder {
 
     public PathFinder(MainGame mg) {
         this.mg = mg;
-
     }
 
     public void instantiateNodes() {
-        nodes = new Node[OverWorld.worldSize.x][OverWorld.worldSize.y];
-        for (int i = 0; i < OverWorld.worldSize.x; i++) {
-            for (int b = 0; b < OverWorld.worldSize.y; b++) {
+        nodes = new Node[700][700];
+        for (int i = 0; i < 700; i++) {
+            for (int b = 0; b < 700; b++) {
                 nodes[i][b] = new Node(i, b);
             }
         }
     }
 
-    //todo check for end of map
     private void resetNodes(int startCol, int startRow) {
-        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x - 1, startCol + 16); i++) {
-            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y - 1, startRow + 16); b++) {
+        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x, startCol + 16); i++) {
+            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y, startRow + 16); b++) {
                 nodes[i][b].open = false;
                 nodes[i][b].checked = false;
                 nodes[i][b].solid = false;
@@ -50,9 +48,9 @@ public class PathFinder {
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x - 1, startCol + 16); i++) {
-            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y - 1, startRow + 16); b++) {
-                int tileNum = OverWorld.worldData[i][b];
+        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x, startCol + 16); i++) {
+            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y, startRow + 16); b++) {
+                int tileNum = mg.wRender.worldData[i][b];
                 if (mg.wRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;
                 }
@@ -73,7 +71,6 @@ public class PathFinder {
         node.hCost = xDistance + yDistance;
         //F cost
         node.fCost = node.gCost + node.hCost;
-
     }
 
     public boolean search() {

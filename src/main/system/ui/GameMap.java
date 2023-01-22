@@ -1,11 +1,16 @@
 package main.system.ui;
 
+import gameworld.Entity;
+import gameworld.Projectile;
+import gameworld.entities.Owly;
 import main.MainGame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 
 public class GameMap {
     private final MainGame mg;
@@ -25,7 +30,7 @@ public class GameMap {
 
     public GameMap(MainGame mg) {
         this.mg = mg;
-        this.mapMover = new Rectangle(mapPanelX, mapPanelY, 1200, 700);
+        this.mapMover = new Rectangle(mapPanelX, mapPanelY, 1570, 940);
         xTile = (mg.player.worldX + 24) / 48;
         yTile = (mg.player.worldY + 24) / 48;
         hideMapCollision();
@@ -44,8 +49,8 @@ public class GameMap {
         }
         if (mapMover.contains(mg.motionH.lastMousePosition) && mg.mouseH.mouse1Pressed) {
             followPlayer = false;
-            xTile += Math.max(-10, Math.min(10, previousMousePosition.x - mg.motionH.lastMousePosition.x));
-            yTile += Math.max(-10, Math.min(10, previousMousePosition.y - mg.motionH.lastMousePosition.y));
+            xTile += Math.max(-1.5, Math.min(1.5, previousMousePosition.x - mg.motionH.lastMousePosition.x));
+            yTile += Math.max(-1.5, Math.min(1.5, previousMousePosition.y - mg.motionH.lastMousePosition.y));
         }
         if (mg.mouseH.mouse2Pressed) {
             followPlayer = true;
@@ -66,6 +71,27 @@ public class GameMap {
                     g2.setColor(green);
                     g2.fillRect(startX + x * 5, startY + y * 5 + 10, 5, 5);
                 }
+                try {
+                    for (Entity entity : mg.PROXIMITY_ENTITIES) {
+                        if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y
+                                && !(entity instanceof Owly) &&
+                                yTileOffset == (24 + entity.worldY) / 48 && xTileOffset == (entity.worldX + 24) / 48) {
+                            g2.setColor(Color.red);
+                            g2.fillRect(startX + x * 5, startY + y * 5 + 10, 5, 5);
+                        }
+                    }
+                } catch (ConcurrentModificationException | NoSuchElementException ignored) {
+
+                }
+                for (Projectile projectile : mg.PROJECTILES) {
+                    //System.out.println((24 + projectile.worldPos.y) / 48 +" " +  (projectile.worldPos.x + 24) / 48);
+                    if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y &&
+                            yTileOffset == (24 + projectile.worldPos.y) / 48 && xTileOffset == (projectile.worldPos.x + 24) / 48) {
+                        g2.setColor(Color.black);
+                        System.out.println("hey");
+                        g2.fillRect(startX + x * 5, startY + y * 5 + 10, 1, 1);
+                    }
+                }
                 if (xTileOffset == (mg.player.worldX + 24) / 48 && yTileOffset == (mg.player.worldY + 24) / 48) {
                     g2.setColor(blue);
                     g2.fillRect(startX + x * 5, startY + y * 5 + 10, 5, 5);
@@ -76,7 +102,7 @@ public class GameMap {
 
     private void drawGameMapBackground(int startX, int startY, Graphics2D g2) {
         g2.setColor(lightBackgroundAlpha);
-        g2.fillRoundRect(startX, startY, 1570, 930, 25, 25);
+        g2.fillRoundRect(startX, startY, 1570, 940, 25, 25);
     }
 
     private void drawGameMapTop(int startX, int startY, Graphics2D g2) {

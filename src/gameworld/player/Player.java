@@ -222,7 +222,7 @@ public class Player extends Entity {
     }
 
     private void getPlayerImage() {
-        entityImage1 = setup("magier_down01.png");
+        entityImage1 = setup("Mage_down01.png");
     }
 
     private void movement() {

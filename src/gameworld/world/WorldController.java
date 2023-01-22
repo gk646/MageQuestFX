@@ -59,7 +59,6 @@ public class WorldController {
         mg.wRender.worldSize = overWorldSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 1;
-        mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
     public void load_tutorial(int xTile, int yTile) {
@@ -68,7 +67,6 @@ public class WorldController {
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 0;
-        mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
     public void load_city1(int xTile, int yTile) {
@@ -77,7 +75,6 @@ public class WorldController {
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 2;
-        mg.wRender.teleportPoint1 = overWorldTeleportCity;
     }
 
     public void getWorldsData() {

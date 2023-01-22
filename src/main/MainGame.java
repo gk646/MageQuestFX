@@ -47,6 +47,7 @@ public class MainGame extends JPanel implements Runnable {
     //---------VARIABLES----------
     public final ArrayList<Projectile> PROJECTILES = new ArrayList<>();
     public final ArrayList<Entity> ENTITIES = new ArrayList<>();
+    public final ArrayList<Entity> PROXIMITY_ENTITIES = new ArrayList<>();
 
 
     //ITEMS
@@ -153,6 +154,7 @@ public class MainGame extends JPanel implements Runnable {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
                         gameMap.dragMap();
+                        proximitySorterENTITIES();
                     }
                     difference = 0;
                 }
@@ -368,5 +370,18 @@ public class MainGame extends JPanel implements Runnable {
 
     private void countItems() {
         System.out.println(-12 + AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
+    }
+
+    private void proximitySorterENTITIES() {
+        try {
+            PROXIMITY_ENTITIES.clear();
+            for (Entity entity : ENTITIES) {
+                if (Math.abs(entity.worldX - player.worldX) + Math.abs(entity.worldY - player.worldY) < 2000) {
+                    PROXIMITY_ENTITIES.add(entity);
+                }
+            }
+        } catch (ConcurrentModificationException ignored) {
+
+        }
     }
 }
