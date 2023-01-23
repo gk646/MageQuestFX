@@ -13,6 +13,8 @@ import input.MotionHandler;
 import input.MouseHandler;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
+import main.system.Storage;
+import main.system.Teleporter;
 import main.system.Utilities;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
@@ -84,6 +86,7 @@ public class MainGame extends JPanel implements Runnable {
     public final int titleState = 0;
     public final int playState = 1;
     public final int optionState = 2;
+    public int playerX, playerY;
     public CollisionChecker collisionChecker;
     public final int gameOver = 4;
 
@@ -111,6 +114,7 @@ public class MainGame extends JPanel implements Runnable {
     public InventoryPanel inventP;
     public TalentPanel talentP;
     public NPC npc;
+    public Teleporter tele;
     public GameMap gameMap;
 
     /**
@@ -155,11 +159,21 @@ public class MainGame extends JPanel implements Runnable {
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     if (gameState == playState) {
-                        player.pickupDroppedItem();
-                        inventP.interactWithWindows();
                         if (showMap) {
                             gameMap.dragMap();
                             gameMap.getImage();
+                        }
+                        player.pickupDroppedItem();
+                        inventP.interactWithWindows();
+                        getPlayerTile();
+                        tele.checkTeleports();
+                        player.screenX = HALF_WIDTH;
+                        player.screenY = HALF_HEIGHT;
+                        if (player.screenX > player.worldX) {
+                            player.screenX = player.worldX;
+                        }
+                        if (player.screenY > player.worldY) {
+                            player.screenY = player.worldY;
                         }
                     }
                     difference = 0;
@@ -263,7 +277,6 @@ public class MainGame extends JPanel implements Runnable {
             player.draw(g2);
             miniM.draw(g2);
             ui.draw(g2);
-
             if (showMap) {
                 gameMap.draw(g2);
             }
@@ -358,7 +371,7 @@ public class MainGame extends JPanel implements Runnable {
         //60%
         ui.updateLoadingScreen(12);
         player2 = new Player2(this);
-
+        tele = new Teleporter(this);
 
         //72%
         ui.updateLoadingScreen(12);
@@ -400,5 +413,10 @@ public class MainGame extends JPanel implements Runnable {
         } catch (ConcurrentModificationException ignored) {
 
         }
+    }
+
+    private void getPlayerTile() {
+        playerX = (player.worldX + 24) / 48;
+        playerY = (player.worldY + 24) / 48;
     }
 }

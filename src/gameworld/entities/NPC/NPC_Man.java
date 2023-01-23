@@ -40,9 +40,7 @@ public class NPC_Man extends Entity {
     public void update() {
         if (mg.collisionChecker.checkEntityAgainstEntity(this, mg.player) && mg.keyHandler.Epressed) {
             dialouge = true;
-            onPath = true;
         }
-        moveToTile(72, 34);
         searchTicks++;
     }
 

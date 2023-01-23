@@ -264,15 +264,15 @@ public class Entity {
     protected void followPlayer() {
         int playerX = (mg.player.worldX + 24) / 48;
         int playerY = (mg.player.worldY + 24) / 48;
-        if ((worldX + 24) / 48 != playerX && (worldY + 24) / 48 != playerY) {
-            searchPath(playerX, playerY, 16);
+        if (!((worldX) / 48 == playerX && (worldY) / 48 == playerY)) {
+            searchPathUncapped(playerX, playerY, 150);
         }
     }
 
     public void moveToTile(int x, int y) {
         if (onPath) {
             if (!((worldX) / 48 == x && (worldY) / 48 == y)) {
-                searchPathUncapped(x + 1, y, 100);
+                searchPath(x, y, 200);
             } else {
                 onPath = false;
             }

@@ -218,6 +218,7 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics2D g2) {
+
         g2.drawImage(entityImage1, screenX, screenY, 48, 48, null);
     }
 
@@ -234,23 +235,23 @@ public class Player extends Entity {
         mg.collisionChecker.checkEntityAgainstTile(this);
 
         if (keyH.leftPressed) {
-            if (!collisionLeft) {
+            if (!collisionLeft && worldX > 0) {
                 worldX -= movementSpeed;
             }
         }
         if (keyH.upPressed) {
-            if (!collisionUp) {
+            if (!collisionUp && worldY > 0) {
                 worldY -= movementSpeed;
             }
         }
         if (keyH.downPressed) {
-            if (!collisionDown) {
+            if (!collisionDown && worldY < mg.wRender.worldSize.x * 48 - 48) {
                 worldY += movementSpeed;
             }
         }
 
         if (keyH.rightPressed) {
-            if (!collisionRight) {
+            if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
                 worldX += movementSpeed;
             }
         }

@@ -1,5 +1,7 @@
-package main;
+package main.system;
 
+
+import main.MainGame;
 
 import javax.imageio.ImageIO;
 import java.awt.Rectangle;

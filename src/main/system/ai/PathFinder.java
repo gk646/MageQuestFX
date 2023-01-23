@@ -76,13 +76,10 @@ public class PathFinder {
             if (playerTooFar()) {
                 return false;
             }
-
             int col = currentNode.col;
             int row = currentNode.row;
-
             currentNode.checked = true;
             openList.remove(currentNode);
-
             if (row - 1 >= 0) {
                 openNode(nodes[col][row - 1]);
             }
@@ -95,7 +92,6 @@ public class PathFinder {
             if (col + 1 < OverWorld.worldSize.x) {
                 openNode(nodes[col + 1][row]);
             }
-
             int bestNodesIndex = 0;
             int bestNodesFCost = 999;
 
