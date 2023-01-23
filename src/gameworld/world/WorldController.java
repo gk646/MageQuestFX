@@ -48,8 +48,7 @@ public class WorldController {
         this.mg = mg;
     }
 
-    public void load_OverworldMap(int xTile, int yTile) {
-        clearWorldArrays();
+    public void load_OverWorldMap(int xTile, int yTile) {
         for (MapQuadrant quadrant : overworldMapQuadrants) {
             if (quadrant.spawned) {
                 quadrant.spawned = false;
@@ -59,22 +58,24 @@ public class WorldController {
         mg.wRender.worldSize = overWorldSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 1;
+        clearWorldArrays();
     }
 
     public void load_tutorial(int xTile, int yTile) {
-        clearWorldArrays();
         mg.wRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 0;
+        clearWorldArrays();
     }
 
     public void load_city1(int xTile, int yTile) {
-        clearWorldArrays();
+
         mg.wRender.worldData = city1_MapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
         currentWorld = 2;
+        clearWorldArrays();
     }
 
     public void getWorldsData() {
@@ -107,6 +108,7 @@ public class WorldController {
         mg.droppedItems.clear();
         mg.ENTITIES.clear();
         mg.PROJECTILES.clear();
+        mg.npc.loadNPC(currentWorld);
     }
 }
 

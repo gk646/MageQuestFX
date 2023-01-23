@@ -315,7 +315,7 @@ public class InventoryPanel {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20f));
         g2.drawString("INT: " + mg.player.INT, startX + 110, startY + 420);
         g2.drawString("VIT: " + mg.player.VIT, startX + 110, startY + 438);
-        g2.drawString("WIS: " + mg.player.REG, startX + 110, startY + 456);
+        g2.drawString("WIS: " + mg.player.WIS, startX + 110, startY + 456);
         g2.drawString("SPD: " + mg.player.SPD, startX + 110, startY + 474);
         g2.drawString("Health: " + mg.player.maxHealth, startX + 170, startY + 420);
         g2.drawString("Mana: " + mg.player.maxMana, startX + 170, startY + 440);

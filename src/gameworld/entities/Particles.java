@@ -1,7 +1,6 @@
 package gameworld.entities;
 
 import gameworld.Entity;
-import main.MainGame;
 
 import java.awt.Color;
 
@@ -14,8 +13,7 @@ class Particles extends Entity {
     private final int speed;
     private final int maxLife;
 
-    public Particles(MainGame mainGame, Entity generator, Color color, int size, int speed, int maxLife, int xd, int yd) {
-        super(mainGame);
+    public Particles(Entity generator, Color color, int size, int speed, int maxLife, int xd, int yd) {
         this.generator = generator;
         this.color = color;
         this.size = size;
@@ -23,7 +21,5 @@ class Particles extends Entity {
         this.maxLife = maxLife;
         this.xd = xd;
         this.yd = yd;
-
-
     }
 }

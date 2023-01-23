@@ -14,7 +14,6 @@ public class PathFinder {
     private Node goalNode;
     private Node currentNode;
     private boolean goalReached = false;
-    private int step = 0;
 
     public PathFinder(MainGame mg) {
         this.mg = mg;
@@ -29,9 +28,9 @@ public class PathFinder {
         }
     }
 
-    private void resetNodes(int startCol, int startRow) {
-        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x, startCol + 16); i++) {
-            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y, startRow + 16); b++) {
+    private void resetNodes(int startCol, int startRow, int maxDistance) {
+        for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
+            for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
                 nodes[i][b].open = false;
                 nodes[i][b].checked = false;
                 nodes[i][b].solid = false;
@@ -40,16 +39,15 @@ public class PathFinder {
         openList.clear();
         pathList.clear();
         goalReached = false;
-        step = 0;
     }
 
-    public void setNodes(int startCol, int startRow, int goalCol, int goalRow) {
-        resetNodes(startCol, startRow);
+    public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int maxDistance) {
+        resetNodes(startCol, startRow, maxDistance);
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        for (int i = Math.max(0, startCol - 16); i < Math.min(mg.wRender.worldSize.x, startCol + 16); i++) {
-            for (int b = Math.max(0, startRow - 16); b < Math.min(mg.wRender.worldSize.y, startRow + 16); b++) {
+        for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
+            for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
                 int tileNum = mg.wRender.worldData[i][b];
                 if (mg.wRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;
@@ -74,10 +72,56 @@ public class PathFinder {
     }
 
     public boolean search() {
-        while (!goalReached && step < 2000) {
+        while (!goalReached) {
             if (playerTooFar()) {
                 return false;
             }
+
+            int col = currentNode.col;
+            int row = currentNode.row;
+
+            currentNode.checked = true;
+            openList.remove(currentNode);
+
+            if (row - 1 >= 0) {
+                openNode(nodes[col][row - 1]);
+            }
+            if (col - 1 >= 0) {
+                openNode(nodes[col - 1][row]);
+            }
+            if (row + 1 < OverWorld.worldSize.y) {
+                openNode(nodes[col][row + 1]);
+            }
+            if (col + 1 < OverWorld.worldSize.x) {
+                openNode(nodes[col + 1][row]);
+            }
+
+            int bestNodesIndex = 0;
+            int bestNodesFCost = 999;
+
+            for (int i = 0; i < openList.size(); i++) {
+                if (openList.get(i).fCost < bestNodesFCost) {
+                    bestNodesIndex = i;
+                    bestNodesFCost = openList.get(i).fCost;
+                } else if (openList.get(i).fCost == bestNodesFCost) {
+                    if (openList.get(i).gCost < openList.get(bestNodesIndex).gCost) bestNodesIndex = i;
+                }
+            }
+            if (openList.size() == 0) {
+                return false;
+            }
+            currentNode = openList.get(bestNodesIndex);
+            if (currentNode == goalNode) {
+                goalReached = true;
+                trackPath();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean searchUncapped() {
+        while (!goalReached) {
             int col = currentNode.col;
             int row = currentNode.row;
 

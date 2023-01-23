@@ -1,7 +1,7 @@
 package gameworld.world;
 
-import gameworld.entities.Grunt;
-import gameworld.entities.Shooter;
+import gameworld.entities.monsters.Grunt;
+import gameworld.entities.monsters.Shooter;
 import main.MainGame;
 
 public class MapQuadrant {

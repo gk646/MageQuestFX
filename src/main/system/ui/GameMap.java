@@ -13,15 +13,10 @@ import java.util.ConcurrentModificationException;
 
 public class GameMap {
     private final MainGame mg;
-
-    private final Color normalColor = new Color(143, 143, 140, 255), epicColor = new Color(168, 93, 218), legendaryColor = new Color(239, 103, 3);
-    private final Color rareColor = new Color(26, 111, 175), lightBackgroundAlpha = new Color(192, 203, 220, 190), darkBackground = new Color(90, 105, 136);
-    private final Rectangle mapMover;
+    public final Rectangle mapMover;
+    private final Color lightBackgroundAlpha = new Color(192, 203, 220, 190);
     private final int mapPanelX = 175;
     private final int mapPanelY = 75;
-    private final Color grey = new Color(121, 121, 121, 219);
-    private final Color green = new Color(101, 203, 101, 208);
-    private final Color blue = new Color(44, 109, 239, 219);
     private int xTile;
     private int yTile;
     private boolean followPlayer = true;
@@ -34,6 +29,7 @@ public class GameMap {
         xTile = (mg.player.worldX + 24) / 48;
         yTile = (mg.player.worldY + 24) / 48;
         hideMapCollision();
+        dragMap();
     }
 
     public void draw(Graphics2D g2) {
@@ -56,41 +52,6 @@ public class GameMap {
             followPlayer = true;
         }
         previousMousePosition = mg.motionH.lastMousePosition;
-    }
-
-
-    private void drawGameMap(Graphics2D g2) {
-        int yTileOffset, xTileOffset, playerX, playerY, entityX, entityY;
-        for (int y = 0; y < 186; y++) {
-            for (int x = 0; x < 314; x++) {
-                yTileOffset = yTile - 93 + y;
-                xTileOffset = xTile - 157 + x;
-                if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y &&
-                        mg.wRender.tileStorage[mg.wRender.worldData[xTileOffset][yTileOffset]].collision) {
-                    g2.setColor(grey);
-                    g2.fillRect(175 + x * 5, 75 + y * 5 + 10, 5, 5);
-                } else {
-                    g2.setColor(green);
-                    g2.fillRect(175 + x * 5, 75 + y * 5 + 10, 5, 5);
-                }
-                playerX = (mg.player.worldX + 24) / 48;
-                playerY = (mg.player.worldY + 24) / 48;
-                if (xTileOffset == playerX && yTileOffset == playerY) {
-                    g2.setColor(blue);
-                    g2.fillRect(175 + x * 5, 75 + y * 5 + 10, 5, 5);
-                }
-                for (Entity entity : mg.PROXIMITY_ENTITIES) {
-                    if (!(entity instanceof Owly)) {
-                        entityX = (entity.worldX + 24) / 48;
-                        entityY = (24 + entity.worldY) / 48;
-                        if (xTileOffset == entityX && yTileOffset == entityY) {
-                            g2.setColor(Color.red);
-                            g2.fillRect(175 + x * 5, 75 + y * 5 + 10, 5, 5);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public void getImage() {
@@ -139,6 +100,17 @@ public class GameMap {
                     }
                 } catch (ConcurrentModificationException ignored) {
 
+                }
+                for (Entity entity : mg.npc.NPC_Active) {
+                    int projectileX = (entity.worldX + 24) / 48;
+                    int projectileY = (24 + entity.worldY) / 48;
+                    if (xTileOffset == projectileX && yTileOffset == projectileY) {
+                        for (int i = y * 5; i < y * 5 + 5; i++) {
+                            for (int b = x * 5; b < x * 5 + 5; b++) {
+                                image.setRGB(b, i, 0xD0124E89);
+                            }
+                        }
+                    }
                 }
             }
         }

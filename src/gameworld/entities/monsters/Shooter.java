@@ -1,13 +1,17 @@
-package gameworld.entities;
+package gameworld.entities.monsters;
 
 import gameworld.Entity;
+import gameworld.player.abilities.EnemyProjectile1;
 import main.MainGame;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 
-public class Grunt extends Entity {
+public class Shooter extends Entity {
+    private int shotCooldown;
+
+
     /**
      * Main Enemy class
      *
@@ -15,7 +19,7 @@ public class Grunt extends Entity {
      * @param worldX   coordinates X
      * @param worldY   coordinates Y
      */
-    public Grunt(MainGame mainGame, int worldX, int worldY, int level) {
+    public Shooter(MainGame mainGame, int worldX, int worldY, int level) {
         super(mainGame);
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
@@ -34,16 +38,17 @@ public class Grunt extends Entity {
         updatePos();
     }
 
-
     public void update() {
         screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (!playerTooFarAbsolute() && (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize)) {
-            onPath = true;
+        onPath = !playerTooFarAbsolute() && (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize);
+        if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
+            mg.PROJECTILES.add(new EnemyProjectile1(mg, mg.mouseH, worldX, worldY, level));
+            shotCooldown = 0;
         }
-        gruntMovement();
-        hitDelay++;
+        shooterMovement();
         searchTicks++;
+        shotCooldown++;
     }
 
     public void updatePos() {
@@ -56,26 +61,31 @@ public class Grunt extends Entity {
     }
 
     private void getDisplayImage() {
-        enemyImage = mg.imageSto.gruntImage1;
+        enemyImage = mg.imageSto.shooterImage1;
     }
 
-    private void gruntMovement() {
+
+    private void shooterMovement() {
         if (mg.client) {
-            if (onPath && searchTicks >= Math.random() * 45) {
+            if (onPath && searchTicks >= Math.random() * 55) {
                 getNearestPlayerMultiplayer();
-                searchPath(goalCol, goalRow);
+                searchPath(goalCol, goalRow, 16);
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);
             }
         } else {
-            if (onPath && searchTicks >= Math.random() * 45) {
+            if (onPath && searchTicks >= Math.random() * 55) {
                 getNearestPlayer();
-                searchPath(goalCol, goalRow);
+                searchPath(goalCol, goalRow, 16);
                 searchTicks = 0;
             } else if (onPath) {
                 trackPath(goalCol, goalRow);
             }
         }
+    }
+
+    private void getNearestCircularTile() {
+
     }
 }

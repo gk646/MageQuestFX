@@ -31,7 +31,7 @@ public class Player extends Entity {
     //STATS
     public int INT;
     public int VIT;
-    public int REG;
+    public int WIS;
     public int SPD;
     private int cooldownOneSecond;
     private int cooldownTwoSecond;
@@ -48,13 +48,14 @@ public class Player extends Entity {
 
 
     public Player(MainGame mainGame, KeyHandler keyH, MouseHandler mouseH, MotionHandler motionHandler) {
-        super(mainGame);
+        this.mg = mainGame;
         this.motionHandler = motionHandler;
+
         //-------VALUES-----------
         movementSpeed = 4;
         this.maxHealth = 10;
-        this.health = maxHealth;
         this.maxMana = 20;
+        this.health = maxHealth;
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
@@ -66,7 +67,6 @@ public class Player extends Entity {
         this.level = 1;
 
         //Handlers
-        this.mg = mainGame;
         this.keyH = keyH;
         this.mouseH = mouseH;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
@@ -82,18 +82,18 @@ public class Player extends Entity {
         INT = 0;
         VIT = 0;
         SPD = 0;
-        REG = 0;
+        WIS = 0;
         for (InventorySlot invSlot : mg.inventP.char_Slots) {
             if (invSlot.item != null) {
                 INT += invSlot.item.INT;
                 VIT += invSlot.item.VIT;
                 SPD += invSlot.item.SPD;
-                REG += invSlot.item.WIS;
+                WIS += invSlot.item.WIS;
             }
         }
-        maxHealth = (int) (9f + ((10f + VIT / 2) / (10f) + VIT / 2) * (level + (0.1f * VIT)));
-        maxMana = (int) (19f + ((10f + INT) / (10f) + INT / 2f) * (level + (0.2 * INT)));
-        manaRegeneration = ((0.3f + INT / 20f) * (level + level - 1)) / 65;
+        maxHealth = (int) (9f + ((10f + VIT / 2) / (10f) + VIT / 2) * (level / 2 + (0.1f * VIT)));
+        maxMana = (int) (19f + ((10f + INT) / (10f) + INT / 2f) * (level / 2 + (0.2 * INT)));
+        manaRegeneration = ((0.3f + WIS / 20f) * (level)) / 65;
         healthRegeneration = (0.05f * level + VIT / 20f) / 60;
         movementSpeed = 4 + SPD;
     }
@@ -257,16 +257,18 @@ public class Player extends Entity {
     }
 
     private void skills() {
-        if (mouseH.mouse1Pressed && cooldownPrimary == 20 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
-            mg.PROJECTILES.add(new PrimaryFire(mg, mouseH));
-            cooldownPrimary = 0;
-            getDurabilityDamageWeapon();
-        }
-        if (mouseH.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10 && !mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition)) {
-            mg.PROJECTILES.add(new SecondaryFire(mg, mouseH));
-            mana -= 10;
-            cooldownOneSecond = 0;
-            getDurabilityDamageWeapon();
+        if (!mg.inventP.wholeBagWindow.contains(mg.motionH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.motionH.lastMousePosition) && !mg.gameMap.mapMover.contains(mg.motionH.lastMousePosition)) {
+            if (mouseH.mouse1Pressed && cooldownPrimary == 20) {
+                mg.PROJECTILES.add(new PrimaryFire(mg, mouseH));
+                cooldownPrimary = 0;
+                getDurabilityDamageWeapon();
+            }
+            if (mouseH.mouse2Pressed && cooldownOneSecond == 60 && this.mana >= 10) {
+                mg.PROJECTILES.add(new SecondaryFire(mg, mouseH));
+                mana -= 10;
+                cooldownOneSecond = 0;
+                getDurabilityDamageWeapon();
+            }
         }
         if (keyH.OnePressed && cooldownTwoSecond == 120 && this.mana >= 10) {
             for (int i = 0; i <= 7; i++) {

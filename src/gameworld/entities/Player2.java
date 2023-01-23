@@ -13,7 +13,7 @@ public class Player2 extends Entity {
     private BufferedImage player2;
 
     public Player2(MainGame mainGame) {
-        super(mainGame);
+        this.mg = mainGame;
         //Setting default values
         getPlayerImage();
         worldX = 12500;
@@ -23,7 +23,7 @@ public class Player2 extends Entity {
 
 
         //Handlers
-        this.mg = mainGame;
+
     }
 
     private void getPlayerImage() {

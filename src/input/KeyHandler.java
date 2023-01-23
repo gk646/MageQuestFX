@@ -12,7 +12,7 @@ import static main.Runner.window;
 public class KeyHandler implements KeyListener {
     private final MainGame mg;
     //Keys
-    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, fpressed, TwoPressed;
+    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, fpressed, TwoPressed, Epressed;
 
     public KeyHandler(MainGame mainGame) {
         this.mg = mainGame;
@@ -89,7 +89,7 @@ public class KeyHandler implements KeyListener {
             }
             if (code == KeyEvent.VK_ENTER) {
                 if (mg.ui.commandNum == 0) {
-                    mg.wControl.load_OverworldMap(495, 495);
+                    mg.wControl.load_OverWorldMap(495, 495);
                 } else if (mg.ui.commandNum == 1) {
                     try {
                         mg.sqLite.savePlayerData();
@@ -124,7 +124,7 @@ public class KeyHandler implements KeyListener {
         //Drawing talent window
         if (code == 'n') {
             if (!mg.showTalents) {
-                mg.wControl.load_OverworldMap(495, 495);
+                mg.wControl.load_OverWorldMap(495, 495);
                 mg.showTalents = true;
                 /*
                 mg.talentP.resetTalentCollision();
@@ -207,6 +207,9 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_F) {
                 fpressed = true;
             }
+            if (code == KeyEvent.VK_E) {
+                Epressed = true;
+            }
         }
         if (code == KeyEvent.VK_H) {
             debugFps = true;
@@ -243,6 +246,9 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_M) {
             multiplayer = false;
+        }
+        if (code == KeyEvent.VK_E) {
+            Epressed = false;
         }
     }
 }

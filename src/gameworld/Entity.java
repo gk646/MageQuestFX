@@ -1,6 +1,5 @@
 package gameworld;
 
-import gameworld.entities.Grunt;
 import gameworld.entities.Owly;
 import main.MainGame;
 
@@ -65,6 +64,10 @@ public class Entity {
         this.mg = mg;
     }
 
+    public Entity() {
+
+    }
+
     /**
      * Only really updates enemy position
      */
@@ -121,8 +124,7 @@ public class Entity {
     }
 
     private void spawnEnemies() {
-        mg.ENTITIES.add(new Owly(mg, mg.player.worldX + 50, mg.player.worldY + 50, 15));
-        mg.ENTITIES.add(new Grunt(mg, 250, 250, 100));
+        mg.ENTITIES.add(new Owly(mg, mg.player.worldX + 50, mg.player.worldY + 50, 10));
     }
 
     protected boolean playerTooFarAbsolute() {
@@ -139,11 +141,11 @@ public class Entity {
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + mg.tileSize) {
+        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + 48) {
             worldY -= movementSpeed;
-        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + mg.tileSize) {
+        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + 48) {
             worldY += movementSpeed;
-        } else if (enTopY >= nextY && enBottomY < nextY + mg.tileSize) {
+        } else if (enTopY >= nextY && enBottomY < nextY + 48) {
             if (enLeftX > nextX) {
                 worldX -= movementSpeed;
             }
@@ -177,15 +179,45 @@ public class Entity {
         }
     }
 
-    protected void searchPath(int goalCol, int goalRow) {
-        int startCol = (worldX + entityWidth / 2) / mg.tileSize;
-        int startRow = (worldY + entityHeight / 2) / mg.tileSize;
-        mg.pathF.setNodes(startCol, startRow, goalCol, goalRow);
+    protected void searchPath(int goalCol, int goalRow, int maxDistance) {
+        int startCol = (worldX + 24) / 48;
+        int startRow = (worldY + 24) / 48;
+        mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
-
+            onPath = false;
         } else if (mg.pathF.search()) {
-            int nextX = mg.pathF.pathList.get(0).col * mg.tileSize;
-            int nextY = mg.pathF.pathList.get(0).row * mg.tileSize;
+            int nextX = mg.pathF.pathList.get(0).col * 48;
+            int nextY = mg.pathF.pathList.get(0).row * 48;
+            decideMovement(nextX, nextY);
+            nextCol1 = mg.pathF.pathList.get(0).col;
+            nextRow1 = mg.pathF.pathList.get(0).row;
+            if (mg.pathF.pathList.size() >= 2) {
+                nextCol2 = mg.pathF.pathList.get(1).col;
+                nextRow2 = mg.pathF.pathList.get(1).row;
+            }
+            if (mg.pathF.pathList.size() >= 3) {
+                nextCol3 = mg.pathF.pathList.get(2).col;
+                nextRow3 = mg.pathF.pathList.get(2).row;
+            }
+            if (mg.pathF.pathList.size() >= 4) {
+                nextCol4 = mg.pathF.pathList.get(3).col;
+                nextRow4 = mg.pathF.pathList.get(3).row;
+            }
+            if (nextCol1 == goalCol && nextRow1 == goalRow) {
+                onPath = false;
+            }
+        }
+    }
+
+    protected void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
+        int startCol = (worldX + 24) / 48;
+        int startRow = (worldY + 24) / 48;
+        mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
+        if (startCol == goalCol && startRow == goalRow) {
+            onPath = false;
+        } else if (mg.pathF.searchUncapped()) {
+            int nextX = mg.pathF.pathList.get(0).col * 48;
+            int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
             nextCol1 = mg.pathF.pathList.get(0).col;
             nextRow1 = mg.pathF.pathList.get(0).row;
@@ -208,8 +240,8 @@ public class Entity {
     }
 
     protected void trackPath(int goalCol, int goalRow) {
-        int nextX = nextCol1 * mg.tileSize;
-        int nextY = nextRow1 * mg.tileSize;
+        int nextX = nextCol1 * 48;
+        int nextY = nextRow1 * 48;
         if ((worldX + collisionBox.x) / mg.tileSize == nextCol1 && (worldY + collisionBox.y) / mg.tileSize == nextRow1) {
             nextX = nextCol2 * mg.tileSize;
             nextY = nextRow2 * mg.tileSize;
@@ -226,6 +258,24 @@ public class Entity {
             onPath = false;
         } else {
             decideMovement(nextX, nextY);
+        }
+    }
+
+    protected void followPlayer() {
+        int playerX = (mg.player.worldX + 24) / 48;
+        int playerY = (mg.player.worldY + 24) / 48;
+        if ((worldX + 24) / 48 != playerX && (worldY + 24) / 48 != playerY) {
+            searchPath(playerX, playerY, 16);
+        }
+    }
+
+    public void moveToTile(int x, int y) {
+        if (onPath) {
+            if (!((worldX - 24) / 48 == x && (worldY - 24) / 48 == y)) {
+                searchPathUncapped(x, y, 100);
+            } else {
+                onPath = false;
+            }
         }
     }
 

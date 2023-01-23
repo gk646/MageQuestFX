@@ -1,8 +1,8 @@
 package main.system;
 
 import gameworld.Entity;
-import gameworld.entities.Grunt;
 import gameworld.entities.Player2;
+import gameworld.entities.monsters.Grunt;
 import main.MainGame;
 
 import java.io.DataInputStream;
@@ -51,7 +51,6 @@ public class Multiplayer {
                 index += 5;
             }
             index = 10;
-
         } catch (IOException | IndexOutOfBoundsException ignored) {
 
         }

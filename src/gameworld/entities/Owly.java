@@ -92,7 +92,7 @@ public class Owly extends Entity {
     private void owlyMovement() {
         if (onPath && searchTicks >= Math.random() * 45) {
             getNearestPlayer();
-            searchPath(goalCol, goalRow);
+            searchPath(goalCol, goalRow, 50);
             searchTicks = 0;
         } else if (onPath) {
             trackPath(goalCol, goalRow);

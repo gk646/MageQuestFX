@@ -2,6 +2,7 @@ package main;
 
 import gameworld.Entity;
 import gameworld.Item;
+import gameworld.NPC;
 import gameworld.Projectile;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
@@ -93,7 +94,7 @@ public class MainGame extends JPanel implements Runnable {
     public WorldController wControl;
     public WorldRender wRender;
     public Projectile projectile;
-    private Entity entity;
+    public Entity entity;
 
     public Player player;
     public Player2 player2;
@@ -109,6 +110,7 @@ public class MainGame extends JPanel implements Runnable {
     private Thread gameThread;
     public InventoryPanel inventP;
     public TalentPanel talentP;
+    public NPC npc;
     public GameMap gameMap;
 
     /**
@@ -198,6 +200,7 @@ public class MainGame extends JPanel implements Runnable {
                     if (gameState == playState) {
                         player.update();
                         projectile.updateProjectilePos();
+                        npc.update();
                     }
                     difference = 0;
                 }
@@ -255,10 +258,12 @@ public class MainGame extends JPanel implements Runnable {
             drawDroppedItems(g2);
             projectile.draw(g2);
             entity.draw(g2);
+            npc.draw(g2);
             player2.draw(g2);
             player.draw(g2);
             miniM.draw(g2);
             ui.draw(g2);
+
             if (showMap) {
                 gameMap.draw(g2);
             }
@@ -296,6 +301,7 @@ public class MainGame extends JPanel implements Runnable {
             g2.setColor(Color.white);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
             g2.drawString(("Draw Time" + difference), 500, 600);
+            g2.drawString((24 + player.worldX) / 48 + " " + (player.worldY + 24) / 48, 500, 650);
         }
         g2.dispose();
     }
@@ -364,11 +370,14 @@ public class MainGame extends JPanel implements Runnable {
         multiplayer = new Multiplayer(this, player2);
         talentP = new TalentPanel(this);
         player.updateEquippedItems();
+        player.health = player.maxHealth;
+        player.mana = player.maxMana;
         gameMap = new GameMap(this);
+        npc = new NPC(this);
 
         //100%
         ui.updateLoadingScreen(100);
-        wControl.load_city1(15, 15);
+        wControl.load_city1(25, 27);
         countItems();
         loadingScreen = false;
         gameState = titleState;
