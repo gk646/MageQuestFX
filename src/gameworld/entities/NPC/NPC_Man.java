@@ -42,7 +42,7 @@ public class NPC_Man extends Entity {
             dialouge = true;
             onPath = true;
         }
-        moveToTile(35, 50);
+        moveToTile(72, 34);
         searchTicks++;
     }
 
