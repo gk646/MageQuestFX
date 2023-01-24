@@ -12,9 +12,9 @@ import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.system.CollisionChecker;
+import main.system.MapTeleporter;
 import main.system.Multiplayer;
 import main.system.Storage;
-import main.system.Teleporter;
 import main.system.Utilities;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
@@ -114,7 +114,7 @@ public class MainGame extends JPanel implements Runnable {
     public InventoryPanel inventP;
     public TalentPanel talentP;
     public NPC npc;
-    public Teleporter tele;
+    public MapTeleporter tele;
     public GameMap gameMap;
 
     /**
@@ -371,7 +371,7 @@ public class MainGame extends JPanel implements Runnable {
         //60%
         ui.updateLoadingScreen(12);
         player2 = new Player2(this);
-        tele = new Teleporter(this);
+        tele = new MapTeleporter(this);
 
         //72%
         ui.updateLoadingScreen(12);
@@ -390,7 +390,7 @@ public class MainGame extends JPanel implements Runnable {
 
         //100%
         ui.updateLoadingScreen(100);
-        wControl.load_city1(25, 27);
+        wControl.load_tutorial(4, 4);
         countItems();
         loadingScreen = false;
         gameState = titleState;

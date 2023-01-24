@@ -2,7 +2,7 @@ package main.system;
 
 import main.MainGame;
 
-public class Teleporter {
+public class MapTeleporter {
     // WORLD CODES
     // 0 = Tutorial
     // 1 = Grass Lands
@@ -13,13 +13,13 @@ public class Teleporter {
 
     private final MainGame mg;
 
-    public Teleporter(MainGame mg) {
+    public MapTeleporter(MainGame mg) {
         this.mg = mg;
     }
 
     public void checkTeleports() {
         if (mg.wControl.currentWorld == 0) {
-            if (mg.playerX == 50 && mg.playerY == 50) {
+            if (mg.playerX == 43 && mg.playerY == 34) {
                 mg.wControl.load_city1(5, 5);
             }
         }
