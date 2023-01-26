@@ -21,6 +21,7 @@ public class MapTeleporter {
         if (mg.wControl.currentWorld == 0) {
             if (mg.playerX == 43 && mg.playerY == 34) {
                 mg.wControl.load_city1(5, 5);
+                mg.player.spawnLevel = 1;
             }
         }
         if (mg.wControl.currentWorld == 1) {
@@ -37,6 +38,14 @@ public class MapTeleporter {
                     mg.playerX == 37 && mg.playerY == 0) {
                 mg.wControl.load_OverWorldMap(495, 495);
             }
+        }
+    }
+
+    public void loadSpawnLevel() {
+        if (mg.player.spawnLevel == 0) {
+            mg.wControl.load_tutorial(4, 4);
+        } else if (mg.player.spawnLevel == 1) {
+            mg.wControl.load_city1(11, 11);
         }
     }
 }

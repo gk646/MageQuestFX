@@ -45,12 +45,19 @@ public class SQLite {
             readPlayerInventory(stmt);
             readPlayerStats(stmt);
             readPlayerBags(stmt);
+            readStartLevel(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public void readStartLevel(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
+        mg.player.spawnLevel = rs.getInt("startLevel");
+    }
+
 
     public void savePlayerData() throws SQLException {
         savePlayerInventory();
@@ -59,11 +66,11 @@ public class SQLite {
     }
 
     private void savePlayerStats() throws SQLException {
-        String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ? WHERE _ROWID_ = ?";
+        String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? WHERE _ROWID_ = 1";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, mg.player.coins);
         stmt.setInt(2, mg.player.experience);
-        stmt.setInt(3, 1);
+        stmt.setInt(3, mg.player.spawnLevel);
         stmt.executeUpdate();
     }
 

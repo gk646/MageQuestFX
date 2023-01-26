@@ -390,7 +390,7 @@ public class MainGame extends JPanel implements Runnable {
 
         //100%
         ui.updateLoadingScreen(100);
-        wControl.load_tutorial(4, 4);
+        tele.loadSpawnLevel();
         countItems();
         loadingScreen = false;
         gameState = titleState;

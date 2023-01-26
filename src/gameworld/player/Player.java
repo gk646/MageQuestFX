@@ -41,6 +41,7 @@ public class Player extends Entity {
     public int coins;
     private int playerQuadrant;
     private int levelUpExperience = 10;
+    public int spawnLevel;
     private int quadrantTimer;
     public float manaRegeneration = 0.02f;
     public float healthRegeneration = 0.002f;

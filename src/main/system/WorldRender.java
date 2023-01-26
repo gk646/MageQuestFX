@@ -60,6 +60,7 @@ public class WorldRender {
         setupTiles(18, "water18.png", true);
         setupTiles(19, "water19.png", true);
         setupTiles(20, "water20.png", true);
+        setupTiles(21, "water21.png", true);
 
         //GRASS
         setupTiles(27, "grass27.png", false);
@@ -84,22 +85,31 @@ public class WorldRender {
 
         setupTiles(47, "water47.png", false);
         setupTiles(48, "water48.png", false);
+
+        setupTiles(58, "tree01.png", true);
+        setupTiles(59, "tree02.png", true);
     }
 
 
     public void draw(Graphics2D g2) {
-        int screenX, screenY;
-        worldCol = Math.max(mg.playerX - 21, 0);
-        worldRow = Math.max(mg.playerY - 12, 0);
-        int maxCol = Math.min(worldCol + 42, mg.wRender.worldSize.x);
-        int maxRow = Math.min(worldRow + 24, mg.wRender.worldSize.y);
-        for (int i = worldCol; i < maxCol; i++) {
-            for (int b = worldRow; b < maxRow; b++) {
-                screenX = i * 48 - mg.player.worldX + mg.player.screenX;
-                screenY = b * 48 - mg.player.worldY + mg.player.screenY;
-
-                g2.drawImage(tileStorage[worldData[i][b]].tileImage, screenX, screenY, 48, 48, null);
+        int tileNUm = 0;
+        try {
+            int screenX, screenY;
+            worldCol = Math.max(mg.playerX - 21, 0);
+            worldRow = Math.max(mg.playerY - 12, 0);
+            int maxCol = Math.min(worldCol + 42, mg.wRender.worldSize.x);
+            int maxRow = Math.min(worldRow + 24, mg.wRender.worldSize.y);
+            for (int i = worldCol; i < maxCol; i++) {
+                for (int b = worldRow; b < maxRow; b++) {
+                    screenX = i * 48 - mg.player.worldX + mg.player.screenX;
+                    screenY = b * 48 - mg.player.worldY + mg.player.screenY;
+                    tileNUm = worldData[i][b];
+                    g2.drawImage(tileStorage[worldData[i][b]].tileImage, screenX, screenY, 48, 48, null);
+                }
             }
+        } catch (Exception e) {
+            int num = tileNUm;
+            System.out.println(num);
         }
     }
 }
