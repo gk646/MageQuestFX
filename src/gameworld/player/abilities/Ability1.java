@@ -28,17 +28,17 @@ public class Ability1 extends Projectile {
         this.version = version;
 
         //------POSITION-----------
-        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
-        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
+        this.worldPos = new java.awt.geom.Point2D.Double(mg.player.worldX, mg.player.worldY);
+        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.direction = "downleftrightup";
-        this.updateVector = new Point(1, 1);
+        this.updateVector = new java.awt.geom.Point2D.Double(1, 1);
         getUpdateVector();
     }
 
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.red);
-        g2.drawRect(worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight);
+        g2.drawRect((int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight);
     }
 
     @Override

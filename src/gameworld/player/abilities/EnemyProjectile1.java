@@ -6,6 +6,7 @@ import main.MainGame;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 public class EnemyProjectile1 extends Projectile {
 
@@ -27,16 +28,15 @@ public class EnemyProjectile1 extends Projectile {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePos = new Point(mg.player.worldX, mg.player.worldY);
-        this.worldPos = new Point(x, y);
-        this.updateVector = getUpdateVector();
+        this.worldPos = new Point2D.Double(x, y);
+        this.updateVector = getTrajectory(new Point(mg.player.worldX, mg.player.worldY));
         getPlayerImage();
-        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
+        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.drawImage(projectileImage1, worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight, null);
+        g2.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, projectileWidth, projectileHeight, null);
     }
 
     @Override
@@ -47,14 +47,9 @@ public class EnemyProjectile1 extends Projectile {
         worldPos.y += updateVector.y;
     }
 
-    //Get normalized vector
-    private Point getUpdateVector() {
-        int deltaX = mousePos.x - worldPos.x;
-        int deltaY = mousePos.y - worldPos.y;
-        double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        double normalizedY = (deltaY / length) * movementSpeed * 2;
-        double normalizedX = (deltaX / length) * movementSpeed * 2;
-        return new Point((int) normalizedX, (int) normalizedY);
+    public Point2D.Double getTrajectory(Point mousePosition) {
+        double angle = Math.atan2(mousePosition.y - mg.HALF_HEIGHT - 24, mousePosition.x - mg.HALF_WIDTH - 24);
+        return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
     private void getPlayerImage() {

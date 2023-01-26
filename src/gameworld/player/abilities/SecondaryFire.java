@@ -6,6 +6,7 @@ import main.MainGame;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 public class SecondaryFire extends Projectile {
 
@@ -24,30 +25,26 @@ public class SecondaryFire extends Projectile {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.mousePos = mainGame.motionH.lastMousePosition;
-        this.worldPos = new Point(mg.player.worldX, mg.player.worldY);
-        this.endPos = new Point(worldPos.x + 650, worldPos.y + 650);
-        screenPos = new Point();
-        this.updateVector = getUpdateVector();
+        this.worldPos = new java.awt.geom.Point2D.Double(mg.player.worldX + 48 - projectileHeight / 2f, mg.player.worldY + 48 - projectileHeight / 2f);
+        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
+        this.updateVector = getTrajectory(mainGame.motionH.lastMousePosition);
         getPlayerImage();
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        screenPos.x = worldPos.x - mg.player.worldX + 960;
-        screenPos.y = worldPos.y - mg.player.worldY + 540;
         if (spriteCounter <= 12) {
-            g2.drawImage(projectileImage1, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
         } else if (spriteCounter <= 24) {
-            g2.drawImage(projectileImage2, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
         } else if (spriteCounter <= 36) {
-            g2.drawImage(projectileImage3, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
         } else if (spriteCounter <= 48) {
-            g2.drawImage(projectileImage4, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
         } else if (spriteCounter <= 60) {
-            g2.drawImage(projectileImage5, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
         } else if (spriteCounter <= 72) {
-            g2.drawImage(projectileImage6, screenPos.x, screenPos.y, projectileWidth, projectileHeight, null);
+            g2.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + 960 - 24, (int) worldPos.y - mg.player.worldY + 540 - 24, projectileWidth, projectileHeight, null);
             spriteCounter = 0;
         }
         spriteCounter++;
@@ -58,18 +55,13 @@ public class SecondaryFire extends Projectile {
     public void update() {
         outOfBounds();
         tileCollision();
-        worldPos.x += updateVector.x;
-        worldPos.y += updateVector.y;
+        worldPos.x += updateVector.x * movementSpeed;
+        worldPos.y += updateVector.y * movementSpeed;
     }
 
-    //Get normalized vector
-    private Point getUpdateVector() {
-        int deltaX = mousePos.x - mg.HALF_WIDTH;
-        int deltaY = mousePos.y - mg.HALF_HEIGHT;
-        double length = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        double normalizedY = (deltaY / length) * movementSpeed * 2;
-        double normalizedX = (deltaX / length) * movementSpeed * 2;
-        return new Point((int) normalizedX, (int) normalizedY);
+    public Point2D.Double getTrajectory(Point mousePosition) {
+        double angle = Math.atan2(mousePosition.y - mg.HALF_HEIGHT - 24, mousePosition.x - mg.HALF_WIDTH - 24);
+        return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
     private void getPlayerImage() {

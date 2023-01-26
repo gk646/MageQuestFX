@@ -14,6 +14,7 @@ import main.MainGame;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;
 
@@ -31,7 +32,8 @@ public class Projectile {
     public boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
-    public Point updateVector, mousePos, worldPos, endPos, screenPos;
+    public Point endPos;
+    public Point2D.Double updateVector, worldPos;
     public int movementSpeed, projectileHeight, projectileWidth, spriteCounter, level;
     public BufferedImage projectileImage1, projectileImage2, projectileImage3, projectileImage4, projectileImage5, projectileImage6, projectileImage7, projectileImage8, projectileImage9, projectileImage10;
 

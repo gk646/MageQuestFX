@@ -65,8 +65,8 @@ public class MiniMap {
                 try {
                     for (Projectile projectile : mg.PROJECTILES) {
                         if (projectile != null) {
-                            int projectileX = (projectile.worldPos.x + 24) / 48;
-                            int projectileY = (24 + projectile.worldPos.y) / 48;
+                            int projectileX = (int) ((projectile.worldPos.x + 24) / 48);
+                            int projectileY = (int) ((24 + projectile.worldPos.y) / 48);
                             if (xTileOffset == projectileX && yTileOffset == projectileY) {
                                 g2.setColor(red);
                                 g2.fillRect(1700 + x * 5, 25 + y * 5, 2, 2);
