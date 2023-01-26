@@ -12,10 +12,9 @@ I took some inspiration from his implementation but started to develop my own id
 
 ### AI assisted programming
 
-Starting with the release of Chat GPT from OpenAI, I began including AI in performance testing and optimizations,  
+Starting with the release of Chat GPT from OpenAI, I began including AI in performance testing and optimizations,
 generating comments, generating first drafts of new ideas etc.
-As of late I also started to use AI generated images from  
-the Dall E 2 model. It's great!
+As of late I also started to use AI generated images from the Dall E 2 model. It's great!
 
 ### Multiplayer:
 
@@ -24,7 +23,7 @@ together!
 The host needs to press h + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press
 h + f.  
 I used java sockets with a static port (60069).  
-I didn't yet update it to work correctly with the newest pathfinding updates.
+**I didn't yet update it to work correctly with the newest pathfinding updates.**
 
 ## Movement:
 
