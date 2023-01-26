@@ -4,6 +4,7 @@ import gameworld.Entity;
 import gameworld.Item;
 import gameworld.NPC;
 import gameworld.Projectile;
+import gameworld.dialogue.Dialog;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
 import gameworld.world.DroppedItem;
@@ -342,7 +343,8 @@ public class MainGame extends JPanel implements Runnable {
         // 0 %
         inventP = new InventoryPanel(this);
         wControl = new WorldController(this);
-
+        Dialog dialog = new Dialog(0);
+        System.out.println(dialog.text);
         //12 %
         ui.updateLoadingScreen(12);
         wRender = new WorldRender(this);

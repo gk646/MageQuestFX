@@ -1,6 +1,7 @@
 package gameworld.entities.NPC;
 
 import gameworld.Entity;
+import gameworld.dialogue.Dialog;
 import main.MainGame;
 
 import javax.imageio.ImageIO;
@@ -13,7 +14,8 @@ import java.util.Objects;
 
 public class NPC_Man extends Entity {
     private BufferedImage player2;
-    private boolean dialouge;
+    private boolean dialogue;
+    private Dialog dial;
 
     public NPC_Man(MainGame mainGame, int x, int y) {
         this.mg = mainGame;
@@ -31,7 +33,7 @@ public class NPC_Man extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(player2, worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24, worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24, 48, 48, null);
-        if (dialouge) {
+        if (dialogue) {
             g2.setColor(Color.RED);
             g2.draw(new Rectangle(worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24 - 50, worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24 - 100, 200, 25));
         }
@@ -39,7 +41,7 @@ public class NPC_Man extends Entity {
 
     public void update() {
         if (mg.collisionChecker.checkEntityAgainstEntity(this, mg.player) && mg.keyHandler.Epressed) {
-            dialouge = true;
+            dialogue = true;
         }
         searchTicks++;
     }
