@@ -101,7 +101,7 @@ public class GameMap {
                 } catch (ConcurrentModificationException ignored) {
 
                 }
-                for (Entity entity : mg.npc.NPC_Active) {
+                for (Entity entity : mg.npcControl.NPC_Active) {
                     int projectileX = (entity.worldX + 24) / 48;
                     int projectileY = (24 + entity.worldY) / 48;
                     if (xTileOffset == projectileX && yTileOffset == projectileY) {

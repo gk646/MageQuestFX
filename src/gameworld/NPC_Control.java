@@ -6,7 +6,7 @@ import main.MainGame;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-public class NPC {
+public class NPC_Control {
 
     // WORLD CODES
     // 0 = Tutorial // 1 = Grass Lands // 2 = City 1 // 3 =
@@ -17,7 +17,7 @@ public class NPC {
     private final MainGame mg;
     public ArrayList<Entity> NPC_Active = new ArrayList<>();
 
-    public NPC(MainGame mg) {
+    public NPC_Control(MainGame mg) {
         this.mg = mg;
         spawnNPC();
     }
@@ -46,8 +46,9 @@ public class NPC {
     }
 
     private void spawnNPC() {
-        NPC_City1.add(new NPC_Man(mg, 27 * 48, 26 * 48));
-        NPC_GrassLand.add(new NPC_Man(mg, 23500, 23500));
-        NPC_GrassLand.add(new NPC_Man(mg, 23400, 23500));
+        NPC_City1.add(new NPC_Man(mg, 0, 27 * 48, 26 * 48));
+        NPC_Tutorial.add(new NPC_Man(mg, 0, 11 * 48, 4 * 48));
+        NPC_GrassLand.add(new NPC_Man(mg, 1, 23500, 23500));
+        NPC_GrassLand.add(new NPC_Man(mg, 2, 23400, 23500));
     }
 }

@@ -2,9 +2,8 @@ package main;
 
 import gameworld.Entity;
 import gameworld.Item;
-import gameworld.NPC;
+import gameworld.NPC_Control;
 import gameworld.Projectile;
-import gameworld.dialogue.Dialog;
 import gameworld.entities.Player2;
 import gameworld.player.Player;
 import gameworld.world.DroppedItem;
@@ -13,7 +12,7 @@ import input.KeyHandler;
 import input.MotionHandler;
 import input.MouseHandler;
 import main.system.CollisionChecker;
-import main.system.MapTeleporter;
+import main.system.ImageSetup;
 import main.system.Multiplayer;
 import main.system.Storage;
 import main.system.Utilities;
@@ -93,7 +92,7 @@ public class MainGame extends JPanel implements Runnable {
 
 
     //---------System---------
-    public final Utilities utilities = new Utilities();
+    public final ImageSetup imageSetup = new ImageSetup();
     public MiniMap miniM;
     public WorldController wControl;
     public WorldRender wRender;
@@ -114,8 +113,8 @@ public class MainGame extends JPanel implements Runnable {
     private Thread gameThread;
     public InventoryPanel inventP;
     public TalentPanel talentP;
-    public NPC npc;
-    public MapTeleporter tele;
+    public NPC_Control npcControl;
+    public Utilities util;
     public GameMap gameMap;
 
     /**
@@ -167,7 +166,8 @@ public class MainGame extends JPanel implements Runnable {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
                         getPlayerTile();
-                        tele.checkTeleports();
+
+                        util.checkTeleports();
                         player.screenX = HALF_WIDTH;
                         player.screenY = HALF_HEIGHT;
                         if (player.screenX > player.worldX) {
@@ -215,7 +215,7 @@ public class MainGame extends JPanel implements Runnable {
                     if (gameState == playState) {
                         player.update();
                         projectile.updateProjectilePos();
-                        npc.update();
+                        npcControl.update();
                     }
                     difference = 0;
                 }
@@ -232,7 +232,7 @@ public class MainGame extends JPanel implements Runnable {
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     if (gameState == playState || gameState == optionState || gameState == talentState) {
-                        if (keyHandler.debugFps && keyHandler.fpressed) {
+                        if (keyHandler.debugFps && keyHandler.f_pressed) {
                             multiplayer.startMultiplayerClient();
                         }
                         if (keyHandler.debugFps && keyHandler.multiplayer) {
@@ -273,7 +273,7 @@ public class MainGame extends JPanel implements Runnable {
             drawDroppedItems(g2);
             projectile.draw(g2);
             entity.draw(g2);
-            npc.draw(g2);
+            npcControl.draw(g2);
             player2.draw(g2);
             player.draw(g2);
             miniM.draw(g2);
@@ -343,8 +343,6 @@ public class MainGame extends JPanel implements Runnable {
         // 0 %
         inventP = new InventoryPanel(this);
         wControl = new WorldController(this);
-        Dialog dialog = new Dialog(0);
-        System.out.println(dialog.text);
         //12 %
         ui.updateLoadingScreen(12);
         wRender = new WorldRender(this);
@@ -373,13 +371,13 @@ public class MainGame extends JPanel implements Runnable {
         //60%
         ui.updateLoadingScreen(12);
         player2 = new Player2(this);
-        tele = new MapTeleporter(this);
+        util = new Utilities(this);
 
         //72%
         ui.updateLoadingScreen(12);
         pathF = new PathFinder(this);
         pathF.instantiateNodes();
-
+        ui.getPixelFont();
         //84%
         ui.updateLoadingScreen(12);
         multiplayer = new Multiplayer(this, player2);
@@ -388,11 +386,11 @@ public class MainGame extends JPanel implements Runnable {
         player.health = player.maxHealth;
         player.mana = player.maxMana;
         gameMap = new GameMap(this);
-        npc = new NPC(this);
+        npcControl = new NPC_Control(this);
 
         //100%
         ui.updateLoadingScreen(100);
-        tele.loadSpawnLevel();
+        util.loadSpawnLevel();
         countItems();
         loadingScreen = false;
         gameState = titleState;

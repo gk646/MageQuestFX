@@ -90,7 +90,7 @@ public class Multiplayer {
     public void startMultiplayerClient() {
         multiplayerStarted = true;
         mainGame.client = true;
-        if (mainGame.keyHandler.fpressed) {
+        if (mainGame.keyHandler.f_pressed) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

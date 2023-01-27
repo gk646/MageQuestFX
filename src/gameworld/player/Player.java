@@ -314,7 +314,7 @@ public class Player extends Entity {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/" + imagePath))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 48, 48);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 48, 48);
         } catch (IOException e) {
             e.printStackTrace();
         }

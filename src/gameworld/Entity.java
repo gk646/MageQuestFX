@@ -272,7 +272,7 @@ public class Entity {
     public void moveToTile(int x, int y) {
         if (onPath) {
             if (!((worldX) / 48 == x && (worldY) / 48 == y)) {
-                searchPath(x, y, 200);
+                searchPathUncapped(x, y, 100);
             } else {
                 onPath = false;
             }

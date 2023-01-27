@@ -1,6 +1,6 @@
 package main.system.ui.talentpane;
 
-import main.system.Utilities;
+import main.system.ImageSetup;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -31,11 +31,11 @@ class Talent {
 
 
     private BufferedImage setup(String imagePath, int sizeX, int sizeY) {
-        Utilities utilities = new Utilities();
+        ImageSetup imageSetup = new ImageSetup();
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/TalentIcons/" + imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, sizeX, sizeY);
+            scaledImage = imageSetup.scaleImage(scaledImage, sizeX, sizeY);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,7 @@ public class UI implements ActionListener, ChangeListener {
     private boolean once = false;
     private BufferedImage playerUI;
     public int loadingProgress = 0;
-
+    public Font pixel_dialog;
     private final Color lightBackground = new Color(192, 203, 220), red = new Color(0xFF0044), blue = new Color(0x0099DB);
     private final Color darkBackground = new Color(90, 105, 136);
 
@@ -194,6 +194,16 @@ public class UI implements ActionListener, ChangeListener {
         return MainGame.SCREEN_WIDTH / 2 - length / 2;
     }
 
+    public void getPixelFont() {
+        InputStream is = getClass().getResourceAsStream("/Fonts/PublicPixel-z84yD.ttf");
+        try {
+            assert is != null;
+            pixel_dialog = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -217,7 +227,7 @@ public class UI implements ActionListener, ChangeListener {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui.png"))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 330, 200);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 330, 200);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package gameworld;
 
-import main.system.Utilities;
+import main.system.ImageSetup;
 
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
@@ -128,12 +128,12 @@ public class Item {
     }
 
 
-    public BufferedImage setup(Utilities utilities, String imagePath) {
+    public BufferedImage setup(ImageSetup imageSetup, String imagePath) {
 
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream(imagePath))));
-            scaledImage = utilities.scaleImage(scaledImage, 48, 48);
+            scaledImage = imageSetup.scaleImage(scaledImage, 48, 48);
         } catch (IOException e) {
             e.printStackTrace();
         }

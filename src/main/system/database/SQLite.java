@@ -281,7 +281,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.AMULET.add(0, new_item);
         }
     }
@@ -300,7 +300,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.BOOTS.add(0, new_item);
         }
     }
@@ -319,7 +319,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.CHEST.add(0, new_item);
         }
     }
@@ -338,7 +338,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.HEAD.add(0, new_item);
         }
     }
@@ -357,7 +357,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.OFFHAND.add(0, new_item);
         }
     }
@@ -376,7 +376,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.ONEHAND.add(0, new_item);
         }
     }
@@ -395,7 +395,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.PANTS.add(0, new_item);
         }
     }
@@ -414,7 +414,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.RELICS.add(0, new_item);
         }
     }
@@ -433,7 +433,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.RINGS.add(0, new_item);
         }
     }
@@ -452,7 +452,7 @@ public class SQLite {
             if (new_item.description.length() >= limit * 2) {
                 new_item.description = new StringBuilder(new_item.description).insert(limit * 2, "\n").toString();
             }
-            new_item.icon = new_item.setup(mg.utilities, new_item.imagePath + ".png");
+            new_item.icon = new_item.setup(mg.imageSetup, new_item.imagePath + ".png");
             mg.TWOHANDS.add(0, new_item);
         }
     }

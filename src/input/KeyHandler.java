@@ -12,7 +12,8 @@ import static main.Runner.window;
 public class KeyHandler implements KeyListener {
     private final MainGame mg;
     //Keys
-    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, fpressed, TwoPressed, Epressed;
+    public boolean upPressed, downPressed, rightPressed, leftPressed, OnePressed, debugFps, multiplayer, f_pressed, TwoPressed, e_typed;
+    private boolean e_tpyed_before;
 
     public KeyHandler(MainGame mainGame) {
         this.mg = mainGame;
@@ -176,6 +177,11 @@ public class KeyHandler implements KeyListener {
                 window.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
             }
         }
+
+
+        if (code == 'e') {
+            e_typed = true;
+        }
     }
 
     @Override
@@ -205,11 +211,9 @@ public class KeyHandler implements KeyListener {
                 TwoPressed = true;
             }
             if (code == KeyEvent.VK_F) {
-                fpressed = true;
+                f_pressed = true;
             }
-            if (code == KeyEvent.VK_E) {
-                Epressed = true;
-            }
+
         }
         if (code == KeyEvent.VK_H) {
             debugFps = true;
@@ -242,13 +246,10 @@ public class KeyHandler implements KeyListener {
             mg.player.mana = mg.player.maxMana;
         }
         if (code == KeyEvent.VK_F) {
-            fpressed = false;
+            f_pressed = false;
         }
         if (code == KeyEvent.VK_M) {
             multiplayer = false;
-        }
-        if (code == KeyEvent.VK_E) {
-            Epressed = false;
         }
     }
 }

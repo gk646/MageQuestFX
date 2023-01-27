@@ -58,7 +58,7 @@ public class Owly extends Entity {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/owly/" + imagePath))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 32, 32);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 32, 32);
         } catch (IOException e) {
             e.printStackTrace();
         }

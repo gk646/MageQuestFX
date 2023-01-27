@@ -27,7 +27,7 @@ public class WorldRender {
         try {
             tileStorage[index] = new Tile();
             tileStorage[index].tileImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources/tiles/" + imagePath))));
-            tileStorage[index].tileImage = mg.utilities.scaleImage(tileStorage[index].tileImage, 48, 48);
+            tileStorage[index].tileImage = mg.imageSetup.scaleImage(tileStorage[index].tileImage, 48, 48);
             tileStorage[index].collision = collision;
         } catch (IOException e) {
             e.printStackTrace();

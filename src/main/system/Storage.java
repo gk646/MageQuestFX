@@ -77,7 +77,7 @@ public class Storage {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/resources" + imagePath))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 70, 92);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 70, 92);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class Storage {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/projectiles/Lightning/" + imagePath))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 70, 92);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 70, 92);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,7 +100,7 @@ public class Storage {
         BufferedImage scaledImage = null;
         try {
             scaledImage = ImageIO.read((Objects.requireNonNull(getClass().getResourceAsStream("/projectiles/EnergySphere/" + imagePath))));
-            scaledImage = mg.utilities.scaleImage(scaledImage, 70, 92);
+            scaledImage = mg.imageSetup.scaleImage(scaledImage, 70, 92);
         } catch (IOException e) {
             e.printStackTrace();
         }
