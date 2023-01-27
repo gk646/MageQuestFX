@@ -22,13 +22,13 @@ public class Utilities {
     public void checkTeleports() {
         if (mg.wControl.currentWorld == 0) {
             if (mg.playerX == 43 && mg.playerY == 34) {
-                mg.wControl.load_city1(5, 5);
+                mg.wControl.load_city1(10, 10);
                 mg.player.spawnLevel = 1;
             }
         }
         if (mg.wControl.currentWorld == 1) {
             if (mg.playerX == 499 && mg.playerY == 499) {
-                mg.wControl.load_city1(5, 5);
+                mg.wControl.load_city1(10, 10);
             }
         }
         if (mg.wControl.currentWorld == 2) {

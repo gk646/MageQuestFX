@@ -59,7 +59,7 @@ public class MiniMap {
                             }
                         }
                     }
-                } catch (ConcurrentModificationException ignored) {
+                } catch (ConcurrentModificationException | NullPointerException ignored) {
 
                 }
                 try {

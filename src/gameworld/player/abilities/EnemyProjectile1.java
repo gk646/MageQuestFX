@@ -43,8 +43,8 @@ public class EnemyProjectile1 extends Projectile {
     public void update() {
         outOfBounds();
         tileCollision();
-        worldPos.x += updateVector.x;
-        worldPos.y += updateVector.y;
+        worldPos.x += updateVector.x * movementSpeed;
+        worldPos.y += updateVector.y * movementSpeed;
     }
 
     public Point2D.Double getTrajectory(Point mousePosition) {

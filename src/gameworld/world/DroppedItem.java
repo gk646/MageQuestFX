@@ -30,19 +30,17 @@ public class DroppedItem {
         while (true) {
             item1 = goThroughArrays(mg.random.nextInt(0, 10));
             if (!item1.name.equals("FILLER")) {
-                if (mg.random.nextInt(0, 15) == 5) {
+                if (mg.random.nextInt(0, 25) == 5) {
                     if (item1.rarity == 1) {
                         return cloneItem(item1);
                     }
-                    if (item1.rarity == 2 && mg.random.nextInt(0, 2) == 1) {
+                    if (item1.rarity == 2 && mg.random.nextInt(0, 3) == 1) {
                         return cloneItem(item1);
                     }
-
-                    if (item1.rarity == 3 && mg.random.nextInt(0, 5) == 4) {
+                    if (item1.rarity == 3 && mg.random.nextInt(0, 7) == 4) {
                         return cloneItem(item1);
                     }
-
-                    if (item1.rarity == 4 && mg.random.nextInt(0, 11) == 10) {
+                    if (item1.rarity == 4 && mg.random.nextInt(0, 20) == 10) {
                         item1.rollQuality();
                         return cloneItem(item1);
                     }

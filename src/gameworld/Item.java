@@ -60,6 +60,7 @@ public class Item {
         this.description = description;
         this.stats = stats;
         getStats();
+        applyQuality();
         rollQuality();
     }
 
@@ -99,6 +100,12 @@ public class Item {
                 SPD = Integer.parseInt(m.group(1));
             }
         }
+    }
+
+    private void applyQuality() {
+        INT = INT * rarity;
+        VIT = VIT * rarity;
+        WIS = WIS * rarity;
     }
 
     public void rollQuality() {
