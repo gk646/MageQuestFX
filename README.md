@@ -32,6 +32,8 @@ A - LEFT
 S - DOWN  
 D - RIGHT
 
+E - Talk to NPC's
+
 ## Combat:
 
 Left Mouse Button - Primary Fire (1 Damage)  
@@ -44,7 +46,7 @@ N - opens talent window (stub for now)
 
 C - opens character panel  
 B - opens bag panel  
-N - talent panel
+N - talent panel  
 You can drag and drop Items to different slots and swap them in place
 
 ## Graphics:

@@ -67,7 +67,7 @@ public class NPC_Man extends Entity {
             playerTalkLocation = new Point(mg.player.worldX, mg.player.worldY);
         }
         if (onPath) {
-            moveToTile(goalTile.x, goalTile.y);
+            followPlayer(goalTile.x, goalTile.y);
         }
         mg.keyHandler.e_typed = false;
     }

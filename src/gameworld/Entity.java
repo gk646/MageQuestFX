@@ -261,11 +261,13 @@ public class Entity {
         }
     }
 
-    protected void followPlayer() {
-        int playerX = (mg.player.worldX + 24) / 48;
-        int playerY = (mg.player.worldY + 24) / 48;
+    protected void followPlayer(int playerX, int playerY) {
+        //playerX = (mg.player.worldX + 24) / 48;
+        //playerY = (mg.player.worldY + 24) / 48;
         if (!((worldX) / 48 == playerX && (worldY) / 48 == playerY)) {
             searchPathUncapped(playerX, playerY, 150);
+        } else {
+            onPath = false;
         }
     }
 

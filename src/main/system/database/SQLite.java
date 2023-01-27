@@ -29,7 +29,7 @@ public class SQLite {
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
-            this.conn = DriverManager.getConnection("jdbc:sqlite:items.sqlite");
+            this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
             Statement stmt = this.conn.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
