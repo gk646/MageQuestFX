@@ -4,6 +4,7 @@
 
 Welcome to Mage QuestFX my second Java game project!  
 Now rewritten in Java FX!
+Iam thinking about publishing it on steam for the fun of it so i stopped updating it here for the moment.
 
 Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which allowed me to start initially.  
 I took some inspiration from his implementation but started to develop my own ideas early on.
