@@ -25,6 +25,7 @@ import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.State;
+import main.system.sound.Sound;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.GameMap;
@@ -103,7 +104,7 @@ public class MainGame {
     private Multiplayer multiplayer;
     private int counter = 0;
     private ENT_Control ent_control;
-    //public Sound sound = new Sound();
+    public Sound sound;
 
 
     /**
@@ -366,7 +367,7 @@ public class MainGame {
         npcControl = new NPC_Control(this);
         gameMap = new GameMap(this);
         FonT.loadFonts();
-
+        sound = new Sound();
         //100%
         ui.updateLoadingScreen(16, gc);
         util.loadSpawnLevel();

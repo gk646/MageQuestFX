@@ -90,7 +90,7 @@ class DroppedItemTest {
     }
 
     private void calcPlayerStats() {
-        mg.player.maxHealth = (int) ((9.0f + mg.player.vitality * 2 + mg.player.endurance / 2.0f) * Math.sqrt(mg.player.level));
+        mg.player.maxHealth = (int) ((9.0f + mg.player.vitality * 1.5f + mg.player.endurance / 2.0f) * Math.sqrt(mg.player.level));
         mg.player.maxMana = (int) ((19.0f + mg.player.intellect * 3 + mg.player.wisdom / 2.0f) * Math.sqrt(mg.player.level));
         mg.player.manaRegeneration = ((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.wisdom * 5 + mg.player.intellect) * (1.0f - (mg.player.level / 65.0f))) * 100.0f) / 100.0f) / 60);
         mg.player.healthRegeneration = (float) (((0.05f + Math.sqrt(mg.player.endurance * 2 + mg.player.vitality)) * Math.sqrt(mg.player.level)) / 80);
