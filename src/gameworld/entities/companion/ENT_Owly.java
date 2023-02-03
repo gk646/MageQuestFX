@@ -1,0 +1,103 @@
+package gameworld.entities.companion;
+
+import gameworld.entities.ENTITY;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import main.MainGame;
+
+import java.awt.Rectangle;
+import java.util.Objects;
+
+public class ENT_Owly extends ENTITY {
+    /**
+     * A possible companion
+     *
+     * @param mg        Maingame instance
+     * @param worldX    worldX coordinate
+     * @param worldY    worldY coordinate
+     * @param maxHealth maximum health
+     */
+    public ENT_Owly(MainGame mg, int worldX, int worldY, int maxHealth) {
+        this.mg = mg;
+        //Setting default values
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.worldX = worldX;
+        this.worldY = worldY;
+        movementSpeed = 4;
+        direction = "updownleftright";
+        this.entityHeight = 48;
+        this.entityWidth = 48;
+        this.collisionBox = new Rectangle(6, 6, 30, 30);
+        this.onPath = true;
+        getOwlyImage();
+        this.searchTicks = 60;
+        updatePos();
+    }
+
+    @Override
+    public void update() {
+        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        if (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize) {
+            onPath = true;
+        }
+        owlyMovement();
+        searchTicks++;
+    }
+
+    private void updatePos() {
+        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+    }
+
+    private void getOwlyImage() {
+        entityImage1 = setup("owly01.png");
+        entityImage2 = setup("owly02.png");
+        entityImage3 = setup("owly03.png");
+        entityImage4 = setup("owly04.png");
+        entityImage5 = setup("owly05.png");
+        entityImage6 = setup("owly06.png");
+    }
+
+    private Image setup(String imagePath) {
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/owly/" + imagePath)));
+    }
+
+    @Override
+    public void draw(GraphicsContext g2) {
+        if (spriteCounter <= 8) {
+            g2.drawImage(entityImage1, screenX, screenY, entityWidth, entityHeight);
+        }
+        if (spriteCounter >= 9 && spriteCounter <= 17) {
+            g2.drawImage(entityImage2, screenX, screenY, entityWidth, entityHeight);
+        }
+        if (spriteCounter >= 18 && spriteCounter <= 24) {
+            g2.drawImage(entityImage3, screenX, screenY, entityWidth, entityHeight);
+        }
+        if (spriteCounter >= 25 && spriteCounter <= 33) {
+            g2.drawImage(entityImage4, screenX, screenY, entityWidth, entityHeight);
+        }
+        if (spriteCounter >= 34 && spriteCounter <= 42) {
+            g2.drawImage(entityImage5, screenX, screenY, entityWidth, entityHeight);
+        }
+        if (spriteCounter >= 43 && spriteCounter <= 51) {
+            g2.drawImage(entityImage6, screenX, screenY, entityWidth, entityHeight);
+            spriteCounter = 0;
+        }
+
+        spriteCounter++;
+    }
+
+    private void owlyMovement() {
+        if (onPath && searchTicks >= Math.random() * 45) {
+            getNearestPlayer();
+            searchPath(goalCol, goalRow, 50);
+            searchTicks = 0;
+        } else if (onPath) {
+            trackPath(goalCol, goalRow);
+        }
+    }
+}
+
+

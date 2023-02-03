@@ -1,0 +1,114 @@
+package gameworld.dialogue;
+
+import gameworld.entities.ENTITY;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import main.MainGame;
+import main.system.ui.FonT;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+abstract public class Dialog {
+    //Type
+    //0 = tutorial npc
+    //1 = trader
+    //2 = Generic person
+    protected int stage = 1;
+    protected MainGame mg;
+    protected int type;
+    public String text;
+    public boolean block;
+    private int textCounter;
+
+    /**
+     * The dialog framework
+     *
+     * @param mg   mainGame to access cross-class information
+     * @param type to choose the type for dialog text (also quest id)
+     */
+    protected Dialog(MainGame mg, int type) {
+    }
+
+    public void draw(GraphicsContext gc, ENTITY entity) {
+        gc.setFont(FonT.minecraftItalic17);
+        gc.setFill(Color.BLACK);
+        gc.fillRoundRect(entity.worldX - mg.player.worldX + mg.player.screenX - 24 - 124, entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115, 373, 120, 25, 25);
+        gc.setLineWidth(2);
+        gc.setStroke(Color.WHITE);
+        gc.setFill(Color.WHITE);
+        gc.strokeRoundRect(entity.worldX - mg.player.worldX + mg.player.screenX - 24 - 124, entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115, 373, 120, 25, 25);
+        int stringY = entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115 + 6;
+        for (String string : text.split("\n")) {
+            gc.fillText(string, entity.worldX - mg.player.worldX + mg.player.screenX - 24 + 5 - 124, stringY += 15);
+        }
+    }
+
+    public void load_text() {
+        try {
+            if (type == 1) {
+                InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/tutorial_npc.txt");
+                assert inputStream != null;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                text = readLine(stage, bufferedReader);
+            } else if (type == 2) {
+                InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/traders.txt");
+                assert inputStream != null;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                text = readLine(stage, bufferedReader);
+            }
+            if (text == null) {
+                text = "...";
+            }
+            if (text.length() >= 28) {
+                text = insertNewLine(text);
+            }
+            mg.inputH.e_typed = false;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String insertNewLine(String str) {
+        StringBuilder sb = new StringBuilder();
+        String[] words = str.split("\\s+");
+        int count = 0;
+        for (String word : words) {
+            count += word.length();
+            if (count + word.length() > 40) {
+                sb.append("\n");
+                count = 0;
+            }
+            sb.append(word);
+            sb.append(" ");
+            count++;
+        }
+        return sb.toString();
+    }
+
+    public void next_stage() {
+        stage++;
+        load_text();
+        mg.inputH.e_typed = false;
+    }
+
+    private String readLine(int line, BufferedReader breader) throws IOException {
+        String line_text;
+        int currentLine = 1;
+        while ((line_text = breader.readLine()) != null) {
+            if (currentLine == line) {
+                break;
+            }
+            currentLine++;
+        }
+        breader.close();
+        return line_text;
+    }
+
+    /**
+     * allows the dialog to check for stages and update progress
+     */
+    abstract public void script();
+}
