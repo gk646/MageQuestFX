@@ -1,9 +1,9 @@
-# Mage Quest_2D
+# Mage Quest FX
 
 ![Screenshot](thumbnail.png)
 
-Welcome to Mage Quest_2D my second Java game project!  
-Now with playable .jar or .exe + JRE (if you don't want to install Java)!
+Welcome to Mage QuestFX my second Java game project!  
+Now rewritten in Java FX!
 
 Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which allowed me to start initially.  
 I took some inspiration from his implementation but started to develop my own ideas early on.
@@ -16,7 +16,7 @@ Starting with the release of Chat GPT from OpenAI, I began including AI in perfo
 generating comments, generating first drafts of new ideas etc.
 As of late I also started to use AI generated images from the Dall E 2 model. It's great!
 
-### Multiplayer:
+### Multiplayer (not updated since v2.+):
 
 You can start the same programm twice on the same PC (localhost) or different PC's ( in the same network) and play
 together!  
@@ -53,6 +53,7 @@ You can drag and drop Items to different slots and swap them in place
 
 I made most of the background tiles myself, I did take inspiration from @RyiSnow's textures and games like
 HeroSiege and other sources for some abilities etc. The pixel font called x12y16pxMaruMonica was made by hicc.
+I started making the game in Swing but rewrote it to JavaFX which improved rendering time by about 15x.
 
 ## Roadmap:
 
