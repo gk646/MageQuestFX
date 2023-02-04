@@ -69,6 +69,7 @@ public class MainGame {
     public final ArrayList<ITEM> RELICS = new ArrayList<>();
     public final ArrayList<ITEM> RINGS = new ArrayList<>();
     public final ArrayList<ITEM> TWOHANDS = new ArrayList<>();
+    public final ArrayList<ITEM> MISC = new ArrayList<>();
 
     public final int tileSize = 48;
     public final UI ui = new UI(this);

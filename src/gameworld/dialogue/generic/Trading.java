@@ -11,8 +11,8 @@ public class Trading extends Dialog {
      * @param mg   maingame instance
      * @param type
      */
-    protected Trading(MainGame mg, int type) {
-        super(mg, type);
+    protected Trading(MainGame mg, int type, NPC npc) {
+        super(mg, type, npc);
         this.type = type;
         this.mg = mg;
         stage = 1;

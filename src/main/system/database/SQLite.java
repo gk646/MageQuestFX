@@ -41,6 +41,7 @@ public class SQLite {
             searchRELICS(stmt);
             searchRINGS(stmt);
             searchTWOHANDS(stmt);
+            searchMISC(stmt);
             inverseArrayLists();
             readPlayerInventory(stmt);
             readPlayerStats(stmt);
@@ -457,6 +458,20 @@ public class SQLite {
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.TWOHANDS.add(0, new_ITEM);
+        }
+    }
+
+    private void searchMISC(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM MISC_ITEMS");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            new_ITEM.description = insertNewLine(new_ITEM.description);
+            new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
+            mg.MISC.add(0, new_ITEM);
         }
     }
 }
