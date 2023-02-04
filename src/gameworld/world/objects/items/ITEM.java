@@ -12,7 +12,7 @@ public class ITEM {
     public final int i_id;
     public final String name;
     public final int rarity;
-    public final String stats;
+    public String stats;
     public final String type;
     /* H - Head slot
        C - chest
@@ -76,6 +76,9 @@ public class ITEM {
         this.stats = stats;
         this.level = 1;
         this.icon = setup(imagePath);
+        if (this.stats == null) {
+            this.stats = "a";
+        }
         getStats();
     }
 
@@ -90,6 +93,9 @@ public class ITEM {
         this.level = level;
         this.icon = setup(imagePath);
         this.quality = quality;
+        if (this.stats == null) {
+            this.stats = "a";
+        }
         getStats();
         applyMultipliers();
     }
