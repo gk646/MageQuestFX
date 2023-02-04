@@ -298,7 +298,7 @@ public class MainGame {
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + difference), 500, 600);
             gc.fillText((24 + Player.worldX) / 48 + " " + (Player.worldY + 24) / 48, 500, 650);
-            gc.fillText((Player.worldX) + " " + (Player.worldY), 500, 700);
+            gc.fillText((int) (Player.worldX / 48) + " " + (int) (Player.worldY / 48), 500, 700);
         }
     }
 
@@ -382,8 +382,8 @@ public class MainGame {
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
-        ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 1));
-        Player.worldX = 35 * 48;
+        ENTITIES.add(new ENT_Shooter(this, 36 * 48, 19 * 48, 1));
+        Player.worldX = 32 * 48;
         Player.worldY = 19 * 48;
         loadingScreen = false;
         gameState = State.TITLE;

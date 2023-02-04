@@ -124,10 +124,10 @@ public class CollisionChecker {
     }
 
     public void checkPlayerAgainstTile(Player player) {
-        int entityLeftWorldX = (int) (Player.worldX + player.collisionBox.x);
-        int entityRightWorldX = (int) (Player.worldX + player.collisionBox.x + player.collisionBox.width);
-        int entityTopWorldY = (int) (Player.worldY + player.collisionBox.y);
-        int entityBottomWorldY = (int) (Player.worldY + player.collisionBox.y + player.collisionBox.height);
+        int entityLeftWorldX = (int) (Player.worldX + 8);
+        int entityRightWorldX = (int) (Player.worldX + 37);
+        int entityTopWorldY = (int) (Player.worldY + 8);
+        int entityBottomWorldY = (int) (Player.worldY + 37);
 
         int entityLeftCol;
         int entityRightCol;

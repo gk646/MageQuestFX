@@ -79,13 +79,13 @@ abstract public class ENTITY {
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-        if (enLeftX < nextX) {
+        if (enLeftX < nextX && !collisionRight) {
             worldX += movementSpeed;
-        } else if (enLeftX > nextX) {
+        } else if (enLeftX > nextX && !collisionLeft) {
             worldX -= movementSpeed;
-        } else if (enTopY < nextY) {
+        } else if (enTopY < nextY && !collisionDown) {
             worldY += movementSpeed;
-        } else if (enTopY > nextY) {
+        } else if (enTopY > nextY && !collisionUp) {
             worldY -= movementSpeed;
         } else if (enRightX > nextX) {
             worldX -= movementSpeed;
@@ -109,14 +109,12 @@ abstract public class ENTITY {
     protected void searchPath(int goalCol, int goalRow, int maxDistance) {
         int startCol = (worldX + 24) / 48;
         int startRow = (worldY + 24) / 48;
-        System.out.println(startCol + "  " + startRow + "  h   " + goalCol + " " + goalRow);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
         } else if (mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
-            System.out.println(nextX + " " + nextY);
             decideMovement(nextX, nextY);
             nextCol1 = mg.pathF.pathList.get(0).col;
             nextRow1 = mg.pathF.pathList.get(0).row;
@@ -250,3 +248,54 @@ abstract public class ENTITY {
 
     abstract public void update();
 }
+
+/*
+
+
+        int enLeftX = worldX + collisionBox.x;
+        int enRightX = worldX + collisionBox.x + collisionBox.width;
+        int enTopY = worldY + collisionBox.y;
+        int enBottomY = worldY + collisionBox.y + collisionBox.height;
+        collisionRight = false;
+        collisionLeft = false;
+        collisionDown = false;
+        collisionUp = false;
+        mg.collisionChecker.checkEntityAgainstTile(this);
+        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + 48) {
+            worldY -= movementSpeed;
+        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + 48) {
+            worldY += movementSpeed;
+        } else if (enTopY >= nextY && enBottomY < nextY + 48) {
+            if (enLeftX > nextX) {
+                worldX -= movementSpeed;
+            }
+            if (enLeftX < nextX) {
+                worldX += movementSpeed;
+            }
+        } else if (enTopY > nextY && enLeftX > nextX) {
+            if (collisionUp) {
+                worldX -= movementSpeed;
+            } else {
+                worldY -= movementSpeed;
+            }
+        } else if (enTopY > nextY && enLeftX < nextX) {
+            if (collisionUp) {
+                worldX += movementSpeed;
+            } else {
+                worldY -= movementSpeed;
+            }
+        } else if (enTopY < nextY && enLeftX > nextX) {
+            if (collisionDown) {
+                worldX -= movementSpeed;
+            } else {
+                worldY += movementSpeed;
+            }
+        } else if (enTopY < nextY && enLeftX < nextX) {
+            if (collisionDown) {
+                worldX += movementSpeed;
+            } else {
+                worldY += movementSpeed;
+            }
+        }
+    }
+ */
