@@ -1,6 +1,5 @@
 package gameworld.entities.npcs;
 
-import gameworld.dialogue.Dialog;
 import gameworld.dialogue.generic.Tutorial;
 import gameworld.entities.NPC;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,17 +11,11 @@ import java.awt.Rectangle;
 import java.util.Objects;
 
 public class NPC_Man extends NPC {
-    private final Dialog dial;
-
-    private Image player2;
-    private boolean show_dialog;
-    private Point playerTalkLocation;
-    private int dialog_counter;
 
 
     public NPC_Man(MainGame mainGame, int dialog_type, int x, int y) {
         this.mg = mainGame;
-        this.dial = new Tutorial(mg, dialog_type);
+        this.dial = new Tutorial(mg, dialog_type, this);
         goalTile = new Point(34, 34);
         //Setting default values
         getPlayerImage();

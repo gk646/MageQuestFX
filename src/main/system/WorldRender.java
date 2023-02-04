@@ -32,6 +32,9 @@ public class WorldRender {
 
     private void getTileImage() {
 
+        //WOOD
+        setupTiles(54, "wooden_fence.png", true);
+
         //BRICKS
         setupTiles(56, "grey_brick_wall.png", true);
         setupTiles(57, "brick_wall.png", true);

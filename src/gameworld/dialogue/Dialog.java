@@ -6,7 +6,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.FonT;
+import main.system.ui.inventory.UI_InventorySlot;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,7 @@ abstract public class Dialog {
     public String text;
     public boolean block;
     private int textCounter;
+    protected NPC npc;
 
     /**
      * The dialog framework
@@ -30,7 +33,10 @@ abstract public class Dialog {
      * @param mg   mainGame to access cross-class information
      * @param type to choose the type for dialog text (also quest id)
      */
-    protected Dialog(MainGame mg, int type) {
+    protected Dialog(MainGame mg, int type, NPC npc) {
+        this.npc = npc;
+        this.type = type;
+        this.mg = mg;
     }
 
     public void draw(GraphicsContext gc, ENTITY entity) {
@@ -112,4 +118,44 @@ abstract public class Dialog {
      * allows the dialog to check for stages and update progress
      */
     abstract public void script(NPC npc);
+
+    /**
+     * Move the npc to a tile and proceed when he gets there
+     *
+     * @param x tile x
+     * @param y tile y
+     */
+    protected void moveToTile(int x, int y) {
+        npc.onPath = true;
+        npc.goalTile = new Point(x, y);
+        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
+            next_stage();
+            npc.onPath = false;
+        }
+    }
+
+    /**
+     * @param distance distance
+     * @param tilex    x of tile
+     * @param tily     y of tile
+     * @return true if the player is X close to (tileX, tileY)
+     */
+    protected boolean playerXCloseToTile(int distance, int tilex, int tily) {
+        return new Point((npc.worldX + 24) / 48, (npc.worldY + 24) / 48).distance(tilex, tily) <= 6;
+    }
+
+    /**
+     * true if the play bags contain item with name
+     *
+     * @param name the item name as string
+     * @return true if item is in player bag
+     */
+    protected boolean playerBagsContainItem(String name) {
+        for (UI_InventorySlot invSlot : mg.inventP.bag_Slots) {
+            if (invSlot.item.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

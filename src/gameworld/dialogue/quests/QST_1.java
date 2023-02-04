@@ -7,8 +7,8 @@ import main.MainGame;
 public class QST_1 extends Dialog {
 
 
-    public QST_1(MainGame mg, int type) {
-        super(mg, type);
+    public QST_1(MainGame mg, int type, NPC npc) {
+        super(mg, type, npc);
         System.out.println(type);
 
         load_text();
