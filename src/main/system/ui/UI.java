@@ -108,8 +108,7 @@ public class UI {
         gc.fillRect(123, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         gc.drawImage(playerUI, 40, 40, 330, 200);
         gc.setFill(Color.WHITE);
-        //gc.setFont(gc.getFont().deriveFont(Font.BOLD, 20f));
-        gc.setFont(maruMonica30);
+        gc.setFont(FonT.minecraftBoldItalic15);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
         gc.setEffect(dropShadow);
@@ -136,10 +135,6 @@ public class UI {
         if (commandNum == 1) {
             gc.fillText(">", 500 - 25, 700);
         }
-    }
-
-    public void drawQuitTutorial(GraphicsContext gc) {
-        gc.fillText("Do you wanna quit the tutorial?", 500, 500);
     }
 
     private void drawLoadingScreen(GraphicsContext gc) {

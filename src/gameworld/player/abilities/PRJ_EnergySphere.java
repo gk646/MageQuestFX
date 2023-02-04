@@ -58,7 +58,7 @@ public class PRJ_EnergySphere extends PRJ_Control {
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {
-        double angle = Math.atan2(mousePosition.y - mg.HALF_HEIGHT - 24, mousePosition.x - mg.HALF_WIDTH - 24);
+        double angle = Math.atan2(mousePosition.y - mg.player.screenY, mousePosition.x - mg.player.screenX);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
