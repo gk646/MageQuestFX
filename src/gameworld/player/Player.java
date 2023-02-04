@@ -6,6 +6,7 @@ import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.enums.Map;
 import main.system.ui.inventory.UI_InventorySlot;
@@ -44,7 +45,9 @@ public class Player extends ENTITY {
     private int levelUpExperience = 10;
     private int quadrantTimer;
     private boolean respawnsDone;
+    // PLAYER X AND Y ALWAYS +24
     public static float worldX, worldY;
+    // screenx is half width -24
     public static int screenX, screenY;
 
     public Player(MainGame mainGame) {
@@ -58,8 +61,8 @@ public class Player extends ENTITY {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        worldX = 0;
-        worldY = 0;
+        worldX = 24;
+        worldY = 24;
         direction = "";
         getPlayerImage();
         this.collisionBox = new Rectangle(8, 8, 32, 32);
@@ -69,8 +72,8 @@ public class Player extends ENTITY {
     }
 
     public void setPosition(int x, int y) {
-        worldX = x;
-        worldY = y;
+        worldX = x + 24;
+        worldY = y + 24;
     }
 
     public void updateEquippedItems() {
@@ -226,8 +229,10 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
-
-        gc.drawImage(entityImage1, screenX, screenY, 48, 48);
+        //gc.drawImage(entityImage1, screenX, screenY, 48, 48);
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(1);
+        gc.strokeRect(960 - 24, 540 - 24, 48, 48);
     }
 
     private void getPlayerImage() {
@@ -241,7 +246,6 @@ public class Player extends ENTITY {
         collisionUp = false;
         direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
-
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
                 worldX -= movementSpeed;
@@ -268,7 +272,7 @@ public class Player extends ENTITY {
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.gameMap.mapMover.contains(mg.inputH.lastMousePosition)) {
             if (mg.inputH.mouse1Pressed && cooldownPrimary == 20) {
-                mg.PRJControls.add(new PRJ_AutoShot(mg));
+                mg.PRJControls.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
                 cooldownPrimary = 0;
                 getDurabilityDamageWeapon();
             }

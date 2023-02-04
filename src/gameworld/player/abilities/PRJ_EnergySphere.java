@@ -4,6 +4,7 @@ import gameworld.PRJ_Control;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.Storage;
 import main.system.ui.Effects;
 
 import java.awt.Point;
@@ -34,19 +35,20 @@ public class PRJ_EnergySphere extends PRJ_Control {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setEffect(Effects.blueGlow);
-        if (spriteCounter <= 12) {
-            gc.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-        } else if (spriteCounter <= 24) {
-            gc.drawImage(projectileImage2, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-        } else if (spriteCounter <= 36) {
-            gc.drawImage(projectileImage3, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-        } else if (spriteCounter <= 48) {
-            gc.drawImage(projectileImage4, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-        } else if (spriteCounter <= 60) {
-            gc.drawImage(projectileImage5, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-        } else if (spriteCounter <= 72) {
-            gc.drawImage(projectileImage6, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
-            spriteCounter = 0;
+        int spriteIndex = spriteCounter % 60 / 10;
+        switch (spriteIndex) {
+            case 0 ->
+                    gc.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
+            case 1 ->
+                    gc.drawImage(projectileImage2, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
+            case 2 ->
+                    gc.drawImage(projectileImage3, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
+            case 3 ->
+                    gc.drawImage(projectileImage4, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
+            case 4 ->
+                    gc.drawImage(projectileImage5, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
+            case 5 ->
+                    gc.drawImage(projectileImage6, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         }
         spriteCounter++;
         gc.setEffect(null);
@@ -66,11 +68,11 @@ public class PRJ_EnergySphere extends PRJ_Control {
     }
 
     private void getPlayerImage() {
-        projectileImage1 = mg.imageSto.secondaryFire1;
-        projectileImage2 = mg.imageSto.secondaryFire2;
-        projectileImage3 = mg.imageSto.secondaryFire3;
-        projectileImage4 = mg.imageSto.secondaryFire4;
-        projectileImage5 = mg.imageSto.secondaryFire5;
-        projectileImage6 = mg.imageSto.secondaryFire6;
+        projectileImage1 = Storage.secondaryFire1;
+        projectileImage2 = Storage.secondaryFire2;
+        projectileImage3 = Storage.secondaryFire3;
+        projectileImage4 = Storage.secondaryFire4;
+        projectileImage5 = Storage.secondaryFire5;
+        projectileImage6 = Storage.secondaryFire6;
     }
 }

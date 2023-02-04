@@ -4,6 +4,7 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
@@ -156,10 +157,8 @@ public class MainGame {
                             gameMap.getImage();
                         }
                         player.pickupDroppedItem();
-
                         inventP.interactWithWindows();
                         getPlayerTile();
-
                         util.checkTeleports();
                     }
                     difference = 0;
@@ -178,10 +177,7 @@ public class MainGame {
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.007_9),
-                ae -> {
-                    drawGame(gc);
-                    counter++;
-                });
+                ae -> drawGame(gc));
 
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
@@ -262,6 +258,7 @@ public class MainGame {
             ui.draw(gc);
             qPanel.draw(gc);
             sBar.draw(gc);
+            gc.fillRect(955, 535, 11, 11);
             if (showMap) {
                 gameMap.draw(gc);
             }
@@ -296,10 +293,12 @@ public class MainGame {
         long drawEnd = System.nanoTime();
         long difference = drawEnd - drawStart;
         if (inputH.debugFps) {
-            gc.setFill(Color.WHITE);
+            gc.setFont(FonT.minecraftBold30);
+            gc.setFill(Color.BLACK);
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + difference), 500, 600);
             gc.fillText((24 + Player.worldX) / 48 + " " + (Player.worldY + 24) / 48, 500, 650);
+            gc.fillText((Player.worldX) + " " + (Player.worldY), 500, 700);
         }
     }
 
@@ -379,11 +378,13 @@ public class MainGame {
         util.loadSpawnLevel();
         countItems();
         gameMap.getImage();
-
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
+        ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 1));
+        Player.worldX = 35 * 48;
+        Player.worldY = 19 * 48;
         loadingScreen = false;
         gameState = State.TITLE;
         startThreads();
@@ -422,3 +423,11 @@ public class MainGame {
         playerY = (int) ((Player.worldY + 24) / 48);
     }
 }
+
+/*
+
+
+
+
+
+ */

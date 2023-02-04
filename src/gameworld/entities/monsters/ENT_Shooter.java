@@ -5,6 +5,7 @@ import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.Storage;
 
 import java.awt.Rectangle;
 
@@ -19,7 +20,8 @@ public class ENT_Shooter extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Shooter(int worldX, int worldY, int level) {
+    public ENT_Shooter(MainGame mg, int worldX, int worldY, int level) {
+        this.mg = mg;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
@@ -39,14 +41,15 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
-        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
-        onPath = !playerTooFarAbsolute() && (worldX / mg.tileSize != Player.worldX / mg.tileSize || worldY / mg.tileSize != Player.worldY / mg.tileSize);
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
+        onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX) / 48 || worldY / 48 != (Player.worldY) / 48);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             mg.PRJControls.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
             shotCooldown = 0;
         }
-        shooterMovement();
+        getNearestPlayer();
+        searchPath(goalCol, goalRow, 16);
         searchTicks++;
         shotCooldown++;
     }
@@ -63,7 +66,7 @@ public class ENT_Shooter extends ENTITY {
 
 
     private void getDisplayImage() {
-        enemyImage = mg.imageSto.shooterImage1;
+        enemyImage = Storage.shooterImage1;
     }
 
 

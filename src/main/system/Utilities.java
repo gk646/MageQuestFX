@@ -49,7 +49,7 @@ public class Utilities {
         if (mg.player.spawnLevel == 0) {
             mg.wControl.load_tutorial(4, 4);
         } else if (mg.player.spawnLevel == 1) {
-            mg.wControl.load_city1(11, 11);
+            mg.wControl.load_city1(40, 18);
         }
     }
 

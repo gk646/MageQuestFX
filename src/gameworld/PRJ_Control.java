@@ -11,10 +11,12 @@ import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
+import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.CollisionChecker;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -114,6 +116,7 @@ public class PRJ_Control {
             mg.player.getExperience(entity);
             entity.dead = true;
             mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, entity.worldX, entity.worldY, entity.level));
+            mg.WORLD_DROPS.add(new DRP_Coin(entity.worldX + mg.random.nextInt(41) - 20, entity.worldY + mg.random.nextInt(41) - 20));
         } else {
             entity.hpBarOn = true;
         }
@@ -130,7 +133,7 @@ public class PRJ_Control {
     }
 
     protected void tileCollision() {
-        mg.collisionChecker.checkProjectileAgainstTile(this);
+        CollisionChecker.checkProjectileAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }

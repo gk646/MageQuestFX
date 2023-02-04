@@ -17,7 +17,8 @@ public class ENT_Grunt extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Grunt(int worldX, int worldY, int level) {
+    public ENT_Grunt(MainGame mg, int worldX, int worldY, int level) {
+        this.mg = mg;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
@@ -39,7 +40,7 @@ public class ENT_Grunt extends ENTITY {
     public void update() {
         screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
         screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
-        onPath = !playerTooFarAbsolute() && (worldX / 48 != Player.worldX / 48 || worldY / 48 != Player.worldY / 48);
+        onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX + 24) / 48 || worldY / 48 != (Player.worldY + 24) / 48);
         gruntMovement();
         hitDelay++;
         searchTicks++;

@@ -8,10 +8,6 @@ import javafx.scene.image.Image;
 import main.MainGame;
 
 public class DRP_DroppedItem extends DROP {
-
-
-    public final ITEM item;
-
     private final MainGame mg;
     public Image droppedIcon;
 

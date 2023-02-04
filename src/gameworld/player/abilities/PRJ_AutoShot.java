@@ -3,7 +3,7 @@ package gameworld.player.abilities;
 import gameworld.PRJ_Control;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
-import main.MainGame;
+import main.system.Storage;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
@@ -12,22 +12,19 @@ public class PRJ_AutoShot extends PRJ_Control {
 
     /**
      * What happens when you press main mouse button
-     *
-     * @param mg to access display functions
      */
-    public PRJ_AutoShot(MainGame mg) {
-        super(mg);
+    public PRJ_AutoShot(int x, int y) {
 
         //-------VALUES-----------
         this.movementSpeed = 7;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
-        this.collisionBox = mg.imageSto.box_primaryFire;
+        this.collisionBox = Storage.box_primaryFire;
         this.direction = "downleftrightup";
         //------POSITION-----------
         this.worldPos = new Point2D.Double(Player.worldX + 48 - projectileHeight / 2.0f, Player.worldY + 48 - projectileHeight / 2.0f);
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
-        this.updateVector = getTrajectory(mg.inputH.lastMousePosition);
+        this.updateVector = getTrajectory(new Point(x, y));
         getPlayerImage();
     }
 
@@ -51,6 +48,6 @@ public class PRJ_AutoShot extends PRJ_Control {
 
 
     private void getPlayerImage() {
-        projectileImage1 = mg.imageSto.primaryFire1;
+        projectileImage1 = Storage.primaryFire1;
     }
 }

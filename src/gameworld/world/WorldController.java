@@ -5,6 +5,7 @@ import gameworld.world.maps.MAP_City1;
 import gameworld.world.maps.MAP_OverWorld;
 import gameworld.world.maps.MAP_Tutorial;
 import main.MainGame;
+import main.system.WorldRender;
 import main.system.enums.Map;
 
 import java.awt.Point;
@@ -50,7 +51,7 @@ public class WorldController {
                 quadrant.spawned = false;
             }
         }
-        mg.wRender.worldData = overWorldMapData;
+        WorldRender.worldData = overWorldMapData;
         mg.wRender.worldSize = overWorldSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
@@ -58,7 +59,7 @@ public class WorldController {
     public void load_tutorial(int xTile, int yTile) {
         currentWorld = Map.Tutorial;
         clearWorldArrays();
-        mg.wRender.worldData = tutorialMapData;
+        WorldRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
@@ -66,7 +67,7 @@ public class WorldController {
     public void load_city1(int xTile, int yTile) {
         currentWorld = Map.City1;
         clearWorldArrays();
-        mg.wRender.worldData = city1_MapData;
+        WorldRender.worldData = city1_MapData;
         mg.wRender.worldSize = tutorialSize;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
@@ -88,8 +89,11 @@ public class WorldController {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             for (int b = 0; b < 10; b++) {
-                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30);
-                counter++;
+                if (counter != 99) {
+                    overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30);
+                    counter++;
+                }
+                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 0);
             }
         }
     }

@@ -4,6 +4,7 @@ import gameworld.dialogue.Dialog;
 import gameworld.entities.NPC;
 import gameworld.entities.monsters.ENT_Grunt;
 import main.MainGame;
+import main.system.WorldRender;
 import main.system.enums.Map;
 
 public class Tutorial extends Dialog {
@@ -28,9 +29,9 @@ public class Tutorial extends Dialog {
         }
         if (stage == 10) {
             gruntkillcounter = mg.prj_control.GruntKilledCounter;
-            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 30, 1));
-            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 34, 1));
-            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 38, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 30, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 34, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 38, 1));
             next_stage();
             block = true;
             mg.sqLite.updateQuestFacts(1, 1, 1);
@@ -45,7 +46,7 @@ public class Tutorial extends Dialog {
         if (stage == 15) {
             mg.sqLite.updateQuestFacts(1, 2, 1);
             if (mg.wControl.currentWorld == Map.Tutorial) {
-                mg.wRender.worldData[48][34] = 4;
+                WorldRender.worldData[48][34] = 4;
             }
         }
         if (stage == 16) {

@@ -11,15 +11,15 @@ import java.util.Objects;
 
 
 public class WorldRender {
-    public final Tile[] tileStorage;
+    public static Tile[] tileStorage;
     private final MainGame mg;
-    public int[][] worldData;
+    public static int[][] worldData;
     public Point worldSize;
     private int worldCol, worldRow;
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
-        this.tileStorage = new Tile[75];
+        tileStorage = new Tile[75];
         getTileImage();
     }
 
@@ -97,8 +97,8 @@ public class WorldRender {
         int maxRow = Math.min(worldRow + 24, worldSize.y);
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
-                Player.screenX = mg.HALF_WIDTH;
-                Player.screenY = mg.HALF_HEIGHT;
+                Player.screenX = mg.HALF_WIDTH - 24;
+                Player.screenY = mg.HALF_HEIGHT - 24;
                 if (Player.screenX > Player.worldX) {
                     Player.screenX = (int) Player.worldX;
                 }

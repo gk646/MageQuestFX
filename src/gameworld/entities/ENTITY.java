@@ -70,50 +70,31 @@ abstract public class ENTITY {
 
 
     private void decideMovement(int nextX, int nextY) {
-        int enLeftX = worldX + collisionBox.x;
-        int enRightX = worldX + collisionBox.x + collisionBox.width;
-        int enTopY = worldY + collisionBox.y;
-        int enBottomY = worldY + collisionBox.y + collisionBox.height;
+        int enLeftX = worldX;
+        int enRightX = worldX + entityWidth;
+        int enTopY = worldY;
+        int enBottomY = worldY + entityHeight;
         collisionRight = false;
         collisionLeft = false;
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + 48) {
-            worldY -= movementSpeed;
-        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + 48) {
+        if (enLeftX < nextX) {
+            worldX += movementSpeed;
+        } else if (enLeftX > nextX) {
+            worldX -= movementSpeed;
+        } else if (enTopY < nextY) {
             worldY += movementSpeed;
-        } else if (enTopY >= nextY && enBottomY < nextY + 48) {
-            if (enLeftX > nextX) {
-                worldX -= movementSpeed;
-            }
-            if (enLeftX < nextX) {
-                worldX += movementSpeed;
-            }
-        } else if (enTopY > nextY && enLeftX > nextX) {
-            if (collisionUp) {
-                worldX -= movementSpeed;
-            } else {
-                worldY -= movementSpeed;
-            }
-        } else if (enTopY > nextY && enLeftX < nextX) {
-            if (collisionUp) {
-                worldX += movementSpeed;
-            } else {
-                worldY -= movementSpeed;
-            }
-        } else if (enTopY < nextY && enLeftX > nextX) {
-            if (collisionDown) {
-                worldX -= movementSpeed;
-            } else {
-                worldY += movementSpeed;
-            }
-        } else if (enTopY < nextY && enLeftX < nextX) {
-            if (collisionDown) {
-                worldX += movementSpeed;
-            } else {
-                worldY += movementSpeed;
-            }
+        } else if (enTopY > nextY) {
+            worldY -= movementSpeed;
+        } else if (enRightX > nextX) {
+            worldX -= movementSpeed;
+        } else if (enRightX < nextX) {
+            worldX += movementSpeed;
+        } else if (enBottomY > nextY) {
+            worldX -= movementSpeed;
+        } else if (enBottomY < nextX) {
+            worldX += movementSpeed;
         }
     }
 
@@ -128,12 +109,14 @@ abstract public class ENTITY {
     protected void searchPath(int goalCol, int goalRow, int maxDistance) {
         int startCol = (worldX + 24) / 48;
         int startRow = (worldY + 24) / 48;
+        System.out.println(startCol + "  " + startRow + "  h   " + goalCol + " " + goalRow);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
         } else if (mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
+            System.out.println(nextX + " " + nextY);
             decideMovement(nextX, nextY);
             nextCol1 = mg.pathF.pathList.get(0).col;
             nextRow1 = mg.pathF.pathList.get(0).row;
@@ -243,8 +226,8 @@ abstract public class ENTITY {
 
     protected void getNearestPlayer() {
         if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (int) ((Player.worldX + mg.player.entityWidth / 2) / mg.tileSize);
-            this.goalRow = (int) ((Player.worldY + mg.player.entityHeight / 2) / mg.tileSize);
+            this.goalCol = (int) ((Player.worldX + 24) / 48);
+            this.goalRow = (int) ((Player.worldY + 24) / 48);
         } else {
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
@@ -253,14 +236,15 @@ abstract public class ENTITY {
 
     protected void getNearestPlayerMultiplayer() {
         if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (int) ((Player.worldX + mg.player.collisionBox.x) / mg.tileSize);
-            this.goalRow = (int) ((Player.worldY + mg.player.collisionBox.y) / mg.tileSize);
+            this.goalCol = (int) ((Player.worldX + 24) / mg.tileSize);
+            this.goalRow = (int) ((Player.worldY + 24) / mg.tileSize);
         } else {
 
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
         }
     }
+
 
     abstract public void draw(GraphicsContext gc);
 
