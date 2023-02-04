@@ -89,7 +89,7 @@ abstract public class PROJECTILE {
     }
 
     private boolean playerTooFarAbsolute() {
-        return Math.abs(worldPos.x - mg.player.worldX) >= 650 || Math.abs(worldPos.y - mg.player.worldY) >= 650;
+        return Math.abs(worldPos.x - Player.worldX) >= 650 || Math.abs(worldPos.y - Player.worldY) >= 650;
     }
 }
 

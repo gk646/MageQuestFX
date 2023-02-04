@@ -2,6 +2,7 @@ package gameworld.dialogue;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
@@ -42,14 +43,14 @@ abstract public class Dialog {
     public void draw(GraphicsContext gc, ENTITY entity) {
         gc.setFont(FonT.minecraftItalic17);
         gc.setFill(Color.BLACK);
-        gc.fillRoundRect(entity.worldX - mg.player.worldX + mg.player.screenX - 24 - 124, entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115, 373, 120, 25, 25);
+        gc.fillRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
         gc.setLineWidth(2);
         gc.setStroke(Color.WHITE);
         gc.setFill(Color.WHITE);
-        gc.strokeRoundRect(entity.worldX - mg.player.worldX + mg.player.screenX - 24 - 124, entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115, 373, 120, 25, 25);
-        int stringY = entity.worldY - mg.player.worldY + mg.player.screenY - 24 - 115 + 6;
+        gc.strokeRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
+        int stringY = entity.worldY - Player.worldY + Player.screenY - 24 - 115 + 6;
         for (String string : text.split("\n")) {
-            gc.fillText(string, entity.worldX - mg.player.worldX + mg.player.screenX - 24 + 5 - 124, stringY += 15);
+            gc.fillText(string, entity.worldX - Player.worldX + Player.screenX - 24 + 5 - 124, stringY += 15);
         }
     }
 

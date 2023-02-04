@@ -299,7 +299,7 @@ public class MainGame {
             gc.setFill(Color.WHITE);
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + difference), 500, 600);
-            gc.fillText((24 + player.worldX) / 48 + " " + (player.worldY + 24) / 48, 500, 650);
+            gc.fillText((24 + Player.worldX) / 48 + " " + (Player.worldY + 24) / 48, 500, 650);
         }
     }
 
@@ -408,7 +408,7 @@ public class MainGame {
         try {
             PROXIMITY_ENTITIES.clear();
             for (gameworld.entities.ENTITY entity : ENTITIES) {
-                if (Math.abs(entity.worldX - player.worldX) + Math.abs(entity.worldY - player.worldY) < 2_000) {
+                if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 2_000) {
                     PROXIMITY_ENTITIES.add(entity);
                 }
             }
@@ -418,7 +418,7 @@ public class MainGame {
     }
 
     private void getPlayerTile() {
-        playerX = (player.worldX + 24) / 48;
-        playerY = (player.worldY + 24) / 48;
+        playerX = (Player.worldX + 24) / 48;
+        playerY = (Player.worldY + 24) / 48;
     }
 }

@@ -28,9 +28,9 @@ public class Tutorial extends Dialog {
         }
         if (stage == 10) {
             gruntkillcounter = mg.prj_control.GruntKilledCounter;
-            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 30, 1));
-            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 34, 1));
-            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 38, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 30, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 34, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(48 * 46, 48 * 38, 1));
             next_stage();
             block = true;
             mg.sqLite.updateQuestFacts(1, 1, 1);

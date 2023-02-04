@@ -40,9 +40,9 @@ public class MapQuadrant {
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
                 if (!mg.wRender.tileStorage[mg.wControl.overWorldMapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
-                        MainGame.ENTITIES.add(new ENT_Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                        MainGame.ENTITIES.add(new ENT_Grunt(xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
                     } else {
-                        MainGame.ENTITIES.add(new ENT_Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                        MainGame.ENTITIES.add(new ENT_Shooter(xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
                     }
                     spawnedEnemies++;
                 }

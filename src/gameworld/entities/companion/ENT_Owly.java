@@ -1,6 +1,7 @@
 package gameworld.entities.companion;
 
 import gameworld.entities.ENTITY;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -37,9 +38,9 @@ public class ENT_Owly extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        if (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize) {
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        if (worldX / mg.tileSize != Player.worldX / mg.tileSize || worldY / mg.tileSize != Player.worldY / mg.tileSize) {
             onPath = true;
         }
         owlyMovement();
@@ -47,8 +48,8 @@ public class ENT_Owly extends ENTITY {
     }
 
     private void updatePos() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
     private void getOwlyImage() {

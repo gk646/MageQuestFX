@@ -1,6 +1,7 @@
 package gameworld.entities.monsters;
 
 import gameworld.entities.ENTITY;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 
@@ -15,8 +16,7 @@ public class ENT_Grunt extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Grunt(MainGame mg, int worldX, int worldY, int level) {
-        this.mg = mg;
+    public ENT_Grunt(int worldX, int worldY, int level) {
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
@@ -36,17 +36,17 @@ public class ENT_Grunt extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        onPath = !playerTooFarAbsolute() && (worldX / 48 != mg.player.worldX / 48 || worldY / 48 != mg.player.worldY / 48);
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        onPath = !playerTooFarAbsolute() && (worldX / 48 != Player.worldX / 48 || worldY / 48 != Player.worldY / 48);
         gruntMovement();
         hitDelay++;
         searchTicks++;
     }
 
     private void updatePos() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
     @Override

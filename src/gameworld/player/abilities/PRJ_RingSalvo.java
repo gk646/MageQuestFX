@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
@@ -27,7 +28,7 @@ public class PRJ_RingSalvo extends PRJ_Control {
         this.version = version;
 
         //------POSITION-----------
-        this.worldPos = new java.awt.geom.Point2D.Double(mg.player.worldX, mg.player.worldY);
+        this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX, Player.worldY);
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.direction = "downleftrightup";
         this.updateVector = new java.awt.geom.Point2D.Double(1, 1);
@@ -37,7 +38,7 @@ public class PRJ_RingSalvo extends PRJ_Control {
     @Override
     public void draw(GraphicsContext g2) {
         g2.setStroke(Color.RED);
-        g2.strokeRect((int) worldPos.x - mg.player.worldX + mg.player.screenX + 12, (int) worldPos.y - mg.player.worldY + mg.player.screenY + 12, projectileWidth, projectileHeight);
+        g2.strokeRect((int) worldPos.x - Player.worldX + Player.screenX + 12, (int) worldPos.y - Player.worldY + Player.screenY + 12, projectileWidth, projectileHeight);
     }
 
     @Override

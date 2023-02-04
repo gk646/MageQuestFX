@@ -469,7 +469,6 @@ public class SQLite {
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
             ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
-            System.out.println(rs.getString("description"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.MISC.add(0, new_ITEM);

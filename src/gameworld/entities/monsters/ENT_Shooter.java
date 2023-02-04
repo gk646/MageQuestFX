@@ -1,6 +1,7 @@
 package gameworld.entities.monsters;
 
 import gameworld.entities.ENTITY;
+import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -15,12 +16,10 @@ public class ENT_Shooter extends ENTITY {
     /**
      * Main Enemy class
      *
-     * @param mainGame super();
-     * @param worldX   coordinates X
-     * @param worldY   coordinates Y
+     * @param worldX coordinates X
+     * @param worldY coordinates Y
      */
-    public ENT_Shooter(MainGame mainGame, int worldX, int worldY, int level) {
-        this.mg = mainGame;
+    public ENT_Shooter(int worldX, int worldY, int level) {
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
@@ -40,9 +39,9 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
-        onPath = !playerTooFarAbsolute() && (worldX / mg.tileSize != mg.player.worldX / mg.tileSize || worldY / mg.tileSize != mg.player.worldY / mg.tileSize);
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        onPath = !playerTooFarAbsolute() && (worldX / mg.tileSize != Player.worldX / mg.tileSize || worldY / mg.tileSize != Player.worldY / mg.tileSize);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             mg.PRJControls.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
             shotCooldown = 0;
@@ -58,8 +57,8 @@ public class ENT_Shooter extends ENTITY {
     }
 
     private void updatePos() {
-        screenX = worldX - mg.player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - mg.player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
+        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
     }
 
 

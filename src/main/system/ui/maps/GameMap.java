@@ -2,6 +2,7 @@ package main.system.ui.maps;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
+import gameworld.player.Player;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -32,8 +33,8 @@ public class GameMap {
     public GameMap(MainGame mg) {
         this.mg = mg;
         this.mapMover = new Rectangle(mapPanelX, mapPanelY, 1_570, 940);
-        xTile = (mg.player.worldX + 24) / 48;
-        yTile = (mg.player.worldY + 24) / 48;
+        xTile = (Player.worldX + 24) / 48;
+        yTile = (Player.worldY + 24) / 48;
         hideMapCollision();
         dragMap();
     }
@@ -46,8 +47,8 @@ public class GameMap {
 
     public void dragMap() {
         if (followPlayer) {
-            xTile = (mg.player.worldX + 24) / 48;
-            yTile = (mg.player.worldY + 24) / 48;
+            xTile = (Player.worldX + 24) / 48;
+            yTile = (Player.worldY + 24) / 48;
         }
         if (mapMover.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             followPlayer = false;
@@ -81,8 +82,8 @@ public class GameMap {
                         }
                     }
                 }
-                playerX = (mg.player.worldX + 24) / 48;
-                playerY = (mg.player.worldY + 24) / 48;
+                playerX = (Player.worldX + 24) / 48;
+                playerY = (Player.worldY + 24) / 48;
                 if (xTileOffset == playerX && yTileOffset == playerY) {
                     for (int i = y * 5; i < y * 5 + 5; i++) {
                         for (int b = x * 5; b < x * 5 + 5; b++) {

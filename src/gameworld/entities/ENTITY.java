@@ -3,6 +3,7 @@ package gameworld.entities;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -64,7 +65,7 @@ abstract public class ENTITY {
      * @return the player being away more than 650 worldPixels
      */
     public boolean playerTooFarAbsolute() {
-        return Math.abs(worldX - mg.player.worldX) >= 650 || Math.abs(worldY - mg.player.worldY) >= 650;
+        return Math.abs(worldX - Player.worldX) >= 650 || Math.abs(worldY - Player.worldY) >= 650;
     }
 
 
@@ -241,9 +242,9 @@ abstract public class ENTITY {
     }
 
     protected void getNearestPlayer() {
-        if (Math.abs(mg.player.worldX - this.worldX + mg.player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (mg.player.worldX + mg.player.entityWidth / 2) / mg.tileSize;
-            this.goalRow = (mg.player.worldY + mg.player.entityHeight / 2) / mg.tileSize;
+        if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
+            this.goalCol = (Player.worldX + mg.player.entityWidth / 2) / mg.tileSize;
+            this.goalRow = (Player.worldY + mg.player.entityHeight / 2) / mg.tileSize;
         } else {
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
@@ -251,9 +252,9 @@ abstract public class ENTITY {
     }
 
     protected void getNearestPlayerMultiplayer() {
-        if (Math.abs(mg.player.worldX - this.worldX + mg.player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (mg.player.worldX + mg.player.collisionBox.x) / mg.tileSize;
-            this.goalRow = (mg.player.worldY + mg.player.collisionBox.y) / mg.tileSize;
+        if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
+            this.goalCol = (Player.worldX + mg.player.collisionBox.x) / mg.tileSize;
+            this.goalRow = (Player.worldY + mg.player.collisionBox.y) / mg.tileSize;
         } else {
 
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;

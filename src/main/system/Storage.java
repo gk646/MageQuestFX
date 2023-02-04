@@ -14,7 +14,7 @@ public class Storage {
     public Image primaryFire1;
     public Image gruntImage1;
     public Image shooterImage1;
-    public Image coin1, coin2, coin3, coin4;
+    public static Image coin1, coin2, coin3, coin4;
 
     public Storage() {
     }

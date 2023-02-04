@@ -1,5 +1,6 @@
 package main.system.ui.inventory;
 
+import gameworld.player.Player;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
@@ -207,7 +208,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < char_Slots.length; i++) {
                 if (char_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && char_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, char_Slots[i].item));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, Player.worldX - 50, Player.worldY, char_Slots[i].item));
                         char_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
                         mg.player.updateEquippedItems();
@@ -223,7 +224,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < bag_Slots.length; i++) {
                 if (bag_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && bag_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, bag_Slots[i].item));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, Player.worldX - 50, Player.worldY, bag_Slots[i].item));
                         bag_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
                         mg.player.updateEquippedItems();

@@ -1,5 +1,6 @@
 package gameworld.world.objects.drops;
 
+import gameworld.player.Player;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
@@ -65,7 +66,7 @@ public class DRP_DroppedItem extends DROP {
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(droppedIcon, worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, 32, 32);
+        g2.drawImage(droppedIcon, worldPos.x - Player.worldX + mg.HALF_WIDTH, worldPos.y - Player.worldY + mg.HALF_HEIGHT, 32, 32);
     }
 
     /**

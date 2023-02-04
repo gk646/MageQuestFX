@@ -3,6 +3,7 @@ package main.system.ui;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
@@ -22,8 +23,8 @@ public class MiniMap {
     }
 
     public void draw(GraphicsContext gc) {
-        int xTile = (mg.player.worldX + 24) / 48;
-        int yTile = (mg.player.worldY + 24) / 48;
+        int xTile = (Player.worldX + 24) / 48;
+        int yTile = (Player.worldY + 24) / 48;
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
         gc.strokeLine(1_700, 25, 1_900, 25);

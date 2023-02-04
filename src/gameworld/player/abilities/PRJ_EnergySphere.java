@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.Effects;
@@ -24,7 +25,7 @@ public class PRJ_EnergySphere extends PRJ_Control {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.worldPos = new java.awt.geom.Point2D.Double(mg.player.worldX + 48 - projectileHeight / 2.0f, mg.player.worldY + 48 - projectileHeight / 2.0f);
+        this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + 48 - projectileHeight / 2.0f, Player.worldY + 48 - projectileHeight / 2.0f);
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.updateVector = getTrajectory(mainGame.inputH.lastMousePosition);
         getPlayerImage();
@@ -34,17 +35,17 @@ public class PRJ_EnergySphere extends PRJ_Control {
     public void draw(GraphicsContext gc) {
         gc.setEffect(Effects.blueGlow);
         if (spriteCounter <= 12) {
-            gc.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 24) {
-            gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage2, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 36) {
-            gc.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage3, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 48) {
-            gc.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage4, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 60) {
-            gc.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage5, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 72) {
-            gc.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage6, (int) worldPos.x - Player.worldX + Player.screenX - 24, (int) worldPos.y - Player.worldY + Player.screenY - 24, projectileWidth, projectileHeight);
             spriteCounter = 0;
         }
         spriteCounter++;
@@ -60,7 +61,7 @@ public class PRJ_EnergySphere extends PRJ_Control {
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {
-        double angle = Math.atan2(mousePosition.y - mg.player.screenY - 24, mousePosition.x - mg.player.screenX - 24);
+        double angle = Math.atan2(mousePosition.y - Player.screenY - 24, mousePosition.x - Player.screenX - 24);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 

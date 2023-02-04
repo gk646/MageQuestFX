@@ -2,6 +2,7 @@ package gameworld.entities.npcs;
 
 import gameworld.dialogue.generic.Tutorial;
 import gameworld.entities.NPC;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -30,7 +31,7 @@ public class NPC_Man extends NPC {
 
 
     public void draw(GraphicsContext g2) {
-        g2.drawImage(player2, worldX - mg.player.worldX + mg.player.screenX, worldY - mg.player.worldY + mg.player.screenY, 48, 48);
+        g2.drawImage(player2, worldX - Player.worldX + Player.screenX, worldY - Player.worldY + Player.screenY, 48, 48);
         if (show_dialog) {
             dial.draw(g2, this);
         }
@@ -54,7 +55,7 @@ public class NPC_Man extends NPC {
         }
         if (mg.collisionChecker.checkEntityAgainstEntity(this, mg.player) && mg.inputH.e_typed) {
             show_dialog = true;
-            playerTalkLocation = new Point(mg.player.worldX, mg.player.worldY);
+            playerTalkLocation = new Point(Player.worldX, Player.worldY);
         }
         mg.inputH.e_typed = false;
     }

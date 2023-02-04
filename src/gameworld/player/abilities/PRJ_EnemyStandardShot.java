@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 
@@ -27,14 +28,14 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
 
         //------POSITION-----------
         this.worldPos = new Point2D.Double(x, y);
-        this.updateVector = getTrajectory(new Point(mg.player.worldX, mg.player.worldY));
+        this.updateVector = getTrajectory(new Point(Player.worldX, Player.worldY));
         getPlayerImage();
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
     }
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenX, projectileWidth, projectileHeight);
+        g2.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenX, projectileWidth, projectileHeight);
     }
 
     @Override

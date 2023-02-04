@@ -1,5 +1,6 @@
 package main.system;
 
+import gameworld.player.Player;
 import main.MainGame;
 import main.system.enums.Map;
 
@@ -53,6 +54,6 @@ public class Utilities {
     }
 
     public boolean player_went_away(Point playerLocation) {
-        return Point.distance(playerLocation.x, playerLocation.y, mg.player.worldX, mg.player.worldY) > 500;
+        return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
     }
 }

@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.Effects;
@@ -22,7 +23,7 @@ public class PRJ_Lightning extends PRJ_Control {
         this.collisionBox = new Rectangle(30, 30, 40, 30);
 
         //------POSITION-----------
-        this.worldPos = new java.awt.geom.Point2D.Double(mainGame.player.worldX + mg.inputH.lastMousePosition.x - mg.HALF_WIDTH - 24, mainGame.player.worldY + mg.inputH.lastMousePosition.y - mg.HALF_HEIGHT - 24);
+        this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + mg.inputH.lastMousePosition.x - mg.HALF_WIDTH - 24, Player.worldY + mg.inputH.lastMousePosition.y - mg.HALF_HEIGHT - 24);
         getImages();
     }
 
@@ -33,29 +34,29 @@ public class PRJ_Lightning extends PRJ_Control {
         int spriteIndex = spriteCounter / 6;
         switch (spriteIndex) {
             case 0 ->
-                    gc.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 1 ->
-                    gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage2, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 2 ->
-                    gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage2, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 4 ->
-                    gc.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage3, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 5 ->
-                    gc.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage4, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 6 ->
-                    gc.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage5, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 7 ->
-                    gc.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage6, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 8 ->
-                    gc.drawImage(projectileImage7, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage7, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 9 ->
-                    gc.drawImage(projectileImage8, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage8, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 10 ->
-                    gc.drawImage(projectileImage9, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage9, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 11 ->
-                    gc.drawImage(projectileImage10, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage10, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 12 ->
-                    gc.drawImage(projectileImage10, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+                    gc.drawImage(projectileImage10, (int) worldPos.x - Player.worldX + mg.HALF_WIDTH, (int) worldPos.y - Player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
             case 13 -> dead = true;
         }
         gc.setEffect(null);

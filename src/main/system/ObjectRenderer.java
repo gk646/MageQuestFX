@@ -1,5 +1,6 @@
 package main.system;
 
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -43,16 +44,16 @@ public class ObjectRenderer {
         int maxRow = Math.min(worldRow + 24, mg.wRender.worldSize.y);
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
-                mg.player.screenX = mg.HALF_WIDTH;
-                mg.player.screenY = mg.HALF_HEIGHT;
-                if (mg.player.screenX > mg.player.worldX) {
-                    mg.player.screenX = mg.player.worldX;
+                Player.screenX = mg.HALF_WIDTH;
+                Player.screenY = mg.HALF_HEIGHT;
+                if (Player.screenX > Player.worldX) {
+                    Player.screenX = Player.worldX;
                 }
-                if (mg.player.screenY > mg.player.worldY) {
-                    mg.player.screenY = mg.player.worldY;
+                if (Player.screenY > Player.worldY) {
+                    Player.screenY = Player.worldY;
                 }
-                screenX = i * 48 - mg.player.worldX + mg.player.screenX;
-                screenY = b * 48 - mg.player.worldY + mg.player.screenY;
+                screenX = i * 48 - Player.worldX + Player.screenX;
+                screenY = b * 48 - Player.worldY + Player.screenY;
                 g2.drawImage(tileStorage[worldData[i][b]].tileImage, screenX, screenY, 48, 48);
             }
         }

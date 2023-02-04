@@ -5,6 +5,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
@@ -146,7 +147,7 @@ public class PRJ_Control {
     }
 
     private boolean playerTooFarAbsolute() {
-        return Math.abs(worldPos.x - mg.player.worldX) >= 650 || Math.abs(worldPos.y - mg.player.worldY) >= 650;
+        return Math.abs(worldPos.x - Player.worldX) >= 650 || Math.abs(worldPos.y - Player.worldY) >= 650;
     }
 }
 
