@@ -7,6 +7,7 @@ import gameworld.world.objects.items.DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.Map;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
@@ -148,7 +149,7 @@ public class Player extends ENTITY {
     public void update() {
         movement();
         skills();
-        if (mg.wControl.currentWorld == 1) {
+        if (mg.wControl.currentWorld == Map.GrassLands) {
             if (quadrantTimer >= 100) {
                 dynamicSpawns();
                 if (respawnsDone) {

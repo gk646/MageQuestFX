@@ -5,6 +5,7 @@ import gameworld.world.maps.MAP_City1;
 import gameworld.world.maps.MAP_OverWorld;
 import gameworld.world.maps.MAP_Tutorial;
 import main.MainGame;
+import main.system.enums.Map;
 
 import java.awt.Point;
 
@@ -18,7 +19,7 @@ public class WorldController {
     //main game
     private final MainGame mg;
     //CURRENT WORLD
-    public int currentWorld;
+    public Map currentWorld;
     //-----OVERWORLD
     public int[][] overWorldMapData;
     //-----HELL
@@ -42,7 +43,7 @@ public class WorldController {
     }
 
     public void load_OverWorldMap(int xTile, int yTile) {
-        currentWorld = 1;
+        currentWorld = Map.GrassLands;
         clearWorldArrays();
         for (MapQuadrant quadrant : overworldMapQuadrants) {
             if (quadrant.spawned) {
@@ -55,7 +56,7 @@ public class WorldController {
     }
 
     public void load_tutorial(int xTile, int yTile) {
-        currentWorld = 0;
+        currentWorld = Map.Tutorial;
         clearWorldArrays();
         mg.wRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
@@ -63,7 +64,7 @@ public class WorldController {
     }
 
     public void load_city1(int xTile, int yTile) {
-        currentWorld = 2;
+        currentWorld = Map.City1;
         clearWorldArrays();
         mg.wRender.worldData = city1_MapData;
         mg.wRender.worldSize = tutorialSize;

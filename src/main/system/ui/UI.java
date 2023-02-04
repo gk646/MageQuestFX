@@ -9,7 +9,6 @@ import javafx.scene.text.Font;
 import main.MainGame;
 import main.system.enums.State;
 
-import java.io.InputStream;
 import java.util.Objects;
 
 public class UI {
@@ -19,7 +18,6 @@ public class UI {
 
     public Font maruMonica30;
     public int commandNum = 0;
-    public Font pixel_dialog;
     DropShadow dropShadow = new DropShadow();
     InnerShadow innerShadow = new InnerShadow(5, Colors.XPBarBlue);
     private Image playerUI;
@@ -28,10 +26,6 @@ public class UI {
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
-        InputStream is = getClass().getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf");
-        assert is != null;
-        maruMonica = Font.loadFont(is, 20);
-        maruMonica30 = Font.loadFont(is, 30);
         getUIImage();
         dropShadow.setOffsetX(5);
         dropShadow.setOffsetY(5);
@@ -54,10 +48,9 @@ public class UI {
     }
 
     private void drawTitleScreen(GraphicsContext gc) {
-        //gc.setFont(gc.getFont().deriveFont(Font.BOLD, 96f));
-        gc.setFont(mg.ui.maruMonica);
+        gc.setFont(FonT.minecraftBold50);
         String text = "Mage Quest_2D";
-        int x = getXForCenteredText(text, gc);
+        int x = (int) (MainGame.SCREEN_WIDTH * 0.39f);
         int y = (int) (MainGame.SCREEN_HEIGHT * 0.044f) * 3;
         //FILL BACKGROUND WITH COLOR
         gc.setFill(Colors.LightGrey);
@@ -67,54 +60,63 @@ public class UI {
         gc.fillText(text, x, y);
 
         //MENU
-        //gc.setFont(gc.getFont().deriveFont(Font.BOLD, 48f));
+        gc.setFont(FonT.minecraftBold30);
 
         text = "START GAME";
-        x = getXForCenteredText(text, gc);
-        y += 2.5f * (int) (MainGame.SCREEN_HEIGHT * 0.049f);
+        x = (int) (MainGame.SCREEN_WIDTH * 0.448_8f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.355f);
         gc.fillText(text, x, y);
         if (commandNum == 0) {
             gc.fillText(">", x - 25, y);
         }
-        text = "OPTIONS";
-
-        x = getXForCenteredText(text, gc);
-        y += (int) (MainGame.SCREEN_HEIGHT * 0.049f);
+        text = "SETTINGS";
+        x = (int) (MainGame.SCREEN_WIDTH * 0.458f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.415f);
         gc.fillText(text, x, y);
         if (commandNum == 1) {
             gc.fillText(">", x - 25, y);
         }
-        text = "QUIT";
-        x = getXForCenteredText(text, gc);
-        y += (int) (MainGame.SCREEN_HEIGHT * 0.049f);
+        text = "CREDITS";
+        x = (int) (MainGame.SCREEN_WIDTH * 0.465_1f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.475f);
         gc.fillText(text, x, y);
         if (commandNum == 2) {
             gc.fillText(">", x - 25, y);
         }
-        text = "3.0.0";
+
+        text = "QUIT";
+        x = (int) (MainGame.SCREEN_WIDTH * 0.481f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.53f);
+        gc.fillText(text, x, y);
+        if (commandNum == 3) {
+            gc.fillText(">", x - 25, y);
+        }
+
+        text = "v3.2.1";
         x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         gc.fillText(text, x, y);
 
-        text = "\u00A9 2022 Lukas Gilch";
-        x = getXForCenteredText(text, gc);
+        text = "\u00A9 2023 Lukas Gilch";
+        x = (int) (MainGame.SCREEN_WIDTH * 0.415f);
         gc.fillText(text, x, y);
     }
 
     private void drawGameUI(GraphicsContext gc) {
+
         gc.setFill(Colors.Red);
-        gc.fillRect(123, 70, (int) ((mg.player.health / (float) mg.player.maxHealth) * 225), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.0640f, 70, (int) ((mg.player.health / (float) mg.player.maxHealth) * 225), 11);
         gc.setFill(Colors.Blue);
-        gc.fillRect(123, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.0640f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         gc.drawImage(playerUI, 40, 40, 330, 200);
         gc.setFill(Color.WHITE);
-        gc.setFont(FonT.minecraftBoldItalic15);
-        gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 200, 79);
-        gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 180, 99);
+        gc.setFont(FonT.editUndo15);
+        gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
+        gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 94);
         gc.setEffect(dropShadow);
         gc.setEffect(innerShadow);
         gc.setFill(Colors.XPBarBlue);
-        gc.fillRoundRect(570, 990, 768 + 6 + 6, 13, 5, 5);
+        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, 768 + 6 + 6, 13, 5, 5);
         gc.setEffect(null);
     }
 
@@ -144,9 +146,9 @@ public class UI {
         //Text
         gc.setFill(Colors.darkBackground);
         //gc.setFont(gc.getFont().deriveFont(Font.BOLD, 96f));
-        gc.setFont(maruMonica30);
+        gc.setFont(FonT.minecraftBold30);
         String text = "Loading..." + loadingProgress + "%";
-        int x = getXForCenteredText(text, gc);
+        int x = 855;
         int y = 600;
         gc.setLineWidth(4);
         gc.fillText(text, x, y);
@@ -161,22 +163,9 @@ public class UI {
         drawLoadingScreen(gc);
     }
 
-
     private void drawGameOver(GraphicsContext gc) {
         gc.fillText("Game Over!", 500, 500);
     }
-
-    private int getXForCenteredText(String text, GraphicsContext gc) {
-        int length = 150;
-        return MainGame.SCREEN_WIDTH / 2 - length / 2;
-    }
-
-    public void getPixelFont() {
-        InputStream is = getClass().getResourceAsStream("/Fonts/PublicPixel-z84yD.ttf");
-        assert is != null;
-        pixel_dialog = Font.loadFont(is, 15);
-    }
-
 
     private void getUIImage() {
         playerUI = setup();

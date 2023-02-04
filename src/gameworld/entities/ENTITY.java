@@ -29,7 +29,7 @@ abstract public class ENTITY {
     protected int entityWidth;
     protected int entityHeight;
     protected int searchTicks;
-    protected boolean onPath;
+    public boolean onPath;
     public int worldY;
     public int worldX;
     public int screenX;

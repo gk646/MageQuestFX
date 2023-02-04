@@ -3,6 +3,7 @@ package gameworld.player.abilities;
 import gameworld.PRJ_Control;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.ui.Effects;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
@@ -30,24 +31,25 @@ public class PRJ_EnergySphere extends PRJ_Control {
     }
 
     @Override
-    public void draw(GraphicsContext g2) {
+    public void draw(GraphicsContext gc) {
+        gc.setEffect(Effects.blueGlow);
         if (spriteCounter <= 12) {
-            g2.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 24) {
-            g2.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 36) {
-            g2.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 48) {
-            g2.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 60) {
-            g2.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
         } else if (spriteCounter <= 72) {
-            g2.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+            gc.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.player.screenX - 24, (int) worldPos.y - mg.player.worldY + mg.player.screenY - 24, projectileWidth, projectileHeight);
             spriteCounter = 0;
         }
         spriteCounter++;
+        gc.setEffect(null);
     }
-
 
     @Override
     public void update() {
@@ -58,7 +60,7 @@ public class PRJ_EnergySphere extends PRJ_Control {
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {
-        double angle = Math.atan2(mousePosition.y - mg.player.screenY, mousePosition.x - mg.player.screenX);
+        double angle = Math.atan2(mousePosition.y - mg.player.screenY - 24, mousePosition.x - mg.player.screenX - 24);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 

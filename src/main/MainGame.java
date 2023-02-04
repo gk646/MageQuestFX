@@ -16,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
@@ -27,6 +28,7 @@ import main.system.database.SQLite;
 import main.system.enums.State;
 import main.system.sound.Sound;
 import main.system.ui.Colors;
+import main.system.ui.Effects;
 import main.system.ui.FonT;
 import main.system.ui.GameMap;
 import main.system.ui.MiniMap;
@@ -321,6 +323,8 @@ public class MainGame {
      * @param gc gc
      */
     private void loadGame(GraphicsContext gc) {
+        FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
+        ui.updateLoadingScreen(0, gc);
         // 0 %
         inventP = new UI_InventoryPanel(this);
         wControl = new WorldController(this);
@@ -356,7 +360,8 @@ public class MainGame {
         ui.updateLoadingScreen(12, gc);
         pathF = new PathFinder(this);
         pathF.instantiateNodes();
-        ui.getPixelFont();
+        Effects.loadEffects();
+
         //84%
         ui.updateLoadingScreen(12, gc);
         multiplayer = new Multiplayer(this, ENTPlayer2);

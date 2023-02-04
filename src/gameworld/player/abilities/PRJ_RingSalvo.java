@@ -37,7 +37,7 @@ public class PRJ_RingSalvo extends PRJ_Control {
     @Override
     public void draw(GraphicsContext g2) {
         g2.setStroke(Color.RED);
-        g2.strokeRect((int) worldPos.x - mg.player.worldX + mg.player.screenX, (int) worldPos.y - mg.player.worldY + mg.player.screenY, projectileWidth, projectileHeight);
+        g2.strokeRect((int) worldPos.x - mg.player.worldX + mg.player.screenX + 12, (int) worldPos.y - mg.player.worldY + mg.player.screenY + 12, projectileWidth, projectileHeight);
     }
 
     @Override

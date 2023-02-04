@@ -62,13 +62,13 @@ public class InputHandler {
             if (code.equals(("w"))) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 0;
+                    mg.ui.commandNum = 3;
                 }
             }
             if (code.equals(("s"))) {
                 mg.ui.commandNum++;
-                if (mg.ui.commandNum > 2) {
-                    mg.ui.commandNum = 2;
+                if (mg.ui.commandNum > 3) {
+                    mg.ui.commandNum = 0;
                 }
             }
             if (code.equals("\r")) {

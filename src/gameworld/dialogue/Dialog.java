@@ -1,6 +1,7 @@
 package gameworld.dialogue;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.NPC;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
@@ -110,5 +111,5 @@ abstract public class Dialog {
     /**
      * allows the dialog to check for stages and update progress
      */
-    abstract public void script();
+    abstract public void script(NPC npc);
 }

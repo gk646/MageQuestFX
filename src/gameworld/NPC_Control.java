@@ -4,6 +4,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.npcs.NPC_Man;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.enums.Map;
 
 import java.util.ArrayList;
 
@@ -36,12 +37,12 @@ public class NPC_Control {
         }
     }
 
-    public void loadNPC(int mapNumber) {
-        if (mapNumber == 0) {
+    public void loadNPC(Map map) {
+        if (map == Map.Tutorial) {
             NPC_Active = NPC_Tutorial;
-        } else if (mapNumber == 1) {
+        } else if (map == Map.GrassLands) {
             NPC_Active = NPC_GrassLand;
-        } else if (mapNumber == 2) {
+        } else if (map == Map.City1) {
             NPC_Active = NPC_City1;
         }
     }

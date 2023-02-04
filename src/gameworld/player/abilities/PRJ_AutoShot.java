@@ -32,7 +32,7 @@ public class PRJ_AutoShot extends PRJ_Control {
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(projectileImage1, (int) (worldPos.x - mg.player.worldX + mg.player.screenX), (int) (worldPos.y - mg.player.worldY + mg.player.screenY), projectileWidth, projectileHeight);
+        g2.drawImage(projectileImage1, (int) (worldPos.x - mg.player.worldX + mg.player.screenX - 24), (int) (worldPos.y - mg.player.worldY + mg.player.screenY - 24), projectileWidth, projectileHeight);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class PRJ_AutoShot extends PRJ_Control {
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {
-        double angle = Math.atan2(mousePosition.y - mg.player.screenY, mousePosition.x - mg.player.screenX);
+        double angle = Math.atan2(mousePosition.y - mg.player.screenY - 24, mousePosition.x - mg.player.screenX - 24);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
