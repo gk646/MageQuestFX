@@ -4,6 +4,7 @@ import gameworld.entities.ENTITY;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.Storage;
 
 import java.awt.Rectangle;
 
@@ -36,8 +37,8 @@ public class ENT_Grunt extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
         onPath = !playerTooFarAbsolute() && (worldX / 48 != Player.worldX / 48 || worldY / 48 != Player.worldY / 48);
         gruntMovement();
         hitDelay++;
@@ -45,8 +46,8 @@ public class ENT_Grunt extends ENTITY {
     }
 
     private void updatePos() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ENT_Grunt extends ENTITY {
     }
 
     private void getDisplayImage() {
-        enemyImage = mg.imageSto.gruntImage1;
+        enemyImage = Storage.gruntImage1;
     }
 
     private void gruntMovement() {

@@ -32,8 +32,8 @@ public class GameMap {
     public GameMap(MainGame mg) {
         this.mg = mg;
         this.mapMover = new Rectangle(mapPanelX, mapPanelY, 1_570, 940);
-        xTile = (Player.worldX + 24) / 48;
-        yTile = (Player.worldY + 24) / 48;
+        xTile = (int) ((Player.worldX + 24) / 48);
+        yTile = (int) ((Player.worldY + 24) / 48);
         hideMapCollision();
         dragMap();
     }
@@ -46,8 +46,8 @@ public class GameMap {
 
     public void dragMap() {
         if (followPlayer) {
-            xTile = (Player.worldX + 24) / 48;
-            yTile = (Player.worldY + 24) / 48;
+            xTile = (int) ((Player.worldX + 24) / 48);
+            yTile = (int) ((Player.worldY + 24) / 48);
         }
         if (mapMover.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             followPlayer = false;
@@ -81,8 +81,8 @@ public class GameMap {
                         }
                     }
                 }
-                playerX = (Player.worldX + 24) / 48;
-                playerY = (Player.worldY + 24) / 48;
+                playerX = (int) ((Player.worldX + 24) / 48);
+                playerY = (int) ((Player.worldY + 24) / 48);
                 if (xTileOffset == playerX && yTileOffset == playerY) {
                     for (int i = y * 5; i < y * 5 + 5; i++) {
                         for (int b = x * 5; b < x * 5 + 5; b++) {

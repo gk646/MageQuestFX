@@ -1,5 +1,6 @@
 package gameworld.world.objects.drops;
 
+import gameworld.player.Player;
 import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -25,10 +26,22 @@ public class DRP_Coin extends DROP {
     @Override
     public void draw(GraphicsContext gc) {
         spriteCounter++;
+        spriteCounter++;
+        int spriteIndex = spriteCounter / 6;
+        switch (spriteIndex) {
+            case 0 ->
+                    gc.drawImage(coin1, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY - 50);
+            case 1 ->
+                    gc.drawImage(coin2, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY - 50);
+            case 2 ->
+                    gc.drawImage(coin3, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY - 50);
+            case 4 ->
+                    gc.drawImage(coin4, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY - 50);
+        }
     }
 
     /**
-     *
+     * update method
      */
     @Override
     public void update() {

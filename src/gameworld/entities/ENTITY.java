@@ -243,8 +243,8 @@ abstract public class ENTITY {
 
     protected void getNearestPlayer() {
         if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (Player.worldX + mg.player.entityWidth / 2) / mg.tileSize;
-            this.goalRow = (Player.worldY + mg.player.entityHeight / 2) / mg.tileSize;
+            this.goalCol = (int) ((Player.worldX + mg.player.entityWidth / 2) / mg.tileSize);
+            this.goalRow = (int) ((Player.worldY + mg.player.entityHeight / 2) / mg.tileSize);
         } else {
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
             this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
@@ -253,8 +253,8 @@ abstract public class ENTITY {
 
     protected void getNearestPlayerMultiplayer() {
         if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (Player.worldX + mg.player.collisionBox.x) / mg.tileSize;
-            this.goalRow = (Player.worldY + mg.player.collisionBox.y) / mg.tileSize;
+            this.goalCol = (int) ((Player.worldX + mg.player.collisionBox.x) / mg.tileSize);
+            this.goalRow = (int) ((Player.worldY + mg.player.collisionBox.y) / mg.tileSize);
         } else {
 
             this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;

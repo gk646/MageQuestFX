@@ -44,7 +44,7 @@ public class Player extends ENTITY {
     private int levelUpExperience = 10;
     private int quadrantTimer;
     private boolean respawnsDone;
-    public static int worldX, worldY;
+    public static float worldX, worldY;
     public static int screenX, screenY;
 
     public Player(MainGame mainGame) {
@@ -113,7 +113,7 @@ public class Player extends ENTITY {
     public void pickupDroppedItem() {
         try {
             for (DROP drop : mg.WORLD_DROPS) {
-                if (new Rectangle(worldX - 25, worldY - 14, mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
+                if (new Rectangle((int) (worldX - 25), (int) (worldY - 14), mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
                     for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
                         if (bagSlot.item == null && !bagSlot.grabbed) {
                             bagSlot.item = drop.item;
@@ -280,7 +280,7 @@ public class Player extends ENTITY {
             mg.sBar.skills[0].activate();
         }
         if (mg.inputH.TwoPressed && mana >= 20 && cdLightning == 20) {
-            mg.PRJControls.add(new PRJ_Lightning(mg));
+            mg.PRJControls.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
             mana -= 20;
             cdLightning = 0;
             getDurabilityDamageWeapon();

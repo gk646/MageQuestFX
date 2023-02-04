@@ -25,7 +25,7 @@ public class FonT {
 
     //PUBLIC PIXEL
     public static Font publicPixel20;
-    public static Font editUndo15;
+    public static Font editUndo18;
 
     public static void loadFonts() {
         minecraftRegular14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 14);
@@ -40,6 +40,6 @@ public class FonT {
         maruMonica = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf"), 20);
         maruMonica90 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf"), 90);
         publicPixel20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/PublicPixel-z84yD.ttf"), 15);
-        editUndo15 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 17);
+        editUndo18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 18);
     }
 }

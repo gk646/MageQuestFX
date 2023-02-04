@@ -110,7 +110,7 @@ public class UI {
         gc.fillRect(MainGame.SCREEN_WIDTH * 0.0640f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         gc.drawImage(playerUI, 40, 40, 330, 200);
         gc.setFill(Color.WHITE);
-        gc.setFont(FonT.editUndo15);
+        gc.setFont(FonT.editUndo18);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 94);
         gc.setEffect(dropShadow);

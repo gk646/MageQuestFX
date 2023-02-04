@@ -39,8 +39,8 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
         onPath = !playerTooFarAbsolute() && (worldX / mg.tileSize != Player.worldX / mg.tileSize || worldY / mg.tileSize != Player.worldY / mg.tileSize);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             mg.PRJControls.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
@@ -57,8 +57,8 @@ public class ENT_Shooter extends ENTITY {
     }
 
     private void updatePos() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
     }
 
 

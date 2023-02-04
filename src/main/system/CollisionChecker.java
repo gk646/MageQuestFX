@@ -124,10 +124,10 @@ public class CollisionChecker {
     }
 
     public void checkPlayerAgainstTile(Player player) {
-        int entityLeftWorldX = Player.worldX + player.collisionBox.x;
-        int entityRightWorldX = Player.worldX + player.collisionBox.x + player.collisionBox.width;
-        int entityTopWorldY = Player.worldY + player.collisionBox.y;
-        int entityBottomWorldY = Player.worldY + player.collisionBox.y + player.collisionBox.height;
+        int entityLeftWorldX = (int) (Player.worldX + player.collisionBox.x);
+        int entityRightWorldX = (int) (Player.worldX + player.collisionBox.x + player.collisionBox.width);
+        int entityTopWorldY = (int) (Player.worldY + player.collisionBox.y);
+        int entityBottomWorldY = (int) (Player.worldY + player.collisionBox.y + player.collisionBox.height);
 
         int entityLeftCol;
         int entityRightCol;
@@ -172,6 +172,10 @@ public class CollisionChecker {
                 player.collisionDown = true;
             }
         }
+    }
+
+    public boolean checkEntityAgainstPlayer(ENTITY checkingForHit, Player incomingToHit) {
+        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) Player.worldX, (int) Player.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 }
 

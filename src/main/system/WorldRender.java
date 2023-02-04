@@ -100,13 +100,13 @@ public class WorldRender {
                 Player.screenX = mg.HALF_WIDTH;
                 Player.screenY = mg.HALF_HEIGHT;
                 if (Player.screenX > Player.worldX) {
-                    Player.screenX = Player.worldX;
+                    Player.screenX = (int) Player.worldX;
                 }
                 if (Player.screenY > Player.worldY) {
-                    Player.screenY = Player.worldY;
+                    Player.screenY = (int) Player.worldY;
                 }
-                screenX = i * 48 - Player.worldX + Player.screenX;
-                screenY = b * 48 - Player.worldY + Player.screenY;
+                screenX = (int) (i * 48 - Player.worldX + Player.screenX);
+                screenY = (int) (b * 48 - Player.worldY + Player.screenY);
                 g2.drawImage(tileStorage[worldData[i][b]].tileImage, screenX, screenY, 48, 48);
             }
         }

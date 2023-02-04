@@ -9,10 +9,10 @@ import java.util.Objects;
 public class Storage {
     public final Rectangle box_primaryFire = new Rectangle(0, 0, 16, 16);
     public final Rectangle box_secondaryFire = new Rectangle(0, 0, 32, 32);
-    public Image Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
-    public Image secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
+    public static Image Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
+    public static Image secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
     public Image primaryFire1;
-    public Image gruntImage1;
+    public static Image gruntImage1;
     public Image shooterImage1;
     public static Image coin1, coin2, coin3, coin4;
 

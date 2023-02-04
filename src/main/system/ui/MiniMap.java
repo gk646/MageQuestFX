@@ -23,8 +23,8 @@ public class MiniMap {
     }
 
     public void draw(GraphicsContext gc) {
-        int xTile = (Player.worldX + 24) / 48;
-        int yTile = (Player.worldY + 24) / 48;
+        int xTile = (int) ((Player.worldX + 24) / 48);
+        int yTile = (int) ((Player.worldY + 24) / 48);
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
         gc.strokeLine(1_700, 25, 1_900, 25);

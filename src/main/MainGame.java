@@ -418,7 +418,7 @@ public class MainGame {
     }
 
     private void getPlayerTile() {
-        playerX = (Player.worldX + 24) / 48;
-        playerY = (Player.worldY + 24) / 48;
+        playerX = (int) ((Player.worldX + 24) / 48);
+        playerY = (int) ((Player.worldY + 24) / 48);
     }
 }

@@ -28,7 +28,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
 
         //------POSITION-----------
         this.worldPos = new Point2D.Double(x, y);
-        this.updateVector = getTrajectory(new Point(Player.worldX, Player.worldY));
+        this.updateVector = getTrajectory(new Point((int) Player.worldX, (int) Player.worldY));
         getPlayerImage();
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
     }

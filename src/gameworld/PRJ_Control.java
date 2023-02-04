@@ -43,7 +43,7 @@ public class PRJ_Control {
     protected Image projectileImage9;
     protected Image projectileImage10;
     protected int projectileWidth;
-    protected final MainGame mg;
+    protected MainGame mg;
     public boolean dead, collisionUp, collisionDown;
     public boolean collisionLeft;
     public boolean collisionRight;
@@ -59,6 +59,10 @@ public class PRJ_Control {
 
     public PRJ_Control(MainGame mg) {
         this.mg = mg;
+    }
+
+    public PRJ_Control() {
+
     }
 
     public void draw(GraphicsContext g2) {

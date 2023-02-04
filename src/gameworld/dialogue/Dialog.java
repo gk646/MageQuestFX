@@ -48,7 +48,7 @@ abstract public class Dialog {
         gc.setStroke(Color.WHITE);
         gc.setFill(Color.WHITE);
         gc.strokeRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
-        int stringY = entity.worldY - Player.worldY + Player.screenY - 24 - 115 + 6;
+        int stringY = (int) (entity.worldY - Player.worldY + Player.screenY - 24 - 115 + 6);
         for (String string : text.split("\n")) {
             gc.fillText(string, entity.worldX - Player.worldX + Player.screenX - 24 + 5 - 124, stringY += 15);
         }

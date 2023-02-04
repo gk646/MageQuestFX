@@ -38,8 +38,8 @@ public class ENT_Owly extends ENTITY {
 
     @Override
     public void update() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
         if (worldX / mg.tileSize != Player.worldX / mg.tileSize || worldY / mg.tileSize != Player.worldY / mg.tileSize) {
             onPath = true;
         }
@@ -48,8 +48,8 @@ public class ENT_Owly extends ENTITY {
     }
 
     private void updatePos() {
-        screenX = worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24;
-        screenY = worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24;
+        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
+        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
     }
 
     private void getOwlyImage() {
