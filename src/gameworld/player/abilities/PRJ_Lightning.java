@@ -3,6 +3,7 @@ package gameworld.player.abilities;
 import gameworld.PRJ_Control;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.ui.Effects;
 
 import java.awt.Rectangle;
 
@@ -27,32 +28,37 @@ public class PRJ_Lightning extends PRJ_Control {
 
     @Override
     public void draw(GraphicsContext gc) {
-
-        if (spriteCounter <= 8) {
-            gc.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        }
-        if (spriteCounter >= 6 && spriteCounter <= 14) {
-            gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 14 && spriteCounter <= 22) {
-            gc.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 22 && spriteCounter <= 30) {
-            gc.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 30 && spriteCounter <= 35) {
-            gc.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 35 && spriteCounter <= 40) {
-            gc.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 40 && spriteCounter <= 56) {
-            gc.drawImage(projectileImage7, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 56 && spriteCounter <= 64) {
-            gc.drawImage(projectileImage8, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 64 && spriteCounter <= 72) {
-            gc.drawImage(projectileImage9, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 72 && spriteCounter <= 80) {
-            gc.drawImage(projectileImage10, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
-        } else if (spriteCounter >= 80) {
-            this.dead = true;
-        }
+        gc.setEffect(Effects.blueGlow);
         spriteCounter++;
+        int spriteIndex = spriteCounter / 6;
+        switch (spriteIndex) {
+            case 0 ->
+                    gc.drawImage(projectileImage1, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 1 ->
+                    gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 2 ->
+                    gc.drawImage(projectileImage2, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 4 ->
+                    gc.drawImage(projectileImage3, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 5 ->
+                    gc.drawImage(projectileImage4, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 6 ->
+                    gc.drawImage(projectileImage5, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 7 ->
+                    gc.drawImage(projectileImage6, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 8 ->
+                    gc.drawImage(projectileImage7, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 9 ->
+                    gc.drawImage(projectileImage8, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 10 ->
+                    gc.drawImage(projectileImage9, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 11 ->
+                    gc.drawImage(projectileImage10, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 12 ->
+                    gc.drawImage(projectileImage10, (int) worldPos.x - mg.player.worldX + mg.HALF_WIDTH, (int) worldPos.y - mg.player.worldY + mg.HALF_HEIGHT - 50, projectileWidth, projectileHeight);
+            case 13 -> dead = true;
+        }
+        gc.setEffect(null);
     }
 
     public void update() {

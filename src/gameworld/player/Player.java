@@ -3,7 +3,7 @@ package gameworld.player;
 import gameworld.entities.ENTITY;
 import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_Lightning;
-import gameworld.world.objects.items.DroppedItem;
+import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -110,12 +110,12 @@ public class Player extends ENTITY {
 
     public void pickupDroppedItem() {
         try {
-            for (DroppedItem drop : mg.droppedItems) {
+            for (DROP drop : mg.WORLD_DROPS) {
                 if (new Rectangle(mg.player.worldX - 25, mg.player.worldY - 14, mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
                     for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
                         if (bagSlot.item == null && !bagSlot.grabbed) {
                             bagSlot.item = drop.item;
-                            mg.droppedItems.remove(drop);
+                            mg.WORLD_DROPS.remove(drop);
                             break;
                         }
                     }

@@ -1,16 +1,16 @@
-package gameworld.world.objects.items;
+package gameworld.world.objects.drops;
 
+import gameworld.world.objects.DROP;
+import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 
-import java.awt.Point;
-
-public class DroppedItem {
+public class DRP_DroppedItem extends DROP {
 
 
     public final ITEM item;
-    public final Point worldPos = new Point();
+
     private final MainGame mg;
     public Image droppedIcon;
 
@@ -27,7 +27,7 @@ public class DroppedItem {
      * @param worldY DropLocation Y
      * @param level  Level of the dropped item
      */
-    public DroppedItem(MainGame mg, int worldX, int worldY, int level) {
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level) {
         this.mg = mg;
         this.worldPos.x = worldX;
         this.worldPos.y = worldY;
@@ -37,7 +37,7 @@ public class DroppedItem {
         }
     }
 
-    public DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
         this.mg = mg;
         this.worldPos.x = worldX;
         this.worldPos.y = worldY;
@@ -63,8 +63,17 @@ public class DroppedItem {
         return new_ITEM;
     }
 
+    @Override
     public void draw(GraphicsContext g2) {
         g2.drawImage(droppedIcon, worldPos.x - mg.player.worldX + mg.HALF_WIDTH, worldPos.y - mg.player.worldY + mg.HALF_HEIGHT, 32, 32);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void update() {
+
     }
 
     private ITEM rollForItem(int level) {
@@ -127,7 +136,7 @@ public class DroppedItem {
     }
 
     private void debugItems() {
-        System.out.println(DroppedItem.cloneItemWithLevelQuality(mg.CHEST.get(8), 80, 60).vitality);
+        System.out.println(DRP_DroppedItem.cloneItemWithLevelQuality(mg.CHEST.get(8), 80, 60).vitality);
         System.out.println(mg.CHEST.get(8).vitality);
         mg.CHEST.get(8).rollQuality(80);
         System.out.println(mg.CHEST.get(8).vitality);

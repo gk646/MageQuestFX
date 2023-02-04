@@ -7,7 +7,7 @@ import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
-import gameworld.world.objects.items.DroppedItem;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.image.Image;
 import main.MainGame;
 
@@ -68,7 +68,7 @@ abstract public class PROJECTILE {
         if (entity.health <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
-            mg.droppedItems.add(new DroppedItem(mg, entity.worldX, entity.worldY, entity.level));
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, entity.worldX, entity.worldY, entity.level));
         } else {
             entity.hpBarOn = true;
         }

@@ -1,6 +1,6 @@
 package main.system.database;
 
-import gameworld.world.objects.items.DroppedItem;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
 
@@ -234,7 +234,7 @@ public class SQLite {
             case "A":
                 for (ITEM item : mg.AMULET) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
                         return new_ITEM;
                     }
                 }
@@ -242,7 +242,7 @@ public class SQLite {
             case "B":
                 for (ITEM item : mg.BOOTS) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -251,7 +251,7 @@ public class SQLite {
             case "C":
                 for (ITEM item : mg.CHEST) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -260,7 +260,7 @@ public class SQLite {
             case "H":
                 for (ITEM item : mg.HEAD) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -269,7 +269,7 @@ public class SQLite {
             case "O":
                 for (ITEM item : mg.OFFHAND) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -278,7 +278,7 @@ public class SQLite {
             case "W":
                 for (ITEM item : mg.ONEHAND) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -287,7 +287,7 @@ public class SQLite {
             case "P":
                 for (ITEM item : mg.PANTS) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
 
                         return new_ITEM;
                     }
@@ -296,7 +296,7 @@ public class SQLite {
             case "T":
                 for (ITEM item : mg.RELICS) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
                         return new_ITEM;
                     }
                 }
@@ -304,7 +304,7 @@ public class SQLite {
             case "R":
                 for (ITEM item : mg.RINGS) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
                         return new_ITEM;
                     }
                 }
@@ -312,7 +312,7 @@ public class SQLite {
             case "2":
                 for (ITEM item : mg.TWOHANDS) {
                     if (item.i_id == i_id) {
-                        new_ITEM = DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
                         return new_ITEM;
                     }
                 }

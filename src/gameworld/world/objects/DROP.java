@@ -1,13 +1,13 @@
 package gameworld.world.objects;
 
+import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 import java.awt.Point;
 
-abstract public class OBJECT {
-    public Point worldPos;
-    Image objectImage1;
+abstract public class DROP {
+    public Point worldPos = new Point();
+    public ITEM item;
 
     abstract public void draw(GraphicsContext gc);
 

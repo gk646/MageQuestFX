@@ -1,9 +1,9 @@
 package gameworld.world.objects.containers;
 
-import gameworld.world.objects.OBJECT;
+import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 
-public class OBJ_Chest extends OBJECT {
+public class OBJ_Chest extends DROP {
 
     /**
      * @param gc Graphics context

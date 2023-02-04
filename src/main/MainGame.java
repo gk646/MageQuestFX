@@ -8,7 +8,8 @@ import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
-import gameworld.world.objects.items.DroppedItem;
+import gameworld.world.objects.DROP;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
 import javafx.animation.KeyFrame;
@@ -58,7 +59,7 @@ public class MainGame {
 
 
     //ITEMS
-    public final ArrayList<DroppedItem> droppedItems = new ArrayList<>();
+    public final ArrayList<DROP> WORLD_DROPS = new ArrayList<>();
     public final ArrayList<ITEM> AMULET = new ArrayList<>();
     public final ArrayList<ITEM> BOOTS = new ArrayList<>();
     public final ArrayList<ITEM> CHEST = new ArrayList<>();
@@ -304,14 +305,13 @@ public class MainGame {
 
 
     private void drawDroppedItems(GraphicsContext gc) {
-        if (droppedItems.size() != 0) {
+        if (WORLD_DROPS.size() != 0) {
             try {
-                for (DroppedItem dropItem : droppedItems) {
-                    if (dropItem.item != null) {
-                        dropItem.draw(gc);
-                    } else {
-                        droppedItems.remove(dropItem);
+                for (DROP drop : WORLD_DROPS) {
+                    if (drop instanceof DRP_DroppedItem && drop.item == null) {
+                        WORLD_DROPS.remove(drop);
                     }
+                    drop.draw(gc);
                 }
             } catch (ConcurrentModificationException ignored) {
             }
@@ -380,10 +380,10 @@ public class MainGame {
         countItems();
         gameMap.getImage();
 
-        inventP.bag_Slots[14].item = DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
-        inventP.bag_Slots[13].item = DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
-        inventP.bag_Slots[11].item = DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
-        inventP.bag_Slots[10].item = DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
+        inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
+        inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
+        inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
+        inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
         loadingScreen = false;
         gameState = State.TITLE;
         startThreads();
@@ -395,7 +395,7 @@ public class MainGame {
      * Prints out the total item count across all categories
      */
     private void countItems() {
-        System.out.println(-12 + AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
+        System.out.println(-12 + MISC.size() + AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
     }
 
     /**

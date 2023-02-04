@@ -1,6 +1,6 @@
 package main.system.ui.inventory;
 
-import gameworld.world.objects.items.DroppedItem;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -129,19 +129,20 @@ public class UI_InventoryPanel {
             gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 5 - 47, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 17);
         }
         //STATS
-        gc.setFill(Colors.darkBackground);
-        gc.setFont(FonT.minecraftItalic15);
-        gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-        gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-        gc.fillText("WIS: " + invSlot.item.wisdom, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+        if (!invSlot.item.type.equals("M")) {
+            gc.setFill(Colors.darkBackground);
+            gc.setFont(FonT.minecraftItalic15);
+            gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
+            gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
+            gc.fillText("WIS: " + invSlot.item.wisdom, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
 
-        gc.fillText("AGI: " + invSlot.item.agility, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-        gc.fillText("LUC: " + invSlot.item.luck, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-        gc.fillText("CHA: " + invSlot.item.charisma, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+            gc.fillText("AGI: " + invSlot.item.agility, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
+            gc.fillText("LUC: " + invSlot.item.luck, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
+            gc.fillText("CHA: " + invSlot.item.charisma, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
 
-        gc.fillText("END: " + invSlot.item.endurance, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-        gc.fillText("STR: " + invSlot.item.strength, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-        gc.fillText("FOC: " + invSlot.item.focus, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+            gc.fillText("END: " + invSlot.item.endurance, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
+            gc.fillText("STR: " + invSlot.item.strength, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
+            gc.fillText("FOC: " + invSlot.item.focus, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
 
       /*  INT - Int
         WIS - Wis
@@ -154,9 +155,9 @@ public class UI_InventoryPanel {
         FOC - Foc
 
        */
-        //EFFECTS
-        gc.fillText("Effects: ", mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 200);
-
+            //EFFECTS
+            gc.fillText("Effects: ", mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 200);
+        }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
         int stringY = mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 270;
@@ -206,7 +207,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < char_Slots.length; i++) {
                 if (char_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && char_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.droppedItems.add(new DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, char_Slots[i].item));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, char_Slots[i].item));
                         char_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
                         mg.player.updateEquippedItems();
@@ -222,7 +223,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < bag_Slots.length; i++) {
                 if (bag_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && bag_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.droppedItems.add(new DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, bag_Slots[i].item));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, mg.player.worldX - 50, mg.player.worldY, bag_Slots[i].item));
                         bag_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
                         mg.player.updateEquippedItems();

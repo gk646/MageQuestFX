@@ -1,6 +1,7 @@
 package gameworld.world.objects.items;
 
 import gameworld.player.Player;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -9,7 +10,7 @@ import main.system.database.SQLite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DroppedItemTest {
+class DRPDroppedItemTest {
 
     MainGame mg;
 
@@ -34,7 +35,7 @@ class DroppedItemTest {
         int rarity5 = 0;
         int fail = 0;
         for (int i = 0; i < 10_00; i++) {
-            DroppedItem drop = new DroppedItem(mg, 1, 1, 1);
+            DRP_DroppedItem drop = new DRP_DroppedItem(mg, 1, 1, 1);
             if (drop.item == null) {
                 nullitems++;
             } else if (drop.item.rarity == 1) {

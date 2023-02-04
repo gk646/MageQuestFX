@@ -14,6 +14,7 @@ public class Storage {
     public Image primaryFire1;
     public Image gruntImage1;
     public Image shooterImage1;
+    public Image coin1, coin2, coin3, coin4;
 
     public Storage() {
     }
@@ -21,11 +22,23 @@ public class Storage {
     public void loadImages() {
         loadAbilityImages();
         loadEntityImages();
+        loadDropImages();
+    }
+
+    private void loadDropImages() {
+        loadCoinImages();
     }
 
     private void loadEntityImages() {
         getGruntImages();
         getShooterImages();
+    }
+
+    private void loadCoinImages() {
+        coin1 = setup("/items/drops/coin1.png");
+        coin2 = setup("/items/drops/coin2.png");
+        coin3 = setup("/items/drops/coin3.png");
+        coin4 = setup("/items/drops/coin4.png");
     }
 
     private void loadAbilityImages() {

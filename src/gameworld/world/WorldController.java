@@ -96,7 +96,7 @@ public class WorldController {
 
     private void clearWorldArrays() {
         mg.npcControl.loadNPC(currentWorld);
-        mg.droppedItems.clear();
+        mg.WORLD_DROPS.clear();
         MainGame.ENTITIES.clear();
         mg.PRJControls.clear();
     }
