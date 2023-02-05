@@ -6,6 +6,7 @@ import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.ui.Effects;
 
 public class DRP_DroppedItem extends DROP {
     private final MainGame mg;
@@ -27,8 +28,8 @@ public class DRP_DroppedItem extends DROP {
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level) {
         this.mg = mg;
         this.size = 32;
-        this.worldPos.x = worldX + 24;
-        this.worldPos.y = worldY + 24;
+        this.worldPos.x = worldX + 16;
+        this.worldPos.y = worldY + 16;
         item = rollForItem(level);
         if (item != null) {
             droppedIcon = item.icon;
@@ -38,8 +39,8 @@ public class DRP_DroppedItem extends DROP {
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
         this.mg = mg;
         this.size = 32;
-        this.worldPos.x = worldX + 24;
-        this.worldPos.y = worldY + 24;
+        this.worldPos.x = worldX + 16;
+        this.worldPos.y = worldY + 16;
         this.item = item;
         droppedIcon = item.icon;
     }
@@ -63,8 +64,10 @@ public class DRP_DroppedItem extends DROP {
     }
 
     @Override
-    public void draw(GraphicsContext g2) {
-        g2.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
+    public void draw(GraphicsContext gc) {
+        setRarityEffect(gc);
+        gc.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+        gc.setEffect(null);
     }
 
     /**
@@ -132,6 +135,20 @@ public class DRP_DroppedItem extends DROP {
             return mg.TWOHANDS.get(mg.random.nextInt(1, mg.TWOHANDS.size()));
         }
         return null;
+    }
+
+    private void setRarityEffect(GraphicsContext gc) {
+        if (item.rarity == 1) {
+            gc.setEffect(Effects.rarity_1glow);
+        } else if (item.rarity == 2) {
+            gc.setEffect(Effects.rarity_2glow);
+        } else if (item.rarity == 3) {
+            gc.setEffect(Effects.rarity_3glow);
+        } else if (item.rarity == 4 || item.rarity == 10) {
+            gc.setEffect(Effects.rarity_4glow);
+        } else if (item.rarity == 5) {
+            gc.setEffect(Effects.rarity_5glow);
+        }
     }
 
     private void debugItems() {

@@ -4,7 +4,6 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
@@ -371,11 +370,11 @@ public class MainGame {
         countItems();
         gameMap.getImage();
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
-        inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
+        inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(4), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
-        inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
+        inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(4), 100, 60);
         for (int i = 0; i < 1; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
+            // ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         Player.worldX = 35 * 48;
