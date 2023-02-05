@@ -11,13 +11,16 @@ public class DRP_Coin extends DROP {
     private Image coin2;
     private Image coin3;
     private Image coin4;
-    private int spriteCounter = 0;
+
+    public int amount;
 
 
-    public DRP_Coin(int x, int y) {
+    public DRP_Coin(int x, int y, int amount) {
         getImages();
-        this.worldPos.x = x;
-        this.worldPos.y = y;
+        this.amount = amount;
+        this.size = 10;
+        this.worldPos.x = x + 5;
+        this.worldPos.y = y + 5;
     }
 
     /**

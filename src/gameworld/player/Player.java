@@ -4,6 +4,8 @@ import gameworld.entities.ENTITY;
 import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.world.objects.DROP;
+import gameworld.world.objects.drops.DRP_Coin;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -12,7 +14,7 @@ import main.system.enums.Map;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
-import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.Objects;
 
 
@@ -99,36 +101,44 @@ public class Player extends ENTITY {
                 focus += invSlot.item.focus;
             }
         }
-        maxHealth = (int) ((9.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(level));
-        maxMana = (int) ((19.0f + intellect * 3 + wisdom / 2.0f) * Math.sqrt(level));
-        manaRegeneration = ((Math.round((5.0f + (level / 10.0f) + (wisdom * 5 + intellect) * (1.0f - (level / 65.0f))) * 100.0f) / 100.0f) / 60);
-        healthRegeneration = (float) (((0.05f + Math.sqrt(endurance * 2 + vitality)) * Math.sqrt(level)) / 80);
-        movementSpeed = (int) (4 + 0.2 * agility);
-        critChance = Math.min((Math.round((5.0f + (level / 10.0f) + (luck * 2) * (1.0f - (level / 63.0f))) * 100.0f) / 100.0f), 75);
+        maxHealth = (int) ((9.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));
+        maxMana = (int) ((19.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
+        manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
+        healthRegeneration = Math.round(2 + ((endurance * 2 + vitality) / Math.sqrt(Math.max(10, level + 10))) / 110.0f * 100.0f) / 100.0f;
+        playerMovementSpeed = Math.round(((4.0f + (agility * 0.4 / (float) level))) * 100.0f) / 100.0f;
+        critChance = Math.min((Math.round(((5.0f + ((luck * 2) / Math.sqrt(Math.max(10, level))) * 100.0f) / 100.0f))), 75);
         speechSkill = Math.round((5.0f + (level / 10.0f) + (1.5f * charisma) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f;
         resistChance = Math.min((Math.round((5.0f + (level / 10.0f) + (endurance * 1.0f) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f), 50);
-        carryWeight = Math.round((50.0f + (level) + (strength * 2.0f) * (1.0f - (level / 100.0f))) * 100.0f) / 100.0f;
-        buffLengthMultiplier = Math.round(((focus) * (1.0f - (level / 80.0f))) * 100.0f) / 100.0f;
-        dotDamageMultiplier = Math.round(((focus) * (1.0f - (level / 70.0f))) * 100.0f) / 100.0f;
-        dotLengthMultiplier = dotDamageMultiplier;
+        carryWeight = Math.round((30.0f + (level) + (strength) * (1.0f - (level / 90.0f))) * 100.0f) / 100.0f;
+        buffLengthMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 83.0f))) * 100.0f) / 100.0f;
+        dotDamageMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 75.0f))) * 100.0f) / 100.0f;
+        dotLengthMultiplier = (dotDamageMultiplier * 1.25f);
     }
 
     public void pickupDroppedItem() {
-        try {
-            for (DROP drop : mg.WORLD_DROPS) {
-                if (new Rectangle((int) (worldX - 25), (int) (worldY - 14), mg.player.collisionBox.width + 10, mg.player.collisionBox.height + 17).contains(drop.worldPos)) {
-                    for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
-                        if (bagSlot.item == null && !bagSlot.grabbed) {
-                            bagSlot.item = drop.item;
-                            mg.WORLD_DROPS.remove(drop);
-                            break;
+        synchronized (mg.WORLD_DROPS) {
+            Iterator<DROP> iter = mg.WORLD_DROPS.iterator();
+            while (iter.hasNext()) {
+                DROP drop = iter.next();
+                if (new Rectangle((int) worldX + mg.player.collisionBox.x, (int) worldY + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
+                    if (drop instanceof DRP_DroppedItem) {
+                        for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
+                            if (bagSlot.item == null && !bagSlot.grabbed) {
+                                bagSlot.item = drop.item;
+                                iter.remove();
+                                break;
+                            }
                         }
+                    } else if (drop instanceof DRP_Coin) {
+                        mg.player.coins += ((DRP_Coin) drop).amount;
+                        iter.remove();
+                        continue;
                     }
                 }
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
+
 
     public void getDurabilityDamageArmour() {
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
@@ -249,23 +259,23 @@ public class Player extends ENTITY {
         mg.collisionChecker.checkPlayerAgainstTile(this);
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
-                worldX -= movementSpeed;
+                worldX -= playerMovementSpeed;
             }
         }
         if (mg.inputH.upPressed) {
             if (!collisionUp && worldY > 0) {
-                worldY -= movementSpeed;
+                worldY -= playerMovementSpeed;
             }
         }
         if (mg.inputH.downPressed) {
             if (!collisionDown && worldY < mg.wRender.worldSize.x * 48 - 48) {
-                worldY += movementSpeed;
+                worldY += playerMovementSpeed;
             }
         }
 
         if (mg.inputH.rightPressed) {
             if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
-                worldX += movementSpeed;
+                worldX += playerMovementSpeed;
             }
         }
     }

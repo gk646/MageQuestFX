@@ -39,10 +39,9 @@ public class NPC_Man extends NPC {
 
     public void update() {
         dial.script(this);
-
         if (show_dialog) {
             show_dialog = !mg.util.player_went_away(playerTalkLocation);
-            if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 2) && mg.inputH.e_typed && !onPath && !dial.block)) {
+            if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !dial.block)) {
                 dial.next_stage();
             }
         }
@@ -54,7 +53,7 @@ public class NPC_Man extends NPC {
                 dialog_counter = 0;
             }
         }
-        if (mg.collisionChecker.checkEntityAgainstPlayer(this, 2) && mg.inputH.e_typed) {
+        if (mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed) {
             this.show_dialog = true;
             playerTalkLocation = new Point((int) Player.worldX, (int) Player.worldY);
         }

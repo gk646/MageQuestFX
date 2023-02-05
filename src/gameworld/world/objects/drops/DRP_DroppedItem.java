@@ -26,8 +26,9 @@ public class DRP_DroppedItem extends DROP {
      */
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level) {
         this.mg = mg;
-        this.worldPos.x = worldX;
-        this.worldPos.y = worldY;
+        this.size = 32;
+        this.worldPos.x = worldX + 24;
+        this.worldPos.y = worldY + 24;
         item = rollForItem(level);
         if (item != null) {
             droppedIcon = item.icon;
@@ -36,8 +37,9 @@ public class DRP_DroppedItem extends DROP {
 
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
         this.mg = mg;
-        this.worldPos.x = worldX;
-        this.worldPos.y = worldY;
+        this.size = 32;
+        this.worldPos.x = worldX + 24;
+        this.worldPos.y = worldY + 24;
         this.item = item;
         droppedIcon = item.icon;
     }
@@ -62,7 +64,7 @@ public class DRP_DroppedItem extends DROP {
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(droppedIcon, worldPos.x - Player.worldX + mg.HALF_WIDTH, worldPos.y - Player.worldY + mg.HALF_HEIGHT, 32, 32);
+        g2.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
     }
 
     /**

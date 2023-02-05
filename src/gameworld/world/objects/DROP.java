@@ -8,6 +8,8 @@ import java.awt.Point;
 abstract public class DROP {
     public Point worldPos = new Point();
     public ITEM item;
+    public int size;
+    public int spriteCounter = 0;
 
     abstract public void draw(GraphicsContext gc);
 

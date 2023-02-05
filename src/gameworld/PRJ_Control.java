@@ -122,7 +122,7 @@ public class PRJ_Control {
             mg.player.getExperience(entity);
             entity.dead = true;
             mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, entity.worldX, entity.worldY, entity.level));
-            mg.WORLD_DROPS.add(new DRP_Coin(entity.worldX + mg.random.nextInt(41) - 20, entity.worldY + mg.random.nextInt(41) - 20));
+            mg.WORLD_DROPS.add(new DRP_Coin(entity.worldX + mg.random.nextInt(41) - 20, entity.worldY + mg.random.nextInt(41) - 20, entity.level));
         } else {
             entity.hpBarOn = true;
         }

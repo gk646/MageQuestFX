@@ -98,6 +98,7 @@ class DRPDroppedItemTest {
 
     @Test
     void playerStatsHigh() {
+
         mg.player.level = 60;
         mg.player.intellect = 400;
         mg.player.vitality = 400;
@@ -108,7 +109,9 @@ class DRPDroppedItemTest {
         mg.player.endurance = 100;
         mg.player.strength = 76;
         mg.player.focus = 250;
+
         calcPlayerStats();
+
         System.out.println("Max Health: " + mg.player.maxHealth);
         System.out.println("Max Mana: " + mg.player.maxMana);
         System.out.println("Mana Regeneration: " + mg.player.manaRegeneration * 60);
@@ -125,18 +128,18 @@ class DRPDroppedItemTest {
     }
 
     private void calcPlayerStats() {
-        mg.player.maxHealth = (int) ((9.0f + mg.player.vitality * 1.5f + mg.player.endurance / 2.0f) * Math.sqrt(mg.player.level));
-        mg.player.maxMana = (int) ((19.0f + mg.player.intellect * 3 + mg.player.wisdom) * Math.sqrt(mg.player.level));
-        mg.player.manaRegeneration = Math.round(((mg.player.wisdom * 2 + mg.player.intellect * 0.8) * (1.0f - (mg.player.level / 65.0f))) / 175.0f * 100.0f) / 100.0f;
-        mg.player.healthRegeneration = ((Math.round(((0.05f + Math.sqrt(mg.player.endurance * 4 + mg.player.vitality * 1.5)) * (1.0f - (mg.player.level / 75.0f)) / 60) * 100.0f) / 100.0f));
-        mg.player.playerMovementSpeed = ((float) Math.round((4 + 0.4 * Math.sqrt(mg.player.agility / (float) mg.player.level)) * 100.0) / 100.0f);
-        mg.player.critChance = Math.min((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.luck * 1.5) * (1.0f - (mg.player.level / 63.0f))) * 100.0f) / 100.0f), 75);
+        mg.player.maxHealth = (int) ((9.0f + mg.player.vitality * 1.5f + mg.player.endurance / 2.0f) * Math.sqrt(Math.min(mg.player.level, 50)));
+        mg.player.maxMana = (int) ((19.0f + mg.player.intellect * 3 + mg.player.wisdom) * Math.sqrt(Math.min(mg.player.level, 50)));
+        mg.player.manaRegeneration = Math.round(1 + ((mg.player.wisdom * 2 + mg.player.intellect) / Math.sqrt(Math.max(10, mg.player.level + 5))) / 60.0f * 100.0f) / 100.0f;
+        mg.player.healthRegeneration = Math.round(2 + ((mg.player.endurance * 2 + mg.player.vitality) / Math.sqrt(Math.max(10, mg.player.level + 10))) / 110.0f * 100.0f) / 100.0f;
+        mg.player.playerMovementSpeed = Math.round(((4.0f + (mg.player.agility * 0.4 / (float) mg.player.level))) * 100.0f) / 100.0f;
+        mg.player.critChance = Math.min((Math.round(((5.0f + ((mg.player.luck * 2) / Math.sqrt(Math.max(10, mg.player.level))) * 100.0f) / 100.0f))), 75);
         mg.player.speechSkill = Math.round((5.0f + (mg.player.level / 10.0f) + (1.5f * mg.player.charisma) * (1.0f - (mg.player.level / 64.0f))) * 100.0f) / 100.0f;
         mg.player.resistChance = Math.min((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.endurance * 1.0f) * (1.0f - (mg.player.level / 64.0f))) * 100.0f) / 100.0f), 50);
-        mg.player.carryWeight = Math.round((40.0f + (mg.player.level) + (mg.player.strength * 2.0f) * (1.0f - (mg.player.level / 75.0f))) * 100.0f) / 100.0f;
-        mg.player.buffLengthMultiplier = Math.round(((mg.player.focus) * (1.0f - (mg.player.level / 80.0f))) * 100.0f) / 100.0f;
-        mg.player.dotDamageMultiplier = Math.round(((mg.player.focus) * (1.0f - (mg.player.level / 70.0f))) * 100.0f) / 100.0f;
-        mg.player.dotLengthMultiplier = mg.player.dotDamageMultiplier;
+        mg.player.carryWeight = Math.round((30.0f + (mg.player.level) + (mg.player.strength) * (1.0f - (mg.player.level / 90.0f))) * 100.0f) / 100.0f;
+        mg.player.buffLengthMultiplier = Math.round(((mg.player.focus * 1.5) * (1.0f - (mg.player.level / 83.0f))) * 100.0f) / 100.0f;
+        mg.player.dotDamageMultiplier = Math.round(((mg.player.focus * 1.5) * (1.0f - (mg.player.level / 75.0f))) * 100.0f) / 100.0f;
+        mg.player.dotLengthMultiplier = (mg.player.dotDamageMultiplier * 1.25f);
     }
 }
 
