@@ -49,7 +49,7 @@ import java.util.Random;
 
 public class MainGame {
 
-    public static final ArrayList<ENTITY> ENTITIES = new ArrayList<>();
+
     private static final float FRAMES_PER_SECOND = 120;
     public static int SCREEN_WIDTH = 1_920;
     public static int SCREEN_HEIGHT = 1_080;
@@ -60,8 +60,8 @@ public class MainGame {
     public final List<PRJ_Control> old = new ArrayList<>();
     public final List<PRJ_Control> PRJControls = Collections.synchronizedList(old);
     public final ArrayList<ENTITY> PROXIMITY_ENTITIES = new ArrayList<>();
-
-
+    public static final ArrayList<ENTITY> old_entities = new ArrayList<>();
+    public static final List<ENTITY> ENTITIES = Collections.synchronizedList(old_entities);
     //ITEMS
     public final ArrayList<DROP> WORLD_DROPS = new ArrayList<>();
     public final ArrayList<ITEM> AMULET = new ArrayList<>();
@@ -198,7 +198,6 @@ public class MainGame {
                         player.update();
                         sBar.update();
                         qPanel.update();
-
                         npcControl.update();
                     }
                     difference = 0;

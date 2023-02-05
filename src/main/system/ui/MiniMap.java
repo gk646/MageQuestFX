@@ -3,10 +3,10 @@ package main.system.ui;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
-import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
+import main.system.WorldRender;
 
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
@@ -23,8 +23,8 @@ public class MiniMap {
     }
 
     public void draw(GraphicsContext gc) {
-        int xTile = (int) ((Player.worldX + 24) / 48);
-        int yTile = (int) ((Player.worldY + 24) / 48);
+        int xTile = mg.playerX;
+        int yTile = mg.playerY;
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
         gc.strokeLine(1_700, 25, 1_900, 25);
@@ -37,7 +37,7 @@ public class MiniMap {
                 yTileOffset = yTile - 20 + y;
                 xTileOffset = xTile - 20 + x;
                 if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y &&
-                        mg.wRender.tileStorage[mg.wRender.worldData[xTileOffset][yTileOffset]].collision) {
+                        WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
                     gc.setFill(grey);
                     gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
                 } else {

@@ -26,9 +26,9 @@ public class ENT_Control {
      * Draws all entities and healthbars
      */
     public void draw(GraphicsContext gc) {
-        for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
-            entity.draw(gc);
-            if (!(entity instanceof ENT_Owly)) {
+        synchronized (MainGame.ENTITIES) {
+            for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
+                entity.draw(gc);
                 if (entity.hpBarOn) {
                     gc.setFill(Colors.Red);
                     gc.fillRect(entity.screenX, entity.screenY - 10, (int) (((float) entity.health / entity.maxHealth) * 48), 8);
