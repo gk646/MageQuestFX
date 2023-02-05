@@ -11,7 +11,6 @@ public class UI_SkillBar {
     private final MainGame mg;
     public SKILL[] skills = new SKILL[4];
     int skillBarX = 576, skillBarY = 1_005;
-    float angle = 0;
 
 
     public UI_SkillBar(MainGame mg) {

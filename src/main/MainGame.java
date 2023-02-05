@@ -252,7 +252,7 @@ public class MainGame {
             prj_control.draw(gc);
             ent_control.draw(gc);
             npcControl.draw(gc);
-            ENTPlayer2.draw(gc);
+            //ENTPlayer2.draw(gc);
             player.draw(gc);
             miniM.draw(gc);
             ui.draw(gc);
