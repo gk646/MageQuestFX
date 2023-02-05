@@ -41,7 +41,7 @@ public class ENT_Grunt extends ENTITY {
         screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
         screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
         onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX + 24) / 48 || worldY / 48 != (Player.worldY + 24) / 48);
-        gruntMovement();
+       // gruntMovement();
         hitDelay++;
         searchTicks++;
     }

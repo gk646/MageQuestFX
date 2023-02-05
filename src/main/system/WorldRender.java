@@ -15,7 +15,7 @@ public class WorldRender {
     private final MainGame mg;
     public static int[][] worldData;
     public Point worldSize;
-    private int worldCol, worldRow;
+
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
@@ -31,7 +31,6 @@ public class WorldRender {
 
 
     private void getTileImage() {
-
         //WOOD
         setupTiles(54, "wooden_fence.png", true);
 
@@ -90,24 +89,21 @@ public class WorldRender {
 
 
     public void draw(GraphicsContext g2) {
-        int screenX, screenY;
-        worldCol = Math.max(mg.playerX - 21, 0);
-        worldRow = Math.max(mg.playerY - 12, 0);
+        int worldCol = Math.max(mg.playerX - 21, 0);
+        int worldRow = Math.max(mg.playerY - 12, 0);
         int maxCol = Math.min(worldCol + 42, worldSize.x);
         int maxRow = Math.min(worldRow + 24, worldSize.y);
+        Player.screenX = mg.HALF_WIDTH - 24;
+        Player.screenY = mg.HALF_HEIGHT - 24;
+        if (Player.screenX > Player.worldX) {
+            Player.screenX = (int) Player.worldX;
+        }
+        if (Player.screenY > Player.worldY) {
+            Player.screenY = (int) Player.worldY;
+        }
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
-                Player.screenX = mg.HALF_WIDTH - 24;
-                Player.screenY = mg.HALF_HEIGHT - 24;
-                if (Player.screenX > Player.worldX) {
-                    Player.screenX = (int) Player.worldX;
-                }
-                if (Player.screenY > Player.worldY) {
-                    Player.screenY = (int) Player.worldY;
-                }
-                screenX = (int) (i * 48 - Player.worldX + Player.screenX);
-                screenY = (int) (b * 48 - Player.worldY + Player.screenY);
-                g2.drawImage(tileStorage[worldData[i][b]].tileImage, screenX, screenY, 48, 48);
+                g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);
             }
         }
     }

@@ -4,7 +4,7 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
@@ -29,7 +29,6 @@ import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.State;
 import main.system.sound.Sound;
-import main.system.ui.Colors;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
 import main.system.ui.GameMap;
@@ -41,7 +40,10 @@ import main.system.ui.skillbar.UI_SkillBar;
 import main.system.ui.talentpane.UI_TalentPanel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 
@@ -55,7 +57,8 @@ public class MainGame {
     public final int HALF_HEIGHT;
     public final Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3_000));
     //---------VARIABLES----------
-    public final ArrayList<PRJ_Control> PRJControls = new ArrayList<>();
+    public final List<PRJ_Control> old = new ArrayList<>();
+    public final List<PRJ_Control> PRJControls = Collections.synchronizedList(old);
     public final ArrayList<ENTITY> PROXIMITY_ENTITIES = new ArrayList<>();
 
 
@@ -110,6 +113,7 @@ public class MainGame {
     private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
+    Iterator<DROP> iterator;
 
 
     /**
@@ -194,7 +198,7 @@ public class MainGame {
                         player.update();
                         sBar.update();
                         qPanel.update();
-                        prj_control.updateProjectilePos();
+
                         npcControl.update();
                     }
                     difference = 0;
@@ -211,7 +215,6 @@ public class MainGame {
                 difference += (firstTimeGate1 - lastTime1) / logicCounter;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
-
                     if (gameState == State.PLAY || gameState == State.OPTION || gameState == State.TALENT) {
                         if (inputH.debugFps && inputH.f_pressed) {
                             multiplayer.startMultiplayerClient();
@@ -222,7 +225,6 @@ public class MainGame {
                         if (multiplayer.multiplayerStarted) {
                             multiplayer.updateMultiplayerInput();
                         }
-
                         prj_control.update();
                         if (!client) {
                             ent_control.update();
@@ -254,7 +256,7 @@ public class MainGame {
             npcControl.draw(gc);
             ENTPlayer2.draw(gc);
             player.draw(gc);
-            miniM.draw(gc);
+            //miniM.draw(gc);
             ui.draw(gc);
             qPanel.draw(gc);
             sBar.draw(gc);
@@ -264,27 +266,16 @@ public class MainGame {
             if (showBag) {
                 inventP.drawBagWindow(gc);
                 inventP.drawBagTooltip(gc);
+                inventP.drawDragAndDrop(gc);
             }
             if (showChar) {
                 inventP.drawCharacterWindow(gc);
                 inventP.drawCharTooltip(gc);
-            }
-            if (showBag || showChar) {
                 inventP.drawDragAndDrop(gc);
             }
             if (showTalents) {
                 talentP.drawTalentWindow(gc);
             }
-        }
-        if (gameState == State.TALENT) {
-            wRender.draw(gc);
-            prj_control.draw(gc);
-            ent_control.draw(gc);
-            ENTPlayer2.draw(gc);
-            player.draw(gc);
-            gc.setStroke(Colors.LightGreyAlpha);
-            gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
-            ui.draw(gc);
         } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
             ui.draw(gc);
         }
@@ -303,18 +294,17 @@ public class MainGame {
 
 
     private void drawDroppedItems(GraphicsContext gc) {
-        if (WORLD_DROPS.size() != 0) {
-            try {
-                for (DROP drop : WORLD_DROPS) {
-                    if (drop instanceof DRP_DroppedItem && drop.item == null) {
-                        WORLD_DROPS.remove(drop);
-                    }
-                    drop.draw(gc);
+        try {
+            for (DROP drop : WORLD_DROPS) {
+                if (drop instanceof DRP_DroppedItem && drop.item == null) {
+                    WORLD_DROPS.remove(drop);
                 }
-            } catch (ConcurrentModificationException ignored) {
+                drop.draw(gc);
             }
+        } catch (ConcurrentModificationException ignored) {
         }
     }
+
 
     /**
      * Loads the game and updates loading screen
@@ -381,7 +371,10 @@ public class MainGame {
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
-        ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
+        for (int i = 0; i < 1000; i++) {
+            ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
+        }
+        //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         Player.worldX = 32 * 48;
         Player.worldY = 19 * 48;
         loadingScreen = false;

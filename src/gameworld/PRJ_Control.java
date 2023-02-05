@@ -21,7 +21,7 @@ import main.system.CollisionChecker;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
-import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 
 /**
@@ -67,37 +67,39 @@ public class PRJ_Control {
 
     }
 
-    public void draw(GraphicsContext g2) {
-        try {
-            for (PRJ_Control PRJControl : mg.PRJControls) {
-                PRJControl.draw(g2);
+    public void draw(GraphicsContext gc) {
+        synchronized (mg.PRJControls) {
+            for (PRJ_Control projectile : mg.PRJControls) {
+                projectile.draw(gc);
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
 
     public void update() {
-        try {
-            for (PRJ_Control projectile : mg.PRJControls) {
+        synchronized (mg.PRJControls) {
+            Iterator<PRJ_Control> iterator = mg.PRJControls.iterator();
+            while (iterator.hasNext()) {
+                PRJ_Control projectile = iterator.next();
+                projectile.update();
                 if (projectile.dead) {
-                    mg.PRJControls.remove(projectile);
+                    iterator.remove();
                     continue;
                 }
-                for (ENTITY entity : MainGame.ENTITIES) {
-                    if (entity.dead) {
-                        recordDeath(entity);
-                        MainGame.ENTITIES.remove(entity);
-                        continue;
-                    }
-                    if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
-                        calcProjectileDamage(projectile, entity);
-                    } else if (!projectile.dead && projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(mg.player, projectile)) {
-                        mg.player.health -= entity.level;
-                        projectile.dead = true;
+                synchronized (MainGame.ENTITIES) {
+                    Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
+                    while (entityIterator.hasNext()) {
+                        ENTITY entity = entityIterator.next();
+                        if (entity.dead) {
+                            recordDeath(entity);
+                            entityIterator.remove();
+                            continue;
+                        }
+                        if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            calcProjectileDamage(projectile, entity);
+                        }
                     }
                 }
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
 
@@ -124,11 +126,10 @@ public class PRJ_Control {
 
 
     public void updateProjectilePos() {
-        try {
+        synchronized (mg.PRJControls) {
             for (PRJ_Control PRJControl : mg.PRJControls) {
                 PRJControl.update();
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
 

@@ -102,7 +102,6 @@ public class Player extends ENTITY {
         maxHealth = (int) ((9.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(level));
         maxMana = (int) ((19.0f + intellect * 3 + wisdom / 2.0f) * Math.sqrt(level));
         manaRegeneration = ((Math.round((5.0f + (level / 10.0f) + (wisdom * 5 + intellect) * (1.0f - (level / 65.0f))) * 100.0f) / 100.0f) / 60);
-        System.out.println(manaRegeneration);
         healthRegeneration = (float) (((0.05f + Math.sqrt(endurance * 2 + vitality)) * Math.sqrt(level)) / 80);
         movementSpeed = (int) (4 + 0.2 * agility);
         critChance = Math.min((Math.round((5.0f + (level / 10.0f) + (luck * 2) * (1.0f - (level / 63.0f))) * 100.0f) / 100.0f), 75);

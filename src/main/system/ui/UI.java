@@ -33,7 +33,6 @@ public class UI {
 
 
     public void draw(GraphicsContext gc) {
-        gc.setFont(maruMonica);
         if (mg.gameState == State.PLAY) {
             drawGameUI(gc);
         } else if (mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) {
@@ -103,21 +102,17 @@ public class UI {
     }
 
     private void drawGameUI(GraphicsContext gc) {
-
         gc.setFill(Colors.Red);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.0640f, 70, (int) ((mg.player.health / (float) mg.player.maxHealth) * 225), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 70, (int) ((mg.player.health / mg.player.maxHealth) * 225), 11);
         gc.setFill(Colors.Blue);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.0640f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
         gc.drawImage(playerUI, 40, 40, 330, 200);
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.editUndo18);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 94);
-        gc.setEffect(dropShadow);
-        gc.setEffect(innerShadow);
         gc.setFill(Colors.XPBarBlue);
         gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, 768 + 6 + 6, 13, 5, 5);
-        gc.setEffect(null);
     }
 
 
