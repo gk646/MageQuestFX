@@ -10,6 +10,9 @@ import main.system.database.SQLite;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.SecureRandom;
+import java.util.Random;
+
 class DRPDroppedItemTest {
 
     MainGame mg;
@@ -23,6 +26,9 @@ class DRPDroppedItemTest {
         mg.sqLite = new SQLite(mg);
         mg.sqLite.readItemsOnly();
         mg.player = new Player(mg);
+        SecureRandom secureRandom = new SecureRandom();
+        long seed = secureRandom.nextLong();
+        mg.random = new Random(seed);
     }
 
     @Test

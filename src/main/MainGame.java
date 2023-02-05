@@ -31,14 +31,15 @@ import main.system.enums.State;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
-import main.system.ui.GameMap;
-import main.system.ui.MiniMap;
 import main.system.ui.UI;
 import main.system.ui.inventory.UI_InventoryPanel;
+import main.system.ui.maps.GameMap;
+import main.system.ui.maps.MiniMap;
 import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.UI_SkillBar;
 import main.system.ui.talentpane.UI_TalentPanel;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -55,13 +56,11 @@ public class MainGame {
     public static int SCREEN_HEIGHT = 1_080;
     public final int HALF_WIDTH;
     public final int HALF_HEIGHT;
-    public final Random random = new Random((long) (System.currentTimeMillis() * Math.random() * Math.random() * 3_000));
+    public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
-    public final List<PRJ_Control> old = new ArrayList<>();
-    public final List<PRJ_Control> PRJControls = Collections.synchronizedList(old);
-    public final ArrayList<ENTITY> PROXIMITY_ENTITIES = new ArrayList<>();
-    public static final ArrayList<ENTITY> old_entities = new ArrayList<>();
-    public static final List<ENTITY> ENTITIES = Collections.synchronizedList(old_entities);
+    public final List<PRJ_Control> PRJControls = Collections.synchronizedList(new ArrayList<>());
+    public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
+    public Random random;
     //ITEMS
     public final ArrayList<DROP> WORLD_DROPS = new ArrayList<>();
     public final ArrayList<ITEM> AMULET = new ArrayList<>();
@@ -136,7 +135,6 @@ public class MainGame {
         loadGame(gc);
     }
 
-
     /**
      * Starts the 4 game threads
      */
@@ -168,7 +166,9 @@ public class MainGame {
                     difference = 0;
                 }
                 if (difference1 >= 1) {
-                    proximitySorterENTITIES();
+                    synchronized (PROXIMITY_ENTITIES) {
+                        proximitySorterENTITIES();
+                    }
                     difference1 = 0;
                     //System.out.println(counter);
                     counter = 0;
@@ -224,6 +224,7 @@ public class MainGame {
                         if (multiplayer.multiplayerStarted) {
                             multiplayer.updateMultiplayerInput();
                         }
+
                         prj_control.update();
                         if (!client) {
                             ent_control.update();
@@ -255,7 +256,7 @@ public class MainGame {
             npcControl.draw(gc);
             ENTPlayer2.draw(gc);
             player.draw(gc);
-            //miniM.draw(gc);
+            miniM.draw(gc);
             ui.draw(gc);
             qPanel.draw(gc);
             sBar.draw(gc);
@@ -343,6 +344,9 @@ public class MainGame {
         ui.updateLoadingScreen(12, gc);
         ENTPlayer2 = new ENT_Player2(this);
         util = new Utilities(this);
+        SecureRandom secureRandom = new SecureRandom();
+        long seed = secureRandom.nextLong();
+        random = new Random(seed);
 
         //72%
         ui.updateLoadingScreen(12, gc);
@@ -370,7 +374,7 @@ public class MainGame {
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 500; i++) {
             ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
@@ -397,15 +401,13 @@ public class MainGame {
      * @see GameMap
      */
     private void proximitySorterENTITIES() {
-        try {
+        synchronized (ENTITIES) {
             PROXIMITY_ENTITIES.clear();
             for (gameworld.entities.ENTITY entity : ENTITIES) {
                 if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 2_000) {
                     PROXIMITY_ENTITIES.add(entity);
                 }
             }
-        } catch (ConcurrentModificationException ignored) {
-
         }
     }
 

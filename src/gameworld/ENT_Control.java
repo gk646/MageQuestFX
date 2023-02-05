@@ -6,8 +6,6 @@ import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
 
-import java.util.ConcurrentModificationException;
-
 
 /**
  * Only used for handling Enemies atm.
@@ -26,7 +24,7 @@ public class ENT_Control {
      * Draws all entities and healthbars
      */
     public void draw(GraphicsContext gc) {
-        synchronized (MainGame.ENTITIES) {
+        synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
                 entity.draw(gc);
                 if (entity.hpBarOn) {
@@ -45,11 +43,11 @@ public class ENT_Control {
 
 
     public void update() {
-        try {
-            for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
+        synchronized (mg.PROXIMITY_ENTITIES) {
+            for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entity.update();
                 if (!(entity instanceof ENT_Owly)) {
-                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstEntity(mg.player, entity)) {
+                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, mg.player)) {
                         mg.player.health -= entity.level;
                         mg.player.getDurabilityDamageArmour();
                         entity.hitDelay = 0;
@@ -63,7 +61,6 @@ public class ENT_Control {
                     }
                 }
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
 }
