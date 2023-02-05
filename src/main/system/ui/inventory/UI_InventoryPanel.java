@@ -208,16 +208,15 @@ public class UI_InventoryPanel {
             for (int i = 0; i < char_Slots.length; i++) {
                 if (char_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && char_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.player.updateEquippedItems();
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item));
                         char_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
-
                         char_Slots[i].grabbed = true;
                         grabbedITEM = char_Slots[i].item;
                         grabbedIndexChar = i;
                         char_Slots[i].item = null;
                     }
+                    mg.player.updateEquippedItems();
                 }
             }
         }
@@ -228,7 +227,6 @@ public class UI_InventoryPanel {
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots[i].item));
                         bag_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
-
                         bag_Slots[i].grabbed = true;
                         grabbedITEM = bag_Slots[i].item;
                         grabbedIndexBag = i;
@@ -241,7 +239,6 @@ public class UI_InventoryPanel {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
                     if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
-                        mg.player.updateEquippedItems();
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -250,8 +247,8 @@ public class UI_InventoryPanel {
                                 bag_Slots[grabbedIndexBag].item = invSlot.item;
                             }
                         }
+                        mg.player.updateEquippedItems();
                         invSlot.item = grabbedITEM;
-
                         grabbedITEM = null;
                     }
                     invSlot.grabbed = false;
@@ -260,13 +257,13 @@ public class UI_InventoryPanel {
             if (mg.showBag) {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
-                        mg.player.updateEquippedItems();
                         if (grabbedIndexChar != -1) {
                             char_Slots[grabbedIndexChar].item = bagSlot.item;
                         }
                         if (grabbedIndexBag != -1) {
                             bag_Slots[grabbedIndexBag].item = bagSlot.item;
                         }
+                        mg.player.updateEquippedItems();
                         bagSlot.item = grabbedITEM;
                         grabbedITEM = null;
                     }
