@@ -41,7 +41,6 @@ import main.system.ui.talentpane.UI_TalentPanel;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -293,14 +292,16 @@ public class MainGame {
 
 
     private void drawDroppedItems(GraphicsContext gc) {
-        try {
-            for (DROP drop : WORLD_DROPS) {
+        synchronized (WORLD_DROPS) {
+            Iterator<DROP> iterator = WORLD_DROPS.iterator();
+            while (iterator.hasNext()) {
+                DROP drop = iterator.next();
                 if (drop instanceof DRP_DroppedItem && drop.item == null) {
-                    WORLD_DROPS.remove(drop);
+                    iterator.remove();
+                } else {
+                    drop.draw(gc);
                 }
-                drop.draw(gc);
             }
-        } catch (ConcurrentModificationException ignored) {
         }
     }
 

@@ -53,7 +53,7 @@ public class Effects {
         rarity_3glow.setOffsetY(0);
         rarity_3glow.setColor(Colors.epicColor);
         rarity_3glow.setBlurType(BlurType.THREE_PASS_BOX);
-        rarity_3glow.setSpread(0.45);
+        rarity_3glow.setSpread(0.40);
 
         //rarity 4 glow
         rarity_4glow = new DropShadow();
@@ -63,7 +63,7 @@ public class Effects {
         rarity_4glow.setOffsetY(0);
         rarity_4glow.setColor(Colors.legendaryColor);
         rarity_4glow.setBlurType(BlurType.THREE_PASS_BOX);
-        rarity_4glow.setSpread(0.55);
+        rarity_4glow.setSpread(0.45);
 
         // rarity 5 glow
         rarity_5glow = new DropShadow();
@@ -73,6 +73,6 @@ public class Effects {
         rarity_5glow.setOffsetY(0);
         rarity_5glow.setColor(Colors.setItem);
         rarity_5glow.setBlurType(BlurType.THREE_PASS_BOX);
-        rarity_5glow.setSpread(0.55);
+        rarity_5glow.setSpread(0.48);
     }
 }
