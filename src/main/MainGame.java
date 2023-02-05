@@ -382,7 +382,7 @@ public class MainGame {
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(9), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(6), 100, 60);
-        ENTITIES.add(new ENT_Shooter(this, 36 * 48, 19 * 48, 1));
+        ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         Player.worldX = 32 * 48;
         Player.worldY = 19 * 48;
         loadingScreen = false;

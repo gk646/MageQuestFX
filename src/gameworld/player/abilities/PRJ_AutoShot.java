@@ -22,7 +22,7 @@ public class PRJ_AutoShot extends PRJ_Control {
         this.collisionBox = Storage.box_primaryFire;
         this.direction = "downleftrightup";
         //------POSITION-----------
-        this.worldPos = new Point2D.Double(Player.worldX + 48 - projectileHeight / 2.0f, Player.worldY + 48 - projectileHeight / 2.0f);
+        this.worldPos = new Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.updateVector = getTrajectory(new Point(x, y));
         getPlayerImage();
@@ -30,7 +30,7 @@ public class PRJ_AutoShot extends PRJ_Control {
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(projectileImage1, (int) (worldPos.x - Player.worldX + Player.screenX - 24), (int) (worldPos.y - Player.worldY + Player.screenY - 24), projectileWidth, projectileHeight);
+        g2.drawImage(projectileImage1, (int) (worldPos.x - Player.worldX + Player.screenX), (int) (worldPos.y - Player.worldY + Player.screenY), projectileWidth, projectileHeight);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ENT_Shooter extends ENTITY {
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.collisionBox = new Rectangle(0, 0, 42, 42);
+        this.collisionBox = new Rectangle(8, 10, 30, 30);
         this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
@@ -41,27 +41,27 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        screenX = (int) (worldX - Player.worldX + Player.screenX);
-        screenY = (int) (worldY - Player.worldY + Player.screenY);
         onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX) / 48 || worldY / 48 != (Player.worldY) / 48);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             mg.PRJControls.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
             shotCooldown = 0;
         }
-        getNearestPlayer();
-        searchPath(goalCol, goalRow, 16);
+        // getNearestPlayer();
+        // searchPath(goalCol, goalRow, 16);
         searchTicks++;
         shotCooldown++;
     }
 
     @Override
     public void draw(GraphicsContext g2) {
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
         g2.drawImage(enemyImage, screenX, screenY, 48, 48);
     }
 
     private void updatePos() {
-        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
-        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
     }
 
 

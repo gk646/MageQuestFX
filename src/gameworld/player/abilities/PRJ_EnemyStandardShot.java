@@ -28,7 +28,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.worldPos = new Point2D.Double(x, y);
+        this.worldPos = new Point2D.Double(x - projectileWidth / 2.0f, y - projectileHeight / 2.0f);
         this.updateVector = getTrajectory();
         getPlayerImage();
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
@@ -36,7 +36,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
 
     @Override
     public void draw(GraphicsContext g2) {
-        g2.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX - 24 + 8, (int) worldPos.y - Player.worldY + Player.screenY - 24 + 8, projectileWidth, projectileHeight);
+        g2.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY, projectileWidth, projectileHeight);
     }
 
     @Override

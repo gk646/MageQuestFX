@@ -27,8 +27,8 @@ abstract public class ENTITY {
     protected Image entityImage5;
     protected Image entityImage6;
     protected Image enemyImage;
-    protected int entityWidth;
-    protected int entityHeight;
+    public int entityWidth;
+    public int entityHeight;
     protected int searchTicks;
     public boolean onPath;
     public int worldY;

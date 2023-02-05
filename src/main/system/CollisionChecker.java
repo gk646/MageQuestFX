@@ -69,7 +69,7 @@ public class CollisionChecker {
     }
 
     public boolean checkEntityAgainstProjectile(ENTITY checkingForHit, PRJ_Control incomingToHit) {
-        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x, (int) incomingToHit.worldPos.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+        return new Rectangle(checkingForHit.worldX + checkingForHit.collisionBox.x, checkingForHit.worldY + checkingForHit.collisionBox.y, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
     public void checkEntityAgainstTile(ENTITY ENTITYControl) {

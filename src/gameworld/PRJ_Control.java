@@ -32,7 +32,7 @@ public class PRJ_Control {
 
     protected Point endPos;
     protected Point2D.Double updateVector;
-    protected int projectileHeight;
+    public int projectileHeight;
     protected int spriteCounter;
     protected Image projectileImage1;
     protected Image projectileImage2;
@@ -44,7 +44,7 @@ public class PRJ_Control {
     protected Image projectileImage8;
     protected Image projectileImage9;
     protected Image projectileImage10;
-    protected int projectileWidth;
+    public int projectileWidth;
     protected MainGame mg;
     public boolean dead, collisionUp, collisionDown;
     public boolean collisionLeft;
