@@ -178,8 +178,8 @@ public class CollisionChecker {
         }
     }
 
-    public boolean checkEntityAgainstPlayer(ENTITY checkingForHit, Player incomingToHit) {
-        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) Player.worldX, (int) Player.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+    public boolean checkEntityAgainstPlayer(ENTITY checkingForHit, int extension) {
+        return new Rectangle(checkingForHit.worldX + checkingForHit.collisionBox.x - extension, checkingForHit.worldY + checkingForHit.collisionBox.y - extension, checkingForHit.collisionBox.width + extension * 2, checkingForHit.collisionBox.height + extension * 2).intersects(new Rectangle((int) Player.worldX + mg.player.collisionBox.x, (int) Player.worldY + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height));
     }
 }
 

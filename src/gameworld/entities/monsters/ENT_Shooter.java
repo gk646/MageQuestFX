@@ -36,7 +36,8 @@ public class ENT_Shooter extends ENTITY {
         this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
-        updatePos();
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
     }
 
     @Override
@@ -57,11 +58,6 @@ public class ENT_Shooter extends ENTITY {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
         g2.drawImage(enemyImage, screenX, screenY, 48, 48);
-    }
-
-    private void updatePos() {
-        screenX = (int) (worldX - Player.worldX + Player.screenX);
-        screenY = (int) (worldY - Player.worldY + Player.screenY);
     }
 
 

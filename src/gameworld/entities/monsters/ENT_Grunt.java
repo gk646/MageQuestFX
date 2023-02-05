@@ -29,31 +29,28 @@ public class ENT_Grunt extends ENTITY {
         direction = "updownleftright";
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.collisionBox = new Rectangle(0, 0, 42, 42);
+        this.collisionBox = new Rectangle(3, 3, 42, 42);
         this.onPath = false;
         getDisplayImage();
         this.searchTicks = 60;
-        updatePos();
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
     }
 
     @Override
     public void update() {
-        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
-        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
         onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX + 24) / 48 || worldY / 48 != (Player.worldY + 24) / 48);
-       // gruntMovement();
+        getNearestPlayer();
+        searchPath(goalCol, goalRow, 16);
         hitDelay++;
         searchTicks++;
     }
 
-    private void updatePos() {
-        screenX = (int) (worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2 - 24);
-        screenY = (int) (worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2 - 24);
-    }
-
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(enemyImage, screenX, screenY, 48, 48);
+        screenX = (int) (worldX - Player.worldX + Player.screenX);
+        screenY = (int) (worldY - Player.worldY + Player.screenY);
+        gc.drawImage(enemyImage, screenX, screenY);
     }
 
     private void getDisplayImage() {

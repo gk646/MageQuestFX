@@ -8,8 +8,7 @@ import main.system.ui.Colors;
 
 
 /**
- * Only used for handling Enemies atm.
- * Main inheritable class for all game world entity's
+ * Used for handling Enemies
  */
 public class ENT_Control {
 
@@ -31,7 +30,7 @@ public class ENT_Control {
                     gc.setFill(Colors.Red);
                     gc.fillRect(entity.screenX, entity.screenY - 10, (int) (((float) entity.health / entity.maxHealth) * 48), 8);
                     gc.setFill(Color.WHITE);
-                    gc.fillText(entity.health + "", entity.screenX + 14, entity.screenY);
+                    gc.fillText(String.valueOf(entity.health), entity.screenX + 14, entity.screenY);
                 }
             }
         }
@@ -47,7 +46,7 @@ public class ENT_Control {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entity.update();
                 if (!(entity instanceof ENT_Owly)) {
-                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, mg.player)) {
+                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
                         mg.player.health -= entity.level;
                         mg.player.getDurabilityDamageArmour();
                         entity.hitDelay = 0;
