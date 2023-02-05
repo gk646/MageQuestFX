@@ -72,6 +72,10 @@ public class CollisionChecker {
         return new Rectangle(checkingForHit.worldX + checkingForHit.collisionBox.x, checkingForHit.worldY + checkingForHit.collisionBox.y, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
+    public boolean checkPlayerAgainstProjectile(Player player, PRJ_Control incomingToHit) {
+        return new Rectangle((int) (Player.worldX + player.collisionBox.x), (int) (Player.worldY + player.collisionBox.y), player.collisionBox.width, player.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+    }
+
     public void checkEntityAgainstTile(ENTITY ENTITYControl) {
         int entityLeftWorldX = ENTITYControl.worldX + ENTITYControl.collisionBox.x;
         int entityRightWorldX = ENTITYControl.worldX + ENTITYControl.collisionBox.x + ENTITYControl.collisionBox.width;

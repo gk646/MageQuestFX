@@ -91,7 +91,7 @@ public class PRJ_Control {
                     }
                     if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile) && !projectile.dead) {
                         calcProjectileDamage(projectile, entity);
-                    } else if (!projectile.dead && projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkEntityAgainstProjectile(mg.player, projectile)) {
+                    } else if (!projectile.dead && projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(mg.player, projectile)) {
                         mg.player.health -= entity.level;
                         projectile.dead = true;
                     }

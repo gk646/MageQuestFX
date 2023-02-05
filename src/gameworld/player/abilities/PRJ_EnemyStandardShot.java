@@ -28,7 +28,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
         this.direction = "downleftrightup";
 
         //------POSITION-----------
-        this.worldPos = new Point2D.Double(x - projectileWidth / 2.0f, y - projectileHeight / 2.0f);
+        this.worldPos = new Point2D.Double(x + 24 - projectileWidth / 2.0f, y + 24 - projectileHeight / 2.0f);
         this.updateVector = getTrajectory();
         getPlayerImage();
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
@@ -48,7 +48,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
     }
 
     private Point2D.Double getTrajectory() {
-        double angle = Math.atan2(Player.worldY - worldPos.y, Player.worldX - worldPos.x);
+        double angle = Math.atan2(Player.worldY + 16 - worldPos.y, Player.worldX + 16 - worldPos.x);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
