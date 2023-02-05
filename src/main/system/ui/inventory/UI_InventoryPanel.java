@@ -208,10 +208,11 @@ public class UI_InventoryPanel {
             for (int i = 0; i < char_Slots.length; i++) {
                 if (char_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && char_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
+                        mg.player.updateEquippedItems();
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item));
                         char_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
-                        mg.player.updateEquippedItems();
+
                         char_Slots[i].grabbed = true;
                         grabbedITEM = char_Slots[i].item;
                         grabbedIndexChar = i;
@@ -227,7 +228,7 @@ public class UI_InventoryPanel {
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots[i].item));
                         bag_Slots[i].item = null;
                     } else if (mg.inputH.mouse1Pressed) {
-                        mg.player.updateEquippedItems();
+
                         bag_Slots[i].grabbed = true;
                         grabbedITEM = bag_Slots[i].item;
                         grabbedIndexBag = i;
@@ -236,11 +237,11 @@ public class UI_InventoryPanel {
                 }
             }
         }
-
         if (grabbedITEM != null && !mg.inputH.mouse1Pressed) {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
                     if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                        mg.player.updateEquippedItems();
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -250,7 +251,7 @@ public class UI_InventoryPanel {
                             }
                         }
                         invSlot.item = grabbedITEM;
-                        mg.player.updateEquippedItems();
+
                         grabbedITEM = null;
                     }
                     invSlot.grabbed = false;
@@ -259,6 +260,7 @@ public class UI_InventoryPanel {
             if (mg.showBag) {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                        mg.player.updateEquippedItems();
                         if (grabbedIndexChar != -1) {
                             char_Slots[grabbedIndexChar].item = bagSlot.item;
                         }

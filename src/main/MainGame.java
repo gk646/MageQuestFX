@@ -258,7 +258,6 @@ public class MainGame {
             ui.draw(gc);
             qPanel.draw(gc);
             sBar.draw(gc);
-            gc.fillRect(955, 535, 11, 11);
             if (showMap) {
                 gameMap.draw(gc);
             }

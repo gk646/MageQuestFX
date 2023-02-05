@@ -99,18 +99,19 @@ public class Player extends ENTITY {
                 focus += invSlot.item.focus;
             }
         }
-        mg.player.maxHealth = (int) ((9.0f + mg.player.vitality * 1.5f + mg.player.endurance / 2.0f) * Math.sqrt(mg.player.level));
-        mg.player.maxMana = (int) ((19.0f + mg.player.intellect * 3 + mg.player.wisdom / 2.0f) * Math.sqrt(mg.player.level));
-        mg.player.manaRegeneration = ((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.wisdom * 5 + mg.player.intellect) * (1.0f - (mg.player.level / 65.0f))) * 100.0f) / 100.0f) / 60);
-        mg.player.healthRegeneration = (float) (((0.05f + Math.sqrt(mg.player.endurance * 2 + mg.player.vitality)) * Math.sqrt(mg.player.level)) / 80);
-        mg.player.playerMovementSpeed = (float) (4 + 0.2 * mg.player.agility);
-        mg.player.critChance = Math.min((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.luck * 2) * (1.0f - (mg.player.level / 63.0f))) * 100.0f) / 100.0f), 75);
-        mg.player.speechSkill = Math.round((5.0f + (mg.player.level / 10.0f) + (1.5f * mg.player.charisma) * (1.0f - (mg.player.level / 64.0f))) * 100.0f) / 100.0f;
-        mg.player.resistChance = Math.min((Math.round((5.0f + (mg.player.level / 10.0f) + (mg.player.endurance * 1.0f) * (1.0f - (mg.player.level / 64.0f))) * 100.0f) / 100.0f), 50);
-        mg.player.carryWeight = Math.round((50.0f + (mg.player.level) + (mg.player.strength * 2.0f) * (1.0f - (mg.player.level / 100.0f))) * 100.0f) / 100.0f;
-        mg.player.buffLengthMultiplier = Math.round(((mg.player.focus) * (1.0f - (mg.player.level / 80.0f))) * 100.0f) / 100.0f;
-        mg.player.dotDamageMultiplier = Math.round(((mg.player.focus) * (1.0f - (mg.player.level / 70.0f))) * 100.0f) / 100.0f;
-        mg.player.dotLengthMultiplier = mg.player.dotDamageMultiplier;
+        maxHealth = (int) ((9.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(level));
+        maxMana = (int) ((19.0f + intellect * 3 + wisdom / 2.0f) * Math.sqrt(level));
+        manaRegeneration = ((Math.round((5.0f + (level / 10.0f) + (wisdom * 5 + intellect) * (1.0f - (level / 65.0f))) * 100.0f) / 100.0f) / 60);
+        System.out.println(manaRegeneration);
+        healthRegeneration = (float) (((0.05f + Math.sqrt(endurance * 2 + vitality)) * Math.sqrt(level)) / 80);
+        movementSpeed = (int) (4 + 0.2 * agility);
+        critChance = Math.min((Math.round((5.0f + (level / 10.0f) + (luck * 2) * (1.0f - (level / 63.0f))) * 100.0f) / 100.0f), 75);
+        speechSkill = Math.round((5.0f + (level / 10.0f) + (1.5f * charisma) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f;
+        resistChance = Math.min((Math.round((5.0f + (level / 10.0f) + (endurance * 1.0f) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f), 50);
+        carryWeight = Math.round((50.0f + (level) + (strength * 2.0f) * (1.0f - (level / 100.0f))) * 100.0f) / 100.0f;
+        buffLengthMultiplier = Math.round(((focus) * (1.0f - (level / 80.0f))) * 100.0f) / 100.0f;
+        dotDamageMultiplier = Math.round(((focus) * (1.0f - (level / 70.0f))) * 100.0f) / 100.0f;
+        dotLengthMultiplier = dotDamageMultiplier;
     }
 
     public void pickupDroppedItem() {
@@ -229,7 +230,8 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
-        //gc.drawImage(entityImage1, screenX, screenY, 48, 48);
+        // gc.drawImage(entityImage1, screenX, screenY, 48, 48);
+
         gc.setStroke(Color.RED);
         gc.setLineWidth(1);
         gc.strokeRect(960 - 24, 540 - 24, 48, 48);
