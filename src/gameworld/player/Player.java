@@ -8,7 +8,6 @@ import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.enums.Map;
 import main.system.ui.inventory.UI_InventorySlot;
@@ -239,15 +238,14 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
-        // gc.drawImage(entityImage1, screenX, screenY, 48, 48);
-
-        gc.setStroke(Color.RED);
-        gc.setLineWidth(1);
-        gc.strokeRect(960 - 24, 540 - 24, 48, 48);
+        gc.drawImage(entityImage1, screenX, screenY, 25, 48);
+        // gc.setStroke(Color.RED);
+        //gc.setLineWidth(1);
+        //gc.strokeRect(960 - 24, 540 - 24, 48, 48);
     }
 
     private void getPlayerImage() {
-        entityImage1 = setup("Mage_down01.png");
+        entityImage1 = setup("wizard1.png");
     }
 
     private void movement() {

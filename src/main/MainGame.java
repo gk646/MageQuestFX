@@ -386,8 +386,8 @@ public class MainGame {
             // ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        Player.worldX = 56 * 48;
-        Player.worldY = 4 * 48;
+        //Player.worldX = 56 * 48;
+        //Player.worldY = 4 * 48;
         loadingScreen = false;
         gameState = State.TITLE;
         startThreads();
