@@ -41,20 +41,26 @@ public class MAP_Tutorial {
     }
 
     public static SpawnTrigger[] getTriggers() {
-        SpawnTrigger[] spawnTriggers = new SpawnTrigger[15];
+        SpawnTrigger[] spawnTriggers = new SpawnTrigger[50];
         //top left
-        spawnTriggers[0] = new SpawnTrigger(47, 9, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[1] = new SpawnTrigger(37, 11, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[2] = new SpawnTrigger(47, 16, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[4] = new SpawnTrigger(37, 21, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[5] = new SpawnTrigger(47, 22, 2, Trigger.SINGULAR, Type.Shooter);
+        spawnTriggers[0] = new SpawnTrigger(47, 9, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[1] = new SpawnTrigger(37, 11, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[2] = new SpawnTrigger(47, 16, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[4] = new SpawnTrigger(37, 21, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[5] = new SpawnTrigger(47, 22, 1, Trigger.SINGULAR, Type.Shooter);
 
         //top right
-        spawnTriggers[6] = new SpawnTrigger(47, 9, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[7] = new SpawnTrigger(37, 11, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[8] = new SpawnTrigger(47, 16, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[9] = new SpawnTrigger(37, 21, 2, Trigger.SINGULAR, Type.Grunt);
-        spawnTriggers[10] = new SpawnTrigger(47, 22, 2, Trigger.SINGULAR, Type.Shooter);
+        spawnTriggers[6] = new SpawnTrigger(91, 21, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[7] = new SpawnTrigger(86, 25, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[8] = new SpawnTrigger(97, 27, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[9] = new SpawnTrigger(94, 14, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[10] = new SpawnTrigger(94, 4, 1, Trigger.SINGULAR, Type.Shooter);
+
+
+        //middle right
+        spawnTriggers[11] = new SpawnTrigger(93, 46, 1, Trigger.SINGULAR, Type.Grunt);
+        spawnTriggers[12] = new SpawnTrigger(87, 45, 1, Trigger.SINGULAR, Type.Shooter);
+        spawnTriggers[13] = new SpawnTrigger(97, 48, 1, Trigger.SINGULAR, Type.Shooter);
 
 
         return spawnTriggers;
