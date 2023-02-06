@@ -136,15 +136,6 @@ abstract public class Dialog {
         }
     }
 
-    /**
-     * @param distance distance
-     * @param tilex    x of tile
-     * @param tily     y of tile
-     * @return true if the player is X close to (tileX, tileY) or closer
-     */
-    protected boolean playerXCloseToTile(int distance, int tilex, int tily) {
-        return new Point(mg.playerX, mg.playerY).distance(tilex, tily) <= distance;
-    }
 
     /**
      * true if the play bags contain item with name

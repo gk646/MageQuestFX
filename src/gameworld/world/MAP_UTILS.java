@@ -30,7 +30,9 @@ public class MAP_UTILS {
                 mg.player.spawnLevel = 1;
             }
             for (SpawnTrigger trigger : mg.wControl.tutorialSpawns) {
-                trigger.activate(mg);
+                if (trigger != null) {
+                    trigger.activate(mg);
+                }
             }
         }
         if (mg.wControl.currentWorld == Map.GrassLands) {
