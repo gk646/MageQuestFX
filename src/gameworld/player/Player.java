@@ -49,7 +49,7 @@ public class Player extends ENTITY {
     private boolean respawnsDone;
     // PLAYER X AND Y ALWAYS +24
     public static float worldX, worldY;
-    // screenx is half width -24
+    // screenX is half width -24
     public static int screenX, screenY;
 
     public Player(MainGame mainGame) {
@@ -283,7 +283,7 @@ public class Player extends ENTITY {
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.gameMap.mapMover.contains(mg.inputH.lastMousePosition)) {
             if (mg.inputH.mouse1Pressed && cooldownPrimary == 20) {
-                mg.PRJControls.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+                mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
                 cooldownPrimary = 0;
                 getDurabilityDamageWeapon();
             }
@@ -295,7 +295,7 @@ public class Player extends ENTITY {
             mg.sBar.skills[0].activate();
         }
         if (mg.inputH.TwoPressed && mana >= 20 && cdLightning == 20) {
-            mg.PRJControls.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+            mg.PROJECTILES.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
             mana -= 20;
             cdLightning = 0;
             getDurabilityDamageWeapon();

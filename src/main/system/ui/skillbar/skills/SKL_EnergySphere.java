@@ -32,7 +32,7 @@ public class SKL_EnergySphere extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            mg.PRJControls.add(new PRJ_EnergySphere(mg));
+            mg.PROJECTILES.add(new PRJ_EnergySphere(mg));
             mg.player.mana -= 10;
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();

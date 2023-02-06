@@ -40,7 +40,7 @@ public class NPC_Man extends NPC {
     public void update() {
         dial.script(this);
         if (show_dialog) {
-            show_dialog = !mg.util.player_went_away(playerTalkLocation);
+            show_dialog = !mg.map_utils.player_went_away(playerTalkLocation);
             if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !dial.block)) {
                 dial.next_stage();
             }

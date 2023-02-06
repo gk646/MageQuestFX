@@ -1,6 +1,6 @@
 package gameworld;
 
-import gameworld.entities.companion.ENT_Owly;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
@@ -23,8 +23,11 @@ public class ENT_Control {
      * Draws all entities and healthbars
      */
     public void draw(GraphicsContext gc) {
-        synchronized (mg.PROXIMITY_ENTITIES) {
+        synchronized (MainGame.ENTITIES) {
             for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
+                if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) > 1_500) {
+                    continue;
+                }
                 entity.draw(gc);
                 if (entity.hpBarOn) {
                     gc.setFill(Colors.Red);
@@ -45,21 +48,13 @@ public class ENT_Control {
         synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entity.update();
-                if (!(entity instanceof ENT_Owly)) {
-                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
-                        mg.player.health -= entity.level;
-                        mg.player.getDurabilityDamageArmour();
-                        entity.hitDelay = 0;
-                    }
-                    if (entity.hpBarCounter >= 600) {
-                        entity.hpBarOn = false;
-                        entity.hpBarCounter = 0;
-                    }
-                    if (entity.hpBarOn) {
-                        entity.hpBarCounter++;
-                    }
+                if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
+                    mg.player.health -= entity.level;
+                    mg.player.getDurabilityDamageArmour();
+                    entity.hitDelay = 0;
                 }
             }
         }
     }
 }
+

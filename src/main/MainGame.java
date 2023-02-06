@@ -6,6 +6,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
+import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
 import gameworld.world.objects.DROP;
@@ -22,7 +23,6 @@ import javafx.util.Duration;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
 import main.system.Storage;
-import main.system.Utilities;
 import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
@@ -56,7 +56,7 @@ public class MainGame {
     public final int HALF_HEIGHT;
     public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
-    public final List<PRJ_Control> PRJControls = Collections.synchronizedList(new ArrayList<>());
+    public final List<PRJ_Control> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
     public Random random;
     //ITEMS
@@ -99,7 +99,7 @@ public class MainGame {
     public UI_InventoryPanel inventP;
     public UI_TalentPanel talentP;
     public NPC_Control npcControl;
-    public Utilities util;
+    public MAP_UTILS map_utils;
     public GameMap gameMap;
     public DayNightCycle cycle = new DayNightCycle(this);
     public UI_SkillBar sBar = new UI_SkillBar(this);
@@ -110,7 +110,6 @@ public class MainGame {
     private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
-    Iterator<DROP> iterator;
 
 
     /**
@@ -137,20 +136,28 @@ public class MainGame {
      * Starts the 4 game threads
      */
     private void startThreads() {
-
         float logicCounter = 1_000_000_000 / 60.0f;
-        float fastRenderCounter = 1_000_000_000 / 360.0f;
+
         Thread renderHelper = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
             float difference = 0;
             float difference1 = 0;
+            float difference2 = 0;
+            float fastRenderCounter = 1_000_000_000 / 360.0f;
+            float fastRenderCounter2 = 1_000_000_000 / 120.0f;
             while (true) {
                 firstTimeGate1 = System.nanoTime();
                 difference += (firstTimeGate1 - lastTime1) / fastRenderCounter;
                 difference1 += (firstTimeGate1 - lastTime1) / 1_000_000_000.0f;
+                difference2 += (firstTimeGate1 - lastTime1) / fastRenderCounter2;
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
+                    inventP.interactWithWindows();
+                    getPlayerTile();
+                    difference = 0;
+                }
+                if (difference2 >= 1) {
                     if (gameState == State.PLAY) {
                         if (showMap) {
                             gameMap.dragMap();
@@ -159,9 +166,9 @@ public class MainGame {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
                         getPlayerTile();
-                        util.checkTeleports();
+                        map_utils.update();
                     }
-                    difference = 0;
+                    difference2 = 0;
                 }
                 if (difference1 >= 0.5) {
                     synchronized (PROXIMITY_ENTITIES) {
@@ -177,9 +184,7 @@ public class MainGame {
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-        KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.007_9),
-                ae -> drawGame(gc));
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.007_9), ae -> drawGame(gc));
 
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
@@ -196,7 +201,6 @@ public class MainGame {
                         player.update();
                         sBar.update();
                         qPanel.update();
-                        npcControl.update();
                     }
                     difference = 0;
                 }
@@ -213,6 +217,7 @@ public class MainGame {
                 lastTime1 = firstTimeGate1;
                 if (difference >= 1) {
                     if (gameState == State.PLAY || gameState == State.OPTION || gameState == State.TALENT) {
+                        /*
                         if (inputH.debugFps && inputH.f_pressed) {
                             multiplayer.startMultiplayerClient();
                         }
@@ -223,13 +228,16 @@ public class MainGame {
                             multiplayer.updateMultiplayerInput();
                         }
 
+                         */
                         prj_control.update();
-                        if (!client) {
-                            ent_control.update();
-                        }
+                        ent_control.update();
+                        npcControl.update();
+                        /*
                         if (multiplayer.multiplayerStarted) {
                             multiplayer.updateMultiplayerOutput();
                         }
+
+                         */
                     }
                     difference = 0;
                 }
@@ -343,7 +351,7 @@ public class MainGame {
         //60%
         ui.updateLoadingScreen(12, gc);
         ENTPlayer2 = new ENT_Player2(this);
-        util = new Utilities(this);
+        map_utils = new MAP_UTILS(this);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
         random = new Random(seed);
@@ -367,7 +375,7 @@ public class MainGame {
         sound = new Sound();
         //100%
         ui.updateLoadingScreen(16, gc);
-        util.loadSpawnLevel();
+        map_utils.loadSpawnLevel();
         countItems();
         gameMap.getImage();
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
@@ -403,7 +411,7 @@ public class MainGame {
     private void proximitySorterENTITIES() {
         synchronized (ENTITIES) {
             PROXIMITY_ENTITIES.clear();
-            for (gameworld.entities.ENTITY entity : ENTITIES) {
+            for (ENTITY entity : ENTITIES) {
                 if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 2_000) {
                     PROXIMITY_ENTITIES.add(entity);
                 }

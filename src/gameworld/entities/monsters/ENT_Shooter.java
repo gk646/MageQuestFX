@@ -42,15 +42,21 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX) / 48 || worldY / 48 != (Player.worldY) / 48);
+        onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
-            mg.PRJControls.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
+            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
             shotCooldown = 0;
         }
-        // getNearestPlayer();
-        // searchPath(goalCol, goalRow, 16);
+        getNearestPlayer();
+        searchPath(goalCol, goalRow, 16);
         searchTicks++;
         shotCooldown++;
+        if (hpBarCounter >= 600) {
+            hpBarOn = false;
+            hpBarCounter = 0;
+        } else if (hpBarOn) {
+            hpBarCounter++;
+        }
     }
 
     @Override

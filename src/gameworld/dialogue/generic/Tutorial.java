@@ -54,7 +54,7 @@ public class Tutorial extends Dialog {
         }
         if (stage == 19) {
             block = true;
-            if (npc.show_dialog && playerBagsContainItem("Glasses")) {
+            if (npc.show_dialog && playerBagsContainItem("Glasses") && playerBagsContainItem("Booze") && playerBagsContainItem("Walking Cane")) {
                 next_stage();
             }
         }

@@ -39,11 +39,17 @@ public class ENT_Grunt extends ENTITY {
 
     @Override
     public void update() {
-        onPath = !playerTooFarAbsolute() && (worldX / 48 != (Player.worldX + 24) / 48 || worldY / 48 != (Player.worldY + 24) / 48);
+        onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         getNearestPlayer();
         searchPath(goalCol, goalRow, 16);
         hitDelay++;
         searchTicks++;
+        if (hpBarCounter >= 600) {
+            hpBarOn = false;
+            hpBarCounter = 0;
+        } else if (hpBarOn) {
+            hpBarCounter++;
+        }
     }
 
     @Override

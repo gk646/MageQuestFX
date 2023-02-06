@@ -27,6 +27,7 @@ abstract public class Dialog {
     public boolean block;
     private int textCounter;
     protected NPC npc;
+    protected boolean[] triggers = new boolean[15];
 
     /**
      * The dialog framework
@@ -139,10 +140,10 @@ abstract public class Dialog {
      * @param distance distance
      * @param tilex    x of tile
      * @param tily     y of tile
-     * @return true if the player is X close to (tileX, tileY)
+     * @return true if the player is X close to (tileX, tileY) or closer
      */
     protected boolean playerXCloseToTile(int distance, int tilex, int tily) {
-        return new Point((npc.worldX + 24) / 48, (npc.worldY + 24) / 48).distance(tilex, tily) <= 6;
+        return new Point(mg.playerX, mg.playerY).distance(tilex, tily) <= distance;
     }
 
     /**
@@ -159,4 +160,12 @@ abstract public class Dialog {
         }
         return false;
     }
+/*
+    protected void singleSpawnTrigger(int x, int y, int distance, int level, Class<?> type) {
+        if (playerXCloseToTile(distance, x, y)) {
+            new SpawnTrigger(mg, x, y, level);
+        }
+
+
+ */
 }

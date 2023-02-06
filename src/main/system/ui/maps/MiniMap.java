@@ -48,8 +48,8 @@ public class MiniMap {
         }
         gc.setFill(Colors.Blue);
         gc.fillRect(1_700 + 100, 25 + 100, 5, 5);
-        synchronized (mg.PRJControls) {
-            for (PRJ_Control PRJControl : mg.PRJControls) {
+        synchronized (mg.PROJECTILES) {
+            for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {

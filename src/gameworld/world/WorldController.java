@@ -1,6 +1,7 @@
 package gameworld.world;
 
 
+import gameworld.dialogue.SpawnTrigger;
 import gameworld.world.maps.MAP_City1;
 import gameworld.world.maps.MAP_OverWorld;
 import gameworld.world.maps.MAP_Tutorial;
@@ -11,32 +12,29 @@ import main.system.enums.Map;
 import java.awt.Point;
 
 public class WorldController {
+    private final MainGame mg;
+    public Map currentWorld;
 
-    // WORLD CODES
-    // 0 = Tutorial // 1 = Grass Lands // 2 = City 1 // 3 =
-    //
 
     public final MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
-    //main game
-    private final MainGame mg;
-    //CURRENT WORLD
-    public Map currentWorld;
-    //-----OVERWORLD
+    private final SpawnTrigger[] overWorldTriggers = new SpawnTrigger[50];
+    public SpawnTrigger[] tutorialSpawns;
+    //-----OVERWORLD---------------------------
     public int[][] overWorldMapData;
-    //-----HELL
+    //-----HELL--------------------------
     public int[][] hell_MapData;
+    //-----VALHALLA------------------------
+    public int[][] valhalla_MapData;
+    //-----CITY 1
+    public int[][] city1_MapData;
     public Point hell_Size;
     public Point hell_StartPoint;
-    //-----VALHALLA
-    public int[][] valhalla_MapData;
+    //-----TUTORIAL-------------------
+    private int[][] tutorialMapData;
     public Point valhalla_Size;
     public Point valhalla_StartPoint;
     private Point overWorldSize;
-    //-----Tutorial
-    private int[][] tutorialMapData;
     private Point tutorialSize;
-    //-----CITY 1
-    private int[][] city1_MapData;
 
 
     public WorldController(MainGame mg) {
@@ -80,6 +78,7 @@ public class WorldController {
         //Tutorial
         this.tutorialMapData = MAP_Tutorial.loadTutorial();
         this.tutorialSize = MAP_Tutorial.loadMapSize();
+        this.tutorialSpawns = MAP_Tutorial.getTriggers();
         //
         this.city1_MapData = MAP_City1.loadCity();
     }
@@ -102,7 +101,7 @@ public class WorldController {
         mg.npcControl.loadNPC(currentWorld);
         mg.WORLD_DROPS.clear();
         MainGame.ENTITIES.clear();
-        mg.PRJControls.clear();
+        mg.PROJECTILES.clear();
     }
 }
 

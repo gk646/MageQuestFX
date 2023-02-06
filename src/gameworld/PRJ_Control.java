@@ -68,31 +68,34 @@ public class PRJ_Control {
     }
 
     public void draw(GraphicsContext gc) {
-        synchronized (mg.PRJControls) {
-            for (PRJ_Control projectile : mg.PRJControls) {
+        synchronized (mg.PROJECTILES) {
+            for (PRJ_Control projectile : mg.PROJECTILES) {
                 projectile.draw(gc);
             }
         }
     }
 
     public void update() {
-        synchronized (mg.PRJControls) {
-            Iterator<PRJ_Control> iterator = mg.PRJControls.iterator();
-            while (iterator.hasNext()) {
-                PRJ_Control projectile = iterator.next();
-                projectile.update();
-                if (projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
-                    mg.player.health -= 10;
-                    projectile.dead = true;
-                }
-                if (projectile.dead) {
-                    iterator.remove();
-                    continue;
-                }
-                synchronized (MainGame.ENTITIES) {
+        synchronized (mg.PROJECTILES) {
+            synchronized (MainGame.ENTITIES) {
+                Iterator<PRJ_Control> iterator = mg.PROJECTILES.iterator();
+                while (iterator.hasNext()) {
+                    PRJ_Control projectile = iterator.next();
+                    projectile.update();
+                    if (projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
+                        mg.player.health -= 10;
+                        projectile.dead = true;
+                    }
+                    if (projectile.dead) {
+                        iterator.remove();
+                        continue;
+                    }
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
+                        if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) >= 2_000) {
+                            continue;
+                        }
                         if (entity.dead) {
                             recordDeath(entity);
                             entityIterator.remove();
@@ -130,8 +133,8 @@ public class PRJ_Control {
 
 
     public void updateProjectilePos() {
-        synchronized (mg.PRJControls) {
-            for (PRJ_Control PRJControl : mg.PRJControls) {
+        synchronized (mg.PROJECTILES) {
+            for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 PRJControl.update();
             }
         }

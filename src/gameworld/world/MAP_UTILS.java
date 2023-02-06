@@ -1,12 +1,13 @@
-package main.system;
+package gameworld.world;
 
+import gameworld.dialogue.SpawnTrigger;
 import gameworld.player.Player;
 import main.MainGame;
 import main.system.enums.Map;
 
 import java.awt.Point;
 
-public class Utilities {
+public class MAP_UTILS {
     // WORLD CODES
     // 0 = Tutorial
     // 1 = Grass Lands
@@ -17,15 +18,19 @@ public class Utilities {
 
     private final MainGame mg;
 
-    public Utilities(MainGame mg) {
+    public MAP_UTILS(MainGame mg) {
         this.mg = mg;
     }
 
-    public void checkTeleports() {
+
+    public void update() {
         if (mg.wControl.currentWorld == Map.Tutorial) {
             if (mg.playerX == 1 && mg.playerY == 1) {
                 mg.wControl.load_city1(10, 10);
                 mg.player.spawnLevel = 1;
+            }
+            for (SpawnTrigger trigger : mg.wControl.tutorialSpawns) {
+                trigger.activate(mg);
             }
         }
         if (mg.wControl.currentWorld == Map.GrassLands) {
