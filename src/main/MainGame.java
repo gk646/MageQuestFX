@@ -378,16 +378,19 @@ public class MainGame {
         map_utils.loadSpawnLevel();
         countItems();
         gameMap.getImage();
+        /*
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(4), 100, 60);
         inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(PANTS.get(3), 100, 60);
         inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(BOOTS.get(4), 100, 60);
+
+         */
         for (int i = 0; i < 1; i++) {
             // ENTITIES.add(new ENT_Grunt(this, 35 * 48, 19 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        Player.worldX = 85 * 48;
-        Player.worldY = 4 * 48;
+        // Player.worldX = 85 * 48;
+        //Player.worldY = 4 * 48;
         loadingScreen = false;
         gameState = State.TITLE;
         startThreads();
