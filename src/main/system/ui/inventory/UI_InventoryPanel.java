@@ -166,7 +166,11 @@ public class UI_InventoryPanel {
             gc.fillText(string, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, stringY += 11);
         }
 
-        gc.setFont(FonT.minecraftRegular14);
+        gc.setFont(FonT.minecraftItalic14);
+        //TYPE
+        printItemType(gc, invSlot);
+
+
         //LEVEL
         gc.fillText("ilvl: " + invSlot.item.level, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 18);
         //Durability
@@ -175,33 +179,59 @@ public class UI_InventoryPanel {
         gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, mg.inputH.lastMousePosition.x - 5 - 73, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
     }
 
-    private void setRarityColor(GraphicsContext g2, UI_InventorySlot slot) {
+    private void setRarityColor(GraphicsContext gc, UI_InventorySlot slot) {
         if (slot.item != null) {
             if (slot.item.rarity == 1) {
-                g2.setStroke(Colors.NormalGrey);
-                g2.setFill(Colors.NormalGrey);
+                gc.setStroke(Colors.NormalGrey);
+                gc.setFill(Colors.NormalGrey);
             } else if (slot.item.rarity == 2) {
-                g2.setStroke(Colors.rareColor);
-                g2.setFill(Colors.rareColor);
+                gc.setStroke(Colors.rareColor);
+                gc.setFill(Colors.rareColor);
             } else if (slot.item.rarity == 3) {
-                g2.setStroke(Colors.epicColor);
-                g2.setFill(Colors.epicColor);
+                gc.setStroke(Colors.epicColor);
+                gc.setFill(Colors.epicColor);
             } else if (slot.item.rarity == 4) {
-                g2.setStroke(Colors.legendaryColor);
-                g2.setFill(Colors.legendaryColor);
+                gc.setStroke(Colors.legendaryColor);
+                gc.setFill(Colors.legendaryColor);
             } else if (slot.item.rarity == 5) {
-                g2.setStroke(Colors.setItem);
-                g2.setFill(Colors.setItem);
+                gc.setStroke(Colors.setItem);
+                gc.setFill(Colors.setItem);
             } else if (slot.item.rarity == 10) {
-                g2.setStroke(Colors.legendaryColor);
-                g2.setFill(Colors.legendaryColor);
+                gc.setStroke(Colors.legendaryColor);
+                gc.setFill(Colors.legendaryColor);
             }
         } else {
-            g2.setStroke(Colors.darkBackground);
-            g2.setFill(Colors.darkBackground);
+            gc.setStroke(Colors.darkBackground);
+            gc.setFill(Colors.darkBackground);
         }
     }
 
+    private void printItemType(GraphicsContext gc, UI_InventorySlot slot) {
+        switch (slot.item.type) {
+            case "H" ->
+                    gc.fillText("Helm", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "C" ->
+                    gc.fillText("Chest", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "P" ->
+                    gc.fillText("Pants", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "B" ->
+                    gc.fillText("Boots", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "A" ->
+                    gc.fillText("Amulet", mg.inputH.lastMousePosition.x - 5 - 170 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "R" ->
+                    gc.fillText("Ring", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "T" ->
+                    gc.fillText("Relic", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "W" ->
+                    gc.fillText("One-Handed", mg.inputH.lastMousePosition.x - 5 - 180 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "2" ->
+                    gc.fillText("Two-Handed", mg.inputH.lastMousePosition.x - 5 - 180 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "O" ->
+                    gc.fillText("Offhand", mg.inputH.lastMousePosition.x - 5 - 175 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            default ->
+                    gc.fillText("Misc", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+        }
+    }
 
     public void drawDragAndDrop(GraphicsContext gc) {
         if (grabbedITEM != null) {
