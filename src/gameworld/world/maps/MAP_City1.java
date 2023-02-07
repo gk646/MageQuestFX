@@ -7,12 +7,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class MAP_City1 {
-    private static Point worldSize;
-    private static int[][] worldData;
+
 
     public static int[][] loadCity() {
-        worldSize = new Point(100, 100);
-        worldData = new int[worldSize.x][worldSize.y];
+        Point worldSize = new Point(100, 100);
+        int[][] worldData = new int[worldSize.x][worldSize.y];
         String[] numbers;
         try {
             InputStream inputStream = MAP_OverWorld.class.getResourceAsStream("/Maps/city.txt");

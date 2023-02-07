@@ -15,8 +15,8 @@ public class MAP_Tutorial {
 
 
     public static int[][] loadTutorial() {
-        worldSize = new Point(99, 99);
-        int[][] worldData = new int[worldSize.x][worldSize.y];
+        worldSize = new Point(100, 100);
+        int[][] worldData = new int[worldSize.x][worldSize.y + 1];
         String[] numbers;
         try {
             InputStream inputStream = MAP_OverWorld.class.getResourceAsStream("/Maps/Tutorial.txt");

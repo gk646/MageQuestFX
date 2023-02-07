@@ -24,7 +24,10 @@ public class Colors {
     public static Color LightGrey = Color.rgb(192, 203, 220, 1);
 
     //INTERFACE
+    public static Color mediumVeryLight = Color.rgb(172, 180, 205, 1);
+    public static Color mediumLightGrey = Color.rgb(155, 169, 194, 1);
     public static Color Red = Color.rgb(255, 0, 68, 1);
+
     public static Color button = Color.rgb(77, 19, 2, 0.9);
     public static Color lightGreyMiddleAlpha = Color.rgb(192, 203, 220, 0.6);
 

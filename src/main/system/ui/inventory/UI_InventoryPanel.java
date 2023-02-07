@@ -43,11 +43,11 @@ public class UI_InventoryPanel {
         grabbedITEM = null;
         createCharSlots();
         createBagSlots();
-        charPanelMover = new Rectangle(charPanelX - 50, charPanelY - 65 + 2 - 10, 500, 50);
+        charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 50, 450, 40);
         charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
-        wholeCharWindow = new Rectangle(charPanelX, charPanelY, 500, 650);
+        wholeCharWindow = new Rectangle(charPanelX, charPanelY, 450, 600);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         hideCharCollision();
         hideBagCollision();
@@ -176,26 +176,29 @@ public class UI_InventoryPanel {
     }
 
     private void setRarityColor(GraphicsContext g2, UI_InventorySlot slot) {
-        g2.setStroke(Colors.darkBackground);
-        g2.setFill(Colors.darkBackground);
-        if (slot.item.rarity == 1) {
-            g2.setStroke(Colors.NormalGrey);
-            g2.setFill(Colors.NormalGrey);
-        } else if (slot.item.rarity == 2) {
-            g2.setStroke(Colors.rareColor);
-            g2.setFill(Colors.rareColor);
-        } else if (slot.item.rarity == 3) {
-            g2.setStroke(Colors.epicColor);
-            g2.setFill(Colors.epicColor);
-        } else if (slot.item.rarity == 4) {
-            g2.setStroke(Colors.legendaryColor);
-            g2.setFill(Colors.legendaryColor);
-        } else if (slot.item.rarity == 5) {
-            g2.setStroke(Colors.setItem);
-            g2.setFill(Colors.setItem);
-        } else if (slot.item.rarity == 10) {
-            g2.setStroke(Colors.legendaryColor);
-            g2.setFill(Colors.legendaryColor);
+        if (slot.item != null) {
+            if (slot.item.rarity == 1) {
+                g2.setStroke(Colors.NormalGrey);
+                g2.setFill(Colors.NormalGrey);
+            } else if (slot.item.rarity == 2) {
+                g2.setStroke(Colors.rareColor);
+                g2.setFill(Colors.rareColor);
+            } else if (slot.item.rarity == 3) {
+                g2.setStroke(Colors.epicColor);
+                g2.setFill(Colors.epicColor);
+            } else if (slot.item.rarity == 4) {
+                g2.setStroke(Colors.legendaryColor);
+                g2.setFill(Colors.legendaryColor);
+            } else if (slot.item.rarity == 5) {
+                g2.setStroke(Colors.setItem);
+                g2.setFill(Colors.setItem);
+            } else if (slot.item.rarity == 10) {
+                g2.setStroke(Colors.legendaryColor);
+                g2.setFill(Colors.legendaryColor);
+            }
+        } else {
+            g2.setStroke(Colors.darkBackground);
+            g2.setFill(Colors.darkBackground);
         }
     }
 
@@ -313,68 +316,87 @@ public class UI_InventoryPanel {
         wholeCharWindow.x = startX - 65;
         wholeCharWindow.y = startY - 65;
         gc.setFill(Colors.LightGrey);
-        gc.fillRoundRect(startX - 50, startY - 65, 500, 650, 35, 35);
+        gc.fillRoundRect(startX - 50, startY - 80, 450, 615, 35, 35);
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
-        gc.strokeRoundRect(startX - 50 + 5, startY - 65 + 5, 500 - 10, 650 - 10, 30, 30);
-        gc.setLineWidth(1);
-        //window mover
-        gc.setFill(Colors.darkBackground);
-        gc.fillRoundRect(startX - 50, startY - 65 + 2, 500, 30, 15, 15);
-        //window close button
-        gc.setStroke(Color.RED);
-        gc.strokeRoundRect(startX + 500 - 50 - 30, startY - 65 + 2, 30, 30, 5, 5);
-        charPanelCloser.x = startX - 50 + 500 - 30;
-        charPanelCloser.y = startY - 65 + 2;
-        //character image outline
+        gc.strokeRoundRect(startX - 45, startY - 75, 440, 620 - 10, 30, 30);
+        gc.setFill(Colors.mediumLightGrey);
+        gc.fillRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setStroke(Colors.darkBackground);
-        gc.strokeRoundRect(100 + startX, startY + 90, 200, 250, 25, 25);
-        //game world.player image
-        gc.drawImage(mg.player.entityImage1, startX + 150, startY + 150, 120, 120);
-        //Stats Text
+        gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setFill(Colors.darkBackground);
-        gc.setFont(mg.ui.maruMonica30);
-        gc.fillText("No Title", 120 + startX, 20 + startY);
-        gc.fillText("Mage: Level" + mg.player.level, 120 + startX, 50 + startY);
+        gc.setFont(FonT.minecraftBold13);
+        gc.fillText("Character", startX - 80 + 218, startY - 78 + 17);
+        gc.fillText("No Title", startX - 45 + 217 - 25, startY);
+        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
+
+        //character image outline
+        gc.setLineWidth(2);
+        gc.strokeRoundRect(75 + startX, startY + 40, 200, 250, 25, 25);
+
+        //game world.player image
+        gc.drawImage(mg.player.entityImage1, startX + 135, startY + 135, 60, 120);
+        //Stats Text
+        gc.strokeRoundRect(startX - 12, startY + 375, 187, 150, 15, 15);
+        gc.strokeRoundRect(startX - 12 + 187, startY + 375, 187, 150, 15, 15);
+        gc.fillText("Base  Stats", startX - 5, startY + 385 - 15);
+        gc.fillText("Combat Stats", startX - 15 + 200, startY + 385 - 15);
+        gc.fillText("Effects", startX + 295, startY + 385 - 15);
 
 
-        gc.fillText("INT: " + mg.player.intellect, startX + 110, startY + 420);
-        gc.fillText("VIT: " + mg.player.vitality, startX + 110, startY + 438);
-        gc.fillText("WIS: " + mg.player.wisdom, startX + 110, startY + 456);
-        gc.fillText("SPD: " + mg.player.agility, startX + 110, startY + 474);
-        gc.fillText("Health: " + mg.player.maxHealth, startX + 170, startY + 420);
-        gc.fillText("Mana: " + mg.player.maxMana, startX + 170, startY + 440);
-        gc.fillText("MvmtSPD: " + mg.player.movementSpeed, startX + 170, startY + 460);
-        gc.fillText("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 170, startY + 480);
-        gc.fillText("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 170, startY + 500);
+        //stats
+        gc.fillText("Intelligence: " + mg.player.intellect, startX - 5, startY + 393);
+        gc.fillText("Wisdom: " + mg.player.wisdom, startX - 5, startY + 393 + 15);
+        gc.fillText("Vitality: " + mg.player.vitality, startX - 5, startY + 393 + 30);
+        gc.fillText("Agility: " + mg.player.agility, startX - 5, startY + 393 + 30 + 15);
+
+        gc.fillText("Luck: " + mg.player.luck, startX - 5, startY + 393 + 30 + 30);
+        gc.fillText("Charisma: " + mg.player.charisma, startX - 5, startY + 393 + 30 + 30 + 15);
+        gc.fillText("Endurance: " + mg.player.endurance, startX - 5, startY + 393 + 30 + 30 + 30);
+        gc.fillText("Strength: " + mg.player.strength, startX - 5, startY + 393 + 30 + 30 + 30 + 15);
+        gc.fillText("Focus: " + mg.player.focus, startX - 5, startY + 393 + 30 + 30 + 30 + 30);
+
+        gc.fillText("Health: " + mg.player.maxHealth, startX + 182, startY + 420);
+        gc.fillText("Mana: " + mg.player.maxMana, startX + 182, startY + 440);
+        gc.fillText("MvmtSPD: " + mg.player.movementSpeed, startX + 182, startY + 460);
+        gc.fillText("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 182, startY + 480);
+        gc.fillText("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 182, startY + 500);
     }
 
     private void drawCharacterSlots(GraphicsContext gc, int startX, int startY) {
-        //Character Slots
         gc.setLineWidth(2);
         for (int i = 0; i <= 3; i++) {
-            char_Slots[i].boundBox.x = 40 + startX;
-            char_Slots[i].boundBox.y = (i * 50 + 110 + startY);
-            char_Slots[i].drawSlot(gc, 40 + startX, (i * 50 + 110 + startY));
+            char_Slots[i].boundBox.x = 21 + startX;
+            char_Slots[i].boundBox.y = (i * 50 + 65 + startY);
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(21 + startX, i * 50 + 65 + startY, 45, 45, 20, 20);
+            setRarityColor(gc, char_Slots[i]);
+            char_Slots[i].drawSlot(gc, 21 + startX, (i * 50 + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, 40 + startX, ((i * 50) + 110 + startY), SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, 21 + startX, ((i * 50) + 65 + startY), SLOT_SIZE);
             }
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i].boundBox.x = 40 + 270 + startX;
-            char_Slots[i].boundBox.y = (((i - 4) * 50) + 110 + startY);
-            char_Slots[i].drawSlot(gc, 40 + 270 + startX, (((i - 4) * 50) + 110 + startY));
+            char_Slots[i].boundBox.x = 18 + 265 + startX;
+            char_Slots[i].boundBox.y = (((i - 4) * 50) + 65 + startY);
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(18 + 265 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
+            setRarityColor(gc, char_Slots[i]);
+            char_Slots[i].drawSlot(gc, 18 + 265 + startX, (((i - 4) * 50) + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, 40 + 270 + startX, ((i - 4) * 50) + 110 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, 18 + 265 + startX, ((i - 4) * 50) + 65 + startY, SLOT_SIZE);
             }
         }
         for (int i = 8; i <= 9; i++) {
-            char_Slots[i].boundBox.x = ((i - 8) * 50) + 140 + startX;
-            char_Slots[i].boundBox.y = 110 + 240 + startY;
-            char_Slots[i].drawSlot(gc, ((i - 8) * 50) + 145 + startX, 110 + 240 + startY);
+            char_Slots[i].boundBox.x = ((i - 8) * 57) + 128 + startX;
+            char_Slots[i].boundBox.y = 80 + 217 + startY;
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(((i - 8) * 57) + 128 + startX, 80 + 217 + startY, 45, 45, 20, 20);
+            setRarityColor(gc, char_Slots[i]);
+            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 128 + startX, 80 + 217 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, ((i - 8) * 50) + 145 + startX, 110 + 240 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 128 + startX, 80 + 217 + startY, SLOT_SIZE);
             }
         }
     }

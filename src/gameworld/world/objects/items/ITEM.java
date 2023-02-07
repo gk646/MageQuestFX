@@ -53,6 +53,20 @@ public class ITEM {
         END - End
         STR - Str
         FOC - Foc
+
+
+
+        EFFECTS
+        + fire dmg
+        + lighting dmg
+        + dark magic
+        + poison
+        + arcane
+
+        + % stat
+        + % magic damage
+        + armour
+        + unique effects
      */
     public int intellect;
     public int vitality;
@@ -63,6 +77,10 @@ public class ITEM {
     public int endurance;
     public int strength;
     public int focus;
+
+    public int armour;
+
+    public String effect;
     public String description;
     public Image icon;
 
