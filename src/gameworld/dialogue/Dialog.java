@@ -145,8 +145,10 @@ abstract public class Dialog {
      */
     protected boolean playerBagsContainItem(String name) {
         for (UI_InventorySlot invSlot : mg.inventP.bag_Slots) {
-            if (invSlot.item.name.equals(name)) {
-                return true;
+            if (invSlot.item != null) {
+                if (invSlot.item.name.equals(name)) {
+                    return true;
+                }
             }
         }
         return false;

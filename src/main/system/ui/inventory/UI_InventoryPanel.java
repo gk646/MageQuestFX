@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 
 public class UI_InventoryPanel {
     private static final int SLOT_SIZE = 45;
+    public final Rectangle combatStatsHitBox;
     private static final int BAG_SLOTS = 15;
     private static final int CHAR_SLOTS = 10;
     public final UI_InventorySlot[] char_Slots;
@@ -23,10 +24,11 @@ public class UI_InventoryPanel {
     public final Rectangle wholeBagWindow;
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.##");
-    private final Rectangle charPanelCloser;
     private final Rectangle bagPanelCloser;
     private final Rectangle charPanelMover;
     private final Rectangle bagPanelMover;
+    public final Rectangle effectsHitBox;
+    public boolean showCombatStats = true;
     private final Point previousMousePosition = new Point(300, 300);
     private int charPanelX = 300, grabbedIndexChar = -1, grabbedIndexBag = -1;
     private int charPanelY = 300;
@@ -44,11 +46,12 @@ public class UI_InventoryPanel {
         createCharSlots();
         createBagSlots();
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 50, 450, 40);
-        charPanelCloser = new Rectangle(charPanelX, charPanelY, 30, 30);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
         wholeCharWindow = new Rectangle(charPanelX, charPanelY, 450, 600);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
+        combatStatsHitBox = new Rectangle(bagPanelX, bagPanelY, 107, 15);
+        effectsHitBox = new Rectangle(bagPanelX, bagPanelY, 80, 15);
         hideCharCollision();
         hideBagCollision();
     }
@@ -102,10 +105,6 @@ public class UI_InventoryPanel {
     private void drawCharPanel(GraphicsContext gc, int startX, int startY) {
         drawCharacterBackground(gc, startX, startY);
         drawCharacterSlots(gc, startX, startY);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(-5 + 30 - 350 + 70);
     }
 
     private void drawBagPanel(GraphicsContext gc, int startX, int startY) {
@@ -324,13 +323,8 @@ public class UI_InventoryPanel {
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             bagPanelMover.x = bagPanelX;
             bagPanelMover.y = bagPanelY - 10;
-        } else if (mg.inputH.mouse1Pressed && charPanelCloser.contains(mg.inputH.lastMousePosition)) {
-            mg.showChar = false;
-            hideCharCollision();
-        } else if (mg.inputH.mouse1Pressed && bagPanelCloser.contains(mg.inputH.lastMousePosition)) {
-            mg.showBag = false;
-            hideBagCollision();
         }
+
         previousMousePosition.x = mg.inputH.lastMousePosition.x;
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
     }
@@ -363,12 +357,9 @@ public class UI_InventoryPanel {
         //game world.player image
         gc.drawImage(mg.player.entityImage1, startX + 135, startY + 135, 60, 120);
         //Stats Text
-        gc.strokeRoundRect(startX - 12, startY + 375, 187, 150, 15, 15);
-        gc.strokeRoundRect(startX - 12 + 187, startY + 375, 187, 150, 15, 15);
+        gc.strokeRoundRect(startX - 14, startY + 375, 187, 150, 15, 15);
+        gc.strokeRoundRect(startX + 177, startY + 375, 187, 150, 15, 15);
         gc.fillText("Base  Stats", startX - 5, startY + 385 - 15);
-        gc.fillText("Combat Stats", startX - 15 + 200, startY + 385 - 15);
-        gc.fillText("Effects", startX + 295, startY + 385 - 15);
-
 
         //stats
         gc.fillText("Intelligence: " + mg.player.intellect, startX - 5, startY + 393);
@@ -382,11 +373,48 @@ public class UI_InventoryPanel {
         gc.fillText("Strength: " + mg.player.strength, startX - 5, startY + 393 + 30 + 30 + 30 + 15);
         gc.fillText("Focus: " + mg.player.focus, startX - 5, startY + 393 + 30 + 30 + 30 + 30);
 
-        gc.fillText("Health: " + mg.player.maxHealth, startX + 182, startY + 420);
-        gc.fillText("Mana: " + mg.player.maxMana, startX + 182, startY + 440);
-        gc.fillText("MvmtSPD: " + mg.player.movementSpeed, startX + 182, startY + 460);
-        gc.fillText("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 182, startY + 480);
-        gc.fillText("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 182, startY + 500);
+        // second panel stats
+        gc.fillText("Combat Stats", startX + 185, startY + 372);
+        gc.fillText("Effects", startX + 292, startY + 372);
+
+        gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+        gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+        combatStatsHitBox.x = startX + 180;
+        combatStatsHitBox.y = startY + 360;
+        effectsHitBox.x = startX + 287;
+        effectsHitBox.y = startY + 360;
+        if (showCombatStats) {
+            drawCombatStats(gc, startX, startY);
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.setFill(Colors.darkBackground);
+            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.fillText("Combat Stats", startX + 185, startY + 372);
+        } else {
+            drawEffects(gc, startX, startY);
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+            gc.setFill(Colors.darkBackground);
+            gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+            gc.fillText("Effects", startX + 292, startY + 372);
+        }
+    }
+
+    private void drawCombatStats(GraphicsContext gc, int startX, int startY) {
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Max-Health: " + mg.player.maxHealth, startX + 182, startY + 393);
+        gc.fillText("Max-Mana: " + mg.player.maxMana, startX + 182, startY + 408);
+        gc.fillText("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 182, startY + 423);
+        gc.fillText("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 182, startY + 438);
+        gc.fillText("Armour: " + mg.player.armour, startX + 182, startY + 453);
+        gc.fillText("Critchance: " + mg.player.critChance, startX + 182, startY + 468);
+        gc.fillText("Resist %: " + mg.player.resistChance, startX + 182, startY + 483);
+        gc.fillText("Carryweight: " + mg.player.carryWeight, startX + 182, startY + 498);
+        gc.fillText("MovementSpeed: " + mg.player.playerMovementSpeed, startX + 182, startY + 512);
+    }
+
+    private void drawEffects(GraphicsContext gc, int startX, int startY) {
+        gc.fillText("hello", startX + 182, startY + 420);
     }
 
     private void drawCharacterSlots(GraphicsContext gc, int startX, int startY) {

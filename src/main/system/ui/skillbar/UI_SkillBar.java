@@ -38,6 +38,7 @@ public class UI_SkillBar {
         gc.strokeRoundRect(skillBarX + 300 + 35, skillBarY + 10, 50, 50, 5, 5);
     }
 
+
     public void update() {
         for (SKILL skill : skills) {
             if (skill != null) {

@@ -124,7 +124,7 @@ public class SQLite {
         String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? WHERE _ROWID_ = 1";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, mg.player.coins);
-        stmt.setInt(2, mg.player.experience);
+        stmt.setInt(2, (int) mg.player.experience);
         stmt.setInt(3, mg.player.spawnLevel);
         stmt.executeUpdate();
     }

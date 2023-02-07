@@ -296,6 +296,10 @@ public class InputHandler {
         if (event.getButton() == MouseButton.PRIMARY) {
             if (mg.qPanel.expandButton.contains(lastMousePosition)) {
                 mg.qPanel.expanded = !mg.qPanel.expanded;
+            } else if (mg.inventP.combatStatsHitBox.contains(lastMousePosition)) {
+                mg.inventP.showCombatStats = true;
+            } else if (mg.inventP.effectsHitBox.contains(lastMousePosition)) {
+                mg.inventP.showCombatStats = false;
             }
         }
     }

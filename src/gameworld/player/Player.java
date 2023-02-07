@@ -34,16 +34,17 @@ public class Player extends ENTITY {
     public float critChance, dotDamageMultiplier, dotLengthMultiplier, buffLengthMultiplier, speechSkill, resistChance, carryWeight;
     public int cooldownOneSecond;
     public int cooldownTwoSecond;
-    public int experience;
+    public float experience;
     public int coins;
     public int spawnLevel;
     public float manaRegeneration = 0.02f;
     public float healthRegeneration = 0.002f;
     public float playerMovementSpeed;
+    public int armour;
     private int cooldownPrimary;
     private int cdLightning;
     private int playerQuadrant;
-    private int levelUpExperience = 10;
+    public int levelUpExperience = 10;
     private int quadrantTimer;
     private boolean respawnsDone;
     // PLAYER X AND Y ALWAYS +24
@@ -100,8 +101,8 @@ public class Player extends ENTITY {
                 focus += invSlot.item.focus;
             }
         }
-        maxHealth = (int) ((9.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));
-        maxMana = (int) ((19.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
+        maxHealth = (int) ((10.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));
+        maxMana = (int) ((20.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
         manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
         healthRegeneration = Math.round(2 + ((endurance * 2 + vitality) / Math.sqrt(Math.max(10, level + 10))) / 110.0f * 100.0f) / 100.0f;
         playerMovementSpeed = Math.round(((4.0f + (agility * 0.4 / (float) level))) * 100.0f) / 100.0f;
@@ -180,6 +181,7 @@ public class Player extends ENTITY {
         if (experience >= levelUpExperience) {
             level++;
             updateEquippedItems();
+            this.experience -= levelUpExperience;
             levelUpExperience = 0;
             for (int i = 1; i <= level; i++) {
                 levelUpExperience += (i + i - 1) * (10 + i - 1);
@@ -192,6 +194,7 @@ public class Player extends ENTITY {
         while (experience >= levelUpExperience) {
             level++;
             updateEquippedItems();
+            this.experience -= levelUpExperience;
             levelUpExperience = 0;
             for (int i = 1; i <= level; i++) {
                 levelUpExperience += (i + i - 1) * (10 + i - 1);

@@ -112,7 +112,9 @@ public class UI {
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 94);
         gc.setFill(Colors.XPBarBlue);
-        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, 768 + 6 + 6, 13, 5, 5);
+        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
+        //gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, 780, 13, 5, 5);
+
     }
 
 
