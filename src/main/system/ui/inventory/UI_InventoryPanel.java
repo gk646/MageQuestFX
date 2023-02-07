@@ -104,6 +104,10 @@ public class UI_InventoryPanel {
         drawCharacterSlots(gc, startX, startY);
     }
 
+    public static void main(String[] args) {
+        System.out.println(-5 + 30 - 350 + 70);
+    }
+
     private void drawBagPanel(GraphicsContext gc, int startX, int startY) {
         drawBagBackground(gc, startX, startY);
         drawBagSlots(gc, startX, startY);
@@ -112,38 +116,38 @@ public class UI_InventoryPanel {
     private void getTooltip(GraphicsContext gc, UI_InventorySlot invSlot) {
         //BACKGROUND
         gc.setFill(Colors.LightGrey);
-        gc.fillRoundRect(mg.inputH.lastMousePosition.x - 5 - 250 - 3, mg.inputH.lastMousePosition.y - 5 + 15 - 350, 250, 350, 15, 15);
+        gc.fillRoundRect(mg.inputH.lastMousePosition.x - (MainGame.SCREEN_HEIGHT * 0.238), mg.inputH.lastMousePosition.y - (MainGame.SCREEN_HEIGHT * 0.314), MainGame.SCREEN_HEIGHT * 0.23, MainGame.SCREEN_HEIGHT * 0.324f, 15, 15);
         //OUTLINE
         setRarityColor(gc, invSlot);
-        gc.setLineWidth(2);
-        gc.strokeRoundRect(mg.inputH.lastMousePosition.x - 5 - 3 - 244 - 3, mg.inputH.lastMousePosition.y - 5 + 15 - 3 - 344, 244, 344, 15, 15);
+        gc.setLineWidth(1);
+        gc.strokeRoundRect(mg.inputH.lastMousePosition.x - (MainGame.SCREEN_HEIGHT * 0.235), mg.inputH.lastMousePosition.y - (MainGame.SCREEN_HEIGHT * 0.311), MainGame.SCREEN_HEIGHT * 0.224, MainGame.SCREEN_HEIGHT * 0.318f, 15, 15);
         //NAME
         setRarityColor(gc, invSlot);
         gc.setFont(FonT.minecraftRegular20);
-        gc.fillText(invSlot.item.name, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 50);
+        gc.fillText(invSlot.item.name, mg.inputH.lastMousePosition.x - 248, mg.inputH.lastMousePosition.y - 290);
         //Quality
         applyQualityColor(invSlot, gc);
         gc.setFont(FonT.minecraftItalic15);
         if (invSlot.item.quality < 100) {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 5 - 38, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 17);
+            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 43, mg.inputH.lastMousePosition.y - 323);
         } else {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 5 - 47, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 17);
+            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 52, mg.inputH.lastMousePosition.y - 323);
         }
         //STATS
         if (!invSlot.item.type.equals("M")) {
             gc.setFill(Colors.darkBackground);
             gc.setFont(FonT.minecraftItalic15);
-            gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-            gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-            gc.fillText("WIS: " + invSlot.item.wisdom, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 9, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+            gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("WIS: " + invSlot.item.wisdom, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
 
-            gc.fillText("AGI: " + invSlot.item.agility, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-            gc.fillText("LUC: " + invSlot.item.luck, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-            gc.fillText("CHA: " + invSlot.item.charisma, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 85, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+            gc.fillText("AGI: " + invSlot.item.agility, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("LUC: " + invSlot.item.luck, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("CHA: " + invSlot.item.charisma, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
 
-            gc.fillText("END: " + invSlot.item.endurance, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 70);
-            gc.fillText("STR: " + invSlot.item.strength, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 85);
-            gc.fillText("FOC: " + invSlot.item.focus, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 165, mg.inputH.lastMousePosition.y - 5 + 30 - 350 + 100);
+            gc.fillText("END: " + invSlot.item.endurance, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("STR: " + invSlot.item.strength, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("FOC: " + invSlot.item.focus, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
 
       /*  INT - Int
         WIS - Wis
@@ -207,29 +211,20 @@ public class UI_InventoryPanel {
     }
 
     private void printItemType(GraphicsContext gc, UI_InventorySlot slot) {
+        int xPosition = (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.148f);
+        int yPosition = (int) (mg.inputH.lastMousePosition.y + MainGame.SCREEN_HEIGHT * 0.002_7f);
         switch (slot.item.type) {
-            case "H" ->
-                    gc.fillText("Helm", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "C" ->
-                    gc.fillText("Chest", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "P" ->
-                    gc.fillText("Pants", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "B" ->
-                    gc.fillText("Boots", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "A" ->
-                    gc.fillText("Amulet", mg.inputH.lastMousePosition.x - 5 - 170 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "R" ->
-                    gc.fillText("Ring", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "T" ->
-                    gc.fillText("Relic", mg.inputH.lastMousePosition.x - 5 - 165 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "W" ->
-                    gc.fillText("One-Handed", mg.inputH.lastMousePosition.x - 5 - 180 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "2" ->
-                    gc.fillText("Two-Handed", mg.inputH.lastMousePosition.x - 5 - 180 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            case "O" ->
-                    gc.fillText("Offhand", mg.inputH.lastMousePosition.x - 5 - 175 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
-            default ->
-                    gc.fillText("Misc", mg.inputH.lastMousePosition.x - 5 - 160 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+            case "H" -> gc.fillText("Helm", xPosition, yPosition);
+            case "C" -> gc.fillText("Chest", xPosition, yPosition);
+            case "P" -> gc.fillText("Pants", xPosition, yPosition);
+            case "B" -> gc.fillText("Boots", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case "A" -> gc.fillText("Amulet", xPosition - MainGame.SCREEN_HEIGHT * 0.009f, yPosition);
+            case "R" -> gc.fillText("Ring", xPosition, yPosition);
+            case "T" -> gc.fillText("Relic", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case "W" -> gc.fillText("One-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.017f, yPosition);
+            case "2" -> gc.fillText("Two-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.019f, yPosition);
+            case "O" -> gc.fillText("Offhand", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            default -> gc.fillText("Misc", xPosition, yPosition);
         }
     }
 
