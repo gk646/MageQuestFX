@@ -29,7 +29,7 @@ public class Tutorial extends Dialog {
         }
         if (stage == 10) {
             gruntkillcounter = mg.prj_control.GruntKilledCounter;
-            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 30, 1));
+            MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 31, 1));
             MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 34, 1));
             MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 38, 1));
             next_stage();
