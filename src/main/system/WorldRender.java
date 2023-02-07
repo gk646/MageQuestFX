@@ -15,6 +15,7 @@ public class WorldRender {
     private final MainGame mg;
     public static int[][] worldData;
     public Point worldSize;
+    int worldCol, worldRow, maxCol, maxRow;
 
 
     public WorldRender(MainGame mg) {
@@ -89,23 +90,25 @@ public class WorldRender {
 
 
     public void draw(GraphicsContext g2) {
-        int worldCol = Math.max(mg.playerX - 21, 0);
-        int worldRow = Math.max(mg.playerY - 12, 0);
-        int maxCol = Math.min(worldCol + 42, worldSize.x);
-        int maxRow = Math.min(worldRow + 24, worldSize.y);
-        Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 24;
+        worldCol = Math.max(mg.playerX - 21, 0);
+        worldRow = Math.max(mg.playerY - 12, 0);
+        maxCol = Math.min(worldCol + 42, worldSize.x);
+        maxRow = Math.min(worldRow + 24, worldSize.y);
         if (Player.screenX > Player.worldX) {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
             Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
             worldCol -= 10;
+        } else {
+            Player.screenX = mg.HALF_WIDTH - 24;
         }
         if (Player.screenY > Player.worldY) {
             Player.screenY = (int) Player.worldY;
         } else if (Player.worldY + 24 > mg.wRender.worldSize.y * 48 - mg.HALF_HEIGHT) {
             Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
             worldRow -= 10;
+        } else {
+            Player.screenY = mg.HALF_HEIGHT - 24;
         }
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
