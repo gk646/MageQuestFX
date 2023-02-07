@@ -30,8 +30,7 @@ public class Runner extends Application {
     @Override
     public void start(Stage stage) {
         GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-        Canvas canvas = new Canvas(1_920, 1_080);
+        Canvas canvas = new Canvas(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Group root = new Group();
         root.getChildren().add(canvas);
@@ -58,7 +57,7 @@ public class Runner extends Application {
         slider.setPrefSize(200, 100);
         root.getChildren().add(slider);
 
-        MainGame mainGame = new MainGame(1_920, 1_080, gc, scene);
+        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight(), gc, scene);
         InputHandler.instance = new InputHandler(mainGame, scene);
         mainGame.inputH = InputHandler.instance;
         Thread thread = new Thread(mainGame::run);
