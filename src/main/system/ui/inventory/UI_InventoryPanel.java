@@ -124,14 +124,14 @@ public class UI_InventoryPanel {
         //NAME
         setRarityColor(gc, invSlot);
         gc.setFont(FonT.minecraftRegular20);
-        gc.fillText(invSlot.item.name, mg.inputH.lastMousePosition.x - 248, mg.inputH.lastMousePosition.y - 290);
+        gc.fillText(invSlot.item.name, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.229f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.268f);
         //Quality
         applyQualityColor(invSlot, gc);
         gc.setFont(FonT.minecraftItalic15);
         if (invSlot.item.quality < 100) {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 43, mg.inputH.lastMousePosition.y - 323);
+            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.039_8f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.299f);
         } else {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - 52, mg.inputH.lastMousePosition.y - 323);
+            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.047_3f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.299f);
         }
         //STATS
         if (!invSlot.item.type.equals("M")) {
