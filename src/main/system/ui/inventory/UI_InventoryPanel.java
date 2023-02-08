@@ -323,8 +323,10 @@ public class UI_InventoryPanel {
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             bagPanelMover.x = bagPanelX;
             bagPanelMover.y = bagPanelY - 10;
+        } else if (mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+            mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
+            mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
         }
-
         previousMousePosition.x = mg.inputH.lastMousePosition.x;
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
     }
