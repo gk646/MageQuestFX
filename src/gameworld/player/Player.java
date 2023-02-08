@@ -47,13 +47,15 @@ public class Player extends ENTITY {
     private int playerQuadrant;
     public int levelUpExperience = 10;
     private int quadrantTimer;
-    private boolean respawnsDone;
+    private boolean respawnsDone, movingLeft;
     // PLAYER X AND Y ALWAYS +24
     public static float worldX, worldY;
     // screenX is half width -24
     public static int screenX, screenY;
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
+    private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
+
 
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -245,7 +247,11 @@ public class Player extends ENTITY {
     @Override
     public void draw(GraphicsContext gc) {
         if (isMoving) {
-            drawRun(gc);
+            if (movingLeft) {
+                drawRunLeft(gc);
+            } else {
+                drawRun(gc);
+            }
         } else {
             drawIdle(gc);
         }
@@ -253,7 +259,8 @@ public class Player extends ENTITY {
     }
 
     public void checkPlayerIsMoving() {
-        isMoving = !(!mg.inputH.upPressed && !mg.inputH.downPressed && !mg.inputH.leftPressed && !mg.inputH.rightPressed);
+        movingLeft = mg.inputH.leftPressed;
+        isMoving = mg.inputH.upPressed || mg.inputH.downPressed || mg.inputH.leftPressed || mg.inputH.rightPressed;
     }
 
     private void drawIdle(GraphicsContext gc) {
@@ -279,6 +286,19 @@ public class Player extends ENTITY {
             case 5 -> gc.drawImage(run6, screenX, screenY);
             case 6 -> gc.drawImage(run7, screenX, screenY);
             case 7 -> gc.drawImage(run8, screenX, screenY);
+        }
+    }
+
+    private void drawRunLeft(GraphicsContext gc) {
+        switch (spriteCounter % 160 / 20) {
+            case 0 -> gc.drawImage(runM1, screenX, screenY);
+            case 1 -> gc.drawImage(runM2, screenX, screenY);
+            case 2 -> gc.drawImage(runM3, screenX, screenY);
+            case 3 -> gc.drawImage(runM4, screenX, screenY);
+            case 4 -> gc.drawImage(runM5, screenX, screenY);
+            case 5 -> gc.drawImage(runM6, screenX, screenY);
+            case 6 -> gc.drawImage(runM7, screenX, screenY);
+            case 7 -> gc.drawImage(runM8, screenX, screenY);
         }
     }
 
@@ -364,6 +384,11 @@ public class Player extends ENTITY {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/run/" + imagePath)));
     }
 
+    private Image setupRunM(String imagePath) {
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/runMirrored/" + imagePath)));
+    }
+
+
     private void getPlayerImage() {
         idle1 = setupIdle("1.png");
         idle2 = setupIdle("2.png");
@@ -381,5 +406,13 @@ public class Player extends ENTITY {
         run6 = setupRun("6.png");
         run7 = setupRun("7.png");
         run8 = setupRun("8.png");
+        runM1 = setupRunM("1.png");
+        runM2 = setupRunM("2.png");
+        runM3 = setupRunM("3.png");
+        runM4 = setupRunM("4.png");
+        runM5 = setupRunM("5.png");
+        runM6 = setupRunM("6.png");
+        runM7 = setupRunM("7.png");
+        runM8 = setupRunM("8.png");
     }
 }
