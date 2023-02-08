@@ -53,6 +53,7 @@ public class Player extends ENTITY {
     // screenX is half width -24
     public static int screenX, screenY;
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
+    private Image run1, run2, run3, run4, run5, run6, run7, run8;
 
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -243,8 +244,8 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
-        if (!isMoving) {
-            gc.drawImage(idle1, screenX, screenY);
+        if (isMoving) {
+            drawRun(gc);
         } else {
             drawIdle(gc);
         }
@@ -252,7 +253,7 @@ public class Player extends ENTITY {
     }
 
     public void checkPlayerIsMoving() {
-        isMoving = !mg.inputH.upPressed && !mg.inputH.downPressed && !mg.inputH.leftPressed && !mg.inputH.rightPressed;
+        isMoving = !(!mg.inputH.upPressed && !mg.inputH.downPressed && !mg.inputH.leftPressed && !mg.inputH.rightPressed);
     }
 
     private void drawIdle(GraphicsContext gc) {
@@ -265,6 +266,19 @@ public class Player extends ENTITY {
             case 5 -> gc.drawImage(idle6, screenX, screenY);
             case 6 -> gc.drawImage(idle7, screenX, screenY);
             case 7 -> gc.drawImage(idle8, screenX, screenY);
+        }
+    }
+
+    private void drawRun(GraphicsContext gc) {
+        switch (spriteCounter % 160 / 20) {
+            case 0 -> gc.drawImage(run1, screenX, screenY);
+            case 1 -> gc.drawImage(run2, screenX, screenY);
+            case 2 -> gc.drawImage(run3, screenX, screenY);
+            case 3 -> gc.drawImage(run4, screenX, screenY);
+            case 4 -> gc.drawImage(run5, screenX, screenY);
+            case 5 -> gc.drawImage(run6, screenX, screenY);
+            case 6 -> gc.drawImage(run7, screenX, screenY);
+            case 7 -> gc.drawImage(run8, screenX, screenY);
         }
     }
 
@@ -342,18 +356,30 @@ public class Player extends ENTITY {
         }
     }
 
-    private Image setup(String imagePath) {
+    private Image setupIdle(String imagePath) {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/idle/" + imagePath)));
     }
 
+    private Image setupRun(String imagePath) {
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/run/" + imagePath)));
+    }
+
     private void getPlayerImage() {
-        idle1 = setup("1.png");
-        idle2 = setup("2.png");
-        idle3 = setup("3.png");
-        idle4 = setup("4.png");
-        idle5 = setup("5.png");
-        idle6 = setup("6.png");
-        idle7 = setup("7.png");
-        idle8 = setup("8.png");
+        idle1 = setupIdle("1.png");
+        idle2 = setupIdle("2.png");
+        idle3 = setupIdle("3.png");
+        idle4 = setupIdle("4.png");
+        idle5 = setupIdle("5.png");
+        idle6 = setupIdle("6.png");
+        idle7 = setupIdle("7.png");
+        idle8 = setupIdle("8.png");
+        run1 = setupRun("1.png");
+        run2 = setupRun("2.png");
+        run3 = setupRun("3.png");
+        run4 = setupRun("4.png");
+        run5 = setupRun("5.png");
+        run6 = setupRun("6.png");
+        run7 = setupRun("7.png");
+        run8 = setupRun("8.png");
     }
 }
