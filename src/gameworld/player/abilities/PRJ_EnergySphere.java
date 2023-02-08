@@ -35,8 +35,7 @@ public class PRJ_EnergySphere extends PRJ_Control {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setEffect(Effects.blueGlow);
-        int spriteIndex = spriteCounter % 60 / 10;
-        switch (spriteIndex) {
+        switch (spriteCounter % 60 / 10) {
             case 0 ->
                     gc.drawImage(projectileImage1, (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY, projectileWidth, projectileHeight);
             case 1 ->

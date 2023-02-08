@@ -155,6 +155,7 @@ public class MainGame {
                 if (difference >= 1) {
                     inventP.interactWithWindows();
                     getPlayerTile();
+                    player.checkPlayerIsMoving();
                     difference = 0;
                 }
                 if (difference2 >= 1) {

@@ -18,6 +18,7 @@ import java.util.Objects;
 
 
 public class Player extends ENTITY {
+    public boolean isMoving;
     public int maxMana;
     public float mana;
     public float health;
@@ -51,6 +52,7 @@ public class Player extends ENTITY {
     public static float worldX, worldY;
     // screenX is half width -24
     public static int screenX, screenY;
+    private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
 
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -241,14 +243,29 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.drawImage(entityImage1, screenX, screenY, 25, 48);
-        // gc.setStroke(Color.RED);
-        //gc.setLineWidth(1);
-        //gc.strokeRect(960 - 24, 540 - 24, 48, 48);
+        if (!isMoving) {
+            gc.drawImage(idle1, screenX, screenY);
+        } else {
+            drawIdle(gc);
+        }
+        spriteCounter++;
     }
 
-    private void getPlayerImage() {
-        entityImage1 = setup("wizard1.png");
+    public void checkPlayerIsMoving() {
+        isMoving = !mg.inputH.upPressed && !mg.inputH.downPressed && !mg.inputH.leftPressed && !mg.inputH.rightPressed;
+    }
+
+    private void drawIdle(GraphicsContext gc) {
+        switch (spriteCounter % 144 / 18) {
+            case 0 -> gc.drawImage(idle1, screenX, screenY);
+            case 1 -> gc.drawImage(idle2, screenX, screenY);
+            case 2 -> gc.drawImage(idle3, screenX, screenY);
+            case 3 -> gc.drawImage(idle4, screenX, screenY);
+            case 4 -> gc.drawImage(idle5, screenX, screenY);
+            case 5 -> gc.drawImage(idle6, screenX, screenY);
+            case 6 -> gc.drawImage(idle7, screenX, screenY);
+            case 7 -> gc.drawImage(idle8, screenX, screenY);
+        }
     }
 
     private void movement() {
@@ -326,6 +343,17 @@ public class Player extends ENTITY {
     }
 
     private Image setup(String imagePath) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/" + imagePath)));
+        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/idle/" + imagePath)));
+    }
+
+    private void getPlayerImage() {
+        idle1 = setup("1.png");
+        idle2 = setup("2.png");
+        idle3 = setup("3.png");
+        idle4 = setup("4.png");
+        idle5 = setup("5.png");
+        idle6 = setup("6.png");
+        idle7 = setup("7.png");
+        idle8 = setup("8.png");
     }
 }
