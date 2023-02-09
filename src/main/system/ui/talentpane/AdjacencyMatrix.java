@@ -1,9 +1,12 @@
 package main.system.ui.talentpane;
 
+import java.util.ArrayList;
+
 public class AdjacencyMatrix {
 
 
     private final int[][] adjacency_matrix;
+    public static final ArrayList<int[]> edge_list = new ArrayList<>();
 
 
     public AdjacencyMatrix() {
@@ -13,6 +16,10 @@ public class AdjacencyMatrix {
 
     public void makeEdge(int to, int from) {
         adjacency_matrix[to][from] = 1;
+        int[] edge = new int[2];
+        edge[0] = to;
+        edge[1] = from;
+        edge_list.add(edge);
     }
 
     public int getEdge(int to, int from) {
@@ -40,7 +47,6 @@ public class AdjacencyMatrix {
         makeEdge(20, 21);
         makeEdge(21, 22);
         makeEdge(19, 20);
-
         makeEdge(0, 8);
         makeEdge(5, 6);
         makeEdge(6, 23);
@@ -49,7 +55,6 @@ public class AdjacencyMatrix {
         makeEdge(25, 26);
         makeEdge(26, 27);
         makeEdge(3, 27);
-
         makeEdge(25, 28);
         makeEdge(28, 41);
         makeEdge(41, 42);

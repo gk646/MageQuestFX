@@ -58,23 +58,9 @@ public class UI_TalentPanel {
 
 
     private void drawConnections(GraphicsContext gc, int x, int y) {
-        drawLineA(x, y, gc, 2, 8);
-        drawLineA(x, y, gc, 2, 9);
-        drawLineA(x, y, gc, 9, 14);
-        drawLineA(x, y, gc, 14, 10);
-        drawLineA(x, y, gc, 10, 11);
-        drawLineA(x, y, gc, 12, 11);
-        drawLineA(x, y, gc, 8, 13);
-        drawLineA(x, y, gc, 13, 12);
-        drawLineA(x, y, gc, 11, 15);
-        drawLineA(x, y, gc, 3, 16);
-        drawLineA(x, y, gc, 16, 17);
-        drawLineA(x, y, gc, 17, 18);
-        drawLineA(x, y, gc, 18, 19);
-        drawLineA(x, y, gc, 19, 20);
-        drawLineA(x, y, gc, 20, 21);
-        drawLineA(x, y, gc, 21, 22);
-        drawLineA(x, y, gc, 13, 20);
+        for (int[] array : AdjacencyMatrix.edge_list) {
+            drawLineA(x, y, gc, array[0], array[1]);
+        }
     }
 
     private void createTalentNodes() {
@@ -119,6 +105,34 @@ public class UI_TalentPanel {
         talent_Nodes[28] = new TalentNode(new TALENT(20, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, 163);
         talent_Nodes[29] = new TalentNode(new TALENT(21, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, 78);
         talent_Nodes[30] = new TalentNode(new TALENT(22, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 298, 0);
+
+        talent_Nodes[31] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 230, 0);
+        talent_Nodes[32] = new TalentNode(new TALENT(16, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 430, 37);
+        talent_Nodes[33] = new TalentNode(new TALENT(17, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 430, -37);
+        talent_Nodes[34] = new TalentNode(new TALENT(18, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, -78);
+        talent_Nodes[35] = new TalentNode(new TALENT(19, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, -164);
+        talent_Nodes[36] = new TalentNode(new TALENT(20, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 454, -164);
+        talent_Nodes[37] = new TalentNode(new TALENT(21, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 558, -164);
+        talent_Nodes[38] = new TalentNode(new TALENT(22, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 664, -164);
+
+        talent_Nodes[39] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, -164);
+        talent_Nodes[40] = new TalentNode(new TALENT(16, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 870, -164);
+        talent_Nodes[41] = new TalentNode(new TALENT(17, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 454, 163);
+        talent_Nodes[42] = new TalentNode(new TALENT(18, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 558, 163);
+        talent_Nodes[43] = new TalentNode(new TALENT(19, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 661, 163);
+        talent_Nodes[44] = new TalentNode(new TALENT(20, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, 163);
+        talent_Nodes[45] = new TalentNode(new TALENT(21, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 870, 163);
+        talent_Nodes[46] = new TalentNode(new TALENT(22, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, 90);
+
+        talent_Nodes[47] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 836, 90);
+        talent_Nodes[48] = new TalentNode(new TALENT(16, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 907, 90);
+        talent_Nodes[49] = new TalentNode(new TALENT(17, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 608, 103);
+        talent_Nodes[50] = new TalentNode(new TALENT(18, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 560, 35);
+        talent_Nodes[51] = new TalentNode(new TALENT(19, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 560, -35);
+
+        talent_Nodes[52] = new TalentNode(new TALENT(20, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, 163);
+        talent_Nodes[53] = new TalentNode(new TALENT(21, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 870, 163);
+        talent_Nodes[54] = new TalentNode(new TALENT(22, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, 90);
     }
 
     private void drawLineA(int x, int y, GraphicsContext gc, int node1, int node2) {
