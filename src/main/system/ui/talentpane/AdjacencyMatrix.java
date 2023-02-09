@@ -1,7 +1,5 @@
 package main.system.ui.talentpane;
 
-import java.util.Scanner;
-
 public class AdjacencyMatrix {
 
 
@@ -11,73 +9,6 @@ public class AdjacencyMatrix {
     public AdjacencyMatrix() {
         adjacency_matrix = new int[100][100];
         makeEdges();
-    }
-
-    public static void main(String[] args) {
-
-        int v, e, count = 1, to = 0, from = 0;
-
-        Scanner sc = new Scanner(System.in);
-
-        AdjacencyMatrix graph;
-
-        try {
-
-            System.out.println("Enter the number of vertices: ");
-
-            v = sc.nextInt();
-
-            System.out.println("Enter the number of edges: ");
-
-            e = sc.nextInt();
-
-
-            graph = new AdjacencyMatrix();
-
-
-            System.out.println("Enter the edges: <to> <from>");
-
-            while (count <= e) {
-
-                to = sc.nextInt();
-
-                from = sc.nextInt();
-
-
-                graph.makeEdge(to, from);
-
-                count++;
-            }
-
-
-            System.out.println("The adjacency matrix for the given graph is: ");
-
-            System.out.print("  ");
-
-            for (int i = 1; i <= v; i++)
-
-                System.out.print(i + " ");
-
-            System.out.println();
-
-
-            for (int i = 1; i <= v; i++) {
-
-                System.out.print(i + " ");
-
-                for (int j = 1; j <= v; j++)
-
-                    System.out.print(graph.getEdge(i, j) + " ");
-
-                System.out.println();
-            }
-        } catch (Exception E) {
-
-            System.out.println("Somthing went wrong");
-        }
-
-
-        sc.close();
     }
 
     public void makeEdge(int to, int from) {
@@ -100,14 +31,15 @@ public class AdjacencyMatrix {
         makeEdge(12, 13);
         makeEdge(13, 12);
         makeEdge(11, 12);
+        makeEdge(3, 16);
+        makeEdge(16, 17);
+        makeEdge(17, 18);
+        makeEdge(18, 19);
+        makeEdge(11, 15);
+        makeEdge(13, 20);
+        makeEdge(20, 21);
+        makeEdge(21, 22);
 
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
         makeEdge(2, 8);
         makeEdge(2, 8);
         makeEdge(2, 8);

@@ -314,19 +314,12 @@ public class UI_InventoryPanel {
     }
 
     public void interactWithWindows() {
-        boolean nodeclick = false;
         for (TalentNode node : mg.talentP.talent_Nodes) {
             if (node != null) {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
                     if (mg.talentP.checkValidTalent(node)) {
                         node.activated = true;
                     }
-                    node.boundBox.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-                    node.boundBox.y += mg.inputH.lastMousePosition.y - previousMousePosition.y;
-                    node.position.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-                    node.position.y += mg.inputH.lastMousePosition.y - previousMousePosition.y;
-                    nodeclick = true;
-                    //System.out.println((960 + node.position.x) + " " + (540 + node.position.y));
                 }
             }
         }
@@ -340,12 +333,17 @@ public class UI_InventoryPanel {
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             bagPanelMover.x = bagPanelX;
             bagPanelMover.y = bagPanelY - 10;
-        } else if (!nodeclick && mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+        } else if (mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
         } else if (mg.inputH.mouse2Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             mg.talentP.talentPanelX = 960 - 16;
             mg.talentP.talentPanelY = 540 - 16;
+            for (TalentNode node : mg.talentP.talent_Nodes) {
+                if (node != null) {
+                    node.activated = false;
+                }
+            }
         }
         previousMousePosition.x = mg.inputH.lastMousePosition.x;
         previousMousePosition.y = mg.inputH.lastMousePosition.y;

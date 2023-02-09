@@ -61,6 +61,15 @@ public class UI_TalentPanel {
         drawLineA(x, y, gc, 12, 11);
         drawLineA(x, y, gc, 8, 13);
         drawLineA(x, y, gc, 13, 12);
+        drawLineA(x, y, gc, 11, 15);
+        drawLineA(x, y, gc, 3, 16);
+        drawLineA(x, y, gc, 16, 17);
+        drawLineA(x, y, gc, 17, 18);
+        drawLineA(x, y, gc, 18, 19);
+        drawLineA(x, y, gc, 19, 20);
+        drawLineA(x, y, gc, 20, 21);
+        drawLineA(x, y, gc, 21, 22);
+        drawLineA(x, y, gc, 13, 20);
     }
 
     private void createTalentNodes() {
@@ -85,17 +94,17 @@ public class UI_TalentPanel {
         talent_Nodes[11] = new TalentNode(new TALENT(11, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -220);
         talent_Nodes[12] = new TalentNode(new TALENT(12, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, -267);
         talent_Nodes[13] = new TalentNode(new TALENT(13, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 110, -218);
-        talent_Nodes[15] = new TalentNode(new TALENT(8, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -325);
+        talent_Nodes[15] = new TalentNode(new TALENT(15, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -325);
 
         //right side
         talent_Nodes[3] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 100, 0);
-        talent_Nodes[16] = new TalentNode(new TALENT(9, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 158, -62);
-        talent_Nodes[17] = new TalentNode(new TALENT(14, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 224, -134);
-        talent_Nodes[18] = new TalentNode(new TALENT(10, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 288, -204);
-        talent_Nodes[19] = new TalentNode(new TALENT(1, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 231, -246);
-        talent_Nodes[20] = new TalentNode(new TALENT(9, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 170, -284);
-        talent_Nodes[21] = new TalentNode(new TALENT(14, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 234, -354);
-        talent_Nodes[22] = new TalentNode(new TALENT(10, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 298, -422);
+        talent_Nodes[16] = new TalentNode(new TALENT(16, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 158, -62);
+        talent_Nodes[17] = new TalentNode(new TALENT(17, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 224, -134);
+        talent_Nodes[18] = new TalentNode(new TALENT(18, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 288, -204);
+        talent_Nodes[19] = new TalentNode(new TALENT(19, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 231, -246);
+        talent_Nodes[20] = new TalentNode(new TALENT(20, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 170, -284);
+        talent_Nodes[21] = new TalentNode(new TALENT(21, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 234, -354);
+        talent_Nodes[22] = new TalentNode(new TALENT(22, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 298, -422);
     }
 
     private void drawLineA(int x, int y, GraphicsContext gc, int node1, int node2) {
@@ -145,7 +154,7 @@ public class UI_TalentPanel {
             if (node != null) {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
                     node.drawHoverOverEffect(gc, startX, startY);
-                    drawTooltip(gc, node);
+                    drawTooltip(gc, node, startX, startY);
                 } else {
                     node.drawNode(gc, startX, startY);
                 }
@@ -153,9 +162,9 @@ public class UI_TalentPanel {
         }
     }
 
-    private void drawTooltip(GraphicsContext gc, TalentNode node) {
+    private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
         gc.setFill(Colors.darkBackground);
-        gc.fillRoundRect(node.position.x - 50, node.position.y - 40, 40, 40, 5, 5);
+        gc.fillRoundRect(startX + node.position.x - 50, startY + node.position.y - 7, 40, 40, 5, 5);
     }
 
     public boolean checkValidTalent(TalentNode node) {
@@ -164,6 +173,10 @@ public class UI_TalentPanel {
         } else {
             for (int b = 0; b < 100; b++) {
                 if (matrix.getEdge(b, node.id) == 1) {
+                    if (talent_Nodes[b].activated) {
+                        return true;
+                    }
+                } else if (matrix.getEdge(node.id, b) == 1) {
                     if (talent_Nodes[b].activated) {
                         return true;
                     }
