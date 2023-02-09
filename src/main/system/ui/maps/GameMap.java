@@ -1,5 +1,8 @@
 package main.system.ui.maps;
 
+import gameworld.PRJ_Control;
+import gameworld.entities.ENTITY;
+import gameworld.entities.companion.ENT_Owly;
 import gameworld.player.Player;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,15 +34,15 @@ public class GameMap {
     public GameMap(MainGame mg) {
         this.mg = mg;
         this.mapMover = new Rectangle(mapPanelX, mapPanelY, 1_570, 940);
-        xTile = (int) ((Player.worldX + 24) / 48);
-        yTile = (int) ((Player.worldY + 24) / 48);
+        xTile = mg.playerX;
+        yTile = mg.playerY;
         hideMapCollision();
         dragMap();
     }
 
     public void draw(GraphicsContext gc) {
         drawGameMapBackground(gc);
-        gc.drawImage(mapImage, 175, 85);
+        gc.drawImage(mapImage, 175, 75);
         drawGameMapTop(gc);
     }
 
@@ -62,12 +65,13 @@ public class GameMap {
 
     public void getImage() {
         BufferedImage image = new BufferedImage(1_570, 940, BufferedImage.TYPE_INT_ARGB);
-        int yTileOffset, xTileOffset, playerX, playerY, entityX, entityY;
+        int yTileOffset, xTileOffset, entityX, entityY;
         for (int y = 0; y < 186; y++) {
             for (int x = 0; x < 314; x++) {
-                yTileOffset = yTile - 93 + y;
-                xTileOffset = xTile - 157 + x;
-                if (xTileOffset > 0 && yTileOffset > 0 && xTileOffset < mg.wRender.worldSize.x && yTileOffset < mg.wRender.worldSize.y && WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
+                yTileOffset = Math.max(Math.min(yTile - 93 + y, mg.wRender.worldSize.x - 1), 0);
+                xTileOffset = Math.max(Math.min(xTile - 157 + x, mg.wRender.worldSize.x - 1), 0);
+                if (WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
+
                     for (int i = y * 5; i < y * 5 + 5; i++) {
                         for (int b = x * 5; b < x * 5 + 5; b++) {
                             image.setRGB(b, i, 0xD05A_6988);
@@ -82,45 +86,61 @@ public class GameMap {
                 }
             }
         }
-
-        int x = 157 * 5 + (mg.playerX - 157 * 5);
-        int y = yTile + 93 + (mg.playerY - yTile);
-        for (int i = y * 5; i < y * 5 + 5; i++) {
-            for (int b = x * 5; b < x * 5 + 5; b++) {
+        int y = 465 + (mg.playerY - yTile) * 5;
+        int x = 785 + (mg.playerX - xTile) * 5;
+        for (int i = y; i < y + 5; i++) {
+            for (int b = x; b < x + 5; b++) {
                 image.setRGB(b, i, 0xD000_99DB);
             }
         }
-        /*
-        try {
+
+        synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
-                if (!(entity instanceof ENT_Owly)) {
-                    entityX = (entity.worldX + 24) / 48;
-                    entityY = (24 + entity.worldY) / 48;
-                    if (xTileOffset == entityX && yTileOffset == entityY) {
-                        for (int i = y * 5; i < y * 5 + 5; i++) {
-                            for (int b = x * 5; b < x * 5 + 5; b++) {
-                                image.setRGB(b, i, 0xD0FF_0044);
-                            }
+                entityX = (entity.worldX + 24) / 48;
+                entityY = (entity.worldY + 24) / 48;
+                if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) < 93 && yTile - entityY <= 93 && !(entity instanceof ENT_Owly)) {
+                    y = 465 + (entityY - yTile) * 5;
+                    x = 785 + (entityX - xTile) * 5;
+                    for (int i = y; i < y + 5; i++) {
+                        for (int b = x; b < x + 5; b++) {
+                            image.setRGB(b, i, 0xD0FF_0044);
                         }
                     }
                 }
             }
-        } catch (ConcurrentModificationException ignored) {
-
         }
+
+        synchronized (mg.PROJECTILES) {
+            for (PRJ_Control PRJControl : mg.PROJECTILES) {
+                entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
+                entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
+                if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
+                    y = 465 + (entityY - yTile) * 5;
+                    x = 785 + (entityX - xTile) * 5;
+                    for (int i = y; i < y + 2; i++) {
+                        for (int b = x; b < x + 2; b++) {
+                            image.setRGB(b, i, 0xD0FF_0044);
+                        }
+                    }
+                }
+            }
+        }
+
         for (ENTITY entity : mg.npcControl.NPC_Active) {
-            int projectileX = (entity.worldX + 24) / 48;
-            int projectileY = (24 + entity.worldY) / 48;
-            if (xTileOffset == projectileX && yTileOffset == projectileY) {
-                for (int i = y * 5; i < y * 5 + 5; i++) {
-                    for (int b = x * 5; b < x * 5 + 5; b++) {
+            entityX = (entity.worldX + 24) / 48;
+            entityY = (entity.worldY + 24) / 48;
+            y = 465 + (entityY - yTile) * 5;
+            x = 785 + (entityX - xTile) * 5;
+            if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
+                for (int i = y; i < y + 5; i++) {
+                    for (int b = x; b < x + 5; b++) {
                         image.setRGB(b, i, 0xD012_4E89);
                     }
                 }
             }
         }
 
-         */
+
         mapImage = SwingFXUtils.toFXImage(image, null);
     }
 

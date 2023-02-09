@@ -106,8 +106,6 @@ public class UI_InventoryPanel {
     private void drawCharPanel(GraphicsContext gc, int startX, int startY) {
         drawCharacterBackground(gc, startX, startY);
         drawCharacterSlots(gc, startX, startY);
-        gc.setStroke(Colors.Red);
-        gc.strokeRoundRect(wholeCharWindow.x, wholeCharWindow.y, wholeCharWindow.width, wholeCharWindow.height, 15, 15);
     }
 
     private void drawBagPanel(GraphicsContext gc, int startX, int startY) {
