@@ -15,6 +15,7 @@ public class TalentNode {
     int pointsSpent;
     public Point position;
     public boolean activated;
+    public int id;
 
 
     TalentNode(TALENT talent, int xCo, int yCo) {
@@ -22,6 +23,7 @@ public class TalentNode {
         this.nodeImage = setup();
         this.talent = talent;
         this.position = new Point(xCo, yCo);
+        this.id = talent.i_id;
     }
 
 

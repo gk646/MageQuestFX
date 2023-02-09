@@ -318,7 +318,9 @@ public class UI_InventoryPanel {
         for (TalentNode node : mg.talentP.talent_Nodes) {
             if (node != null) {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-                    node.activated = true;
+                    if (mg.talentP.checkValidTalent(node)) {
+                        node.activated = true;
+                    }
                     node.boundBox.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
                     node.boundBox.y += mg.inputH.lastMousePosition.y - previousMousePosition.y;
                     node.position.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
