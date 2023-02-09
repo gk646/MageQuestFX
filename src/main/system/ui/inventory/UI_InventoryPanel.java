@@ -4,7 +4,6 @@ import gameworld.player.Player;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
@@ -491,12 +490,6 @@ public class UI_InventoryPanel {
         //window mover
         g2.setFill(Colors.darkBackground);
         g2.fillRoundRect(startX, startY, 365, 30, 15, 15);
-
-        //window close button
-        g2.setFill(Color.RED);
-        g2.fillRoundRect(startX + 365 - 30, startY, 30, 30, 15, 15);
-        bagPanelCloser.x = startX + 365 - 30;
-        bagPanelCloser.y = startY;
     }
 
     private void drawBagSlots(GraphicsContext gc, int startX, int startY) {

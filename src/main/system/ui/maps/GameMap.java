@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.WorldRender;
 import main.system.ui.Colors;
+import main.system.ui.FonT;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -42,8 +43,8 @@ public class GameMap {
 
     public void draw(GraphicsContext gc) {
         drawGameMapBackground(gc);
-        gc.drawImage(mapImage, 175, 75);
-        drawGameMapTop(gc);
+        gc.drawImage(mapImage, 175, 85);
+        drawTop(gc);
     }
 
     public void dragMap() {
@@ -71,7 +72,6 @@ public class GameMap {
                 yTileOffset = Math.max(Math.min(yTile - 93 + y, mg.wRender.worldSize.x - 1), 0);
                 xTileOffset = Math.max(Math.min(xTile - 157 + x, mg.wRender.worldSize.x - 1), 0);
                 if (WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
-
                     for (int i = y * 5; i < y * 5 + 5; i++) {
                         for (int b = x * 5; b < x * 5 + 5; b++) {
                             image.setRGB(b, i, 0xD05A_6988);
@@ -88,12 +88,13 @@ public class GameMap {
         }
         int y = 465 + (mg.playerY - yTile) * 5;
         int x = 785 + (mg.playerX - xTile) * 5;
-        for (int i = y; i < y + 5; i++) {
-            for (int b = x; b < x + 5; b++) {
-                image.setRGB(b, i, 0xD000_99DB);
+        if ((mg.playerX - xTile) < 157 && xTile - mg.playerX <= 157 && (mg.playerY - yTile) < 93 && yTile - mg.playerY <= 93) {
+            for (int i = y; i < y + 5; i++) {
+                for (int b = x; b < x + 5; b++) {
+                    image.setRGB(b, i, 0xD000_99DB);
+                }
             }
         }
-
         synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (entity.worldX + 24) / 48;
@@ -109,7 +110,6 @@ public class GameMap {
                 }
             }
         }
-
         synchronized (mg.PROJECTILES) {
             for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
@@ -125,7 +125,6 @@ public class GameMap {
                 }
             }
         }
-
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
@@ -139,20 +138,27 @@ public class GameMap {
                 }
             }
         }
-
-
         mapImage = SwingFXUtils.toFXImage(image, null);
     }
 
-    private void drawGameMapBackground(GraphicsContext g2) {
-        g2.setStroke(Colors.LightGreyAlpha);
-        g2.fillRoundRect(175, 75, 1_570, 940, 25, 25);
+    private void drawGameMapBackground(GraphicsContext gc) {
+        gc.setFill(Colors.LightGreyAlpha);
+        gc.fillRoundRect(175, 75, 1_570, 940, 25, 25);
     }
 
-    private void drawGameMapTop(GraphicsContext g2) {
-        g2.setStroke(Colors.LightGreyAlpha);
-        g2.fillRoundRect(175, 75, 1_570, 35, 25, 25);
+    private void drawTop(GraphicsContext gc) {
+        gc.setStroke(Colors.darkBackground);
+        gc.setLineWidth(5);
+        gc.strokeRoundRect(175, 70, 1_570, 945, 15, 15);
+        gc.strokeRoundRect(175, 70, 1_570, 15, 15, 15);
+        gc.setLineWidth(1);
+        gc.setFill(Colors.mediumVeryLight);
+        gc.fillRoundRect(175, 70, 1_570, 15, 10, 10);
+        gc.setFill(Colors.darkBackground);
+        gc.setFont(FonT.minecraftBold13);
+        gc.fillText("World Map", 872, 83);
     }
+
 
     public void hideMapCollision() {
         mapMover.y = -1_100;
