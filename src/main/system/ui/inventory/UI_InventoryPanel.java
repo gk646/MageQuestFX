@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
+import main.system.ui.talentpane.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -313,6 +314,20 @@ public class UI_InventoryPanel {
     }
 
     public void interactWithWindows() {
+        boolean nodeclick = false;
+        for (TalentNode node : mg.talentP.talent_Nodes) {
+            if (node != null) {
+                if (node.boundBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
+                    node.activated = true;
+                    node.boundBox.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
+                    node.boundBox.y += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+                    node.position.x += mg.inputH.lastMousePosition.x - previousMousePosition.x;
+                    node.position.y += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+                    nodeclick = true;
+                    //System.out.println((960 + node.position.x) + " " + (540 + node.position.y));
+                }
+            }
+        }
         if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
@@ -323,9 +338,12 @@ public class UI_InventoryPanel {
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             bagPanelMover.x = bagPanelX;
             bagPanelMover.y = bagPanelY - 10;
-        } else if (mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+        } else if (!nodeclick && mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.inputH.mouse2Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+            mg.talentP.talentPanelX = 960 - 16;
+            mg.talentP.talentPanelY = 540 - 16;
         }
         previousMousePosition.x = mg.inputH.lastMousePosition.x;
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
