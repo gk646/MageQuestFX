@@ -98,7 +98,7 @@ public class WorldRender {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
             Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
-            worldCol -= 10;
+            worldCol -= 15;
         } else {
             Player.screenX = mg.HALF_WIDTH - 24;
         }
@@ -106,7 +106,7 @@ public class WorldRender {
             Player.screenY = (int) Player.worldY;
         } else if (Player.worldY + 24 > mg.wRender.worldSize.y * 48 - mg.HALF_HEIGHT) {
             Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
-            worldRow -= 10;
+            worldRow -= 15;
         } else {
             Player.screenY = mg.HALF_HEIGHT - 24;
         }

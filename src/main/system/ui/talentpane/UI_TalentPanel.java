@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import main.MainGame;
 import main.system.ui.Colors;
+import main.system.ui.FonT;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -24,7 +25,7 @@ public class UI_TalentPanel {
     private final Image connection_orange = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_orange.png")));
     private final Image connection_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_green.png")));
 
-    private int pointsToSpend;
+    public int pointsToSpend;
     public int talentPanelX = 960 - 16;
     public int talentPanelY = 540 - 16;
     private final Point lastTalentPosition = new Point(talentPanelX, talentPanelY);
@@ -53,7 +54,15 @@ public class UI_TalentPanel {
     private void drawTalentBackground(GraphicsContext gc) {
         gc.drawImage(backgrounbig, 175, 75);
         gc.setStroke(Colors.darkBackground);
-        gc.strokeRoundRect(175, 75, 1_570, 940, 15, 15);
+        gc.setLineWidth(5);
+        gc.strokeRoundRect(175, 70, 1_570, 945, 15, 15);
+        gc.strokeRoundRect(175, 70, 1_570, 15, 15, 15);
+        gc.setLineWidth(1);
+        gc.setFill(Colors.mediumVeryLight);
+        gc.fillRoundRect(175, 70, 1_570, 15, 10, 10);
+        gc.setFill(Colors.darkBackground);
+        gc.setFont(FonT.minecraftBold13);
+        gc.fillText("Skill Tree", 925, 82);
     }
 
 

@@ -379,6 +379,7 @@ public class MainGame {
         ui.updateLoadingScreen(16, gc);
         map_utils.loadSpawnLevel();
         countItems();
+        gameMap.getImage();
 
         /*
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);

@@ -37,6 +37,7 @@ public class UI_InventoryPanel {
     private int bagPanelY = 600;
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private ITEM grabbedITEM;
+    private boolean node_focused;
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -313,15 +314,7 @@ public class UI_InventoryPanel {
     }
 
     public void interactWithWindows() {
-        for (TalentNode node : mg.talentP.talent_Nodes) {
-            if (node != null) {
-                if (node.boundBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-                    if (mg.talentP.checkValidTalent(node)) {
-                        node.activated = true;
-                    }
-                }
-            }
-        }
+        node_focused = false;
         if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
@@ -332,9 +325,24 @@ public class UI_InventoryPanel {
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             bagPanelMover.x = bagPanelX;
             bagPanelMover.y = bagPanelY - 10;
-        } else if (mg.inputH.mouse1Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
-            mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-            mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+            for (TalentNode node : mg.talentP.talent_Nodes) {
+                if (node != null) {
+                    if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
+                        if (mg.inputH.mouse1Pressed) {
+                            if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0) {
+                                node.activated = true;
+                                mg.talentP.pointsToSpend--;
+                            }
+                        }
+                        node_focused = true;
+                    }
+                }
+            }
+            if (!node_focused && mg.inputH.mouse1Pressed) {
+                mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
+                mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+            }
         } else if (mg.inputH.mouse2Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             mg.talentP.talentPanelX = 960 - 16;
             mg.talentP.talentPanelY = 540 - 16;

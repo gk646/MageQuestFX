@@ -219,7 +219,7 @@ public class GameMap {
         gc.fillRoundRect(175, 70, 1_570, 15, 10, 10);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
-        gc.fillText("World Map", 872, 82);
+        gc.fillText("World Map", 925, 82);
     }
 
 
