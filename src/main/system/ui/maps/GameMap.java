@@ -68,7 +68,20 @@ public class GameMap {
 
     private void getOffset(int zoom) {
         System.out.println(zoom);
-        if (zoom == 5) {
+
+        if (zoom == 1) {
+            yOffset = 0;
+            xOffset = 0;
+        } else if (zoom == 2) {
+            yOffset = 0;
+            xOffset = 1;
+        } else if (zoom == 3) {
+            yOffset = 1;
+            xOffset = 1;
+        } else if (zoom == 4) {
+            yOffset = 2;
+            xOffset = 3;
+        } else if (zoom == 5) {
             yOffset = 0;
             xOffset = 0;
         } else if (zoom == 6) {
@@ -147,8 +160,8 @@ public class GameMap {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (entity.worldX + 24) / 48;
                 entityY = (entity.worldY + 24) / 48;
-                y = 470 + (entityY - yTile_i) * zoom_i;
-                x = 785 + (entityX - xTile_i) * zoom_i;
+                y = 470 + yOffset + (entityY - yTile_i) * zoom_i;
+                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1570 && i > 0 && b > 0) {
@@ -164,8 +177,8 @@ public class GameMap {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
                 if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                    y = 465 + (entityY - yTile_i) * zoom_i;
-                    x = 785 + (entityX - xTile_i) * zoom_i;
+                    y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+                    x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                     for (float i = y; i < y + 2; i++) {
                         for (float b = x; b < x + 2; b++) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);
@@ -177,8 +190,8 @@ public class GameMap {
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
-            y = 465 + (entityY - yTile_i) * zoom_i;
-            x = 785 + (entityX - xTile_i) * zoom_i;
+            y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+            x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
             if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
