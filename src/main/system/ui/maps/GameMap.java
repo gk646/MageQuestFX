@@ -20,12 +20,14 @@ public class GameMap {
     private final int mapPanelX = 175;
     private final int mapPanelY = 75;
     private final Point previousMousePosition = new Point(500, 500);
-    private int xTile;
-    private int yTile;
+    int yOffset = 0;
+    int xOffset = 0;
     private boolean followPlayer = true;
     private Image mapImage;
     public float zoom = 5;
     public float deltaZoom = 0;
+    private float xTile;
+    private float yTile;
 
     /**
      * The big ingame map when you press "M"
@@ -54,8 +56,8 @@ public class GameMap {
         }
         if (mapMover.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             followPlayer = false;
-            xTile += Math.max(-3, Math.min(3, previousMousePosition.x - mg.inputH.lastMousePosition.x));
-            yTile += Math.max(-3, Math.min(3, previousMousePosition.y - mg.inputH.lastMousePosition.y));
+            xTile += (previousMousePosition.x - mg.inputH.lastMousePosition.x) / zoom;
+            yTile += (previousMousePosition.y - mg.inputH.lastMousePosition.y) / zoom;
         }
         if (mg.inputH.mouse2Pressed) {
             followPlayer = true;
@@ -64,24 +66,64 @@ public class GameMap {
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
     }
 
+    private void getOffset(int zoom) {
+        System.out.println(zoom);
+        if (zoom == 5) {
+            yOffset = 0;
+            xOffset = 0;
+        } else if (zoom == 6) {
+            yOffset = 4;
+            xOffset = 1;
+        } else if (zoom == 7) {
+            yOffset = 6;
+            xOffset = 6;
+        } else if (zoom == 8) {
+            yOffset = 2;
+            xOffset = 7;
+        } else if (zoom == 9) {
+            yOffset = 7;
+            xOffset = 7;
+        } else if (zoom == 10) {
+            yOffset = 0;
+            xOffset = 5;
+        } else if (zoom == 11) {
+            yOffset = 3;
+            xOffset = 7;
+        } else if (zoom == 12) {
+            yOffset = 10;
+            xOffset = 7;
+        } else if (zoom == 13) {
+            yOffset = 11;
+            xOffset = 8;
+        } else if (zoom == 14) {
+            yOffset = 6;
+            xOffset = 13;
+        }
+    }
+
     public void getImage() {
+
+        int yTile_i = (int) yTile;
+        int xTile_i = (int) xTile;
+        int zoom_i = (int) zoom;
+        getOffset(zoom_i);
         BufferedImage image = new BufferedImage(1_570, 935, BufferedImage.TYPE_INT_ARGB);
-        int yTileOffset, xTileOffset, entityX, entityY;
-        for (int y = 0; y < 940 / zoom; y++) {
-            for (int x = 0; x < 1570 / zoom; x++) {
-                yTileOffset = (int) Math.max(Math.min(yTile - (940 / (zoom * 2)) + y, mg.wRender.worldSize.x - 1), 0);
-                xTileOffset = (int) Math.max(Math.min(xTile - (1_570 / (zoom * 2)) + x, mg.wRender.worldSize.x - 1), 0);
-                if (WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
-                    for (float i = y * zoom; i < y * zoom + zoom; i++) {
-                        for (float b = x * zoom; b < x * zoom + zoom; b++) {
-                            if (i < 935 && b < 1570 && i > 0 && b > 0) {
-                                image.setRGB((int) b, (int) i, 0xD05A_6988);
+        int yTile_iOffset, xTile_iOffset, entityX, entityY;
+        for (int y = 0; y < (940 / zoom_i) + 1; y++) {
+            for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
+                yTile_iOffset = (int) Math.max(Math.min(yTile_i - (940.0f / (zoom_i * 2)) + y, mg.wRender.worldSize.x - 1), 0);
+                xTile_iOffset = (int) Math.max(Math.min(xTile_i - (1_570.0f / (zoom_i * 2)) + x, mg.wRender.worldSize.x - 1), 0);
+                if (WorldRender.tileStorage[WorldRender.worldData[xTile_iOffset][yTile_iOffset]].collision) {
+                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD05A6988);
                             }
                         }
                     }
                 } else {
-                    for (float i = y * zoom; i < y * zoom + zoom; i++) {
-                        for (float b = x * zoom; b < x * zoom + zoom; b++) {
+                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                             if (i < 935 && b < 1570 && i > 0 && b > 0) {
                                 image.setRGB((int) b, (int) i, 0xD063_C74D);
                             }
@@ -91,12 +133,13 @@ public class GameMap {
             }
         }
 
-        float y = 470 + (mg.playerY - yTile) * zoom;
-        float x = 785 + (mg.playerX - xTile) * zoom;
-        for (float i = y; i < y + zoom; i++) {
-            for (float b = x; b < x + zoom; b++) {
+        int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
+        int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
+        System.out.println(yOffset + "  " + zoom);
+        for (int i = y; i < y + zoom_i; i++) {
+            for (int b = x; b < x + zoom_i; b++) {
                 if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                    image.setRGB((int) b, (int) i, 0xD000_99DB);
+                    image.setRGB(b, i, 0xD000_99DB);
                 }
             }
         }
@@ -104,10 +147,10 @@ public class GameMap {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (entity.worldX + 24) / 48;
                 entityY = (entity.worldY + 24) / 48;
-                y = 465 + (entityY - yTile) * zoom;
-                x = 785 + (entityX - xTile) * zoom;
-                for (float i = y; i < y + zoom; i++) {
-                    for (float b = x; b < x + zoom; b++) {
+                y = 470 + (entityY - yTile_i) * zoom_i;
+                x = 785 + (entityX - xTile_i) * zoom_i;
+                for (float i = y; i < y + zoom_i; i++) {
+                    for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1570 && i > 0 && b > 0) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);
                         }
@@ -120,9 +163,9 @@ public class GameMap {
             for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
-                if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
-                    y = 465 + (entityY - yTile) * zoom;
-                    x = 785 + (entityX - xTile) * zoom;
+                if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                    y = 465 + (entityY - yTile_i) * zoom_i;
+                    x = 785 + (entityX - xTile_i) * zoom_i;
                     for (float i = y; i < y + 2; i++) {
                         for (float b = x; b < x + 2; b++) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);
@@ -134,11 +177,11 @@ public class GameMap {
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
-            y = 465 + (entityY - yTile) * zoom;
-            x = 785 + (entityX - xTile) * zoom;
-            if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
-                for (float i = y; i < y + zoom; i++) {
-                    for (float b = x; b < x + zoom; b++) {
+            y = 465 + (entityY - yTile_i) * zoom_i;
+            x = 785 + (entityX - xTile_i) * zoom_i;
+            if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                for (float i = y; i < y + zoom_i; i++) {
+                    for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1570 && i > 0 && b > 0) {
                             image.setRGB((int) b, (int) i, 0xD012_4E89);
                         }
