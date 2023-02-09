@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="exports/City1.tmj" format="json"/>
  </editorsettings>
- <tileset firstgid="1" source="grassspritesheet.tsx"/>
+ <tileset firstgid="1" source="TileSet.tsx"/>
  <layer id="1" name="Kachelebene 1" width="100" height="100">
   <data encoding="csv">
 58,58,59,58,58,58,58,58,58,59,59,58,58,58,59,58,59,59,58,58,58,58,59,59,59,58,59,58,59,59,58,16,4,4,4,4,4,4,14,43,15,41,15,59,58,42,40,15,18,19,19,19,19,19,20,43,42,43,58,59,41,16,4,4,4,4,4,4,14,43,42,41,40,41,58,58,58,58,59,59,59,59,58,59,59,59,58,58,58,59,59,58,59,59,58,59,58,58,59,58,

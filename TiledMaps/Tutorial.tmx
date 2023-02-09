@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="exports/Turtorial.txt" format="json"/>
  </editorsettings>
- <tileset firstgid="1" source="grassspritesheet.tsx"/>
+ <tileset firstgid="1" source="TileSet.tsx"/>
  <layer id="1" name="Kachelebene 1" width="100" height="100" offsetx="-15.3333" offsety="-18">
   <data encoding="csv">
 58,59,59,59,58,58,59,59,58,59,59,59,59,58,58,58,58,59,59,59,58,58,59,59,59,58,59,59,58,59,58,58,59,58,59,58,58,59,58,58,58,59,59,59,58,59,59,58,59,58,58,58,58,58,59,59,59,59,59,59,59,58,59,58,59,58,58,59,59,58,58,58,59,59,59,59,58,58,58,58,59,58,58,59,58,58,58,59,58,58,59,59,59,59,58,59,59,58,59,59,

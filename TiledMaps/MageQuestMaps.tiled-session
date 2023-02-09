@@ -1,5 +1,5 @@
 {
-    "activeFile": "grassspritesheet.tsx",
+    "activeFile": "second floor_tutorial_castle.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -8,8 +8,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 825,
-                "y": 643
+                "x": 837,
+                "y": 368
             }
         },
         "GrassLands.tmx": {
@@ -17,11 +17,16 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 5752,
-                "y": 4696
+                "y": 6832
             }
         },
         "GrassLands.tmx#grassspritesheet": {
             "scaleInDock": 1
+        },
+        "TileSet.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
         },
         "Turtorial.tmj": {
             "scale": 0.4285581683168317,
@@ -40,14 +45,15 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.4285581683168317,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 792.1911775323081,
-                "y": 792.1911775323081
+                "x": 956.060606060606,
+                "y": 587.8787878787879
             }
         },
         "grassspritesheet.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 3,
             "scaleInEditor": 4
         },
@@ -72,25 +78,52 @@
         },
         "map1.tmx#grassspritesheet": {
             "scaleInDock": 1
+        },
+        "second floor_tutorial_castle.tmx": {
+            "scale": 0.5901875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1010.6957534681778,
+                "y": 515.9377316530764
+            }
+        },
+        "second floor_tutorial_castle.tmx#TileSet": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "C:/Users/Lukas/Documents/TileMaps/exports",
+    "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
+    "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
     "openFiles": [
         "City1.tmx",
         "GrassLands.tmx",
         "grassspritesheet.tsx",
-        "Tutorial.tmx"
+        "Tutorial.tmx",
+        "second floor_tutorial_castle.tmx",
+        "TileSet.tsx",
+        "TileSet.tsx",
+        "TileSet.tsx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "City1.tmx",
         "GrassLands.tmx",
-        "Tutorial.tmx",
         "grassspritesheet.tsx",
+        "Tutorial.tmx",
+        "TileSet.tsx",
+        "second floor_tutorial_castle.tmx",
         "Turtorial.tmj",
         "map1.tmj",
         "Turtorial.tmx",
         "map1.tmx"
-    ]
+    ],
+    "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 1,
+    "tileset.spacing": 2,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }
