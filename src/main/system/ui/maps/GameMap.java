@@ -2,8 +2,6 @@ package main.system.ui.maps;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.companion.ENT_Owly;
-import gameworld.player.Player;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,6 +24,8 @@ public class GameMap {
     private int yTile;
     private boolean followPlayer = true;
     private Image mapImage;
+    public float zoom = 5;
+    public float deltaZoom = 0;
 
     /**
      * The big ingame map when you press "M"
@@ -43,14 +43,14 @@ public class GameMap {
 
     public void draw(GraphicsContext gc) {
         drawGameMapBackground(gc);
-        gc.drawImage(mapImage, 175, 85);
+        gc.drawImage(mapImage, 175, 80);
         drawTop(gc);
     }
 
     public void dragMap() {
         if (followPlayer) {
-            xTile = (int) ((Player.worldX + 24) / 48);
-            yTile = (int) ((Player.worldY + 24) / 48);
+            xTile = mg.playerX;
+            yTile = mg.playerY;
         }
         if (mapMover.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             followPlayer = false;
@@ -65,33 +65,38 @@ public class GameMap {
     }
 
     public void getImage() {
-        BufferedImage image = new BufferedImage(1_570, 940, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(1_570, 935, BufferedImage.TYPE_INT_ARGB);
         int yTileOffset, xTileOffset, entityX, entityY;
-        for (int y = 0; y < 186; y++) {
-            for (int x = 0; x < 314; x++) {
-                yTileOffset = Math.max(Math.min(yTile - 93 + y, mg.wRender.worldSize.x - 1), 0);
-                xTileOffset = Math.max(Math.min(xTile - 157 + x, mg.wRender.worldSize.x - 1), 0);
+        for (int y = 0; y < 940 / zoom; y++) {
+            for (int x = 0; x < 1570 / zoom; x++) {
+                yTileOffset = (int) Math.max(Math.min(yTile - (940 / (zoom * 2)) + y, mg.wRender.worldSize.x - 1), 0);
+                xTileOffset = (int) Math.max(Math.min(xTile - (1_570 / (zoom * 2)) + x, mg.wRender.worldSize.x - 1), 0);
                 if (WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
-                    for (int i = y * 5; i < y * 5 + 5; i++) {
-                        for (int b = x * 5; b < x * 5 + 5; b++) {
-                            image.setRGB(b, i, 0xD05A_6988);
+                    for (float i = y * zoom; i < y * zoom + zoom; i++) {
+                        for (float b = x * zoom; b < x * zoom + zoom; b++) {
+                            if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD05A_6988);
+                            }
                         }
                     }
                 } else {
-                    for (int i = y * 5; i < y * 5 + 5; i++) {
-                        for (int b = x * 5; b < x * 5 + 5; b++) {
-                            image.setRGB(b, i, 0xD063_C74D);
+                    for (float i = y * zoom; i < y * zoom + zoom; i++) {
+                        for (float b = x * zoom; b < x * zoom + zoom; b++) {
+                            if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD063_C74D);
+                            }
                         }
                     }
                 }
             }
         }
-        int y = 465 + (mg.playerY - yTile) * 5;
-        int x = 785 + (mg.playerX - xTile) * 5;
-        if ((mg.playerX - xTile) < 157 && xTile - mg.playerX <= 157 && (mg.playerY - yTile) < 93 && yTile - mg.playerY <= 93) {
-            for (int i = y; i < y + 5; i++) {
-                for (int b = x; b < x + 5; b++) {
-                    image.setRGB(b, i, 0xD000_99DB);
+
+        float y = 470 + (mg.playerY - yTile) * zoom;
+        float x = 785 + (mg.playerX - xTile) * zoom;
+        for (float i = y; i < y + zoom; i++) {
+            for (float b = x; b < x + zoom; b++) {
+                if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                    image.setRGB((int) b, (int) i, 0xD000_99DB);
                 }
             }
         }
@@ -99,27 +104,28 @@ public class GameMap {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (entity.worldX + 24) / 48;
                 entityY = (entity.worldY + 24) / 48;
-                if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) < 93 && yTile - entityY <= 93 && !(entity instanceof ENT_Owly)) {
-                    y = 465 + (entityY - yTile) * 5;
-                    x = 785 + (entityX - xTile) * 5;
-                    for (int i = y; i < y + 5; i++) {
-                        for (int b = x; b < x + 5; b++) {
-                            image.setRGB(b, i, 0xD0FF_0044);
+                y = 465 + (entityY - yTile) * zoom;
+                x = 785 + (entityX - xTile) * zoom;
+                for (float i = y; i < y + zoom; i++) {
+                    for (float b = x; b < x + zoom; b++) {
+                        if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                            image.setRGB((int) b, (int) i, 0xD0FF_0044);
                         }
                     }
                 }
             }
         }
+
         synchronized (mg.PROJECTILES) {
             for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
                 if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
-                    y = 465 + (entityY - yTile) * 5;
-                    x = 785 + (entityX - xTile) * 5;
-                    for (int i = y; i < y + 2; i++) {
-                        for (int b = x; b < x + 2; b++) {
-                            image.setRGB(b, i, 0xD0FF_0044);
+                    y = 465 + (entityY - yTile) * zoom;
+                    x = 785 + (entityX - xTile) * zoom;
+                    for (float i = y; i < y + 2; i++) {
+                        for (float b = x; b < x + 2; b++) {
+                            image.setRGB((int) b, (int) i, 0xD0FF_0044);
                         }
                     }
                 }
@@ -128,12 +134,14 @@ public class GameMap {
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
-            y = 465 + (entityY - yTile) * 5;
-            x = 785 + (entityX - xTile) * 5;
+            y = 465 + (entityY - yTile) * zoom;
+            x = 785 + (entityX - xTile) * zoom;
             if ((entityX - xTile) < 157 && xTile - entityX <= 157 && (entityY - yTile) <= 93 && yTile - entityY < 93) {
-                for (int i = y; i < y + 5; i++) {
-                    for (int b = x; b < x + 5; b++) {
-                        image.setRGB(b, i, 0xD012_4E89);
+                for (float i = y; i < y + zoom; i++) {
+                    for (float b = x; b < x + zoom; b++) {
+                        if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                            image.setRGB((int) b, (int) i, 0xD012_4E89);
+                        }
                     }
                 }
             }
@@ -156,7 +164,7 @@ public class GameMap {
         gc.fillRoundRect(175, 70, 1_570, 15, 10, 10);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
-        gc.fillText("World Map", 872, 83);
+        gc.fillText("World Map", 872, 82);
     }
 
 

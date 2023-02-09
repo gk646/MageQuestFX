@@ -69,7 +69,7 @@ public class Runner extends Application {
         scene.setOnMouseMoved(event -> mainGame.inputH.handleMouseMovement(event));
         scene.setOnMouseDragged(event -> mainGame.inputH.handleMouseMovement(event));
         scene.setOnMouseClicked(event -> mainGame.inputH.handleMouseClick(event));
-
+        scene.setOnScroll(event -> mainGame.inputH.handleScroll(event));
         //KEYS
         scene.setOnKeyTyped(event -> mainGame.inputH.handleKeyType(event));
         scene.setOnKeyPressed(event -> mainGame.inputH.handleKeyPressed(event));

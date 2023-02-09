@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import main.MainGame;
 import main.system.enums.State;
 
@@ -302,5 +303,9 @@ public class InputHandler {
                 mg.inventP.showCombatStats = false;
             }
         }
+    }
+
+    public void handleScroll(ScrollEvent event) {
+        mg.gameMap.zoom += event.getDeltaY() / 80;
     }
 }

@@ -4,7 +4,6 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.world.MAP_UTILS;
@@ -388,7 +387,7 @@ public class MainGame {
 
          */
         for (int i = 0; i < 1; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
+           // ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         Player.worldX = 86 * 48;
