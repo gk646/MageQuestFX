@@ -45,9 +45,11 @@ public class UI_TalentPanel {
 
 
     private void drawTalentBackground(GraphicsContext gc) {
-        for (int i = 0; i < 30; i++) {
-            for (int b = 0; b < 19; b++) {
-                gc.drawImage(background, 175 + i * 48, 75 + b * 48);
+        gc.setStroke(Colors.darkBackground);
+        gc.strokeRoundRect(175, 75, 1_570, 940, 15, 15);
+        for (int i = 0; i < 33; i++) {
+            for (int b = 0; b < 20; b++) {
+                gc.drawImage(background, 178 + i * 48, 78 + b * 48);
             }
         }
     }
@@ -111,7 +113,8 @@ public class UI_TalentPanel {
         drawLine(x, y, gc, talent_Nodes[node1].position.x, talent_Nodes[node1].position.y, talent_Nodes[node2].position.x, talent_Nodes[node2].position.y, talent_Nodes[node1], talent_Nodes[node2]);
     }
 
-    private void drawLine(int offsetx, int offsety, GraphicsContext gc, int x0, int y0, int x1, int y1, TalentNode requirement, TalentNode nextOne) {
+    private void drawLine(int offsetx, int offsety, GraphicsContext gc, int x0, int y0, int x1, int y1, TalentNode
+            requirement, TalentNode nextOne) {
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
         int sx = x0 < x1 ? 1 : -1;
@@ -121,18 +124,22 @@ public class UI_TalentPanel {
         int err = dx - dy;
         int e2;
         while (true) {
-            if ((counterx + countery) >= 8) {
-                if (requirement.activated && nextOne.activated) {
-                    gc.drawImage(connection_green, offsetx + x0 + 16 - 2, offsety + y0 + 16 - 2);
-                } else if (requirement.activated) {
-                    gc.drawImage(connection_orange, offsetx + x0 + 16 - 2, offsety + y0 + 16 - 2);
-                } else if (!nextOne.activated) {
-                    gc.drawImage(connection_red, offsetx + x0 + 16 - 2, offsety + y0 + 16 - 2);
-                } else {
-                    gc.drawImage(connection_orange, offsetx + x0 + 16 - 2, offsety + y0 + 16 - 2);
+            if ((counterx + countery) >= 12) {
+                int drawx = x0 + offsetx + 14;
+                int drawy = y0 + offsety + 14;
+                if (drawx < 1705 && drawy < 1_015 && drawy > 75 && drawx > 175) {
+                    if (requirement.activated && nextOne.activated) {
+                        gc.drawImage(connection_green, drawx, drawy);
+                    } else if (requirement.activated) {
+                        gc.drawImage(connection_orange, drawx, drawy);
+                    } else if (!nextOne.activated) {
+                        gc.drawImage(connection_red, drawx, drawy);
+                    } else {
+                        gc.drawImage(connection_orange, drawx, drawy);
+                    }
+                    countery = 0;
+                    counterx = 0;
                 }
-                countery = 0;
-                counterx = 0;
             }
             if (x0 == x1 && y0 == y1) break;
             e2 = 2 * err;

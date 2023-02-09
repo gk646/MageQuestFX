@@ -39,6 +39,7 @@ public class AdjacencyMatrix {
         makeEdge(13, 20);
         makeEdge(20, 21);
         makeEdge(21, 22);
+        makeEdge(19, 20);
 
         makeEdge(2, 8);
         makeEdge(2, 8);

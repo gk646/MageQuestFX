@@ -46,10 +46,10 @@ public class UI_InventoryPanel {
         grabbedITEM = null;
         createCharSlots();
         createBagSlots();
-        charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 50, 450, 40);
+        charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
-        wholeCharWindow = new Rectangle(charPanelX, charPanelY, 450, 600);
+        wholeCharWindow = new Rectangle(charPanelX - 30, charPanelY - 15, 445, 615);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         combatStatsHitBox = new Rectangle(bagPanelX, bagPanelY, 107, 15);
         effectsHitBox = new Rectangle(bagPanelX, bagPanelY, 80, 15);
@@ -106,6 +106,8 @@ public class UI_InventoryPanel {
     private void drawCharPanel(GraphicsContext gc, int startX, int startY) {
         drawCharacterBackground(gc, startX, startY);
         drawCharacterSlots(gc, startX, startY);
+        gc.setStroke(Colors.Red);
+        gc.strokeRoundRect(wholeCharWindow.x, wholeCharWindow.y, wholeCharWindow.width, wholeCharWindow.height, 15, 15);
     }
 
     private void drawBagPanel(GraphicsContext gc, int startX, int startY) {
@@ -326,8 +328,8 @@ public class UI_InventoryPanel {
         if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
-            charPanelMover.x = charPanelX - 50;
-            charPanelMover.y = charPanelY - 65 + 2 - 10;
+            charPanelMover.x = charPanelX - 40;
+            charPanelMover.y = charPanelY - 75;
         } else if (mg.inputH.mouse1Pressed && bagPanelMover.contains(mg.inputH.lastMousePosition)) {
             bagPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
@@ -352,10 +354,10 @@ public class UI_InventoryPanel {
     private void drawCharacterBackground(GraphicsContext gc, int startX, int startY) {
         //inventory background
         //big background
-        wholeCharWindow.x = startX - 65;
-        wholeCharWindow.y = startY - 65;
+        wholeCharWindow.x = startX - 47;
+        wholeCharWindow.y = startY - 78;
         gc.setFill(Colors.LightGrey);
-        gc.fillRoundRect(startX - 50, startY - 80, 450, 615, 35, 35);
+        gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
