@@ -277,7 +277,7 @@ public class Player extends ENTITY {
     }
 
     private void drawRun(GraphicsContext gc) {
-        switch (spriteCounter % 160 / 20) {
+        switch (spriteCounter % 136 / 17) {
             case 0 -> gc.drawImage(run1, screenX, screenY);
             case 1 -> gc.drawImage(run2, screenX, screenY);
             case 2 -> gc.drawImage(run3, screenX, screenY);
@@ -290,7 +290,7 @@ public class Player extends ENTITY {
     }
 
     private void drawRunLeft(GraphicsContext gc) {
-        switch (spriteCounter % 160 / 20) {
+        switch (spriteCounter % 136 / 17) {
             case 0 -> gc.drawImage(runM1, screenX, screenY);
             case 1 -> gc.drawImage(runM2, screenX, screenY);
             case 2 -> gc.drawImage(runM3, screenX, screenY);

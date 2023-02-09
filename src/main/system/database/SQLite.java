@@ -83,11 +83,11 @@ public class SQLite {
         String[] words = str.split("\\s+");
         int count = 0;
         for (String word : words) {
-            count += word.length();
             if (count + word.length() > 39) {
                 sb.append("\n");
                 count = 0;
             }
+            count += word.length();
             sb.append(word);
             sb.append(" ");
             count++;
@@ -185,6 +185,7 @@ public class SQLite {
         mg.RELICS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.RINGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.MISC.sort(Comparator.comparingInt(o -> o.i_id));
         mg.AMULET.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.CHEST.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
@@ -195,6 +196,7 @@ public class SQLite {
         mg.RELICS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.RINGS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.MISC.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
     }
 
     private void readPlayerInventory(Statement stmt) throws SQLException {

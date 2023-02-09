@@ -42,7 +42,7 @@ abstract public class Dialog {
     }
 
     public void draw(GraphicsContext gc, ENTITY entity) {
-        gc.setFont(FonT.minecraftItalic17);
+        gc.setFont(FonT.minecraftBoldItalic15);
         gc.setFill(Color.BLACK);
         gc.fillRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
         gc.setLineWidth(2);
@@ -51,7 +51,7 @@ abstract public class Dialog {
         gc.strokeRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
         int stringY = (int) (entity.worldY - Player.worldY + Player.screenY - 24 - 115 + 6);
         for (String string : text.split("\n")) {
-            gc.fillText(string, entity.worldX - Player.worldX + Player.screenX - 24 + 5 - 124, stringY += 15);
+            gc.fillText(string, entity.worldX - Player.worldX + Player.screenX - 24 + 5 - 124, stringY += 16);
         }
     }
 
@@ -85,11 +85,11 @@ abstract public class Dialog {
         String[] words = str.split("\\s+");
         int count = 0;
         for (String word : words) {
-            count += word.length();
-            if (count + word.length() > 40) {
+            if (count + word.length() > 39) {
                 sb.append("\n");
                 count = 0;
             }
+            count += word.length();
             sb.append(word);
             sb.append(" ");
             count++;
@@ -153,12 +153,5 @@ abstract public class Dialog {
         }
         return false;
     }
-/*
-    protected void singleSpawnTrigger(int x, int y, int distance, int level, Class<?> type) {
-        if (playerXCloseToTile(distance, x, y)) {
-            new SpawnTrigger(mg, x, y, level);
-        }
 
-
- */
 }

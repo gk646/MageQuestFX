@@ -165,9 +165,9 @@ public class UI_InventoryPanel {
         }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
-        int stringY = mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 270;
+        int stringY = mg.inputH.lastMousePosition.y - 70;
         for (String string : invSlot.item.description.split("\n")) {
-            gc.fillText(string, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, stringY += 11);
+            gc.fillText(string, mg.inputH.lastMousePosition.x - 250, stringY += 11);
         }
 
         gc.setFont(FonT.minecraftItalic14);

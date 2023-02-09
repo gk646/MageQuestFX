@@ -3,6 +3,7 @@ package gameworld.dialogue.generic;
 import gameworld.dialogue.Dialog;
 import gameworld.entities.NPC;
 import gameworld.entities.monsters.ENT_Grunt;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.WorldRender;
 import main.system.enums.Map;
@@ -35,6 +36,9 @@ public class Tutorial extends Dialog {
             next_stage();
             block = true;
             mg.sqLite.updateQuestFacts(1, 1, 1);
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 45, 48 * 21, mg.MISC.get(1)));
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 96, 48 * 5, mg.MISC.get(2)));
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 97, 48 * 47, mg.MISC.get(3)));
         }
         if (stage == 11 && mg.prj_control.GruntKilledCounter == gruntkillcounter + 3) {
             next_stage();

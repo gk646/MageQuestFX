@@ -392,8 +392,7 @@ public class MainGame {
             ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
         }
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        Player.worldX = 86 * 48;
-        Player.worldY = 98 * 48;
+
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
         gameState = State.TITLE;
