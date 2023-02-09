@@ -162,7 +162,7 @@ public class GameMapOld {
                 x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
-                        if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                        if (i < 935 && b < 1570 && i > 75 && b > 175) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);
                         }
                     }

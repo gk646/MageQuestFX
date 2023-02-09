@@ -111,58 +111,52 @@ public class GameMap {
     }
 
     public void getImage(GraphicsContext gc) {
-        int yTile_i = (int) yTile;
-        int xTile_i = (int) xTile;
         int zoom_i = (int) zoom;
         getOffset(zoom_i);
-        int yTile_iOffset, xTile_iOffset, entityX, entityY;
-        for (int y = 0; y < (940 / zoom_i) + 1; y++) {
+        int yTile_i = (int) yTile;
+        int xTile_i = (int) xTile;
+        int entityX, entityY;
+        int offsetx = (int) (xTile_i - 1_570.0f / (zoom_i * 2));
+        int offsety = (int) (yTile_i - 935.0f / (zoom_i * 2));
+        for (int y = 0; y < 935 / zoom_i; y++) {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
-                yTile_iOffset = (int) Math.max(Math.min(yTile_i - (940.0f / (zoom_i * 2)) + y, mg.wRender.worldSize.x - 1), 0);
-                xTile_iOffset = (int) Math.max(Math.min(xTile_i - (1_570.0f / (zoom_i * 2)) + x, mg.wRender.worldSize.x - 1), 0);
-                if (WorldRender.tileStorage[WorldRender.worldData[xTile_iOffset][yTile_iOffset]].collision) {
+                if (WorldRender.tileStorage[WorldRender.worldData[Math.max(Math.min(offsetx + x, mg.wRender.worldSize.x - 1), 0)][Math.max(Math.min(offsety + y, mg.wRender.worldSize.x - 1), 0)]].collision) {
                     gc.setFill(Colors.darkBackground);
-                    gc.fillRect(175 + x * zoom_i, 75 + y * zoom_i, zoom_i, zoom_i);
                 } else {
                     gc.setFill(Colors.map_green);
-                    gc.fillRect(175 + x * zoom_i, 75 + y * zoom_i, zoom_i, zoom_i);
                 }
+                gc.fillRect(175 + x * zoom_i, 75 + y * zoom_i, zoom_i, zoom_i);
             }
         }
-        int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
-        int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
-        gc.fillRect(175 + (x), 75 + y, zoom_i, zoom_i);
-        synchronized (mg.PROXIMITY_ENTITIES) {
-            gc.setFill(Colors.Red);
-            for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
-                entityX = (entity.worldX + 24) / 48;
-                entityY = (entity.worldY + 24) / 48;
-                y = 470 + yOffset + (entityY - yTile_i) * zoom_i;
-                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
-                gc.fillRect(175 + x, 75 + y, zoom_i, zoom_i);
+
+        // Loop for proximity entities
+        for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
+            entityX = (entity.worldX + 24) / 48;
+            entityY = (entity.worldY + 24) / 48;
+            gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (470 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
+        }
+
+        // Loop for projectiles
+        for (PRJ_Control PRJControl : mg.PROJECTILES) {
+            entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
+            entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
+            if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (465 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
             }
         }
-        synchronized (mg.PROJECTILES) {
-            for (PRJ_Control PRJControl : mg.PROJECTILES) {
-                entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
-                entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
-                if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                    y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
-                    x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
-                    gc.fillRect(175 + x, 75 + y, zoom_i, zoom_i);
-                }
-            }
-        }
+
+        // Loop for NPCs
         gc.setFill(Colors.blue_npc);
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
-            y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
-            x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
             if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                gc.fillRect(175 + x, 75 + y, zoom_i, zoom_i);
+                gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (465 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
             }
         }
+        gc.setFill(Colors.Blue);
+        // Draw player
+        gc.fillRect(175 + (785 + xOffset + (mg.playerX - xTile_i) * zoom_i), 75 + (470 + yOffset + (mg.playerY - yTile_i) * zoom_i), zoom_i, zoom_i);
     }
 
 

@@ -306,6 +306,6 @@ public class InputHandler {
     }
 
     public void handleScroll(ScrollEvent event) {
-        mg.gameMap.zoom = (float) Math.max(1, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
+        mg.gameMap.zoom = (float) Math.max(4, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
     }
 }
