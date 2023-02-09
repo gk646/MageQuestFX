@@ -64,18 +64,19 @@ public class UI_TalentPanel {
     }
 
     private void createTalentNodes() {
-        //middle
-        talent_Nodes[0] = new TalentNode(new TALENT(0, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, 100);
+        //left side
         talent_Nodes[1] = new TalentNode(new TALENT(1, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), -100, 0);
-        talent_Nodes[2] = new TalentNode(new TALENT(2, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -100);
-        talent_Nodes[3] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 100, 0);
+
+
         //lower side
+        talent_Nodes[0] = new TalentNode(new TALENT(0, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, 100);
         talent_Nodes[4] = new TalentNode(new TALENT(4, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), -50, 150);
         talent_Nodes[5] = new TalentNode(new TALENT(5, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, 150);
         talent_Nodes[6] = new TalentNode(new TALENT(6, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 100, 200);
         talent_Nodes[7] = new TalentNode(new TALENT(7, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), -100, 200);
 
         // upper side
+        talent_Nodes[2] = new TalentNode(new TALENT(2, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -100);
         talent_Nodes[8] = new TalentNode(new TALENT(8, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, -150);
         talent_Nodes[9] = new TalentNode(new TALENT(9, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), -50, -150);
         talent_Nodes[14] = new TalentNode(new TALENT(14, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), -110, -218);
@@ -84,6 +85,17 @@ public class UI_TalentPanel {
         talent_Nodes[11] = new TalentNode(new TALENT(11, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -220);
         talent_Nodes[12] = new TalentNode(new TALENT(12, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, -267);
         talent_Nodes[13] = new TalentNode(new TALENT(13, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 110, -218);
+        talent_Nodes[15] = new TalentNode(new TALENT(8, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -325);
+
+        //right side
+        talent_Nodes[3] = new TalentNode(new TALENT(3, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 100, 0);
+        talent_Nodes[16] = new TalentNode(new TALENT(9, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 158, -62);
+        talent_Nodes[17] = new TalentNode(new TALENT(14, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 224, -134);
+        talent_Nodes[18] = new TalentNode(new TALENT(10, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 288, -204);
+        talent_Nodes[19] = new TalentNode(new TALENT(1, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 231, -246);
+        talent_Nodes[20] = new TalentNode(new TALENT(9, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 170, -284);
+        talent_Nodes[21] = new TalentNode(new TALENT(14, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 234, -354);
+        talent_Nodes[22] = new TalentNode(new TALENT(10, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 298, -422);
     }
 
     private void drawLineA(int x, int y, GraphicsContext gc, int node1, int node2) {
@@ -147,18 +159,16 @@ public class UI_TalentPanel {
     }
 
     public boolean checkValidTalent(TalentNode node) {
-        if (node.id == 2) {
+        if (node.id == 0 || node.id == 1 || node.id == 2 || node.id == 3) {
             return true;
         } else {
             for (int b = 0; b < 100; b++) {
                 if (matrix.getEdge(b, node.id) == 1) {
-                    System.out.println(b);
                     if (talent_Nodes[b].activated) {
                         return true;
                     }
                 }
             }
-
             return false;
         }
     }

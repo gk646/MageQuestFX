@@ -94,9 +94,12 @@ public class AdjacencyMatrix {
         makeEdge(9, 14);
         makeEdge(14, 10);
         makeEdge(10, 11);
+        makeEdge(11, 10);
         makeEdge(12, 11);
         makeEdge(8, 13);
+        makeEdge(12, 13);
         makeEdge(13, 12);
+        makeEdge(11, 12);
 
         makeEdge(2, 8);
         makeEdge(2, 8);
