@@ -3,6 +3,7 @@ package main.system.ui.talentpane;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.MainGame;
 import main.system.ui.Colors;
 
@@ -13,9 +14,9 @@ import java.util.Objects;
 public class UI_TalentPanel {
     private static final int TALENT_SIZE = 45;
 
-    public final TalentNode[] talent_Nodes;
+    private final Image backgrounbig = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/background_big.png")));
     private final int stringY = 0;
-    public final Rectangle wholeTalentWindow;
+    private final ImageView backgrounclip = new ImageView(backgrounbig);
     private final MainGame mg;
     private final Point previousMousePosition = new Point(300, 300);
     private final Image background = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/background.png")));
@@ -27,14 +28,19 @@ public class UI_TalentPanel {
     public int talentPanelX = 960 - 16;
     public int talentPanelY = 540 - 16;
     private final Point lastTalentPosition = new Point(talentPanelX, talentPanelY);
+    public TalentNode[] talent_Nodes;
+    public Rectangle wholeTalentWindow;
+    javafx.scene.shape.Rectangle ceil = new javafx.scene.shape.Rectangle(175, 75, 1_568, 938);
+
     AdjacencyMatrix matrix = new AdjacencyMatrix();
 
     public UI_TalentPanel(MainGame mg) {
         this.mg = mg;
         this.talent_Nodes = new TalentNode[25];
         createTalentNodes();
-        wholeTalentWindow = new Rectangle(175, 75, 1_570, 940);
+        wholeTalentWindow = new Rectangle(176, 76, 1_568, 938);
         hideTalentCollision();
+        backgrounclip.setClip(ceil);
     }
 
     public void drawTalentWindow(GraphicsContext gc) {
@@ -45,14 +51,11 @@ public class UI_TalentPanel {
 
 
     private void drawTalentBackground(GraphicsContext gc) {
+        gc.drawImage(backgrounbig, 175, 75);
         gc.setStroke(Colors.darkBackground);
         gc.strokeRoundRect(175, 75, 1_570, 940, 15, 15);
-        for (int i = 0; i < 33; i++) {
-            for (int b = 0; b < 20; b++) {
-                gc.drawImage(background, 178 + i * 48, 78 + b * 48);
-            }
-        }
     }
+
 
     private void drawConnections(GraphicsContext gc, int x, int y) {
         drawLineA(x, y, gc, 2, 8);

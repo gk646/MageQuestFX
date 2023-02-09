@@ -431,7 +431,7 @@ public class UI_InventoryPanel {
         gc.fillText("Armour: " + mg.player.armour, startX + 182, startY + 453);
         gc.fillText("Critchance: " + mg.player.critChance, startX + 182, startY + 468);
         gc.fillText("Resist %: " + mg.player.resistChance, startX + 182, startY + 483);
-        gc.fillText("Carryweight: " + mg.player.carryWeight, startX + 182, startY + 498);
+        gc.fillText("Carry-weight: " + mg.player.carryWeight, startX + 182, startY + 498);
         gc.fillText("MovementSpeed: " + mg.player.playerMovementSpeed, startX + 182, startY + 512);
     }
 
