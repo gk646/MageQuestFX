@@ -41,33 +41,34 @@ public class AdjacencyMatrix {
         makeEdge(21, 22);
         makeEdge(19, 20);
 
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
-        makeEdge(2, 8);
+        makeEdge(0, 8);
+        makeEdge(5, 6);
+        makeEdge(6, 23);
+        makeEdge(23, 24);
+        makeEdge(24, 25);
+        makeEdge(25, 26);
+        makeEdge(26, 27);
+        makeEdge(3, 27);
+
+        makeEdge(25, 28);
+        makeEdge(28, 41);
+        makeEdge(41, 42);
+        makeEdge(42, 43);
+        makeEdge(43, 44);
+        makeEdge(44, 45);
+        makeEdge(42, 49);
+        makeEdge(43, 49);
+        makeEdge(49, 50);
+        makeEdge(50, 51);
+        makeEdge(51, 52);
+        makeEdge(49, 54);
+        makeEdge(54, 53);
+        makeEdge(53, 52);
+        makeEdge(52, 38);
+        makeEdge(52, 37);
+        makeEdge(37, 36);
+        makeEdge(36, 35);
+        makeEdge(35, 34);
     }
 }
 
