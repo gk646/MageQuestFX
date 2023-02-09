@@ -163,7 +163,6 @@ public class MainGame {
                     if (gameState == State.PLAY) {
                         if (showMap) {
                             gameMap.dragMap();
-                            gameMap.getImage();
                         }
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
@@ -379,7 +378,7 @@ public class MainGame {
         ui.updateLoadingScreen(16, gc);
         map_utils.loadSpawnLevel();
         countItems();
-        gameMap.getImage();
+
         /*
         inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
         inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(4), 100, 60);

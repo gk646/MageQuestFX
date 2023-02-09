@@ -36,32 +36,34 @@ public class MiniMap {
                 }
             }
         }
+        gc.setFill(Colors.Blue);
+        gc.fillRect(1_700 + 100, 25 + 100, 5, 5);
         synchronized (mg.PROXIMITY_ENTITIES) {
+            gc.setFill(Colors.Red);
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (entity.worldX + 24) / 48;
                 entityY = (entity.worldY + 24) / 48;
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20 && !(entity instanceof ENT_Owly)) {
-                    gc.setFill(Colors.Red);
                     gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 5, 5);
                 }
             }
         }
-        gc.setFill(Colors.Blue);
-        gc.fillRect(1_700 + 100, 25 + 100, 5, 5);
+
         synchronized (mg.PROJECTILES) {
             for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
-                    gc.setFill(Colors.Red);
+
                     gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 2, 2);
                 }
             }
         }
+        gc.setFill(Colors.blue_npc);
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (24 + entity.worldY) / 48;
-            gc.setFill(Colors.blue_npc);
+
             gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 5, 5);
         }
     }
