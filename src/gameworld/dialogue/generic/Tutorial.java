@@ -64,6 +64,8 @@ public class Tutorial extends Dialog {
         }
         if (stage == 20) {
             block = true;
+            moveToTile(58, 37);
+            WorldRender.worldData[58][37] = 15;
         }
     }
 }

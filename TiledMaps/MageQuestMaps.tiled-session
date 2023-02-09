@@ -1,0 +1,96 @@
+{
+    "activeFile": "grassspritesheet.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "City1.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 825,
+                "y": 643
+            }
+        },
+        "GrassLands.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 5752,
+                "y": 4696
+            }
+        },
+        "GrassLands.tmx#grassspritesheet": {
+            "scaleInDock": 1
+        },
+        "Turtorial.tmj": {
+            "scale": 0.4285581683168317,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 792.1911775323081,
+                "y": 792.1911775323081
+            }
+        },
+        "Turtorial.tmx": {
+            "scale": 0.4285581683168317,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 792.1911775323081,
+                "y": 792.1911775323081
+            }
+        },
+        "Tutorial.tmx": {
+            "scale": 0.4285581683168317,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 792.1911775323081,
+                "y": 792.1911775323081
+            }
+        },
+        "grassspritesheet.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 4
+        },
+        "map1.tmj": {
+            "scale": 0.177978515625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4025.766803840878,
+                "y": 3924.6310013717416
+            }
+        },
+        "map1.tmj#grassspritesheet": {
+            "scaleInDock": 1
+        },
+        "map1.tmx": {
+            "scale": 0.177978515625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 4020.148148148148,
+                "y": 3913.393689986283
+            }
+        },
+        "map1.tmx#grassspritesheet": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Lukas/Documents/TileMaps/exports",
+    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "openFiles": [
+        "City1.tmx",
+        "GrassLands.tmx",
+        "grassspritesheet.tsx",
+        "Tutorial.tmx"
+    ],
+    "project": "MageQuestMaps.tiled-project",
+    "recentFiles": [
+        "City1.tmx",
+        "GrassLands.tmx",
+        "Tutorial.tmx",
+        "grassspritesheet.tsx",
+        "Turtorial.tmj",
+        "map1.tmj",
+        "Turtorial.tmx",
+        "map1.tmx"
+    ]
+}
