@@ -2,6 +2,7 @@ package main.system.ui.maps;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -11,6 +12,7 @@ import main.system.ui.FonT;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class GameMap {
     public final Rectangle mapMover;
@@ -18,12 +20,13 @@ public class GameMap {
     private final int mapPanelX = 175;
     private final int mapPanelY = 75;
     private final Point previousMousePosition = new Point(500, 500);
+    public float zoom = 5;
+    public float deltaZoom = 0;
     int yOffset = 0;
     int xOffset = 0;
     private boolean followPlayer = true;
     private Image mapImage;
-    public float zoom = 5;
-    public float deltaZoom = 0;
+    BufferedImage image;
     private float xTile;
     private float yTile;
 
@@ -43,7 +46,7 @@ public class GameMap {
 
     public void draw(GraphicsContext gc) {
         drawGameMapBackground(gc);
-        getImage(gc);
+        gc.drawImage(mapImage, 175, 80);
         drawTop(gc);
     }
 
@@ -65,6 +68,7 @@ public class GameMap {
     }
 
     private void getOffset(int zoom) {
+
         if (zoom == 1) {
             yOffset = 0;
             xOffset = 0;
@@ -110,53 +114,93 @@ public class GameMap {
         }
     }
 
-    public void getImage(GraphicsContext gc) {
-        int zoom_i = (int) zoom;
-        getOffset(zoom_i);
+    public void getImage() {
         int yTile_i = (int) yTile;
         int xTile_i = (int) xTile;
+        int zoom_i = (int) zoom;
+        getOffset(zoom_i);
+        image = new BufferedImage(1_570, 935, BufferedImage.TYPE_INT_ARGB);
         int entityX, entityY;
         int offsetx = (int) (xTile_i - 1_570.0f / (zoom_i * 2));
         int offsety = (int) (yTile_i - 935.0f / (zoom_i * 2));
-        for (int y = 0; y < 935 / zoom_i; y++) {
+        for (int y = 0; y < (935 / zoom_i) + 1; y++) {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
                 if (WorldRender.tileStorage[WorldRender.worldData[Math.max(Math.min(offsetx + x, mg.wRender.worldSize.x - 1), 0)][Math.max(Math.min(offsety + y, mg.wRender.worldSize.x - 1), 0)]].collision) {
-                    gc.setFill(Colors.darkBackground);
+                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD05A6988);
+                            }
+                        }
+                    }
                 } else {
-                    gc.setFill(Colors.map_green);
+                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                            if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD063_C74D);
+                            }
+                        }
+                    }
                 }
-                gc.fillRect(175 + x * zoom_i, 75 + y * zoom_i, zoom_i, zoom_i);
             }
         }
 
-        // Loop for proximity entities
-        for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
-            entityX = (entity.worldX + 24) / 48;
-            entityY = (entity.worldY + 24) / 48;
-            gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (470 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
+        int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
+        int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
+        for (int i = y; i < y + zoom_i; i++) {
+            for (int b = x; b < x + zoom_i; b++) {
+                if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                    image.setRGB(b, i, 0xD000_99DB);
+                }
+            }
         }
-
-        // Loop for projectiles
-        for (PRJ_Control PRJControl : mg.PROJECTILES) {
-            entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
-            entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
-            if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (465 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
+        synchronized (mg.PROXIMITY_ENTITIES) {
+            for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
+                entityX = (entity.worldX + 24) / 48;
+                entityY = (entity.worldY + 24) / 48;
+                y = 470 + yOffset + (entityY - yTile_i) * zoom_i;
+                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
+                for (float i = y; i < y + zoom_i; i++) {
+                    for (float b = x; b < x + zoom_i; b++) {
+                        if (i < 935 && b < 1570 && i > 75 && b > 175) {
+                            image.setRGB((int) b, (int) i, 0xD0FF_0044);
+                        }
+                    }
+                }
             }
         }
 
-        // Loop for NPCs
-        gc.setFill(Colors.blue_npc);
+        synchronized (mg.PROJECTILES) {
+            for (PRJ_Control PRJControl : mg.PROJECTILES) {
+                entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
+                entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
+                if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                    y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+                    x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
+                    for (float i = y; i < y + 2; i++) {
+                        for (float b = x; b < x + 2; b++) {
+                            image.setRGB((int) b, (int) i, 0xD0FF_0044);
+                        }
+                    }
+                }
+            }
+        }
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (entity.worldX + 24) / 48;
             entityY = (entity.worldY + 24) / 48;
+            y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+            x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
             if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                gc.fillRect(175 + (785 + xOffset + (entityX - xTile_i) * zoom_i), 75 + (465 + yOffset + (entityY - yTile_i) * zoom_i), zoom_i, zoom_i);
+                for (float i = y; i < y + zoom_i; i++) {
+                    for (float b = x; b < x + zoom_i; b++) {
+                        if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                            image.setRGB((int) b, (int) i, 0xD012_4E89);
+                        }
+                    }
+                }
             }
         }
-        gc.setFill(Colors.Blue);
-        // Draw player
-        gc.fillRect(175 + (785 + xOffset + (mg.playerX - xTile_i) * zoom_i), 75 + (470 + yOffset + (mg.playerY - yTile_i) * zoom_i), zoom_i, zoom_i);
+        mapImage = SwingFXUtils.toFXImage(image, null);
     }
 
 

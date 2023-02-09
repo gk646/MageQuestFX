@@ -163,6 +163,7 @@ public class MainGame {
                     if (gameState == State.PLAY) {
                         if (showMap) {
                             gameMap.dragMap();
+                            gameMap.getImage();
                         }
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
