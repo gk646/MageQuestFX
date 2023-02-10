@@ -22,6 +22,7 @@ public class UI {
     InnerShadow innerShadow = new InnerShadow(5, Colors.XPBarBlue);
     private Image playerUI;
     private int loadingProgress = 0;
+    public float credits_scroll = 0;
 
 
     public UI(MainGame mainGame) {
@@ -37,13 +38,30 @@ public class UI {
             drawGameUI(gc);
         } else if (mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) {
             drawOptions(gc);
-        } else if (mg.gameState == State.TITLE) {
+        } else if (mg.gameState == State.TITLE && !mg.credits) {
             drawTitleScreen(gc);
         } else if (mg.gameState == State.GAMEOVER) {
             drawGameOver(gc);
         } else if (mg.loadingScreen) {
             drawLoadingScreen(gc);
+        } else if (mg.credits) {
+            drawCredits(gc);
         }
+    }
+
+    private void drawCredits(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold30);
+        gc.setFill(Colors.LightGrey);
+        gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Map Editor: Tiled / Version: 1.9.2 / made by Thorbjørn Lindeijer", 200, credits_scroll);
+        gc.fillText("Character textures: craftpix.net / Full copyright with their Freebie License", 200, credits_scroll - 35);
+        gc.fillText("Effect textures from: craftpix.net / Full copyright with their Freebie License", 200, credits_scroll - 70);
+        gc.fillText("Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", 200, credits_scroll - 105);
+        gc.fillText("Item icons: DALL·E  / Image generation AI by OpenAI", 200, credits_scroll - 140);
+        credits_scroll += 0.25;
+
+        gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
 
     private void drawTitleScreen(GraphicsContext gc) {

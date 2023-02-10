@@ -130,7 +130,6 @@ abstract public class Dialog {
         npc.onPath = true;
         npc.goalTile = new Point(x, y);
         if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
-            next_stage();
             npc.onPath = false;
         }
     }

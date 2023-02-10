@@ -1,6 +1,7 @@
 package input;
 
 
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -80,7 +81,10 @@ public class InputHandler {
                     mg.gameState = State.TITLE_OPTION;
                     mg.ui.commandNum = 0;
                 } else if (mg.ui.commandNum == 2) {
-                    System.exit(1);
+                    mg.credits = true;
+                } else if (mg.ui.commandNum == 3) {
+                    Platform.exit();
+                    System.exit(0);
                 }
             }
         }
@@ -156,6 +160,9 @@ public class InputHandler {
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
+            } else if (mg.credits) {
+                mg.credits = false;
+                mg.ui.credits_scroll = 0;
             }
         }
         //Drawing talent window
@@ -218,6 +225,10 @@ public class InputHandler {
             if (mg.showTalents) {
                 mg.talentP.talentPanelX = 960;
                 mg.talentP.talentPanelY = 540;
+            }
+            if (mg.showMap) {
+                mg.gameMap.xTile = mg.playerX;
+                mg.gameMap.yTile = mg.playerY;
             }
         }
     }

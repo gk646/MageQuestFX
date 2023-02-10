@@ -27,8 +27,8 @@ public class GameMap {
     private boolean followPlayer = true;
     private Image mapImage;
     BufferedImage image;
-    private float xTile;
-    private float yTile;
+    public float xTile;
+    public float yTile;
 
     /**
      * The big ingame map when you press "M"
