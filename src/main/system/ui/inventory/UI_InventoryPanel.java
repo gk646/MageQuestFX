@@ -158,16 +158,17 @@ public class UI_InventoryPanel {
         END - End
         STR - Str
         FOC - Foc
-
+        MainGame.SCREEN_HEIGHT*0.8f
+        x / 1080
        */
             //EFFECTS
-            gc.fillText("Effects: ", mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 200);
+            gc.fillText("Effects: ", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.229f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.130f);
         }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
-        int stringY = mg.inputH.lastMousePosition.y - 70;
+        int stringY = (int) (mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.065f);
         for (String string : invSlot.item.description.split("\n")) {
-            gc.fillText(string, mg.inputH.lastMousePosition.x - 250, stringY += 11);
+            gc.fillText(string, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.231f, stringY += MainGame.SCREEN_HEIGHT * 0.010f);
         }
 
         gc.setFont(FonT.minecraftItalic14);
@@ -176,11 +177,11 @@ public class UI_InventoryPanel {
 
 
         //LEVEL
-        gc.fillText("ilvl: " + invSlot.item.level, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 10, mg.inputH.lastMousePosition.y - 5 + 15 - 350 + 18);
+        gc.fillText("ilvl: " + invSlot.item.level, mg.inputH.lastMousePosition.x - 248, mg.inputH.lastMousePosition.y - 322);
         //Durability
-        gc.fillText("D: " + invSlot.item.durability, mg.inputH.lastMousePosition.x - 5 - 250 - 3 + 7, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+        gc.fillText("D: " + invSlot.item.durability, mg.inputH.lastMousePosition.x - 251, mg.inputH.lastMousePosition.y + 3);
         //ID
-        gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, mg.inputH.lastMousePosition.x - 5 - 73, mg.inputH.lastMousePosition.y - 5 + 15 - 7);
+        gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, mg.inputH.lastMousePosition.x - 78, mg.inputH.lastMousePosition.y + 3);
     }
 
     private void setRarityColor(GraphicsContext gc, UI_InventorySlot slot) {
@@ -382,8 +383,8 @@ public class UI_InventoryPanel {
         gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
-        gc.fillText("Character", startX - 80 + 218, startY - 78 + 17);
-        gc.fillText("No Title", startX - 45 + 217 - 25, startY);
+        gc.fillText("Character", startX + 138, startY - 61);
+        gc.fillText("No Title", startX + 147, startY);
         gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
 
         //character image outline
@@ -395,19 +396,19 @@ public class UI_InventoryPanel {
         //Stats Text
         gc.strokeRoundRect(startX - 14, startY + 375, 187, 150, 15, 15);
         gc.strokeRoundRect(startX + 177, startY + 375, 187, 150, 15, 15);
-        gc.fillText("Base  Stats", startX - 5, startY + 385 - 15);
+        gc.fillText("Base  Stats", startX - 5, startY + 370);
 
         //stats
         gc.fillText("Intelligence: " + mg.player.intellect, startX - 5, startY + 393);
-        gc.fillText("Wisdom: " + mg.player.wisdom, startX - 5, startY + 393 + 15);
-        gc.fillText("Vitality: " + mg.player.vitality, startX - 5, startY + 393 + 30);
-        gc.fillText("Agility: " + mg.player.agility, startX - 5, startY + 393 + 30 + 15);
+        gc.fillText("Wisdom: " + mg.player.wisdom, startX - 5, startY + 408);
+        gc.fillText("Vitality: " + mg.player.vitality, startX - 5, startY + 423);
+        gc.fillText("Agility: " + mg.player.agility, startX - 5, startY + 438);
 
-        gc.fillText("Luck: " + mg.player.luck, startX - 5, startY + 393 + 30 + 30);
-        gc.fillText("Charisma: " + mg.player.charisma, startX - 5, startY + 393 + 30 + 30 + 15);
-        gc.fillText("Endurance: " + mg.player.endurance, startX - 5, startY + 393 + 30 + 30 + 30);
-        gc.fillText("Strength: " + mg.player.strength, startX - 5, startY + 393 + 30 + 30 + 30 + 15);
-        gc.fillText("Focus: " + mg.player.focus, startX - 5, startY + 393 + 30 + 30 + 30 + 30);
+        gc.fillText("Luck: " + mg.player.luck, startX - 5, startY + 453);
+        gc.fillText("Charisma: " + mg.player.charisma, startX - 5, startY + 468);
+        gc.fillText("Endurance: " + mg.player.endurance, startX - 5, startY + 483);
+        gc.fillText("Strength: " + mg.player.strength, startX - 5, startY + 498);
+        gc.fillText("Focus: " + mg.player.focus, startX - 5, startY + 513);
 
         // second panel stats
         gc.fillText("Combat Stats", startX + 185, startY + 372);
@@ -467,25 +468,25 @@ public class UI_InventoryPanel {
             }
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i].boundBox.x = 18 + 265 + startX;
+            char_Slots[i].boundBox.x = 283 + startX;
             char_Slots[i].boundBox.y = (((i - 4) * 50) + 65 + startY);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(18 + 265 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(+283 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, 18 + 265 + startX, (((i - 4) * 50) + 65 + startY));
+            char_Slots[i].drawSlot(gc, 283 + startX, (((i - 4) * 50) + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, 18 + 265 + startX, ((i - 4) * 50) + 65 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, 283 + startX, ((i - 4) * 50) + 65 + startY, SLOT_SIZE);
             }
         }
         for (int i = 8; i <= 9; i++) {
             char_Slots[i].boundBox.x = ((i - 8) * 57) + 128 + startX;
-            char_Slots[i].boundBox.y = 80 + 217 + startY;
+            char_Slots[i].boundBox.y = 297 + startY;
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(((i - 8) * 57) + 128 + startX, 80 + 217 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(((i - 8) * 57) + 128 + startX, 297 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 128 + startX, 80 + 217 + startY);
+            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 128 + startX, 297 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 128 + startX, 80 + 217 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 128 + startX, 297 + startY, SLOT_SIZE);
             }
         }
     }
@@ -572,13 +573,13 @@ public class UI_InventoryPanel {
 
     private void createCharSlots() {
         for (int i = 0; i <= 3; i++) {
-            char_Slots[i] = new UI_InventorySlot(null, 40 + 260, (i * 50) + 110 + 200);
+            char_Slots[i] = new UI_InventorySlot(null, 40 + 260, (i * 50) + 310);
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i] = new UI_InventorySlot(null, 40 + 270 + 260, ((i - 4) * 50) + 110 + 200);
+            char_Slots[i] = new UI_InventorySlot(null, 40 + 270 + 260, ((i - 4) * 50) + 310);
         }
         for (int i = 8; i <= 9; i++) {
-            char_Slots[i] = new UI_InventorySlot(null, ((i - 8) * 50) + 160 + 260, 110 + 240 + 200);
+            char_Slots[i] = new UI_InventorySlot(null, ((i - 8) * 50) + 160 + 260, 550);
         }
         char_Slots[0].type = "H";
         char_Slots[1].type = "C";
@@ -594,10 +595,10 @@ public class UI_InventoryPanel {
 
     private void createBagSlots() {
         for (int i = 0; i <= 9; i++) {
-            bag_Slots[i] = new UI_InventorySlot(null, (i * 50) + 40 + 770, 130 + 200);
+            bag_Slots[i] = new UI_InventorySlot(null, (i * 50) + 810, 330);
         }
         for (int i = 10; i < 15; i++) {
-            bag_Slots[i] = new UI_InventorySlot(null, ((i - 10) * 50) + 40 + 770, 130 + 200 + 50);
+            bag_Slots[i] = new UI_InventorySlot(null, ((i - 10) * 50) + 810, 380);
         }
     }
 }

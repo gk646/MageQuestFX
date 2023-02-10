@@ -8,6 +8,7 @@ import main.MainGame;
 import java.awt.Rectangle;
 
 public class CollisionChecker {
+
     private final MainGame mg;
 
     public CollisionChecker(MainGame mainGame) {
