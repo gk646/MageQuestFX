@@ -58,14 +58,16 @@ public class Tutorial extends Dialog {
         }
         if (stage == 19) {
             block = true;
-            if (npc.show_dialog && playerBagsContainItem("Glasses") && playerBagsContainItem("Booze") && playerBagsContainItem("Walking Cane")) {
+            if (npc.show_dialog && playerBagsContainItem("Old Glasses") && playerBagsContainItem("Booze") && playerBagsContainItem("Walking Cane")) {
                 next_stage();
             }
         }
         if (stage == 20) {
-            block = true;
+            block = false;
+        }
+        if (stage == 22) {
             moveToTile(58, 37);
-            WorldRender.worldData[58][37] = 15;
+            WorldRender.worldData[58][38] = 15;
         }
     }
 }

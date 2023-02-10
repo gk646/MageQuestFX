@@ -27,7 +27,6 @@ abstract public class Dialog {
     public boolean block;
     private int textCounter;
     protected NPC npc;
-    protected boolean[] triggers = new boolean[15];
 
     /**
      * The dialog framework
