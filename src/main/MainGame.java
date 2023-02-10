@@ -333,7 +333,7 @@ public class MainGame {
         wRender = new WorldRender(this);
         wControl.getWorldsData();
         wControl.makeOverWorldQuadrants();
-
+        talentP = new UI_TalentPanel(this);
         //24%
         ui.updateLoadingScreen(12, gc);
         miniM = new MiniMap(this);
@@ -368,7 +368,7 @@ public class MainGame {
         //84%
         ui.updateLoadingScreen(12, gc);
         multiplayer = new Multiplayer(this, ENTPlayer2);
-        talentP = new UI_TalentPanel(this);
+
         player.updateEquippedItems();
         player.health = player.maxHealth;
         player.mana = player.maxMana;
@@ -395,6 +395,7 @@ public class MainGame {
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
+        wControl.load_OverWorldMap(450, 450);
         gameState = State.TITLE;
         startThreads();
         //sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

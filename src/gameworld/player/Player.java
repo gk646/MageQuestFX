@@ -147,7 +147,7 @@ public class Player extends ENTITY {
 
     public void getDurabilityDamageArmour() {
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
-            if (invSlot.item != null && (!invSlot.item.type.contains("2") && !invSlot.item.type.contains("W") && !invSlot.item.type.contains("O"))) {
+            if (invSlot.item != null && (!(invSlot.item.type == '2') && !(invSlot.item.type == 'W') && (!(invSlot.item.type == 'O')))) {
                 if (Math.random() >= 0.9) {
                     invSlot.item.durability--;
                 }
@@ -157,7 +157,7 @@ public class Player extends ENTITY {
 
     public void getDurabilityDamageWeapon() {
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
-            if (invSlot.item != null && (invSlot.item.type.contains("2") || invSlot.item.type.contains("W") || invSlot.item.type.contains("O"))) {
+            if (invSlot.item != null && (!(invSlot.item.type == '2') && !(invSlot.item.type == 'W') && (!(invSlot.item.type == 'O')))) {
                 if (Math.random() >= 0.95) {
                     invSlot.item.durability--;
                 }
@@ -336,7 +336,7 @@ public class Player extends ENTITY {
 
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.gameMap.mapMover.contains(mg.inputH.lastMousePosition)) {
-            if (mg.inputH.mouse1Pressed && cooldownPrimary == 20) {
+            if (mg.inputH.mouse1Pressed && cooldownPrimary == 35) {
                 mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
                 cooldownPrimary = 0;
                 getDurabilityDamageWeapon();
@@ -364,7 +364,7 @@ public class Player extends ENTITY {
         } else if (health > maxHealth) {
             health = maxHealth;
         }
-        if (cooldownPrimary < 20) {
+        if (cooldownPrimary < 35) {
             cooldownPrimary++;
         }
         if (cooldownOneSecond < 60) {

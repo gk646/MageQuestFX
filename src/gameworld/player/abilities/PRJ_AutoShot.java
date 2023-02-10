@@ -16,7 +16,7 @@ public class PRJ_AutoShot extends PRJ_Control {
     public PRJ_AutoShot(int x, int y) {
 
         //-------VALUES-----------
-        this.movementSpeed = 7;
+        this.movementSpeed = 5;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;

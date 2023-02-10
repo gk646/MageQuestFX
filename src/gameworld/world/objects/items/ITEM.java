@@ -13,7 +13,7 @@ public class ITEM {
     public final String name;
     public final int rarity;
     public String stats;
-    public final String type;
+    public final char type;
     /* H - Head slot
        C - chest
        P - pants
@@ -84,7 +84,7 @@ public class ITEM {
     public String description;
     public Image icon;
 
-    public ITEM(int i_id, String name, int rarity, String type, String imagePath, String description, String stats) {
+    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
@@ -100,7 +100,7 @@ public class ITEM {
         getStats();
     }
 
-    public ITEM(int i_id, String name, int rarity, String type, String imagePath, String description, String stats, int quality, int level) {
+    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;

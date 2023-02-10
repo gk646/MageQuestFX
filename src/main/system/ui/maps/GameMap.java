@@ -115,7 +115,6 @@ public class GameMap {
     }
 
     public void getImage() {
-        long start = System.currentTimeMillis();
         int yTile_i = (int) yTile;
         int xTile_i = (int) xTile;
         int zoom_i = (int) zoom;
@@ -203,7 +202,6 @@ public class GameMap {
             }
         }
         mapImage = SwingFXUtils.toFXImage(image, null);
-        System.out.println(System.currentTimeMillis() - start);
     }
 
 

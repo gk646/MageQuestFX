@@ -83,7 +83,7 @@ public class SQLite {
         String[] words = str.split("\\s+");
         int count = 0;
         for (String word : words) {
-            if (count + word.length() > 39) {
+            if (count + word.length() > 38) {
                 sb.append("\n");
                 count = 0;
             }
@@ -143,7 +143,7 @@ public class SQLite {
                 continue;
             }
             stmt.setInt(1, mg.inventP.bag_Slots[i - 1].item.i_id);
-            stmt.setString(2, mg.inventP.bag_Slots[i - 1].item.type);
+            stmt.setString(2, String.valueOf(mg.inventP.bag_Slots[i - 1].item.type));
             stmt.setInt(3, mg.inventP.bag_Slots[i - 1].item.quality);
             stmt.setInt(4, mg.inventP.bag_Slots[i - 1].item.level);
             stmt.setInt(5, i);
@@ -165,7 +165,7 @@ public class SQLite {
                 continue;
             }
             stmt.setInt(1, mg.inventP.char_Slots[i].item.i_id);
-            stmt.setString(2, mg.inventP.char_Slots[i].item.type);
+            stmt.setString(2, String.valueOf(mg.inventP.char_Slots[i].item.type));
             stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
             stmt.setInt(4, mg.inventP.char_Slots[i].item.level);
             stmt.setInt(5, i + 1);
@@ -186,17 +186,17 @@ public class SQLite {
         mg.RINGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.MISC.sort(Comparator.comparingInt(o -> o.i_id));
-        mg.AMULET.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.CHEST.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.HEAD.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.OFFHAND.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.ONEHAND.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.PANTS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.RELICS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.RINGS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.MISC.add(0, new ITEM(0, "FILLER", 10, "2", "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.AMULET.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.CHEST.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.HEAD.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.OFFHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.ONEHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.PANTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.RELICS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.RINGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.MISC.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
     }
 
     private void readPlayerInventory(Statement stmt) throws SQLException {
@@ -330,7 +330,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.AMULET.add(0, new_ITEM);
@@ -344,7 +344,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.BOOTS.add(0, new_ITEM);
@@ -358,7 +358,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.CHEST.add(0, new_ITEM);
@@ -372,7 +372,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.HEAD.add(0, new_ITEM);
@@ -386,7 +386,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.OFFHAND.add(0, new_ITEM);
@@ -400,7 +400,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.ONEHAND.add(0, new_ITEM);
@@ -414,7 +414,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.PANTS.add(0, new_ITEM);
@@ -428,7 +428,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.RELICS.add(0, new_ITEM);
@@ -442,7 +442,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.RINGS.add(0, new_ITEM);
@@ -456,7 +456,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.TWOHANDS.add(0, new_ITEM);
@@ -470,7 +470,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type"), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.MISC.add(0, new_ITEM);

@@ -11,11 +11,13 @@ public class UI_InventorySlot {
     public boolean grabbed;
     public ITEM item;
     public int toolTipTimer;
+    public String type = "+";
 
     UI_InventorySlot(ITEM item, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
         this.item = item;
     }
+
 
     public void drawIcon(GraphicsContext g2, int x, int y, int slotSize) {
         item.drawIcon(g2, x, y, slotSize);

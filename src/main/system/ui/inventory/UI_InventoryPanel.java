@@ -135,7 +135,7 @@ public class UI_InventoryPanel {
         }
         //STATS
         gc.setFill(Colors.darkBackground);
-        if (!invSlot.item.type.equals("M")) {
+        if (!(invSlot.item.type == 'M')) {
             gc.setFont(FonT.minecraftItalic15);
             gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
             gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
@@ -214,16 +214,16 @@ public class UI_InventoryPanel {
         int xPosition = (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.148f);
         int yPosition = (int) (mg.inputH.lastMousePosition.y + MainGame.SCREEN_HEIGHT * 0.002_7f);
         switch (slot.item.type) {
-            case "H" -> gc.fillText("Helm", xPosition, yPosition);
-            case "C" -> gc.fillText("Chest", xPosition, yPosition);
-            case "P" -> gc.fillText("Pants", xPosition, yPosition);
-            case "B" -> gc.fillText("Boots", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
-            case "A" -> gc.fillText("Amulet", xPosition - MainGame.SCREEN_HEIGHT * 0.009f, yPosition);
-            case "R" -> gc.fillText("Ring", xPosition, yPosition);
-            case "T" -> gc.fillText("Relic", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
-            case "W" -> gc.fillText("One-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.017f, yPosition);
-            case "2" -> gc.fillText("Two-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.019f, yPosition);
-            case "O" -> gc.fillText("Offhand", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case 'H' -> gc.fillText("Helm", xPosition, yPosition);
+            case 'C' -> gc.fillText("Chest", xPosition, yPosition);
+            case 'P' -> gc.fillText("Pants", xPosition, yPosition);
+            case 'B' -> gc.fillText("Boots", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case 'A' -> gc.fillText("Amulet", xPosition - MainGame.SCREEN_HEIGHT * 0.009f, yPosition);
+            case 'R' -> gc.fillText("Ring", xPosition, yPosition);
+            case 'T' -> gc.fillText("Relic", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case 'W' -> gc.fillText("One-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.017f, yPosition);
+            case '2' -> gc.fillText("Two-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.019f, yPosition);
+            case 'O' -> gc.fillText("Offhand", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
             default -> gc.fillText("Misc", xPosition, yPosition);
         }
     }
@@ -266,7 +266,7 @@ public class UI_InventoryPanel {
         if (grabbedITEM != null && !mg.inputH.mouse1Pressed) {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
-                    if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    if (invSlot.boundBox.contains(mg.inputH.lastMousePosition) && invSlot.type.contains(String.valueOf(grabbedITEM.type))) {
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -275,8 +275,8 @@ public class UI_InventoryPanel {
                                 bag_Slots[grabbedIndexBag].item = invSlot.item;
                             }
                         }
-                        mg.player.updateEquippedItems();
                         invSlot.item = grabbedITEM;
+                        mg.player.updateEquippedItems();
                         grabbedITEM = null;
                     }
                     invSlot.grabbed = false;
@@ -285,11 +285,15 @@ public class UI_InventoryPanel {
             if (mg.showBag) {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
-                        if (grabbedIndexChar != -1) {
-                            char_Slots[grabbedIndexChar].item = bagSlot.item;
-                        }
-                        if (grabbedIndexBag != -1) {
-                            bag_Slots[grabbedIndexBag].item = bagSlot.item;
+                        if (bagSlot.item != null) {
+                            if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
+                                char_Slots[grabbedIndexChar].item = bagSlot.item;
+                            } else {
+                                break;
+                            }
+                            if (grabbedIndexBag != -1) {
+                                bag_Slots[grabbedIndexBag].item = bagSlot.item;
+                            }
                         }
                         mg.player.updateEquippedItems();
                         bagSlot.item = grabbedITEM;
@@ -314,6 +318,11 @@ public class UI_InventoryPanel {
     }
 
     public void interactWithWindows() {
+        if (char_Slots[8].item != null && char_Slots[8].item.type == '2') {
+            char_Slots[9].type = ",";
+        } else {
+            char_Slots[9].type = "O";
+        }
         node_focused = false;
         if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
@@ -571,6 +580,16 @@ public class UI_InventoryPanel {
         for (int i = 8; i <= 9; i++) {
             char_Slots[i] = new UI_InventorySlot(null, ((i - 8) * 50) + 160 + 260, 110 + 240 + 200);
         }
+        char_Slots[0].type = "H";
+        char_Slots[1].type = "C";
+        char_Slots[2].type = "P";
+        char_Slots[3].type = "B";
+        char_Slots[4].type = "A";
+        char_Slots[5].type = "R";
+        char_Slots[6].type = "R";
+        char_Slots[7].type = "T";
+        char_Slots[8].type = "W2";
+        char_Slots[9].type = "O";
     }
 
     private void createBagSlots() {
