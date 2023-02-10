@@ -332,7 +332,7 @@ public class UI_InventoryPanel {
                         if (mg.inputH.mouse1Pressed) {
                             if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0) {
                                 node.activated = true;
-                                mg.talentP.pointsToSpend--;
+                                mg.talentP.spendTalentPoint();
                             }
                         }
                         node_focused = true;

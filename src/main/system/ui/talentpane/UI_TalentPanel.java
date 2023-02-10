@@ -44,6 +44,17 @@ public class UI_TalentPanel {
         backgrounclip.setClip(ceil);
     }
 
+    public void getTalentEffects() {
+        for (TalentNode node : talent_Nodes) {
+
+        }
+    }
+
+    public void spendTalentPoint() {
+        pointsSpent++;
+        pointsToSpend--;
+    }
+
     public void drawTalentWindow(GraphicsContext gc) {
         drawTalentBackground(gc);
         drawConnections(gc, talentPanelX, talentPanelY);
@@ -119,7 +130,6 @@ public class UI_TalentPanel {
 
     private void drawLegend(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold14);
-
         gc.setFill(Colors.mediumVeryLight);
         gc.fillRoundRect(900, 0, 129, 20, 5, 5);
         gc.fillRoundRect(750, 30, 150, 20, 5, 5);
