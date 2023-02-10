@@ -24,6 +24,10 @@ public class UI_TalentPanel {
     private final Image connection_red = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_red.png")));
     private final Image connection_orange = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_orange.png")));
     private final Image connection_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_green.png")));
+    private final Image talentnode = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/talentnode.png")));
+    private final Image talentnode_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_green.png")));
+    private final Image talentnode_purple = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_purple.png")));
+    private final Image talentnode_orange = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_orange.png")));
 
     public int pointsToSpend = 5, pointsSpent;
     public int talentPanelX = 960 - 16;
@@ -82,14 +86,19 @@ public class UI_TalentPanel {
         for (TalentNode node : talent_Nodes) {
             if (node != null) {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
-                    node.drawHoverOverEffect(gc, startX, startY);
                     drawTooltip(gc, node, startX, startY);
+                }
+                if (node.activated) {
+                    node.drawNode(gc, startX, startY, talentnode_green);
+                } else if (checkValidTalent(node)) {
+                    node.drawNode(gc, startX, startY, talentnode_purple);
                 } else {
-                    node.drawNode(gc, startX, startY);
+                    node.drawNode(gc, startX, startY, talentnode_orange);
                 }
             }
         }
     }
+
 
     private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
         gc.setFill(Colors.darkBackground);

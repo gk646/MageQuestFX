@@ -330,7 +330,7 @@ public class UI_InventoryPanel {
                 if (node != null) {
                     if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
                         if (mg.inputH.mouse1Pressed) {
-                            if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0) {
+                            if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0 && !node.activated) {
                                 node.activated = true;
                                 mg.talentP.spendTalentPoint();
                             }

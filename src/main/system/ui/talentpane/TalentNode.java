@@ -27,21 +27,15 @@ public class TalentNode {
     }
 
 
-    public void drawNode(GraphicsContext gc, int x, int y) {
+    public void drawNode(GraphicsContext gc, int x, int y, Image image) {
         int drawx = position.x + x;
         int drawy = position.y + y;
-        gc.drawImage(nodeImage, drawx, drawy);
+        gc.drawImage(image, drawx, drawy);
         talent.drawIcon(gc, drawx + 8, drawy + 8);
         boundBox.x = drawx;
         boundBox.y = drawy;
     }
 
-    public void drawHoverOverEffect(GraphicsContext gc, int x, int y) {
-        gc.drawImage(nodeImage, position.x + x, position.y + y);
-        talent.drawIcon(gc, position.x + x + 8, position.y + y + 8);
-        boundBox.x = position.x + x;
-        boundBox.y = position.y + y;
-    }
 
     private Image setup() {
         return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/ui/talents/talentnode.png"))));
