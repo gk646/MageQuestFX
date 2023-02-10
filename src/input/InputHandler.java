@@ -223,8 +223,8 @@ public class InputHandler {
         }
         if (code.equals("\s")) {
             if (mg.showTalents) {
-                mg.talentP.talentPanelX = 960;
-                mg.talentP.talentPanelY = 540;
+                mg.talentP.talentPanelX = 960 - 16;
+                mg.talentP.talentPanelY = 540 - 16;
             }
             if (mg.showMap) {
                 mg.gameMap.xTile = mg.playerX;

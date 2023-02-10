@@ -395,7 +395,7 @@ public class MainGame {
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
-        wControl.load_OverWorldMap(450, 450);
+       // wControl.load_OverWorldMap(450, 450);
         gameState = State.TITLE;
         startThreads();
         //sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

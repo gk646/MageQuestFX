@@ -5,11 +5,11 @@
     ],
     "fileStates": {
         "City1.tmx": {
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 799,
-                "y": 799
+                "x": 715.3333333333333,
+                "y": 473.3333333333333
             }
         },
         "GrassLands.tmx": {
@@ -45,11 +45,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 871,
-                "y": 750
+                "x": 189.39393939393926,
+                "y": 1242.4242424242423
             }
         },
         "grassspritesheet.tsx": {
