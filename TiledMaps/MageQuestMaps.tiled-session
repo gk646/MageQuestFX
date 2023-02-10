@@ -1,5 +1,5 @@
 {
-    "activeFile": "second floor_tutorial_castle.tmx",
+    "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -17,7 +17,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 4024,
-                "y": 3928
+                "y": 1728
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -45,11 +45,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.125,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 792,
-                "y": 792
+                "x": 871,
+                "y": 750
             }
         },
         "grassspritesheet.tsx": {
@@ -87,15 +87,15 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 550,
-                "y": -73.33333333333337
+                "x": 400,
+                "y": 400.6666666666667
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
             "scaleInDock": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/Lukas/Documents/TileMaps/exports",
+    "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/src/resources/Maps",
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
@@ -110,9 +110,9 @@
     "recentFiles": [
         "City1.tmx",
         "GrassLands.tmx",
-        "Tutorial.tmx",
         "TileSet.tsx",
         "second floor_tutorial_castle.tmx",
+        "Tutorial.tmx",
         "sdf.tsx",
         "grassspritesheet.tsx",
         "Turtorial.tmj",

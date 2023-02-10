@@ -158,8 +158,8 @@ public class UI_TalentPanel {
 
         gc.fillText("SPACE: Recenter", 1_653, 95);
         gc.fillText("Green: Active", 1_653, 110);
-        gc.fillText("Orange: Available", 1_653, 125);
-        gc.fillText("Red: Locked", 1_653, 140);
+        gc.fillText("Purple: Available", 1_653, 125);
+        gc.fillText("Orange: Locked", 1_653, 140);
     }
 
     private void createTalentNodes() {

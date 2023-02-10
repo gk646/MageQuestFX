@@ -115,6 +115,7 @@ public class GameMap {
     }
 
     public void getImage() {
+        long start = System.currentTimeMillis();
         int yTile_i = (int) yTile;
         int xTile_i = (int) xTile;
         int zoom_i = (int) zoom;
@@ -125,26 +126,27 @@ public class GameMap {
         int offsety = (int) (yTile_i - 935.0f / (zoom_i * 2));
         for (int y = 0; y < (935 / zoom_i) + 1; y++) {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
-                if (WorldRender.tileStorage[WorldRender.worldData[Math.max(Math.min(offsetx + x, mg.wRender.worldSize.x - 1), 0)][Math.max(Math.min(offsety + y, mg.wRender.worldSize.x - 1), 0)]].collision) {
-                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
-                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
-                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                                image.setRGB((int) b, (int) i, 0xD05A6988);
+                if (offsetx + x < mg.wRender.worldSize.x && offsetx + x >= 0 && offsety + y < mg.wRender.worldSize.x && offsety + y >= 0) {
+                    if (!WorldRender.tileStorage[WorldRender.worldData[offsetx + x][offsety + y]].collision) {
+                        for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                            for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                                if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
+                                    image.setRGB((int) b, (int) i, 0xD063_C74D);
+                                }
                             }
                         }
-                    }
-                } else {
-                    for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
-                        for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
-                            if (i < 935 && b < 1570 && i > 0 && b > 0) {
-                                image.setRGB((int) b, (int) i, 0xD063_C74D);
+                    } else {
+                        for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                            for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                                if (i < 935 && b < 1570 && i >= 0 && b >= 0) {
+                                    image.setRGB((int) b, (int) i, 0xD05A6988);
+                                }
                             }
                         }
                     }
                 }
             }
         }
-
         int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
         int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
         for (int i = y; i < y + zoom_i; i++) {
@@ -201,11 +203,12 @@ public class GameMap {
             }
         }
         mapImage = SwingFXUtils.toFXImage(image, null);
+        System.out.println(System.currentTimeMillis() - start);
     }
 
 
     private void drawGameMapBackground(GraphicsContext gc) {
-        gc.setFill(Colors.LightGreyAlpha);
+        gc.setFill(Colors.mediumLightGreyTransparent);
         gc.fillRoundRect(175, 75, 1_570, 940, 25, 25);
     }
 

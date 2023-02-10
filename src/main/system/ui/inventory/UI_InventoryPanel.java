@@ -134,8 +134,8 @@ public class UI_InventoryPanel {
             gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.047_3f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.299f);
         }
         //STATS
+        gc.setFill(Colors.darkBackground);
         if (!invSlot.item.type.equals("M")) {
-            gc.setFill(Colors.darkBackground);
             gc.setFont(FonT.minecraftItalic15);
             gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
             gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
