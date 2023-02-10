@@ -30,12 +30,10 @@ public class TalentNode {
     public void drawNode(GraphicsContext gc, int x, int y) {
         int drawx = position.x + x;
         int drawy = position.y + y;
-        if (drawx < 1705 && drawy < 1_015 && drawy > 75 && drawx > 175) {
-            gc.drawImage(nodeImage, drawx, drawy);
-            talent.drawIcon(gc, drawx + 8, drawy + 8);
-            boundBox.x = drawx;
-            boundBox.y = drawy;
-        }
+        gc.drawImage(nodeImage, drawx, drawy);
+        talent.drawIcon(gc, drawx + 8, drawy + 8);
+        boundBox.x = drawx;
+        boundBox.y = drawy;
     }
 
     public void drawHoverOverEffect(GraphicsContext gc, int x, int y) {

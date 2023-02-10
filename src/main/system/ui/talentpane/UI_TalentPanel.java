@@ -25,7 +25,7 @@ public class UI_TalentPanel {
     private final Image connection_orange = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_orange.png")));
     private final Image connection_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_green.png")));
 
-    public int pointsToSpend;
+    public int pointsToSpend, pointsSpent;
     public int talentPanelX = 960 - 16;
     public int talentPanelY = 540 - 16;
     private final Point lastTalentPosition = new Point(talentPanelX, talentPanelY);
@@ -48,28 +48,99 @@ public class UI_TalentPanel {
         drawTalentBackground(gc);
         drawConnections(gc, talentPanelX, talentPanelY);
         drawTalentNodes(gc, talentPanelX, talentPanelY);
+        drawLegend(gc);
     }
 
 
     private void drawTalentBackground(GraphicsContext gc) {
-        gc.drawImage(backgrounbig, 175, 75);
-        gc.setStroke(Colors.darkBackground);
-        gc.setLineWidth(5);
-        gc.strokeRoundRect(175, 70, 1_570, 945, 15, 15);
-        gc.strokeRoundRect(175, 70, 1_570, 15, 15, 15);
-        gc.setLineWidth(1);
-        gc.setFill(Colors.mediumVeryLight);
-        gc.fillRoundRect(175, 70, 1_570, 15, 10, 10);
-        gc.setFill(Colors.darkBackground);
-        gc.setFont(FonT.minecraftBold13);
-        gc.fillText("Skill Tree", 925, 82);
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 23; j++) {
+                gc.drawImage(background, i * 48, j * 48);
+            }
+        }
     }
 
 
     private void drawConnections(GraphicsContext gc, int x, int y) {
         for (int[] array : AdjacencyMatrix.edge_list) {
-            drawLineA(x, y, gc, array[0], array[1]);
+            drawLine(x, y, gc, talent_Nodes[array[0]], talent_Nodes[array[1]]);
         }
+    }
+
+    private void drawTalentNodes(GraphicsContext gc, int startX, int startY) {
+        for (TalentNode node : talent_Nodes) {
+            if (node != null) {
+                if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    node.drawHoverOverEffect(gc, startX, startY);
+                    drawTooltip(gc, node, startX, startY);
+                } else {
+                    node.drawNode(gc, startX, startY);
+                }
+            }
+        }
+    }
+
+    private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
+        gc.setFill(Colors.darkBackground);
+        gc.fillRoundRect(startX + node.position.x - 50, startY + node.position.y - 7, 40, 40, 5, 5);
+    }
+
+    private void drawLine(int offsetx, int offsety, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {
+        int x0 = requirement.position.x;
+        int x1 = nextOne.position.x;
+        int y0 = requirement.position.y;
+        int y1 = nextOne.position.y;
+        int dx = Math.abs(x1 - x0);
+        int dy = Math.abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int counter = 0;
+        int err = dx - dy;
+        int e2, drawx, drawy;
+        while (true) {
+            if (counter % 8 == 0) {
+                drawx = x0 + offsetx + 14;
+                drawy = y0 + offsety + 14;
+                gc.drawImage(requirement.activated && nextOne.activated ? connection_green : requirement.activated ? connection_orange : !nextOne.activated ? connection_red : connection_orange, drawx, drawy);
+            }
+            if (x0 == x1 && y0 == y1) break;
+            e2 = 2 * err;
+            if (e2 > -dy) {
+                err = err - dy;
+                x0 = x0 + sx;
+            }
+            if (e2 < dx) {
+                err = err + dx;
+                y0 = y0 + sy;
+            }
+            counter++;
+        }
+    }
+
+    private void drawLegend(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold14);
+
+        gc.setFill(Colors.mediumVeryLight);
+        gc.fillRoundRect(900, 0, 129, 20, 5, 5);
+        gc.fillRoundRect(750, 30, 150, 20, 5, 5);
+        gc.fillRoundRect(1_030, 30, 150, 20, 5, 5);
+        gc.fillRect(1_650, 80, 150, 65);
+        gc.setLineWidth(2);
+        gc.setStroke(Colors.darkBackground);
+        gc.strokeRoundRect(900, 0, 129, 20, 5, 5);
+        gc.strokeRoundRect(750, 30, 150, 20, 7, 7);
+        gc.strokeRoundRect(1_030, 30, 150, 20, 7, 7);
+        gc.strokeRoundRect(1_650, 80, 150, 65, 3, 3);
+        gc.setLineWidth(1);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Skill Tree", 925, 15);
+        gc.fillText("Points spent:   " + pointsSpent, 757, 45);
+        gc.fillText("Talentpoints:   " + pointsToSpend, 1_037, 45);
+
+        gc.fillText("SPACE: Recenter", 1_653, 95);
+        gc.fillText("Green: Active", 1_653, 110);
+        gc.fillText("Orange: Available", 1_653, 125);
+        gc.fillText("Red: Locked", 1_653, 140);
     }
 
     private void createTalentNodes() {
@@ -145,67 +216,6 @@ public class UI_TalentPanel {
         talent_Nodes[57] = new TalentNode(new TALENT(57, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 816, 6);
         talent_Nodes[58] = new TalentNode(new TALENT(58, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 875, -52);
         talent_Nodes[59] = new TalentNode(new TALENT(59, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 816, -52);
-    }
-
-    private void drawLineA(int x, int y, GraphicsContext gc, int node1, int node2) {
-        drawLine(x, y, gc, talent_Nodes[node1].position.x, talent_Nodes[node1].position.y, talent_Nodes[node2].position.x, talent_Nodes[node2].position.y, talent_Nodes[node1], talent_Nodes[node2]);
-    }
-
-    private void drawLine(int offsetx, int offsety, GraphicsContext gc, int x0, int y0, int x1, int y1, TalentNode
-            requirement, TalentNode nextOne) {
-        int dx = Math.abs(x1 - x0);
-        int dy = Math.abs(y1 - y0);
-        int sx = x0 < x1 ? 1 : -1;
-        int sy = y0 < y1 ? 1 : -1;
-        int counter = 0;
-        int err = dx - dy;
-        int e2;
-        while (true) {
-            if (counter % 8 == 0) {
-                int drawx = x0 + offsetx + 14;
-                int drawy = y0 + offsety + 14;
-                if (drawx < 1_705 && drawy < 1_015 && drawy > 75 && drawx > 175) {
-                    if (requirement.activated && nextOne.activated) {
-                        gc.drawImage(connection_green, drawx, drawy);
-                    } else if (requirement.activated) {
-                        gc.drawImage(connection_orange, drawx, drawy);
-                    } else if (!nextOne.activated) {
-                        gc.drawImage(connection_red, drawx, drawy);
-                    } else {
-                        gc.drawImage(connection_orange, drawx, drawy);
-                    }
-                }
-            }
-            if (x0 == x1 && y0 == y1) break;
-            e2 = 2 * err;
-            if (e2 > -dy) {
-                err = err - dy;
-                x0 = x0 + sx;
-            }
-            if (e2 < dx) {
-                err = err + dx;
-                y0 = y0 + sy;
-            }
-            counter++;
-        }
-    }
-
-    private void drawTalentNodes(GraphicsContext gc, int startX, int startY) {
-        for (TalentNode node : talent_Nodes) {
-            if (node != null) {
-                if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
-                    node.drawHoverOverEffect(gc, startX, startY);
-                    drawTooltip(gc, node, startX, startY);
-                } else {
-                    node.drawNode(gc, startX, startY);
-                }
-            }
-        }
-    }
-
-    private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
-        gc.setFill(Colors.darkBackground);
-        gc.fillRoundRect(startX + node.position.x - 50, startY + node.position.y - 7, 40, 40, 5, 5);
     }
 
     public boolean checkValidTalent(TalentNode node) {

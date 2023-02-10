@@ -214,6 +214,12 @@ public class InputHandler {
         if (code.equals("e")) {
             e_typed = true;
         }
+        if (code.equals("\s")) {
+            if (mg.showTalents) {
+                mg.talentP.talentPanelX = 960;
+                mg.talentP.talentPanelY = 540;
+            }
+        }
     }
 
     public void handleKeyPressed(KeyEvent e) {

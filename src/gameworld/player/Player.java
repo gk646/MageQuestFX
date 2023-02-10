@@ -185,6 +185,7 @@ public class Player extends ENTITY {
         experience += entity.level;
         if (experience >= levelUpExperience) {
             level++;
+            mg.talentP.pointsToSpend++;
             updateEquippedItems();
             this.experience -= levelUpExperience;
             levelUpExperience = 0;
@@ -198,6 +199,7 @@ public class Player extends ENTITY {
         this.experience = experience;
         while (experience >= levelUpExperience) {
             level++;
+            mg.talentP.pointsToSpend++;
             updateEquippedItems();
             this.experience -= levelUpExperience;
             levelUpExperience = 0;
