@@ -332,14 +332,16 @@ public class MainGame {
         wControl = new WorldController(this);
         //12 %
         ui.updateLoadingScreen(12, gc);
-        this.ob_control = new OBJ_Control(this);
+        ob_control = new OBJ_Control(this);
         wRender = new WorldRender(this);
         wControl.getWorldsData();
         wControl.makeOverWorldQuadrants();
         talentP = new UI_TalentPanel(this);
+
         //24%
         ui.updateLoadingScreen(12, gc);
         miniM = new MiniMap(this);
+
         ent_control = new ENT_Control(this);
         collisionChecker = new CollisionChecker(this);
         //36%

@@ -41,7 +41,6 @@ public class Runner extends Application {
         InputStream is = getClass().getResourceAsStream("/Icons/icon2.png");
         assert is != null;
         stage.getIcons().add(new Image(is));
-
         stage.setMaxWidth(gE.getDefaultScreenDevice().getDisplayMode().getWidth());
         stage.setMaxHeight(gE.getDefaultScreenDevice().getDisplayMode().getHeight());
         stage.setFullScreen(true);
@@ -56,13 +55,13 @@ public class Runner extends Application {
         slider.setVisible(false);
         slider.setPrefSize(200, 100);
         root.getChildren().add(slider);
-
         MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight(), gc, scene);
         InputHandler.instance = new InputHandler(mainGame, scene);
         mainGame.inputH = InputHandler.instance;
         Thread thread = new Thread(mainGame::run);
-        thread.start();
         stage.show();
+        thread.start();
+
         //MOUSE
         scene.setOnMousePressed(event -> mainGame.inputH.handleMousePressed(event));
         scene.setOnMouseReleased(event -> mainGame.inputH.handleMouseReleased(event));
