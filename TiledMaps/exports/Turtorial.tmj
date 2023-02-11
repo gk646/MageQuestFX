@@ -1,18 +1,42 @@
- public void checkCollisionEntity(ENTITY entity) {
-        long time = System.nanoTime();
-        for (Rectangle rect : objects_tutorial) {
-            if (rect != null) {
-                if (rect.intersects(entity.worldX + mg.entity.entityMovementSpeed, entity.worldY, 48, 48)) {
-                    mg.entity.collisionRight = true;
-                }
-                if (rect.intersects(entity.worldX - mg.entity.entityMovementSpeed, entity.worldY, 48, 48)) {
-                    mg.entity.collisionLeft = true;
-                }
-                if (rect.intersects(entity.worldX, entity.worldY - mg.entity.entityMovementSpeed, 48, 48)) {
-                    mg.entity.collisionUp = true;
-                }
-                if (rect.intersects(entity.worldX, entity.worldY + mg.entity.entityMovementSpeed, 48, 48)) {
-                    mg.entity.collisionDown = true;
-                }
-            }
-        }
+  switch (bagSlot.item.type) {
+                            case 'H':
+                                if (char_Slots[0].item != null) {
+                                    getTooltip(gc, char_Slots[0], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'C':
+                                if (char_Slots[1].item != null) {
+                                    getTooltip(gc, char_Slots[1], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'P':
+                                if (char_Slots[2].item != null) {
+                                    getTooltip(gc, char_Slots[2], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'B':
+                                if (char_Slots[3].item != null) {
+                                    getTooltip(gc, char_Slots[3], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'A':
+                                if (char_Slots[4].item != null) {
+                                    getTooltip(gc, char_Slots[4], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.));
+                                }
+                            case 'R':
+                                if (char_Slots[5].item != null) {
+                                    getTooltip(gc, char_Slots[5], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'T':
+                                if (char_Slots[7].item != null) {
+                                    getTooltip(gc, char_Slots[7], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'W':
+                                if (char_Slots[8].item != null) {
+                                    getTooltip(gc, char_Slots[8], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case '2':
+                                if (char_Slots[8].item != null) {
+                                    getTooltip(gc, char_Slots[9], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                            case 'O':
+                                if (char_Slots[9].item != null) {
+                                    getTooltip(gc, char_Slots[10], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
+                                }
+                        }

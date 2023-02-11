@@ -74,8 +74,8 @@ public class UI_InventoryPanel {
     public void drawCharTooltip(GraphicsContext g2) {
         if (grabbedITEM == null && !mg.inputH.mouse1Pressed) {
             for (UI_InventorySlot invSlot : char_Slots) {
-                if (invSlot.item != null && invSlot.toolTipTimer >= 40) {
-                    getTooltip(g2, invSlot);
+                if (invSlot.item != null && invSlot.toolTipTimer >= 30) {
+                    getTooltip(g2, invSlot, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
                 }
                 if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
                     invSlot.toolTipTimer++;
@@ -87,11 +87,18 @@ public class UI_InventoryPanel {
         }
     }
 
-    public void drawBagTooltip(GraphicsContext g2) {
+    public void drawBagTooltip(GraphicsContext gc) {
         if (grabbedITEM == null && !mg.inputH.mouse1Pressed) {
             for (UI_InventorySlot bagSlot : bag_Slots) {
-                if (bagSlot.item != null && bagSlot.toolTipTimer >= 40) {
-                    getTooltip(g2, bagSlot);
+                if (bagSlot.item != null && bagSlot.toolTipTimer >= 30) {
+                    getTooltip(gc, bagSlot, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                    if (mg.inputH.shift_pressed) {
+                        for (UI_InventorySlot slot : char_Slots) {
+                            if (slot.item != null && slot.item.type == bagSlot.item.type) {
+                                getTooltip(gc, slot, (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.232), (mg.inputH.lastMousePosition.y));
+                            }
+                        }
+                    }
                 }
                 if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
                     bagSlot.toolTipTimer++;
@@ -113,41 +120,41 @@ public class UI_InventoryPanel {
         drawBagSlots(gc, startX, startY);
     }
 
-    private void getTooltip(GraphicsContext gc, UI_InventorySlot invSlot) {
+    private void getTooltip(GraphicsContext gc, UI_InventorySlot invSlot, int startX, int startY) {
         //BACKGROUND
         gc.setFill(Colors.LightGrey);
-        gc.fillRoundRect(mg.inputH.lastMousePosition.x - (MainGame.SCREEN_HEIGHT * 0.238), mg.inputH.lastMousePosition.y - (MainGame.SCREEN_HEIGHT * 0.314), MainGame.SCREEN_HEIGHT * 0.23, MainGame.SCREEN_HEIGHT * 0.324f, 15, 15);
+        gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.238), startY - (MainGame.SCREEN_HEIGHT * 0.314), MainGame.SCREEN_HEIGHT * 0.23, MainGame.SCREEN_HEIGHT * 0.324f, 15, 15);
         //OUTLINE
         setRarityColor(gc, invSlot);
         gc.setLineWidth(1);
-        gc.strokeRoundRect(mg.inputH.lastMousePosition.x - (MainGame.SCREEN_HEIGHT * 0.235), mg.inputH.lastMousePosition.y - (MainGame.SCREEN_HEIGHT * 0.311), MainGame.SCREEN_HEIGHT * 0.224, MainGame.SCREEN_HEIGHT * 0.318f, 15, 15);
+        gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.235), startY - (MainGame.SCREEN_HEIGHT * 0.311), MainGame.SCREEN_HEIGHT * 0.224, MainGame.SCREEN_HEIGHT * 0.318f, 15, 15);
         //NAME
         setRarityColor(gc, invSlot);
         gc.setFont(FonT.minecraftRegular20);
-        gc.fillText(invSlot.item.name, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.229f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.268f);
+        gc.fillText(invSlot.item.name, startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.268f);
         //Quality
         applyQualityColor(invSlot, gc);
         gc.setFont(FonT.minecraftItalic15);
         if (invSlot.item.quality < 100) {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.039_8f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.299f);
+            gc.fillText(invSlot.item.quality + "%", startX - MainGame.SCREEN_HEIGHT * 0.039_8f, startY - MainGame.SCREEN_HEIGHT * 0.299f);
         } else {
-            gc.fillText(invSlot.item.quality + "%", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.047_3f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.299f);
+            gc.fillText(invSlot.item.quality + "%", startX - MainGame.SCREEN_HEIGHT * 0.047_3f, startY - MainGame.SCREEN_HEIGHT * 0.299f);
         }
         //STATS
         gc.setFill(Colors.darkBackground);
         if (!(invSlot.item.type == 'M')) {
             gc.setFont(FonT.minecraftItalic15);
-            gc.fillText("INT: " + invSlot.item.intellect, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
-            gc.fillText("VIT: " + invSlot.item.vitality, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
-            gc.fillText("WIS: " + invSlot.item.wisdom, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.230f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
+            gc.fillText("INT: " + invSlot.item.intellect, startX - MainGame.SCREEN_HEIGHT * 0.230f, startY - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("VIT: " + invSlot.item.vitality, startX - MainGame.SCREEN_HEIGHT * 0.230f, startY - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("WIS: " + invSlot.item.wisdom, startX - MainGame.SCREEN_HEIGHT * 0.230f, startY - MainGame.SCREEN_HEIGHT * 0.208f);
 
-            gc.fillText("AGI: " + invSlot.item.agility, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
-            gc.fillText("LUC: " + invSlot.item.luck, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
-            gc.fillText("CHA: " + invSlot.item.charisma, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.160f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
+            gc.fillText("AGI: " + invSlot.item.agility, startX - MainGame.SCREEN_HEIGHT * 0.160f, startY - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("LUC: " + invSlot.item.luck, startX - MainGame.SCREEN_HEIGHT * 0.160f, startY - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("CHA: " + invSlot.item.charisma, startX - MainGame.SCREEN_HEIGHT * 0.160f, startY - MainGame.SCREEN_HEIGHT * 0.208f);
 
-            gc.fillText("END: " + invSlot.item.endurance, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.236f);
-            gc.fillText("STR: " + invSlot.item.strength, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.222f);
-            gc.fillText("FOC: " + invSlot.item.focus, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.086f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.208f);
+            gc.fillText("END: " + invSlot.item.endurance, startX - MainGame.SCREEN_HEIGHT * 0.086f, startY - MainGame.SCREEN_HEIGHT * 0.236f);
+            gc.fillText("STR: " + invSlot.item.strength, startX - MainGame.SCREEN_HEIGHT * 0.086f, startY - MainGame.SCREEN_HEIGHT * 0.222f);
+            gc.fillText("FOC: " + invSlot.item.focus, startX - MainGame.SCREEN_HEIGHT * 0.086f, startY - MainGame.SCREEN_HEIGHT * 0.208f);
 
       /*  INT - Int
         WIS - Wis
@@ -162,13 +169,13 @@ public class UI_InventoryPanel {
         x / 1080
        */
             //EFFECTS
-            gc.fillText("Effects: ", mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.229f, mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.130f);
+            gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
         }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
-        int stringY = (int) (mg.inputH.lastMousePosition.y - MainGame.SCREEN_HEIGHT * 0.065f);
+        int stringY = (int) (startY - MainGame.SCREEN_HEIGHT * 0.065f);
         for (String string : invSlot.item.description.split("\n")) {
-            gc.fillText(string, mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.231f, stringY += MainGame.SCREEN_HEIGHT * 0.010f);
+            gc.fillText(string, startX - MainGame.SCREEN_HEIGHT * 0.231f, stringY += MainGame.SCREEN_HEIGHT * 0.010f);
         }
 
         gc.setFont(FonT.minecraftItalic14);
@@ -177,11 +184,11 @@ public class UI_InventoryPanel {
 
 
         //LEVEL
-        gc.fillText("ilvl: " + invSlot.item.level, mg.inputH.lastMousePosition.x - 248, mg.inputH.lastMousePosition.y - 322);
+        gc.fillText("ilvl: " + invSlot.item.level, startX - 248, startY - 322);
         //Durability
-        gc.fillText("D: " + invSlot.item.durability, mg.inputH.lastMousePosition.x - 251, mg.inputH.lastMousePosition.y + 3);
+        gc.fillText("D: " + invSlot.item.durability, startX - 251, startY + 3);
         //ID
-        gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, mg.inputH.lastMousePosition.x - 78, mg.inputH.lastMousePosition.y + 3);
+        gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, startX - 78, startY + 3);
     }
 
     private void setRarityColor(GraphicsContext gc, UI_InventorySlot slot) {
@@ -245,6 +252,7 @@ public class UI_InventoryPanel {
                                 if (slot.item == null) {
                                     slot.item = char_Slots[i].item;
                                     char_Slots[i].item = null;
+                                    mg.player.updateEquippedItems();
                                     break;
                                 }
                             }
@@ -271,10 +279,18 @@ public class UI_InventoryPanel {
                                 if (slot.item == null && slot.type.equals(String.valueOf(bag_Slots[i].item.type))) {
                                     slot.item = bag_Slots[i].item;
                                     bag_Slots[i].item = null;
+                                    mg.player.updateEquippedItems();
+                                    break;
+                                } else if (slot.type.equals(String.valueOf(bag_Slots[i].item.type))) {
+                                    ITEM placeholder = slot.item;
+                                    slot.item = bag_Slots[i].item;
+                                    bag_Slots[i].item = placeholder;
+                                    mg.player.updateEquippedItems();
                                     break;
                                 }
+                                mg.inputH.mouse1Pressed = false;
                             }
-                            continue;
+                            break;
                         }
                         bag_Slots[i].grabbed = true;
                         grabbedITEM = bag_Slots[i].item;

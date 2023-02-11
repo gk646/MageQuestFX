@@ -83,7 +83,7 @@ public class PRJ_Control {
                     PRJ_Control projectile = iterator.next();
                     projectile.update();
                     if (projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
-                        mg.player.health -= 10;
+                        mg.player.health -= projectile.level;
                         projectile.dead = true;
                     }
                     if (projectile.dead) {

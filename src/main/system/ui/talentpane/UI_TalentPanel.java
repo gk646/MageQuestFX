@@ -28,6 +28,7 @@ public class UI_TalentPanel {
     private final Image talentnode_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_green.png")));
     private final Image talentnode_purple = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_purple.png")));
     private final Image talentnode_orange = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/node_orange.png")));
+    private final Image talentnode_big = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/talent_big.png")));
 
     public int pointsToSpend = 5, pointsSpent;
     public int talentPanelX = 960 - 16;
@@ -88,12 +89,22 @@ public class UI_TalentPanel {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
                     drawTooltip(gc, node, startX, startY);
                 }
-                if (node.activated) {
-                    node.drawNode(gc, startX, startY, talentnode_green);
-                } else if (checkValidTalent(node)) {
-                    node.drawNode(gc, startX, startY, talentnode_purple);
-                } else {
-                    node.drawNode(gc, startX, startY, talentnode_orange);
+                if (node.size == 0) {
+                    if (node.activated) {
+                        node.drawNode(gc, startX, startY, talentnode_green);
+                    } else if (checkValidTalent(node)) {
+                        node.drawNode(gc, startX, startY, talentnode_purple);
+                    } else {
+                        node.drawNode(gc, startX, startY, talentnode_orange);
+                    }
+                } else if (node.size == 1) {
+                    if (node.activated) {
+                        node.drawNode(gc, startX - 6, startY - 6, talentnode_big);
+                    } else if (checkValidTalent(node)) {
+                        node.drawNode(gc, startX - 6, startY - 6, talentnode_big);
+                    } else {
+                        node.drawNode(gc, startX - 6, startY - 6, talentnode_big);
+                    }
                 }
             }
         }
@@ -182,7 +193,7 @@ public class UI_TalentPanel {
         talent_Nodes[10] = new TalentNode(new TALENT(10, "Increase maximum mana", "glowing_health.png", "Increases maximum mana by 5%"), -50, -267);
         //energy sphere?s
         talent_Nodes[11] = new TalentNode(new TALENT(11, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -220);
-        talent_Nodes[12] = new TalentNode(new TALENT(12, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, -267);
+        talent_Nodes[12] = new TalentNode(new TALENT(12, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 50, -267, 1);
         talent_Nodes[13] = new TalentNode(new TALENT(13, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 110, -218);
         talent_Nodes[15] = new TalentNode(new TALENT(15, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 0, -325);
 
@@ -205,7 +216,7 @@ public class UI_TalentPanel {
         talent_Nodes[29] = new TalentNode(new TALENT(29, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, 78);
         talent_Nodes[30] = new TalentNode(new TALENT(30, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 298, 0);
 
-        talent_Nodes[31] = new TalentNode(new TALENT(31, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 230, 0);
+        talent_Nodes[31] = new TalentNode(new TALENT(31, "Increase maximum mana", "blood_rune.png", "Increases maximum mana by 5%"), 230, 0, 1);
         talent_Nodes[32] = new TalentNode(new TALENT(32, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 430, 37);
         talent_Nodes[33] = new TalentNode(new TALENT(33, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 430, -37);
         talent_Nodes[34] = new TalentNode(new TALENT(34, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 350, -78);
@@ -222,7 +233,7 @@ public class UI_TalentPanel {
         talent_Nodes[45] = new TalentNode(new TALENT(45, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 870, 163);
         talent_Nodes[46] = new TalentNode(new TALENT(46, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 765, 90);
         talent_Nodes[47] = new TalentNode(new TALENT(47, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 836, 90);
-        talent_Nodes[48] = new TalentNode(new TALENT(48, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 907, 90);
+        talent_Nodes[48] = new TalentNode(new TALENT(48, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 907, 90, 1);
         talent_Nodes[49] = new TalentNode(new TALENT(49, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 608, 103);
         talent_Nodes[50] = new TalentNode(new TALENT(50, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 560, 35);
         talent_Nodes[51] = new TalentNode(new TALENT(51, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 560, -35);
@@ -234,7 +245,7 @@ public class UI_TalentPanel {
         talent_Nodes[56] = new TalentNode(new TALENT(56, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 757, -52);
         talent_Nodes[57] = new TalentNode(new TALENT(57, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 816, 6);
         talent_Nodes[58] = new TalentNode(new TALENT(58, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 875, -52);
-        talent_Nodes[59] = new TalentNode(new TALENT(59, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 816, -52);
+        talent_Nodes[59] = new TalentNode(new TALENT(59, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 816, -52, 1);
     }
 
     public boolean checkValidTalent(TalentNode node) {

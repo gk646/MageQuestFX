@@ -38,7 +38,7 @@ public class Runner extends Application {
         scene.setCursor(Cursor.HAND);
         stage.setScene(scene);
         stage.setTitle("Mage Quest_2D");
-        InputStream is = getClass().getResourceAsStream("/Icons/icon.png");
+        InputStream is = getClass().getResourceAsStream("/Icons/icon2.png");
         assert is != null;
         stage.getIcons().add(new Image(is));
 
