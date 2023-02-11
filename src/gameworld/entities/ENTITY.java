@@ -49,7 +49,7 @@ abstract public class ENTITY {
     public String direction;
     public Rectangle collisionBox;
     public boolean hpBarOn;
-    public int hpBarCounter;
+    protected int hpBarCounter;
     private int nextCol1;
     private int nextRow1;
     private int nextCol2;
@@ -64,6 +64,7 @@ abstract public class ENTITY {
      *
      * @return the player being away more than 650 worldPixels
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean playerTooFarAbsolute() {
         return Math.abs(worldX - Player.worldX) >= 650 || Math.abs(worldY - Player.worldY) >= 650;
     }
@@ -204,8 +205,6 @@ abstract public class ENTITY {
     }
 
     protected void followPlayer(int playerX, int playerY) {
-        //playerX = (mg.player.worldX + 24) / 48;
-        //playerY = (mg.player.worldY + 24) / 48;
         if (!((worldX) / 48 == playerX && (worldY) / 48 == playerY)) {
             searchPathUncapped(playerX, playerY, 150);
         } else {

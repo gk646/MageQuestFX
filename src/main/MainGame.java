@@ -103,16 +103,16 @@ public class MainGame {
     public NPC_Control npcControl;
     public MAP_UTILS map_utils;
     public GameMap gameMap;
-    public DayNightCycle cycle = new DayNightCycle(this);
-    public UI_SkillBar sBar = new UI_SkillBar(this);
-    public UI_QuestPanel qPanel = new UI_QuestPanel(this);
+    private final DayNightCycle cycle = new DayNightCycle(this);
+    public final UI_SkillBar sBar = new UI_SkillBar(this);
+    public final UI_QuestPanel qPanel = new UI_QuestPanel(this);
     public boolean credits;
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
     private int counter = 0;
     private ENT_Control ent_control;
-    public Sound sound;
+    private Sound sound;
     public OBJ_Control ob_control;
 
 

@@ -2,7 +2,7 @@ package main.system.ui.talentpane;
 
 import java.util.ArrayList;
 
-public class AdjacencyMatrix {
+class AdjacencyMatrix {
 
 
     private final int[][] adjacency_matrix;
@@ -14,7 +14,7 @@ public class AdjacencyMatrix {
         makeEdges();
     }
 
-    public void makeEdge(int to, int from) {
+    private void makeEdge(int to, int from) {
         adjacency_matrix[to][from] = 1;
         int[] edge = new int[2];
         edge[0] = to;

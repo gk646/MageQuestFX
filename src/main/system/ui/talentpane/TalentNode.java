@@ -9,9 +9,9 @@ import java.awt.Rectangle;
 public class TalentNode {
     public final Rectangle boundBox;
     private final TALENT talent;
-    public Point position;
+    public final Point position;
     public boolean activated;
-    public int id;
+    public final int id;
     public int size = 0;
 
 

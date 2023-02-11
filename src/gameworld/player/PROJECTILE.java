@@ -20,9 +20,9 @@ import java.awt.geom.Point2D;
  * Inherits Entity
  * Main inheritable class for all projectiles
  */
-abstract public class PROJECTILE {
+abstract class PROJECTILE {
 
-    protected Point endPos;
+    private Point endPos;
     protected Point2D.Double updateVector;
     protected int projectileHeight;
     protected int spriteCounter;
@@ -37,14 +37,16 @@ abstract public class PROJECTILE {
     protected Image projectileImage9;
     protected Image projectileImage10;
     protected int projectileWidth;
-    protected final MainGame mg;
-    public boolean dead, collisionUp, collisionDown;
-    public boolean collisionLeft;
-    public boolean collisionRight;
+    private final MainGame mg;
+    private boolean dead;
+    private boolean collisionUp;
+    private boolean collisionDown;
+    private boolean collisionLeft;
+    private boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
     public int movementSpeed;
-    public Point2D.Double worldPos;
+    private Point2D.Double worldPos;
     /*
 
      */

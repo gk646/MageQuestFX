@@ -2,6 +2,7 @@ package main.system.ai;
 
 import gameworld.world.maps.MAP_OverWorld;
 import main.MainGame;
+import main.system.WorldRender;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,8 @@ public class PathFinder {
         goalNode = nodes[goalCol][goalRow];
         for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
             for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
-                int tileNum = mg.wRender.worldData[i][b];
-                if (mg.wRender.tileStorage[tileNum].collision) {
+                int tileNum = WorldRender.worldData[i][b];
+                if (WorldRender.tileStorage[tileNum].collision) {
                     nodes[i][b].solid = true;
                 }
                 getCost(nodes[i][b]);

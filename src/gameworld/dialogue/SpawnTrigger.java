@@ -13,7 +13,7 @@ public class SpawnTrigger {
     private final int level;
     private final Trigger trigger;
     private final Type type;
-    public boolean triggered = false;
+    private boolean triggered;
 
     public SpawnTrigger(int x, int y, int level, Trigger trigger, Type type) {
         this.x = x;
@@ -42,7 +42,7 @@ public class SpawnTrigger {
      * @param tily     y of tile
      * @return true if the player is X close to (tileX, tileY) or closer
      */
-    protected boolean playerXCloseToTile(int distance, int tilex, int tily) {
+    private boolean playerXCloseToTile(int distance, int tilex, int tily) {
         return new Point((int) ((Player.worldX + 24) / 48), (int) ((Player.worldY + 24) / 48)).distance(tilex, tily) <= distance;
     }
 }

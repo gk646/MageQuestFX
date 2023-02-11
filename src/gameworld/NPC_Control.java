@@ -17,7 +17,7 @@ public class NPC_Control {
     // WORLD CODES
     // 0 = Tutorial // 1 = Grass Lands // 2 = City 1 // 3 =
     //
-    ArrayList<ENTITY> NPC_City1 = new ArrayList<>();
+    private final ArrayList<ENTITY> NPC_City1 = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;

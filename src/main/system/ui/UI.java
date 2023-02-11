@@ -18,7 +18,7 @@ public class UI {
 
     public Font maruMonica30;
     public int commandNum = 0;
-    DropShadow dropShadow = new DropShadow();
+    private final DropShadow dropShadow = new DropShadow();
     InnerShadow innerShadow = new InnerShadow(5, Colors.XPBarBlue);
     private Image playerUI;
     private int loadingProgress = 0;

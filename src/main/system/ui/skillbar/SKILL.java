@@ -10,7 +10,7 @@ import java.util.Objects;
 abstract public class SKILL {
 
     protected Image icon;
-    public final MainGame mg;
+    protected final MainGame mg;
     public float totalCoolDown;
     public float coolDownCoefficient;
     /*
@@ -22,9 +22,13 @@ abstract public class SKILL {
        Dark = 5
      */
     public int type;
-    public int side1, side2, side3, side4, side5;
+    private int side1;
+    private int side2;
+    private int side3;
+    private int side4;
+    private int side5;
     public String imagePath;
-    public float actualCoolDown;
+    protected float actualCoolDown;
     private int i_id;
     private String name;
     private String description;
@@ -37,11 +41,11 @@ abstract public class SKILL {
 
     }
 
-    public void drawIcon(GraphicsContext gc, int x, int y) {
+    protected void drawIcon(GraphicsContext gc, int x, int y) {
         gc.drawImage(icon, x, y);
     }
 
-    public void drawCooldown(GraphicsContext gc, int skillBarX, int skillBarY) {
+    protected void drawCooldown(GraphicsContext gc, int skillBarX, int skillBarY) {
         if (actualCoolDown != totalCoolDown) {
             coolDownCoefficient = (actualCoolDown * (200.0f / totalCoolDown));
             side1 = 25;

@@ -8,6 +8,7 @@ import main.system.ui.Effects;
 
 import java.awt.Rectangle;
 
+@SuppressWarnings("DuplicateBranchesInSwitch")
 public class PRJ_Lightning extends PRJ_Control {
 
     /**

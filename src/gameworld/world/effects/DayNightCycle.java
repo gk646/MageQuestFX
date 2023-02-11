@@ -6,11 +6,11 @@ import javafx.scene.paint.Color;
 import main.MainGame;
 
 public class DayNightCycle {
-    MainGame mg;
-    Light.Point light = new Light.Point();
+    private final MainGame mg;
+    private final Light.Point light = new Light.Point();
 
 
-    Lighting lighting = new Lighting();
+    private final Lighting lighting = new Lighting();
 
     public DayNightCycle(MainGame mg) {
         this.mg = mg;

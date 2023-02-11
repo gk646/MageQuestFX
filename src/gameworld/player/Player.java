@@ -18,7 +18,7 @@ import java.util.Objects;
 
 
 public class Player extends ENTITY {
-    public boolean isMoving;
+    private boolean isMoving;
     public int maxMana;
     public float mana;
     public float health;
@@ -33,8 +33,8 @@ public class Player extends ENTITY {
     public int strength;
     public int focus;
     public float critChance, dotDamageMultiplier, dotLengthMultiplier, buffLengthMultiplier, speechSkill, resistChance, carryWeight;
-    public int cooldownOneSecond;
-    public int cooldownTwoSecond;
+    private int cooldownOneSecond;
+    private int cooldownTwoSecond;
     public float experience;
     public int coins;
     public int spawnLevel;
@@ -137,7 +137,6 @@ public class Player extends ENTITY {
                     } else if (drop instanceof DRP_Coin) {
                         mg.player.coins += ((DRP_Coin) drop).amount;
                         iter.remove();
-                        continue;
                     }
                 }
             }

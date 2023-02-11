@@ -1,4 +1,4 @@
 package main.system.ui.skillbar.skills;
 
-public class SKL_AutoShot {
+class SKL_AutoShot {
 }

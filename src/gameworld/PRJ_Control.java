@@ -53,7 +53,8 @@ public class PRJ_Control {
     public Rectangle collisionBox;
     public int movementSpeed;
     public Point2D.Double worldPos;
-    public int GruntKilledCounter, ShooterKilledCounter;
+    public int GruntKilledCounter;
+    private int ShooterKilledCounter;
     /*
 
      */
@@ -63,7 +64,7 @@ public class PRJ_Control {
         this.mg = mg;
     }
 
-    public PRJ_Control() {
+    protected PRJ_Control() {
 
     }
 

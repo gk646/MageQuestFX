@@ -17,15 +17,14 @@ public class QST_3 extends Dialog {
     /**
      * allows the dialog to check for stages and update progress
      *
-     * @param npc
      */
     @Override
     public void script(NPC npc) {
 
     }
 
-    /**
-     * allows the dialog to check for stages and update progress
+    /*
+      allows the dialog to check for stages and update progress
      */
 
 }

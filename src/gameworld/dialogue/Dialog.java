@@ -23,10 +23,10 @@ abstract public class Dialog {
     protected int stage = 1;
     protected MainGame mg;
     protected int type;
-    public String text;
+    private String text;
     public boolean block;
     private int textCounter;
-    protected NPC npc;
+    private final NPC npc;
 
     /**
      * The dialog framework
@@ -54,7 +54,7 @@ abstract public class Dialog {
         }
     }
 
-    public void load_text() {
+    protected void load_text() {
         try {
             if (type == 1) {
                 InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/tutorial_npc.txt");

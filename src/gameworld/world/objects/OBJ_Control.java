@@ -8,8 +8,8 @@ import java.awt.Rectangle;
 
 public class OBJ_Control {
     Rectangle[] objects = new Rectangle[100];
-    Rectangle[] objects_tutorial = new Rectangle[100];
-    MainGame mg;
+    private final Rectangle[] objects_tutorial = new Rectangle[100];
+    private final MainGame mg;
 
     public OBJ_Control(MainGame mg) {
         this.mg = mg;

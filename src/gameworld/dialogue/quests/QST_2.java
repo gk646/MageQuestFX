@@ -17,7 +17,6 @@ public class QST_2 extends Dialog {
     /**
      * allows the dialog to check for stages and update progress
      *
-     * @param npc
      */
     @Override
     public void script(NPC npc) {

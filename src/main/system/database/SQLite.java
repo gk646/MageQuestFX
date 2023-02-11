@@ -149,7 +149,7 @@ public class SQLite {
         }
     }
 
-    public void savePlayerInventory() throws SQLException {
+    private void savePlayerInventory() throws SQLException {
         String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?, level = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         for (int i = 0; i < 10; i++) {

@@ -15,7 +15,10 @@ public class WorldRender {
     private final MainGame mg;
     public static int[][] worldData;
     public Point worldSize;
-    int worldCol, worldRow, maxCol, maxRow;
+    private int worldCol;
+    private int worldRow;
+    private int maxCol;
+    private int maxRow;
 
 
     public WorldRender(MainGame mg) {

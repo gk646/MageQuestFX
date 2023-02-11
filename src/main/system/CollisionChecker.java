@@ -15,6 +15,7 @@ public class CollisionChecker {
         this.mg = mainGame;
     }
 
+    @SuppressWarnings("DuplicateExpressions")
     public static void checkProjectileAgainstTile(PRJ_Control projectile) {
         int entityLeftWorldX = (int) (projectile.worldPos.x + projectile.collisionBox.x);
         int entityRightWorldX = (int) (projectile.worldPos.x + projectile.collisionBox.x + projectile.collisionBox.width);

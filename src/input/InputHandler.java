@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 public class InputHandler {
     public static InputHandler instance;
-    public Point lastMousePosition = new Point(500, 500);
+    public final Point lastMousePosition = new Point(500, 500);
     private final MainGame mg;
     private final Scene scene;
     //Keys

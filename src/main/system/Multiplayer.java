@@ -20,7 +20,7 @@ public class Multiplayer {
     private static DataInputStream inputStream;
     private final MainGame mg;
     private final ENT_Player2 ENTPlayer2;
-    public boolean multiplayerStarted;
+    private boolean multiplayerStarted;
     private int index = 10;
 
     public Multiplayer(MainGame mainGame, ENT_Player2 ENTPlayer2) {
@@ -58,7 +58,7 @@ public class Multiplayer {
     }
 
 
-    public void updateMultiplayerOutput() {
+    private void updateMultiplayerOutput() {
         try {
             StringBuilder outputString = new StringBuilder();
             outputString.append(Player.worldX + 50_000).append(Player.worldY + 50_000);

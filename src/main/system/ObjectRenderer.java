@@ -10,10 +10,10 @@ import java.awt.Point;
 import java.util.Objects;
 
 
-public class ObjectRenderer {
-    public final Tile[] tileStorage;
+class ObjectRenderer {
+    private final Tile[] tileStorage;
     private final MainGame mg;
-    public int[][] worldData;
+    private int[][] worldData;
     public Point worldSize;
     private int worldCol, worldRow;
 

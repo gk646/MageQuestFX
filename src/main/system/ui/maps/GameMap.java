@@ -22,11 +22,11 @@ public class GameMap {
     private final Point previousMousePosition = new Point(500, 500);
     public float zoom = 5;
     public float deltaZoom = 0;
-    int yOffset = 0;
-    int xOffset = 0;
+    private int yOffset = 0;
+    private int xOffset = 0;
     private boolean followPlayer = true;
     private Image mapImage;
-    BufferedImage image;
+    private BufferedImage image;
     public float xTile;
     public float yTile;
 
@@ -137,8 +137,8 @@ public class GameMap {
                     } else {
                         for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                             for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
-                                if (i < 935 && b < 1570 && i >= 0 && b >= 0) {
-                                    image.setRGB((int) b, (int) i, 0xD05A6988);
+                                if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
+                                    image.setRGB((int) b, (int) i, 0xD05A_6988);
                                 }
                             }
                         }
@@ -163,7 +163,7 @@ public class GameMap {
                 x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
-                        if (i < 935 && b < 1570 && i > 75 && b > 175) {
+                        if (i < 935 && b < 1_570 && i > 75 && b > 175) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);
                         }
                     }
@@ -194,7 +194,7 @@ public class GameMap {
             if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
-                        if (i < 935 && b < 1570 && i > 0 && b > 0) {
+                        if (i < 935 && b < 1_570 && i > 0 && b > 0) {
                             image.setRGB((int) b, (int) i, 0xD012_4E89);
                         }
                     }

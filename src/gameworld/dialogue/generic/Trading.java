@@ -9,7 +9,6 @@ public class Trading extends Dialog {
      * Trading dialog framework
      *
      * @param mg   maingame instance
-     * @param type
      */
     protected Trading(MainGame mg, int type, NPC npc) {
         super(mg, type, npc);
@@ -22,7 +21,6 @@ public class Trading extends Dialog {
     /**
      * allows the dialog to check for stages and update progress
      *
-     * @param npc
      */
     @Override
     public void script(NPC npc) {

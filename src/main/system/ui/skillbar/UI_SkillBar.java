@@ -9,8 +9,9 @@ import main.system.ui.skillbar.skills.SKL_RingSalvo;
 public class UI_SkillBar {
 
     private final MainGame mg;
-    public SKILL[] skills = new SKILL[4];
-    int skillBarX = 576, skillBarY = 1_005;
+    public final SKILL[] skills = new SKILL[4];
+    private final int skillBarX = 576;
+    private final int skillBarY = 1_005;
 
 
     public UI_SkillBar(MainGame mg) {

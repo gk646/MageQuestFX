@@ -25,13 +25,14 @@ public class UI_TalentPanel {
     private final Image talentnode_mid_purple = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/talent_mid_purple.png")));
     private final Image talentnode_big_green = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/talent_big_green.png")));
     private final Image talentnode_big_purple = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/talent_big_purple.png")));
-    public int pointsToSpend = 15, pointsSpent;
+    public int pointsToSpend = 15;
+    private int pointsSpent;
     public int talentPanelX = 960 - 16;
     public int talentPanelY = 540 - 16;
-    public TalentNode[] talent_Nodes;
-    public Rectangle wholeTalentWindow;
+    public final TalentNode[] talent_Nodes;
+    public final Rectangle wholeTalentWindow;
 
-    AdjacencyMatrix matrix = new AdjacencyMatrix();
+    private final AdjacencyMatrix matrix = new AdjacencyMatrix();
 
     public UI_TalentPanel(MainGame mg) {
         this.mg = mg;
@@ -308,9 +309,5 @@ public class UI_TalentPanel {
     public void hideTalentCollision() {
         wholeTalentWindow.x = -1_000;
         wholeTalentWindow.y = -1_000;
-    }
-
-    private void getImages() {
-
     }
 }

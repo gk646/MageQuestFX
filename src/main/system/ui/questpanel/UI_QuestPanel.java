@@ -12,10 +12,10 @@ import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
-    public Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
-    MainGame mg;
-    Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
-    Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
+    public final Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
+    private final MainGame mg;
+    private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
+    private final Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
 
 
     public UI_QuestPanel(MainGame mg) {

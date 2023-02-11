@@ -5,13 +5,13 @@ import javafx.scene.image.Image;
 
 import java.util.Objects;
 
-public class TALENT {
+class TALENT {
     public final int i_id;
-    public final String name;
-    public String description;
+    private final String name;
+    private final String description;
 
     public String imagePath;
-    public Image icon;
+    private final Image icon;
 
     public TALENT(int i_id, String name, String imagePath, String description) {
         this.i_id = i_id;

@@ -7,10 +7,10 @@ public class FonT {
 
     public static Font minecraftItalic12;
     public static Font minecraftRegular20;
-    public static Font minecraftRegular14;
+    private static Font minecraftRegular14;
     public static Font minecraftItalic15;
-    public static Font minecraftItalic17;
-    public static Font minecraftItalic30;
+    private static Font minecraftItalic17;
+    private static Font minecraftItalic30;
     public static Font minecraftBold14;
     public static Font minecraftBold30;
     public static Font minecraftBold50;
@@ -19,12 +19,12 @@ public class FonT {
     public static Font minecraftBoldItalic15;
 
     //MARU MONICA
-    public static Font maruMonica;
+    private static Font maruMonica;
 
-    public static Font maruMonica90;
+    private static Font maruMonica90;
 
     //PUBLIC PIXEL
-    public static Font publicPixel20;
+    private static Font publicPixel20;
     public static Font editUndo18;
     public static Font minecraftItalic14;
 

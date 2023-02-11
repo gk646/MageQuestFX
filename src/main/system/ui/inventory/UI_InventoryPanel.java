@@ -506,7 +506,7 @@ public class UI_InventoryPanel {
             char_Slots[i].boundBox.x = 283 + startX;
             char_Slots[i].boundBox.y = (((i - 4) * 50) + 65 + startY);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(+283 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(283 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
             char_Slots[i].drawSlot(gc, 283 + startX, (((i - 4) * 50) + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {

@@ -10,7 +10,7 @@ import main.system.ui.Effects;
 
 public class DRP_DroppedItem extends DROP {
     private final MainGame mg;
-    public Image droppedIcon;
+    private Image droppedIcon;
 
     /**
      * Rarity 1: 803/10000 (8%) <p>
@@ -45,7 +45,7 @@ public class DRP_DroppedItem extends DROP {
         droppedIcon = item.icon;
     }
 
-    public static ITEM cloneItem(ITEM item) {
+    private static ITEM cloneItem(ITEM item) {
         ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, item.quality, item.level);
         new_ITEM.icon = item.icon;
         return new_ITEM;

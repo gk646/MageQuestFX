@@ -12,7 +12,7 @@ public class DRP_Coin extends DROP {
     private Image coin3;
     private Image coin4;
 
-    public int amount;
+    public final int amount;
 
 
     public DRP_Coin(int x, int y, int amount) {
