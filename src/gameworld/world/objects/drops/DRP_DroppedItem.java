@@ -66,7 +66,7 @@ public class DRP_DroppedItem extends DROP {
     @Override
     public void draw(GraphicsContext gc) {
         setRarityEffect(gc);
-        gc.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+        gc.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
         gc.setEffect(null);
     }
 

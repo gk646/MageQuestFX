@@ -17,7 +17,6 @@ public class OBJ_Control {
     }
 
     public void checkCollisionPlayer() {
-        long time = System.nanoTime();
         for (Rectangle rect : objects_tutorial) {
             if (rect != null) {
                 if (rect.intersects(Player.worldX + mg.player.playerMovementSpeed, Player.worldY, 48, 48)) {
@@ -32,11 +31,9 @@ public class OBJ_Control {
                 }
             }
         }
-        System.out.println((System.nanoTime() - time) / 1_000);
     }
 
     public void checkCollisionEntity(ENTITY entity) {
-        long time = System.nanoTime();
         for (Rectangle rect : objects_tutorial) {
             if (rect != null) {
                 if (rect.intersects(entity.worldX + entity.movementSpeed, entity.worldY, entity.entityWidth, entity.entityHeight)) {
@@ -51,6 +48,5 @@ public class OBJ_Control {
                 }
             }
         }
-        System.out.println((System.nanoTime() - time) / 1_000);
     }
 }

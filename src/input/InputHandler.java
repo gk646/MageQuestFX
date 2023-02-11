@@ -33,6 +33,7 @@ public class InputHandler {
     public boolean e_typed;
     public boolean X_pressed;
     public boolean mouse1Pressed, mouse2Pressed;
+    public boolean shift_pressed;
 
 
     public InputHandler(MainGame mg, Scene scene) {
@@ -240,6 +241,9 @@ public class InputHandler {
             if (code == KeyCode.W) {
                 upPressed = true;
             }
+            if (code == KeyCode.SHIFT) {
+                shift_pressed = true;
+            }
             if (code == KeyCode.A) {
                 leftPressed = true;
             }
@@ -267,7 +271,6 @@ public class InputHandler {
         }
         if (code == KeyCode.H) {
             debugFps = true;
-            mg.player.mana = mg.player.maxMana;
         }
     }
 
@@ -282,6 +285,9 @@ public class InputHandler {
                 downPressed = false;
             } else if (code == KeyCode.D) {
                 rightPressed = false;
+            }
+            if (code == KeyCode.SHIFT) {
+                shift_pressed = false;
             }
             if (code == KeyCode.DIGIT1) {
                 OnePressed = false;
@@ -314,15 +320,19 @@ public class InputHandler {
         if (event.getButton() == MouseButton.PRIMARY) {
             if (mg.qPanel.expandButton.contains(lastMousePosition)) {
                 mg.qPanel.expanded = !mg.qPanel.expanded;
-            } else if (mg.inventP.combatStatsHitBox.contains(lastMousePosition)) {
-                mg.inventP.showCombatStats = true;
-            } else if (mg.inventP.effectsHitBox.contains(lastMousePosition)) {
-                mg.inventP.showCombatStats = false;
+            } else if (mg.showChar) {
+                if (mg.inventP.combatStatsHitBox.contains(lastMousePosition)) {
+                    mg.inventP.showCombatStats = true;
+                } else if (mg.inventP.effectsHitBox.contains(lastMousePosition)) {
+                    mg.inventP.showCombatStats = false;
+                }
             }
         }
     }
 
     public void handleScroll(ScrollEvent event) {
-        mg.gameMap.zoom = (float) Math.max(3, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
+        if (mg.showMap) {
+            mg.gameMap.zoom = (float) Math.max(3, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
+        }
     }
 }
