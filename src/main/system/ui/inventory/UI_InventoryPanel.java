@@ -11,6 +11,7 @@ import main.system.ui.talentpane.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 public class UI_InventoryPanel {
@@ -267,7 +268,7 @@ public class UI_InventoryPanel {
         if (grabbedITEM != null && !mg.inputH.mouse1Pressed) {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
-                    if (invSlot.boundBox.contains(mg.inputH.lastMousePosition) && invSlot.type.contains(String.valueOf(grabbedITEM.type))) {
+                    if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -287,10 +288,8 @@ public class UI_InventoryPanel {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
                         if (bagSlot.item != null) {
-                            if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
+                            if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = bagSlot.item;
-                            } else {
-                                break;
                             }
                             if (grabbedIndexBag != -1) {
                                 bag_Slots[grabbedIndexBag].item = bagSlot.item;
@@ -311,7 +310,11 @@ public class UI_InventoryPanel {
             }
             grabbedIndexChar = -1;
             grabbedIndexBag = -1;
-
+            try {
+                mg.sqLite.savePlayerInventory();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             if (grabbedITEM != null) {
                 grabbedITEM = null;
             }
@@ -581,7 +584,7 @@ public class UI_InventoryPanel {
         for (int i = 8; i <= 9; i++) {
             char_Slots[i] = new UI_InventorySlot(null, ((i - 8) * 50) + 160 + 260, 550);
         }
-        char_Slots[0].type = "H";
+        /*char_Slots[0].type = "H";
         char_Slots[1].type = "C";
         char_Slots[2].type = "P";
         char_Slots[3].type = "B";
@@ -591,6 +594,8 @@ public class UI_InventoryPanel {
         char_Slots[7].type = "T";
         char_Slots[8].type = "W2";
         char_Slots[9].type = "O";
+
+         */
     }
 
     private void createBagSlots() {

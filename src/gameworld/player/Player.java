@@ -311,6 +311,7 @@ public class Player extends ENTITY {
         collisionUp = false;
         direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
+        mg.ob_control.checkCollisionPlayer();
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
                 worldX -= playerMovementSpeed;

@@ -11,6 +11,7 @@ import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
 import gameworld.world.objects.DROP;
+import gameworld.world.objects.OBJ_Control;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
@@ -112,6 +113,7 @@ public class MainGame {
     private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
+    public OBJ_Control ob_control;
 
 
     /**
@@ -261,6 +263,7 @@ public class MainGame {
             wRender.draw(gc);
             drawDroppedItems(gc);
             prj_control.draw(gc);
+            gc.fillRect(800, 150, 48, 48);
             ent_control.draw(gc);
             npcControl.draw(gc);
             //ENTPlayer2.draw(gc);
@@ -330,6 +333,7 @@ public class MainGame {
         wControl = new WorldController(this);
         //12 %
         ui.updateLoadingScreen(12, gc);
+        this.ob_control = new OBJ_Control(this);
         wRender = new WorldRender(this);
         wControl.getWorldsData();
         wControl.makeOverWorldQuadrants();
@@ -383,19 +387,14 @@ public class MainGame {
         gameMap.getImage();
 
 
-        inventP.bag_Slots[14].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
-        inventP.bag_Slots[13].item = DRP_DroppedItem.cloneItemWithLevelQuality(MISC.get(1), 100, 60);
-        inventP.bag_Slots[11].item = DRP_DroppedItem.cloneItemWithLevelQuality(MISC.get(2), 100, 60);
-        inventP.bag_Slots[10].item = DRP_DroppedItem.cloneItemWithLevelQuality(MISC.get(3), 100, 60);
-
-
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
         }
+        inventP.bag_Slots[3].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
-       // wControl.load_OverWorldMap(450, 450);
+        // wControl.load_OverWorldMap(450, 450);
         gameState = State.TITLE;
         startThreads();
         //sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

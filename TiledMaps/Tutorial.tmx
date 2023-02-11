@@ -109,6 +109,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objektebene 1">
-  <object id="1" x="118.781" y="21.5625" width="18.6667" height="16"/>
+  <object id="1" x="373.448" y="25.5625" width="18.6667" height="16"/>
  </objectgroup>
 </map>

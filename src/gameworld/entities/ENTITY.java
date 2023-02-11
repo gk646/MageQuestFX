@@ -79,7 +79,7 @@ abstract public class ENTITY {
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-
+        mg.ob_control.checkCollisionEntity(this);
         if (enLeftX < nextX && !collisionRight) {
             worldX += movementSpeed;
         } else if (enLeftX > nextX && !collisionLeft) {

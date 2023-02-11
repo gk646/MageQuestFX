@@ -137,7 +137,7 @@ public class InputHandler {
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-                    System.exit(1);
+                    System.exit(0);
                 } else if (mg.ui.commandNum == 2) {
 
                 }

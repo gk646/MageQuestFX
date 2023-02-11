@@ -16,8 +16,6 @@ import java.util.Comparator;
 public class SQLite {
 
     private final MainGame mg;
-
-    private final int limit = 32;
     private Connection conn;
 
     public SQLite(MainGame mg) {
@@ -151,7 +149,7 @@ public class SQLite {
         }
     }
 
-    private void savePlayerInventory() throws SQLException {
+    public void savePlayerInventory() throws SQLException {
         String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?, level = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         for (int i = 0; i < 10; i++) {
@@ -217,6 +215,7 @@ public class SQLite {
         int counter = 1;
         while (rs.next()) {
             if (rs.getString("i_id") == null) {
+                counter++;
                 continue;
             }
             mg.inventP.bag_Slots[counter - 1].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
