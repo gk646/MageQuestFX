@@ -28,7 +28,6 @@ public class UI_InventoryPanel {
     public final Rectangle wholeBagWindow;
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.##");
-    private final Rectangle bagPanelCloser;
     public final Rectangle bagEquipSlotsBox;
     private final Rectangle charPanelMover;
     private final Rectangle bagPanelMover;
@@ -43,6 +42,7 @@ public class UI_InventoryPanel {
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private ITEM grabbedITEM;
     private boolean node_focused;
+    private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
 
@@ -55,8 +55,7 @@ public class UI_InventoryPanel {
         createBagSlots();
         bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
-        bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
-        bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
+        bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 355, 20);
         wholeCharWindow = new Rectangle(charPanelX - 30, charPanelY - 15, 445, 615);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         combatStatsHitBox = new Rectangle(bagPanelX, bagPanelY, 107, 15);
@@ -178,6 +177,24 @@ public class UI_InventoryPanel {
             //EFFECTS
             gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
         }
+        if (!(invSlot.item.type == 'G')) {
+            gc.setFont(FonT.minecraftItalic15);
+          /*  INT - Int
+            WIS - Wis
+            VIT - Vit
+            AGI - Agi
+            LUC - Luc
+            CHA - Cha
+            END - End
+            STR - Str
+            FOC - Foc
+            MainGame.SCREEN_HEIGHT*0.8f
+            x / 1080
+           */
+            //EFFECTS
+            gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
+            gc.fillText("Slots: " + invSlot.item.stats, startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.110f);
+        }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
         int stringY = (int) (startY - MainGame.SCREEN_HEIGHT * 0.065f);
@@ -239,6 +256,8 @@ public class UI_InventoryPanel {
             case 'W' -> gc.fillText("One-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.017f, yPosition);
             case '2' -> gc.fillText("Two-Handed", xPosition - MainGame.SCREEN_HEIGHT * 0.019f, yPosition);
             case 'O' -> gc.fillText("Offhand", xPosition - MainGame.SCREEN_HEIGHT * 0.004, yPosition);
+            case 'G' -> gc.fillText("Bag", xPosition, yPosition);
+
             default -> gc.fillText("Misc", xPosition, yPosition);
         }
     }
@@ -307,6 +326,24 @@ public class UI_InventoryPanel {
                 }
             }
         }
+        if (grabbedITEM == null && showBagEquipSlots) {
+            for (int i = 0; i < bagEquipSlots.length; i++) {
+                if (bagEquipSlots[i].boundBox.contains(mg.inputH.lastMousePosition) && bagEquipSlots[i].item != null) {
+                    if (mg.inputH.X_pressed) {
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bagEquipSlots[i].item));
+                        removeBagSlots(Integer.parseInt(bagEquipSlots[i].item.stats));
+                        bagEquipSlots[i].item = null;
+                        break;
+                    } else if (mg.inputH.mouse1Pressed) {
+                        bagEquipSlots[i].grabbed = true;
+                        grabbedITEM = bagEquipSlots[i].item;
+                        grabbedBagEquipIndex = i;
+                        removeBagSlots(Integer.parseInt(bagEquipSlots[i].item.stats));
+                        bagEquipSlots[i].item = null;
+                    }
+                }
+            }
+        }
         if (grabbedITEM != null && !mg.inputH.mouse1Pressed) {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
@@ -332,8 +369,6 @@ public class UI_InventoryPanel {
                         if (bagSlot.item != null) {
                             if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
                                 char_Slots[grabbedIndexChar].item = bagSlot.item;
-                            } else {
-                                break;
                             }
                             if (grabbedIndexBag != -1) {
                                 bag_Slots.get(grabbedIndexBag).item = bagSlot.item;
@@ -346,19 +381,37 @@ public class UI_InventoryPanel {
                     bagSlot.grabbed = false;
                 }
             }
+            if (showBagEquipSlots) {
+                for (UI_InventorySlot equipBag : bagEquipSlots) {
+                    if (equipBag.boundBox.contains(mg.inputH.lastMousePosition) && grabbedITEM != null) {
+                        if (equipBag.item == null && grabbedITEM.type == 'G') {
+                            equipBag.item = grabbedITEM;
+                            addBagSlots(Integer.parseInt(grabbedITEM.stats));
+                            grabbedITEM = null;
+                        }
+                    }
+                    equipBag.grabbed = false;
+                }
+            }
             if (grabbedIndexChar != -1 && grabbedITEM != null) {
                 char_Slots[grabbedIndexChar].item = grabbedITEM;
             }
             if (grabbedIndexBag != -1 && grabbedITEM != null) {
                 bag_Slots.get(grabbedIndexBag).item = grabbedITEM;
             }
+            if (grabbedBagEquipIndex != -1 && grabbedITEM != null) {
+                bagEquipSlots[grabbedBagEquipIndex].item = grabbedITEM;
+                addBagSlots(Integer.parseInt(bagEquipSlots[grabbedBagEquipIndex].item.stats));
+            }
             grabbedIndexChar = -1;
             grabbedIndexBag = -1;
+            grabbedBagEquipIndex = -1;
             if (grabbedITEM != null) {
                 grabbedITEM = null;
             }
         }
     }
+
 
     public void interactWithWindows() {
         if (char_Slots[8].item != null && char_Slots[8].item.type == '2') {
@@ -375,8 +428,6 @@ public class UI_InventoryPanel {
         } else if (mg.inputH.mouse1Pressed && bagPanelMover.contains(mg.inputH.lastMousePosition)) {
             bagPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
-            bagPanelMover.x = bagPanelX;
-            bagPanelMover.y = bagPanelY - 10;
         } else if (mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             for (TalentNode node : mg.talentP.talent_Nodes) {
                 if (node != null) {
@@ -526,13 +577,14 @@ public class UI_InventoryPanel {
     }
 
     private void drawBagBackground(GraphicsContext gc, int startX, int startY) {
-        wholeBagWindow.x = startX;
-        wholeBagWindow.y = startY;
-
         //background
         if (showBagEquipSlots) {
+            wholeBagWindow.x = startX;
+            wholeBagWindow.y = startY - 30;
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 1;
+            bagPanelMover.x = startX + 5;
+            bagPanelMover.y = startY - 25;
             gc.setFill(Colors.LightGrey);
             gc.fillRoundRect(startX, startY - 30, 365, 440, 25, 25);
             //background header
@@ -558,13 +610,21 @@ public class UI_InventoryPanel {
                 gc.fillRoundRect(i * 26 + startX + 11, startY + 26, 25, 25, 15, 15);
                 setRarityColor(gc, bagEquipSlots[i]);
                 bagEquipSlots[i].drawSlot(gc, i * 26 + startX + 11, startY + 26);
-                if (bagEquipSlots[i] != null && !bagEquipSlots[i].grabbed) {
+                if (bagEquipSlots[i].item != null && !bagEquipSlots[i].grabbed) {
                     bagEquipSlots[i].drawIcon(gc, i * 26 + startX + 11, startY + 26, 25);
                 }
             }
         } else {
+            for (int i = 0; i < 4; i++) {
+                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11 + 1000;
+                bagEquipSlots[i].boundBox.y = startY + 26 + 1000;
+            }
+            wholeBagWindow.x = startX;
+            wholeBagWindow.y = startY;
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 31;
+            bagPanelMover.x = startX + 5;
+            bagPanelMover.y = startY + 3;
             gc.setFill(Colors.LightGrey);
             gc.fillRoundRect(startX, startY, 365, 410, 25, 25);
             //background header
@@ -663,12 +723,26 @@ public class UI_InventoryPanel {
     }
 
     private void createBagSlots() {
-        for (int i = 0; i <= 15; i++) {
+        for (int i = 0; i < 14; i++) {
             bag_Slots.add(new UI_InventorySlot(null, (i * 50) + 810, 330));
+        }
+        for (int i = 0; i < 4; i++) {
+            bagEquipSlots[i] = new UI_InventorySlot(null, 700, 700, 25);
         }
     }
 
     public void addBagSlots(int size) {
-        bag_Slots.add(new UI_InventorySlot(null, 1, 1));
+        for (int i = 0; i < size; i++) {
+            bag_Slots.add(new UI_InventorySlot(null, 1, 1));
+        }
+    }
+
+    private void removeBagSlots(int size) {
+        for (int i = 1; i <= size; i++) {
+            if (bag_Slots.get(bag_Slots.size() - 1).item != null) {
+                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(bag_Slots.size() - 1).item));
+            }
+            bag_Slots.remove(bag_Slots.size() - 1);
+        }
     }
 }

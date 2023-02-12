@@ -28,6 +28,7 @@ public class ITEM {
        2 - two hand
        O - offhand
 
+       G - Bag
      */
     public final String imagePath;
     public int quality;

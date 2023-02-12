@@ -19,7 +19,7 @@ public class UI_InventorySlot {
     }
 
     UI_InventorySlot(ITEM item, int xCo, int yCo, int size) {
-        this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
+        this.boundBox = new Rectangle(xCo, yCo, size, size);
         this.item = item;
         this.SLOT_SIZE = size;
     }

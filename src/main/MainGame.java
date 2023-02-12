@@ -73,6 +73,7 @@ public class MainGame {
     public final ArrayList<ITEM> RELICS = new ArrayList<>();
     public final ArrayList<ITEM> RINGS = new ArrayList<>();
     public final ArrayList<ITEM> TWOHANDS = new ArrayList<>();
+    public final ArrayList<ITEM> BAGS = new ArrayList<>();
     public final ArrayList<ITEM> MISC = new ArrayList<>();
 
     public final int tileSize = 48;
@@ -391,7 +392,8 @@ public class MainGame {
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
         }
-        // inventP.bag_Slots[3].item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
+        inventP.bag_Slots.get(3).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
+        inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
@@ -406,7 +408,7 @@ public class MainGame {
      * Prints out the total item count across all categories
      */
     private void countItems() {
-        System.out.println(-12 + MISC.size() + AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
+        System.out.println(-12 + MISC.size() + BAGS.size() + AMULET.size() + BOOTS.size() + CHEST.size() + HEAD.size() + OFFHAND.size() + ONEHAND.size() + PANTS.size() + RELICS.size() + RINGS.size() + TWOHANDS.size() + " total Items!");
     }
 
     /**

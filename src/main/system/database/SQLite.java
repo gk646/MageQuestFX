@@ -39,6 +39,7 @@ public class SQLite {
             searchRELICS(stmt);
             searchRINGS(stmt);
             searchTWOHANDS(stmt);
+            searchBAGS(stmt);
             searchMISC(stmt);
             inverseArrayLists();
             readPlayerInventory(stmt);
@@ -183,6 +184,7 @@ public class SQLite {
         mg.RELICS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.RINGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
+        mg.BAGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.MISC.sort(Comparator.comparingInt(o -> o.i_id));
         mg.AMULET.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
@@ -194,6 +196,7 @@ public class SQLite {
         mg.RELICS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.RINGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.BAGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
         mg.MISC.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
     }
 
@@ -473,6 +476,20 @@ public class SQLite {
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.MISC.add(0, new_ITEM);
+        }
+    }
+
+    private void searchBAGS(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ITEM_BAG");
+        while (rs.next()) {
+            if (rs.getString("name") == null) {
+                continue;
+            }
+            //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            new_ITEM.description = insertNewLine(new_ITEM.description);
+            new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
+            mg.BAGS.add(0, new_ITEM);
         }
     }
 }
