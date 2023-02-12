@@ -130,8 +130,8 @@ public class SQLite {
     private void saveBagInventory() throws SQLException {
         String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 1; i <= mg.inventP.bag_Slots.length; i++) {
-            if (mg.inventP.bag_Slots[i - 1].item == null) {
+        for (int i = 1; i <= mg.inventP.bag_Slots.size(); i++) {
+            if (mg.inventP.bag_Slots.get(i - 1).item == null) {
                 stmt.setNull(1, Types.INTEGER);
                 stmt.setString(2, null);
                 stmt.setNull(3, Types.INTEGER);
@@ -140,10 +140,10 @@ public class SQLite {
                 stmt.executeUpdate();
                 continue;
             }
-            stmt.setInt(1, mg.inventP.bag_Slots[i - 1].item.i_id);
-            stmt.setString(2, String.valueOf(mg.inventP.bag_Slots[i - 1].item.type));
-            stmt.setInt(3, mg.inventP.bag_Slots[i - 1].item.quality);
-            stmt.setInt(4, mg.inventP.bag_Slots[i - 1].item.level);
+            stmt.setInt(1, mg.inventP.bag_Slots.get(i - 1).item.i_id);
+            stmt.setString(2, String.valueOf(mg.inventP.bag_Slots.get(i - 1).item.type));
+            stmt.setInt(3, mg.inventP.bag_Slots.get(i - 1).item.quality);
+            stmt.setInt(4, mg.inventP.bag_Slots.get(i - 1).item.level);
             stmt.setInt(5, i);
             stmt.executeUpdate();
         }
@@ -218,7 +218,7 @@ public class SQLite {
                 counter++;
                 continue;
             }
-            mg.inventP.bag_Slots[counter - 1].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
+            mg.inventP.bag_Slots.get(counter - 1).item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
             counter++;
         }
     }
