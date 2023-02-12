@@ -7,7 +7,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 public class TalentNode {
-    public final Rectangle boundBox;
+    public Rectangle boundBox;
     private final TALENT talent;
     public final Point position;
     public boolean activated;
@@ -23,12 +23,20 @@ public class TalentNode {
         this.id = talent.i_id;
     }
 
-    TalentNode(TALENT talent, int xCo, int yCo, int size) {
-        this.boundBox = new Rectangle(944 + xCo, 524 + yCo, 32, 32);
+    TalentNode(TALENT talent, int xCo, int yCo, int size, int activated) {
+        this.size = size;
+        if (size == 0) {
+            this.boundBox = new Rectangle(944 + xCo, 524 + yCo, 32, 32);
+        } else if (size == 2) {
+            this.boundBox = new Rectangle(941 + xCo, 521 + yCo, 38, 38);
+        } else if (size == 1) {
+            this.boundBox = new Rectangle(937 + xCo, 517 + yCo, 45, 45);
+        }
+
         this.talent = talent;
         this.position = new Point(xCo, yCo);
         this.id = talent.i_id;
-        this.size = size;
+        this.activated = activated == 1;
     }
 
 

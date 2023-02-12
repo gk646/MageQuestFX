@@ -1,42 +1,80 @@
-  switch (bagSlot.item.type) {
-                            case 'H':
-                                if (char_Slots[0].item != null) {
-                                    getTooltip(gc, char_Slots[0], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'C':
-                                if (char_Slots[1].item != null) {
-                                    getTooltip(gc, char_Slots[1], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'P':
-                                if (char_Slots[2].item != null) {
-                                    getTooltip(gc, char_Slots[2], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'B':
-                                if (char_Slots[3].item != null) {
-                                    getTooltip(gc, char_Slots[3], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'A':
-                                if (char_Slots[4].item != null) {
-                                    getTooltip(gc, char_Slots[4], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.));
-                                }
-                            case 'R':
-                                if (char_Slots[5].item != null) {
-                                    getTooltip(gc, char_Slots[5], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'T':
-                                if (char_Slots[7].item != null) {
-                                    getTooltip(gc, char_Slots[7], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'W':
-                                if (char_Slots[8].item != null) {
-                                    getTooltip(gc, char_Slots[8], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case '2':
-                                if (char_Slots[8].item != null) {
-                                    getTooltip(gc, char_Slots[9], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                            case 'O':
-                                if (char_Slots[9].item != null) {
-                                    getTooltip(gc, char_Slots[10], (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.238), (int) (mg.inputH.lastMousePosition.y));
-                                }
-                        }
+1,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-100,0
+0,Increasemaximummana,mana.png,Increasesmaximummanaby5%,0,100
+4,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-64,169
+5,Increasemaximummana,mana.png,Increasesmaximummanaby5%,64,169
+6,Increasemaximummana,mana.png,Increasesmaximummanaby5%,124,236
+7,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-124,236
+2,Increasemaximummana,health.png,Increasesmaximummanaby5%,0,-100
+8,Increasemaximummana,glowing_health.png,Increasesmaximummanaby5%,62,-160
+9,Increasemaximummana,glowing_health2.png,Increasesmaximummanaby5%,-62,-160
+14,Increasemaximummana,glowing_health2.png,Increasesmaximummanaby5%,-115,-223
+10,Increasemaximummana,glowing_health.png,Increasesmaximummanaby5%,-50,-267
+11,Increasemaximummana,mana.png,Increasesmaximummanaby5%,0,-220,1
+12,Increasemaximummana,mana.png,Increasesmaximummanaby5%,50,-267
+13,Increasemaximummana,mana.png,Increasesmaximummanaby5%,115,-223
+15,Increasemaximummana,mana.png,Increasesmaximummanaby5%,0,-325,2
+3,Increasemaximummana,mana.png,Increasesmaximummanaby5%,100,0
+16,Increasemaximummana,mana.png,Increasesmaximummanaby5%,158,-62
+17,Increasemaximummana,mana.png,Increasesmaximummanaby5%,224,-134
+18,Increasemaximummana,mana.png,Increasesmaximummanaby5%,285,-195
+19,Increasemaximummana,mana.png,Increasesmaximummanaby5%,231,-243,2
+20,Increasemaximummana,mana.png,Increasesmaximummanaby5%,175,-285
+21,Increasemaximummana,mana.png,Increasesmaximummanaby5%,234,-354
+22,Increasemaximummana,mana.png,Increasesmaximummanaby5%,298,-422
+23,Increasemaximummana,mana.png,Increasesmaximummanaby5%,188,306
+24,Increasemaximummana,mana.png,Increasesmaximummanaby5%,242,258,2
+25,Increasemaximummana,mana.png,Increasesmaximummanaby5%,295,211
+26,Increasemaximummana,mana.png,Increasesmaximummanaby5%,228,138
+27,Increasemaximummana,mana.png,Increasesmaximummanaby5%,160,69
+28,Increasemaximummana,mana.png,Increasesmaximummanaby5%,350,163
+29,Increasemaximummana,mana.png,Increasesmaximummanaby5%,350,78
+30,Increasemaximummana,mana.png,Increasesmaximummanaby5%,298,0,2
+31,Increasemaximummana,mana.png,Increasesmaximummanaby5%,230,0,1
+32,Increasemaximummana,mana.png,Increasesmaximummanaby5%,430,37
+33,Increasemaximummana,mana.png,Increasesmaximummanaby5%,430,-37
+34,Increasemaximummana,mana.png,Increasesmaximummanaby5%,350,-78
+35,Increasemaximummana,mana.png,Increasesmaximummanaby5%,350,-164
+36,Increasemaximummana,mana.png,Increasesmaximummanaby5%,454,-164
+37,Increasemaximummana,mana.png,Increasesmaximummanaby5%,558,-164
+38,Increasemaximummana,mana.png,Increasesmaximummanaby5%,664,-164
+39,Increasemaximummana,mana.png,Increasesmaximummanaby5%,765,-164
+40,Increasemaximummana,mana.png,Increasesmaximummanaby5%,870,-164
+41,Increasemaximummana,mana.png,Increasesmaximummanaby5%,454,163
+42,Increasemaximummana,mana.png,Increasesmaximummanaby5%,558,163
+43,Increasemaximummana,mana.png,Increasesmaximummanaby5%,661,163
+44,Increasemaximummana,mana.png,Increasesmaximummanaby5%,765,163
+45,Increasemaximummana,mana.png,Increasesmaximummanaby5%,870,163
+46,Increasemaximummana,mana.png,Increasesmaximummanaby5%,765,90
+47,Increasemaximummana,mana.png,Increasesmaximummanaby5%,836,90,2
+48,Increasemaximummana,mana.png,Increasesmaximummanaby5%,907,90,1
+49,Increasemaximummana,mana.png,Increasesmaximummanaby5%,608,103
+50,Increasemaximummana,mana.png,Increasesmaximummanaby5%,560,35
+51,Increasemaximummana,mana.png,Increasesmaximummanaby5%,560,-35
+52,Increasemaximummana,mana.png,Increasesmaximummanaby5%,608,-97
+53,Increasemaximummana,mana.png,Increasesmaximummanaby5%,658,-35
+54,Increasemaximummana,mana.png,Increasesmaximummanaby5%,658,35
+55,Increasemaximummana,mana.png,Increasesmaximummanaby5%,816,-111
+56,Increasemaximummana,mana.png,Increasesmaximummanaby5%,757,-52
+57,Increasemaximummana,mana.png,Increasesmaximummanaby5%,816,6,2
+58,Increasemaximummana,mana.png,Increasesmaximummanaby5%,875,-52
+59,Increasemaximummana,mana.png,Increasesmaximummanaby5%,816,-52,1
+60,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-163,-67
+61,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-225,-135
+62,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-290,-207
+63,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-352,-267
+64,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-348,-157
+65,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-403,-107
+66,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-482,-51
+67,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-340,-51
+68,BloodRune,blood_rune.png,Increasesmaximummanaby5%,-427,0,1
+69,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-484,51
+70,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-406,103
+71,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-340,51
+72,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-350,160
+73,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-290,207
+74,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-225,135
+75,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-163,67
+76,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-200,0
+77,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-277,0
+78,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-242,259,2
+79,Increasemaximummana,mana.png,Increasesmaximummanaby5%,-188,306

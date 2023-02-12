@@ -16,7 +16,7 @@ import java.util.Comparator;
 public class SQLite {
 
     private final MainGame mg;
-    private Connection conn;
+    public Connection conn;
 
     public SQLite(MainGame mg) {
         this.mg = mg;

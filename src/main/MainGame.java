@@ -363,7 +363,7 @@ public class MainGame {
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
         random = new Random(seed);
-
+        talentP.createTalentNodes();
         //72%
         ui.updateLoadingScreen(12, gc);
         pathF = new PathFinder(this);
