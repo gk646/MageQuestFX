@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 
 public class UI_InventorySlot {
     public final Rectangle boundBox;
-    private final int SLOT_SIZE = 45;
+    private int SLOT_SIZE = 45;
     public boolean grabbed;
     public ITEM item;
     public int toolTipTimer;
@@ -16,6 +16,12 @@ public class UI_InventorySlot {
     UI_InventorySlot(ITEM item, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
         this.item = item;
+    }
+
+    UI_InventorySlot(ITEM item, int xCo, int yCo, int size) {
+        this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
+        this.item = item;
+        this.SLOT_SIZE = size;
     }
 
 

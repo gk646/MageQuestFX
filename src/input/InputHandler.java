@@ -327,6 +327,9 @@ public class InputHandler {
                     mg.inventP.showCombatStats = false;
                 }
             }
+            if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mg.inputH.lastMousePosition)) {
+                mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+            }
         }
     }
 

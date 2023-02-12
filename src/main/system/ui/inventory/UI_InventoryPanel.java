@@ -23,12 +23,14 @@ public class UI_InventoryPanel {
     private static final int CHAR_SLOTS = 10;
     public final UI_InventorySlot[] char_Slots;
     public final ArrayList<UI_InventorySlot> bag_Slots = new ArrayList<>();
+    public final UI_InventorySlot[] bagEquipSlots;
     public final Rectangle wholeCharWindow;
     public final Rectangle wholeBagWindow;
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.##");
     private final Rectangle bagPanelCloser;
-    private final Rectangle charPanelMover, bagEquipSlots;
+    public final Rectangle bagEquipSlotsBox;
+    private final Rectangle charPanelMover;
     private final Rectangle bagPanelMover;
     public final Rectangle effectsHitBox;
     public boolean showCombatStats = true;
@@ -41,15 +43,17 @@ public class UI_InventoryPanel {
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private ITEM grabbedITEM;
     private boolean node_focused;
+    public boolean showBagEquipSlots;
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
         char_Slots = new UI_InventorySlot[CHAR_SLOTS];
+        bagEquipSlots = new UI_InventorySlot[4];
         grabbedITEM = null;
         createCharSlots();
         createBagSlots();
-        bagEquipSlots = new Rectangle(charPanelX, charPanelY, 24, 24);
+        bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 365, 50);
         bagPanelCloser = new Rectangle(bagPanelX, bagPanelY, 30, 30);
@@ -391,14 +395,6 @@ public class UI_InventoryPanel {
                 mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
                 mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             }
-        } else if (mg.inputH.mouse2Pressed && mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
-            mg.talentP.talentPanelX = 960 - 16;
-            mg.talentP.talentPanelY = 540 - 16;
-            for (TalentNode node : mg.talentP.talent_Nodes) {
-                if (node != null) {
-                    node.activated = false;
-                }
-            }
         }
         previousMousePosition.x = mg.inputH.lastMousePosition.x;
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
@@ -532,29 +528,64 @@ public class UI_InventoryPanel {
     private void drawBagBackground(GraphicsContext gc, int startX, int startY) {
         wholeBagWindow.x = startX;
         wholeBagWindow.y = startY;
-        bagEquipSlots.x = startX + 11;
-        bagEquipSlots.y = startY + 31;
-        //background
-        gc.setFill(Colors.LightGrey);
-        gc.fillRoundRect(startX, startY, 365, 410, 25, 25);
-        //background header
-        gc.setFont(FonT.minecraftBold14);
-        gc.setFill(Colors.mediumLightGrey);
-        gc.fillRoundRect(startX + 5, startY + 5, 355, 20, 15, 15);
 
-        gc.setLineWidth(3);
-        gc.setStroke(Colors.darkBackground);
-        //header outline
-        gc.strokeRoundRect(startX + 5, startY + 5, 355, 20, 15, 15);
-        //outline
-        gc.strokeRoundRect(startX + 5, startY + 5, 355, 400, 15, 15);
-        gc.setLineWidth(2);
-        //feature pane
-        // gc.strokeRoundRect(startX + 5, startY + 31, 355, 18, 15, 15);
-        gc.setFill(Colors.darkBackground);
-        gc.fillText("Bags", startX + 160, startY + 19);
-        gc.strokeRoundRect(startX + 10, startY + 30, 25, 25, 5, 5);
-        gc.drawImage(bag, startX + 11, startY + 31);
+        //background
+        if (showBagEquipSlots) {
+            bagEquipSlotsBox.x = startX + 11;
+            bagEquipSlotsBox.y = startY + 1;
+            gc.setFill(Colors.LightGrey);
+            gc.fillRoundRect(startX, startY - 30, 365, 440, 25, 25);
+            //background header
+            gc.setFont(FonT.minecraftBold14);
+            gc.setFill(Colors.mediumLightGrey);
+            gc.fillRoundRect(startX + 5, startY - 25, 355, 20, 15, 15);
+            gc.setLineWidth(3);
+            gc.setStroke(Colors.darkBackground);
+            //header outline
+            gc.strokeRoundRect(startX + 5, startY - 25, 355, 20, 15, 15);
+            //outline
+            gc.strokeRoundRect(startX + 5, startY - 25, 355, 430, 15, 15);
+            gc.setLineWidth(2);
+            //feature pane
+            gc.setFill(Colors.darkBackground);
+            gc.fillText("Bags", startX + 160, startY - 11);
+            gc.strokeRoundRect(startX + 10, startY, 25, 25, 5, 5);
+            gc.drawImage(bag, startX + 11, startY + 1);
+            for (int i = 0; i < 4; i++) {
+                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11;
+                bagEquipSlots[i].boundBox.y = startY + 26;
+                gc.setFill(Colors.mediumVeryLight);
+                gc.fillRoundRect(i * 26 + startX + 11, startY + 26, 25, 25, 15, 15);
+                setRarityColor(gc, bagEquipSlots[i]);
+                bagEquipSlots[i].drawSlot(gc, i * 26 + startX + 11, startY + 26);
+                if (bagEquipSlots[i] != null && !bagEquipSlots[i].grabbed) {
+                    bagEquipSlots[i].drawIcon(gc, i * 26 + startX + 11, startY + 26, 25);
+                }
+            }
+        } else {
+            bagEquipSlotsBox.x = startX + 11;
+            bagEquipSlotsBox.y = startY + 31;
+            gc.setFill(Colors.LightGrey);
+            gc.fillRoundRect(startX, startY, 365, 410, 25, 25);
+            //background header
+            gc.setFont(FonT.minecraftBold14);
+            gc.setFill(Colors.mediumLightGrey);
+            gc.fillRoundRect(startX + 5, startY + 5, 355, 20, 15, 15);
+
+            gc.setLineWidth(3);
+            gc.setStroke(Colors.darkBackground);
+            //header outline
+            gc.strokeRoundRect(startX + 5, startY + 5, 355, 20, 15, 15);
+            //outline
+            gc.strokeRoundRect(startX + 5, startY + 5, 355, 400, 15, 15);
+            gc.setLineWidth(2);
+            //feature pane
+            // gc.strokeRoundRect(startX + 5, startY + 31, 355, 18, 15, 15);
+            gc.setFill(Colors.darkBackground);
+            gc.fillText("Bags", startX + 160, startY + 19);
+            gc.strokeRoundRect(startX + 10, startY + 30, 25, 25, 5, 5);
+            gc.drawImage(bag, startX + 11, startY + 31);
+        }
     }
 
     private void drawBagSlots(GraphicsContext gc, int startX, int startY) {
