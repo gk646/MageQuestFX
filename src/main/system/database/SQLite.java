@@ -113,10 +113,18 @@ public class SQLite {
     }
 
 
-    public void savePlayerData() throws SQLException {
-        savePlayerInventory();
-        saveBagInventory();
-        savePlayerStats();
+    public void savePlayerData() {
+        mg.ui.drawSaveMessage = true;
+
+        try {
+            savePlayerInventory();
+
+            saveBagInventory();
+
+            savePlayerStats();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void savePlayerStats() throws SQLException {

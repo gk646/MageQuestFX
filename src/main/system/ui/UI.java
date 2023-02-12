@@ -22,7 +22,9 @@ public class UI {
     InnerShadow innerShadow = new InnerShadow(5, Colors.XPBarBlue);
     private Image playerUI;
     private int loadingProgress = 0;
+    public int saveMessageStage;
     public float credits_scroll = 0;
+    public boolean drawSaveMessage;
 
 
     public UI(MainGame mainGame) {
@@ -38,6 +40,9 @@ public class UI {
             drawGameUI(gc);
         } else if (mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) {
             drawOptions(gc);
+            if (drawSaveMessage) {
+                drawSaveMessage(gc);
+            }
         } else if (mg.gameState == State.TITLE && !mg.credits) {
             drawTitleScreen(gc);
         } else if (mg.gameState == State.GAMEOVER) {
@@ -137,21 +142,57 @@ public class UI {
 
 
     private void drawOptions(GraphicsContext gc) {
-        gc.setStroke(Colors.LightGreyAlpha);
+        gc.setFill(Colors.LightGreyAlpha);
         gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
-        // gc.setFont(gc.getFont().deriveFont(Font.BOLD, 59f));
-        gc.setStroke(Colors.darkBackground);
-        gc.fillText("Settings", MainGame.SCREEN_HEIGHT * 0.092f, MainGame.SCREEN_HEIGHT * 0.092f);
-        // gc.setFont(gc.getFont().deriveFont(30f));
-        gc.fillText("Framerate: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
+        gc.setFont(FonT.minecraftBold50);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Settings", MainGame.SCREEN_HEIGHT * 0.092f, MainGame.SCREEN_HEIGHT * 0.132f);
+        gc.setFont(FonT.minecraftBold30);
+        gc.fillText("Gameplay", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.302f);
+        gc.fillText("Video Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.352f);
+        gc.fillText("Sound Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.402f);
+        gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.452f);
+        gc.fillText("Manual Save", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
+        gc.fillText("Quit Game", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.552f);
+        /*
+        gc.fillText("Framerate: 120FPS locked", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
         gc.fillText("Network Settings: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.416f);
         gc.fillText("Quit Game?", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.648f);
+
+         */
         if (commandNum == 0) {
-            gc.fillText(">", 450 - 25, 700);
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.302f);
+        } else if (commandNum == 1) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.352f);
+        } else if (commandNum == 2) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.402f);
+        } else if (commandNum == 3) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.452f);
+        } else if (commandNum == 4) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.502f);
+        } else if (commandNum == 5) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.552f);
         }
-        if (commandNum == 1) {
-            gc.fillText(">", 500 - 25, 700);
+    }
+
+    private void drawSaveMessage(GraphicsContext gc) {
+
+        if (saveMessageStage < 40) {
+            gc.fillText("Saving Game", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+        } else if (saveMessageStage < 80) {
+            gc.fillText("Saving Game.", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+        } else if (saveMessageStage < 120) {
+            gc.fillText("Saving Game..", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+        } else if (saveMessageStage < 150) {
+            gc.fillText("Saving Game...", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+        } else if (saveMessageStage > 150) {
+            gc.fillText("Game Saved!", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+            if (saveMessageStage >= 360) {
+                drawSaveMessage = false;
+                saveMessageStage = 0;
+            }
         }
+        saveMessageStage++;
     }
 
     private void drawLoadingScreen(GraphicsContext gc) {

@@ -13,7 +13,6 @@ import main.MainGame;
 import main.system.enums.State;
 
 import java.awt.Point;
-import java.sql.SQLException;
 
 public class InputHandler {
     public static InputHandler instance;
@@ -93,26 +92,28 @@ public class InputHandler {
             if (code.equals(("w"))) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 0;
+                    mg.ui.commandNum = 5;
                 }
             }
             if (code.equals(("s"))) {
                 mg.ui.commandNum++;
-                if (mg.ui.commandNum > 2) {
-                    mg.ui.commandNum = 2;
+                if (mg.ui.commandNum > 5) {
+                    mg.ui.commandNum = 0;
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
-                } else if (mg.ui.commandNum == 1) {
-                    mg.gameState = State.PLAY;
-                } else if (mg.ui.commandNum == 2) {
-                    System.exit(1);
+                } else if (mg.ui.commandNum == 4) {
+                    mg.sqLite.savePlayerData();
+                } else if (mg.ui.commandNum == 5) {
+                    Platform.exit();
+                    System.exit(0);
                 }
             }
+
             if (code.equals("\u001B")) {
                 mg.gameState = State.TITLE;
-                mg.ui.commandNum = 0;
+                mg.ui.commandNum = 1;
             }
         }
         if (mg.gameState == State.OPTION) {
@@ -123,24 +124,18 @@ public class InputHandler {
                 }
             }
             if (code.equals(("s"))) {
-
                 mg.ui.commandNum++;
-                if (mg.ui.commandNum > 2) {
-                    mg.ui.commandNum = 2;
+                if (mg.ui.commandNum > 5) {
+                    mg.ui.commandNum = 0;
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
-                    mg.wControl.load_OverWorldMap(495, 495);
-                } else if (mg.ui.commandNum == 1) {
-                    try {
-                        mg.sqLite.savePlayerData();
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                } else if (mg.ui.commandNum == 4) {
+                    mg.sqLite.savePlayerData();
+                } else if (mg.ui.commandNum == 5) {
+                    Platform.exit();
                     System.exit(0);
-                } else if (mg.ui.commandNum == 2) {
-
                 }
             }
         }
@@ -156,6 +151,10 @@ public class InputHandler {
             } else if (mg.gameState == State.PLAY) {
                 scene.setCursor(Cursor.HAND);
                 mg.gameState = State.OPTION;
+                leftPressed = false;
+                upPressed = false;
+                rightPressed = false;
+                downPressed = false;
                 try {
                     Thread.sleep(15);
                 } catch (InterruptedException ex) {
