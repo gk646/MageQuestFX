@@ -65,7 +65,6 @@ public class UI {
         gc.fillText("Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", 200, credits_scroll - 105);
         gc.fillText("Item icons: DALL·E  / Image generation AI by OpenAI", 200, credits_scroll - 140);
         credits_scroll += 0.25;
-
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
 

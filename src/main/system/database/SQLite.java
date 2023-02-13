@@ -46,6 +46,7 @@ public class SQLite {
             readPlayerStats(stmt);
             readPlayerBags(stmt);
             readStartLevel(stmt);
+            readPlayerBagEquip(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -115,12 +116,9 @@ public class SQLite {
 
     public void savePlayerData() {
         mg.ui.drawSaveMessage = true;
-
         try {
             savePlayerInventory();
-
             saveBagInventory();
-
             savePlayerStats();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -178,6 +176,23 @@ public class SQLite {
             stmt.setInt(5, i + 1);
             stmt.executeUpdate();
         }
+        for (int i = 0; i < 4; i++) {
+            if (mg.inventP.bagEquipSlots[i].item == null) {
+                stmt.setNull(1, Types.INTEGER);
+                stmt.setString(2, null);
+                stmt.setNull(3, Types.INTEGER);
+                stmt.setNull(4, Types.INTEGER);
+                stmt.setInt(5, i + 10);
+                stmt.executeUpdate();
+                continue;
+            }
+            stmt.setInt(1, mg.inventP.bagEquipSlots[i].item.i_id);
+            stmt.setString(2, String.valueOf(mg.inventP.bagEquipSlots[i].item.type));
+            stmt.setInt(3, mg.inventP.bagEquipSlots[i].item.quality);
+            stmt.setInt(4, mg.inventP.bagEquipSlots[i].item.level);
+            stmt.setInt(5, i + 10);
+            stmt.executeUpdate();
+        }
     }
 
 
@@ -209,17 +224,32 @@ public class SQLite {
     }
 
     private void readPlayerInventory(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_INV");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM  PLAYER_INV");
         int counter = 0;
         while (rs.next()) {
             if (rs.getString("i_id") == null) {
                 counter++;
                 continue;
+            } else if (rs.getRow() >= 10) {
+                break;
             }
             mg.inventP.char_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
             counter++;
         }
     }
+
+    private void readPlayerBagEquip(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM  PLAYER_INV");
+        while (rs.next()) {
+            if (rs.getRow() < 10 || rs.getString("i_id") == null) {
+                continue;
+            } else if (rs.getRow() >= 13) {
+                break;
+            }
+            mg.inventP.bagEquipSlots[rs.getRow() - 10].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
+        }
+    }
+
 
     private void readPlayerBags(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");
@@ -323,6 +353,22 @@ public class SQLite {
                 break;
             case "2":
                 for (ITEM item : mg.TWOHANDS) {
+                    if (item.i_id == i_id) {
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        return new_ITEM;
+                    }
+                }
+                break;
+            case "G":
+                for (ITEM item : mg.BAGS) {
+                    if (item.i_id == i_id) {
+                        new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                        return new_ITEM;
+                    }
+                }
+                break;
+            case "M":
+                for (ITEM item : mg.MISC) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
                         return new_ITEM;

@@ -134,6 +134,7 @@ public class InputHandler {
                 } else if (mg.ui.commandNum == 4) {
                     mg.sqLite.savePlayerData();
                 } else if (mg.ui.commandNum == 5) {
+                    mg.sqLite.savePlayerData();
                     Platform.exit();
                     System.exit(0);
                 }
@@ -155,6 +156,10 @@ public class InputHandler {
                 upPressed = false;
                 rightPressed = false;
                 downPressed = false;
+                mg.showBag = false;
+                mg.showChar = false;
+                mg.showMap = false;
+                mg.showTalents = false;
                 try {
                     Thread.sleep(15);
                 } catch (InterruptedException ex) {
@@ -328,6 +333,11 @@ public class InputHandler {
             }
             if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mg.inputH.lastMousePosition)) {
                 mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+                if (mg.inventP.showBagEquipSlots) {
+                    mg.inventP.bagPanelMover.y -= 30;
+                } else {
+                    mg.inventP.bagPanelMover.y += 30;
+                }
             }
         }
     }

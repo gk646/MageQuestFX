@@ -30,7 +30,7 @@ public class UI_InventoryPanel {
     private final DecimalFormat df = new DecimalFormat("#.##");
     public final Rectangle bagEquipSlotsBox;
     private final Rectangle charPanelMover;
-    private final Rectangle bagPanelMover;
+    public final Rectangle bagPanelMover;
     public final Rectangle effectsHitBox;
     public boolean showCombatStats = true;
     private final Point previousMousePosition = new Point(300, 300);
@@ -55,7 +55,7 @@ public class UI_InventoryPanel {
         createBagSlots();
         bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
-        bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 355, 20);
+        bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 355, 25);
         wholeCharWindow = new Rectangle(charPanelX - 30, charPanelY - 15, 445, 615);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         combatStatsHitBox = new Rectangle(bagPanelX, bagPanelY, 107, 15);
@@ -428,6 +428,21 @@ public class UI_InventoryPanel {
         } else if (mg.inputH.mouse1Pressed && bagPanelMover.contains(mg.inputH.lastMousePosition)) {
             bagPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+            if (showBagEquipSlots) {
+                wholeBagWindow.x = bagPanelX;
+                wholeBagWindow.y = bagPanelY - 30;
+                bagEquipSlotsBox.x = bagPanelX + 11;
+                bagEquipSlotsBox.y = bagPanelY + 1;
+                bagPanelMover.x = bagPanelX + 5;
+                bagPanelMover.y = bagPanelY - 30;
+            } else {
+                wholeBagWindow.x = bagPanelX;
+                wholeBagWindow.y = bagPanelY;
+                bagEquipSlotsBox.x = bagPanelX + 11;
+                bagEquipSlotsBox.y = bagPanelY + 31;
+                bagPanelMover.x = bagPanelX + 5;
+                bagPanelMover.y = bagPanelY - 2;
+            }
         } else if (mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
             for (TalentNode node : mg.talentP.talent_Nodes) {
                 if (node != null) {
@@ -584,7 +599,7 @@ public class UI_InventoryPanel {
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 1;
             bagPanelMover.x = startX + 5;
-            bagPanelMover.y = startY - 25;
+            bagPanelMover.y = startY - 30;
             gc.setFill(Colors.LightGrey);
             gc.fillRoundRect(startX, startY - 30, 365, 440, 25, 25);
             //background header
@@ -615,16 +630,16 @@ public class UI_InventoryPanel {
                 }
             }
         } else {
-            for (int i = 0; i < 4; i++) {
-                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11 + 1000;
-                bagEquipSlots[i].boundBox.y = startY + 26 + 1000;
-            }
             wholeBagWindow.x = startX;
             wholeBagWindow.y = startY;
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 31;
             bagPanelMover.x = startX + 5;
-            bagPanelMover.y = startY + 3;
+            bagPanelMover.y = startY - 2;
+            for (int i = 0; i < 4; i++) {
+                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11 + 1000;
+                bagEquipSlots[i].boundBox.y = startY + 26 + 1000;
+            }
             gc.setFill(Colors.LightGrey);
             gc.fillRoundRect(startX, startY, 365, 410, 25, 25);
             //background header
@@ -743,6 +758,14 @@ public class UI_InventoryPanel {
                 mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(bag_Slots.size() - 1).item));
             }
             bag_Slots.remove(bag_Slots.size() - 1);
+        }
+    }
+
+    public void updateItemEffects() {
+        for (UI_InventorySlot slot : bagEquipSlots) {
+            if (slot.item != null) {
+                addBagSlots(Integer.parseInt(slot.item.stats));
+            }
         }
     }
 }

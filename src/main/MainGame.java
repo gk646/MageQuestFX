@@ -356,6 +356,7 @@ public class MainGame {
         ui.updateLoadingScreen(12, gc);
         sqLite = new SQLite(this);
         sqLite.readItemsFromDB();
+        inventP.updateItemEffects();
 
         //60%
         ui.updateLoadingScreen(12, gc);
@@ -392,8 +393,8 @@ public class MainGame {
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
         }
-        inventP.bag_Slots.get(3).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
-        inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
+        //  inventP.bag_Slots.get(3).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
+        // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
