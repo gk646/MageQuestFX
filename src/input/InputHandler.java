@@ -339,6 +339,8 @@ public class InputHandler {
                 } else {
                     mg.inventP.bagPanelMover.y += 30;
                 }
+            } else if (mg.showBag && mg.inventP.bagSortButton.contains(mg.inputH.lastMousePosition)) {
+                mg.inventP.sortBagsRarity();
             }
         }
     }

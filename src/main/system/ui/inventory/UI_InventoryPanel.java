@@ -41,10 +41,12 @@ public class UI_InventoryPanel {
     private int bagPanelY = 600;
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private ITEM grabbedITEM;
+    public final Rectangle bagSortButton;
     private boolean node_focused;
     private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
+    private final Image sort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/sort.png")));
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -53,6 +55,7 @@ public class UI_InventoryPanel {
         grabbedITEM = null;
         createCharSlots();
         createBagSlots();
+        bagSortButton = new Rectangle(bagPanelX, bagPanelY, 24, 24);
         bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 355, 25);
@@ -439,6 +442,8 @@ public class UI_InventoryPanel {
             bagPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
             if (showBagEquipSlots) {
+                bagSortButton.x = bagPanelX + 41;
+                bagSortButton.y = bagPanelY + 1;
                 wholeBagWindow.x = bagPanelX;
                 wholeBagWindow.y = bagPanelY - 30;
                 bagEquipSlotsBox.x = bagPanelX + 11;
@@ -446,6 +451,8 @@ public class UI_InventoryPanel {
                 bagPanelMover.x = bagPanelX + 5;
                 bagPanelMover.y = bagPanelY - 30;
             } else {
+                bagSortButton.x = bagPanelX + 41;
+                bagSortButton.y = bagPanelY + 31;
                 wholeBagWindow.x = bagPanelX;
                 wholeBagWindow.y = bagPanelY;
                 bagEquipSlotsBox.x = bagPanelX + 11;
@@ -604,10 +611,12 @@ public class UI_InventoryPanel {
     private void drawBagBackground(GraphicsContext gc, int startX, int startY) {
         //background
         if (showBagEquipSlots) {
-            wholeBagWindow.x = startX;
-            wholeBagWindow.y = startY - 30;
+            bagSortButton.x = startX + 41;
+            bagSortButton.y = startY + 1;
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 1;
+            wholeBagWindow.x = startX;
+            wholeBagWindow.y = startY - 30;
             bagPanelMover.x = startX + 5;
             bagPanelMover.y = startY - 30;
             gc.setFill(Colors.LightGrey);
@@ -627,28 +636,33 @@ public class UI_InventoryPanel {
             gc.setFill(Colors.darkBackground);
             gc.fillText("Bags", startX + 160, startY - 11);
             gc.strokeRoundRect(startX + 10, startY, 25, 25, 5, 5);
+            gc.strokeRoundRect(startX + 40, startY, 25, 25, 5, 5);
             gc.drawImage(bag, startX + 11, startY + 1);
+            gc.drawImage(sort, startX + 41, startY + 1);
+
             for (int i = 0; i < 4; i++) {
                 bagEquipSlots[i].boundBox.x = i * 26 + startX + 11;
-                bagEquipSlots[i].boundBox.y = startY + 26;
+                bagEquipSlots[i].boundBox.y = startY + 30;
                 gc.setFill(Colors.mediumVeryLight);
-                gc.fillRoundRect(i * 26 + startX + 11, startY + 26, 25, 25, 15, 15);
+                gc.fillRoundRect(i * 26 + startX + 11, startY + 30, 25, 25, 15, 15);
                 setRarityColor(gc, bagEquipSlots[i]);
-                bagEquipSlots[i].drawSlot(gc, i * 26 + startX + 11, startY + 26);
+                bagEquipSlots[i].drawSlot(gc, i * 26 + startX + 11, startY + 30);
                 if (bagEquipSlots[i].item != null && !bagEquipSlots[i].grabbed) {
-                    bagEquipSlots[i].drawIcon(gc, i * 26 + startX + 11, startY + 26, 25);
+                    bagEquipSlots[i].drawIcon(gc, i * 26 + startX + 11, startY + 30, 25);
                 }
             }
         } else {
-            wholeBagWindow.x = startX;
-            wholeBagWindow.y = startY;
+            bagSortButton.x = startX + 41;
+            bagSortButton.y = startY + 31;
             bagEquipSlotsBox.x = startX + 11;
             bagEquipSlotsBox.y = startY + 31;
+            wholeBagWindow.x = startX;
+            wholeBagWindow.y = startY;
             bagPanelMover.x = startX + 5;
             bagPanelMover.y = startY - 2;
             for (int i = 0; i < 4; i++) {
-                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11 + 1000;
-                bagEquipSlots[i].boundBox.y = startY + 26 + 1000;
+                bagEquipSlots[i].boundBox.x = i * 26 + startX + 11 + 1_000;
+                bagEquipSlots[i].boundBox.y = startY + 26 + 1_000;
             }
             gc.setFill(Colors.LightGrey);
             gc.fillRoundRect(startX, startY, 365, 410, 25, 25);
@@ -669,7 +683,9 @@ public class UI_InventoryPanel {
             gc.setFill(Colors.darkBackground);
             gc.fillText("Bags", startX + 160, startY + 19);
             gc.strokeRoundRect(startX + 10, startY + 30, 25, 25, 5, 5);
+            gc.strokeRoundRect(startX + 40, startY + 30, 25, 25, 5, 5);
             gc.drawImage(bag, startX + 11, startY + 31);
+            gc.drawImage(sort, startX + 41, startY + 31);
         }
     }
 
@@ -775,6 +791,24 @@ public class UI_InventoryPanel {
         for (UI_InventorySlot slot : bagEquipSlots) {
             if (slot.item != null) {
                 addBagSlots(Integer.parseInt(slot.item.stats));
+            }
+        }
+    }
+
+    public void sortBagsRarity() {
+        int n = bag_Slots.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (bag_Slots.get(j).item != null && bag_Slots.get(j + 1).item != null && bag_Slots.get(j).item.rarity < bag_Slots.get(j + 1).item.rarity) {
+                    UI_InventorySlot temp = bag_Slots.get(j);
+                    bag_Slots.set(j, bag_Slots.get(j + 1));
+                    bag_Slots.set(j + 1, temp);
+                }
+                if (bag_Slots.get(j).item == null && bag_Slots.get(j + 1).item != null) {
+                    UI_InventorySlot temp = bag_Slots.get(j);
+                    bag_Slots.set(j, bag_Slots.get(j + 1));
+                    bag_Slots.set(j + 1, temp);
+                }
             }
         }
     }
