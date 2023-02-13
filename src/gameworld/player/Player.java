@@ -55,8 +55,35 @@ public class Player extends ENTITY {
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
+    public static int effectsSize = 30;
 
+    public int[] effects = new int[effectsSize];
 
+    /*
+    1. DMG_Arcane_Absolute
+    2. DMG_Dark__Absolute
+    3. buffLength_Absolute
+    4. DoT_Damage_Absolute
+    5. DoT_Length_Absolute
+    6. Mana_Percent
+    7. Health_Percent
+    8. INT__Absolute
+    9. WIS__Absolute
+    10. VIT_Absolute
+    11. AGI__Absolute
+    12. LUC__Absolute
+    13. CHA__Absolute
+    14. STR__Absolute
+    15. END__Absolute
+    16. FOC_Absolute
+    17. CDR_Absolute
+    18. DMG_Poison_Absolute
+    19. DMG_Fire_Percent
+    20. Armour_Percent
+    21. CritChance_Absolute
+    22. CritDMG_Absolute
+    23. CarryWeight_Absolute
+     */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
         //-------VALUES-----------
@@ -93,6 +120,10 @@ public class Player extends ENTITY {
         endurance = 0;
         strength = 0;
         focus = 0;
+        armour = 0;
+        for (int i = 1; i < effectsSize; i++) {
+            effects[i] = 0;
+        }
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
             if (invSlot.item != null) {
                 intellect += invSlot.item.intellect;
@@ -104,6 +135,12 @@ public class Player extends ENTITY {
                 endurance += invSlot.item.endurance;
                 strength += invSlot.item.strength;
                 focus += invSlot.item.focus;
+                armour += invSlot.item.armour;
+
+                //EFFECTS
+                for (int i = 1; i < effectsSize; i++) {
+                    effects[i] += invSlot.item.effects[i];
+                }
             }
         }
         maxHealth = (int) ((10.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));

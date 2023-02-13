@@ -92,6 +92,7 @@ public class DRP_DroppedItem extends DROP {
         return getItemWithDropChance(item);
     }
 
+
     private ITEM getItemWithDropChance(ITEM item) {
         if (mg.random.nextInt(0, 2) == mg.random.nextInt(0, 2)) {
             if (item.rarity == 1) {
@@ -138,6 +139,74 @@ public class DRP_DroppedItem extends DROP {
             return mg.BAGS.get(mg.random.nextInt(1, mg.BAGS.size()));
         }
         return null;
+    }
+
+    private ITEM rollEffect(ITEM item) {
+        if (item.rarity == 2) {
+            int number = mg.random.nextInt(1, Player.effectsSize);
+            if (number == 1 || number == 2 || number == 18 || number == 19) {
+                item.effects[number] = mg.random.nextInt(0, 11);
+            } else if (number == 3) {
+                item.effects[number] = mg.random.nextInt(0, 26);
+            } else if (number == 4) {
+                item.effects[number] = mg.random.nextInt(0, 11);
+            } else if (number == 5) {
+                item.effects[number] = mg.random.nextInt(0, 26);
+            } else if (number == 6 || number == 7) {
+                item.effects[number] = mg.random.nextInt(0, 6);
+            } else if (number >= 8 & number <= 16) {
+                item.effects[number] = mg.random.nextInt(0, 6);
+            } else if (number == 17) {
+                item.effects[number] = mg.random.nextInt(0, 16);
+            } else if (number == 20) {
+                item.effects[number] = mg.random.nextInt(0, 16);
+            } else if (number == 21) {
+                item.effects[number] = mg.random.nextInt(0, 6);
+            } else if (number == 22) {
+                item.effects[number] = mg.random.nextInt(0, 16);
+            } else if (number == 23) {
+                item.effects[number] = mg.random.nextInt(0, 16);
+            }
+        }
+        if (item.rarity == 3) {
+            int number1 = mg.random.nextInt(1, Player.effectsSize);
+            int number2 = mg.random.nextInt(1, Player.effectsSize);
+            while (number1 == number2) {
+                number2 = mg.random.nextInt(1, Player.effectsSize);
+            }
+            int number;
+            for (int i = 0; i < 2; i++) {
+                if (i == 1) {
+                    number = number1;
+                } else {
+                    number = number2;
+                }
+                if (number == 1 || number == 2 || number == 18 || number == 19) {
+                    item.effects[number] = mg.random.nextInt(0, 11);
+                } else if (number == 3) {
+                    item.effects[number] = mg.random.nextInt(0, 26);
+                } else if (number == 4) {
+                    item.effects[number] = mg.random.nextInt(0, 11);
+                } else if (number == 5) {
+                    item.effects[number] = mg.random.nextInt(0, 26);
+                } else if (number == 6 || number == 7) {
+                    item.effects[number] = mg.random.nextInt(0, 6);
+                } else if (number >= 8 & number <= 16) {
+                    item.effects[number] = mg.random.nextInt(0, 6);
+                } else if (number == 17) {
+                    item.effects[number] = mg.random.nextInt(0, 16);
+                } else if (number == 20) {
+                    item.effects[number] = mg.random.nextInt(0, 16);
+                } else if (number == 21) {
+                    item.effects[number] = mg.random.nextInt(0, 6);
+                } else if (number == 22) {
+                    item.effects[number] = mg.random.nextInt(0, 16);
+                } else if (number == 23) {
+                    item.effects[number] = mg.random.nextInt(0, 16);
+                }
+            }
+        }
+        return item;
     }
 
     public ITEM getRandomCommon(int level) {

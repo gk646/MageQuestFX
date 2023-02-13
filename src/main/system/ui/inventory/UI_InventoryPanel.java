@@ -148,7 +148,26 @@ public class UI_InventoryPanel {
         }
         //STATS
         gc.setFill(Colors.darkBackground);
-        if (!(invSlot.item.type == 'M')) {
+        if ((invSlot.item.type == 'M')) {
+
+        } else if ((invSlot.item.type == 'G')) {
+            gc.setFont(FonT.minecraftItalic15);
+          /*  INT - Int
+            WIS - Wis
+            VIT - Vit
+            AGI - Agi
+            LUC - Luc
+            CHA - Cha
+            END - End
+            STR - Str
+            FOC - Foc
+            MainGame.SCREEN_HEIGHT*0.8f
+            x / 1080
+           */
+            //EFFECTS
+            gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
+            gc.fillText("Slots: " + invSlot.item.stats, startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.110f);
+        } else {
             gc.setFont(FonT.minecraftItalic15);
             gc.fillText("INT: " + invSlot.item.intellect, startX - MainGame.SCREEN_HEIGHT * 0.230f, startY - MainGame.SCREEN_HEIGHT * 0.236f);
             gc.fillText("VIT: " + invSlot.item.vitality, startX - MainGame.SCREEN_HEIGHT * 0.230f, startY - MainGame.SCREEN_HEIGHT * 0.222f);
@@ -176,24 +195,6 @@ public class UI_InventoryPanel {
        */
             //EFFECTS
             gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
-        }
-        if (!(invSlot.item.type == 'G')) {
-            gc.setFont(FonT.minecraftItalic15);
-          /*  INT - Int
-            WIS - Wis
-            VIT - Vit
-            AGI - Agi
-            LUC - Luc
-            CHA - Cha
-            END - End
-            STR - Str
-            FOC - Foc
-            MainGame.SCREEN_HEIGHT*0.8f
-            x / 1080
-           */
-            //EFFECTS
-            gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
-            gc.fillText("Slots: " + invSlot.item.stats, startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.110f);
         }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
