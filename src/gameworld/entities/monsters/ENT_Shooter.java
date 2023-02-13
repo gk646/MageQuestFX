@@ -44,7 +44,7 @@ public class ENT_Shooter extends ENTITY {
     public void update() {
         onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level, (int) Player.worldX, (int) Player.worldY));
+            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, (int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
         }
         getNearestPlayer();

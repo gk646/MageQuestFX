@@ -44,14 +44,14 @@ public class BOS_Slime extends BOSS {
 
     private void slimeVolley() {
         for (int i = 0; i < 720; i++) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level, (int) (worldX + (150 * Math.cos(i % 360 * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin(i % 360 * (Math.PI / 180))))));
+            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, (int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos(i % 360 * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin(i % 360 * (Math.PI / 180))))));
         }
     }
 
     private void slimeCone() {
         int angle = (int) (Math.atan2(Player.worldY - worldY, Player.worldX - worldX) * (180 / Math.PI));
         for (int i = -45; i < 45; i++) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
+            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, (int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
         }
     }
 }

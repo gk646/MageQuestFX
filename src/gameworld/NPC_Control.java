@@ -1,7 +1,7 @@
 package gameworld;
 
 import gameworld.entities.ENTITY;
-import gameworld.entities.npcs.NPC_Man;
+import gameworld.entities.npcs.NPC_OldMan;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Map;
@@ -48,9 +48,9 @@ public class NPC_Control {
     }
 
     private void spawnNPC() {
-        NPC_City1.add(new NPC_Man(mg, 2, 27 * 48, 26 * 48));
-        NPC_Tutorial.add(new NPC_Man(mg, 1, 11 * 48, 4 * 48));
-        NPC_GrassLand.add(new NPC_Man(mg, 2, 23_500, 23_500));
-        NPC_GrassLand.add(new NPC_Man(mg, 2, 23_400, 23_500));
+        NPC_City1.add(new NPC_OldMan(mg, 2, 27 * 48, 26 * 48));
+        NPC_Tutorial.add(new NPC_OldMan(mg, 1, 11 * 48, 4 * 48));
+        NPC_GrassLand.add(new NPC_OldMan(mg, 2, 23_500, 23_500));
+        NPC_GrassLand.add(new NPC_OldMan(mg, 2, 23_400, 23_500));
     }
 }

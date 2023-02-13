@@ -67,11 +67,11 @@ public class CollisionChecker {
     }
 
     public boolean checkEntityAgainstEntity(ENTITY checkingForHit, ENTITY incomingToHit) {
-        return new Rectangle(checkingForHit.worldX, checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle(incomingToHit.worldX, incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+        return new Rectangle((int) checkingForHit.worldX, (int) checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldX, (int) incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
     public boolean checkEntityAgainstProjectile(ENTITY checkingForHit, PRJ_Control incomingToHit) {
-        return new Rectangle(checkingForHit.worldX + checkingForHit.collisionBox.x, checkingForHit.worldY + checkingForHit.collisionBox.y, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
+        return new Rectangle((int) (checkingForHit.worldX + checkingForHit.collisionBox.x), (int) (checkingForHit.worldY + checkingForHit.collisionBox.y), checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
     public boolean checkPlayerAgainstProjectile(PRJ_Control incomingToHit) {
@@ -79,19 +79,19 @@ public class CollisionChecker {
     }
 
     public void checkEntityAgainstTile(ENTITY ENTITYControl) {
-        int entityLeftWorldX = ENTITYControl.worldX + ENTITYControl.collisionBox.x;
-        int entityRightWorldX = ENTITYControl.worldX + ENTITYControl.collisionBox.x + ENTITYControl.collisionBox.width;
-        int entityTopWorldY = ENTITYControl.worldY + ENTITYControl.collisionBox.y;
-        int entityBottomWorldY = ENTITYControl.worldY + ENTITYControl.collisionBox.y + ENTITYControl.collisionBox.height;
+        float entityLeftWorldX = (ENTITYControl.worldX + ENTITYControl.collisionBox.x);
+        float entityRightWorldX = (ENTITYControl.worldX + ENTITYControl.collisionBox.x + ENTITYControl.collisionBox.width);
+        float entityTopWorldY = (ENTITYControl.worldY + ENTITYControl.collisionBox.y);
+        float entityBottomWorldY = (ENTITYControl.worldY + ENTITYControl.collisionBox.y + ENTITYControl.collisionBox.height);
 
         int entityLeftCol;
         int entityRightCol;
-        int entityTopRow = Math.max(Math.min(entityTopWorldY / 48, mg.wRender.worldSize.x), 0);
-        int entityBottomRow = Math.min(entityBottomWorldY / 48, mg.wRender.worldSize.x);
+        int entityTopRow = (int) Math.max(Math.min(entityTopWorldY / 48, mg.wRender.worldSize.x), 0);
+        int entityBottomRow = (int) Math.min(entityBottomWorldY / 48, mg.wRender.worldSize.x);
 
         int tileNum1, tileNum2;
         if (ENTITYControl.direction.contains("right")) {
-            entityRightCol = Math.min((entityRightWorldX + ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityRightCol = (int) Math.min((entityRightWorldX + ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -99,28 +99,28 @@ public class CollisionChecker {
             }
         }
         if (ENTITYControl.direction.contains("left")) {
-            entityLeftCol = Math.min((entityLeftWorldX - ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityLeftCol = (int) Math.min((entityLeftWorldX - ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
                 ENTITYControl.collisionLeft = true;
             }
         }
-        entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
-        entityRightCol = Math.min(entityRightWorldX / 48, mg.wRender.worldSize.x);
+        entityLeftCol = (int) Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
+        entityRightCol = (int) Math.min(entityRightWorldX / 48, mg.wRender.worldSize.x);
         if (ENTITYControl.direction.contains("up")) {
 
-            entityTopRow = Math.min((entityTopWorldY - ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityTopRow = (int) Math.min((entityTopWorldY - ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
                 ENTITYControl.collisionUp = true;
             }
         }
-        entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
+        entityLeftCol = (int) Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
 
         if (ENTITYControl.direction.contains("down")) {
-            entityBottomRow = Math.min((entityBottomWorldY + ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityBottomRow = (int) Math.min((entityBottomWorldY + ENTITYControl.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -130,10 +130,10 @@ public class CollisionChecker {
     }
 
     public void checkPlayerAgainstTile(Player player) {
-        int entityLeftWorldX = (int) (Player.worldX + 8);
-        int entityRightWorldX = (int) (Player.worldX + 37);
+        int entityLeftWorldX = (int) (Player.worldX + 18);
+        int entityRightWorldX = (int) (Player.worldX + 28);
         int entityTopWorldY = (int) (Player.worldY + 8);
-        int entityBottomWorldY = (int) (Player.worldY + 37);
+        int entityBottomWorldY = (int) (Player.worldY + 40);
 
         int entityLeftCol;
         int entityRightCol;
@@ -142,7 +142,7 @@ public class CollisionChecker {
 
         int tileNum1, tileNum2;
         if (player.direction.contains("right")) {
-            entityRightCol = Math.min((entityRightWorldX + player.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityRightCol = (int) Math.min((entityRightWorldX + player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -150,7 +150,7 @@ public class CollisionChecker {
             }
         }
         if (player.direction.contains("left")) {
-            entityLeftCol = Math.min((entityLeftWorldX - player.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityLeftCol = (int) Math.min((entityLeftWorldX - player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -161,7 +161,7 @@ public class CollisionChecker {
         entityRightCol = Math.min(entityRightWorldX / 48, mg.wRender.worldSize.x);
         if (player.direction.contains("up")) {
 
-            entityTopRow = Math.min((entityTopWorldY - player.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityTopRow = (int) Math.min((entityTopWorldY - player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -171,7 +171,7 @@ public class CollisionChecker {
         entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
 
         if (player.direction.contains("down")) {
-            entityBottomRow = Math.min((entityBottomWorldY + player.movementSpeed) / 48, mg.wRender.worldSize.x);
+            entityBottomRow = (int) Math.min((entityBottomWorldY + player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
@@ -181,7 +181,7 @@ public class CollisionChecker {
     }
 
     public boolean checkEntityAgainstPlayer(ENTITY checkingForHit, int extension) {
-        return new Rectangle(checkingForHit.worldX + checkingForHit.collisionBox.x - extension, checkingForHit.worldY + checkingForHit.collisionBox.y - extension, checkingForHit.collisionBox.width + extension * 2, checkingForHit.collisionBox.height + extension * 2).intersects(new Rectangle((int) Player.worldX + mg.player.collisionBox.x, (int) Player.worldY + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height));
+        return new Rectangle((int) (checkingForHit.worldX + checkingForHit.collisionBox.x - extension), (int) (checkingForHit.worldY + checkingForHit.collisionBox.y - extension), checkingForHit.collisionBox.width + extension * 2, checkingForHit.collisionBox.height + extension * 2).intersects(new Rectangle((int) Player.worldX + mg.player.collisionBox.x, (int) Player.worldY + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height));
     }
 }
 

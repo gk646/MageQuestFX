@@ -72,7 +72,7 @@ public class Player extends ENTITY {
         worldY = 24;
         direction = "";
         getPlayerImage();
-        this.collisionBox = new Rectangle(8, 8, 32, 32);
+        this.collisionBox = new Rectangle(18, 8, 10, 32);
         this.level = 1;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;

@@ -70,7 +70,7 @@ abstract class PROJECTILE {
         if (entity.health <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
-            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, entity.worldX, entity.worldY, entity.level));
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level));
         } else {
             entity.hpBarOn = true;
         }

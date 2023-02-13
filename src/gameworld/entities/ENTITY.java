@@ -31,13 +31,13 @@ abstract public class ENTITY {
     public int entityHeight;
     protected int searchTicks;
     public boolean onPath;
-    public int worldY;
-    public int worldX;
+    public float worldY;
+    public float worldX;
     public int screenX;
     public int screenY;
     public int health;
     public int maxHealth;
-    public int movementSpeed;
+    public float movementSpeed;
     public int level;
     public Image entityImage1;
     public int hitDelay;
@@ -71,16 +71,16 @@ abstract public class ENTITY {
 
 
     private void decideMovement(int nextX, int nextY) {
-        int enLeftX = worldX;
-        int enRightX = worldX + entityWidth;
-        int enTopY = worldY;
-        int enBottomY = worldY + entityHeight;
+        float enLeftX = worldX;
+        float enRightX = (worldX + entityWidth);
+        float enTopY = worldY;
+        float enBottomY = (worldY + entityHeight);
         collisionRight = false;
         collisionLeft = false;
         collisionDown = false;
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
-        mg.ob_control.checkCollisionEntity(this);
+        //mg.ob_control.checkCollisionEntity(this);
         if (enLeftX < nextX && !collisionRight) {
             worldX += movementSpeed;
         } else if (enLeftX > nextX && !collisionLeft) {
@@ -109,8 +109,8 @@ abstract public class ENTITY {
      * @param maxDistance max distance to set nodes in both directions
      */
     protected void searchPath(int goalCol, int goalRow, int maxDistance) {
-        int startCol = (worldX + 24) / 48;
-        int startRow = (worldY + 24) / 48;
+        int startCol = (int) ((worldX + 24) / 48);
+        int startRow = (int) ((worldY + 24) / 48);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
@@ -147,8 +147,8 @@ abstract public class ENTITY {
      * @see ENTITY#searchPath(int, int, int)
      */
     private void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
-        int startCol = (worldX + 24) / 48;
-        int startRow = (worldY + 24) / 48;
+        int startCol = (int) ((worldX + 24) / 48);
+        int startRow = (int) ((worldY + 24) / 48);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
@@ -227,8 +227,8 @@ abstract public class ENTITY {
             this.goalCol = (int) ((Player.worldX + 24) / 48);
             this.goalRow = (int) ((Player.worldY + 24) / 48);
         } else {
-            this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
-            this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
+            this.goalCol = (int) ((mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize);
+            this.goalRow = (int) ((mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize);
         }
     }
 
@@ -238,8 +238,8 @@ abstract public class ENTITY {
             this.goalRow = (int) ((Player.worldY + 24) / mg.tileSize);
         } else {
 
-            this.goalCol = (mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize;
-            this.goalRow = (mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize;
+            this.goalCol = (int) ((mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize);
+            this.goalRow = (int) ((mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize);
         }
     }
 

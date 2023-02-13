@@ -13,7 +13,7 @@ public class OBJ_Control {
 
     public OBJ_Control(MainGame mg) {
         this.mg = mg;
-        objects_tutorial[1] = new Rectangle(23 * 48, 8 * 48, 48, 48);
+      //  objects_tutorial[1] = new Rectangle(23 * 48, 8 * 48, 48, 48);
     }
 
     public void checkCollisionPlayer() {

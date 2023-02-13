@@ -157,8 +157,8 @@ public class GameMap {
         }
         synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
-                entityX = (entity.worldX + 24) / 48;
-                entityY = (entity.worldY + 24) / 48;
+                entityX = (int) ((entity.worldX + 24) / 48);
+                entityY = (int) ((entity.worldY + 24) / 48);
                 y = 470 + yOffset + (entityY - yTile_i) * zoom_i;
                 x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                 for (float i = y; i < y + zoom_i; i++) {
@@ -187,8 +187,8 @@ public class GameMap {
             }
         }
         for (ENTITY entity : mg.npcControl.NPC_Active) {
-            entityX = (entity.worldX + 24) / 48;
-            entityY = (entity.worldY + 24) / 48;
+            entityX = (int) ((entity.worldX + 24) / 48);
+            entityY = (int) ((entity.worldY + 24) / 48);
             y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
             x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
             if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
