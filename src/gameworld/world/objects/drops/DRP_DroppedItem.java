@@ -13,12 +13,11 @@ public class DRP_DroppedItem extends DROP {
     private Image droppedIcon;
 
     /**
-     * Rarity 1: 803/10000 (8%) <p>
-     * Rarity 2: 1621/10000 (16%) <p>
-     * Rarity 3: 359/10000 (3.6%) <p>
-     * Rarity 4: 58/10000 (0.6%) <p>
-     * Rarity 5: 18/10000 (0.2%) <p>
-     * Nullitems: 7141/10000 (71.4%) <p>
+     * Rarity 1: 12.24%<p>
+     * Rarity 2: 7.14%<p>
+     * Rarity 3: 1.19%<p>
+     * Rarity 4: 0.27%<p>
+     * Rarity 5: 0.06% <p>
      *
      * @param mg     MainGame
      * @param worldX DropLocation X
@@ -78,34 +77,38 @@ public class DRP_DroppedItem extends DROP {
 
     }
 
+    /**
+     * Gets item with desired level
+     *
+     * @param level level the item should have
+     * @return a random item with the given level
+     */
     private ITEM rollForItem(int level) {
         ITEM item;
         while (true) {
-            item = goThroughArrays(mg.random.nextInt(0, 10));
+            item = goThroughArrays(mg.random.nextInt(0, 11));
             assert item != null;
             item.level = level;
             item.rollQuality();
-            if (item.rarity <= 5) {
-                if (mg.random.nextInt(0, 40) == 25) {
-                    if (item.rarity == 1) {
-                        return cloneItem(item);
-                    }
-                    if (item.rarity == 2 && mg.random.nextInt(0, 3) == 1) {
-                        return cloneItem(item);
-                    }
-                    if (item.rarity == 3 && mg.random.nextInt(0, 7) == 4) {
-                        return cloneItem(item);
-                    }
-                    if (item.rarity == 4 && mg.random.nextInt(0, 20) == 10) {
-                        return cloneItem(item);
-                    }
-                    if (item.rarity == 5 && mg.random.nextInt(0, 25) == 10) {
-                        return cloneItem(item);
-                    }
-                    return null;
-                }
+            return getItemWithDropChance(item);
+        }
+    }
+
+    private ITEM getItemWithDropChance(ITEM item) {
+        if (mg.random.nextInt(0, 2) == mg.random.nextInt(0, 2)) {
+            if (item.rarity == 1) {
+                return cloneItem(item);
+            } else if (item.rarity == 2 && mg.random.nextInt(0, 3) == mg.random.nextInt(0, 3)) {
+                return cloneItem(item);
+            } else if (item.rarity == 3 && mg.random.nextInt(0, 7) == mg.random.nextInt(0, 6)) {
+                return cloneItem(item);
+            } else if (item.rarity == 4 && mg.random.nextInt(0, 20) == mg.random.nextInt(0, 18)) {
+                return cloneItem(item);
+            } else if (item.rarity == 5 && mg.random.nextInt(0, 25) == mg.random.nextInt(0, 20)) {
+                return cloneItem(item);
             }
         }
+        return null;
     }
 
     /**
@@ -133,6 +136,8 @@ public class DRP_DroppedItem extends DROP {
             return mg.RINGS.get(mg.random.nextInt(1, mg.RINGS.size()));
         } else if (listIndex == 9) {
             return mg.TWOHANDS.get(mg.random.nextInt(1, mg.TWOHANDS.size()));
+        } else if (listIndex == 10) {
+            return mg.BAGS.get(mg.random.nextInt(1, mg.BAGS.size()));
         }
         return null;
     }

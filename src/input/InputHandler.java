@@ -76,6 +76,7 @@ public class InputHandler {
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
                     mg.gameState = State.PLAY;
+                    mg.sound.mediaPlayer.stop();
                     scene.setCursor(Cursor.CROSSHAIR);
                 } else if (mg.ui.commandNum == 1) {
                     mg.gameState = State.TITLE_OPTION;
@@ -120,7 +121,7 @@ public class InputHandler {
             if (code.equals(("w"))) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 0;
+                    mg.ui.commandNum = 5;
                 }
             }
             if (code.equals(("s"))) {

@@ -55,7 +55,7 @@ public class Runner extends Application {
         slider.setVisible(false);
         slider.setPrefSize(200, 100);
         root.getChildren().add(slider);
-        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight(), gc, scene);
+        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight(), gc);
         InputHandler.instance = new InputHandler(mainGame, scene);
         mainGame.inputH = InputHandler.instance;
         Thread thread = new Thread(mainGame::run);

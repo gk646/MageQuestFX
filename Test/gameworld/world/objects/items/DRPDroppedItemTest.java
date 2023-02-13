@@ -22,7 +22,7 @@ class DRPDroppedItemTest {
         Canvas canvas = new Canvas();
         Group group = new Group();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        this.mg = new MainGame(1, 1, gc, group.getScene());
+        this.mg = new MainGame(1, 1, gc);
         mg.sqLite = new SQLite(mg);
         mg.sqLite.readItemsOnly();
         mg.player = new Player(mg);
@@ -40,7 +40,7 @@ class DRPDroppedItemTest {
         int rarity4 = 0;
         int rarity5 = 0;
         int fail = 0;
-        for (int i = 0; i < 10_00; i++) {
+        for (int i = 0; i < 10_000; i++) {
             DRP_DroppedItem drop = new DRP_DroppedItem(mg, 1, 1, 1);
             if (drop.item == null) {
                 nullitems++;

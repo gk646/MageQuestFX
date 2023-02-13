@@ -17,8 +17,8 @@ import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -83,7 +83,7 @@ public class MainGame {
     //---------Input-----------
     public final GraphicsContext gc;
     //----------SCREEN SETTINGS---------------
-    private final Scene scene;
+
     public String player2Information = "";
     public InputHandler inputH;
     public int playerX, playerY;
@@ -113,15 +113,14 @@ public class MainGame {
     private Multiplayer multiplayer;
     private int counter = 0;
     private ENT_Control ent_control;
-    private Sound sound;
+    public Sound sound;
     public OBJ_Control ob_control;
 
 
     /**
      * Main class for the game logic and center point for information
      */
-    public MainGame(int width, int height, GraphicsContext gc, Scene scene) {
-        this.scene = scene;
+    public MainGame(int width, int height, GraphicsContext gc) {
         this.gc = gc;
         SCREEN_WIDTH = width;
         SCREEN_HEIGHT = height;
@@ -142,7 +141,6 @@ public class MainGame {
      */
     private void startThreads() {
         float logicCounter = 1_000_000_000 / 60.0f;
-
         Thread renderHelper = new Thread(() -> {
             long firstTimeGate1;
             long lastTime1 = System.nanoTime();
@@ -304,7 +302,6 @@ public class MainGame {
         }
     }
 
-
     private void drawDroppedItems(GraphicsContext gc) {
         synchronized (WORLD_DROPS) {
             Iterator<DROP> iterator = WORLD_DROPS.iterator();
@@ -319,7 +316,6 @@ public class MainGame {
         }
     }
 
-
     /**
      * Loads the game and updates loading screen
      *
@@ -331,6 +327,7 @@ public class MainGame {
         // 0 %
         inventP = new UI_InventoryPanel(this);
         wControl = new WorldController(this);
+
         //12 %
         ui.updateLoadingScreen(12, gc);
         ob_control = new OBJ_Control(this);
@@ -342,9 +339,9 @@ public class MainGame {
         //24%
         ui.updateLoadingScreen(12, gc);
         miniM = new MiniMap(this);
-
         ent_control = new ENT_Control(this);
         collisionChecker = new CollisionChecker(this);
+
         //36%
         ui.updateLoadingScreen(12, gc);
         imageSto = new Storage();
@@ -383,6 +380,7 @@ public class MainGame {
         gameMap = new GameMap(this);
         FonT.loadFonts();
         sound = new Sound();
+
         //100%
         ui.updateLoadingScreen(16, gc);
         map_utils.loadSpawnLevel();
@@ -401,8 +399,8 @@ public class MainGame {
         wControl.load_OverWorldMap(490, 490);
         gameState = State.TITLE;
         startThreads();
-        //sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        //sound.mediaPlayer.play();
+        sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        sound.mediaPlayer.play();
     }
 
     /**

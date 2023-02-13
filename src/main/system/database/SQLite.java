@@ -73,6 +73,7 @@ public class SQLite {
             searchRELICS(stmt);
             searchRINGS(stmt);
             searchTWOHANDS(stmt);
+            searchBAGS(stmt);
             inverseArrayLists();
         } catch (SQLException e) {
             e.printStackTrace();
