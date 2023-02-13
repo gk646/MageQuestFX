@@ -266,40 +266,40 @@ public class Player extends ENTITY {
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 144 / 18) {
-            case 0 -> gc.drawImage(idle1, screenX, screenY);
-            case 1 -> gc.drawImage(idle2, screenX, screenY);
-            case 2 -> gc.drawImage(idle3, screenX, screenY);
-            case 3 -> gc.drawImage(idle4, screenX, screenY);
-            case 4 -> gc.drawImage(idle5, screenX, screenY);
-            case 5 -> gc.drawImage(idle6, screenX, screenY);
-            case 6 -> gc.drawImage(idle7, screenX, screenY);
-            case 7 -> gc.drawImage(idle8, screenX, screenY);
+            case 0 -> gc.drawImage(idle1, screenX - 24, screenY - 24);
+            case 1 -> gc.drawImage(idle2, screenX - 24, screenY - 24);
+            case 2 -> gc.drawImage(idle3, screenX - 24, screenY - 24);
+            case 3 -> gc.drawImage(idle4, screenX - 24, screenY - 24);
+            case 4 -> gc.drawImage(idle5, screenX - 24, screenY - 24);
+            case 5 -> gc.drawImage(idle6, screenX - 24, screenY - 24);
+            case 6 -> gc.drawImage(idle7, screenX - 24, screenY - 24);
+            case 7 -> gc.drawImage(idle8, screenX - 24, screenY - 24);
         }
     }
 
     private void drawRun(GraphicsContext gc) {
         switch (spriteCounter % 136 / 17) {
-            case 0 -> gc.drawImage(run1, screenX, screenY);
-            case 1 -> gc.drawImage(run2, screenX, screenY);
-            case 2 -> gc.drawImage(run3, screenX, screenY);
-            case 3 -> gc.drawImage(run4, screenX, screenY);
-            case 4 -> gc.drawImage(run5, screenX, screenY);
-            case 5 -> gc.drawImage(run6, screenX, screenY);
-            case 6 -> gc.drawImage(run7, screenX, screenY);
-            case 7 -> gc.drawImage(run8, screenX, screenY);
+            case 0 -> gc.drawImage(run1, screenX - 24, screenY - 24);
+            case 1 -> gc.drawImage(run2, screenX - 24, screenY - 24);
+            case 2 -> gc.drawImage(run3, screenX - 24, screenY - 24);
+            case 3 -> gc.drawImage(run4, screenX - 24, screenY - 24);
+            case 4 -> gc.drawImage(run5, screenX - 24, screenY - 24);
+            case 5 -> gc.drawImage(run6, screenX - 24, screenY - 24);
+            case 6 -> gc.drawImage(run7, screenX - 24, screenY - 24);
+            case 7 -> gc.drawImage(run8, screenX - 24, screenY - 24);
         }
     }
 
     private void drawRunLeft(GraphicsContext gc) {
         switch (spriteCounter % 136 / 17) {
-            case 0 -> gc.drawImage(runM1, screenX, screenY);
-            case 1 -> gc.drawImage(runM2, screenX, screenY);
-            case 2 -> gc.drawImage(runM3, screenX, screenY);
-            case 3 -> gc.drawImage(runM4, screenX, screenY);
-            case 4 -> gc.drawImage(runM5, screenX, screenY);
-            case 5 -> gc.drawImage(runM6, screenX, screenY);
-            case 6 -> gc.drawImage(runM7, screenX, screenY);
-            case 7 -> gc.drawImage(runM8, screenX, screenY);
+            case 0 -> gc.drawImage(runM1, screenX - 24, screenY - 24);
+            case 1 -> gc.drawImage(runM2, screenX - 24, screenY - 24);
+            case 2 -> gc.drawImage(runM3, screenX - 24, screenY - 24);
+            case 3 -> gc.drawImage(runM4, screenX - 24, screenY - 24);
+            case 4 -> gc.drawImage(runM5, screenX - 24, screenY - 24);
+            case 5 -> gc.drawImage(runM6, screenX - 24, screenY - 24);
+            case 6 -> gc.drawImage(runM7, screenX - 24, screenY - 24);
+            case 7 -> gc.drawImage(runM8, screenX - 24, screenY - 24);
         }
     }
 
