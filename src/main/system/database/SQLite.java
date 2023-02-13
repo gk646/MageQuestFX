@@ -1,5 +1,6 @@
 package main.system.database;
 
+import gameworld.player.Player;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
@@ -27,7 +28,6 @@ public class SQLite {
 
     public void readItemsFromDB() {
         try {
-            // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
             this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
             Statement stmt = this.conn.createStatement();
@@ -43,13 +43,14 @@ public class SQLite {
             searchTWOHANDS(stmt);
             searchBAGS(stmt);
             searchMISC(stmt);
+            readPlayerBagEquip(stmt);
             inverseArrayLists();
             readPlayerInventory(stmt);
             readPlayerStats(stmt);
             readPlayerBags(stmt);
             readStartLevel(stmt);
             readSkillTree(stmt);
-            readPlayerBagEquip(stmt);
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -140,7 +141,7 @@ public class SQLite {
     }
 
     private void saveBagInventory() throws SQLException {
-        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ? WHERE _ROWID_ = ?";
+        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         for (int i = 1; i <= mg.inventP.bag_Slots.size(); i++) {
             if (mg.inventP.bag_Slots.get(i - 1).item == null) {
@@ -148,7 +149,8 @@ public class SQLite {
                 stmt.setString(2, null);
                 stmt.setNull(3, Types.INTEGER);
                 stmt.setNull(4, Types.INTEGER);
-                stmt.setInt(5, i);
+                stmt.setString(5, null);
+                stmt.setInt(6, i);
                 stmt.executeUpdate();
                 continue;
             }
@@ -156,13 +158,24 @@ public class SQLite {
             stmt.setString(2, String.valueOf(mg.inventP.bag_Slots.get(i - 1).item.type));
             stmt.setInt(3, mg.inventP.bag_Slots.get(i - 1).item.quality);
             stmt.setInt(4, mg.inventP.bag_Slots.get(i - 1).item.level);
-            stmt.setInt(5, i);
+            stmt.setString(5, getEffectString(mg.inventP.bag_Slots.get(i - 1).item));
+            stmt.setInt(6, i);
             stmt.executeUpdate();
         }
     }
 
+    private String getEffectString(ITEM item) {
+        StringBuilder effect = new StringBuilder();
+        for (int i = 1; i < Player.effectsSizeRollable; i++) {
+            if (item.effects[i] != 0) {
+                effect.append("[").append(i).append("]").append(item.effects[i]);
+            }
+        }
+        return effect.toString().length() < 1 ? null : effect.toString();
+    }
+
     private void savePlayerInventory() throws SQLException {
-        String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?, level = ? WHERE _ROWID_ = ?";
+        String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?, level = ?, effect = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         for (int i = 0; i < 10; i++) {
             if (mg.inventP.char_Slots[i].item == null) {
@@ -170,7 +183,8 @@ public class SQLite {
                 stmt.setString(2, null);
                 stmt.setNull(3, Types.INTEGER);
                 stmt.setNull(4, Types.INTEGER);
-                stmt.setInt(5, i + 1);
+                stmt.setString(5, null);
+                stmt.setInt(6, i + 1);
                 stmt.executeUpdate();
                 continue;
             }
@@ -178,7 +192,8 @@ public class SQLite {
             stmt.setString(2, String.valueOf(mg.inventP.char_Slots[i].item.type));
             stmt.setInt(3, mg.inventP.char_Slots[i].item.quality);
             stmt.setInt(4, mg.inventP.char_Slots[i].item.level);
-            stmt.setInt(5, i + 1);
+            stmt.setString(5, getEffectString(mg.inventP.char_Slots[i].item));
+            stmt.setInt(6, i + 1);
             stmt.executeUpdate();
         }
         for (int i = 0; i < 4; i++) {
@@ -251,7 +266,8 @@ public class SQLite {
             } else if (rs.getRow() >= 10) {
                 break;
             }
-            mg.inventP.char_Slots[counter].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
+            mg.inventP.char_Slots[counter].item = getItemWithQualityEffect(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"), rs.getString("effect"));
+
             counter++;
         }
     }
@@ -266,6 +282,7 @@ public class SQLite {
             }
             mg.inventP.bagEquipSlots[rs.getRow() - 10].item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
         }
+        mg.inventP.updateItemEffects();
     }
 
     private void readSkillTree(Statement stmt) throws SQLException {
@@ -287,7 +304,7 @@ public class SQLite {
                 counter++;
                 continue;
             }
-            mg.inventP.bag_Slots.get(counter - 1).item = getItemWithQuality(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"));
+            mg.inventP.bag_Slots.get(counter - 1).item = getItemWithQualityEffect(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"), rs.getString("effect"));
             counter++;
         }
     }
@@ -404,6 +421,123 @@ public class SQLite {
                 }
                 break;
         }
+        return null;
+    }
+
+    private ITEM getItemWithQualityEffect(int i_id, String type, int quality, int level, String effect) {
+        ITEM new_ITEM;
+        if (effect != null) {
+            switch (type) {
+                case "A":
+                    for (ITEM item : mg.AMULET) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "B":
+                    for (ITEM item : mg.BOOTS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "C":
+                    for (ITEM item : mg.CHEST) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "H":
+                    for (ITEM item : mg.HEAD) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "O":
+                    for (ITEM item : mg.OFFHAND) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "W":
+                    for (ITEM item : mg.ONEHAND) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "P":
+                    for (ITEM item : mg.PANTS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "T":
+                    for (ITEM item : mg.RELICS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "R":
+                    for (ITEM item : mg.RINGS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "2":
+                    for (ITEM item : mg.TWOHANDS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "G":
+                    for (ITEM item : mg.BAGS) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+                case "M":
+                    for (ITEM item : mg.MISC) {
+                        if (item.i_id == i_id) {
+                            new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
+                            new_ITEM.getEffect(effect);
+                            return new_ITEM;
+                        }
+                    }
+                    break;
+            }
+        } else getItemWithQuality(i_id, type, quality, level);
         return null;
     }
 

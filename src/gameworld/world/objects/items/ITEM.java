@@ -196,13 +196,6 @@ public class ITEM {
                 armour = Integer.parseInt(m.group(1));
             }
         }
-        if (stats.contains("[")) {
-            p = Pattern.compile("\\[(\\d+)](\\d+)");
-            m = p.matcher(stats);
-            while (m.find()) {
-                effects[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));
-            }
-        }
         /*
          INT - Int
         WIS - Wis
@@ -214,6 +207,16 @@ public class ITEM {
         STR - Str
         FOC - Foc
          */
+    }
+
+    public void getEffect(String effect) {
+        Pattern p;
+        Matcher m;
+        p = Pattern.compile("\\[(\\d+)](\\d+)");
+        m = p.matcher(effect);
+        while (m.find()) {
+            effects[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));
+        }
     }
 
     private void applyMultipliers() {

@@ -353,7 +353,6 @@ public class MainGame {
         ui.updateLoadingScreen(12, gc);
         sqLite = new SQLite(this);
         sqLite.readItemsFromDB();
-        inventP.updateItemEffects();
 
         //60%
         ui.updateLoadingScreen(12, gc);
