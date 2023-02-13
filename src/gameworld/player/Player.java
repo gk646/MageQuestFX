@@ -55,10 +55,10 @@ public class Player extends ENTITY {
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
-    public static int effectsSize = 30;
-
-    public int[] effects = new int[effectsSize];
-    public static String[] effectNames = new String[effectsSize];
+    public static int effectsSizeRollable = 30;
+    public static int effectsSizeTotal = 40;
+    public static String[] effectNames = new String[effectsSizeTotal];
+    public int[] effects = new int[effectsSizeTotal];
 
     /*
     1. DMG_Arcane_Absolute
@@ -123,7 +123,7 @@ public class Player extends ENTITY {
         strength = 0;
         focus = 0;
         armour = 0;
-        for (int i = 1; i < effectsSize; i++) {
+        for (int i = 1; i < effectsSizeRollable; i++) {
             effects[i] = 0;
         }
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
@@ -140,7 +140,7 @@ public class Player extends ENTITY {
                 armour += invSlot.item.armour;
 
                 //EFFECTS
-                for (int i = 1; i < effectsSize; i++) {
+                for (int i = 1; i < effectsSizeRollable; i++) {
                     effects[i] += invSlot.item.effects[i];
                 }
             }
@@ -430,6 +430,7 @@ public class Player extends ENTITY {
 
     private void setupEffectNames() {
         effectNames = new String[]{
+                "filler",
                 "Arcane Damage: +",
                 "Dark Magic Damage: +",
                 "Buff Length: +",

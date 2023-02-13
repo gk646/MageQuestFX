@@ -181,27 +181,28 @@ public class UI_InventoryPanel {
             gc.fillText("STR: " + invSlot.item.strength, startX - MainGame.SCREEN_HEIGHT * 0.086f, startY - MainGame.SCREEN_HEIGHT * 0.222f);
             gc.fillText("FOC: " + invSlot.item.focus, startX - MainGame.SCREEN_HEIGHT * 0.086f, startY - MainGame.SCREEN_HEIGHT * 0.208f);
 
-      /*  INT - Int
-        WIS - Wis
-        VIT - Vit
-        AGI - Agi
-        LUC - Luc
-        CHA - Cha
-        END - End
-        STR - Str
-        FOC - Foc
-        MainGame.SCREEN_HEIGHT*0.8f
-        x / 1080
-       */
+          /*  INT - Int
+            WIS - Wis
+            VIT - Vit
+            AGI - Agi
+            LUC - Luc
+            CHA - Cha
+            END - End
+            STR - Str
+            FOC - Foc
+            MainGame.SCREEN_HEIGHT*0.8f
+            x / 1080
+           */
             //EFFECTS
             gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
+            gc.setFont(FonT.minecraftItalic14);
             int counter = 0;
-            for (int i = 0; i < Player.effectsSize; i++) {
+            for (int i = 0; i < Player.effectsSizeRollable; i++) {
                 if (invSlot.item.effects[i] != 0) {
                     if (i == 23) {
-                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i], startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * (0.100f - 0.03 * counter));
+                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i], startX - MainGame.SCREEN_HEIGHT * 0.221f, startY - MainGame.SCREEN_HEIGHT * (0.114f - 0.014 * counter));
                     } else {
-                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i] + "%", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * (0.100f - 0.03 * counter));
+                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i] + "%", startX - MainGame.SCREEN_HEIGHT * 0.221f, startY - MainGame.SCREEN_HEIGHT * (0.114f - 0.014 * counter));
                     }
                     counter++;
                 }
@@ -213,12 +214,9 @@ public class UI_InventoryPanel {
         for (String string : invSlot.item.description.split("\n")) {
             gc.fillText(string, startX - MainGame.SCREEN_HEIGHT * 0.231f, stringY += MainGame.SCREEN_HEIGHT * 0.010f);
         }
-
         gc.setFont(FonT.minecraftItalic14);
         //TYPE
         printItemType(gc, invSlot);
-
-
         //LEVEL
         gc.fillText("ilvl: " + invSlot.item.level, startX - 248, startY - 322);
         //Durability

@@ -35,7 +35,7 @@ public class ITEM {
     public int quality;
     public int durability = 100;
     public int level;
-    public int[] effects = new int[Player.effectsSize];
+    public int[] effects = new int[Player.effectsSizeRollable];
 
     /*
         INT intellect + max mana / more damage on abilities

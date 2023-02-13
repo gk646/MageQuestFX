@@ -4,7 +4,6 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
@@ -387,6 +386,12 @@ public class MainGame {
         map_utils.loadSpawnLevel();
         countItems();
         gameMap.getImage();
+        gameState = State.TITLE;
+        sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        sound.mediaPlayer.play();
+        loadingScreen = false;
+        wControl.load_OverWorldMap(490, 490);
+        startThreads();
 
 
         for (int i = 0; i < 1; i++) {
@@ -396,14 +401,16 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(15,15);
-        loadingScreen = false;
-        wControl.load_OverWorldMap(490, 490);
-        ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
+        for (int i = 0; i < 10; i++) {
+            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2));
+        }
+        for (int i = 0; i < 10; i++) {
+            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3));
+        }
 
-        gameState = State.TITLE;
-        startThreads();
-        sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        sound.mediaPlayer.play();
+        // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
+
+
     }
 
     /**

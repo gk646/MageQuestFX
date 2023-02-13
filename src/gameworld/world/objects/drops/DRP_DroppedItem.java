@@ -35,6 +35,20 @@ public class DRP_DroppedItem extends DROP {
         }
     }
 
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, int rarity) {
+        this.mg = mg;
+        this.size = 32;
+        this.worldPos.x = worldX + 16;
+        this.worldPos.y = worldY + 16;
+        item = rollForItem(level);
+        if (rarity == 2) {
+            item = getRandomRare(5);
+        } else if (rarity == 3) {
+            item = getRandomEpic(5);
+        }
+        droppedIcon = item.icon;
+    }
+
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
         this.mg = mg;
         this.size = 32;
@@ -98,9 +112,9 @@ public class DRP_DroppedItem extends DROP {
             if (item.rarity == 1) {
                 return cloneItem(item);
             } else if (item.rarity == 2 && mg.random.nextInt(0, 3) == mg.random.nextInt(0, 3)) {
-                return rollEffect(cloneItem(item));
+                return cloneAndRollEffects(item);
             } else if (item.rarity == 3 && mg.random.nextInt(0, 7) == mg.random.nextInt(0, 6)) {
-                return rollEffect(cloneItem(item));
+                return cloneAndRollEffects(item);
             } else if (item.rarity == 4 && mg.random.nextInt(0, 20) == mg.random.nextInt(0, 18)) {
                 return cloneItem(item);
             } else if (item.rarity == 5 && mg.random.nextInt(0, 25) == mg.random.nextInt(0, 20)) {
@@ -143,7 +157,7 @@ public class DRP_DroppedItem extends DROP {
 
     private ITEM rollEffect(ITEM item) {
         if (item.rarity == 2) {
-            int number = mg.random.nextInt(1, Player.effectsSize);
+            int number = mg.random.nextInt(1, Player.effectsSizeRollable);
             if (number == 1 || number == 2 || number == 18 || number == 19) {
                 item.effects[number] = mg.random.nextInt(0, 11);
             } else if (number == 3) {
@@ -169,10 +183,10 @@ public class DRP_DroppedItem extends DROP {
             }
         }
         if (item.rarity == 3) {
-            int number1 = mg.random.nextInt(1, Player.effectsSize);
-            int number2 = mg.random.nextInt(1, Player.effectsSize);
+            int number1 = mg.random.nextInt(1, Player.effectsSizeRollable);
+            int number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
             while (number1 == number2) {
-                number2 = mg.random.nextInt(1, Player.effectsSize);
+                number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
             }
             int number;
             for (int i = 0; i < 2; i++) {
@@ -230,9 +244,13 @@ public class DRP_DroppedItem extends DROP {
             if (item.rarity == 2) break;
             item = goThroughArrays(mg.random.nextInt(0, 11));
         }
-        item.rollQuality();
         item.level = level;
-        return cloneItem(item);
+        item.rollQuality();
+        return cloneAndRollEffects(item);
+    }
+
+    public ITEM cloneAndRollEffects(ITEM item) {
+        return rollEffect(cloneItem(item));
     }
 
     public ITEM getRandomEpic(int level) {
@@ -243,9 +261,10 @@ public class DRP_DroppedItem extends DROP {
             if (item.rarity == 3) break;
             item = goThroughArrays(mg.random.nextInt(0, 11));
         }
-        item.rollQuality();
         item.level = level;
-        return cloneItem(item);
+        item.rollQuality();
+
+        return cloneAndRollEffects(item);
     }
 
     public ITEM getRandomLegendary(int level) {
