@@ -116,7 +116,8 @@ public class UI_TalentPanel {
 
     private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
         gc.setFill(Colors.darkBackground);
-        gc.fillRoundRect(startX + node.position.x - 50, startY + node.position.y - 7, 40, 40, 5, 5);
+        gc.fillRoundRect(startX + node.position.x - 260, startY + node.position.y - 7, 250, 40, 5, 5);
+        gc.fillText(node.talent.description, startX + node.position.x - 150, startY + node.position.y - 7);
     }
 
     private void drawLine(int offsetx, int offsety, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {

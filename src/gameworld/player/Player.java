@@ -61,8 +61,8 @@ public class Player extends ENTITY {
     public static String[] effectNames = new String[effectsSizeTotal];
 
     public int[] effects = new int[effectsSizeTotal];
-    public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent, INT__Absolute, WIS__Absolute, LUC__Absolute, AGI__Absolute, CHA__Absolute;
-    public float STR__Absolute, END__Absolute, CDR_Absolute, DMG_Poison_Absolute, DMG_Fire_Percent, Armour_Percent, CritChance_Absolute, CritDMG_Absolute, CarryWeight_Absolute;
+    public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
+    public float CDR_Absolute, DMG_Poison_Absolute, DMG_Fire_Percent, CritDMG_Absolute;
 
     /*
     1. DMG_Arcane_Absolute
@@ -155,7 +155,7 @@ public class Player extends ENTITY {
             }
         }
         for (TalentNode node : mg.talentP.talent_Nodes) {
-            if (node.talent != null && node.activated) {
+            if (node != null && node.talent != null && node.activated) {
                 for (int i = 1; i < effectsSizeTotal; i++) {
                     effects[i] += node.talent.effects[i];
                 }
@@ -172,6 +172,17 @@ public class Player extends ENTITY {
             }
         }
 
+        intellect = (int) (intellect + (intellect / 100.0f) * effects[8]);
+        wisdom = (int) (wisdom + (wisdom / 100.0f) * effects[9]);
+        vitality = (int) (vitality + (vitality / 100.0f) * effects[10]);
+        agility = (int) (agility + (agility / 100.0f) * effects[11]);
+        luck = (int) (luck + (luck / 100.0f) * effects[12]);
+        charisma = (int) (charisma + (charisma / 100.0f) * effects[13]);
+        strength = (int) (strength + (strength / 100.0f) * effects[14]);
+        endurance = (int) (endurance + (endurance / 100.0f) * effects[15]);
+        focus = (int) (focus + (focus / 100.0f) * effects[16]);
+        armour = (int) (armour + (armour / 100.0f) * effects[20]);
+
         maxHealth = (int) ((10.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));
         maxMana = (int) ((20.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
         manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
@@ -185,6 +196,7 @@ public class Player extends ENTITY {
         dotDamageMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 75.0f))) * 100.0f) / 100.0f;
         dotLengthMultiplier = (dotDamageMultiplier * 1.25f);
 
+
         DMG_Arcane_Absolute = effects[1];
         DMG_Dark__Absolute = effects[2];
         buffLengthMultiplier += effects[3];
@@ -192,12 +204,12 @@ public class Player extends ENTITY {
         dotLengthMultiplier += effects[5];
         maxMana = (int) (maxMana + (maxMana / 100.0f) * effects[6]);
         maxHealth = (int) (maxHealth + (maxHealth / 100.0f) * effects[7]);
-        DMG_Dark__Absolute = effects[17];
-        DMG_Dark__Absolute = effects[18];
-        DMG_Dark__Absolute = effects[19];
-        DMG_Dark__Absolute = effects[20];
-        DMG_Dark__Absolute = effects[21];
-        DMG_Dark__Absolute = effects[22];
+        CDR_Absolute = effects[17];
+        DMG_Poison_Absolute = effects[18];
+        DMG_Fire_Percent = effects[19];
+        critChance += effects[21];
+        CritDMG_Absolute = 50 + effects[22];
+        carryWeight += effects[23];
     }
 
     public void pickupDroppedItem() {
