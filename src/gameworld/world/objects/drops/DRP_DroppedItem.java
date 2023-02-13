@@ -85,13 +85,11 @@ public class DRP_DroppedItem extends DROP {
      */
     private ITEM rollForItem(int level) {
         ITEM item;
-        while (true) {
-            item = goThroughArrays(mg.random.nextInt(0, 11));
-            assert item != null;
-            item.level = level;
-            item.rollQuality();
-            return getItemWithDropChance(item);
-        }
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        assert item != null;
+        item.level = level;
+        item.rollQuality();
+        return getItemWithDropChance(item);
     }
 
     private ITEM getItemWithDropChance(ITEM item) {
@@ -140,6 +138,71 @@ public class DRP_DroppedItem extends DROP {
             return mg.BAGS.get(mg.random.nextInt(1, mg.BAGS.size()));
         }
         return null;
+    }
+
+    public ITEM getRandomCommon(int level) {
+        ITEM item;
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        while (true) {
+            assert item != null;
+            if (item.rarity == 1) break;
+            item = goThroughArrays(mg.random.nextInt(0, 11));
+        }
+        item.rollQuality();
+        item.level = level;
+        return cloneItem(item);
+    }
+
+    public ITEM getRandomRare(int level) {
+        ITEM item;
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        while (true) {
+            assert item != null;
+            if (item.rarity == 2) break;
+            item = goThroughArrays(mg.random.nextInt(0, 11));
+        }
+        item.rollQuality();
+        item.level = level;
+        return cloneItem(item);
+    }
+
+    public ITEM getRandomEpic(int level) {
+        ITEM item;
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        while (true) {
+            assert item != null;
+            if (item.rarity == 3) break;
+            item = goThroughArrays(mg.random.nextInt(0, 11));
+        }
+        item.rollQuality();
+        item.level = level;
+        return cloneItem(item);
+    }
+
+    public ITEM getRandomLegendary(int level) {
+        ITEM item;
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        while (true) {
+            assert item != null;
+            if (item.rarity == 4) break;
+            item = goThroughArrays(mg.random.nextInt(0, 11));
+        }
+        item.rollQuality();
+        item.level = level;
+        return cloneItem(item);
+    }
+
+    public ITEM getRandomSetItem(int level) {
+        ITEM item;
+        item = goThroughArrays(mg.random.nextInt(0, 11));
+        while (true) {
+            assert item != null;
+            if (item.rarity == 5) break;
+            item = goThroughArrays(mg.random.nextInt(0, 11));
+        }
+        item.rollQuality();
+        item.level = level;
+        return cloneItem(item);
     }
 
     private void setRarityEffect(GraphicsContext gc) {

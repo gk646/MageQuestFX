@@ -55,6 +55,7 @@ public class PRJ_Control {
     public Point2D.Double worldPos;
     public int GruntKilledCounter;
     private int ShooterKilledCounter;
+    public int outOfBoundsDistance;
     /*
 
      */
@@ -150,6 +151,12 @@ public class PRJ_Control {
 
     protected void outOfBounds() {
         if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 650 * 2 || worldPos.x <= endPos.x - 650 * 2) {
+            this.dead = true;
+        }
+    }
+
+    protected void outOfBounds(int x) {
+        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - x * 2 || worldPos.x <= endPos.x - x * 2) {
             this.dead = true;
         }
     }

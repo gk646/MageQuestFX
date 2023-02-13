@@ -4,6 +4,7 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
@@ -397,6 +398,7 @@ public class MainGame {
         //wControl.load_OverWorldMap(15,15);
         loadingScreen = false;
         wControl.load_OverWorldMap(490, 490);
+        ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
         gameState = State.TITLE;
         startThreads();
         sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

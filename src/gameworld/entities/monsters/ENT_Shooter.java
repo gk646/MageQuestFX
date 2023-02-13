@@ -44,7 +44,7 @@ public class ENT_Shooter extends ENTITY {
     public void update() {
         onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level));
+            mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, worldX, worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
         }
         getNearestPlayer();
@@ -60,10 +60,10 @@ public class ENT_Shooter extends ENTITY {
     }
 
     @Override
-    public void draw(GraphicsContext g2) {
+    public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        g2.drawImage(enemyImage, screenX, screenY, 48, 48);
+        gc.drawImage(enemyImage, screenX, screenY, 48, 48);
     }
 
 

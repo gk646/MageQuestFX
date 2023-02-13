@@ -17,7 +17,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
      * @param mg    to access display functions
      * @param level the level and damage to the player
      */
-    public PRJ_EnemyStandardShot(MainGame mg, int x, int y, int level) {
+    public PRJ_EnemyStandardShot(MainGame mg, int x, int y, int level, int goalx, int goaly) {
         super(mg);
         //-------VALUES-----------
         this.movementSpeed = 3;
@@ -29,9 +29,9 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
 
         //------POSITION-----------
         this.worldPos = new Point2D.Double(x + 24 - projectileWidth / 2.0f, y + 24 - projectileHeight / 2.0f);
-        this.updateVector = getTrajectory();
+        this.updateVector = getTrajectory(goalx, goaly);
         getPlayerImage();
-        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
+        this.endPos = new Point((int) (worldPos.x + 850), (int) (worldPos.y + 850));
     }
 
     @Override
@@ -41,14 +41,14 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
 
     @Override
     public void update() {
-        outOfBounds();
+        outOfBounds(850);
         tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
     }
 
-    private Point2D.Double getTrajectory() {
-        double angle = Math.atan2(Player.worldY + 16 - worldPos.y, Player.worldX + 16 - worldPos.x);
+    private Point2D.Double getTrajectory(int x, int y) {
+        double angle = Math.atan2(y + 16 - worldPos.y, x + 16 - worldPos.x);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 

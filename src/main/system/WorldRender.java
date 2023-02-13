@@ -103,7 +103,7 @@ public class WorldRender {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
             Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
-            worldCol -= 10;
+            worldCol -= 18;
         }
         if (Player.screenY > Player.worldY) {
             Player.screenY = (int) Player.worldY;
