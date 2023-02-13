@@ -326,7 +326,6 @@ public class Player extends ENTITY {
                 worldY += playerMovementSpeed;
             }
         }
-
         if (mg.inputH.rightPressed) {
             if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
                 worldX += playerMovementSpeed;
