@@ -23,7 +23,7 @@ public class TalentNode {
         this.id = talent.i_id;
     }
 
-    TalentNode(TALENT talent, int xCo, int yCo, int size, int activated) {
+    public TalentNode(TALENT talent, int xCo, int yCo, int size, int activated) {
         this.size = size;
         if (size == 0) {
             this.boundBox = new Rectangle(944 + xCo, 524 + yCo, 32, 32);

@@ -3,6 +3,8 @@ package main.system.database;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
+import main.system.ui.talentpane.TALENT;
+import main.system.ui.talentpane.TalentNode;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,6 +48,7 @@ public class SQLite {
             readPlayerStats(stmt);
             readPlayerBags(stmt);
             readStartLevel(stmt);
+            readSkillTree(stmt);
             readPlayerBagEquip(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,6 +123,7 @@ public class SQLite {
             savePlayerInventory();
             saveBagInventory();
             savePlayerStats();
+            saveTalentTree();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -195,6 +199,19 @@ public class SQLite {
         }
     }
 
+    private void saveTalentTree() throws SQLException {
+        String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
+            if (mg.talentP.talent_Nodes[i] != null) {
+                if (mg.talentP.talent_Nodes[i].activated) {
+                    stmt.setInt(1, 1);
+                    stmt.setString(2, String.valueOf(i));
+                    stmt.executeUpdate();
+                }
+            }
+        }
+    }
 
     private void inverseArrayLists() {
         mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));
@@ -250,6 +267,16 @@ public class SQLite {
         }
     }
 
+    private void readSkillTree(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM TALENTS");
+        while (rs.next()) {
+            if (rs.getString("id") == null) {
+                continue;
+            }
+            mg.talentP.talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description")),
+                    rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), rs.getInt("activated"));
+        }
+    }
 
     private void readPlayerBags(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");

@@ -8,9 +8,6 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 
 import java.awt.Rectangle;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Objects;
 
 public class UI_TalentPanel {
@@ -40,7 +37,7 @@ public class UI_TalentPanel {
     public UI_TalentPanel(MainGame mg) {
         this.mg = mg;
         this.talent_Nodes = new TalentNode[100];
-        wholeTalentWindow = new Rectangle(176, 76, 1_568, 938);
+        wholeTalentWindow = new Rectangle(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         hideTalentCollision();
         getImages();
     }
@@ -180,21 +177,7 @@ public class UI_TalentPanel {
     }
 
     public void createTalentNodes() {
-        Statement stmt;
-        try {
-            stmt = mg.sqLite.conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TALENTS");
-            while (rs.next()) {
-                if (rs.getString("id") == null) {
-                    continue;
-                }
-                talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description")),
-                        rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), rs.getInt("activated"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
 /*
         talent_Nodes[80] = new TalentNode(new TALENT(80, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%"), 560, 35);

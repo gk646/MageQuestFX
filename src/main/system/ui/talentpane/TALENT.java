@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 import java.util.Objects;
 
-class TALENT {
+public class TALENT {
     public final int i_id;
     private final String name;
     private final String description;
