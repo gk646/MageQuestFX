@@ -389,7 +389,7 @@ public class MainGame {
         sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         sound.mediaPlayer.play();
         loadingScreen = false;
-        wControl.load_OverWorldMap(490, 490);
+
         startThreads();
 
         for (int i = 0; i < 1; i++) {

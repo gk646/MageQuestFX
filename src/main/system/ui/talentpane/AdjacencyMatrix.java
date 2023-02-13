@@ -110,7 +110,6 @@ class AdjacencyMatrix {
         makeEdge(70, 71);
         makeEdge(71, 77);
         makeEdge(77, 76);
-        makeEdge(76, 1);
         makeEdge(65, 67);
         makeEdge(67, 77);
         makeEdge(72, 73);

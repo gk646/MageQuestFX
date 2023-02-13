@@ -50,7 +50,6 @@ public class SQLite {
             readPlayerBags(stmt);
             readStartLevel(stmt);
             readSkillTree(stmt);
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -291,7 +290,7 @@ public class SQLite {
             if (rs.getString("id") == null) {
                 continue;
             }
-            mg.talentP.talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description")),
+            mg.talentP.talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description"), rs.getString("effect")),
                     rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), rs.getInt("activated"));
         }
     }

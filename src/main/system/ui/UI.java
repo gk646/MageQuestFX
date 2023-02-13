@@ -128,7 +128,7 @@ public class UI {
         gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 70, (int) ((mg.player.health / mg.player.maxHealth) * 225), 11);
         gc.setFill(Colors.Blue);
         gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
-        gc.drawImage(playerUI, 40, 40, 330, 200);
+        gc.drawImage(playerUI, 40, 40, 330, 150);
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.editUndo18);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
@@ -227,6 +227,6 @@ public class UI {
     }
 
     private Image setup() {
-        return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui.png"))));
+        return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/" + "player_ui3.png"))));
     }
 }

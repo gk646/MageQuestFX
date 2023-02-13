@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Map;
 import main.system.ui.inventory.UI_InventorySlot;
+import main.system.ui.talentpane.TalentNode;
 
 import java.awt.Rectangle;
 import java.util.Iterator;
@@ -56,9 +57,12 @@ public class Player extends ENTITY {
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
     public static int effectsSizeRollable = 30;
-    public static int effectsSizeTotal = 40;
+    public static int effectsSizeTotal = 50;
     public static String[] effectNames = new String[effectsSizeTotal];
+
     public int[] effects = new int[effectsSizeTotal];
+    public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent, INT__Absolute, WIS__Absolute, LUC__Absolute, AGI__Absolute, CHA__Absolute;
+    public float STR__Absolute, END__Absolute, CDR_Absolute, DMG_Poison_Absolute, DMG_Fire_Percent, Armour_Percent, CritChance_Absolute, CritDMG_Absolute, CarryWeight_Absolute;
 
     /*
     1. DMG_Arcane_Absolute
@@ -84,6 +88,11 @@ public class Player extends ENTITY {
     21. CritChance_Absolute
     22. CritDMG_Absolute
     23. CarryWeight_Absolute
+    24. HealthRegen_Absolute
+    25. Mana Regen
+
+
+    41.
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -123,7 +132,7 @@ public class Player extends ENTITY {
         strength = 0;
         focus = 0;
         armour = 0;
-        for (int i = 1; i < effectsSizeRollable; i++) {
+        for (int i = 1; i < effectsSizeTotal; i++) {
             effects[i] = 0;
         }
         for (UI_InventorySlot invSlot : mg.inventP.char_Slots) {
@@ -145,6 +154,24 @@ public class Player extends ENTITY {
                 }
             }
         }
+        for (TalentNode node : mg.talentP.talent_Nodes) {
+            if (node.talent != null && node.activated) {
+                for (int i = 1; i < effectsSizeTotal; i++) {
+                    effects[i] += node.talent.effects[i];
+                }
+                intellect += node.talent.intellect;
+                vitality += node.talent.vitality;
+                agility += node.talent.agility;
+                wisdom += node.talent.wisdom;
+                luck += node.talent.luck;
+                charisma += node.talent.charisma;
+                endurance += node.talent.endurance;
+                strength += node.talent.strength;
+                focus += node.talent.focus;
+                armour += node.talent.armour;
+            }
+        }
+
         maxHealth = (int) ((10.0f + vitality * 1.5f + endurance / 2.0f) * Math.sqrt(Math.min(level, 50)));
         maxMana = (int) ((20.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
         manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
@@ -154,9 +181,23 @@ public class Player extends ENTITY {
         speechSkill = Math.round((5.0f + (level / 10.0f) + (1.5f * charisma) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f;
         resistChance = Math.min((Math.round((5.0f + (level / 10.0f) + (endurance * 1.0f) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f), 50);
         carryWeight = Math.round((30.0f + (level) + (strength) * (1.0f - (level / 90.0f))) * 100.0f) / 100.0f;
-        buffLengthMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 83.0f))) * 100.0f) / 100.0f;
+        buffLengthMultiplier = (float) ((focus * 1.5) * (1.0f - (level / 83.0f)));
         dotDamageMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 75.0f))) * 100.0f) / 100.0f;
         dotLengthMultiplier = (dotDamageMultiplier * 1.25f);
+
+        DMG_Arcane_Absolute = effects[1];
+        DMG_Dark__Absolute = effects[2];
+        buffLengthMultiplier += effects[3];
+        dotDamageMultiplier += effects[4];
+        dotLengthMultiplier += effects[5];
+        maxMana = (int) (maxMana + (maxMana / 100.0f) * effects[6]);
+        maxHealth = (int) (maxHealth + (maxHealth / 100.0f) * effects[7]);
+        DMG_Dark__Absolute = effects[17];
+        DMG_Dark__Absolute = effects[18];
+        DMG_Dark__Absolute = effects[19];
+        DMG_Dark__Absolute = effects[20];
+        DMG_Dark__Absolute = effects[21];
+        DMG_Dark__Absolute = effects[22];
     }
 
     public void pickupDroppedItem() {
@@ -453,7 +494,9 @@ public class Player extends ENTITY {
                 "Armour: +",
                 "Crit Chance: +",
                 "CritDamage: +",
-                "Carry Weight: +"
+                "Carry Weight: +",
+                "Health Regeneration: +",
+                "Mana Regeneration: +"
         };
     }
 
