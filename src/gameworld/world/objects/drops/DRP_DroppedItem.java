@@ -98,9 +98,9 @@ public class DRP_DroppedItem extends DROP {
             if (item.rarity == 1) {
                 return cloneItem(item);
             } else if (item.rarity == 2 && mg.random.nextInt(0, 3) == mg.random.nextInt(0, 3)) {
-                return cloneItem(item);
+                return rollEffect(cloneItem(item));
             } else if (item.rarity == 3 && mg.random.nextInt(0, 7) == mg.random.nextInt(0, 6)) {
-                return cloneItem(item);
+                return rollEffect(cloneItem(item));
             } else if (item.rarity == 4 && mg.random.nextInt(0, 20) == mg.random.nextInt(0, 18)) {
                 return cloneItem(item);
             } else if (item.rarity == 5 && mg.random.nextInt(0, 25) == mg.random.nextInt(0, 20)) {
@@ -149,7 +149,7 @@ public class DRP_DroppedItem extends DROP {
             } else if (number == 3) {
                 item.effects[number] = mg.random.nextInt(0, 26);
             } else if (number == 4) {
-                item.effects[number] = mg.random.nextInt(0, 11);
+                item.effects[number] = mg.random.nextInt(0, 16);
             } else if (number == 5) {
                 item.effects[number] = mg.random.nextInt(0, 26);
             } else if (number == 6 || number == 7) {

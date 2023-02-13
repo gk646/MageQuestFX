@@ -58,6 +58,7 @@ public class Player extends ENTITY {
     public static int effectsSize = 30;
 
     public int[] effects = new int[effectsSize];
+    public static String[] effectNames = new String[effectsSize];
 
     /*
     1. DMG_Arcane_Absolute
@@ -103,6 +104,7 @@ public class Player extends ENTITY {
         this.level = 1;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
         screenY = MainGame.SCREEN_HEIGHT / 2 - 24;
+        setupEffectNames();
     }
 
     public void setPosition(int x, int y) {
@@ -426,6 +428,33 @@ public class Player extends ENTITY {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/runMirrored/" + imagePath)));
     }
 
+    private void setupEffectNames() {
+        effectNames = new String[]{
+                "Arcane Damage: +",
+                "Dark Magic Damage: +",
+                "Buff Length: +",
+                "DoT Damage: +",
+                "DoT Length: +",
+                "Mana: +",
+                "Health: +",
+                "INT: +",
+                "WIS: +",
+                "VIT: +",
+                "AGI: +",
+                "LUC: +",
+                "CHA: +",
+                "STR: +",
+                "END: +",
+                "FOC: +",
+                "Cooldown Reduction: +",
+                "Poison Damage: +",
+                "Fire Damage: +",
+                "Armour: +",
+                "Crit Chance: +",
+                "CritDamage: +",
+                "Carry Weight: +"
+        };
+    }
 
     private void getPlayerImage() {
         idle1 = setupIdle("1.png");

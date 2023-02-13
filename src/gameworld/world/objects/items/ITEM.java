@@ -122,21 +122,6 @@ public class ITEM {
         gc.drawImage(icon, x, y, slotSize, slotSize);
     }
 
-    public static void main(String[] args) {
-        Pattern p;
-        Matcher m;
-        int stat = 0;
-        int[] effec = new int[25];
-        String stats = "INT3 VIT2 ARM2 [1]50 [3]24";
-        p = Pattern.compile("\\[(\\d+)](\\d+)");
-        m = p.matcher(stats);
-        if (stats.contains("[")) {
-            while (m.find()) {
-                effec[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));
-            }
-        }
-        System.out.println(effec[1] + " " + effec[3]);
-    }
 
     private void getStats() {
         Pattern p;

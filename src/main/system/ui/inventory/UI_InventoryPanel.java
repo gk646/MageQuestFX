@@ -195,6 +195,17 @@ public class UI_InventoryPanel {
        */
             //EFFECTS
             gc.fillText("Effects: ", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.130f);
+            int counter = 0;
+            for (int i = 0; i < Player.effectsSize; i++) {
+                if (invSlot.item.effects[i] != 0) {
+                    if (i == 23) {
+                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i], startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * (0.100f - 0.03 * counter));
+                    } else {
+                        gc.fillText(Player.effectNames[i] + invSlot.item.effects[i] + "%", startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * (0.100f - 0.03 * counter));
+                    }
+                    counter++;
+                }
+            }
         }
         //DESCRIPTION
         gc.setFont(FonT.minecraftItalic12);
