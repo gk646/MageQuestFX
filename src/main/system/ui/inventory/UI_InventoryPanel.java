@@ -228,7 +228,7 @@ public class UI_InventoryPanel {
         }
         gc.setFont(FonT.minecraftItalic14);
         //TYPE
-        printItemType(gc, invSlot);
+        printItemType(gc, invSlot, startX, startY);
         //LEVEL
         gc.fillText("ilvl: " + invSlot.item.level, startX - 248, startY - 322);
         //Durability
@@ -264,9 +264,9 @@ public class UI_InventoryPanel {
         }
     }
 
-    private void printItemType(GraphicsContext gc, UI_InventorySlot slot) {
-        int xPosition = (int) (mg.inputH.lastMousePosition.x - MainGame.SCREEN_HEIGHT * 0.148f);
-        int yPosition = (int) (mg.inputH.lastMousePosition.y + MainGame.SCREEN_HEIGHT * 0.002_7f);
+    private void printItemType(GraphicsContext gc, UI_InventorySlot slot, int x, int y) {
+        int xPosition = (int) (x - MainGame.SCREEN_HEIGHT * 0.148f);
+        int yPosition = (int) (y + MainGame.SCREEN_HEIGHT * 0.002_7f);
         switch (slot.item.type) {
             case 'H' -> gc.fillText("Helm", xPosition, yPosition);
             case 'C' -> gc.fillText("Chest", xPosition, yPosition);
@@ -622,9 +622,13 @@ public class UI_InventoryPanel {
         gc.fillText("Character", startX + 138, startY - 61);
         gc.fillText("Character", startX - 17, startY - 80 + 629);
         gc.fillText("Currency", startX + 100, startY - 80 + 629);
-        gc.fillText("No Title", startX + 147, startY);
-        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
+        int y = startY + 50;
+        for (int i = 1; i < 26; i++) {
+            gc.fillText(Player.effectNames[i] + mg.player.effects[i] + "%", 100 + startX, y);
+            y += 18;
+        }
     }
+
 
     private void drawEffects(GraphicsContext gc, int startX, int startY) {
         gc.fillText("hello", startX + 182, startY + 420);

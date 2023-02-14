@@ -199,17 +199,23 @@ public class Player extends ENTITY {
 
         DMG_Arcane_Absolute = effects[1];
         DMG_Dark__Absolute = effects[2];
-        buffLengthMultiplier += effects[3];
-        dotDamageMultiplier += effects[4];
-        dotLengthMultiplier += effects[5];
+        effects[3] += buffLengthMultiplier;
+        buffLengthMultiplier = effects[3];
+        effects[4] += dotDamageMultiplier;
+        dotDamageMultiplier = effects[4];
+        effects[5] += dotLengthMultiplier;
+        dotLengthMultiplier = effects[5];
         maxMana = (int) (maxMana + (maxMana / 100.0f) * effects[6]);
         maxHealth = (int) (maxHealth + (maxHealth / 100.0f) * effects[7]);
         CDR_Absolute = effects[17];
         DMG_Poison_Percent = effects[18];
         DMG_Fire_Percent = effects[19];
-        critChance += effects[21];
-        CritDMG_Absolute = 50 + effects[22];
-        carryWeight += effects[23];
+
+        effects[21] += critChance;
+        critChance = effects[21];
+        effects[22] += 50;
+        effects[23] += carryWeight;
+        carryWeight = effects[23];
     }
 
     public void pickupDroppedItem() {

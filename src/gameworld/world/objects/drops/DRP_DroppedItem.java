@@ -180,6 +180,8 @@ public class DRP_DroppedItem extends DROP {
                 item.effects[number] = mg.random.nextInt(0, 16);
             } else if (number == 23) {
                 item.effects[number] = mg.random.nextInt(0, 16);
+            } else if (number == 24 || number == 25) {
+                item.effects[number] = mg.random.nextInt(0, 11);
             }
         }
         if (item.rarity == 3) {
@@ -217,6 +219,8 @@ public class DRP_DroppedItem extends DROP {
                     item.effects[number] = mg.random.nextInt(0, 16);
                 } else if (number == 23) {
                     item.effects[number] = mg.random.nextInt(0, 16);
+                } else if (number == 24 || number == 25) {
+                    item.effects[number] = mg.random.nextInt(0, 11);
                 }
             }
         }
