@@ -1,7 +1,7 @@
 package gameworld.world;
 
 
-import gameworld.dialogue.SpawnTrigger;
+import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.MAP_City1;
 import gameworld.world.maps.MAP_OverWorld;
 import gameworld.world.maps.MAP_Tutorial;

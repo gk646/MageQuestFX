@@ -1,4 +1,4 @@
-package gameworld.dialogue;
+package gameworld.quest;
 
 public enum Trigger {
     SINGULAR(1), SPREAD_Random(2), SPREAD_Circle(3);

@@ -1,8 +1,8 @@
 package gameworld.world.maps;
 
-import gameworld.dialogue.SpawnTrigger;
-import gameworld.dialogue.Trigger;
-import gameworld.dialogue.Type;
+import gameworld.quest.SpawnTrigger;
+import gameworld.quest.Trigger;
+import gameworld.quest.Type;
 
 import java.awt.Point;
 import java.io.BufferedReader;

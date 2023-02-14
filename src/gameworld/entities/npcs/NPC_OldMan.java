@@ -1,6 +1,5 @@
 package gameworld.entities.npcs;
 
-import gameworld.dialogue.generic.Tutorial;
 import gameworld.entities.NPC;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,9 +14,8 @@ public class NPC_OldMan extends NPC {
     private Image idle1, idle2, idle3, idle4;
 
 
-    public NPC_OldMan(MainGame mainGame, int dialog_type, int x, int y) {
+    public NPC_OldMan(MainGame mainGame, int x, int y) {
         this.mg = mainGame;
-        this.dial = new Tutorial(mg, dialog_type, this);
         goalTile = new Point(34, 34);
         //Setting default values
         getPlayerImage();
@@ -58,7 +56,7 @@ public class NPC_OldMan extends NPC {
     }
 
     public void update() {
-        dial.script(this);
+
         if (show_dialog) {
             show_dialog = !mg.map_utils.player_went_away(playerTalkLocation);
             if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !dial.block)) {

@@ -1,6 +1,7 @@
 package main.system.ui.questpanel;
 
 
+import gameworld.quest.QUEST;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
+    public QUEST[] quests = new QUEST[10];
     public final Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
     private final MainGame mg;
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
@@ -39,6 +41,10 @@ public class UI_QuestPanel {
     }
 
     public void update() {
-
+        for (QUEST quest : quests) {
+            if (quest != null) {
+                quest.update();
+            }
+        }
     }
 }

@@ -1,16 +1,15 @@
-package gameworld.dialogue.generic;
+package gameworld.quest.generic;
 
-import gameworld.dialogue.Dialog;
-import gameworld.entities.NPC;
+import gameworld.quest.Dialog;
 import main.MainGame;
 
 public class Trading extends Dialog {
     /**
      * Trading dialog framework
      *
-     * @param mg   maingame instance
+     * @param mg maingame instance
      */
-    protected Trading(MainGame mg, int type, NPC npc) {
+    protected Trading(MainGame mg,) {
         super(mg, type, npc);
         this.type = type;
         this.mg = mg;
@@ -18,14 +17,12 @@ public class Trading extends Dialog {
         load_text();
     }
 
+
     /**
      * allows the dialog to check for stages and update progress
-     *
      */
     @Override
-    public void script(NPC npc) {
+    public void script() {
 
     }
-
-
 }

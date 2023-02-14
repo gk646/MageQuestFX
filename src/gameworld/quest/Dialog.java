@@ -1,4 +1,4 @@
-package gameworld.dialogue;
+package gameworld.quest;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
@@ -16,28 +16,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 abstract public class Dialog {
-    //Type
-    //0 = tutorial npc
-    //1 = trader
-    //2 = Generic person
     protected int stage = 1;
     protected MainGame mg;
-    protected int type;
     private String text;
     public boolean block;
-    private int textCounter;
-    private final NPC npc;
+    public String txtName;
+    private NPC npc;
+    private int stuckCounter;
 
     /**
      * The dialog framework
      *
-     * @param mg   mainGame to access cross-class information
-     * @param type to choose the type for dialog text (also quest id)
+     * @param mg      mainGame to access cross-class information
+     * @param txtName to choose the type for dialog text (also quest id)
      */
-    protected Dialog(MainGame mg, int type, NPC npc) {
-        this.npc = npc;
-        this.type = type;
+    protected Dialog(MainGame mg, String txtName) {
         this.mg = mg;
+        this.txtName = txtName;
     }
 
     public void draw(GraphicsContext gc, ENTITY entity) {
@@ -56,17 +51,10 @@ abstract public class Dialog {
 
     protected void load_text() {
         try {
-            if (type == 1) {
-                InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/tutorial_npc.txt");
-                assert inputStream != null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                text = readLine(stage, bufferedReader);
-            } else if (type == 2) {
-                InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/traders.txt");
-                assert inputStream != null;
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                text = readLine(stage, bufferedReader);
-            }
+            InputStream inputStream = Dialog.class.getResourceAsStream("/Dialog/" + txtName + ".txt");
+            assert inputStream != null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            text = readLine(stage, bufferedReader);
             if (text == null) {
                 text = "...";
             }
@@ -118,7 +106,7 @@ abstract public class Dialog {
     /**
      * allows the dialog to check for stages and update progress
      */
-    abstract public void script(NPC npc);
+    abstract public void script();
 
     /**
      * Move the npc to a tile and proceed when he gets there
@@ -129,8 +117,14 @@ abstract public class Dialog {
     protected void moveToTile(int x, int y) {
         npc.onPath = true;
         npc.goalTile = new Point(x, y);
+        stuckCounter++;
         if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
             npc.onPath = false;
+            stuckCounter = 0;
+        } else if (stuckCounter > 2000) {
+            npc.worldX = npc.goalTile.x * 48;
+            npc.worldY = npc.goalTile.y * 48;
+            stuckCounter = 0;
         }
     }
 
@@ -151,5 +145,4 @@ abstract public class Dialog {
         }
         return false;
     }
-
 }

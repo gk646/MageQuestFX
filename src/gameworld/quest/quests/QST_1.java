@@ -1,13 +1,13 @@
-package gameworld.dialogue.quests;
+package gameworld.quest.quests;
 
-import gameworld.dialogue.Dialog;
 import gameworld.entities.NPC;
+import gameworld.quest.Dialog;
 import main.MainGame;
 
-public class QST_2 extends Dialog {
+public class QST_1 extends Dialog {
 
 
-    public QST_2(MainGame mg, int type, NPC npc) {
+    public QST_1(MainGame mg, int type, NPC npc) {
         super(mg, type, npc);
         System.out.println(type);
 
@@ -22,4 +22,7 @@ public class QST_2 extends Dialog {
     public void script(NPC npc) {
 
     }
+
+
 }
+

@@ -1,4 +1,4 @@
-package gameworld.dialogue;
+package gameworld.quest;
 
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;

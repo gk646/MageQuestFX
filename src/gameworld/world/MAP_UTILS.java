@@ -1,7 +1,7 @@
 package gameworld.world;
 
-import gameworld.dialogue.SpawnTrigger;
 import gameworld.player.Player;
+import gameworld.quest.SpawnTrigger;
 import main.MainGame;
 import main.system.enums.Map;
 

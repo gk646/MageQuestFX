@@ -1,6 +1,6 @@
 package gameworld.entities;
 
-import gameworld.dialogue.Dialog;
+import gameworld.quest.Dialog;
 import javafx.scene.image.Image;
 
 import java.awt.Point;

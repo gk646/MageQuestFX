@@ -1,8 +1,8 @@
-package gameworld.dialogue.generic;
+package gameworld.quest.dialog;
 
-import gameworld.dialogue.Dialog;
 import gameworld.entities.NPC;
 import gameworld.entities.monsters.ENT_Grunt;
+import gameworld.quest.Dialog;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.WorldRender;
@@ -14,8 +14,8 @@ public class Tutorial extends Dialog {
     /**
      * The tutorial dialog
      */
-    public Tutorial(MainGame mg, int type, NPC npc) {
-        super(mg, type, npc);
+    public Tutorial(MainGame mg, NPC npc, String textName, String Questname) {
+        super(mg, textName, npc, Questname);
         load_text();
     }
 
@@ -67,7 +67,6 @@ public class Tutorial extends Dialog {
         }
         if (stage == 21) {
             moveToTile(58, 37);
-
         }
 
         if (stage == 22) {
