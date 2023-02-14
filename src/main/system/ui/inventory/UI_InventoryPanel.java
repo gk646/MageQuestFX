@@ -48,6 +48,8 @@ public class UI_InventoryPanel {
     public boolean showBagEquipSlots;
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
     private final Image sort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/sort.png")));
+    private final Image character_bottom = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture.png")));
+    private final Image character_bottom2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture2.png")));
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -502,21 +504,18 @@ public class UI_InventoryPanel {
 
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
-        gc.fillRoundRect(startX - 35, startY - 80 + 610, 115, 30, 15, 15);
-        gc.fillRoundRect(startX + 85, startY - 80 + 610, 100, 30, 15, 15);
+
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
         gc.strokeRoundRect(startX - 45, startY - 75, 440, 620 - 10, 30, 30);
         gc.setFill(Colors.mediumLightGrey);
         gc.fillRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
-        // gc.fillRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
-        gc.fillRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+
         gc.setStroke(Colors.darkBackground);
         gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setLineWidth(4);
-        gc.strokeRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
-        gc.strokeRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+        gc.drawImage(character_bottom, startX - 52, startY - 80 + 606);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
         gc.fillText("Character", startX + 138, startY - 61);
@@ -596,31 +595,28 @@ public class UI_InventoryPanel {
     }
 
     private void drawCharacterSecondPanel(GraphicsContext gc, int startX, int startY) {
-        //inventory background
-        //big background
         wholeCharWindow.x = startX - 47;
         wholeCharWindow.y = startY - 78;
         firstPanelButton.x = startX - 30;
         firstPanelButton.y = startY - 80 + 615;
         secondPanelButton.x = startX + 90;
         secondPanelButton.y = startY - 80 + 615;
+        //big background
+
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
-        gc.fillRoundRect(startX - 35, startY - 80 + 610, 115, 30, 15, 15);
-        gc.fillRoundRect(startX + 85, startY - 80 + 610, 100, 30, 15, 15);
+
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
         gc.strokeRoundRect(startX - 45, startY - 75, 440, 620 - 10, 30, 30);
         gc.setFill(Colors.mediumLightGrey);
         gc.fillRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
-        // gc.fillRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
-        gc.fillRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+
         gc.setStroke(Colors.darkBackground);
         gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setLineWidth(4);
-        gc.strokeRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
-        gc.strokeRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+        gc.drawImage(character_bottom2, startX - 52, startY - 80 + 606);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
         gc.fillText("Character", startX + 138, startY - 61);
@@ -659,14 +655,14 @@ public class UI_InventoryPanel {
             }
         }
         for (int i = 8; i <= 9; i++) {
-            char_Slots[i].boundBox.x = ((i - 8) * 57) + 128 + startX;
+            char_Slots[i].boundBox.x = ((i - 8) * 57) + 124 + startX;
             char_Slots[i].boundBox.y = 297 + startY;
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(((i - 8) * 57) + 128 + startX, 297 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(((i - 8) * 57) + 124 + startX, 297 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 128 + startX, 297 + startY);
+            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 124 + startX, 297 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 128 + startX, 297 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 124 + startX, 297 + startY, SLOT_SIZE);
             }
         }
     }

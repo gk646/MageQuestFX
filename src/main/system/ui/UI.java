@@ -50,14 +50,23 @@ public class UI {
             if (drawSaveMessage) {
                 drawSaveMessage(gc);
             }
-        } else if (mg.gameState == State.TITLE && !mg.credits) {
+            if (mg.drawVideoSettings) {
+                drawVideoSettings(gc);
+            } else if (mg.drawAudioSettings) {
+                drawAudioSettings(gc);
+            } else if (mg.drawKeybindings) {
+                drawKeyBindings(gc);
+            } else if (mg.drawGameplay) {
+                drawGamePlaySettings(gc);
+            }
+        } else if (mg.credits) {
+            drawCredits(gc);
+        } else if (mg.gameState == State.TITLE) {
             drawTitleScreen(gc);
         } else if (mg.gameState == State.GAMEOVER) {
             drawGameOver(gc);
         } else if (mg.loadingScreen) {
             drawLoadingScreen(gc);
-        } else if (mg.credits) {
-            drawCredits(gc);
         }
     }
 
@@ -159,7 +168,7 @@ public class UI {
         gc.fillText("Settings", MainGame.SCREEN_HEIGHT * 0.092f, MainGame.SCREEN_HEIGHT * 0.132f);
         gc.setFont(FonT.minecraftBold30);
         gc.fillText("Video Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.302f);
-        gc.fillText("Sound Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.352f);
+        gc.fillText("Audio Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.352f);
         gc.fillText("Keybindings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.402f);
         gc.fillText("Gameplay", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.452f);
         gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
@@ -188,6 +197,23 @@ public class UI {
         }
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
+
+    private void drawVideoSettings(GraphicsContext gc) {
+
+    }
+
+    private void drawAudioSettings(GraphicsContext gc) {
+
+    }
+
+    private void drawKeyBindings(GraphicsContext gc) {
+
+    }
+
+    private void drawGamePlaySettings(GraphicsContext gc) {
+
+    }
+
 
     private void drawSaveMessage(GraphicsContext gc) {
 

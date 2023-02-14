@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Sound {
     {
         try {
-            fileName = Objects.requireNonNull(getClass().getResource("/resources/sound/music/intromore.wav")).toURI().toString();
+            fileName = Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro_new.wav")).toURI().toString();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

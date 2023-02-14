@@ -108,6 +108,9 @@ public class MainGame {
     public final UI_SkillBar sBar = new UI_SkillBar(this);
     public final UI_QuestPanel qPanel = new UI_QuestPanel(this);
     public boolean credits;
+    public boolean drawVideoSettings, drawAudioSettings;
+    public boolean drawKeybindings;
+    public boolean drawGameplay;
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
