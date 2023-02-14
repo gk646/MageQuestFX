@@ -42,13 +42,6 @@ public class UI_TalentPanel {
         getImages();
     }
 
-    public void getTalentEffects() {
-        for (TalentNode node : talent_Nodes) {
-            if (node.activated) {
-
-            }
-        }
-    }
 
     public void spendTalentPoint() {
         pointsSpent++;
@@ -59,6 +52,7 @@ public class UI_TalentPanel {
         drawTalentBackground(gc);
         drawConnections(gc, talentPanelX, talentPanelY);
         drawTalentNodes(gc, talentPanelX, talentPanelY);
+        drawTooltip(gc);
         drawLegend(gc);
     }
 
@@ -106,18 +100,40 @@ public class UI_TalentPanel {
                         node.drawNode(gc, startX - 3, startY - 3, talentnode_mid);
                     }
                 }
-                if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
-                    drawTooltip(gc, node, startX, startY);
-                }
             }
         }
     }
 
 
-    private void drawTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
-        gc.setFill(Colors.darkBackground);
-        gc.fillRoundRect(startX + node.position.x - 260, startY + node.position.y - 7, 250, 40, 5, 5);
-        gc.fillText(node.talent.description, startX + node.position.x - 150, startY + node.position.y - 7);
+    public void drawTooltip(GraphicsContext gc) {
+        for (TalentNode node : talent_Nodes) {
+            if (node != null) {
+                if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    getTooltip(gc, node, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
+            }
+        }
+    }
+
+    private void getTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
+        //BACKGROUND
+        gc.setFill(Colors.black_transparent);
+        gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.338), startY - (MainGame.SCREEN_HEIGHT * 0.114), MainGame.SCREEN_HEIGHT * 0.33, MainGame.SCREEN_HEIGHT * 0.124f, 15, 15);
+        //OUTLINE
+        gc.setStroke(Colors.purple_dark);
+        gc.setLineWidth(2);
+        gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.335), startY - (MainGame.SCREEN_HEIGHT * 0.111), MainGame.SCREEN_HEIGHT * 0.324, MainGame.SCREEN_HEIGHT * 0.118f, 15, 15);
+        //NAME
+        gc.setFill(Colors.white);
+        gc.setFont(FonT.minecraftBoldItalic15);
+        gc.fillText(node.talent.name, startX - MainGame.SCREEN_HEIGHT * 0.329f, startY - MainGame.SCREEN_HEIGHT * 0.098f);
+        //description
+        gc.setFont(FonT.minecraftItalic14);
+        String[] lines = node.talent.description.split("\\n");
+        float y = 0.088f;
+        for (String line : lines) {
+            gc.fillText(line, startX - MainGame.SCREEN_HEIGHT * 0.329f, startY - MainGame.SCREEN_HEIGHT * (y -= 0.015f));
+        }
     }
 
     private void drawLine(int offsetx, int offsety, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {

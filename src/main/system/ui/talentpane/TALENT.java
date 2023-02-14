@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class TALENT {
     public final int i_id;
-    private final String name;
+    final String name;
     final String description;
 
     public String imagePath;
@@ -30,6 +30,7 @@ public class TALENT {
     public TALENT(int i_id, String name, String imagePath, String description, String effect) {
         this.i_id = i_id;
         this.name = name;
+        this.imagePath = imagePath;
         if (effect != null) {
             getEffect(effect);
             getStats(effect);
@@ -124,7 +125,11 @@ public class TALENT {
     }
 
     public void drawIcon(GraphicsContext gc, int x, int y) {
-        gc.drawImage(icon, x, y);
+        if (imagePath.contains("dark_magic")) {
+            gc.drawImage(icon, x + 2, y);
+        } else {
+            gc.drawImage(icon, x, y);
+        }
     }
 
 
