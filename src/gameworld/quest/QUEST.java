@@ -33,10 +33,10 @@ abstract public class QUEST {
         npc.onPath = true;
         npc.goalTile = new Point(x, y);
         npc.stuckCounter++;
-        if ((npc.worldX) / 48 == npc.goalTile.x && (npc.worldY) / 48 == npc.goalTile.y) {
+        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
             npc.onPath = false;
             npc.stuckCounter = 0;
-        } else if (npc.stuckCounter > 1000) {
+        } else if (npc.stuckCounter > 7000) {
             npc.worldX = npc.goalTile.x * 48;
             npc.worldY = npc.goalTile.y * 48;
             npc.stuckCounter = 0;
@@ -92,5 +92,14 @@ abstract public class QUEST {
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
         }
         mg.inputH.e_typed = false;
+    }
+
+    protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
+        try {
+            npc.dialog.loadNewLine(array[stageNumber]);
+            npc.dialogHideDelay = 0;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            npc.dialog.loadNewLine("...");
+        }
     }
 }

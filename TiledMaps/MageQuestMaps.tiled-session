@@ -17,7 +17,7 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4029.6666666666665,
+                "x": 4029.666666666666,
                 "y": 3836
             }
         },
@@ -49,8 +49,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 312,
-                "y": 778
+                "x": 792,
+                "y": 790
             }
         },
         "grassspritesheet.tsx": {
@@ -88,8 +88,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 400.66666666666663,
-                "y": 401.3333333333333
+                "x": 400,
+                "y": 400.6666666666667
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {

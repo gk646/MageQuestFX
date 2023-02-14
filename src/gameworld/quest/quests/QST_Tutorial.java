@@ -26,7 +26,6 @@ public class QST_Tutorial extends QUEST {
     public void update() {
         for (NPC npc : mg.npcControl.NPC_Active)
             if (npc instanceof NPC_OldMan) {
-                System.out.println(progressStage);
                 interactWithNpc(npc, DialogStorage.Tutorial);
                 if (progressStage == 6) {
                     objective = "Follow the old man!";
@@ -51,6 +50,7 @@ public class QST_Tutorial extends QUEST {
                 }
                 if (progressStage == 11 && mg.prj_control.GruntKilledCounter == gruntKillCounter + 3) {
                     nextStage();
+                    loadDialogStage(npc, DialogStorage.Tutorial, 12);
                     npc.blockInteraction = false;
                 }
                 if (progressStage == 14) {

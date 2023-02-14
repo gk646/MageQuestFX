@@ -207,7 +207,7 @@ abstract public class ENTITY {
     }
 
     protected void followPlayer(int playerX, int playerY) {
-        if (!((worldX) / 48 == playerX && (worldY) / 48 == playerY)) {
+        if (!((worldX + 24) / 48 == playerX && (worldY + 24) / 48 == playerY)) {
             searchPathUncapped(playerX, playerY, 100);
         } else {
             onPath = false;
