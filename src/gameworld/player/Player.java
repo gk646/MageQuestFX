@@ -62,7 +62,7 @@ public class Player extends ENTITY {
 
     public int[] effects = new int[effectsSizeTotal];
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
-    public float CDR_Absolute, DMG_Poison_Absolute, DMG_Fire_Percent, CritDMG_Absolute;
+    public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
 
     /*
     1. DMG_Arcane_Absolute
@@ -205,7 +205,7 @@ public class Player extends ENTITY {
         maxMana = (int) (maxMana + (maxMana / 100.0f) * effects[6]);
         maxHealth = (int) (maxHealth + (maxHealth / 100.0f) * effects[7]);
         CDR_Absolute = effects[17];
-        DMG_Poison_Absolute = effects[18];
+        DMG_Poison_Percent = effects[18];
         DMG_Fire_Percent = effects[19];
         critChance += effects[21];
         CritDMG_Absolute = 50 + effects[22];

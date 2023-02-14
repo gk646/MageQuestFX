@@ -1,8 +1,8 @@
 {
     "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
         "City1.tmx": {
@@ -26,7 +26,7 @@
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 3
         },
         "Turtorial.tmj": {
@@ -46,11 +46,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 3,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 64.83333333333334,
-                "y": 321.33333333333337
+                "x": 312,
+                "y": 778
             }
         },
         "grassspritesheet.tsx": {
@@ -96,7 +96,7 @@
             "scaleInDock": 1
         },
         "tileset16.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 1.5,
             "scaleInEditor": 4
         }
     },
@@ -109,16 +109,17 @@
         "GrassLands.tmx",
         "Tutorial.tmx",
         "second floor_tutorial_castle.tmx",
-        "TileSet.tsx"
+        "tileset16.tsx",
+        "tileset16.tsx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
-        "TileSet.tsx",
-        "tileset16.tsx",
         "City1.tmx",
         "GrassLands.tmx",
+        "tileset16.tsx",
         "second floor_tutorial_castle.tmx",
         "Tutorial.tmx",
+        "TileSet.tsx",
         "sdf.tsx",
         "grassspritesheet.tsx",
         "Turtorial.tmj",

@@ -93,25 +93,25 @@ public class InputHandler {
             if (code.equals(("w"))) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 5;
+                    mg.ui.commandNum = 6;
                 }
             }
             if (code.equals(("s"))) {
                 mg.ui.commandNum++;
-                if (mg.ui.commandNum > 5) {
+                if (mg.ui.commandNum > 6) {
                     mg.ui.commandNum = 0;
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
-                } else if (mg.ui.commandNum == 4) {
-                    mg.sqLite.savePlayerData();
                 } else if (mg.ui.commandNum == 5) {
+                    mg.sqLite.savePlayerData();
+                } else if (mg.ui.commandNum == 6) {
+                    mg.sqLite.savePlayerData();
                     Platform.exit();
                     System.exit(0);
                 }
             }
-
             if (code.equals("\u001B")) {
                 mg.gameState = State.TITLE;
                 mg.ui.commandNum = 1;
@@ -121,20 +121,20 @@ public class InputHandler {
             if (code.equals(("w"))) {
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 5;
+                    mg.ui.commandNum = 6;
                 }
             }
             if (code.equals(("s"))) {
                 mg.ui.commandNum++;
-                if (mg.ui.commandNum > 5) {
+                if (mg.ui.commandNum > 6) {
                     mg.ui.commandNum = 0;
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
-                } else if (mg.ui.commandNum == 4) {
-                    mg.sqLite.savePlayerData();
                 } else if (mg.ui.commandNum == 5) {
+                    mg.sqLite.savePlayerData();
+                } else if (mg.ui.commandNum == 6) {
                     mg.sqLite.savePlayerData();
                     Platform.exit();
                     System.exit(0);
@@ -341,6 +341,11 @@ public class InputHandler {
                 }
             } else if (mg.showBag && mg.inventP.bagSortButton.contains(mg.inputH.lastMousePosition)) {
                 mg.inventP.sortBagsRarity();
+            }
+            if (mg.showChar && mg.inventP.secondPanelButton.contains(mg.inputH.lastMousePosition)) {
+                mg.inventP.activeCharacterPanel = 2;
+            } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mg.inputH.lastMousePosition)) {
+                mg.inventP.activeCharacterPanel = 1;
             }
         }
     }

@@ -29,7 +29,7 @@ public class UI_InventoryPanel {
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.##");
     public final Rectangle bagEquipSlotsBox;
-    private final Rectangle charPanelMover;
+    public final Rectangle charPanelMover, secondPanelButton, firstPanelButton;
     public final Rectangle bagPanelMover;
     public final Rectangle effectsHitBox;
     public boolean showCombatStats = true;
@@ -42,6 +42,7 @@ public class UI_InventoryPanel {
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
     private ITEM grabbedITEM;
     public final Rectangle bagSortButton;
+    public int activeCharacterPanel = 1;
     private boolean node_focused;
     private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
@@ -55,6 +56,8 @@ public class UI_InventoryPanel {
         grabbedITEM = null;
         createCharSlots();
         createBagSlots();
+        firstPanelButton = new Rectangle(charPanelX, charPanelY, 105, 20);
+        secondPanelButton = new Rectangle(charPanelX, charPanelY, 90, 20);
         bagSortButton = new Rectangle(bagPanelX, bagPanelY, 24, 24);
         bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
@@ -120,8 +123,12 @@ public class UI_InventoryPanel {
     }
 
     private void drawCharPanel(GraphicsContext gc, int startX, int startY) {
-        drawCharacterBackground(gc, startX, startY);
-        drawCharacterSlots(gc, startX, startY);
+        if (activeCharacterPanel == 1) {
+            drawCharacterBackGroundMain(gc, startX, startY);
+            drawCharacterSlots(gc, startX, startY);
+        } else if (activeCharacterPanel == 2) {
+            drawCharacterSecondPanel(gc, startX, startY);
+        }
     }
 
     private void drawBagPanel(GraphicsContext gc, int startX, int startY) {
@@ -425,7 +432,6 @@ public class UI_InventoryPanel {
         }
     }
 
-
     public void interactWithWindows() {
         if (char_Slots[8].item != null && char_Slots[8].item.type == '2') {
             char_Slots[9].type = ",";
@@ -467,6 +473,7 @@ public class UI_InventoryPanel {
                         if (mg.inputH.mouse1Pressed) {
                             if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0 && !node.activated) {
                                 node.activated = true;
+                                mg.player.updateEquippedItems();
                                 mg.talentP.spendTalentPoint();
                             }
                         }
@@ -483,24 +490,38 @@ public class UI_InventoryPanel {
         previousMousePosition.y = mg.inputH.lastMousePosition.y;
     }
 
-    private void drawCharacterBackground(GraphicsContext gc, int startX, int startY) {
+    private void drawCharacterBackGroundMain(GraphicsContext gc, int startX, int startY) {
         //inventory background
-        //big background
         wholeCharWindow.x = startX - 47;
         wholeCharWindow.y = startY - 78;
+        firstPanelButton.x = startX - 30;
+        firstPanelButton.y = startY - 80 + 615;
+        secondPanelButton.x = startX + 90;
+        secondPanelButton.y = startY - 80 + 615;
+        //big background
+
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
+        gc.fillRoundRect(startX - 35, startY - 80 + 610, 115, 30, 15, 15);
+        gc.fillRoundRect(startX + 85, startY - 80 + 610, 100, 30, 15, 15);
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
         gc.strokeRoundRect(startX - 45, startY - 75, 440, 620 - 10, 30, 30);
         gc.setFill(Colors.mediumLightGrey);
         gc.fillRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
+        // gc.fillRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
+        gc.fillRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
         gc.setStroke(Colors.darkBackground);
         gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
+        gc.setLineWidth(4);
+        gc.strokeRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
+        gc.strokeRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
         gc.fillText("Character", startX + 138, startY - 61);
+        gc.fillText("Character", startX - 17, startY - 80 + 629);
+        gc.fillText("Currency", startX + 100, startY - 80 + 629);
         gc.fillText("No Title", startX + 147, startY);
         gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
 
@@ -538,19 +559,26 @@ public class UI_InventoryPanel {
         effectsHitBox.x = startX + 287;
         effectsHitBox.y = startY + 360;
         if (showCombatStats) {
-            drawCombatStats(gc, startX, startY);
-            gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
-            gc.setFill(Colors.darkBackground);
+            gc.setStroke(Colors.darkBackground);
             gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
             gc.fillText("Combat Stats", startX + 185, startY + 372);
-        } else {
-            drawEffects(gc, startX, startY);
             gc.setFill(Colors.mediumVeryLight);
             gc.fillRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
             gc.setFill(Colors.darkBackground);
             gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
             gc.fillText("Effects", startX + 292, startY + 372);
+            drawCombatStats(gc, startX, startY);
+        } else {
+            gc.setStroke(Colors.darkBackground);
+            gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+            gc.setFill(Colors.mediumVeryLight);
+            gc.fillRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.setFill(Colors.darkBackground);
+            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.fillText("Effects", startX + 292, startY + 372);
+            gc.fillText("Combat Stats", startX + 185, startY + 372);
+            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            drawEffects(gc, startX, startY);
         }
     }
 
@@ -565,6 +593,41 @@ public class UI_InventoryPanel {
         gc.fillText("Resist %: " + mg.player.resistChance, startX + 182, startY + 483);
         gc.fillText("Carry-weight: " + mg.player.carryWeight, startX + 182, startY + 498);
         gc.fillText("MovementSpeed: " + mg.player.playerMovementSpeed, startX + 182, startY + 512);
+    }
+
+    private void drawCharacterSecondPanel(GraphicsContext gc, int startX, int startY) {
+        //inventory background
+        //big background
+        wholeCharWindow.x = startX - 47;
+        wholeCharWindow.y = startY - 78;
+        firstPanelButton.x = startX - 30;
+        firstPanelButton.y = startY - 80 + 615;
+        secondPanelButton.x = startX + 90;
+        secondPanelButton.y = startY - 80 + 615;
+        gc.setFill(Colors.LightGrey);
+        gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
+        gc.fillRoundRect(startX - 35, startY - 80 + 610, 115, 30, 15, 15);
+        gc.fillRoundRect(startX + 85, startY - 80 + 610, 100, 30, 15, 15);
+        //outline
+        gc.setStroke(Colors.darkBackground);
+        gc.setLineWidth(5);
+        gc.strokeRoundRect(startX - 45, startY - 75, 440, 620 - 10, 30, 30);
+        gc.setFill(Colors.mediumLightGrey);
+        gc.fillRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
+        // gc.fillRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
+        gc.fillRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+        gc.setStroke(Colors.darkBackground);
+        gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
+        gc.setLineWidth(4);
+        gc.strokeRoundRect(startX - 30, startY - 80 + 615, 105, 20, 15, 15);
+        gc.strokeRoundRect(startX + 90, startY - 80 + 615, 90, 20, 15, 15);
+        gc.setFill(Colors.darkBackground);
+        gc.setFont(FonT.minecraftBold13);
+        gc.fillText("Character", startX + 138, startY - 61);
+        gc.fillText("Character", startX - 17, startY - 80 + 629);
+        gc.fillText("Currency", startX + 100, startY - 80 + 629);
+        gc.fillText("No Title", startX + 147, startY);
+        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
     }
 
     private void drawEffects(GraphicsContext gc, int startX, int startY) {

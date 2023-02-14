@@ -2,7 +2,8 @@ package main.system.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -18,8 +19,11 @@ public class UI {
 
     public Font maruMonica30;
     public int commandNum = 0;
-    private final DropShadow dropShadow = new DropShadow();
-    InnerShadow innerShadow = new InnerShadow(5, Colors.XPBarBlue);
+    DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
+    Light.Distant light = new Light.Distant();
+
+    Lighting lighting = new Lighting();
+
     private Image playerUI;
     private int loadingProgress = 0;
     public int saveMessageStage;
@@ -30,8 +34,11 @@ public class UI {
     public UI(MainGame mainGame) {
         this.mg = mainGame;
         getUIImage();
-        dropShadow.setOffsetX(5);
-        dropShadow.setOffsetY(5);
+        light.setAzimuth(-135.0);
+        lighting.setLight(light);
+        lighting.setSurfaceScale(3.0);
+        lighting.setDiffuseConstant(1);
+        lighting.setSpecularConstant(-1);
     }
 
 
@@ -124,19 +131,23 @@ public class UI {
     }
 
     private void drawGameUI(GraphicsContext gc) {
+        gc.setEffect(lighting);
         gc.setFill(Colors.Red);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 70, (int) ((mg.player.health / mg.player.maxHealth) * 225), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 69, (int) ((mg.player.health / mg.player.maxHealth) * 225), 10);
+        lighting.setSurfaceScale(3.0);
+        lighting.setDiffuseConstant(1.7);
         gc.setFill(Colors.Blue);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.064_0f, 90, (int) ((mg.player.mana / mg.player.maxMana) * 162), 11);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 95, (int) ((mg.player.mana / mg.player.maxMana) * 162), 10);
+        gc.setEffect(null);
         gc.drawImage(playerUI, 40, 40, 330, 150);
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.editUndo18);
+        gc.setEffect(shadow);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
-        gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 94);
+        gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 97);
+        gc.setEffect(null);
         gc.setFill(Colors.XPBarBlue);
         gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
-        //gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, 780, 13, 5, 5);
-
     }
 
 
@@ -147,12 +158,13 @@ public class UI {
         gc.setFill(Colors.darkBackground);
         gc.fillText("Settings", MainGame.SCREEN_HEIGHT * 0.092f, MainGame.SCREEN_HEIGHT * 0.132f);
         gc.setFont(FonT.minecraftBold30);
-        gc.fillText("Gameplay", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.302f);
-        gc.fillText("Video Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.352f);
-        gc.fillText("Sound Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.402f);
-        gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.452f);
-        gc.fillText("Manual Save", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
-        gc.fillText("Quit Game", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.552f);
+        gc.fillText("Video Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.302f);
+        gc.fillText("Sound Settings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.352f);
+        gc.fillText("Keybindings", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.402f);
+        gc.fillText("Gameplay", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.452f);
+        gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
+        gc.fillText("Manual Save", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.552f);
+        gc.fillText("Quit Game", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.602f);
         /*
         gc.fillText("Framerate: 120FPS locked", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
         gc.fillText("Network Settings: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.416f);
@@ -171,7 +183,10 @@ public class UI {
             gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.502f);
         } else if (commandNum == 5) {
             gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.552f);
+        } else if (commandNum == 6) {
+            gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.602f);
         }
+        gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
 
     private void drawSaveMessage(GraphicsContext gc) {
