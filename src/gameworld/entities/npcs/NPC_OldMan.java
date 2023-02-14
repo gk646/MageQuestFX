@@ -28,7 +28,7 @@ public class NPC_OldMan extends NPC {
         direction = "updownleftright";
     }
 
-
+    @Override
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
@@ -55,11 +55,11 @@ public class NPC_OldMan extends NPC {
         spriteCounter++;
     }
 
+    @Override
     public void update() {
-
         if (show_dialog) {
             show_dialog = !mg.map_utils.player_went_away(playerTalkLocation);
-            if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !dial.block)) {
+            if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !blockInteraction)) {
                 dial.next_stage();
             }
         }

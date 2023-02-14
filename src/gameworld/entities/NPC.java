@@ -1,16 +1,15 @@
 package gameworld.entities;
 
 import gameworld.quest.Dialog;
-import javafx.scene.image.Image;
 
 import java.awt.Point;
 
 abstract public class NPC extends ENTITY {
     public Dialog dial;
-
-    protected Image player2;
+    public boolean blockInteraction;
     public boolean show_dialog;
     protected Point playerTalkLocation;
     protected int dialog_counter;
     public Point goalTile;
+    public int stuckCounter;
 }

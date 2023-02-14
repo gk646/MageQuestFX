@@ -1,6 +1,7 @@
 package gameworld;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.NPC;
 import gameworld.entities.npcs.NPC_OldMan;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -10,14 +11,14 @@ import java.util.ArrayList;
 
 public class NPC_Control {
 
-    private final ArrayList<ENTITY> NPC_GrassLand = new ArrayList<>();
-    private final ArrayList<ENTITY> NPC_Tutorial = new ArrayList<>();
+    private final ArrayList<NPC> NPC_GrassLand = new ArrayList<>();
+    private final ArrayList<NPC> NPC_Tutorial = new ArrayList<>();
     private final MainGame mg;
-    public ArrayList<ENTITY> NPC_Active = new ArrayList<>();
     // WORLD CODES
     // 0 = Tutorial // 1 = Grass Lands // 2 = City 1 // 3 =
     //
-    private final ArrayList<ENTITY> NPC_City1 = new ArrayList<>();
+    private final ArrayList<NPC> NPC_City1 = new ArrayList<>();
+    public ArrayList<NPC> NPC_Active = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;

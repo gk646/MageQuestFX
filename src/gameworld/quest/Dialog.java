@@ -7,9 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.FonT;
-import main.system.ui.inventory.UI_InventorySlot;
 
-import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,12 +25,11 @@ abstract public class Dialog {
     /**
      * The dialog framework
      *
-     * @param mg      mainGame to access cross-class information
-     * @param txtName to choose the type for dialog text (also quest id)
+     * @param mg mainGame to access cross-class information
+     *           to choose the type for dialog text (also quest id)
      */
-    protected Dialog(MainGame mg, String txtName) {
+    protected Dialog(MainGame mg) {
         this.mg = mg;
-        this.txtName = txtName;
     }
 
     public void draw(GraphicsContext gc, ENTITY entity) {
@@ -108,41 +105,7 @@ abstract public class Dialog {
      */
     abstract public void script();
 
-    /**
-     * Move the npc to a tile and proceed when he gets there
-     *
-     * @param x tile x
-     * @param y tile y
-     */
-    protected void moveToTile(int x, int y) {
-        npc.onPath = true;
-        npc.goalTile = new Point(x, y);
-        stuckCounter++;
-        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
-            npc.onPath = false;
-            stuckCounter = 0;
-        } else if (stuckCounter > 2000) {
-            npc.worldX = npc.goalTile.x * 48;
-            npc.worldY = npc.goalTile.y * 48;
-            stuckCounter = 0;
-        }
-    }
 
 
-    /**
-     * true if the play bags contain item with name
-     *
-     * @param name the item name as string
-     * @return true if item is in player bag
-     */
-    protected boolean playerBagsContainItem(String name) {
-        for (UI_InventorySlot invSlot : mg.inventP.bag_Slots) {
-            if (invSlot.item != null) {
-                if (invSlot.item.name.equals(name)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
 }
