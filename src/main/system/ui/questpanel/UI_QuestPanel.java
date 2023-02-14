@@ -2,6 +2,7 @@ package main.system.ui.questpanel;
 
 
 import gameworld.quest.QUEST;
+import gameworld.quest.quests.QST_Tutorial;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -22,6 +23,7 @@ public class UI_QuestPanel {
 
     public UI_QuestPanel(MainGame mg) {
         this.mg = mg;
+        quests[0] = new QST_Tutorial(mg, "An old man's tale");
     }
 
     public void draw(GraphicsContext gc) {

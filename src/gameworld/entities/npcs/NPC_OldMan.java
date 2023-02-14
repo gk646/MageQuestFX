@@ -2,6 +2,7 @@ package gameworld.entities.npcs;
 
 import gameworld.entities.NPC;
 import gameworld.player.Player;
+import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -15,6 +16,7 @@ public class NPC_OldMan extends NPC {
 
 
     public NPC_OldMan(MainGame mainGame, int x, int y) {
+        this.dialog = new Dialog();
         this.mg = mainGame;
         goalTile = new Point(34, 34);
         //Setting default values
@@ -50,7 +52,7 @@ public class NPC_OldMan extends NPC {
             }
         }
         if (show_dialog) {
-            dial.draw(gc, this);
+            dialog.drawDialog(gc, this);
         }
         spriteCounter++;
     }
@@ -58,24 +60,17 @@ public class NPC_OldMan extends NPC {
     @Override
     public void update() {
         if (show_dialog) {
+            dialogHideDelay++;
             show_dialog = !mg.map_utils.player_went_away(playerTalkLocation);
-            if ((mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed && !onPath && !blockInteraction)) {
-                dial.next_stage();
-            }
+        }
+
+        if (dialogHideDelay > 600) {
+            show_dialog = false;
+            dialogHideDelay = 0;
         }
         if (onPath) {
-            dialog_counter++;
             followPlayer(goalTile.x, goalTile.y);
-            if (dialog_counter > 140) {
-                show_dialog = false;
-                dialog_counter = 0;
-            }
         }
-        if (mg.collisionChecker.checkEntityAgainstPlayer(this, 0) && mg.inputH.e_typed) {
-            this.show_dialog = true;
-            playerTalkLocation = new Point((int) Player.worldX, (int) Player.worldY);
-        }
-        mg.inputH.e_typed = false;
     }
 
 

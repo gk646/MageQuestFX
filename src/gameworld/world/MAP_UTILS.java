@@ -60,6 +60,10 @@ public class MAP_UTILS {
         }
     }
 
+    /**
+     * @param playerLocation in awt Point
+     * @return true if the player is further than 500 pixels from the given points
+     */
     public boolean player_went_away(Point playerLocation) {
         return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
     }

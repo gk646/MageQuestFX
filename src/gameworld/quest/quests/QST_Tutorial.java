@@ -4,6 +4,7 @@ import gameworld.entities.NPC;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.npcs.NPC_OldMan;
 import gameworld.quest.QUEST;
+import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.WorldRender;
@@ -25,7 +26,8 @@ public class QST_Tutorial extends QUEST {
     public void update() {
         for (NPC npc : mg.npcControl.NPC_Active)
             if (npc instanceof NPC_OldMan) {
-                interactWithNpc(npc, "Tutorial", progressStage);
+                System.out.println(progressStage);
+                interactWithNpc(npc, DialogStorage.Tutorial);
                 if (progressStage == 6) {
                     objective = "Follow the old man!";
                     npc.onPath = true;

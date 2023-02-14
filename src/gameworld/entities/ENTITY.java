@@ -4,6 +4,7 @@ import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
+import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -18,6 +19,7 @@ import java.awt.Rectangle;
  * @see ENT_Shooter
  */
 abstract public class ENTITY {
+    public Dialog dialog;
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
@@ -206,7 +208,7 @@ abstract public class ENTITY {
 
     protected void followPlayer(int playerX, int playerY) {
         if (!((worldX) / 48 == playerX && (worldY) / 48 == playerY)) {
-            searchPathUncapped(playerX, playerY, 150);
+            searchPathUncapped(playerX, playerY, 100);
         } else {
             onPath = false;
         }

@@ -7,6 +7,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
+import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
@@ -170,6 +171,7 @@ public class MainGame {
                             gameMap.dragMap();
                             gameMap.getImage();
                         }
+                        qPanel.update();
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
                         getPlayerTile();
@@ -207,7 +209,6 @@ public class MainGame {
                     if (gameState == State.PLAY) {
                         player.update();
                         sBar.update();
-                        qPanel.update();
                     }
                     difference = 0;
                 }
@@ -338,6 +339,7 @@ public class MainGame {
         wControl.getWorldsData();
         wControl.makeOverWorldQuadrants();
         talentP = new UI_TalentPanel(this);
+        DialogStorage.loadDialogs();
 
         //24%
         ui.updateLoadingScreen(12, gc);
@@ -400,7 +402,7 @@ public class MainGame {
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        wControl.load_OverWorldMap(496, 496);
+        //wControl.load_OverWorldMap(496, 496);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2));
         }

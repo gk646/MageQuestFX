@@ -1,6 +1,7 @@
 package gameworld.quest;
 
 import gameworld.entities.NPC;
+import gameworld.player.Player;
 import main.MainGame;
 import main.system.ui.inventory.UI_InventorySlot;
 
@@ -32,10 +33,10 @@ abstract public class QUEST {
         npc.onPath = true;
         npc.goalTile = new Point(x, y);
         npc.stuckCounter++;
-        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
+        if ((npc.worldX) / 48 == npc.goalTile.x && (npc.worldY) / 48 == npc.goalTile.y) {
             npc.onPath = false;
             npc.stuckCounter = 0;
-        } else if (npc.stuckCounter > 2000) {
+        } else if (npc.stuckCounter > 1000) {
             npc.worldX = npc.goalTile.x * 48;
             npc.worldY = npc.goalTile.y * 48;
             npc.stuckCounter = 0;
@@ -63,9 +64,33 @@ abstract public class QUEST {
         return false;
     }
 
-    protected void interactWithNpc(NPC npc, String txtName, int progressStage) {
-        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-            npc.show_dialog = true;
+    protected void interactWithNpc(NPC npc, String[] array) {
+        if (npc.dialog.dialogLine.equals("...")) {
+            try {
+                npc.dialog.loadNewLine(array[progressStage]);
+                npc.dialogHideDelay = 0;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                npc.dialog.loadNewLine("...");
+            }
         }
+        if (npc.show_dialog) {
+            if (!npc.blockInteraction && !npc.onPath && npc.dialog.dialogRenderCounter == 2000 && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                try {
+                    nextStage();
+                    npc.dialog.loadNewLine(array[progressStage]);
+                    npc.dialogHideDelay = 0;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    npc.dialog.loadNewLine("...");
+                }
+            } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                npc.dialog.dialogRenderCounter = 2000;
+            }
+        }
+        if (mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+
+            npc.show_dialog = true;
+            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+        }
+        mg.inputH.e_typed = false;
     }
 }
