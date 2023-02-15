@@ -177,7 +177,7 @@ public class MainGame {
                         player.pickupDroppedItem();
                         inventP.interactWithWindows();
                         getPlayerTile();
-                        map_utils.update();
+                        wControl.update();
                     }
                     difference2 = 0;
                 }
@@ -313,7 +313,7 @@ public class MainGame {
             Iterator<DROP> iterator = WORLD_DROPS.iterator();
             while (iterator.hasNext()) {
                 DROP drop = iterator.next();
-                if ((drop instanceof DRP_DroppedItem && drop.item == null) || WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld) {
+                if ((drop instanceof DRP_DroppedItem && drop.item == null) || (WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld)) {
                     iterator.remove();
                 } else if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
                     drop.draw(gc);
@@ -390,7 +390,7 @@ public class MainGame {
 
         //100%
         ui.updateLoadingScreen(16, gc);
-        map_utils.loadSpawnLevel();
+        wControl.loadSpawnLevel();
         countItems();
         gameMap.getImage();
         gameState = State.TITLE;
@@ -401,12 +401,12 @@ public class MainGame {
         startThreads();
 
         for (int i = 0; i < 1; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100, Zone.GrassLands));
+            ENTITIES.add(new ENT_Grunt(this, 490 * 48, 490 * 48, 100, Zone.GrassLands));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        //wControl.load_OverWorldMap(496, 496);
-        wControl.load_tutorial(59, 49);
+        // wControl.load_OverWorldMap(496, 496);
+        wControl.load_tutorial(62, 88);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }

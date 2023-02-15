@@ -63,7 +63,7 @@ public class NPC_OldMan extends NPC {
     public void update() {
         if (show_dialog) {
             dialogHideDelay++;
-            show_dialog = !mg.map_utils.player_went_away(playerTalkLocation);
+            show_dialog = !mg.wControl.player_went_away(playerTalkLocation);
         }
 
         if (dialogHideDelay > 600) {

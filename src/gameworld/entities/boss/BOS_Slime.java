@@ -20,7 +20,10 @@ public class BOS_Slime extends BOSS {
         this.worldY = y;
         this.level = level;
         this.maxHealth = health;
+        movementSpeed = 2;
+        this.health = maxHealth;
         this.enemyImage = Storage.gruntImage1;
+        this.direction = "leftrightdownup";
     }
 
     /**
@@ -38,10 +41,16 @@ public class BOS_Slime extends BOSS {
      */
     @Override
     public void update() {
+        onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         searchTicks++;
         if (searchTicks % 120 == 0) {
             slimeCone();
         }
+        if (!playerTooFarAbsolute() && searchTicks % 240 == 0) {
+            slimeVolley();
+        }
+        getNearestPlayer();
+        searchPath(goalCol, goalRow, 25);
     }
 
     private void slimeVolley() {

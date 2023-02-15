@@ -1,41 +1,43 @@
 package gameworld.world;
 
 
+import gameworld.player.Player;
 import gameworld.quest.SpawnTrigger;
-import gameworld.world.maps.MAP_City1;
-import gameworld.world.maps.MAP_OverWorld;
-import gameworld.world.maps.MAP_Tutorial;
+import gameworld.quest.Trigger;
+import gameworld.quest.Type;
+import gameworld.world.maps.MapLoader;
 import main.MainGame;
 import main.system.WorldRender;
 import main.system.enums.Zone;
 
 import java.awt.Point;
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class WorldController {
+
     private final MainGame mg;
     public static Zone currentWorld;
+    public static ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
 
-
+    // OVERWORLD
     public final MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
-    private final SpawnTrigger[] overWorldTriggers = new SpawnTrigger[50];
-    public SpawnTrigger[] tutorialSpawns;
-    //-----OVERWORLD---------------------------
+    // VALHALLA
+    public final Point valhalla_Size = new Point(200, 200);
     public int[][] overWorldMapData;
-    //-----HELL--------------------------
-    public int[][] hell_MapData;
-    //-----VALHALLA------------------------
+    // CITY 1
+    public final Point city1_Size = new Point(400, 400);
+    // TUTORIAL
+    public final Point tutorial_Size = new Point(100, 100);
     public int[][] valhalla_MapData;
-    //-----CITY 1
-    public int[][] city1_MapData;
-    public Point hell_Size;
-    public Point hell_StartPoint;
-    //-----TUTORIAL-------------------
-    private int[][] tutorialMapData;
-    public Point valhalla_Size;
     public Point valhalla_StartPoint;
-    private Point overWorldSize;
-    private Point tutorialSize;
+    // DUNGEON TUTORIAL
+    public final Point dungeonTutorial_Size = new Point(30, 30);
+    public Point overWorldSize = new Point(500, 500);
+    // HELL
+    public int[][] hell_MapData;
+    public int[][] city1_MapData;
+    public int[][] tutorialMapData;
+    public int[][] dungeonTutorial_MapData;
 
 
     public WorldController(MainGame mg) {
@@ -59,7 +61,7 @@ public class WorldController {
         currentWorld = Zone.Tutorial;
         clearWorldArrays();
         WorldRender.worldData = tutorialMapData;
-        mg.wRender.worldSize = tutorialSize;
+        mg.wRender.worldSize = tutorial_Size;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
 
@@ -67,25 +69,52 @@ public class WorldController {
         currentWorld = Zone.City1;
         clearWorldArrays();
         WorldRender.worldData = city1_MapData;
-        mg.wRender.worldSize = tutorialSize;
+        mg.wRender.worldSize = tutorial_Size;
+        mg.player.setPosition(xTile * 48, yTile * 48);
+    }
+
+    public void dungeon_tutorial(int xTile, int yTile) {
+        currentWorld = Zone.City1;
+        clearWorldArrays();
+        WorldRender.worldData = city1_MapData;
+        mg.wRender.worldSize = tutorial_Size;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
 
     public void getWorldsData() {
-        //Over world
-        this.overWorldMapData = MAP_OverWorld.loadOverWorld();
-        this.overWorldSize = MAP_OverWorld.loadMapSize();
-
         //Tutorial
-        this.tutorialMapData = MAP_Tutorial.loadTutorial();
-        this.tutorialSize = MAP_Tutorial.loadMapSize();
-        try {
-            this.tutorialSpawns = MAP_Tutorial.getTriggers();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //
-        this.city1_MapData = MAP_City1.loadCity();
+        this.tutorialMapData = MapLoader.loadMapData("Tutorial", 100);
+        MapLoader.getTriggers("Tutorial");
+
+        //dungeon tutorial
+        MapLoader.getTriggers("DungeonTutorial");
+        this.dungeonTutorial_MapData = MapLoader.loadMapData("DungeonTutorial", 30);
+        //city 1
+        this.city1_MapData = MapLoader.loadMapData("City1", 100);
+        //Over world
+        this.overWorldMapData = MapLoader.loadMapData("Overworld", 500);
+        addCustom();
+    }
+
+
+    private void addCustom() {
+        globalTriggers.add(new SpawnTrigger(75, 89, 1, Trigger.SINGULAR, Type.BOSS_Slime, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(47, 9, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(37, 11, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(47, 16, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(37, 21, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(47, 22, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
+        //top right
+        globalTriggers.add(new SpawnTrigger(91, 21, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(86, 25, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(97, 27, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(94, 14, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(94, 4, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
+
+        //middle right
+        globalTriggers.add(new SpawnTrigger(93, 46, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(87, 45, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
+        globalTriggers.add(new SpawnTrigger(97, 48, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
     }
 
     public void makeOverWorldQuadrants() {
@@ -104,8 +133,52 @@ public class WorldController {
 
     private void clearWorldArrays() {
         mg.npcControl.loadNPC(currentWorld);
-
         mg.PROJECTILES.clear();
+    }
+
+    public void update() {
+        if (WorldController.currentWorld == Zone.Tutorial) {
+            if (mg.playerX == 1 && mg.playerY == 1) {
+                mg.wControl.load_city1(10, 10);
+                mg.player.spawnLevel = 1;
+            }
+            for (SpawnTrigger trigger : globalTriggers) {
+                if (trigger != null && trigger.zone == currentWorld) {
+                    trigger.activate(mg);
+                }
+            }
+        }
+        if (WorldController.currentWorld == Zone.GrassLands) {
+            if (mg.playerX == 499 && mg.playerY == 499) {
+                mg.wControl.load_city1(10, 10);
+            }
+        }
+        if (WorldController.currentWorld == Zone.City1) {
+            if (mg.playerX == 32 && mg.playerY == 0 ||
+                    mg.playerX == 33 && mg.playerY == 0 ||
+                    mg.playerX == 34 && mg.playerY == 0 ||
+                    mg.playerX == 35 && mg.playerY == 0 ||
+                    mg.playerX == 36 && mg.playerY == 0 ||
+                    mg.playerX == 37 && mg.playerY == 0) {
+                mg.wControl.load_OverWorldMap(495, 495);
+            }
+        }
+    }
+
+    public void loadSpawnLevel() {
+        if (mg.player.spawnLevel == 0) {
+            mg.wControl.load_tutorial(4, 4);
+        } else if (mg.player.spawnLevel == 1) {
+            mg.wControl.load_city1(40, 18);
+        }
+    }
+
+    /**
+     * @param playerLocation in awt Point
+     * @return true if the player is further than 500 pixels from the given points
+     */
+    public boolean player_went_away(Point playerLocation) {
+        return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
     }
 }
 

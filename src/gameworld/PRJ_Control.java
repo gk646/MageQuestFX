@@ -78,8 +78,10 @@ public class PRJ_Control {
     }
 
     public void update() {
+
         synchronized (mg.PROJECTILES) {
             synchronized (MainGame.ENTITIES) {
+
                 Iterator<PRJ_Control> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PRJ_Control projectile = iterator.next();
@@ -95,7 +97,7 @@ public class PRJ_Control {
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
-                        if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+                        if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_500) {
                             if (entity.dead) {
                                 recordDeath(entity);
                                 entityIterator.remove();
@@ -110,6 +112,7 @@ public class PRJ_Control {
             }
         }
     }
+
 
     private void calcProjectileDamage(PRJ_Control PRJControl, ENTITY entity) {
         if (PRJControl instanceof PRJ_AutoShot) {

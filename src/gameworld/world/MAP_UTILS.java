@@ -1,11 +1,6 @@
 package gameworld.world;
 
-import gameworld.player.Player;
-import gameworld.quest.SpawnTrigger;
 import main.MainGame;
-import main.system.enums.Zone;
-
-import java.awt.Point;
 
 public class MAP_UTILS {
     // WORLD CODES
@@ -23,48 +18,5 @@ public class MAP_UTILS {
     }
 
 
-    public void update() {
-        if (WorldController.currentWorld == Zone.Tutorial) {
-            if (mg.playerX == 1 && mg.playerY == 1) {
-                mg.wControl.load_city1(10, 10);
-                mg.player.spawnLevel = 1;
-            }
-            for (SpawnTrigger trigger : mg.wControl.tutorialSpawns) {
-                if (trigger != null) {
-                    trigger.activate(mg);
-                }
-            }
-        }
-        if (WorldController.currentWorld == Zone.GrassLands) {
-            if (mg.playerX == 499 && mg.playerY == 499) {
-                mg.wControl.load_city1(10, 10);
-            }
-        }
-        if (WorldController.currentWorld == Zone.City1) {
-            if (mg.playerX == 32 && mg.playerY == 0 ||
-                    mg.playerX == 33 && mg.playerY == 0 ||
-                    mg.playerX == 34 && mg.playerY == 0 ||
-                    mg.playerX == 35 && mg.playerY == 0 ||
-                    mg.playerX == 36 && mg.playerY == 0 ||
-                    mg.playerX == 37 && mg.playerY == 0) {
-                mg.wControl.load_OverWorldMap(495, 495);
-            }
-        }
-    }
 
-    public void loadSpawnLevel() {
-        if (mg.player.spawnLevel == 0) {
-            mg.wControl.load_tutorial(4, 4);
-        } else if (mg.player.spawnLevel == 1) {
-            mg.wControl.load_city1(40, 18);
-        }
-    }
-
-    /**
-     * @param playerLocation in awt Point
-     * @return true if the player is further than 500 pixels from the given points
-     */
-    public boolean player_went_away(Point playerLocation) {
-        return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
-    }
 }

@@ -26,7 +26,7 @@ public class ENT_Control {
     public void draw(GraphicsContext gc) {
         synchronized (MainGame.ENTITIES) {
             for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
-                if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+                if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
                     entity.draw(gc);
                     if (entity.hpBarOn) {
                         gc.setFill(Colors.Red);
@@ -47,7 +47,7 @@ public class ENT_Control {
     public void update() {
         synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
-                if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+                if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
                     entity.update();
                     if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
                         mg.player.health -= entity.level;

@@ -1,6 +1,5 @@
 package main.system.ai;
 
-import gameworld.world.maps.MAP_OverWorld;
 import main.MainGame;
 import main.system.WorldRender;
 
@@ -87,10 +86,10 @@ public class PathFinder {
             if (col - 1 >= 0) {
                 openNode(nodes[col - 1][row]);
             }
-            if (row + 1 < MAP_OverWorld.worldSize.y) {
+            if (row + 1 < mg.wRender.worldSize.y) {
                 openNode(nodes[col][row + 1]);
             }
-            if (col + 1 < MAP_OverWorld.worldSize.x) {
+            if (col + 1 < mg.wRender.worldSize.x) {
                 openNode(nodes[col + 1][row]);
             }
             int bestNodesIndex = 0;
@@ -131,10 +130,10 @@ public class PathFinder {
             if (col - 1 >= 0) {
                 openNode(nodes[col - 1][row]);
             }
-            if (row + 1 < MAP_OverWorld.worldSize.y) {
+            if (row + 1 < mg.wRender.worldSize.y) {
                 openNode(nodes[col][row + 1]);
             }
-            if (col + 1 < MAP_OverWorld.worldSize.x) {
+            if (col + 1 < mg.wRender.worldSize.x) {
                 openNode(nodes[col + 1][row]);
             }
 

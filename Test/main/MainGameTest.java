@@ -78,7 +78,7 @@ class MainGameTest {
         System.out.println(arrayList.size());
         time = System.nanoTime();
         for (ENTITY entity : entities) {
-            if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+            if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
                 entity.update();
                 arrayList.add(2);
             }
@@ -86,18 +86,22 @@ class MainGameTest {
         System.out.println((System.nanoTime() - time) / 1_000 + " ki way");
         System.out.println(arrayList.size());
         time = System.nanoTime();
-        double num;
+
         for (ENTITY entity : entities) {
-            num = Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2));
+            if ((entity.worldX - Player.worldX) * (entity.worldX - Player.worldX) + (entity.worldY - Player.worldY) * (entity.worldY - Player.worldY) < 2_250_000) {
+                arrayList.add(1);
+            }
         }
 
         System.out.println((System.nanoTime() - time) / 1_000 + "pythagors");
         System.out.println(arrayList.size());
 
         time = System.nanoTime();
-        num = 0;
+
         for (ENTITY entity : entities) {
-            num = Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY);
+            if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1500) {
+                arrayList.add(1);
+            }
         }
 
         System.out.println((System.nanoTime() - time) / 1_000 + " my way");
