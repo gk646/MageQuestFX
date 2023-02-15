@@ -5,6 +5,7 @@ import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.Storage;
+import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
@@ -17,8 +18,9 @@ public class ENT_Grunt extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Grunt(MainGame mg, int worldX, int worldY, int level) {
+    public ENT_Grunt(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         this.mg = mg;
+        this.zone = zone;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;

@@ -4,6 +4,7 @@ import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import main.MainGame;
 import main.system.WorldRender;
+import main.system.enums.Zone;
 
 public class MapQuadrant {
 
@@ -11,24 +12,27 @@ public class MapQuadrant {
     public final int startTileY;
     private final int size;
     private final MainGame mg;
+    private final Zone zone;
     boolean spawned;
     private int difficulty;
     private int numberOfEnemies;
 
-    public MapQuadrant(int difficulty, MainGame mg, int startTileX, int startTileY, int size, int numberOfEnemies) {
+    public MapQuadrant(int difficulty, MainGame mg, int startTileX, int startTileY, int size, int numberOfEnemies, Zone zone) {
         this.startTileX = startTileX;
         this.startTileY = startTileY;
+        this.zone = zone;
         this.size = size;
         this.mg = mg;
         this.numberOfEnemies = numberOfEnemies;
         this.difficulty = difficulty;
     }
 
-    public MapQuadrant(MainGame mg, int startTileX, int startTileY, int size) {
+    public MapQuadrant(MainGame mg, int startTileX, int startTileY, int size, Zone zone) {
         this.startTileX = startTileX;
         this.startTileY = startTileY;
         this.size = size;
         this.mg = mg;
+        this.zone = zone;
     }
 
 
@@ -41,9 +45,9 @@ public class MapQuadrant {
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
                 if (!WorldRender.tileStorage[mg.wControl.overWorldMapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
-                        MainGame.ENTITIES.add(new ENT_Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                        MainGame.ENTITIES.add(new ENT_Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     } else {
-                        MainGame.ENTITIES.add(new ENT_Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty));
+                        MainGame.ENTITIES.add(new ENT_Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     }
                     spawnedEnemies++;
                 }

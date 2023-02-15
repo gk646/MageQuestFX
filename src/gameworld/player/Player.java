@@ -3,13 +3,14 @@ package gameworld.player;
 import gameworld.entities.ENTITY;
 import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_Lightning;
+import gameworld.world.WorldController;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
-import main.system.enums.Map;
+import main.system.enums.Zone;
 import main.system.ui.inventory.UI_InventorySlot;
 import main.system.ui.talentpane.TalentNode;
 
@@ -266,7 +267,7 @@ public class Player extends ENTITY {
     public void update() {
         movement();
         skills();
-        if (mg.wControl.currentWorld == Map.GrassLands) {
+        if (WorldController.currentWorld == Zone.GrassLands) {
             if (quadrantTimer >= 100) {
                 dynamicSpawns();
                 if (respawnsDone) {

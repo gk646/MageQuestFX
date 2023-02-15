@@ -1,11 +1,11 @@
 package main.system.enums;
 
-public enum Map {
+public enum Zone {
     Tutorial(0), GrassLands(1), City1(2);
 
     private final int value;
 
-    Map(int val) {
+    Zone(int val) {
         value = val;
     }
 }

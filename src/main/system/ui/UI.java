@@ -226,7 +226,7 @@ public class UI {
         for (String string : ("""
                 WINDOWS:
                 "N" - to open the talent panel (explained in TalentPanel).
-                "M" - to open the world map, scroll in and out with scroll wheel, drag it around with holding left mouse and recenter it on the player with "SPACEBAR".
+                "M" - to open the world zone, scroll in and out with scroll wheel, drag it around with holding left mouse and recenter it on the player with "SPACEBAR".
                 "C" - to open the character panel. There you see your characters stats and equipped items (explained in character panel).
                 "B" - to open the bag panel. This hold all the items in your bag including miscellaneous items and equippable bags and consumables.""").split("\n"))
             gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));

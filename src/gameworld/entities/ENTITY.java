@@ -8,6 +8,7 @@ import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
@@ -20,6 +21,7 @@ import java.awt.Rectangle;
  */
 abstract public class ENTITY {
     public Dialog dialog;
+    public Zone zone;
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
@@ -225,13 +227,20 @@ abstract public class ENTITY {
     }
 
     protected void getNearestPlayer() {
-        if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
-            this.goalCol = (int) ((Player.worldX + 24) / 48);
-            this.goalRow = (int) ((Player.worldY + 24) / 48);
+        /*  if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
+
+         */
+        this.goalCol = (int) ((Player.worldX + 24) / 48);
+        this.goalRow = (int) ((Player.worldY + 24) / 48);
+     /*
         } else {
+
+
             this.goalCol = (int) ((mg.ENTPlayer2.worldX + mg.player.collisionBox.x) / mg.tileSize);
             this.goalRow = (int) ((mg.ENTPlayer2.worldY + mg.player.collisionBox.y) / mg.tileSize);
+
         }
+      */
     }
 
     protected void getNearestPlayerMultiplayer() {

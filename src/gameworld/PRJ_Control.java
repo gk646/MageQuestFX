@@ -11,6 +11,7 @@ import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
+import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
@@ -55,7 +56,6 @@ public class PRJ_Control {
     public Point2D.Double worldPos;
     public int GruntKilledCounter;
     private int ShooterKilledCounter;
-    public int outOfBoundsDistance;
     /*
 
      */
@@ -95,16 +95,15 @@ public class PRJ_Control {
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
-                        if (Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) >= 2_000) {
-                            continue;
-                        }
-                        if (entity.dead) {
-                            recordDeath(entity);
-                            entityIterator.remove();
-                            continue;
-                        }
-                        if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
-                            calcProjectileDamage(projectile, entity);
+                        if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+                            if (entity.dead) {
+                                recordDeath(entity);
+                                entityIterator.remove();
+                                continue;
+                            }
+                            if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                                calcProjectileDamage(projectile, entity);
+                            }
                         }
                     }
                 }
@@ -126,7 +125,7 @@ public class PRJ_Control {
         if (entity.health <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
-            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level));
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
             mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level));
         } else {
             entity.hpBarOn = true;

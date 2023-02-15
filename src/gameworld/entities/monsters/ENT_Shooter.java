@@ -6,6 +6,7 @@ import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.Storage;
+import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
@@ -20,7 +21,8 @@ public class ENT_Shooter extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Shooter(MainGame mg, int worldX, int worldY, int level) {
+    public ENT_Shooter(MainGame mg, int worldX, int worldY, int level, Zone zone) {
+        this.zone = zone;
         this.mg = mg;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);

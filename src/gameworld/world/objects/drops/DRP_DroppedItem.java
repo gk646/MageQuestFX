@@ -6,6 +6,7 @@ import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.Zone;
 import main.system.ui.Effects;
 
 public class DRP_DroppedItem extends DROP {
@@ -24,7 +25,8 @@ public class DRP_DroppedItem extends DROP {
      * @param worldY DropLocation Y
      * @param level  Level of the dropped item
      */
-    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level) {
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, Zone zone) {
+        this.zone = zone;
         this.mg = mg;
         this.size = 32;
         this.worldPos.x = worldX + 16;
@@ -35,9 +37,10 @@ public class DRP_DroppedItem extends DROP {
         }
     }
 
-    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, int rarity) {
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, int rarity, Zone zone) {
         this.mg = mg;
         this.size = 32;
+        this.zone = zone;
         this.worldPos.x = worldX + 16;
         this.worldPos.y = worldY + 16;
         item = rollForItem(level);
@@ -49,8 +52,9 @@ public class DRP_DroppedItem extends DROP {
         droppedIcon = item.icon;
     }
 
-    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item) {
+    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item, Zone zone) {
         this.mg = mg;
+        this.zone = zone;
         this.size = 32;
         this.worldPos.x = worldX + 16;
         this.worldPos.y = worldY + 16;

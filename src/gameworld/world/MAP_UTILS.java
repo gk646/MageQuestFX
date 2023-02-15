@@ -3,7 +3,7 @@ package gameworld.world;
 import gameworld.player.Player;
 import gameworld.quest.SpawnTrigger;
 import main.MainGame;
-import main.system.enums.Map;
+import main.system.enums.Zone;
 
 import java.awt.Point;
 
@@ -24,7 +24,7 @@ public class MAP_UTILS {
 
 
     public void update() {
-        if (mg.wControl.currentWorld == Map.Tutorial) {
+        if (WorldController.currentWorld == Zone.Tutorial) {
             if (mg.playerX == 1 && mg.playerY == 1) {
                 mg.wControl.load_city1(10, 10);
                 mg.player.spawnLevel = 1;
@@ -35,12 +35,12 @@ public class MAP_UTILS {
                 }
             }
         }
-        if (mg.wControl.currentWorld == Map.GrassLands) {
+        if (WorldController.currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
                 mg.wControl.load_city1(10, 10);
             }
         }
-        if (mg.wControl.currentWorld == Map.City1) {
+        if (WorldController.currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
                     mg.playerX == 33 && mg.playerY == 0 ||
                     mg.playerX == 34 && mg.playerY == 0 ||

@@ -7,13 +7,13 @@ import gameworld.world.maps.MAP_OverWorld;
 import gameworld.world.maps.MAP_Tutorial;
 import main.MainGame;
 import main.system.WorldRender;
-import main.system.enums.Map;
+import main.system.enums.Zone;
 
 import java.awt.Point;
 
 public class WorldController {
     private final MainGame mg;
-    public Map currentWorld;
+    public static Zone currentWorld;
 
 
     public final MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
@@ -42,7 +42,7 @@ public class WorldController {
     }
 
     public void load_OverWorldMap(int xTile, int yTile) {
-        currentWorld = Map.GrassLands;
+        currentWorld = Zone.GrassLands;
         clearWorldArrays();
         for (MapQuadrant quadrant : overworldMapQuadrants) {
             if (quadrant.spawned) {
@@ -55,7 +55,7 @@ public class WorldController {
     }
 
     public void load_tutorial(int xTile, int yTile) {
-        currentWorld = Map.Tutorial;
+        currentWorld = Zone.Tutorial;
         clearWorldArrays();
         WorldRender.worldData = tutorialMapData;
         mg.wRender.worldSize = tutorialSize;
@@ -63,7 +63,7 @@ public class WorldController {
     }
 
     public void load_city1(int xTile, int yTile) {
-        currentWorld = Map.City1;
+        currentWorld = Zone.City1;
         clearWorldArrays();
         WorldRender.worldData = city1_MapData;
         mg.wRender.worldSize = tutorialSize;
@@ -89,18 +89,17 @@ public class WorldController {
         for (int i = 0; i < 10; i++) {
             for (int b = 0; b < 10; b++) {
                 if (counter != 99) {
-                    overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30);
+                    overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30, Zone.GrassLands);
                     counter++;
                 }
-                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 0);
+                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 0, Zone.GrassLands);
             }
         }
     }
 
     private void clearWorldArrays() {
         mg.npcControl.loadNPC(currentWorld);
-        mg.WORLD_DROPS.clear();
-        MainGame.ENTITIES.clear();
+
         mg.PROJECTILES.clear();
     }
 }

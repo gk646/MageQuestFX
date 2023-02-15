@@ -6,6 +6,7 @@ import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.Zone;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -17,6 +18,7 @@ public class NPC_OldMan extends NPC {
 
     public NPC_OldMan(MainGame mainGame, int x, int y) {
         this.dialog = new Dialog();
+        this.zone = Zone.Tutorial;
         this.mg = mainGame;
         goalTile = new Point(34, 34);
         //Setting default values

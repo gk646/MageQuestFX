@@ -30,6 +30,7 @@ import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.State;
+import main.system.enums.Zone;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
@@ -314,12 +315,13 @@ public class MainGame {
                 DROP drop = iterator.next();
                 if (drop instanceof DRP_DroppedItem && drop.item == null) {
                     iterator.remove();
-                } else {
+                } else if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
                     drop.draw(gc);
                 }
             }
         }
     }
+
 
     /**
      * Loads the game and updates loading screen
@@ -399,16 +401,16 @@ public class MainGame {
         startThreads();
 
         for (int i = 0; i < 1; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100));
+            ENTITIES.add(new ENT_Grunt(this, 87 * 48, 87 * 48, 100, Zone.GrassLands));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(496, 496);
         for (int i = 0; i < 10; i++) {
-            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2));
+            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }
         for (int i = 0; i < 10; i++) {
-            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3));
+            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3, Zone.GrassLands));
         }
 
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
