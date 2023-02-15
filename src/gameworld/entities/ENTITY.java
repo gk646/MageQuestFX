@@ -25,12 +25,15 @@ abstract public class ENTITY {
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
+    public Image entityImage1;
     protected Image entityImage2;
     protected Image entityImage3;
     protected Image entityImage4;
     protected Image entityImage5;
     protected Image entityImage6;
     protected Image enemyImage;
+    public Image walk1, walk2, walk3, walk4, walk5, walk6;
+
     public int entityWidth;
     public int entityHeight;
     protected int searchTicks;
@@ -43,7 +46,7 @@ abstract public class ENTITY {
     public int maxHealth;
     public float movementSpeed;
     public int level;
-    public Image entityImage1;
+
     public int hitDelay;
     public boolean collisionUp, collisionDown;
     public boolean collisionLeft;
@@ -150,7 +153,7 @@ abstract public class ENTITY {
      * @param maxDistance the maximum distance that is searched in every direction
      * @see ENTITY#searchPath(int, int, int)
      */
-    private void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
+    public void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
         int startCol = (int) ((worldX + 24) / 48);
         int startRow = (int) ((worldY + 24) / 48);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);

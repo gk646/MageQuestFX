@@ -110,7 +110,6 @@ public class WorldController {
         globalTriggers.add(new SpawnTrigger(97, 27, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
         globalTriggers.add(new SpawnTrigger(94, 14, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
         globalTriggers.add(new SpawnTrigger(94, 4, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
-
         //middle right
         globalTriggers.add(new SpawnTrigger(93, 46, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
         globalTriggers.add(new SpawnTrigger(87, 45, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));

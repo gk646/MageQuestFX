@@ -20,7 +20,6 @@ public class WorldRender {
     private int maxCol;
     private int maxRow;
 
-
     public WorldRender(MainGame mg) {
         this.mg = mg;
         tileStorage = new Tile[75];
@@ -92,21 +91,24 @@ public class WorldRender {
 
 
     public void draw(GraphicsContext g2) {
+
         worldCol = Math.max(mg.playerX - 21, 0);
         worldRow = Math.max(mg.playerY - 12, 0);
         maxCol = Math.min(mg.playerX + 21, worldSize.x);
-        maxRow = Math.min(mg.playerX + 12, worldSize.y);
+        maxRow = Math.min(mg.playerY + 12, worldSize.y);
         Player.screenX = mg.HALF_WIDTH - 24;
         Player.screenY = mg.HALF_HEIGHT - 24;
         if (Player.screenX > Player.worldX) {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
             Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
+            worldCol = Math.max(mg.playerX - 42, 0);
         }
         if (Player.screenY > Player.worldY) {
             Player.screenY = (int) Player.worldY;
         } else if (Player.worldY + 24 > mg.wRender.worldSize.y * 48 - mg.HALF_HEIGHT) {
             Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
+            worldRow = Math.max(mg.playerY - 24, 0);
         }
 
         for (int i = worldCol; i < maxCol; i++) {
@@ -116,5 +118,6 @@ public class WorldRender {
         }
     }
 }
+
 
 

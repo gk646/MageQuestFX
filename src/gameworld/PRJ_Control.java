@@ -1,6 +1,7 @@
 package gameworld;
 
 
+import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.monsters.ENT_Grunt;
@@ -11,7 +12,6 @@ import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
-import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
@@ -78,10 +78,8 @@ public class PRJ_Control {
     }
 
     public void update() {
-
         synchronized (mg.PROJECTILES) {
             synchronized (MainGame.ENTITIES) {
-
                 Iterator<PRJ_Control> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PRJ_Control projectile = iterator.next();
@@ -94,18 +92,21 @@ public class PRJ_Control {
                         iterator.remove();
                         continue;
                     }
+                    double px = Player.worldX;
+                    double py = Player.worldY;
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
-                        if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_500) {
-                            if (entity.dead) {
-                                recordDeath(entity);
-                                entityIterator.remove();
-                                continue;
-                            }
-                            if (!entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
-                                calcProjectileDamage(projectile, entity);
-                            }
+                        if (entity.dead) {
+                            recordDeath(entity);
+                            entityIterator.remove();
+                            continue;
+                        }
+                        double ex = entity.worldX;
+                        double ey = entity.worldY;
+                        double distSq = (ex - px) * (ex - px) + (ey - py) * (ey - py);
+                        if (distSq < 2_250_000 && !entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            calcProjectileDamage(projectile, entity);
                         }
                     }
                 }
@@ -128,8 +129,12 @@ public class PRJ_Control {
         if (entity.health <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
-            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
-            mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level));
+            if (entity instanceof BOSS) {
+                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, 2, entity.zone));
+            } else {
+                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
+                mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level));
+            }
         } else {
             entity.hpBarOn = true;
         }

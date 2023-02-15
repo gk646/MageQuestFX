@@ -24,6 +24,7 @@ public class BOS_Slime extends BOSS {
         this.health = maxHealth;
         this.enemyImage = Storage.gruntImage1;
         this.direction = "leftrightdownup";
+        getImages();
     }
 
     /**
@@ -33,8 +34,21 @@ public class BOS_Slime extends BOSS {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        gc.drawImage(enemyImage, screenX, screenY, 48, 48);
+        if (onPath) {
+            switch (spriteCounter % 180 / 30) {
+                case 0 -> gc.drawImage(walk1, screenX, screenY);
+                case 1 -> gc.drawImage(walk2, screenX, screenY);
+                case 2 -> gc.drawImage(walk3, screenX, screenY);
+                case 3 -> gc.drawImage(walk4, screenX, screenY);
+                case 4 -> gc.drawImage(walk5, screenX, screenY);
+                case 5 -> gc.drawImage(walk6, screenX, screenY);
+            }
+        } else {
+            gc.drawImage(enemyImage, screenX, screenY, 48, 48);
+        }
+        spriteCounter++;
     }
+
 
     /**
      *
@@ -50,19 +64,28 @@ public class BOS_Slime extends BOSS {
             slimeVolley();
         }
         getNearestPlayer();
-        searchPath(goalCol, goalRow, 25);
+        searchPathUncapped(goalCol, goalRow, 30);
     }
 
     private void slimeVolley() {
-        for (int i = 0; i < 720; i++) {
+        for (int i = 0; i < 720; i += 4) {
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, (int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos(i % 360 * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin(i % 360 * (Math.PI / 180))))));
         }
     }
 
     private void slimeCone() {
         int angle = (int) (Math.atan2(Player.worldY - worldY, Player.worldX - worldX) * (180 / Math.PI));
-        for (int i = -45; i < 45; i++) {
+        for (int i = -45; i < 45; i += 4) {
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot(mg, (int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
         }
+    }
+
+    private void getImages() {
+        this.walk1 = Storage.BigSLimewalk1;
+        this.walk2 = Storage.BigSLimewalk2;
+        this.walk3 = Storage.BigSLimewalk3;
+        this.walk4 = Storage.BigSLimewalk4;
+        this.walk5 = Storage.BigSLimewalk5;
+        this.walk6 = Storage.BigSLimewalk6;
     }
 }
