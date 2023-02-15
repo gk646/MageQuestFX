@@ -41,7 +41,7 @@ public class WorldRender {
         //BRICKS
         setupTiles(56, "grey_brick_wall.png", true);
         setupTiles(57, "brick_wall.png", false);
-
+        setupTiles(46, "black.png", true);
         //GRASS
         setupTiles(1, "grass01.png", false);
         setupTiles(2, "grass02.png", false);
@@ -76,7 +76,6 @@ public class WorldRender {
         setupTiles(33, "water33.png", true);
         setupTiles(34, "water34.png", false);
 
-
         setupTiles(40, "grass40.png", false);
         setupTiles(41, "grass41.png", false);
         setupTiles(42, "grass42.png", false);
@@ -95,21 +94,19 @@ public class WorldRender {
     public void draw(GraphicsContext g2) {
         worldCol = Math.max(mg.playerX - 21, 0);
         worldRow = Math.max(mg.playerY - 12, 0);
-        maxCol = Math.min(worldCol + 42, worldSize.x);
-        maxRow = Math.min(worldRow + 24, worldSize.y);
+        maxCol = Math.min(mg.playerX + 21, worldSize.x);
+        maxRow = Math.min(mg.playerX + 12, worldSize.y);
         Player.screenX = mg.HALF_WIDTH - 24;
         Player.screenY = mg.HALF_HEIGHT - 24;
         if (Player.screenX > Player.worldX) {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
             Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
-            worldCol -= 18;
         }
         if (Player.screenY > Player.worldY) {
             Player.screenY = (int) Player.worldY;
         } else if (Player.worldY + 24 > mg.wRender.worldSize.y * 48 - mg.HALF_HEIGHT) {
             Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
-            worldRow -= 10;
         }
 
         for (int i = worldCol; i < maxCol; i++) {

@@ -31,7 +31,7 @@ public class WorldController {
     public int[][] valhalla_MapData;
     public Point valhalla_StartPoint;
     // DUNGEON TUTORIAL
-    public final Point dungeonTutorial_Size = new Point(30, 30);
+    public final Point dungeonTutorial_Size = new Point(60, 60);
     public Point overWorldSize = new Point(500, 500);
     // HELL
     public int[][] hell_MapData;
@@ -73,22 +73,22 @@ public class WorldController {
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
 
-    public void dungeon_tutorial(int xTile, int yTile) {
-        currentWorld = Zone.City1;
+    public void loadDungeonTutorial(int xTile, int yTile) {
+        currentWorld = Zone.Dungeon_Tutorial;
         clearWorldArrays();
-        WorldRender.worldData = city1_MapData;
-        mg.wRender.worldSize = tutorial_Size;
+        WorldRender.worldData = dungeonTutorial_MapData;
+        mg.wRender.worldSize = dungeonTutorial_Size;
         mg.player.setPosition(xTile * 48, yTile * 48);
     }
 
     public void getWorldsData() {
         //Tutorial
         this.tutorialMapData = MapLoader.loadMapData("Tutorial", 100);
-        MapLoader.getTriggers("Tutorial");
+        MapLoader.getTriggers("Tutorial", Zone.Tutorial);
 
         //dungeon tutorial
-        MapLoader.getTriggers("DungeonTutorial");
-        this.dungeonTutorial_MapData = MapLoader.loadMapData("DungeonTutorial", 30);
+        MapLoader.getTriggers("DungeonTutorial", Zone.Dungeon_Tutorial);
+        this.dungeonTutorial_MapData = MapLoader.loadMapData("DungeonTutorial", 60);
         //city 1
         this.city1_MapData = MapLoader.loadMapData("City1", 100);
         //Over world
@@ -137,23 +137,23 @@ public class WorldController {
     }
 
     public void update() {
-        if (WorldController.currentWorld == Zone.Tutorial) {
+        for (SpawnTrigger trigger : globalTriggers) {
+            if (trigger != null && trigger.zone == currentWorld) {
+                trigger.activate(mg);
+            }
+        }
+        if (currentWorld == Zone.Tutorial) {
             if (mg.playerX == 1 && mg.playerY == 1) {
                 mg.wControl.load_city1(10, 10);
                 mg.player.spawnLevel = 1;
             }
-            for (SpawnTrigger trigger : globalTriggers) {
-                if (trigger != null && trigger.zone == currentWorld) {
-                    trigger.activate(mg);
-                }
-            }
         }
-        if (WorldController.currentWorld == Zone.GrassLands) {
+        if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
                 mg.wControl.load_city1(10, 10);
             }
         }
-        if (WorldController.currentWorld == Zone.City1) {
+        if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
                     mg.playerX == 33 && mg.playerY == 0 ||
                     mg.playerX == 34 && mg.playerY == 0 ||
@@ -161,6 +161,16 @@ public class WorldController {
                     mg.playerX == 36 && mg.playerY == 0 ||
                     mg.playerX == 37 && mg.playerY == 0) {
                 mg.wControl.load_OverWorldMap(495, 495);
+            }
+        }
+        if (currentWorld == Zone.Tutorial) {
+            if (mg.playerX == 71 && mg.playerY == 56) {
+                loadDungeonTutorial(27, 0);
+            }
+        }
+        if (currentWorld == Zone.Dungeon_Tutorial) {
+            if (mg.playerX == 26 && mg.playerY == 0) {
+                load_tutorial(71, 55);
             }
         }
     }

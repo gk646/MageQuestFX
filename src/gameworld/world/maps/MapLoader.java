@@ -37,58 +37,50 @@ abstract public class MapLoader {
     }
 
 
-    public static void getTriggers(String fileName) {
-        try {
-            InputStream inputStream = MapLoader.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
-            assert inputStream != null;
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line = bufferedReader.readLine();
-            boolean xfound = false, typefound = false;
-            Pattern xfinder;
-            Pattern yfinder;
-            Pattern namefinder;
-            Matcher x;
-            Matcher y;
-            Matcher name;
+    public static void getTriggers(String fileName, Zone zone) {
+        Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
+        Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
+        Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho)(\\d{0,3})");
+        try (InputStream inputStream = MapLoader.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            Matcher matcher;
+            String line;
             int level = 0;
             Type type = null;
-            int counter = 0;
             int newTriggerx = 0, newTriggery = 0;
-            xfinder = Pattern.compile("\"x\":([0-9]{0,4})");
-            yfinder = Pattern.compile("\"y\":([0-9]{0,4})");
-            namefinder = Pattern.compile("\"name\":\"([a-z]{3})([0-9]{0,3})");
-            while (line != null) {
-                x = xfinder.matcher(line);
-                y = yfinder.matcher(line);
-                name = namefinder.matcher(line);
+            boolean xfound = false, typefound = false;
+            while ((line = bufferedReader.readLine()) != null) {
                 if (!typefound) {
-                    if (name.find()) {
-                        if (name.group(1).equals("gru")) {
+                    matcher = namefinder.matcher(line);
+                    if (matcher.find()) {
+                        String name = matcher.group(1);
+                        level = Integer.parseInt(matcher.group(2));
+                        if (name.equals("gru")) {
                             type = Type.Grunt;
-                        } else if (name.group(1).equals("sho")) {
+                        } else if (name.equals("sho")) {
                             type = Type.Shooter;
                         }
-                        level = Integer.parseInt(name.group(2));
                         typefound = true;
                     }
                 } else if (!xfound) {
-                    if (x.find()) {
-                        newTriggerx = Integer.parseInt(x.group(1));
+                    matcher = xfinder.matcher(line);
+                    if (matcher.find()) {
+                        newTriggerx = Integer.parseInt(matcher.group(1));
                         xfound = true;
                     }
                 } else {
-                    if (y.find()) {
-                        newTriggery = Integer.parseInt(y.group(1));
+                    matcher = yfinder.matcher(line);
+                    if (matcher.find()) {
+                        newTriggery = Integer.parseInt(matcher.group(1));
                         xfound = false;
                         typefound = false;
-                        WorldController.globalTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SINGULAR, type, Zone.Tutorial));
-                        counter++;
+                        WorldController.globalTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SINGULAR, type, zone));
                     }
                 }
-                line = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException();
         }
     }
 }
+
