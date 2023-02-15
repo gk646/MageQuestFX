@@ -58,6 +58,8 @@ public class UI {
                 drawKeyBindings(gc);
             } else if (mg.drawGameplay) {
                 drawGamePlaySettings(gc);
+            } else if (mg.drawCodex) {
+                drawCodex(gc);
             }
         } else if (mg.credits) {
             drawCredits(gc);
@@ -69,6 +71,7 @@ public class UI {
             drawLoadingScreen(gc);
         }
     }
+
 
     private void drawCredits(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold30);
@@ -214,6 +217,60 @@ public class UI {
 
     }
 
+    private void drawCodex(GraphicsContext gc) {
+        gc.setFill(Colors.darkBackground);
+        gc.setFont(FonT.minecraftBoldItalic15);
+        gc.fillText("MOVEMENT: Use the W A S D keyboard keys to move up, left, down and right respectively.", MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * 0.302f);
+        float y = 0.322f;
+        for (String string : ("""
+                WINDOWS:
+                "N" - to open the talent panel (explained in TalentPanel).
+                "M" - to open the world map, scroll in and out with scroll wheel, drag it around with holding left mouse and recenter it on the player with "SPACEBAR".
+                "C" - to open the character panel. There you see your characters stats and equipped items (explained in character panel).
+                "B" - to open the bag panel. This hold all the items in your bag including miscellaneous items and equippable bags and consumables.""").split("\n"))
+            gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+
+        y += 0.02;
+        for (String string : ("""
+                MOUSE and ABILITIES:
+                Click the mouse on the screen with either mouse button to activate the ability in the respective slot.
+                The button to activate slots are indicated in the hot bar and but are from left to right: 1 numerical key, 2, 3,4,5 , left mouse button , right mouse button""").split("\n"))
+            gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+
+        y += 0.02;
+        for (String string : ("""
+                INVENTORY:
+                Each inventory slot can only hold a specific piece of equipment as indicated by the letter.
+                The letter always corresponds to the first letter of the item type e.g "H" for headslot (or Helm).
+                "2" - is for twohanded, "O" for offhand and "W" for onehand weapons.
+                On the bottom you can click between the different tabs inside the  character panel:
+                  """).split("\n")) {
+            gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+        }
+
+        y += 0.02;
+        for (String string : ("""
+                BAGS:
+                Holds all your valuable items.
+                There is a quick equip feature when you press shift and click on a item it automatically searches for the first possible slot.
+                Also when you hold shift and hover over a item in your bag you get a comparison with the actively equipped item (should there be one)
+                While looking at this comparison you can still shift click to equip the item get the new comparison in reverse order.
+                Left is the equipped item on the right your bag""").split("\n")) {
+            gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+        }
+        y += 0.02;
+        for (String string : ("""
+                STATS:
+                    INT: Intelligence. Has the biggest impact on your maximum mana and a slight impact on mana regeneration.
+                    WIS: Wisdom. Has the biggest impact on your mana regeneration and a slight impact on maximum mana.
+                    VIT: vitality. Only base stat that increases your health.
+                    AGI: Agility. Determines how fast you can move. Has a small impact on resist chance.
+                    LUC: Luck. The only base stat that increases your chance for a critical hit. Has a small impact on getting better loot.
+                    CHA: Charisma. Changes how NPC's like you and for how much you can sell and buy items from merchants.
+                    STR: Strength. Impacts how much you can carry.""").split("\n")) {
+            gc.fillText(string, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+        }
+    }
 
     private void drawSaveMessage(GraphicsContext gc) {
 

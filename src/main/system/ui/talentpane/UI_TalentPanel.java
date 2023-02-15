@@ -136,7 +136,7 @@ public class UI_TalentPanel {
         }
     }
 
-    private void drawLine(int offsetx, int offsety, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {
+    private void drawLine(int offsetX, int offsetY, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {
         int x0 = requirement.position.x;
         int x1 = nextOne.position.x;
         int y0 = requirement.position.y;
@@ -147,12 +147,12 @@ public class UI_TalentPanel {
         int sy = y0 < y1 ? 1 : -1;
         int counter = 0;
         int err = dx - dy;
-        int e2, drawx, drawy;
+        int e2, drawX, drawY;
         while (true) {
             if (counter % 8 == 0) {
-                drawx = x0 + offsetx + 14;
-                drawy = y0 + offsety + 14;
-                gc.drawImage(requirement.activated && nextOne.activated ? connection_green : requirement.activated ? connection_orange : !nextOne.activated ? connection_red : connection_orange, drawx, drawy);
+                drawX = x0 + offsetX + 14;
+                drawY = y0 + offsetY + 14;
+                gc.drawImage(requirement.activated && nextOne.activated ? connection_green : requirement.activated ? connection_orange : !nextOne.activated ? connection_red : connection_orange, drawX, drawY);
             }
             if (x0 == x1 && y0 == y1) break;
             e2 = 2 * err;

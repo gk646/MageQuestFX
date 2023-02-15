@@ -104,6 +104,8 @@ public class InputHandler {
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
+                } else if (mg.ui.commandNum == 4) {
+                    mg.drawCodex = true;
                 } else if (mg.ui.commandNum == 5) {
                     mg.sqLite.savePlayerData();
                 } else if (mg.ui.commandNum == 6) {
@@ -113,8 +115,20 @@ public class InputHandler {
                 }
             }
             if (code.equals("\u001B")) {
-                mg.gameState = State.TITLE;
-                mg.ui.commandNum = 1;
+                if (mg.drawCodex) {
+                    mg.drawCodex = false;
+                    return;
+                } else if (mg.drawAudioSettings) {
+                    mg.drawAudioSettings = false;
+                    return;
+                } else if (mg.drawKeybindings) {
+                    mg.drawKeybindings = false;
+                } else if (mg.drawGameplay) {
+                    mg.drawGameplay = false;
+                } else {
+                    mg.gameState = State.TITLE;
+                    mg.ui.commandNum = 1;
+                }
             }
         }
         if (mg.gameState == State.OPTION) {
@@ -132,6 +146,8 @@ public class InputHandler {
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
+                } else if (mg.ui.commandNum == 4) {
+                    mg.drawCodex = true;
                 } else if (mg.ui.commandNum == 5) {
                     mg.sqLite.savePlayerData();
                 } else if (mg.ui.commandNum == 6) {
@@ -143,8 +159,20 @@ public class InputHandler {
         }
         if (code.equals("\u001B")) {
             if (mg.gameState == State.OPTION) {
-                scene.setCursor(Cursor.CROSSHAIR);
-                mg.gameState = State.PLAY;
+                if (mg.drawCodex) {
+                    mg.drawCodex = false;
+                    return;
+                } else if (mg.drawAudioSettings) {
+                    mg.drawAudioSettings = false;
+                    return;
+                } else if (mg.drawKeybindings) {
+                    mg.drawKeybindings = false;
+                } else if (mg.drawGameplay) {
+                    mg.drawGameplay = false;
+                } else {
+                    scene.setCursor(Cursor.CROSSHAIR);
+                    mg.gameState = State.PLAY;
+                }
                 try {
                     Thread.sleep(15);
                 } catch (InterruptedException ex) {

@@ -112,6 +112,7 @@ public class MainGame {
     public boolean drawVideoSettings, drawAudioSettings;
     public boolean drawKeybindings;
     public boolean drawGameplay;
+    public boolean drawCodex;
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
