@@ -10,7 +10,7 @@ class AdjacencyMatrix {
 
 
     public AdjacencyMatrix() {
-        adjacency_matrix = new int[100][100];
+        adjacency_matrix = new int[250][250];
         makeEdges();
     }
 
@@ -120,6 +120,34 @@ class AdjacencyMatrix {
         makeEdge(74, 75);
         makeEdge(1, 75);
         makeEdge(70, 72);
+        makeEdge(63, 81);
+        makeEdge(81, 82);
+        makeEdge(82, 89);
+        makeEdge(89, 88);
+        makeEdge(88, 87);
+        makeEdge(87, 86);
+        makeEdge(86, 85);
+        makeEdge(85, 84);
+        makeEdge(84, 83);
+        makeEdge(83, 62);
+        makeEdge(82, 90);
+        makeEdge(90, 91);
+        makeEdge(91, 97);
+        makeEdge(97, 92);
+        makeEdge(92, 93);
+        makeEdge(92, 96);
+        makeEdge(96, 93);
+        makeEdge(93, 94);
+        makeEdge(94, 95);
+        makeEdge(95, 21);
+        makeEdge(94, 98);
+        makeEdge(98, 97);
+        makeEdge(98, 99);
+        makeEdge(97, 100);
+        makeEdge(101, 102);
+        makeEdge(100, 101);
+        makeEdge(101, 103);
+        makeEdge(103, 104);
     }
 }
 
