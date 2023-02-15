@@ -40,7 +40,7 @@ public class WorldRender {
 
         //BRICKS
         setupTiles(56, "grey_brick_wall.png", true);
-        setupTiles(57, "brick_wall.png", true);
+        setupTiles(57, "brick_wall.png", false);
 
         //GRASS
         setupTiles(1, "grass01.png", false);

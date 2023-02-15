@@ -10,6 +10,7 @@ import main.system.WorldRender;
 import main.system.enums.Zone;
 
 import java.awt.Point;
+import java.io.IOException;
 
 public class WorldController {
     private final MainGame mg;
@@ -78,7 +79,11 @@ public class WorldController {
         //Tutorial
         this.tutorialMapData = MAP_Tutorial.loadTutorial();
         this.tutorialSize = MAP_Tutorial.loadMapSize();
-        this.tutorialSpawns = MAP_Tutorial.getTriggers();
+        try {
+            this.tutorialSpawns = MAP_Tutorial.getTriggers();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //
         this.city1_MapData = MAP_City1.loadCity();
     }

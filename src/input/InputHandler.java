@@ -146,6 +146,8 @@ public class InputHandler {
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
+                } else if (mg.ui.commandNum == 3) {
+                    mg.wControl.load_OverWorldMap(495, 495);
                 } else if (mg.ui.commandNum == 4) {
                     mg.drawCodex = true;
                 } else if (mg.ui.commandNum == 5) {

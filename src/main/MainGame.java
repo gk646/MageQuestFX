@@ -313,7 +313,7 @@ public class MainGame {
             Iterator<DROP> iterator = WORLD_DROPS.iterator();
             while (iterator.hasNext()) {
                 DROP drop = iterator.next();
-                if (drop instanceof DRP_DroppedItem && drop.item == null) {
+                if ((drop instanceof DRP_DroppedItem && drop.item == null) || WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld) {
                     iterator.remove();
                 } else if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
                     drop.draw(gc);
@@ -406,6 +406,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.load_OverWorldMap(496, 496);
+        wControl.load_tutorial(59, 49);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }

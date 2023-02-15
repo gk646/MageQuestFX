@@ -1,24 +1,24 @@
 {
-    "activeFile": "Tutorial.tmx",
+    "activeFile": "tileset16.tsx",
     "expandedProjectPaths": [
         ".",
         "exports"
     ],
     "fileStates": {
         "City1.tmx": {
-            "scale": 0.75,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 799.3333333333333,
-                "y": 799.3333333333333
+                "x": 872,
+                "y": 696
             }
         },
         "GrassLands.tmx": {
-            "scale": 1.5,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4029.666666666666,
-                "y": 3836
+                "x": 4520,
+                "y": 3984
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -46,12 +46,26 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 970.6666666666666,
+                "y": 1116
+            }
+        },
+        "exports/as.tmj": {
+            "scale": 0.151611328125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 923,
-                "y": 548.5
+                "x": 2400.8760064412236,
+                "y": 2397.5780998389696
             }
+        },
+        "exports/as.tmj#grass": {
+            "scaleInDock": 1
         },
         "grassspritesheet.tsx": {
             "dynamicWrapping": true,
@@ -88,8 +102,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 400,
-                "y": 400.6666666666667
+                "x": 366.6666666666666,
+                "y": 400
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -103,19 +117,16 @@
     "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/src/resources/Maps",
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
+    "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
     "openFiles": [
-        "City1.tmx",
-        "GrassLands.tmx",
-        "Tutorial.tmx",
-        "second floor_tutorial_castle.tmx",
         "tileset16.tsx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
+        "tileset16.tsx",
         "City1.tmx",
         "GrassLands.tmx",
-        "tileset16.tsx",
         "second floor_tutorial_castle.tmx",
         "Tutorial.tmx",
         "TileSet.tsx",

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="3">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="52">
  <editorsettings>
-  <export target="../src/resources/Maps/Tutorial.txt" format="json"/>
+  <export target="../src/resources/Maps/Tutorial.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="TileSet.tsx"/>
  <layer id="1" name="Kachelebene 1" width="100" height="100" offsetx="-15.3333" offsety="-18">
@@ -108,4 +108,12 @@
 58,59,59,59,58,58,59,58,59,59,58,58,59,58,58,58,59,59,58,59,58,59,58,58,58,58,59,59,58,59,59,58,58,58,59,58,59,59,58,58,59,59,58,59,59,58,58,58,58,58,58,58,58,58,59,58,59,58,59,59,59,58,59,58,59,59,58,59,58,58,58,59,58,58,58,58,58,58,58,58,59,59,59,59,59,58,58,59,59,59,58,59,59,59,59,58,59,4,4,4
 </data>
  </layer>
+ <objectgroup id="4" name="Objektebene 1" offsetx="-1" offsety="-1">
+  <object id="43" name="gru1" x="719.333" y="929.667"/>
+  <object id="45" name="gru1" x="642.333" y="776.333"/>
+  <object id="46" name="gru1" x="604.333" y="837.667"/>
+  <object id="48" name="sho1" x="491.667" y="741"/>
+  <object id="50" name="sho1" x="463" y="830.333"/>
+  <object id="51" name="sho1" x="521.667" y="796.333"/>
+ </objectgroup>
 </map>

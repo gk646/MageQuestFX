@@ -123,13 +123,68 @@
                 {
                  "class":"",
                  "height":0,
-                 "id":4,
-                 "name":"",
+                 "id":43,
+                 "name":"gru1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":601.5,
-                 "y":743.5
+                 "x":719.333333333333,
+                 "y":929.666666666667
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":45,
+                 "name":"gru1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":642.333333333333,
+                 "y":776.333333333333
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":46,
+                 "name":"gru1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":604.333333333333,
+                 "y":837.666666666667
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":48,
+                 "name":"sho1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":491.666666666667,
+                 "y":741
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":50,
+                 "name":"sho1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":463,
+                 "y":830.333333333333
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":51,
+                 "name":"sho1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":521.666666666667,
+                 "y":796.333333333333
                 }],
          "offsetx":-1,
          "offsety":-1,
@@ -140,7 +195,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":5,
+ "nextobjectid":52,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
