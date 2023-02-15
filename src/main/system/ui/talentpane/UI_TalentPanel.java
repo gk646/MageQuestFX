@@ -194,53 +194,6 @@ public class UI_TalentPanel {
     }
 
     public void createTalentNodes() {
-        talent_Nodes[81] = new TalentNode(new TALENT(81, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -296, -323);
-        talent_Nodes[82] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -239, -362);
-        talent_Nodes[83] = new TalentNode(new TALENT(83, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -419, -349);
-        talent_Nodes[84] = new TalentNode(new TALENT(84, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -478, -417);
-        talent_Nodes[85] = new TalentNode(new TALENT(85, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -539, -480);
-        talent_Nodes[86] = new TalentNode(new TALENT(86, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -481, -520);
-        talent_Nodes[87] = new TalentNode(new TALENT(87, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -426, -566);
-        talent_Nodes[88] = new TalentNode(new TALENT(88, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -366, -500);
-        talent_Nodes[89] = new TalentNode(new TALENT(89, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -306, -432);
-        talent_Nodes[90] = new TalentNode(new TALENT(80, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -175, -415);
-        talent_Nodes[91] = new TalentNode(new TALENT(81, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -117, -476);
-        talent_Nodes[92] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -45, -443);
-        talent_Nodes[93] = new TalentNode(new TALENT(83, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 45, -443);
-        talent_Nodes[94] = new TalentNode(new TALENT(84, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 113, -477);
-        talent_Nodes[95] = new TalentNode(new TALENT(85, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 170, -435);
-        talent_Nodes[96] = new TalentNode(new TALENT(86, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 0, -482);
-        talent_Nodes[97] = new TalentNode(new TALENT(87, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -45, -515);
-        talent_Nodes[98] = new TalentNode(new TALENT(88, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 45, -515);
-        talent_Nodes[99] = new TalentNode(new TALENT(89, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 112, -574);
-        talent_Nodes[100] = new TalentNode(new TALENT(81, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -117, -574);
-        talent_Nodes[101] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -191, -626);
-        talent_Nodes[102] = new TalentNode(new TALENT(83, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -268, -626);
-        talent_Nodes[103] = new TalentNode(new TALENT(84, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -191, -700);
-        talent_Nodes[104] = new TalentNode(new TALENT(85, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -268, -700);
-        talent_Nodes[105] = new TalentNode(new TALENT(86, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -176, -290);
-        talent_Nodes[106] = new TalentNode(new TALENT(87, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -230, -783);
-        talent_Nodes[107] = new TalentNode(new TALENT(88, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -122, -823);
-        talent_Nodes[108] = new TalentNode(new TALENT(89, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 0, -840);
-        talent_Nodes[109] = new TalentNode(new TALENT(80, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 106, -824);
-        talent_Nodes[110] = new TalentNode(new TALENT(81, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 220, -773);
-        talent_Nodes[111] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 48, -924);
-        talent_Nodes[112] = new TalentNode(new TALENT(83, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -48, -924);
-        talent_Nodes[113] = new TalentNode(new TALENT(84, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 0, -1024);
-        talent_Nodes[114] = new TalentNode(new TALENT(85, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -44, -764);
-        talent_Nodes[115] = new TalentNode(new TALENT(86, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), -44, -692);
-        talent_Nodes[116] = new TalentNode(new TALENT(87, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 44, -764);
-        talent_Nodes[117] = new TalentNode(new TALENT(88, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 44, -692);
-        talent_Nodes[118] = new TalentNode(new TALENT(89, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 0, -635);
-        talent_Nodes[119] = new TalentNode(new TALENT(81, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 182, -632);
-        talent_Nodes[120] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 182, -704);
-        talent_Nodes[121] = new TalentNode(new TALENT(82, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 259, -704);
-        talent_Nodes[122] = new TalentNode(new TALENT(83, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 259, -632);
-        talent_Nodes[123] = new TalentNode(new TALENT(84, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 271, -816);
-        talent_Nodes[124] = new TalentNode(new TALENT(85, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 202, -854);
-        talent_Nodes[125] = new TalentNode(new TALENT(86, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 291, -889);
-        talent_Nodes[126] = new TalentNode(new TALENT(87, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 199, -943);
-        talent_Nodes[127] = new TalentNode(new TALENT(88, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 243, -994);
        /*
         talent_Nodes[128] = new TalentNode(new TALENT(89, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 0, -840);
         talent_Nodes[129] = new TalentNode(new TALENT(80, "Increase maximum mana", "mana.png", "Increases maximum mana by 5%", "w"), 1115, -824);
@@ -301,12 +254,12 @@ public class UI_TalentPanel {
     }
 
     public void resetTalentCollision() {
-        wholeTalentWindow.x = 175;
-        wholeTalentWindow.y = 75;
+        wholeTalentWindow.x = 0;
+        wholeTalentWindow.y = 0;
     }
 
     public void hideTalentCollision() {
-        wholeTalentWindow.x = -1_000;
-        wholeTalentWindow.y = -1_000;
+        wholeTalentWindow.x = -2_000;
+        wholeTalentWindow.y = -2_000;
     }
 }
