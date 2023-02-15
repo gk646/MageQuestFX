@@ -332,11 +332,14 @@ public class MainGame {
         FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
         ui.updateLoadingScreen(0, gc);
         // 0 %
+        sound = new Sound();
+        sound.loadSounds();
         inventP = new UI_InventoryPanel(this);
         wControl = new WorldController(this);
 
         //12 %
         ui.updateLoadingScreen(12, gc);
+
         ob_control = new OBJ_Control(this);
         wRender = new WorldRender(this);
         wControl.getWorldsData();
@@ -386,7 +389,7 @@ public class MainGame {
         npcControl = new NPC_Control(this);
         gameMap = new GameMap(this);
         FonT.loadFonts();
-        sound = new Sound();
+
 
         //100%
         ui.updateLoadingScreen(16, gc);
@@ -394,11 +397,11 @@ public class MainGame {
         countItems();
         gameMap.getImage();
         gameState = State.TITLE;
-        sound.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        sound.mediaPlayer.play();
         loadingScreen = false;
-
         startThreads();
+        sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
+        sound.INTRO.play();
+
 
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_Grunt(this, 490 * 48, 490 * 48, 100, Zone.GrassLands));

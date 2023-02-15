@@ -10,22 +10,19 @@
     ],
     "fileStates": {
         "City1.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 672,
-                "y": 694
+                "x": 294,
+                "y": 720
             }
         },
         "DungeonTutorial.tmx": {
-            "expandedObjectLayers": [
-                2
-            ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 586,
-                "y": 433
+                "x": 462.6666666666667,
+                "y": 200
             }
         },
         "GrassLands.tmx": {
@@ -128,8 +125,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 233.33333333333337,
-                "y": 400
+                "x": 232,
+                "y": 398.66666666666663
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -146,8 +143,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 141,
-                "y": 61
+                "x": 140,
+                "y": 60
             }
         }
     },
@@ -156,7 +153,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 60,
-    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,

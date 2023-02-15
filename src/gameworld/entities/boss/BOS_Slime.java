@@ -13,17 +13,10 @@ import java.awt.Rectangle;
 public class BOS_Slime extends BOSS {
 
     public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
-        this.mg = mg;
-        this.zone = zone;
+        super(mg, x, y, level, health, zone);
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
-        this.worldX = x;
-        this.worldY = y;
-        this.level = level;
-        this.maxHealth = health;
         movementSpeed = 2;
-        this.health = maxHealth;
-        this.enemyImage = Storage.gruntImage1;
-        this.direction = "leftrightdownup";
+        this.enemyImage = Storage.BigSLimewalk1;
         getImages();
     }
 

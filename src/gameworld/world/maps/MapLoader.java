@@ -40,7 +40,7 @@ abstract public class MapLoader {
     public static void getTriggers(String fileName, Zone zone) {
         Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
-        Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho)(\\d{0,3})");
+        Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho|slimeB)(\\d{0,3})");
         try (InputStream inputStream = MapLoader.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             Matcher matcher;
@@ -55,10 +55,10 @@ abstract public class MapLoader {
                     if (matcher.find()) {
                         String name = matcher.group(1);
                         level = Integer.parseInt(matcher.group(2));
-                        if (name.equals("gru")) {
-                            type = Type.Grunt;
-                        } else if (name.equals("sho")) {
-                            type = Type.Shooter;
+                        switch (name) {
+                            case "gru" -> type = Type.Grunt;
+                            case "sho" -> type = Type.Shooter;
+                            case "slimeB" -> type = Type.BOSS_Slime;
                         }
                         typefound = true;
                     }

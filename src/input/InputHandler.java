@@ -76,7 +76,7 @@ public class InputHandler {
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
                     mg.gameState = State.PLAY;
-                    mg.sound.mediaPlayer.stop();
+                    mg.sound.INTRO.stop();
                     scene.setCursor(Cursor.CROSSHAIR);
                 } else if (mg.ui.commandNum == 1) {
                     mg.gameState = State.TITLE_OPTION;

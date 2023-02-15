@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="4">
  <editorsettings>
-  <export target="exports/City1.tmj" format="json"/>
+  <export target="../src/resources/Maps/City1.csv" format="csv"/>
  </editorsettings>
  <tileset firstgid="1" source="TileSet.tsx"/>
  <layer id="1" name="Kachelebene 1" width="100" height="100">
@@ -108,4 +108,9 @@
 19,19,19,19,19,20,16,4,4,4,4,4,4,4,4,4,4,4,4,4,14,43,59,59,59,59,58,59,59,58,59,40,4,4,4,4,4,4,43,42,40,42,40,43,40,41,42,43,15,42,15,42,41,41,42,41,43,15,43,41,43,42,42,41,42,43,42,43,43,15,42,42,15,43,15,42,15,42,41,43,42,41,41,43,58,58,58,59,59,58,59,58,59,58,59,59,58,58,59,59
 </data>
  </layer>
+ <objectgroup id="2" name="Objektebene 1">
+  <object id="1" name="gru2" x="180" y="542.5"/>
+  <object id="2" name="gru3" x="173.5" y="664"/>
+  <object id="3" name="sho3" x="244.5" y="607.5"/>
+ </objectgroup>
 </map>
