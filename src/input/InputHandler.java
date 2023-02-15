@@ -381,6 +381,9 @@ public class InputHandler {
     public void handleScroll(ScrollEvent event) {
         if (mg.showMap) {
             mg.gameMap.zoom = (float) Math.max(3, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
+        } else if (mg.drawCodex) {
+
+            mg.ui.codex_scroll = Math.max(-1, Math.min((mg.ui.codex_scroll - event.getDeltaY() / 1_800), 0.322f));
         }
     }
 }

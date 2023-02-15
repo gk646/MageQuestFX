@@ -29,6 +29,7 @@ public class UI {
     public int saveMessageStage;
     public float credits_scroll = 0;
     public boolean drawSaveMessage;
+    public double codex_scroll = 0.332;
 
 
     public UI(MainGame mainGame) {
@@ -59,7 +60,7 @@ public class UI {
             } else if (mg.drawGameplay) {
                 drawGamePlaySettings(gc);
             } else if (mg.drawCodex) {
-                drawCodex(gc);
+                drawCodex(gc, codex_scroll);
             }
         } else if (mg.credits) {
             drawCredits(gc);
@@ -217,11 +218,11 @@ public class UI {
 
     }
 
-    private void drawCodex(GraphicsContext gc) {
+    private void drawCodex(GraphicsContext gc, double startY) {
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBoldItalic15);
-        gc.fillText("MOVEMENT: Use the W A S D keyboard keys to move up, left, down and right respectively.", MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * 0.302f);
-        float y = 0.322f;
+        double y = startY;
+        gc.fillText("MOVEMENT: Use the W A S D keyboard keys to move up, left, down and right respectively.", MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * y);
         for (String string : ("""
                 WINDOWS:
                 "N" - to open the talent panel (explained in TalentPanel).
