@@ -6,13 +6,15 @@ import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.Storage;
+import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
 public class BOS_Slime extends BOSS {
 
-    public BOS_Slime(MainGame mg, int x, int y, int level, int health) {
+    public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
         this.mg = mg;
+        this.zone = zone;
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         this.worldX = x;
         this.worldY = y;

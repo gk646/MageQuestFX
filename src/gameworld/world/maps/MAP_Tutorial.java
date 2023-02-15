@@ -60,8 +60,8 @@ public class MAP_Tutorial {
         Type type = null;
         int counter = 14;
         int newTriggerx = 0, newTriggery = 0;
-        xfinder = Pattern.compile("\"x\":([0-9]{3})");
-        yfinder = Pattern.compile("\"y\":([0-9]{3})");
+        xfinder = Pattern.compile("\"x\":([0-9]{0,4})");
+        yfinder = Pattern.compile("\"y\":([0-9]{0,4})");
         namefinder = Pattern.compile("\"name\":\"([a-z]{3})([0-9])");
         while (line != null) {
 
@@ -94,6 +94,7 @@ public class MAP_Tutorial {
             }
             line = bufferedReader.readLine();
         }
+        System.out.println(counter - 14 + " Spawns created!");
 
         //top left
         spawnTriggers[0] = new SpawnTrigger(47, 9, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial);
@@ -114,6 +115,9 @@ public class MAP_Tutorial {
         spawnTriggers[11] = new SpawnTrigger(93, 46, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial);
         spawnTriggers[12] = new SpawnTrigger(87, 45, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial);
         spawnTriggers[13] = new SpawnTrigger(97, 48, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial);
+
+
+        spawnTriggers[45] = new SpawnTrigger(75, 89, 1, Trigger.SINGULAR, Type.BOSS_Slime, Zone.Tutorial);
 
 
         return spawnTriggers;

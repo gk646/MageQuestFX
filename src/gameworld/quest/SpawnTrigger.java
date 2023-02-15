@@ -1,5 +1,6 @@
 package gameworld.quest;
 
+import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
@@ -34,6 +35,8 @@ public class SpawnTrigger {
                 MainGame.ENTITIES.add(new ENT_Grunt(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.Shooter) {
                 MainGame.ENTITIES.add(new ENT_Shooter(mg, x * 48, y * 48, level, zone));
+            } else if (trigger == Trigger.SINGULAR && type == Type.BOSS_Slime) {
+                MainGame.ENTITIES.add(new BOS_Slime(mg, x * 48, y * 48, level, 150, zone));
             }
             triggered = true;
         }
