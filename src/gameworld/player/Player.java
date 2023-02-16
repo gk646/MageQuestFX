@@ -22,6 +22,7 @@ import java.util.Objects;
 
 
 public class Player extends ENTITY {
+    public Map map;
     private boolean isMoving;
     public int maxMana;
     public float mana;
@@ -91,8 +92,9 @@ public class Player extends ENTITY {
     21. CritChance_Absolute
     22. CritDMG_Absolute
     23. CarryWeight_Absolute
-    24. HealthRegen_Absolute
-    25. Mana Regen
+    24. HealthRegen_Percent
+    25. Mana Regen Percent
+    26. Man Cost Reduction
 
 
     41.
@@ -310,7 +312,6 @@ public class Player extends ENTITY {
     }
 
     private void dynamicSpawns() {
-        Map map = mg.wControl.getMap(Zone.GrassLands);
         MapQuadrant[] mapQuadrants = map.mapQuadrants;
         int[][] mapData = map.mapData;
         getPlayerQuadrant(mapQuadrants);

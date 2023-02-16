@@ -332,6 +332,8 @@ public class MainGame {
      */
     private void loadGame(GraphicsContext gc) {
         FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
+        sqLite = new SQLite(this);
+        sqLite.getConnection();
         ui.updateLoadingScreen(0, gc);
         // 0 %
         sound = new Sound();
@@ -363,7 +365,7 @@ public class MainGame {
 
         //48%
         ui.updateLoadingScreen(12, gc);
-        sqLite = new SQLite(this);
+
         sqLite.readItemsFromDB();
 
         //60%
@@ -409,8 +411,8 @@ public class MainGame {
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        // wControl.load_OverWorldMap(496, 496);
-        wControl.loadMap(Zone.Tutorial, 62, 49);
+        wControl.loadMap(Zone.GrassLands, 496, 496);
+        //wControl.loadMap(Zone.Tutorial, 62, 49);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }

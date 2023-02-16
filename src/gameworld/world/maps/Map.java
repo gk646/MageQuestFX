@@ -52,7 +52,7 @@ public class Map {
         this.mapQuadrants = new MapQuadrant[100];
         this.mapCover = new int[mapSize.x][mapSize.x];
         if (gameMapType == GameMapType.MapCover) {
-            // mapCover = getMapCover();
+            mapCover = getMapCover();
         }
     }
 
@@ -124,35 +124,26 @@ public class Map {
     }
 
     public int[][] getMapCover() {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = SQLite.mapCoverConn.createStatement();
-
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + name);
-
-            // Find the size of the array
-            int numRows = 0;
-            int numCols = 0;
+            int[][] temp = new int[mapSize.x][mapSize.x];
+            int i = 0, j = 1;
             while (rs.next()) {
-                numRows = Math.max(numRows, rs.getInt("row") + 1);
-                numCols = Math.max(numCols, rs.getInt("col") + 1);
+                temp[i][j] = rs.getInt("value");
+                j++;
+                if (j == mapSize.x) {
+                    i++;
+                    j = 0;
+                }
+                if (i == mapSize.x) {
+                    break;
+                }
             }
-
-            // Create a new array to hold the data
-            int[][] myArray = new int[numRows][numCols];
-
-            // Populate the array with the data from the database
-            rs.beforeFirst();
-            while (rs.next()) {
-                int row = rs.getInt("row");
-                int col = rs.getInt("col");
-                int value = rs.getInt("value");
-                myArray[row][col] = value;
-            }
-
             rs.close();
             stmt.close();
-            return myArray;
+            return temp;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -169,6 +160,23 @@ public class Map {
             }
         }
         stmt.close();
+    }
+
+    public void resetMapCover() {
+        try {
+            String sql = "UPDATE " + name + " SET value = ? WHERE _ROWID_ = ?";
+            PreparedStatement stmt = SQLite.mapCoverConn.prepareStatement(sql);
+            for (int i = 0; i < mapCover.length; i++) {
+                for (int j = 0; j < mapCover[i].length; j++) {
+                    stmt.setInt(1, 0);
+                    stmt.setInt(2, (i * mapCover.length) + j + 1);
+                    stmt.executeUpdate();
+                }
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

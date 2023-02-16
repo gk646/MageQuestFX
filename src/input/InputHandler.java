@@ -161,9 +161,7 @@ public class InputHandler {
                 } else if (mg.ui.commandNum == 5) {
                     mg.sqLite.saveGame();
                 } else if (mg.ui.commandNum == 6) {
-                    mg.sqLite.saveGame();
-                    Platform.exit();
-                    System.exit(0);
+                    mg.sqLite.saveGameAndExit();
                 }
             }
         }

@@ -48,10 +48,14 @@ public class Sound {
     }
 
     private void loadDungeonAmbience() {
-        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/ambience03.wav").toString()));
-        MediaPlayer ambientTrack2 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/ambience04.wav").toString()));
+        addDungeonTrack("3");
+        addDungeonTrack("4");
+    }
+
+    private void addDungeonTrack(String name) {
+        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".wav").toString()));
+        ambientTrack1.setVolume(0.7);
         ambientTracks.add(ambientTrack1);
-        ambientTracks.add(ambientTrack2);
     }
 
     public void update() {

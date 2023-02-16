@@ -32,6 +32,7 @@ public class WorldController {
         MAPS.add(new Map("DungeonTutorial", new Point(60, 60), Zone.Dungeon_Tutorial));
         //Overworld
         MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+        loadArray();
     }
 
     public void loadMap(Zone zone, int xTile, int yTile) {
@@ -39,7 +40,8 @@ public class WorldController {
             if (map.zone == zone) {
                 clearWorldArrays();
                 WorldRender.worldData = map.mapData;
-                mg.wRender.worldSize = map.mapSize;
+                mg.player.map = map;
+                mg.wRender.worldSize = new Point(map.mapSize.x - 1, map.mapSize.x - 1);
                 currentWorld = map.zone;
                 currentMapCover = map.mapCover;
                 mg.player.setPosition(xTile * 48, yTile * 48);
@@ -120,6 +122,12 @@ public class WorldController {
             mg.wControl.loadMap(Zone.Tutorial, 4, 4);
         } else if (mg.player.spawnLevel == 1) {
             mg.wControl.loadMap(Zone.City1, 40, 18);
+        }
+    }
+
+    private void loadArray() {
+        for (Map map : MAPS) {
+            globalTriggers.addAll(map.spawnTriggers);
         }
     }
 

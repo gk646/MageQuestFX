@@ -3,25 +3,32 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "unbenannt.tmx",
+    "activeFile": "City1.tmx",
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TileSet.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "City1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 294,
-                "y": 720
+                "x": 730,
+                "y": 522
             }
+        },
+        "City1.tmx#grassspritesheet16": {
+            "scaleInDock": 1
         },
         "DungeonTutorial.tmx": {
             "expandedObjectLayers": [
@@ -30,16 +37,16 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 462.6666666666667,
-                "y": 200
+                "x": 448,
+                "y": 217.33333333333331
             }
         },
         "GrassLands.tmx": {
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 6896,
-                "y": 6732
+                "x": 4030,
+                "y": 3376
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -70,11 +77,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1054,
-                "y": 742
+                "x": 988.6666666666665,
+                "y": 752
             }
         },
         "exports/DungeonTutorial.tmx": {
@@ -134,15 +141,16 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232,
-                "y": 398.66666666666663
+                "x": 400,
+                "y": 401.3333333333333
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
             "scaleInDock": 1
         },
         "tileset16.tsx": {
-            "scaleInDock": 1.5,
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
             "scaleInEditor": 4
         },
         "unbenannt.tmx": {
@@ -152,8 +160,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 140,
-                "y": 60
+                "x": 240,
+                "y": 159.5
             }
         }
     },
@@ -176,19 +184,24 @@
         "TileSet.tsx",
         "unbenannt.tmx",
         "DungeonTutorial.tmx",
-        "exports/DungeonTutorial.tmx"
+        "tileset16.tsx",
+        "tileset16.tsx",
+        "tileset16.tsx",
+        "tileset16.tsx",
+        "tileset16.tsx",
+        "tileset16.tsx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "tileset16.tsx",
-        "City1.tmx",
-        "GrassLands.tmx",
-        "second floor_tutorial_castle.tmx",
-        "Tutorial.tmx",
-        "TileSet.tsx",
-        "exports/DungeonTutorial.tmx",
         "DungeonTutorial.tmx",
         "unbenannt.tmx",
+        "TileSet.tsx",
+        "Tutorial.tmx",
+        "second floor_tutorial_castle.tmx",
+        "GrassLands.tmx",
+        "City1.tmx",
+        "exports/DungeonTutorial.tmx",
         "exports/as.tmj",
         "sdf.tsx",
         "grassspritesheet.tsx"

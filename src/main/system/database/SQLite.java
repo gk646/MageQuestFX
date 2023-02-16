@@ -4,6 +4,7 @@ import gameworld.player.Player;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
+import javafx.application.Platform;
 import main.MainGame;
 import main.system.enums.GameMapType;
 import main.system.ui.talentpane.TALENT;
@@ -28,11 +29,18 @@ public class SQLite {
         this.mg = mg;
     }
 
-    public void readItemsFromDB() {
+    public void getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
             this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
             mapCoverConn = DriverManager.getConnection("jdbc:sqlite:MageQuestMapCoverDB.sqlite");
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void readItemsFromDB() {
+        try {
             Statement stmt = this.conn.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
@@ -55,8 +63,6 @@ public class SQLite {
             readSkillTree(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -149,6 +155,21 @@ public class SQLite {
             }
         });
         saveThread.start();
+    }
+
+    public void saveGameAndExit() {
+        Thread saveThread = new Thread(() -> {
+            mg.ui.drawSaveMessage = true;
+            try {
+                saveGameData();
+                mg.ui.saveMessageStage = 400;
+                System.exit(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        saveThread.start();
+        Platform.exit();
     }
 
     private void savePlayerStats() throws SQLException {
