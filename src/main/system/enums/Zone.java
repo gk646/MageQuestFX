@@ -8,4 +8,8 @@ public enum Zone {
     Zone(int val) {
         value = val;
     }
+
+    public boolean isDungeon() {
+        return value == 3;
+    }
 }

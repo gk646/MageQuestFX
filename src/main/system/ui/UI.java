@@ -37,9 +37,8 @@ public class UI {
         getUIImage();
         light.setAzimuth(-135.0);
         lighting.setLight(light);
-        lighting.setSurfaceScale(3.0);
-        lighting.setDiffuseConstant(1);
-        lighting.setSpecularConstant(-1);
+        lighting.setDiffuseConstant(1.9);
+        lighting.setSurfaceScale(4);
     }
 
 
@@ -146,11 +145,9 @@ public class UI {
     private void drawGameUI(GraphicsContext gc) {
         gc.setEffect(lighting);
         gc.setFill(Colors.Red);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 69, (int) ((mg.player.health / mg.player.maxHealth) * 225), 10);
-        lighting.setSurfaceScale(3.0);
-        lighting.setDiffuseConstant(1.7);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, (int) ((mg.player.health / mg.player.maxHealth) * 225), 10);
         gc.setFill(Colors.Blue);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 95, (int) ((mg.player.mana / mg.player.maxMana) * 162), 10);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, (int) ((mg.player.mana / mg.player.maxMana) * 162), 10);
         gc.setEffect(null);
         gc.drawImage(playerUI, 40, 40, 330, 150);
         gc.setFill(Color.WHITE);
@@ -158,9 +155,11 @@ public class UI {
         gc.setEffect(shadow);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 97);
-        gc.setEffect(null);
         gc.setFill(Colors.XPBarBlue);
+        gc.setEffect(null);
+        gc.setEffect(lighting);
         gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
+        gc.setEffect(null);
     }
 
 

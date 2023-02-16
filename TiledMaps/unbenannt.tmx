@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="11">
  <editorsettings>
-  <export target="../src/resources/Maps/DungeonTutorial.csv" format="csv"/>
+  <export target="../src/resources/Maps/DungeonTutorial.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="TileSet.tsx"/>
  <layer id="1" name="Kachelebene 1" width="30" height="20">

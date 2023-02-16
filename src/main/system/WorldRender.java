@@ -91,11 +91,10 @@ public class WorldRender {
 
 
     public void draw(GraphicsContext g2) {
-
         worldCol = Math.max(mg.playerX - 21, 0);
         worldRow = Math.max(mg.playerY - 12, 0);
-        maxCol = Math.min(mg.playerX + 21, worldSize.x);
-        maxRow = Math.min(mg.playerY + 12, worldSize.y);
+        maxCol = Math.min(worldCol + 42, worldSize.x);
+        maxRow = Math.min(worldRow + 24, worldSize.y);
         Player.screenX = mg.HALF_WIDTH - 24;
         Player.screenY = mg.HALF_HEIGHT - 24;
         if (Player.screenX > Player.worldX) {
@@ -110,7 +109,6 @@ public class WorldRender {
             Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
             worldRow = Math.max(mg.playerY - 24, 0);
         }
-
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
                 g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);

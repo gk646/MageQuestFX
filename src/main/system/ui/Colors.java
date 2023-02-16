@@ -20,7 +20,7 @@ public class Colors {
     public static final Color LightGreyAlpha = Color.rgb(192, 203, 220, 0.85);
     public static final Color LightGreyTransparent = Color.rgb(150, 150, 150, 0.25);
     public static final Color darkBackground = Color.rgb(90, 105, 136, 1);
-    public static final Color XPBarBlue = Color.rgb(64, 79, 117, 0.9);
+    public static final Color XPBarBlue = Color.rgb(0, 154, 219, 0.9);
     public static final Color LightGrey = Color.rgb(192, 203, 220, 1);
 
     //INTERFACE
