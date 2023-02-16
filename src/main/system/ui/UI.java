@@ -7,6 +7,7 @@ import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.enums.State;
 
@@ -78,11 +79,34 @@ public class UI {
         gc.setFill(Colors.LightGrey);
         gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         gc.setFill(Colors.darkBackground);
-        gc.fillText("Map Editor: Tiled / Version: 1.9.2 / made by Thorbjørn Lindeijer", 200, credits_scroll);
-        gc.fillText("Character textures: craftpix.net / Full copyright with their Freebie License", 200, credits_scroll - 35);
-        gc.fillText("Effect textures from: craftpix.net / Full copyright with their Freebie License", 200, credits_scroll - 70);
-        gc.fillText("Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", 200, credits_scroll - 105);
-        gc.fillText("Item icons: DALL·E  / Image generation AI by OpenAI", 200, credits_scroll - 140);
+        drawCenteredText(gc, "JavaFX ", credits_scroll);
+        drawCenteredText(gc, "The next generation client application framework for desktop, mobile and embedded systems.", credits_scroll - 55);
+        drawCenteredText(gc, "OpenJDK", credits_scroll - 110);
+        drawCenteredText(gc, "The open source implementation of the Java Platform, Standard Edition (Java SE).", credits_scroll - 165);
+        drawCenteredText(gc, "Map Editor", credits_scroll - 200);
+        drawCenteredText(gc, "Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer", credits_scroll - 235);
+        drawCenteredText(gc, "TEXTURES", credits_scroll - 270);
+        drawCenteredText(gc, "Character textures: craftpix.net / Full copyright with their Freebie License", credits_scroll - 305);
+        drawCenteredText(gc, "Effect textures from: craftpix.net / Full copyright with their Freebie License", credits_scroll - 340);
+        drawCenteredText(gc, "Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", credits_scroll - 375);
+        drawCenteredText(gc, "Item icons: DALL·E  / Image generation AI by OpenAI", credits_scroll - 410);
+        drawCenteredText(gc, "SOUNDS", credits_scroll - 450);
+        drawCenteredText(gc, "unfa's Laser Weapon Sounds  https://freesound.org/s/187119/", credits_scroll - 485);
+
+
+        drawCenteredText(gc, "Various Public Commons Effects", credits_scroll - 455);
+        drawCenteredText(gc, "", credits_scroll - 490);
+        drawCenteredText(gc, "", credits_scroll - 525);
+        drawCenteredText(gc, "", credits_scroll - 560);
+        drawCenteredText(gc, "", credits_scroll - 595);
+        drawCenteredText(gc, "", credits_scroll - 630);
+        drawCenteredText(gc, "", credits_scroll - 665);
+        drawCenteredText(gc, "", credits_scroll - 700);
+        drawCenteredText(gc, "", credits_scroll - 735);
+        drawCenteredText(gc, "", credits_scroll - 770);
+        drawCenteredText(gc, "", credits_scroll - 805);
+        drawCenteredText(gc, "", credits_scroll - 840);
+
         credits_scroll += 0.25;
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
@@ -322,6 +346,14 @@ public class UI {
 
     private void getUIImage() {
         playerUI = setup();
+    }
+
+    private void drawCenteredText(GraphicsContext gc, String text, float y) {
+        Text textNode = new Text(text);
+        textNode.setFont(gc.getFont());
+        double textWidth = textNode.getLayoutBounds().getWidth();
+        double x = (gc.getCanvas().getWidth() - textWidth) / 2;
+        gc.fillText(text, x, y);
     }
 
     private Image setup() {
