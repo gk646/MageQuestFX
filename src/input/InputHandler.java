@@ -62,12 +62,14 @@ public class InputHandler {
         String code = e.getCharacter();
         if (mg.gameState == State.TITLE) {
             if (code.equals(("w"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 3;
                 }
             }
             if (code.equals(("s"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum++;
                 if (mg.ui.commandNum > 3) {
                     mg.ui.commandNum = 0;
@@ -91,12 +93,14 @@ public class InputHandler {
         }
         if (mg.gameState == State.TITLE_OPTION) {
             if (code.equals(("w"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 6;
                 }
             }
             if (code.equals(("s"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum++;
                 if (mg.ui.commandNum > 6) {
                     mg.ui.commandNum = 0;
@@ -115,6 +119,7 @@ public class InputHandler {
                 }
             }
             if (code.equals("\u001B")) {
+                mg.sound.playBackSound();
                 if (mg.drawCodex) {
                     mg.drawCodex = false;
                     return;
@@ -133,12 +138,14 @@ public class InputHandler {
         }
         if (mg.gameState == State.OPTION) {
             if (code.equals(("w"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 6;
                 }
             }
             if (code.equals(("s"))) {
+                mg.sound.playSwitchSound();
                 mg.ui.commandNum++;
                 if (mg.ui.commandNum > 6) {
                     mg.ui.commandNum = 0;
@@ -160,6 +167,7 @@ public class InputHandler {
             }
         }
         if (code.equals("\u001B")) {
+            mg.sound.playBackSound();
             if (mg.gameState == State.OPTION) {
                 if (mg.drawCodex) {
                     mg.drawCodex = false;

@@ -14,6 +14,9 @@ public class Sound {
     public static ArrayList<MediaPlayer> ambientTracks = new ArrayList<>();
 
     public MediaPlayer INTRO;
+    public MediaPlayer menu_switch;
+    public MediaPlayer menu_back;
+
     private final double fadeDuration = 3.0;
     private final double initialVolume = 1.0;
     public MediaPlayer currentDungeonAmbient;
@@ -24,8 +27,23 @@ public class Sound {
     public Sound() {
     }
 
+    public void playSwitchSound() {
+        menu_switch.stop();
+        menu_switch.seek(Duration.ZERO);
+        menu_switch.play();
+    }
+
+    public void playBackSound() {
+        menu_back.stop();
+        menu_back.seek(Duration.ZERO);
+        menu_back.play();
+    }
+
     public void loadSounds() {
         INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro_new.wav").toString()));
+        INTRO.setVolume(0.8);
+        menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_switch.wav").toString()));
+        menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_back.wav").toString()));
         loadDungeonAmbience();
     }
 
