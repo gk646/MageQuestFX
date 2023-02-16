@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import main.MainGame;
 import main.system.enums.State;
+import main.system.enums.Zone;
 
 import java.awt.Point;
 
@@ -111,9 +112,9 @@ public class InputHandler {
                 } else if (mg.ui.commandNum == 4) {
                     mg.drawCodex = true;
                 } else if (mg.ui.commandNum == 5) {
-                    mg.sqLite.savePlayerData();
+                    mg.sqLite.saveGame();
                 } else if (mg.ui.commandNum == 6) {
-                    mg.sqLite.savePlayerData();
+                    mg.sqLite.saveGame();
                     Platform.exit();
                     System.exit(0);
                 }
@@ -154,13 +155,13 @@ public class InputHandler {
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
                 } else if (mg.ui.commandNum == 3) {
-                    mg.wControl.load_OverWorldMap(495, 495);
+                    mg.wControl.loadMap(Zone.GrassLands, 495, 495);
                 } else if (mg.ui.commandNum == 4) {
                     mg.drawCodex = true;
                 } else if (mg.ui.commandNum == 5) {
-                    mg.sqLite.savePlayerData();
+                    mg.sqLite.saveGame();
                 } else if (mg.ui.commandNum == 6) {
-                    mg.sqLite.savePlayerData();
+                    mg.sqLite.saveGame();
                     Platform.exit();
                     System.exit(0);
                 }

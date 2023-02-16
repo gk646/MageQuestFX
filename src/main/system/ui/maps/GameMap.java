@@ -2,6 +2,7 @@ package main.system.ui.maps;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.world.WorldController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -126,12 +127,21 @@ public class GameMap {
         for (int y = 0; y < (935 / zoom_i) + 1; y++) {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
                 if (offsetx + x < mg.wRender.worldSize.x && offsetx + x >= 0 && offsety + y < mg.wRender.worldSize.x && offsety + y >= 0) {
-
-                    if (!WorldRender.tileStorage[WorldRender.worldData[offsetx + x][offsety + y]].collision) {
-                        for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
-                            for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
-                                if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
-                                    image.setRGB((int) b, (int) i, 0xD063_C74D);
+                    if (WorldController.currentMapCover[offsetx + x][offsety + y] == 1) {
+                        if (!WorldRender.tileStorage[WorldRender.worldData[offsetx + x][offsety + y]].collision) {
+                            for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                                for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                                    if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
+                                        image.setRGB((int) b, (int) i, 0xD063_C74D);
+                                    }
+                                }
+                            }
+                        } else {
+                            for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                                for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                                    if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
+                                        image.setRGB((int) b, (int) i, 0xD05A_6988);
+                                    }
                                 }
                             }
                         }
@@ -139,7 +149,7 @@ public class GameMap {
                         for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                             for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                 if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
-                                    image.setRGB((int) b, (int) i, 0xD05A_6988);
+                                    image.setRGB((int) b, (int) i, 0xD025_2426);
                                 }
                             }
                         }

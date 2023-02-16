@@ -39,7 +39,7 @@ class MainGameTest {
         mg.pathF.instantiateNodes();
         mg.wControl = new WorldController(mg);
         mg.npcControl = new NPC_Control(mg);
-        mg.wControl.getWorldsData();
+        mg.wControl.loadWorldData();
         mg.wControl.load_tutorial(15, 15);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();

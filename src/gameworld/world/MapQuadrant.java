@@ -36,14 +36,14 @@ public class MapQuadrant {
     }
 
 
-    public void spawnEnemies() {
+    public void spawnEnemies(int[][] mapData) {
         if (!spawned) {
             int spawnedEnemies = 0;
             int xTile, yTile;
             while (spawnedEnemies < numberOfEnemies) {
                 xTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileX, 499));
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
-                if (!WorldRender.tileStorage[mg.wControl.overWorldMapData[xTile][yTile]].collision) {
+                if (!WorldRender.tileStorage[mapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
                         MainGame.ENTITIES.add(new ENT_Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     } else {

@@ -48,9 +48,7 @@ public class UI {
             drawGameUI(gc);
         } else if (mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) {
             drawOptions(gc);
-            if (drawSaveMessage) {
-                drawSaveMessage(gc);
-            }
+
             if (mg.drawVideoSettings) {
                 drawVideoSettings(gc);
             } else if (mg.drawAudioSettings) {
@@ -71,6 +69,9 @@ public class UI {
         } else if (mg.loadingScreen) {
             drawLoadingScreen(gc);
         }
+        if (drawSaveMessage) {
+            drawSaveMessage(gc);
+        }
     }
 
 
@@ -80,32 +81,30 @@ public class UI {
         gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         gc.setFill(Colors.darkBackground);
         drawCenteredText(gc, "JavaFX ", credits_scroll);
-        drawCenteredText(gc, "The next generation client application framework for desktop, mobile and embedded systems.", credits_scroll - 55);
-        drawCenteredText(gc, "OpenJDK", credits_scroll - 110);
-        drawCenteredText(gc, "The open source implementation of the Java Platform, Standard Edition (Java SE).", credits_scroll - 165);
+        drawCenteredText(gc, "The next generation client application framework for desktop, mobile and embedded systems.", credits_scroll - 50);
+        drawCenteredText(gc, "OpenJDK", credits_scroll - 100);
+        drawCenteredText(gc, "The open source implementation of the Java Platform, Standard Edition (Java SE).", credits_scroll - 150);
         drawCenteredText(gc, "Map Editor", credits_scroll - 200);
-        drawCenteredText(gc, "Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer", credits_scroll - 235);
-        drawCenteredText(gc, "TEXTURES", credits_scroll - 270);
-        drawCenteredText(gc, "Character textures: craftpix.net / Full copyright with their Freebie License", credits_scroll - 305);
-        drawCenteredText(gc, "Effect textures from: craftpix.net / Full copyright with their Freebie License", credits_scroll - 340);
-        drawCenteredText(gc, "Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", credits_scroll - 375);
-        drawCenteredText(gc, "Item icons: DALL·E  / Image generation AI by OpenAI", credits_scroll - 410);
-        drawCenteredText(gc, "SOUNDS", credits_scroll - 450);
-        drawCenteredText(gc, "unfa's Laser Weapon Sounds  https://freesound.org/s/187119/", credits_scroll - 485);
+        drawCenteredText(gc, "Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer", credits_scroll - 250);
+        drawCenteredText(gc, "TEXTURES", credits_scroll - 300);
+        drawCenteredText(gc, "Character textures: craftpix.net / Full copyright with their Freebie License", credits_scroll - 350);
+        drawCenteredText(gc, "Effect textures from: craftpix.net / Full copyright with their Freebie License", credits_scroll - 400);
+        drawCenteredText(gc, "Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", credits_scroll - 450);
+        drawCenteredText(gc, "Item icons: DALL·E  / Image generation AI by OpenAI", credits_scroll - 500);
+        drawCenteredText(gc, "SOUNDS", credits_scroll - 550);
+        drawCenteredText(gc, "unfa's Laser Weapon Sounds  https://freesound.org/s/187119/", credits_scroll - 600);
+        drawCenteredText(gc, "Various soundeffects / public domain from freesound.org", credits_scroll - 650);
+        drawCenteredText(gc, "DATABASE", credits_scroll - 700);
+        drawCenteredText(gc, "SQLite JDBC driver 3.4 - developed by Xerial", credits_scroll - 750);
+        drawCenteredText(gc, "SQLite database - developed by D. Richard Hipp", credits_scroll - 7800);
+        drawCenteredText(gc, "", credits_scroll - 850);
+        drawCenteredText(gc, "", credits_scroll - 900);
+        drawCenteredText(gc, "", credits_scroll - 950);
+        drawCenteredText(gc, "", credits_scroll - 1000);
+        drawCenteredText(gc, "", credits_scroll - 1050);
+        drawCenteredText(gc, "", credits_scroll - 1100);
+        drawCenteredText(gc, "", credits_scroll - 1150);
 
-
-        drawCenteredText(gc, "Various Public Commons Effects", credits_scroll - 455);
-        drawCenteredText(gc, "", credits_scroll - 490);
-        drawCenteredText(gc, "", credits_scroll - 525);
-        drawCenteredText(gc, "", credits_scroll - 560);
-        drawCenteredText(gc, "", credits_scroll - 595);
-        drawCenteredText(gc, "", credits_scroll - 630);
-        drawCenteredText(gc, "", credits_scroll - 665);
-        drawCenteredText(gc, "", credits_scroll - 700);
-        drawCenteredText(gc, "", credits_scroll - 735);
-        drawCenteredText(gc, "", credits_scroll - 770);
-        drawCenteredText(gc, "", credits_scroll - 805);
-        drawCenteredText(gc, "", credits_scroll - 840);
 
         credits_scroll += 0.25;
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
@@ -297,18 +296,15 @@ public class UI {
     }
 
     private void drawSaveMessage(GraphicsContext gc) {
-
-        if (saveMessageStage < 40) {
-            gc.fillText("Saving Game", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
-        } else if (saveMessageStage < 80) {
-            gc.fillText("Saving Game.", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
-        } else if (saveMessageStage < 120) {
-            gc.fillText("Saving Game..", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
-        } else if (saveMessageStage < 150) {
-            gc.fillText("Saving Game...", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
-        } else if (saveMessageStage > 150) {
+        gc.setFont(FonT.minecraftBold30);
+        gc.setFill(Colors.darkBackground);
+        if (saveMessageStage < 400) {
+            int numDots = (saveMessageStage / 40) % 4;
+            gc.fillText("Saving Game" + ".".repeat(Math.max(0, numDots)), MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
+        }
+        if (saveMessageStage >= 400) {
             gc.fillText("Game Saved!", MainGame.SCREEN_HEIGHT * 1.4, MainGame.SCREEN_HEIGHT * 0.8f);
-            if (saveMessageStage >= 360) {
+            if (saveMessageStage >= 760) {
                 drawSaveMessage = false;
                 saveMessageStage = 0;
             }

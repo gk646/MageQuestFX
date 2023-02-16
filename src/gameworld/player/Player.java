@@ -3,7 +3,9 @@ package gameworld.player;
 import gameworld.entities.ENTITY;
 import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_Lightning;
+import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
+import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
@@ -308,13 +310,16 @@ public class Player extends ENTITY {
     }
 
     private void dynamicSpawns() {
-        getPlayerQuadrant();
-        respawnCloseQuadrants();
+        Map map = mg.wControl.getMap(Zone.GrassLands);
+        MapQuadrant[] mapQuadrants = map.mapQuadrants;
+        int[][] mapData = map.mapData;
+        getPlayerQuadrant(mapQuadrants);
+        respawnCloseQuadrants(mapData, mapQuadrants);
     }
 
-    private void getPlayerQuadrant() {
+    private void getPlayerQuadrant(MapQuadrant[] mapQuadrants) {
         for (int i = 99; i >= 0; i--) {
-            if (worldX / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileX && worldY / mg.tileSize > mg.wControl.overworldMapQuadrants[i].startTileY && worldX / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mg.wControl.overworldMapQuadrants[i].startTileY + 50) {
+            if (worldX / mg.tileSize > mapQuadrants[i].startTileX && worldY / mg.tileSize > mapQuadrants[i].startTileY && worldX / mg.tileSize < mapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mapQuadrants[i].startTileY + 50) {
                 playerQuadrant = i;
                 break;
             }
@@ -322,24 +327,24 @@ public class Player extends ENTITY {
     }
 
 
-    private void respawnCloseQuadrants() {
-        mg.wControl.overworldMapQuadrants[playerQuadrant].spawnEnemies();
+    private void respawnCloseQuadrants(int[][] mapData, MapQuadrant[] mapQuadrants) {
+        mapQuadrants[playerQuadrant].spawnEnemies(mapData);
         if (quadrantTimer < 210) {
-            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 1, 99)].spawnEnemies();
+            mapQuadrants[Math.min(playerQuadrant + 1, 99)].spawnEnemies(mapData);
         } else if (quadrantTimer < 220) {
-            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 1, 0)].spawnEnemies();
+            mapQuadrants[Math.max(playerQuadrant - 1, 0)].spawnEnemies(mapData);
         } else if (quadrantTimer < 230) {
-            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 9, 99)].spawnEnemies();
+            mapQuadrants[Math.min(playerQuadrant + 9, 99)].spawnEnemies(mapData);
         } else if (quadrantTimer < 240) {
-            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 10, 99)].spawnEnemies();
+            mapQuadrants[Math.min(playerQuadrant + 10, 99)].spawnEnemies(mapData);
         } else if (quadrantTimer < 250) {
-            mg.wControl.overworldMapQuadrants[Math.min(playerQuadrant + 11, 99)].spawnEnemies();
+            mapQuadrants[Math.min(playerQuadrant + 11, 99)].spawnEnemies(mapData);
         } else if (quadrantTimer < 260) {
-            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 9, 0)].spawnEnemies();
+            mapQuadrants[Math.max(playerQuadrant - 9, 0)].spawnEnemies(mapData);
         } else if (quadrantTimer < 270) {
-            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 10, 0)].spawnEnemies();
+            mapQuadrants[Math.max(playerQuadrant - 10, 0)].spawnEnemies(mapData);
         } else if (quadrantTimer < 280) {
-            mg.wControl.overworldMapQuadrants[Math.max(playerQuadrant - 11, 0)].spawnEnemies();
+            mapQuadrants[Math.max(playerQuadrant - 11, 0)].spawnEnemies(mapData);
             respawnsDone = true;
         }
     }

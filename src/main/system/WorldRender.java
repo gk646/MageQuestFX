@@ -91,10 +91,10 @@ public class WorldRender {
 
 
     public void draw(GraphicsContext g2) {
-        worldCol = Math.max(mg.playerX - 21, 0);
-        worldRow = Math.max(mg.playerY - 12, 0);
-        maxCol = Math.min(worldCol + 42, worldSize.x);
-        maxRow = Math.min(worldRow + 24, worldSize.y);
+        int worldCol = Math.max(mg.playerX - 21, 0);
+        int worldRow = Math.max(mg.playerY - 12, 0);
+        int maxCol = Math.min(worldCol + 42, worldSize.x);
+        int maxRow = Math.min(worldRow + 24, worldSize.y);
         Player.screenX = mg.HALF_WIDTH - 24;
         Player.screenY = mg.HALF_HEIGHT - 24;
         if (Player.screenX > Player.worldX) {

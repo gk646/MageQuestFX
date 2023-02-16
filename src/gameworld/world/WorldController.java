@@ -3,129 +3,70 @@ package gameworld.world;
 
 import gameworld.player.Player;
 import gameworld.quest.SpawnTrigger;
-import gameworld.quest.Trigger;
-import gameworld.quest.Type;
-import gameworld.world.maps.MapLoader;
+import gameworld.world.maps.Map;
 import main.MainGame;
 import main.system.WorldRender;
+import main.system.enums.GameMapType;
 import main.system.enums.Zone;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 public class WorldController {
-
     private final MainGame mg;
     public static Zone currentWorld;
+    public static int[][] currentMapCover;
     public static ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
-
-    // OVERWORLD
-    public final MapQuadrant[] overworldMapQuadrants = new MapQuadrant[100];
-    // VALHALLA
-    public final Point valhalla_Size = new Point(200, 200);
-    public int[][] overWorldMapData;
-    // CITY 1
-    public final Point city1_Size = new Point(400, 400);
-    // TUTORIAL
-    public final Point tutorial_Size = new Point(100, 100);
-    public int[][] valhalla_MapData;
-    public Point valhalla_StartPoint;
-    // DUNGEON TUTORIAL
-    public final Point dungeonTutorial_Size = new Point(60, 60);
-    public Point overWorldSize = new Point(500, 500);
-    // HELL
-    public int[][] hell_MapData;
-    public int[][] city1_MapData;
-    public int[][] tutorialMapData;
-    public int[][] dungeonTutorial_MapData;
-
+    public ArrayList<Map> MAPS = new ArrayList<>();
 
     public WorldController(MainGame mg) {
         this.mg = mg;
     }
 
-    public void load_OverWorldMap(int xTile, int yTile) {
-        currentWorld = Zone.GrassLands;
-        clearWorldArrays();
-        for (MapQuadrant quadrant : overworldMapQuadrants) {
-            if (quadrant.spawned) {
-                quadrant.spawned = false;
+    public void loadWorldData() {
+        // CITY 1
+        MAPS.add(new Map("city1", new Point(100, 100), Zone.City1, GameMapType.MapCover));
+        // TUTORIAL
+        MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Tutorial, GameMapType.MapCover));
+        // DUNGEON TUTORIAL
+        MAPS.add(new Map("DungeonTutorial", new Point(60, 60), Zone.Dungeon_Tutorial));
+        //Overworld
+        MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+    }
+
+    public void loadMap(Zone zone, int xTile, int yTile) {
+        for (Map map : MAPS) {
+            if (map.zone == zone) {
+                clearWorldArrays();
+                WorldRender.worldData = map.mapData;
+                mg.wRender.worldSize = map.mapSize;
+                currentWorld = map.zone;
+                currentMapCover = map.mapCover;
+                mg.player.setPosition(xTile * 48, yTile * 48);
+                break;
             }
         }
-        WorldRender.worldData = overWorldMapData;
-        mg.wRender.worldSize = overWorldSize;
-        mg.player.setPosition(xTile * 48, yTile * 48);
     }
 
-    public void load_tutorial(int xTile, int yTile) {
-        currentWorld = Zone.Tutorial;
-        clearWorldArrays();
-        WorldRender.worldData = tutorialMapData;
-        mg.wRender.worldSize = tutorial_Size;
-        mg.player.setPosition(xTile * 48, yTile * 48);
-    }
-
-    public void load_city1(int xTile, int yTile) {
-        currentWorld = Zone.City1;
-        clearWorldArrays();
-        WorldRender.worldData = city1_MapData;
-        mg.wRender.worldSize = tutorial_Size;
-        mg.player.setPosition(xTile * 48, yTile * 48);
-    }
-
-    public void loadDungeonTutorial(int xTile, int yTile) {
-        currentWorld = Zone.Dungeon_Tutorial;
-        clearWorldArrays();
-        WorldRender.worldData = dungeonTutorial_MapData;
-        mg.wRender.worldSize = dungeonTutorial_Size;
-        mg.player.setPosition(xTile * 48, yTile * 48);
-    }
-
-    public void getWorldsData() {
-        //Tutorial
-        this.tutorialMapData = MapLoader.loadMapData("Tutorial", 100);
-        MapLoader.getTriggers("Tutorial", Zone.Tutorial);
-
-        //dungeon tutorial
-        MapLoader.getTriggers("DungeonTutorial", Zone.Dungeon_Tutorial);
-        this.dungeonTutorial_MapData = MapLoader.loadMapData("DungeonTutorial", 60);
-        //city 1
-        this.city1_MapData = MapLoader.loadMapData("City1", 100);
-        //Over world
-        this.overWorldMapData = MapLoader.loadMapData("Overworld", 500);
-        addCustom();
-    }
-
-
-    private void addCustom() {
-        globalTriggers.add(new SpawnTrigger(75, 89, 1, Trigger.SINGULAR, Type.BOSS_Slime, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(47, 9, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(37, 11, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(47, 16, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(37, 21, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(47, 22, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
-        //top right
-        globalTriggers.add(new SpawnTrigger(91, 21, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(86, 25, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(97, 27, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(94, 14, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(94, 4, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
-        //middle right
-        globalTriggers.add(new SpawnTrigger(93, 46, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(87, 45, 1, Trigger.SINGULAR, Type.Grunt, Zone.Tutorial));
-        globalTriggers.add(new SpawnTrigger(97, 48, 1, Trigger.SINGULAR, Type.Shooter, Zone.Tutorial));
+    public Map getMap(Zone zone) {
+        for (Map map : MAPS) {
+            if (map.zone == zone) {
+                return map;
+            }
+        }
+        return null;
     }
 
     public void makeOverWorldQuadrants() {
-        int size = overWorldSize.x / 10;
+        int size = getMap(Zone.GrassLands).mapSize.x / 10;
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             for (int b = 0; b < 10; b++) {
                 if (counter != 99) {
-                    overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30, Zone.GrassLands);
+                    getMap(Zone.GrassLands).mapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 30, Zone.GrassLands);
                     counter++;
                 }
-                overworldMapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 0, Zone.GrassLands);
+                getMap(Zone.GrassLands).mapQuadrants[counter] = new MapQuadrant(19 - (i + b), mg, size * i, size * b, size, 0, Zone.GrassLands);
             }
         }
     }
@@ -143,13 +84,13 @@ public class WorldController {
         }
         if (currentWorld == Zone.Tutorial) {
             if (mg.playerX == 1 && mg.playerY == 1) {
-                mg.wControl.load_city1(10, 10);
+                mg.wControl.loadMap(Zone.City1, 10, 10);
                 mg.player.spawnLevel = 1;
             }
         }
         if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
-                mg.wControl.load_city1(10, 10);
+                mg.wControl.loadMap(Zone.City1, 10, 10);
             }
         }
         if (currentWorld == Zone.City1) {
@@ -159,26 +100,26 @@ public class WorldController {
                     mg.playerX == 35 && mg.playerY == 0 ||
                     mg.playerX == 36 && mg.playerY == 0 ||
                     mg.playerX == 37 && mg.playerY == 0) {
-                mg.wControl.load_OverWorldMap(495, 495);
+                mg.wControl.loadMap(Zone.GrassLands, 495, 495);
             }
         }
         if (currentWorld == Zone.Tutorial) {
             if (mg.playerX == 71 && mg.playerY == 56) {
-                loadDungeonTutorial(27, 0);
+                mg.wControl.loadMap(Zone.Dungeon_Tutorial, 27, 0);
             }
         }
         if (currentWorld == Zone.Dungeon_Tutorial) {
             if (mg.playerX == 26 && mg.playerY == 0) {
-                load_tutorial(71, 55);
+                mg.wControl.loadMap(Zone.Tutorial, 71, 55);
             }
         }
     }
 
     public void loadSpawnLevel() {
         if (mg.player.spawnLevel == 0) {
-            mg.wControl.load_tutorial(4, 4);
+            mg.wControl.loadMap(Zone.Tutorial, 4, 4);
         } else if (mg.player.spawnLevel == 1) {
-            mg.wControl.load_city1(40, 18);
+            mg.wControl.loadMap(Zone.City1, 40, 18);
         }
     }
 
@@ -188,6 +129,26 @@ public class WorldController {
      */
     public boolean player_went_away(Point playerLocation) {
         return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
+    }
+
+    public void uncoverWorldMap() {
+        int playerX = mg.playerX;
+        int playerY = mg.playerY;
+        int radius = 7;
+        int xMin = Math.max(0, playerX - radius);
+        int xMax = Math.min(currentMapCover.length - 1, playerX + radius);
+        int yMin = Math.max(0, playerY - radius);
+        int yMax = Math.min(currentMapCover[0].length - 1, playerY + radius);
+        int radiusSquared = radius * radius;
+        for (int x = xMin; x <= xMax; x++) {
+            for (int y = yMin; y <= yMax; y++) {
+                int dx = x - playerX;
+                int dy = y - playerY;
+                if (dx * dx + dy * dy <= radiusSquared) {
+                    currentMapCover[x][y] = 1;
+                }
+            }
+        }
     }
 }
 

@@ -1,9 +1,11 @@
 package main.system.database;
 
 import gameworld.player.Player;
+import gameworld.world.maps.Map;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
+import main.system.enums.GameMapType;
 import main.system.ui.talentpane.TALENT;
 import main.system.ui.talentpane.TalentNode;
 
@@ -20,16 +22,17 @@ public class SQLite {
 
     private final MainGame mg;
     public Connection conn;
+    public static Connection mapCoverConn;
 
     public SQLite(MainGame mg) {
         this.mg = mg;
     }
 
-
     public void readItemsFromDB() {
         try {
             Class.forName("org.sqlite.JDBC");
             this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
+            mapCoverConn = DriverManager.getConnection("jdbc:sqlite:MageQuestMapCoverDB.sqlite");
             Statement stmt = this.conn.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
@@ -118,16 +121,34 @@ public class SQLite {
     }
 
 
-    public void savePlayerData() {
-        mg.ui.drawSaveMessage = true;
+    private void saveGameData() {
+
         try {
             savePlayerInventory();
             saveBagInventory();
             savePlayerStats();
             saveTalentTree();
+            for (Map map : mg.wControl.MAPS) {
+                if (map.gameMapType == GameMapType.MapCover) {
+                    map.saveMapCover();
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void saveGame() {
+        Thread saveThread = new Thread(() -> {
+            mg.ui.drawSaveMessage = true;
+            try {
+                saveGameData();
+                mg.ui.saveMessageStage = 400;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        saveThread.start();
     }
 
     private void savePlayerStats() throws SQLException {
@@ -695,7 +716,7 @@ public class SQLite {
     }
 
     private void searchBAGS(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM ITEM_BAG");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM ARM_BAG");
         while (rs.next()) {
             if (rs.getString("name") == null) {
                 continue;
