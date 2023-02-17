@@ -51,6 +51,16 @@ public class UI_InventoryPanel {
     private final Image sort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/sort.png")));
     private final Image character_bottom = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture.png")));
     private final Image character_bottom2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture2.png")));
+    private final Image helm = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/helm.png")));
+    private final Image chest = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/chest.png")));
+    private final Image pants = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/pants.png")));
+    private final Image boots = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/boots.png")));
+    private final Image ring = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
+    private final Image amulet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/amulet.png")));
+    private final Image offhand = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/offhand.png")));
+    private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
+    private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
+
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -646,6 +656,16 @@ public class UI_InventoryPanel {
             char_Slots[i].drawSlot(gc, 21 + startX, (i * 50 + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(gc, 21 + startX, ((i * 50) + 65 + startY), SLOT_SIZE);
+            } else {
+                if (char_Slots[i].type.equals("H")) {
+                    gc.drawImage(helm, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                } else if (char_Slots[i].type.equals("C")) {
+                    gc.drawImage(chest, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                } else if (char_Slots[i].type.equals("P")) {
+                    gc.drawImage(pants, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                } else if (char_Slots[i].type.equals("B")) {
+                    gc.drawImage(boots, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                }
             }
         }
         for (int i = 4; i <= 7; i++) {
@@ -657,6 +677,14 @@ public class UI_InventoryPanel {
             char_Slots[i].drawSlot(gc, 283 + startX, (((i - 4) * 50) + 65 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(gc, 283 + startX, ((i - 4) * 50) + 65 + startY, SLOT_SIZE);
+            } else {
+                if (char_Slots[i].type.equals("R")) {
+                    gc.drawImage(ring, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                } else if (char_Slots[i].type.equals("A")) {
+                    gc.drawImage(amulet, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                } else if (char_Slots[i].type.equals("T")) {
+                    gc.drawImage(relic, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                }
             }
         }
         for (int i = 8; i <= 9; i++) {
@@ -668,6 +696,12 @@ public class UI_InventoryPanel {
             char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 124 + startX, 297 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
                 char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 124 + startX, 297 + startY, SLOT_SIZE);
+            } else {
+                if (char_Slots[i].type.contains("2") || char_Slots[i].type.contains("W")) {
+                    gc.drawImage(weapon, ((i - 8) * 57) + 124 + startX + 2, 297 + startY + 2);
+                } else if (char_Slots[i].type.equals("O")) {
+                    gc.drawImage(offhand, ((i - 8) * 57) + 124 + startX + 2, 297 + startY + 2);
+                }
             }
         }
     }

@@ -220,6 +220,8 @@ public class Player extends ENTITY {
         effects[22] += 50;
         effects[23] += carryWeight;
         carryWeight = effects[23];
+        healthRegeneration = healthRegeneration + (healthRegeneration / 100.0f) * effects[24];
+        manaRegeneration = manaRegeneration + (manaRegeneration / 100.0f) * effects[25];
 
 
         playerMovementSpeed += effects[41];

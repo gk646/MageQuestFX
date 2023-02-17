@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TIILESET.tsx",
+    "activeFile": "DungeonTutorial.tmx",
     "expandedProjectPaths": [
         "exports",
         "."
@@ -23,8 +23,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 757,
-                "y": 522
+                "x": 799,
+                "y": 799
             }
         },
         "City1.tmx#grassspritesheet16": {
@@ -34,19 +34,19 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 4,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 363.75,
-                "y": 58.75
+                "x": 417,
+                "y": 69
             }
         },
         "GrassLands.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 7422.727272727273,
-                "y": 7518.181818181818
+                "x": 4027.2727272727275,
+                "y": 3509.090909090909
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -56,7 +56,7 @@
         "TIILESET.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 3,
-            "scaleInEditor": 5.5
+            "scaleInEditor": 2
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -155,8 +155,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 452,
-                "y": 442
+                "x": 314,
+                "y": 400
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -210,9 +210,9 @@
         "Tutorial.tmx",
         "TileSet.tsx",
         "unbenannt.tmx",
-        "DungeonTutorial.tmx",
         "d.tsx",
         "TIILESET.tsx",
+        "DungeonTutorial.tmx",
         "exports/DungeonTutorial.tmx",
         "exports/as.tmj"
     ],

@@ -135,7 +135,7 @@ public class WorldRender {
         int maxCol = Math.min(worldCol + 42, worldSize.x);
         int maxRow = Math.min(worldRow + 24, worldSize.y);
         Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 24;
+        Player.screenY = mg.HALF_HEIGHT - 25;
         if (Player.screenX > Player.worldX) {
             Player.screenX = (int) Player.worldX;
         } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {

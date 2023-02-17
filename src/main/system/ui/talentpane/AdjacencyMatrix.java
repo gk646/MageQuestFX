@@ -205,6 +205,7 @@ class AdjacencyMatrix {
         makeEdge(141, 142);
         makeEdge(143, 142);
         makeEdge(143, 144);
+        makeEdge(103, 106);
     }
 }
 

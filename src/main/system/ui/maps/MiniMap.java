@@ -5,13 +5,16 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.WorldRender;
 import main.system.ui.Colors;
 
+import java.util.Objects;
+
 public class MiniMap {
     private final MainGame mg;
+    Image miniMapFrame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/minimap_frame.png")));
 
     public MiniMap(MainGame mg) {
         this.mg = mg;
@@ -20,9 +23,6 @@ public class MiniMap {
     public void draw(GraphicsContext gc) {
         int xTile = mg.playerX;
         int yTile = mg.playerY;
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(2);
-        gc.strokeRect(1_700, 25, 200, 200);
         int yTileOffset, xTileOffset, entityX, entityY;
         for (int y = 0; y < 40; y++) {
             for (int x = 0; x < 40; x++) {
@@ -78,6 +78,7 @@ public class MiniMap {
                 }
             }
         }
+        gc.drawImage(miniMapFrame, 1663, 0);
     }
 }
 
