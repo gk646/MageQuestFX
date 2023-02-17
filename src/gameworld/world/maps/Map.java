@@ -24,7 +24,8 @@ import java.util.regex.Pattern;
 public class Map {
     public GameMapType gameMapType;
     public Zone zone;
-    public int[][] mapData;
+    public int[][] mapDataBackGround;
+    public int[][] mapDataForeGround;
     public Point mapSize;
     public ArrayList<SpawnTrigger> spawnTriggers;
     public MapQuadrant[] mapQuadrants;
@@ -35,7 +36,8 @@ public class Map {
         this.name = name;
         this.zone = zone;
         this.gameMapType = GameMapType.NoMapCover;
-        this.mapData = loadMapData(name, mapSize.x);
+        this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
+        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
         this.spawnTriggers = getTriggers(name, zone);
         this.mapQuadrants = new MapQuadrant[100];
         this.mapSize = mapSize;
@@ -47,7 +49,8 @@ public class Map {
         this.gameMapType = gameMapType;
         this.zone = zone;
         this.name = name;
-        this.mapData = loadMapData(name, mapSize.x);
+        this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
+        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
         this.spawnTriggers = getTriggers(name, zone);
         this.mapQuadrants = new MapQuadrant[100];
         this.mapCover = new int[mapSize.x][mapSize.x];
@@ -64,7 +67,7 @@ public class Map {
                 for (int i = 0; i < worldSize; i++) {
                     numbers = bufferedReader.readLine().split(",");
                     for (int b = 0; b < worldSize; b++) {
-                        worldData[b][i] = Integer.parseInt(numbers[b]) + 1;
+                        worldData[b][i] = Integer.parseInt(numbers[b]);
                     }
                 }
             }

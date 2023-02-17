@@ -274,6 +274,7 @@ public class MainGame {
             npcControl.draw(gc);
             //ENTPlayer2.draw(gc);
             player.draw(gc);
+            wRender.drawSecondLayer(gc);
             miniM.draw(gc);
             ui.draw(gc);
             qPanel.draw(gc);
@@ -346,7 +347,7 @@ public class MainGame {
         ob_control = new OBJ_Control(this);
         wRender = new WorldRender(this);
         wControl.loadWorldData();
-        wControl.makeOverWorldQuadrants();
+        //  wControl.makeOverWorldQuadrants();
         talentP = new UI_TalentPanel(this);
         DialogStorage.loadDialogs();
 
@@ -406,13 +407,13 @@ public class MainGame {
         sound.INTRO.play();
 
 
-        for (int i = 0; i < 1; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 490 * 48, 490 * 48, 100, Zone.GrassLands));
+        for (int i = 0; i < 4; i++) {
+            ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 4, 4);
+        wControl.loadMap(Zone.Tutorial, 59, 49);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }

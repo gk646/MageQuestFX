@@ -23,7 +23,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 730,
+                "x": 757,
                 "y": 522
             }
         },
@@ -34,23 +34,26 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 448,
-                "y": 217.33333333333331
+                "x": 385.5,
+                "y": 36.75
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.25,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4030,
-                "y": 3376
+                "x": 7422.727272727273,
+                "y": 7518.181818181818
             }
         },
         "GrassLands.tmx#grassspritesheet": {
             "scaleInDock": 1
+        },
+        "TIILESET.tsx": {
+            "dynamicWrapping": false
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -77,12 +80,15 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 988.6666666666665,
-                "y": 752
+                "x": 712,
+                "y": 462
             }
+        },
+        "d.tsx": {
+            "dynamicWrapping": true
         },
         "exports/DungeonTutorial.tmx": {
             "scale": 0.8292708333333333,
@@ -138,11 +144,11 @@
             "scaleInEditor": 1
         },
         "second floor_tutorial_castle.tmx": {
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 400,
-                "y": 401.3333333333333
+                "x": 422.5,
+                "y": 443
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -213,5 +219,6 @@
     "tileset.tileSize": {
         "height": 16,
         "width": 16
-    }
+    },
+    "tileset.type": 1
 }

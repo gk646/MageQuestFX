@@ -23,9 +23,9 @@ public class PRJ_EnergySphere extends PRJ_Control {
     public PRJ_EnergySphere(MainGame mainGame) {
         super(mainGame);
         activation = new MediaPlayer(Sound.energySphereBeginning);
-        activation.setVolume(0.3);
+        activation.setVolume(0.12);
         hit = new MediaPlayer(Sound.energySphereHit);
-        hit.setVolume(0.3);
+        hit.setVolume(0.2);
         activation.play();
         //-------VALUES-----------
         this.movementSpeed = 3;
@@ -76,7 +76,11 @@ public class PRJ_EnergySphere extends PRJ_Control {
 
     @Override
     public void playHitSound() {
-        hit.play();
+        if (System.currentTimeMillis() - lastHitTime >= 100) {
+            hit.seek(Duration.ZERO);
+            hit.play();
+            lastHitTime = System.currentTimeMillis();
+        }
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {

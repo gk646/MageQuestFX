@@ -57,6 +57,7 @@ public class PRJ_Control {
     public int movementSpeed;
     public Point2D.Double worldPos;
     public int GruntKilledCounter;
+    public long lastHitTime;
     private int ShooterKilledCounter;
     /*
 

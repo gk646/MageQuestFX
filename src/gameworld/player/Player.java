@@ -313,7 +313,7 @@ public class Player extends ENTITY {
 
     private void dynamicSpawns() {
         MapQuadrant[] mapQuadrants = map.mapQuadrants;
-        int[][] mapData = map.mapData;
+        int[][] mapData = map.mapDataBackGround;
         getPlayerQuadrant(mapQuadrants);
         respawnCloseQuadrants(mapData, mapQuadrants);
     }

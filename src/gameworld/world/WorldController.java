@@ -25,13 +25,13 @@ public class WorldController {
 
     public void loadWorldData() {
         // CITY 1
-        MAPS.add(new Map("city1", new Point(100, 100), Zone.City1, GameMapType.MapCover));
+        // MAPS.add(new Map("city1", new Point(100, 100), Zone.City1, GameMapType.MapCover));
         // TUTORIAL
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Tutorial, GameMapType.MapCover));
         // DUNGEON TUTORIAL
         MAPS.add(new Map("DungeonTutorial", new Point(60, 60), Zone.Dungeon_Tutorial));
         //Overworld
-        MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+        //   MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         loadArray();
     }
 
@@ -39,7 +39,8 @@ public class WorldController {
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 clearWorldArrays();
-                WorldRender.worldData = map.mapData;
+                WorldRender.worldData = map.mapDataBackGround;
+                WorldRender.worldData2 = map.mapDataForeGround;
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
                 currentWorld = map.zone;
