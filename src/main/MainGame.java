@@ -62,6 +62,7 @@ public class MainGame {
     //---------VARIABLES----------
     public final List<PRJ_Control> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
+
     public Random random;
     //ITEMS
     public final ArrayList<DROP> WORLD_DROPS = new ArrayList<>();
@@ -336,6 +337,9 @@ public class MainGame {
         sqLite = new SQLite(this);
         sqLite.getConnection();
         ui.updateLoadingScreen(0, gc);
+        SecureRandom secureRandom = new SecureRandom();
+        long seed = secureRandom.nextLong();
+        random = new Random(seed);
         // 0 %
         sound = new Sound();
         sound.loadSounds();
@@ -368,14 +372,12 @@ public class MainGame {
         ui.updateLoadingScreen(12, gc);
 
         sqLite.readItemsFromDB();
-
+        talentP.assignDescriptions();
         //60%
         ui.updateLoadingScreen(12, gc);
         ENTPlayer2 = new ENT_Player2(this);
         map_utils = new MAP_UTILS(this);
-        SecureRandom secureRandom = new SecureRandom();
-        long seed = secureRandom.nextLong();
-        random = new Random(seed);
+
         talentP.createTalentNodes();
         //72%
         ui.updateLoadingScreen(12, gc);
@@ -453,6 +455,10 @@ public class MainGame {
     private void getPlayerTile() {
         playerX = (int) ((Player.worldX + 24) / 48);
         playerY = (int) ((Player.worldY + 24) / 48);
+    }
+
+    private void loadCursor() {
+
     }
 }
 

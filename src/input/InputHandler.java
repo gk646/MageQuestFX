@@ -10,6 +10,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import main.MainGame;
+import main.Runner;
 import main.system.enums.State;
 import main.system.enums.Zone;
 
@@ -179,7 +180,7 @@ public class InputHandler {
                 } else if (mg.drawGameplay) {
                     mg.drawGameplay = false;
                 } else {
-                    scene.setCursor(Cursor.CROSSHAIR);
+                    scene.setCursor(Runner.crosshair);
                     mg.gameState = State.PLAY;
                 }
                 try {
@@ -213,12 +214,12 @@ public class InputHandler {
             if (!mg.showTalents) {
                 mg.showTalents = true;
                 mg.talentP.resetTalentCollision();
-                scene.setCursor(Cursor.HAND);
+                scene.setCursor(Runner.crosshair3);
             } else {
                 mg.showTalents = false;
                 mg.talentP.hideTalentCollision();
                 if (!mg.showBag || !mg.showTalents) {
-                    scene.setCursor(Cursor.CROSSHAIR);
+                    scene.setCursor(Runner.crosshair);
                 }
             }
         }
@@ -232,7 +233,7 @@ public class InputHandler {
                 mg.inventP.hideCharCollision();
                 mg.showChar = false;
                 if (!mg.showBag || !mg.showTalents) {
-                    scene.setCursor(Cursor.CROSSHAIR);
+                    scene.setCursor(Runner.crosshair);
                 }
             }
         }
@@ -241,11 +242,11 @@ public class InputHandler {
             if (!mg.showBag) {
                 mg.inventP.resetBagCollision();
                 mg.showBag = true;
-                scene.setCursor(Cursor.HAND);
+                scene.setCursor(Runner.crosshair3);
             } else {
                 mg.inventP.hideBagCollision();
                 mg.showBag = false;
-                scene.setCursor(Cursor.CROSSHAIR);
+                scene.setCursor(Runner.crosshair);
             }
         }
         if (code.equals("m")) {
@@ -257,7 +258,7 @@ public class InputHandler {
                 mg.gameMap.hideMapCollision();
                 mg.showMap = false;
                 if (!mg.showBag || mg.showChar || !mg.showTalents) {
-                    scene.setCursor(Cursor.CROSSHAIR);
+                    scene.setCursor(Runner.crosshair);
                 }
             }
         }

@@ -4,6 +4,7 @@ import input.InputHandler;
 import javafx.application.Application;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,7 +18,8 @@ import java.awt.GraphicsEnvironment;
 import java.io.InputStream;
 
 public class Runner extends Application {
-
+    public static ImageCursor crosshair;
+    public static ImageCursor crosshair3;
 
     /**
      * @author Lukas Gilch
@@ -39,6 +41,11 @@ public class Runner extends Application {
         stage.setScene(scene);
         stage.setTitle("Mage Quest_2D");
         InputStream is = getClass().getResourceAsStream("/Icons/icon2.png");
+        Image cursor = new Image(getClass().getResource("/ui/crosshair_1.png").toExternalForm());
+        Image cursor3 = new Image(getClass().getResource("/ui/crosshair_3.png").toExternalForm());
+        crosshair = new ImageCursor(cursor, 8, 8);
+        crosshair3 = new ImageCursor(cursor3, 8, 8);
+        scene.setCursor(crosshair);
         assert is != null;
         stage.getIcons().add(new Image(is));
         stage.setMaxWidth(gE.getDefaultScreenDevice().getDisplayMode().getWidth());

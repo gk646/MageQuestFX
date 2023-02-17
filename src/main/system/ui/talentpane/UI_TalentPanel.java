@@ -115,6 +115,23 @@ public class UI_TalentPanel {
         }
     }
 
+    public static String insertNewLine(String str) {
+        StringBuilder sb = new StringBuilder();
+        String[] words = str.split("\\s+");
+        int count = 0;
+        for (String word : words) {
+            if (count + word.length() > 58) {
+                sb.append("\n");
+                count = 0;
+            }
+            count += word.length();
+            sb.append(word);
+            sb.append(" ");
+            count++;
+        }
+        return sb.toString();
+    }
+
     private void getTooltip(GraphicsContext gc, TalentNode node, int startX, int startY) {
         //BACKGROUND
         gc.setFill(Colors.black_transparent);
@@ -131,8 +148,16 @@ public class UI_TalentPanel {
         gc.setFont(FonT.minecraftItalic14);
         String[] lines = node.talent.description.split("\\n");
         float y = 0.088f;
+        int count = 1;
         for (String line : lines) {
-            gc.fillText(line, startX - MainGame.SCREEN_HEIGHT * 0.329f, startY - MainGame.SCREEN_HEIGHT * (y -= 0.015f));
+            if (count > 1) {
+                gc.setFont(FonT.minecraftItalic11);
+                gc.setFill(Colors.LightGrey);
+                gc.fillText(line, startX - MainGame.SCREEN_HEIGHT * 0.329f, startY - MainGame.SCREEN_HEIGHT * (y -= 0.009f));
+            } else {
+                gc.fillText(line, startX - MainGame.SCREEN_HEIGHT * 0.329f, startY - MainGame.SCREEN_HEIGHT * (y -= 0.012f));
+            }
+            count++;
         }
     }
 
@@ -218,6 +243,34 @@ public class UI_TalentPanel {
         */
     }
 
+    public void assignDescriptions() {
+        String magicFind = """
+                "Legend has it that the great wizard Merlin once went on a treasure hunt, and his magic find was so powerful that he accidentally uncovered the Holy Grail while searching for his car keys."
+                "Rumor has it that the infamous pirate Blackbeard was always on the lookout for magical artifacts, but he never realized that the real treasure was the friends he made along the way... until he got a magic find boost and suddenly found a chest full of gold and riches."
+                "Some say that the reason the philosopher's stone was so hard to find is that it was hidden in plain sight the whole time - all anyone needed was a magic find talent and a sharp eye for shiny things. Unfortunately, most alchemists were too busy trying to turn lead into gold to notice."
+                "Back in the day, the great adventurer Jones was known for his ability to find ancient relics and artifacts..."
+                "There's an old tale about a wealthy merchant who hired a team of mages to enchant his entire mansion with magic find spells, hoping to discover hidden riches that had been lost for centuries. Unfortunately, all they found were a bunch of dusty old cobwebs and a few silver spoons - but hey, at least the mansion is enchanted now.""";
+        addDescription("magic_find", magicFind);
+
+        String intelligence = """
+                "Rumor has it that the great philosopher Aristotle once stumbled upon a hidden library filled with ancient texts and scrolls. His intelligence was so high that he immediately recognized the value of the priceless manuscripts - but he accidentally left them at the market on the way home."
+                "Legend has it that the famous mage Merlin was known for his incredible intelligence, which he used to discover hidden truths and ancient knowledge. But one day, he got so lost in thought that he accidentally walked into a wall - proof that even the smartest among us can have a momentary lapse of judgment."
+                "There's an old story about a group of mages who were tasked with finding a rare spell that could unlock untold power. They scoured the land for months, using every trick in the book to increase their intelligence find - but it wasn't until they stumbled upon a local pub and started swapping stories that they finally uncovered the secret they were looking for."
+                "It is said that the great scientist Isaac Newton once stumbled upon a hidden room filled with ancient tomes and esoteric knowledge. His intelligence was so great that he could understand every word on the page - but when he tried to explain his discoveries to his cat, the feline just stared at him with a look of disdain, reminding him that intelligence isn't everything."
+                  """;
+        addDescription("book", intelligence);
+    }
+
+    private void addDescription(String name, String text) {
+        for (TalentNode node : talent_Nodes) {
+            if (node != null) {
+                if (node.talent.imagePath.contains(name)) {
+                    node.talent.description += "\n\n" + insertNewLine(text.split("\n")[mg.random.nextInt(0, text.split("\n").length)]);
+                }
+            }
+        }
+    }
+
     private void getImages() {
         background = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/background.png")));
         connection_red = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/talents/connection_red.png")));
@@ -238,7 +291,7 @@ public class UI_TalentPanel {
         if (node.id == 0 || node.id == 1 || node.id == 2 || node.id == 3) {
             return true;
         } else {
-            for (int b = 0; b < 100; b++) {
+            for (int b = 0; b < matrix.length; b++) {
                 if (matrix.getEdge(b, node.id) == 1) {
                     if (talent_Nodes[b].activated) {
                         return true;

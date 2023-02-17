@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 class AdjacencyMatrix {
 
-
+    public int length;
     private final int[][] adjacency_matrix;
     public static final ArrayList<int[]> edge_list = new ArrayList<>();
 
 
     public AdjacencyMatrix() {
-        adjacency_matrix = new int[250][250];
+        length = 250;
+        adjacency_matrix = new int[length][length];
+
         makeEdges();
     }
 
@@ -174,6 +176,7 @@ class AdjacencyMatrix {
         makeEdge(96, 98);
         makeEdge(98, 93);
         makeEdge(82, 105);
+        makeEdge(105, 82);
         makeEdge(105, 14);
         makeEdge(108, 111);
         makeEdge(111, 112);
@@ -183,6 +186,11 @@ class AdjacencyMatrix {
         makeEdge(99, 119);
         makeEdge(96, 97);
         makeEdge(112, 108);
+        makeEdge(35, 128);
+        makeEdge(36, 128);
+        makeEdge(128, 129);
+        makeEdge(128, 130);
+        makeEdge(128, 131);
     }
 }
 

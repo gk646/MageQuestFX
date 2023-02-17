@@ -43,9 +43,9 @@ public class TalentNode {
         int drawy = position.y + y;
         gc.drawImage(image, drawx, drawy);
         if (size == 1) {
-            talent.drawIcon(gc, drawx + 6, drawy + 6);
-        } else if (size == 2) {
             talent.drawIcon(gc, drawx + 8, drawy + 8);
+        } else if (size == 2) {
+            talent.drawIcon(gc, drawx + 6, drawy + 6);
         } else {
             talent.drawIcon(gc, drawx + 8, drawy + 8);
         }

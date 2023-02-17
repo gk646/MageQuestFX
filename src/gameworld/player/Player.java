@@ -60,11 +60,11 @@ public class Player extends ENTITY {
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
-    public static int effectsSizeRollable = 30;
+    public static int effectsSizeRollable = 35;
     public static int effectsSizeTotal = 50;
     public static String[] effectNames = new String[effectsSizeTotal];
 
-    public int[] effects = new int[effectsSizeTotal];
+    public float[] effects = new float[effectsSizeTotal];
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
 
@@ -95,9 +95,9 @@ public class Player extends ENTITY {
     24. HealthRegen_Percent
     25. Mana Regen Percent
     26. Man Cost Reduction
+    27. magic find
 
-
-    41.
+    45.MovementSpeed Absolute (eg. 0.5)
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -192,7 +192,7 @@ public class Player extends ENTITY {
         maxMana = (int) ((20.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
         manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
         healthRegeneration = Math.round(2 + ((endurance * 2 + vitality) / Math.sqrt(Math.max(10, level + 10))) / 110.0f * 100.0f) / 100.0f;
-        playerMovementSpeed = Math.round(((4.0f + (agility * 0.4 / (float) level))) * 100.0f) / 100.0f;
+        playerMovementSpeed = Math.round(((4.0f + (agility * 0.4 / (float) Math.max(10, level)))) * 100.0f) / 100.0f;
         critChance = Math.min((Math.round(((5.0f + ((luck * 2) / Math.sqrt(Math.max(10, level))) * 100.0f) / 100.0f))), 75);
         speechSkill = Math.round((5.0f + (level / 10.0f) + (1.5f * charisma) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f;
         resistChance = Math.min((Math.round((5.0f + (level / 10.0f) + (endurance * 1.0f) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f), 50);
@@ -215,12 +215,14 @@ public class Player extends ENTITY {
         CDR_Absolute = effects[17];
         DMG_Poison_Percent = effects[18];
         DMG_Fire_Percent = effects[19];
-
         effects[21] += critChance;
         critChance = effects[21];
         effects[22] += 50;
         effects[23] += carryWeight;
         carryWeight = effects[23];
+
+
+        playerMovementSpeed += effects[41];
     }
 
     public void pickupDroppedItem() {
@@ -521,7 +523,9 @@ public class Player extends ENTITY {
                 "CritDamage: +",
                 "Carry Weight: +",
                 "Health Regeneration: +",
-                "Mana Regeneration: +"
+                "Mana Regeneration: +",
+                "Mana Cost Reduction",
+                "Magic Find"
         };
     }
 

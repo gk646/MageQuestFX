@@ -153,7 +153,7 @@ public class WorldController {
             for (int y = yMin; y <= yMax; y++) {
                 int dx = x - playerX;
                 int dy = y - playerY;
-                if (dx * dx + dy * dy <= radiusSquared) {
+                if (dx * dx + dy * dy <= radiusSquared && Math.random() > 0.95) {
                     currentMapCover[x][y] = 1;
                 }
             }

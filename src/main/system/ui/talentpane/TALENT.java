@@ -11,11 +11,11 @@ import java.util.regex.Pattern;
 public class TALENT {
     public final int i_id;
     final String name;
-    final String description;
+    public float[] effects = new float[Player.effectsSizeTotal];
 
     public String imagePath;
     private final Image icon;
-    public int[] effects = new int[Player.effectsSizeTotal];
+    String description;
     public int intellect;
     public int vitality;
     public int wisdom;
@@ -42,12 +42,15 @@ public class TALENT {
     private void getEffect(String effect) {
         Pattern p;
         Matcher m;
-        p = Pattern.compile("\\[(\\d+)](\\d+)");
+        p = Pattern.compile("\\[(\\d+)](\\d+(\\.\\d+)?)");
+
+
         m = p.matcher(effect);
         while (m.find()) {
-            effects[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));
+            effects[Integer.parseInt(m.group(1))] = Float.parseFloat(m.group(2));
         }
     }
+
 
     private void getStats(String effect) {
         Pattern p;
@@ -127,6 +130,10 @@ public class TALENT {
     public void drawIcon(GraphicsContext gc, int x, int y) {
         if (imagePath.contains("dark_magic")) {
             gc.drawImage(icon, x + 2, y);
+        } else if (imagePath.contains("shoe")) {
+            gc.drawImage(icon, x - 1, y + 1);
+        } else if (imagePath.contains("magic_find")) {
+            gc.drawImage(icon, x - 1, y - 3);
         } else {
             gc.drawImage(icon, x, y);
         }
