@@ -14,7 +14,9 @@ import main.Runner;
 import main.system.enums.State;
 import main.system.enums.Zone;
 
+import java.awt.Desktop;
 import java.awt.Point;
+import java.net.URI;
 
 public class InputHandler {
     public static InputHandler instance;
@@ -384,6 +386,19 @@ public class InputHandler {
                 mg.inventP.activeCharacterPanel = 2;
             } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mg.inputH.lastMousePosition)) {
                 mg.inventP.activeCharacterPanel = 1;
+            }
+            if (mg.gameState == State.TITLE && mg.ui.discord_button.contains(lastMousePosition)) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://discord.gg/rzQgQm5Wu6"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (mg.gameState == State.TITLE && mg.ui.github_button.contains(lastMousePosition)) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/gk646/MageQuestFX"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

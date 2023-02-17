@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.enums.State;
 
+import java.awt.Rectangle;
 import java.util.Objects;
 
 public class UI {
@@ -31,7 +32,15 @@ public class UI {
     public float credits_scroll = 0;
     public boolean drawSaveMessage;
     public double codex_scroll = 0.332;
-
+    private final Image discord = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/discord.png")));
+    private final Image discord1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/discord2.png")));
+    private final Image discord2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/discord3.png")));
+    private final Image github = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github.png")));
+    private final Image github1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github2.png")));
+    private final Image github2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github3.png")));
+    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.89f), 42, 42);
+    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.87), (int) (MainGame.SCREEN_HEIGHT * 0.89f), 42, 42);
+    private int spriteCounter1 = 0;
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
@@ -163,6 +172,19 @@ public class UI {
         text = "\u00A9 2023 Lukas Gilch";
         x = (int) (MainGame.SCREEN_WIDTH * 0.415f);
         gc.fillText(text, x, y);
+        switch (spriteCounter1 % 200 / 50) {
+            case 0 -> gc.drawImage(discord, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 1 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 2 -> gc.drawImage(discord2, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 3 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+        }
+        switch (spriteCounter1 % 200 / 50) {
+            case 0 -> gc.drawImage(github, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 1 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 2 -> gc.drawImage(github2, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 3 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+        }
+        spriteCounter1++;
     }
 
     private void drawGameUI(GraphicsContext gc) {
