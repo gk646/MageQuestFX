@@ -159,6 +159,13 @@ public class UI_TalentPanel {
             }
             count++;
         }
+        if (node.id < 10) {
+            gc.fillText(String.valueOf(node.id), startX - MainGame.SCREEN_HEIGHT * 0.020, startY + MainGame.SCREEN_HEIGHT * 0.000_5f);
+        } else if (node.id < 100) {
+            gc.fillText(String.valueOf(node.id), startX - MainGame.SCREEN_HEIGHT * 0.030, startY + MainGame.SCREEN_HEIGHT * 0.000_5f);
+        } else {
+            gc.fillText(String.valueOf(node.id), startX - MainGame.SCREEN_HEIGHT * 0.040, startY + MainGame.SCREEN_HEIGHT * 0.000_5f);
+        }
     }
 
     private void drawLine(int offsetX, int offsetY, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {

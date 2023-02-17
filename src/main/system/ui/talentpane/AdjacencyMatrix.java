@@ -191,6 +191,20 @@ class AdjacencyMatrix {
         makeEdge(128, 129);
         makeEdge(128, 130);
         makeEdge(128, 131);
+        makeEdge(142, 145);
+        makeEdge(140, 141);
+        makeEdge(142, 139);
+        makeEdge(139, 138);
+        makeEdge(138, 137);
+        makeEdge(137, 136);
+        makeEdge(136, 135);
+        makeEdge(135, 134);
+        makeEdge(134, 133);
+        makeEdge(133, 132);
+        makeEdge(132, 40);
+        makeEdge(141, 142);
+        makeEdge(143, 142);
+        makeEdge(143, 144);
     }
 }
 
