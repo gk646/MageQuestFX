@@ -157,6 +157,7 @@ public class GameMap {
                 }
             }
         }
+
         int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
         int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
         for (int i = y; i < y + zoom_i; i++) {
@@ -212,6 +213,7 @@ public class GameMap {
                 }
             }
         }
+
         mapImage = SwingFXUtils.toFXImage(image, null);
     }
 

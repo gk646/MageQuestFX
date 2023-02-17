@@ -178,6 +178,7 @@ public class MainGame {
                         getPlayerTile();
                         wControl.uncoverWorldMap();
                         wControl.update();
+                        qPanel.update();
                     }
                     difference2 = 0;
                 }
@@ -186,7 +187,6 @@ public class MainGame {
                         proximitySorterENTITIES();
                     }
                     sound.update();
-                    qPanel.update();
                     difference1 = 0;
                     //System.out.println(counter);
                     counter = 0;
@@ -411,8 +411,8 @@ public class MainGame {
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        wControl.loadMap(Zone.GrassLands, 496, 496);
-        //wControl.loadMap(Zone.Tutorial, 62, 49);
+        //wControl.loadMap(Zone.GrassLands, 496, 496);
+        wControl.loadMap(Zone.Tutorial, 4, 4);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }

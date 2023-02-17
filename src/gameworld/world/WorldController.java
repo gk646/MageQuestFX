@@ -41,7 +41,7 @@ public class WorldController {
                 clearWorldArrays();
                 WorldRender.worldData = map.mapData;
                 mg.player.map = map;
-                mg.wRender.worldSize = new Point(map.mapSize.x - 1, map.mapSize.x - 1);
+                mg.wRender.worldSize = map.mapSize;
                 currentWorld = map.zone;
                 currentMapCover = map.mapCover;
                 mg.player.setPosition(xTile * 48, yTile * 48);

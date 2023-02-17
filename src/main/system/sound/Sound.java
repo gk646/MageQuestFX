@@ -8,7 +8,14 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Sound {
     public static ArrayList<MediaPlayer> ambientTracks = new ArrayList<>();
@@ -22,9 +29,23 @@ public class Sound {
     public MediaPlayer currentDungeonAmbient;
     public int currentTrackIndex = 0;
     private boolean fadeOut, fadeIn;
+    public static Media energySphereBeginning;
+    public static Media energySphereHit;
 
 
     public Sound() {
+        getClips();
+    }
+
+    public void getClips() {
+        AudioInputStream inputStream = null;
+        try {
+            Clip clip = AudioSystem.getClip();
+            inputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/travelling.wav")));
+            clip.open(inputStream);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void playSwitchSound() {
@@ -44,6 +65,8 @@ public class Sound {
         INTRO.setVolume(0.8);
         menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_switch.wav").toString()));
         menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_back.wav").toString()));
+        energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
+        energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
         loadDungeonAmbience();
     }
 

@@ -35,6 +35,7 @@ public class Colors {
     public static final Color map_green = Color.rgb(99, 199, 77, 1);
     public static final Color mediumLightGreyTransparent = Color.rgb(155, 169, 194, 0.9);
     public static final Color blue_npc = Color.rgb(18, 78, 137, 1);
+    public static final Color black = Color.rgb(24, 20, 37, 1);
 
     //Talents
     public static final Color black_transparent = Color.rgb(24, 24, 24, 0.85);

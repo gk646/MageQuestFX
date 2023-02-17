@@ -16,6 +16,7 @@ import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 import main.MainGame;
 import main.system.CollisionChecker;
 
@@ -31,6 +32,7 @@ import java.util.Iterator;
  */
 public class PRJ_Control {
 
+    public MediaPlayer sound;
     protected Point endPos;
     protected Point2D.Double updateVector;
     public int projectileHeight;
@@ -115,15 +117,16 @@ public class PRJ_Control {
     }
 
 
-    private void calcProjectileDamage(PRJ_Control PRJControl, ENTITY entity) {
-        if (PRJControl instanceof PRJ_AutoShot) {
+    private void calcProjectileDamage(PRJ_Control projectile, ENTITY entity) {
+        if (projectile instanceof PRJ_AutoShot) {
             entity.health -= 1;
-            PRJControl.dead = true;
-        } else if (PRJControl instanceof PRJ_EnergySphere) {
+            projectile.dead = true;
+        } else if (projectile instanceof PRJ_EnergySphere) {
             entity.health -= 1;
-        } else if (PRJControl instanceof PRJ_RingSalvo) {
+            projectile.playHitSound();
+        } else if (projectile instanceof PRJ_RingSalvo) {
             entity.health -= 5;
-        } else if (PRJControl instanceof PRJ_Lightning) {
+        } else if (projectile instanceof PRJ_Lightning) {
             entity.health -= 1;
         }
         if (entity.health <= 0) {
@@ -179,7 +182,28 @@ public class PRJ_Control {
     private boolean playerTooFarAbsolute() {
         return Math.abs(worldPos.x - Player.worldX) >= 650 || Math.abs(worldPos.y - Player.worldY) >= 650;
     }
+
+
+    public void playHitSound() {
+
+    }
+
+
+    public void playFlightSound() {
+        if (sound != null) {
+            sound.setCycleCount(MediaPlayer.INDEFINITE);
+            sound.play();
+        }
+    }
+
+    public void stopFlightSound() {
+        if (sound != null) {
+            sound.stop();
+        }
+    }
 }
+
+
 
 
 

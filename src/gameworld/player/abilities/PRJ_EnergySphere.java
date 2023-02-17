@@ -3,21 +3,30 @@ package gameworld.player.abilities;
 import gameworld.PRJ_Control;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import main.MainGame;
 import main.system.Storage;
+import main.system.sound.Sound;
 import main.system.ui.Effects;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class PRJ_EnergySphere extends PRJ_Control {
+    MediaPlayer activation;
+    MediaPlayer hit;
 
     /**
      * Energy Sphere projectile
      */
     public PRJ_EnergySphere(MainGame mainGame) {
         super(mainGame);
-
+        activation = new MediaPlayer(Sound.energySphereBeginning);
+        activation.setVolume(0.3);
+        hit = new MediaPlayer(Sound.energySphereHit);
+        hit.setVolume(0.3);
+        activation.play();
         //-------VALUES-----------
         this.movementSpeed = 3;
         this.projectileHeight = 32;
@@ -59,6 +68,15 @@ public class PRJ_EnergySphere extends PRJ_Control {
         tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
+        if (dead) {
+            playHitSound();
+            activation.stop();
+        }
+    }
+
+    @Override
+    public void playHitSound() {
+        hit.play();
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {
@@ -73,5 +91,21 @@ public class PRJ_EnergySphere extends PRJ_Control {
         projectileImage4 = Storage.secondaryFire4;
         projectileImage5 = Storage.secondaryFire5;
         projectileImage6 = Storage.secondaryFire6;
+    }
+
+    private void controlSound() {
+        sound.play();
+        // When a projectile is fired
+
+
+        sound.seek(Duration.ZERO); // Go back to the beginning of the sound
+        sound.setCycleCount(MediaPlayer.INDEFINITE); // Loop the middle section
+        sound.setStartTime(Duration.millis(720)); // Start looping from the second of the sound
+
+        // When the projectile hits something
+        sound.stop(); // Stop looping the middle section
+        sound.setStartTime(Duration.seconds(5)); // Go to the ending of the sound
+        sound.setCycleCount(1); // Play the ending once
+        sound.play();
     }
 }
