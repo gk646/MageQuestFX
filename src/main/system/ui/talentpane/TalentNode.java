@@ -14,21 +14,15 @@ public class TalentNode {
     public final int id;
     public int size = 0;
 
-    TalentNode(TALENT talent, int xCo, int yCo) {
-        this.boundBox = new Rectangle(944 + xCo, 524 + yCo, 32, 32);
-        this.talent = talent;
-        this.position = new Point(xCo, yCo);
-        this.id = talent.i_id;
-    }
 
     public TalentNode(TALENT talent, int xCo, int yCo, int size, int activated) {
         this.size = size;
         if (size == 0) {
             this.boundBox = new Rectangle(944 + xCo, 524 + yCo, 32, 32);
         } else if (size == 2) {
-            this.boundBox = new Rectangle(941 + xCo, 521 + yCo, 38, 38);
+            this.boundBox = new Rectangle(938 + xCo, 518 + yCo, 45, 45);
         } else if (size == 1) {
-            this.boundBox = new Rectangle(937 + xCo, 517 + yCo, 45, 45);
+            this.boundBox = new Rectangle(935 + xCo, 515 + yCo, 50, 50);
         }
 
         this.talent = talent;

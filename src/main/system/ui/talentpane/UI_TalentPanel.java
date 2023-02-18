@@ -85,19 +85,19 @@ public class UI_TalentPanel {
                     }
                 } else if (node.size == 1) {
                     if (node.activated) {
-                        node.drawNode(gc, startX - 7, startY - 7, talentnode_big_green);
+                        node.drawNode(gc, startX - 9, startY - 9, talentnode_big_green);
                     } else if (checkValidTalent(node)) {
-                        node.drawNode(gc, startX - 7, startY - 7, talentnode_big_purple);
+                        node.drawNode(gc, startX - 9, startY - 9, talentnode_big_purple);
                     } else {
-                        node.drawNode(gc, startX - 7, startY - 7, talentnode_big);
+                        node.drawNode(gc, startX - 9, startY - 9, talentnode_big);
                     }
                 } else if (node.size == 2) {
                     if (node.activated) {
-                        node.drawNode(gc, startX - 3, startY - 3, talentnode_mid_green);
+                        node.drawNode(gc, startX - 7, startY - 7, talentnode_mid_green);
                     } else if (checkValidTalent(node)) {
-                        node.drawNode(gc, startX - 3, startY - 3, talentnode_mid_purple);
+                        node.drawNode(gc, startX - 7, startY - 7, talentnode_mid_purple);
                     } else {
-                        node.drawNode(gc, startX - 3, startY - 3, talentnode_mid);
+                        node.drawNode(gc, startX - 7, startY - 7, talentnode_mid);
                     }
                 }
             }
@@ -171,8 +171,17 @@ public class UI_TalentPanel {
     private void drawLine(int offsetX, int offsetY, GraphicsContext gc, TalentNode requirement, TalentNode nextOne) {
         int x0 = requirement.position.x;
         int x1 = nextOne.position.x;
+
         int y0 = requirement.position.y;
         int y1 = nextOne.position.y;
+        if (requirement.size != 0) {
+            x0 -= 2;
+            y0 -= 2;
+        }
+        if (nextOne.size != 0) {
+            x1 -= 2;
+            y1 -= 2;
+        }
         int dx = Math.abs(x1 - x0);
         int dy = Math.abs(y1 - y0);
         int sx = x0 < x1 ? 1 : -1;

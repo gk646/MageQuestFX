@@ -62,7 +62,7 @@ public class Map {
     public int[][] loadMapData(String filename, int worldSize) {
         int[][] worldData = new int[worldSize][worldSize];
         String[] numbers;
-        try (InputStream inputStream = MapLoader.class.getResourceAsStream("/Maps/" + filename + ".csv")) {
+        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + filename + ".csv")) {
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream), 32_768)) {
                 for (int i = 0; i < worldSize; i++) {
                     numbers = bufferedReader.readLine().split(",");
@@ -83,7 +83,7 @@ public class Map {
         Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
         Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho|slimeB)(\\d{0,3})");
-        try (InputStream inputStream = MapLoader.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
+        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             Matcher matcher;
             String line;

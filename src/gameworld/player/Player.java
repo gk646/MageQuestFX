@@ -124,9 +124,67 @@ public class Player extends ENTITY {
         setupEffectNames();
     }
 
-    public void setPosition(int x, int y) {
-        worldX = x;
-        worldY = y;
+    private void movement() {
+        collisionRight = false;
+        collisionLeft = false;
+        collisionDown = false;
+        collisionUp = false;
+        direction = "updownleftright";
+        mg.collisionChecker.checkPlayerAgainstTile(this);
+        mg.ob_control.checkCollisionPlayer();
+        if (mg.inputH.leftPressed) {
+            if (!collisionLeft && worldX > 0) {
+                worldX -= playerMovementSpeed;
+            }
+        }
+        if (mg.inputH.upPressed) {
+            if (!collisionUp && worldY > 0) {
+                worldY -= playerMovementSpeed;
+            }
+        }
+        if (mg.inputH.downPressed) {
+            if (!collisionDown && worldY < mg.wRender.worldSize.x * 48 - 48) {
+                worldY += playerMovementSpeed;
+            }
+        }
+        if (mg.inputH.rightPressed) {
+            if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
+                worldX += playerMovementSpeed;
+            }
+        }
+    }
+
+    private void skills() {
+        if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.showMap && !mg.showTalents) {
+            if (mg.inputH.mouse1Pressed && cooldownPrimary == 35) {
+                mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+                cooldownPrimary = 0;
+                getDurabilityDamageWeapon();
+            }
+            if (mg.inputH.mouse2Pressed) {
+                mg.sBar.skills[1].activate();
+            }
+            if (mg.inputH.OnePressed) {
+                mg.sBar.skills[0].activate();
+            }
+        }
+
+        if (mg.inputH.TwoPressed && mana >= 20 && cdLightning == 20) {
+            mg.PROJECTILES.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+            mana -= 20;
+            cdLightning = 0;
+            getDurabilityDamageWeapon();
+        }
+        if (mana < maxMana) {
+            mana += manaRegeneration;
+        } else if (mana > maxMana) {
+            mana = maxMana;
+        }
+        if (health < maxHealth) {
+            health += healthRegeneration;
+        } else if (health > maxHealth) {
+            health = maxHealth;
+        }
     }
 
     public void updateEquippedItems() {
@@ -230,6 +288,12 @@ public class Player extends ENTITY {
         playerMovementSpeed += effects[45];
         maxMana += effects[46];
     }
+
+    public void setPosition(int x, int y) {
+        worldX = x;
+        worldY = y;
+    }
+
 
     public void pickupDroppedItem() {
         synchronized (mg.WORLD_DROPS) {
@@ -416,79 +480,6 @@ public class Player extends ENTITY {
         }
     }
 
-    private void movement() {
-        collisionRight = false;
-        collisionLeft = false;
-        collisionDown = false;
-        collisionUp = false;
-        direction = "updownleftright";
-        mg.collisionChecker.checkPlayerAgainstTile(this);
-        mg.ob_control.checkCollisionPlayer();
-        if (mg.inputH.leftPressed) {
-            if (!collisionLeft && worldX > 0) {
-                worldX -= playerMovementSpeed;
-            }
-        }
-        if (mg.inputH.upPressed) {
-            if (!collisionUp && worldY > 0) {
-                worldY -= playerMovementSpeed;
-            }
-        }
-        if (mg.inputH.downPressed) {
-            if (!collisionDown && worldY < mg.wRender.worldSize.x * 48 - 48) {
-                worldY += playerMovementSpeed;
-            }
-        }
-        if (mg.inputH.rightPressed) {
-            if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
-                worldX += playerMovementSpeed;
-            }
-        }
-    }
-
-    private void skills() {
-        if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.gameMap.mapMover.contains(mg.inputH.lastMousePosition)) {
-            if (mg.inputH.mouse1Pressed && cooldownPrimary == 35) {
-                mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
-                cooldownPrimary = 0;
-                getDurabilityDamageWeapon();
-            }
-            if (mg.inputH.mouse2Pressed) {
-                mg.sBar.skills[1].activate();
-            }
-        }
-        if (mg.inputH.OnePressed) {
-            mg.sBar.skills[0].activate();
-        }
-        if (mg.inputH.TwoPressed && mana >= 20 && cdLightning == 20) {
-            mg.PROJECTILES.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
-            mana -= 20;
-            cdLightning = 0;
-            getDurabilityDamageWeapon();
-        }
-        if (mana < maxMana) {
-            mana += manaRegeneration;
-        } else if (mana > maxMana) {
-            mana = maxMana;
-        }
-        if (health < maxHealth) {
-            health += healthRegeneration;
-        } else if (health > maxHealth) {
-            health = maxHealth;
-        }
-        if (cooldownPrimary < 35) {
-            cooldownPrimary++;
-        }
-        if (cooldownOneSecond < 60) {
-            cooldownOneSecond++;
-        }
-        if (cooldownTwoSecond < 120) {
-            cooldownTwoSecond++;
-        }
-        if (cdLightning < 20) {
-            cdLightning++;
-        }
-    }
 
     private Image setupIdle(String imagePath) {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/idle/" + imagePath)));
