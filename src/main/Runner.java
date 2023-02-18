@@ -44,7 +44,7 @@ public class Runner extends Application {
         Image cursor = new Image(getClass().getResource("/ui/crosshair_1.png").toExternalForm());
         Image cursor3 = new Image(getClass().getResource("/ui/crosshair_3.png").toExternalForm());
         crosshair = new ImageCursor(cursor, 8, 8);
-        crosshair3 = new ImageCursor(cursor3, 8, 8);
+        crosshair3 = new ImageCursor(cursor3, 16, 16);
         scene.setCursor(crosshair);
         assert is != null;
         stage.getIcons().add(new Image(is));

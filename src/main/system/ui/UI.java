@@ -38,8 +38,8 @@ public class UI {
     private final Image github = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github.png")));
     private final Image github1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github2.png")));
     private final Image github2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github3.png")));
-    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.89f), 42, 42);
-    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.87), (int) (MainGame.SCREEN_HEIGHT * 0.89f), 42, 42);
+    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
+    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
     private int spriteCounter1 = 0;
 
     public UI(MainGame mainGame) {

@@ -95,9 +95,12 @@ public class Player extends ENTITY {
     24. HealthRegen_Percent
     25. Mana Regen Percent
     26. Man Cost Reduction
-    27. magic find
+    27. magic find flat ( 10)
 
     45.MovementSpeed Absolute (eg. 0.5)
+    46. maximum mana flat (20)
+    47. maximum health flat (10)
+
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
@@ -224,7 +227,8 @@ public class Player extends ENTITY {
         manaRegeneration = manaRegeneration + (manaRegeneration / 100.0f) * effects[25];
 
 
-        playerMovementSpeed += effects[41];
+        playerMovementSpeed += effects[45];
+        maxMana += effects[46];
     }
 
     public void pickupDroppedItem() {
