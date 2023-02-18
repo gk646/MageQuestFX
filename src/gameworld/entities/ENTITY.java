@@ -27,8 +27,8 @@ import java.util.Iterator;
 abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
-    public ArrayList<Effect> effects;
-    public ArrayList<DamageNumber> damageNumbers;
+    public ArrayList<Effect> effects = new ArrayList<>();
+    public ArrayList<DamageNumber> damageNumbers = new ArrayList<>();
     public Zone zone;
     protected int spriteCounter;
     protected int goalCol;
@@ -276,6 +276,9 @@ abstract public class ENTITY {
         }
     }
 
+    public float getHealth() {
+        return this.health;
+    }
 
     abstract public void draw(GraphicsContext gc);
 

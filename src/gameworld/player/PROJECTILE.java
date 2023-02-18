@@ -1,13 +1,6 @@
 package gameworld.player;
 
 
-import gameworld.PRJ_Control;
-import gameworld.entities.ENTITY;
-import gameworld.player.abilities.PRJ_AutoShot;
-import gameworld.player.abilities.PRJ_EnergySphere;
-import gameworld.player.abilities.PRJ_Lightning;
-import gameworld.player.abilities.PRJ_RingSalvo;
-import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.image.Image;
 import main.MainGame;
 
@@ -54,26 +47,6 @@ abstract class PROJECTILE {
 
     public PROJECTILE(MainGame mg) {
         this.mg = mg;
-    }
-
-    private void calcProjectileDamage(PRJ_Control PRJControl, ENTITY entity) {
-        if (PRJControl instanceof PRJ_AutoShot) {
-            entity.health -= 1;
-            PRJControl.dead = true;
-        } else if (PRJControl instanceof PRJ_EnergySphere) {
-            entity.health -= 1;
-        } else if (PRJControl instanceof PRJ_RingSalvo) {
-            entity.health -= 5;
-        } else if (PRJControl instanceof PRJ_Lightning) {
-            entity.health -= 1;
-        }
-        if (entity.health <= 0) {
-            mg.player.getExperience(entity);
-            entity.dead = true;
-            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
-        } else {
-            entity.hpBarOn = true;
-        }
     }
 
 

@@ -30,9 +30,9 @@ public class ENT_Control {
                     entity.draw(gc);
                     if (entity.hpBarOn) {
                         gc.setFill(Colors.Red);
-                        gc.fillRect(entity.screenX, entity.screenY - 10, (int) (((float) entity.health / entity.maxHealth) * 48), 8);
+                        gc.fillRect(entity.screenX, entity.screenY - 10, (int) ((entity.getHealth() / entity.maxHealth) * 48), 8);
                         gc.setFill(Color.WHITE);
-                        gc.fillText(String.valueOf(entity.health), entity.screenX + 14, entity.screenY);
+                        gc.fillText(String.valueOf(entity.getHealth()), entity.screenX + 14, entity.screenY);
                     }
                 }
             }

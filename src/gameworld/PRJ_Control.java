@@ -4,6 +4,7 @@ package gameworld;
 import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
+import gameworld.entities.damage.DamageType;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
@@ -33,6 +34,7 @@ import java.util.Iterator;
 public class PRJ_Control {
 
     public MediaPlayer sound;
+    public DamageType type;
     protected Point endPos;
     protected Point2D.Double updateVector;
     public float damage;
@@ -101,16 +103,15 @@ public class PRJ_Control {
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
-                        if (entity.dead) {
-                            recordDeath(entity);
-                            entityIterator.remove();
-                            continue;
-                        }
                         double ex = entity.worldX;
                         double ey = entity.worldY;
                         double distSq = (ex - px) * (ex - px) + (ey - py) * (ey - py);
                         if (distSq < 2_250_000 && !entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                             calcProjectileDamage(projectile, entity);
+                        }
+                        if (entity.getHealth() <= 0) {
+                            recordDeath(entity);
+                            entityIterator.remove();
                         }
                     }
                 }
@@ -121,17 +122,17 @@ public class PRJ_Control {
 
     private void calcProjectileDamage(PRJ_Control projectile, ENTITY entity) {
         if (projectile instanceof PRJ_AutoShot) {
-            entity.getDamageFromPlayer(projectile.damage);
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
             projectile.dead = true;
         } else if (projectile instanceof PRJ_EnergySphere) {
-            entity.health -= 1;
+            entity.getDamage(1);
             projectile.playHitSound();
         } else if (projectile instanceof PRJ_RingSalvo) {
-            entity.health -= 5;
+            entity.getDamage(5);
         } else if (projectile instanceof PRJ_Lightning) {
-            entity.health -= 1;
+            entity.getDamage(1);
         }
-        if (entity.health <= 0) {
+        if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
             if (entity instanceof BOSS) {

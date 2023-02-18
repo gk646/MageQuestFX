@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_AutoShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -10,9 +11,11 @@ public class SKL_AutoShot extends SKILL {
 
     public SKL_AutoShot(MainGame mg) {
         super(mg);
-        this.totalCoolDown = 120;
-        actualCoolDown = 120;
+        this.totalCoolDown = 30;
+        actualCoolDown = 30;
         this.coolDownCoefficient = 0;
+        this.damage = 1;
+        this.type = DamageType.PoisonDMG;
         this.icon = setup("energy_sphere.png");
     }
 
@@ -32,7 +35,7 @@ public class SKL_AutoShot extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 30) {
-            mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+            mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y, damage));
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();
         }

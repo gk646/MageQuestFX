@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.entities.damage.DamageType;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
@@ -13,10 +14,12 @@ public class PRJ_AutoShot extends PRJ_Control {
     /**
      * What happens when you press main mouse button
      */
-    public PRJ_AutoShot(int x, int y) {
+    public PRJ_AutoShot(int x, int y, float damage) {
 
         //-------VALUES-----------
         this.movementSpeed = 5;
+        this.damage = damage;
+        this.type = DamageType.PoisonDMG;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;

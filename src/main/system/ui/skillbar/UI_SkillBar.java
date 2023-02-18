@@ -23,8 +23,11 @@ public class UI_SkillBar {
 
     public void draw(GraphicsContext gc) {
         drawBackGround(gc);
-        skills[0].draw(gc, skillBarX + 5, skillBarY + 10);
-        skills[1].draw(gc, skillBarX + 50 + 10, skillBarY + 10);
+        for (int i = 0; i < skills.length; i++) {
+            if (skills[i] != null) {
+                skills[i].draw(gc, skillBarX + 5 + i * 50, skillBarY + 10);
+            }
+        }
     }
 
     private void drawBackGround(GraphicsContext gc) {

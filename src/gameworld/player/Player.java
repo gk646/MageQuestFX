@@ -1,7 +1,6 @@
 package gameworld.player;
 
 import gameworld.entities.ENTITY;
-import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
@@ -157,7 +156,7 @@ public class Player extends ENTITY {
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.showMap && !mg.showTalents) {
             if (mg.inputH.mouse1Pressed) {
-                mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+                mg.sBar.skills[4].activate();
                 getDurabilityDamageWeapon();
             }
             if (mg.inputH.mouse2Pressed) {

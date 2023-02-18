@@ -1,5 +1,6 @@
 package main.system.ui.skillbar;
 
+import gameworld.entities.damage.DamageType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -13,7 +14,9 @@ abstract public class SKILL {
     protected final MainGame mg;
     public float totalCoolDown;
     public float coolDownCoefficient;
+    public DamageType type;
     public float damage;
+
     /*
        Posion = 0
        Fire = 1
@@ -22,7 +25,6 @@ abstract public class SKILL {
        Arcane = 4
        Dark = 5
      */
-    public int type;
     private int side1;
     private int side2;
     private int side3;

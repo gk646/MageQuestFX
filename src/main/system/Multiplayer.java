@@ -49,7 +49,7 @@ public class Multiplayer {
                 index += 5;
                 entity.worldY = Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000;
                 index += 5;
-                entity.health = Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000;
+                //entity.health = Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000;
                 index += 5;
             }
             index = 10;
@@ -61,13 +61,14 @@ public class Multiplayer {
 
     private void updateMultiplayerOutput() {
         try {
-            StringBuilder outputString = new StringBuilder();
-            outputString.append(Player.worldX + 50_000).append(Player.worldY + 50_000);
             for (ENTITY entity : MainGame.ENTITIES) {
-                outputString.append(entity.worldX + 50_000).append(entity.worldY + 50_000).append(entity.health + 50_000);
+                //outputString.append(entity.worldX + 50_000).append(entity.worldY + 50_000).append(entity.health + 50_000);
             }
             //System.out.println(outputString);
-            Multiplayer.outputStream.writeUTF(outputString.toString());
+            Multiplayer.outputStream.writeUTF(String.valueOf(Player.worldX + 50_000) + (Player.worldY + 50_000)
+                    //outputString.append(entity.worldX + 50_000).append(entity.worldY + 50_000).append(entity.health + 50_000);
+                    //System.out.println(outputString);
+            );
             index = 10;
         } catch (IOException e) {
             throw new RuntimeException("failed");
