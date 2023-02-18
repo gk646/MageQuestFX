@@ -64,7 +64,7 @@ public class Player extends ENTITY {
     public static int effectsSizeTotal = 50;
     public static String[] effectNames = new String[effectsSizeTotal];
 
-    public float[] effects = new float[effectsSizeTotal];
+    public static float[] effects = new float[effectsSizeTotal];
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
 
@@ -353,6 +353,7 @@ public class Player extends ENTITY {
             quadrantTimer++;
         }
     }
+
 
     public void getExperience(ENTITY entity) {
         experience += entity.level;

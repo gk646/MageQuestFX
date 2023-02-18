@@ -13,6 +13,7 @@ abstract public class SKILL {
     protected final MainGame mg;
     public float totalCoolDown;
     public float coolDownCoefficient;
+    public float damage;
     /*
        Posion = 0
        Fire = 1

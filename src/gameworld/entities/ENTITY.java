@@ -1,6 +1,9 @@
 package gameworld.entities;
 
 import gameworld.entities.companion.ENT_Owly;
+import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.dmg_numbers.DamageNumber;
+import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
@@ -11,6 +14,8 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Main inheritable class for all entities
@@ -21,6 +26,9 @@ import java.awt.Rectangle;
  */
 abstract public class ENTITY {
     public Dialog dialog;
+    protected float health;
+    public ArrayList<Effect> effects;
+    public ArrayList<DamageNumber> damageNumbers;
     public Zone zone;
     protected int spriteCounter;
     protected int goalCol;
@@ -42,7 +50,7 @@ abstract public class ENTITY {
     public float worldX;
     public int screenX;
     public int screenY;
-    public int health;
+    public int magicResistance;
     public int maxHealth;
     public float movementSpeed;
     public int level;
@@ -257,59 +265,34 @@ abstract public class ENTITY {
         }
     }
 
+    protected void tickEffects() {
+        Iterator<Effect> iter = effects.iterator();
+        while (iter.hasNext()) {
+            Effect effect = iter.next();
+            effect.tick(this);
+            if (effect.rest_duration <= 0) {
+                iter.remove();
+            }
+        }
+    }
+
 
     abstract public void draw(GraphicsContext gc);
 
     abstract public void update();
-}
 
-/*
-
-
-        int enLeftX = worldX + collisionBox.x;
-        int enRightX = worldX + collisionBox.x + collisionBox.width;
-        int enTopY = worldY + collisionBox.y;
-        int enBottomY = worldY + collisionBox.y + collisionBox.height;
-        collisionRight = false;
-        collisionLeft = false;
-        collisionDown = false;
-        collisionUp = false;
-        mg.collisionChecker.checkEntityAgainstTile(this);
-        if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + 48) {
-            worldY -= movementSpeed;
-        } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + 48) {
-            worldY += movementSpeed;
-        } else if (enTopY >= nextY && enBottomY < nextY + 48) {
-            if (enLeftX > nextX) {
-                worldX -= movementSpeed;
-            }
-            if (enLeftX < nextX) {
-                worldX += movementSpeed;
-            }
-        } else if (enTopY > nextY && enLeftX > nextX) {
-            if (collisionUp) {
-                worldX -= movementSpeed;
-            } else {
-                worldY -= movementSpeed;
-            }
-        } else if (enTopY > nextY && enLeftX < nextX) {
-            if (collisionUp) {
-                worldX += movementSpeed;
-            } else {
-                worldY -= movementSpeed;
-            }
-        } else if (enTopY < nextY && enLeftX > nextX) {
-            if (collisionDown) {
-                worldX -= movementSpeed;
-            } else {
-                worldY += movementSpeed;
-            }
-        } else if (enTopY < nextY && enLeftX < nextX) {
-            if (collisionDown) {
-                worldX += movementSpeed;
-            } else {
-                worldY += movementSpeed;
-            }
+    public void getDamageFromPlayer(float flat_damage, DamageType type) {
+        switch (type) {
+            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[2];
+            case FireDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[19];
+            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[1];
+            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[18];
         }
+        this.health -= flat_damage;
     }
- */
+
+
+    public void getDamage(float flat_damage) {
+        this.health -= flat_damage;
+    }
+}

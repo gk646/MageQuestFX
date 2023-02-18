@@ -35,6 +35,7 @@ public class PRJ_Control {
     public MediaPlayer sound;
     protected Point endPos;
     protected Point2D.Double updateVector;
+    public float damage;
     public int projectileHeight;
     protected int spriteCounter;
     protected Image projectileImage1;
@@ -120,7 +121,7 @@ public class PRJ_Control {
 
     private void calcProjectileDamage(PRJ_Control projectile, ENTITY entity) {
         if (projectile instanceof PRJ_AutoShot) {
-            entity.health -= 1;
+            entity.getDamageFromPlayer(projectile.damage);
             projectile.dead = true;
         } else if (projectile instanceof PRJ_EnergySphere) {
             entity.health -= 1;
