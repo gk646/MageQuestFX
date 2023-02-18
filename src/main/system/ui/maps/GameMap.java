@@ -128,7 +128,7 @@ public class GameMap {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
                 if (offsetx + x < mg.wRender.worldSize.x && offsetx + x >= 0 && offsety + y < mg.wRender.worldSize.x && offsety + y >= 0) {
                     if (WorldController.currentMapCover[offsetx + x][offsety + y] == 1) {
-                        if (!WorldRender.tileStorage[WorldRender.worldData[offsetx + x][offsety + y]].collision) {
+                        if (!WorldRender.tileStorage[Math.max(0, WorldRender.worldData[offsetx + x][offsety + y])].collision) {
                             for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                                 for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                     if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {

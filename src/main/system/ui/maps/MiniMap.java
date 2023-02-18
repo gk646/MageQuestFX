@@ -29,7 +29,7 @@ public class MiniMap {
                 yTileOffset = Math.max(Math.min(yTile - 20 + y, mg.wRender.worldSize.x - 1), 0);
                 xTileOffset = Math.max(Math.min(xTile - 20 + x, mg.wRender.worldSize.x - 1), 0);
                 if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
-                    if (WorldRender.tileStorage[WorldRender.worldData[xTileOffset][yTileOffset]].collision) {
+                    if (WorldRender.tileStorage[Math.max(WorldRender.worldData[xTileOffset][yTileOffset], 0)].collision) {
                         gc.setFill(Colors.darkBackground);
                         gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
                     } else {
