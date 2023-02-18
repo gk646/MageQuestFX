@@ -9,7 +9,7 @@ import main.system.ui.skillbar.skills.SKL_RingSalvo;
 public class UI_SkillBar {
 
     private final MainGame mg;
-    public final SKILL[] skills = new SKILL[4];
+    public final SKILL[] skills = new SKILL[6];
     private final int skillBarX = 576;
     private final int skillBarY = 1_005;
 
@@ -18,6 +18,7 @@ public class UI_SkillBar {
         this.mg = mg;
         skills[0] = new SKL_RingSalvo(mg);
         skills[1] = new SKL_EnergySphere(mg);
+        skills[4] =
     }
 
     public void draw(GraphicsContext gc) {

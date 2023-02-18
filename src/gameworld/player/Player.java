@@ -156,9 +156,8 @@ public class Player extends ENTITY {
 
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.showMap && !mg.showTalents) {
-            if (mg.inputH.mouse1Pressed && cooldownPrimary == 35) {
+            if (mg.inputH.mouse1Pressed) {
                 mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
-                cooldownPrimary = 0;
                 getDurabilityDamageWeapon();
             }
             if (mg.inputH.mouse2Pressed) {
