@@ -34,100 +34,6 @@ public class WorldRender {
     }
 
 
-    private void getTileImage() {
-        //WOOD
-        setupTiles(53, "wooden_fence.png", true);
-
-        //BRICKS
-        setupTiles(55, "grey_brick_wall.png", true);
-        setupTiles(56, "brick_wall.png", false);
-        setupTiles(45, "black.png", true);
-        //GRASS
-
-        setupTiles(53, "wooden_fence.png", true);
-
-//BRICKS
-        setupTiles(55, "grey_brick_wall.png", true);
-        setupTiles(56, "brick_wall.png", false);
-        setupTiles(45, "black.png", true);
-//GRASS
-        setupTiles(0, "grass01.png", false);
-        setupTiles(1, "grass02.png", false);
-        setupTiles(2, "grass03.png", false);
-        setupTiles(3, "grass04.png", false);
-
-//WATER
-        setupTiles(4, "water05.png", true);
-        setupTiles(5, "water06.png", true);
-        setupTiles(6, "water07.png", true);
-//GRASS
-        setupTiles(13, "grass14.png", false);
-        setupTiles(14, "grass15.png", false);
-        setupTiles(15, "grass16.png", false);
-        setupTiles(16, "grass17.png", false);
-//WATER
-        setupTiles(17, "water18.png", true);
-        setupTiles(18, "water19.png", true);
-        setupTiles(19, "water20.png", true);
-        setupTiles(20, "water21.png", true);
-
-//GRASS
-        setupTiles(26, "grass27.png", false);
-        setupTiles(27, "grass27.png", false);
-        setupTiles(27, "grass28.png", false);
-        setupTiles(28, "grass29.png", false);
-        setupTiles(29, "grass30.png", false);
-
-//WATER
-        setupTiles(30, "water31.png", true);
-        setupTiles(31, "water32.png", true);
-        setupTiles(32, "water33.png", true);
-        setupTiles(33, "water34.png", false);
-
-        setupTiles(39, "grass40.png", false);
-        setupTiles(40, "grass41.png", false);
-        setupTiles(41, "grass42.png", false);
-        setupTiles(42, "grass43.png", false);
-        setupTiles(43, "grass44.png", false);
-        setupTiles(44, "grass45.png", false);
-
-        setupTiles(46, "water47.png", false);
-        setupTiles(47, "water48.png", false);
-
-        setupTiles(57, "tree01.png", true);
-        setupTiles(58, "tree02.png", true);
-
-        setupTiles(79, "79.png", true);
-        setupTiles(80, "79.png", true);
-        setupTiles(81, "82.png", true);
-        setupTiles(82, "83.png", true);
-        setupTiles(92, "93.png", true);
-        setupTiles(93, "94.png", true);
-        setupTiles(94, "95.png", true);
-        setupTiles(131, "132.png", false);
-        setupTiles(132, "133.png", false);
-        setupTiles(169, "170.png", true);
-        setupTiles(182, "183.png", true);
-        setupTiles(195, "196.png", true);
-        setupTiles(199, "200.png", true);
-        setupTiles(145, "146.png", false);
-        setupTiles(184, "185.png", true);
-        setupTiles(107, "108.png", true);
-        setupTiles(120, "121.png", true);
-        setupTiles(133, "134.png", false);
-        setupTiles(226, "227.png", false);
-        setupTiles(200, "201.png", true);
-        setupTiles(210, "211.png", true);
-        setupTiles(171, "171.png", true);
-        setupTiles(183, "184.png", true);
-        setupTiles(196, "197.png", true);
-        setupTiles(186, "186.png", true);
-        setupTiles(105, "105.png", true);
-        setupTiles(170, "169.png", true);
-        setupTiles(187, "187.png", true);
-        setupTiles(212, "212.png", true);
-    }
-
     private void getTileImagesNew() {
         setupTiles(0, "0.png", false);
         setupTiles(1, "1.png", false);
@@ -234,12 +140,12 @@ public class WorldRender {
         setupTiles(102, "102.png", false);
         setupTiles(103, "103.png", false);
         setupTiles(104, "104.png", false);
-        setupTiles(105, "105.png", false);
-        setupTiles(106, "106.png", false);
-        setupTiles(107, "107.png", false);
-        setupTiles(108, "108.png", false);
-        setupTiles(109, "109.png", false);
-        setupTiles(110, "110.png", false);
+        setupTiles(105, "105.png", true);
+        setupTiles(106, "106.png", true);
+        setupTiles(107, "107.png", true);
+        setupTiles(108, "108.png", true);
+        setupTiles(109, "109.png", true);
+        setupTiles(110, "110.png", true);
         setupTiles(111, "111.png", false);
         setupTiles(112, "112.png", false);
         setupTiles(113, "113.png", false);
@@ -276,7 +182,7 @@ public class WorldRender {
         setupTiles(144, "144.png", false);
         setupTiles(145, "145.png", false);
         setupTiles(146, "146.png", false);
-        setupTiles(147, "147.png", false);
+        setupTiles(147, "147.png", true);
         setupTiles(148, "148.png", false);
         setupTiles(149, "149.png", false);
         setupTiles(150, "150.png", false);
@@ -304,7 +210,7 @@ public class WorldRender {
         setupTiles(172, "172.png", false);
         setupTiles(173, "173.png", false);
         setupTiles(174, "174.png", false);
-        setupTiles(175, "175.png", false);
+        setupTiles(175, "175.png", true);
         setupTiles(176, "176.png", false);
         setupTiles(177, "177.png", false);
         setupTiles(178, "178.png", false);
@@ -328,8 +234,8 @@ public class WorldRender {
         setupTiles(196, "196.png", false);
         setupTiles(197, "197.png", false);
         setupTiles(198, "198.png", false);
-        setupTiles(199, "199.png", false);
-        setupTiles(200, "200.png", false);
+        setupTiles(199, "199.png", true);
+        setupTiles(200, "200.png", true);
         setupTiles(201, "201.png", false);
         setupTiles(202, "202.png", false);
         setupTiles(203, "203.png", false);
@@ -364,8 +270,8 @@ public class WorldRender {
         setupTiles(232, "232.png", false);
         setupTiles(233, "233.png", false);
         setupTiles(234, "234.png", false);
-        setupTiles(235, "235.png", false);
-        setupTiles(236, "236.png", false);
+        setupTiles(235, "235.png", true);
+        setupTiles(236, "236.png", true);
         setupTiles(237, "237.png", false);
         setupTiles(238, "238.png", false);
         setupTiles(239, "239.png", false);
@@ -1061,7 +967,7 @@ public class WorldRender {
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
                 if (worldData[i][b] != -1) {
-                    g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);
+                    g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
                 }
             }
         }
@@ -1089,7 +995,7 @@ public class WorldRender {
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
                 if (worldData2[i][b] != -1) {
-                    g2.drawImage(tileStorage[worldData2[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);
+                    g2.drawImage(tileStorage[worldData2[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
                 }
             }
         }

@@ -1,11 +1,11 @@
 package main.system.ui.skillbar.skills;
 
-import gameworld.player.abilities.PRJ_EnergySphere;
+import gameworld.player.abilities.PRJ_AutoShot;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
-class SKL_AutoShot extends SKILL {
+public class SKL_AutoShot extends SKILL {
 
 
     public SKL_AutoShot(MainGame mg) {
@@ -31,9 +31,8 @@ class SKL_AutoShot extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            mg.PROJECTILES.add(new PRJ_EnergySphere(mg));
-            mg.player.mana -= 10;
+        if (actualCoolDown == 30) {
+            mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();
         }

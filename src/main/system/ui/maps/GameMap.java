@@ -122,13 +122,15 @@ public class GameMap {
         getOffset(zoom_i);
         image = new BufferedImage(1_570, 935, BufferedImage.TYPE_INT_ARGB);
         int entityX, entityY;
+        int tileNum;
         int offsetx = (int) (xTile_i - 1_570.0f / (zoom_i * 2));
         int offsety = (int) (yTile_i - 935.0f / (zoom_i * 2));
         for (int y = 0; y < (935 / zoom_i) + 1; y++) {
             for (int x = 0; x < (1_570 / zoom_i) + 1; x++) {
                 if (offsetx + x < mg.wRender.worldSize.x && offsetx + x >= 0 && offsety + y < mg.wRender.worldSize.x && offsety + y >= 0) {
                     if (WorldController.currentMapCover[offsetx + x][offsety + y] == 1) {
-                        if (!WorldRender.tileStorage[Math.max(0, WorldRender.worldData[offsetx + x][offsety + y])].collision) {
+                        tileNum = WorldRender.worldData[offsetx + x][offsety + y];
+                        if (tileNum != -1 && !WorldRender.tileStorage[tileNum].collision) {
                             for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                                 for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                     if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {

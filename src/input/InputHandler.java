@@ -389,7 +389,7 @@ public class InputHandler {
             }
             if (mg.gameState == State.TITLE && mg.ui.discord_button.contains(lastMousePosition)) {
                 try {
-                    Desktop.getDesktop().browse(new URI("https://discord.gg/rzQgQm5Wu6"));
+                    Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

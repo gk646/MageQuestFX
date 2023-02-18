@@ -23,13 +23,15 @@ public class MiniMap {
     public void draw(GraphicsContext gc) {
         int xTile = mg.playerX;
         int yTile = mg.playerY;
+        int tileNum;
         int yTileOffset, xTileOffset, entityX, entityY;
         for (int y = 0; y < 40; y++) {
             for (int x = 0; x < 40; x++) {
                 yTileOffset = Math.max(Math.min(yTile - 20 + y, mg.wRender.worldSize.x - 1), 0);
                 xTileOffset = Math.max(Math.min(xTile - 20 + x, mg.wRender.worldSize.x - 1), 0);
+                tileNum = WorldRender.worldData[xTileOffset][yTileOffset];
                 if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
-                    if (WorldRender.tileStorage[Math.max(WorldRender.worldData[xTileOffset][yTileOffset], 0)].collision) {
+                    if (tileNum != -1 && WorldRender.tileStorage[tileNum].collision) {
                         gc.setFill(Colors.darkBackground);
                         gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
                     } else {
@@ -61,8 +63,8 @@ public class MiniMap {
             for (PRJ_Control PRJControl : mg.PROJECTILES) {
                 entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
                 entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
-                if (WorldController.currentMapCover[entityX][entityY] == 1) {
-                    if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
+                if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
+                    if (WorldController.currentMapCover[entityX][entityY] == 1) {
                         gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 2, 2);
                     }
                 }

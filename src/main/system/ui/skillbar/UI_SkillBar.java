@@ -3,22 +3,22 @@ package main.system.ui.skillbar;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.Colors;
+import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
 import main.system.ui.skillbar.skills.SKL_RingSalvo;
 
 public class UI_SkillBar {
 
-    private final MainGame mg;
+
     public final SKILL[] skills = new SKILL[6];
     private final int skillBarX = 576;
     private final int skillBarY = 1_005;
 
 
     public UI_SkillBar(MainGame mg) {
-        this.mg = mg;
         skills[0] = new SKL_RingSalvo(mg);
         skills[1] = new SKL_EnergySphere(mg);
-        skills[4] =
+        skills[4] = new SKL_AutoShot(mg);
     }
 
     public void draw(GraphicsContext gc) {

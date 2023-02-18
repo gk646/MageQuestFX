@@ -34,11 +34,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 373,
-                "y": 330
+                "x": 364,
+                "y": 104
             }
         },
         "GrassLands.tmx": {
@@ -83,11 +83,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.75,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 200,
-                "y": 156
+                "x": 248.4848484848485,
+                "y": 615.1515151515151
             }
         },
         "d.tsx": {
@@ -156,7 +156,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 122,
+                "x": 274,
                 "y": 176
             }
         },
