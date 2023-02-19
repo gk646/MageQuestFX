@@ -1,7 +1,7 @@
 package main.system.ai;
 
 import main.MainGame;
-import main.system.WorldRender;
+import main.system.rendering.WorldRender;
 
 import java.util.ArrayList;
 

@@ -4,6 +4,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.player.Player;
 import main.MainGame;
+import main.system.rendering.WorldRender;
 
 import java.awt.Rectangle;
 

@@ -27,11 +27,12 @@ import javafx.util.Duration;
 import main.system.CollisionChecker;
 import main.system.Multiplayer;
 import main.system.Storage;
-import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.State;
 import main.system.enums.Zone;
+import main.system.rendering.WorldAnimation;
+import main.system.rendering.WorldRender;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
@@ -118,6 +119,7 @@ public class MainGame {
     public boolean drawKeybindings;
     public boolean drawGameplay;
     public boolean drawCodex;
+    public WorldAnimation wAnim;
 
     //---------System---------
     private MiniMap miniM;
@@ -342,6 +344,7 @@ public class MainGame {
         FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
         sqLite = new SQLite(this);
         sqLite.getConnection();
+        wAnim = new WorldAnimation(this);
         ui.updateLoadingScreen(0, gc);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
@@ -416,7 +419,7 @@ public class MainGame {
 
         ENTITIES.add(new BOS_Slime(this, 48 * 48, 49 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
-           // ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
+            // ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));

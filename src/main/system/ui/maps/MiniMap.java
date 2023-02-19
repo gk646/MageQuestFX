@@ -7,7 +7,7 @@ import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
-import main.system.WorldRender;
+import main.system.rendering.WorldRender;
 import main.system.ui.Colors;
 
 import java.util.Objects;

@@ -7,7 +7,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
-import main.system.WorldRender;
+import main.system.rendering.WorldRender;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 

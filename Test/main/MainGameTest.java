@@ -8,10 +8,10 @@ import gameworld.world.WorldController;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import main.system.WorldRender;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

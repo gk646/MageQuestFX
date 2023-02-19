@@ -2,6 +2,7 @@ package main.system;
 
 import gameworld.player.Player;
 import main.MainGame;
+import main.system.rendering.WorldRender;
 import main.system.tiles.Tile;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

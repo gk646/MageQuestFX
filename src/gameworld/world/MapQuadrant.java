@@ -3,8 +3,8 @@ package gameworld.world;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import main.MainGame;
-import main.system.WorldRender;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 
 public class MapQuadrant {
 

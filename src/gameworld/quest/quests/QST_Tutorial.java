@@ -8,8 +8,8 @@ import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
-import main.system.WorldRender;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 
 public class QST_Tutorial extends QUEST {
     private int gruntKillCounter;

@@ -1,4 +1,4 @@
-package main.system;
+package main.system.rendering;
 
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;

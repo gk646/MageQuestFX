@@ -5,9 +5,9 @@ import gameworld.player.Player;
 import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
 import main.MainGame;
-import main.system.WorldRender;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -43,6 +43,7 @@ public class WorldController {
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
+                mg.wAnim.cacheAnimationTiles();
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
                 currentWorld = map.zone;
