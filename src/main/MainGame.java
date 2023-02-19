@@ -183,6 +183,7 @@ public class MainGame {
                         player.checkPlayerIsMoving();
                         inventP.interactWithWindows();
                         getPlayerTile();
+                        wAnim.animateTiles();
                         wControl.uncoverWorldMap();
                         ent_control.removeDead();
                         wControl.update();

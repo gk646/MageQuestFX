@@ -37,7 +37,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 358,
+                "x": 356,
                 "y": 378
             }
         },
@@ -83,11 +83,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 315.3333333333333,
-                "y": 247.33333333333331
+                "x": 489,
+                "y": 103
             }
         },
         "d.tsx": {
