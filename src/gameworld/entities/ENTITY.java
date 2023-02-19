@@ -163,8 +163,8 @@ abstract public class ENTITY {
      * @see ENTITY#searchPath(int, int, int)
      */
     public void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
-        int startCol = (int) ((worldX + 24) / 48);
-        int startRow = (int) ((worldY + 24) / 48);
+        int startCol = (int) ((worldX) / 48);
+        int startRow = (int) ((worldY) / 48);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
@@ -221,10 +221,10 @@ abstract public class ENTITY {
     }
 
     protected void followPlayer(int playerX, int playerY) {
-        if (!((worldX + 24) / 48 == playerX && (worldY + 24) / 48 == playerY)) {
-            searchPathUncapped(playerX, playerY, 100);
-        } else {
+        if ((worldX) / 48 == playerX && (worldY) / 48 == playerY) {
             onPath = false;
+        } else {
+            searchPathUncapped(playerX, playerY, 100);
         }
     }
 

@@ -41,6 +41,7 @@ public class WorldController {
                 clearWorldArrays();
                 mg.npcControl.loadNPC(zone);
                 WorldRender.worldData = map.mapDataBackGround;
+                WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;

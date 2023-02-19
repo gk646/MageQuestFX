@@ -140,12 +140,17 @@ public class CollisionChecker {
         int entityTopRow = Math.max(Math.min(entityTopWorldY / 48, mg.wRender.worldSize.x), 0);
         int entityBottomRow = Math.min(entityBottomWorldY / 48, mg.wRender.worldSize.x);
 
-        int tileNum1, tileNum2;
+        int tileNum1, tileNum2, tileNumBG1, tileNumBG1_2;
         if (player.direction.contains("right")) {
             entityRightCol = (int) Math.min((entityRightWorldX + player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityRightCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityBottomRow];
+
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                player.collisionRight = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 player.collisionRight = true;
             }
         }
@@ -153,7 +158,11 @@ public class CollisionChecker {
             entityLeftCol = (int) Math.min((entityLeftWorldX - player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityLeftCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                player.collisionLeft = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 player.collisionLeft = true;
             }
         }
@@ -164,7 +173,11 @@ public class CollisionChecker {
             entityTopRow = (int) Math.min((entityTopWorldY - player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityTopRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                player.collisionUp = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 player.collisionUp = true;
             }
         }
@@ -174,7 +187,11 @@ public class CollisionChecker {
             entityBottomRow = (int) Math.min((entityBottomWorldY + player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityBottomRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                player.collisionDown = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 player.collisionDown = true;
             }
         }

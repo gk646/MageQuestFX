@@ -25,6 +25,7 @@ public class Map {
     public GameMapType gameMapType;
     public Zone zone;
     public int[][] mapDataBackGround;
+    public int[][] mapDataBackGround2;
     public int[][] mapDataForeGround;
     public Point mapSize;
     public ArrayList<SpawnTrigger> spawnTriggers;
@@ -38,6 +39,7 @@ public class Map {
         this.gameMapType = GameMapType.NoMapCover;
         this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
         this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
+        this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
         this.spawnTriggers = getTriggers(name, zone);
         this.mapQuadrants = new MapQuadrant[100];
         this.mapSize = mapSize;
@@ -51,6 +53,7 @@ public class Map {
         this.name = name;
         this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
         this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
+        this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
         this.spawnTriggers = getTriggers(name, zone);
         this.mapQuadrants = new MapQuadrant[100];
         this.mapCover = new int[mapSize.x][mapSize.x];

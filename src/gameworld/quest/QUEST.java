@@ -33,7 +33,7 @@ abstract public class QUEST {
         npc.onPath = true;
         npc.goalTile = new Point(x, y);
         npc.stuckCounter++;
-        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
+        if ((npc.worldX) / 48 == npc.goalTile.x && (npc.worldY) / 48 == npc.goalTile.y) {
             npc.onPath = false;
             npc.stuckCounter = 0;
         } else if (npc.stuckCounter > 7000) {

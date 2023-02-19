@@ -24,7 +24,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 942.4242424242424,
-                "y": 857.5757575757577
+                "y": 860.6060606060607
             }
         },
         "City1.tmx#grassspritesheet16": {
@@ -35,10 +35,10 @@
                 2
             ],
             "scale": 0.5,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 364,
-                "y": 104
+                "x": 360,
+                "y": 378
             }
         },
         "GrassLands.tmx": {
@@ -83,11 +83,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.75,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -517.3333333333333,
-                "y": -88
+                "x": 200,
+                "y": 179
             }
         },
         "d.tsx": {
@@ -157,7 +157,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 274,
-                "y": 176
+                "y": 177
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -172,11 +172,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239,
-                "y": 159.5
+                "x": 241.33333333333331,
+                "y": 205.99999999999994
             }
         }
     },

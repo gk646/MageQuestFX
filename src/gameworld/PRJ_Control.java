@@ -129,7 +129,6 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
             entity.effects.add(new EFT_Burning_I(360, 1, true, 60));
             projectile.dead = true;
-
             projectile.playHitSound();
         }
         entity.hpBarOn = true;
