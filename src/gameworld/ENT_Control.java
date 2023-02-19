@@ -1,11 +1,14 @@
 package gameworld;
 
+import gameworld.entities.ENTITY;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
+
+import java.util.Iterator;
 
 
 /**
@@ -61,7 +64,14 @@ public class ENT_Control {
 
     public void removeDead() {
         synchronized (MainGame.ENTITIES) {
-            MainGame.ENTITIES.removeIf(entity -> entity.dead);
+            Iterator<ENTITY> iterator = MainGame.ENTITIES.iterator();
+            while (iterator.hasNext()) {
+                ENTITY entity = iterator.next();
+                if (entity.dead) {
+                    iterator.remove();
+                    mg.prj_control.recordDeath(entity);
+                }
+            }
         }
     }
 }

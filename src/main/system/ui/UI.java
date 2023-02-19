@@ -89,23 +89,25 @@ public class UI {
         gc.setFill(Colors.LightGrey);
         gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         gc.setFill(Colors.darkBackground);
-        drawCenteredText(gc, "JavaFX ", credits_scroll);
-        drawCenteredText(gc, "The next generation client application framework for desktop, mobile and embedded systems.", credits_scroll - 50);
-        drawCenteredText(gc, "OpenJDK", credits_scroll - 100);
-        drawCenteredText(gc, "The open source implementation of the Java Platform, Standard Edition (Java SE).", credits_scroll - 150);
-        drawCenteredText(gc, "Map Editor", credits_scroll - 200);
-        drawCenteredText(gc, "Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer", credits_scroll - 250);
-        drawCenteredText(gc, "TEXTURES", credits_scroll - 300);
-        drawCenteredText(gc, "Character textures: craftpix.net / Full copyright with their Freebie License", credits_scroll - 350);
-        drawCenteredText(gc, "Effect textures from: craftpix.net / Full copyright with their Freebie License", credits_scroll - 400);
-        drawCenteredText(gc, "Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", credits_scroll - 450);
-        drawCenteredText(gc, "Item icons: DALL·E  / Image generation AI by OpenAI", credits_scroll - 500);
-        drawCenteredText(gc, "SOUNDS", credits_scroll - 550);
-        drawCenteredText(gc, "unfa's Laser Weapon Sounds  https://freesound.org/s/187119/", credits_scroll - 600);
-        drawCenteredText(gc, "Various soundeffects / public domain from freesound.org", credits_scroll - 650);
-        drawCenteredText(gc, "DATABASE", credits_scroll - 700);
-        drawCenteredText(gc, "SQLite JDBC driver 3.4 - developed by Xerial", credits_scroll - 750);
-        drawCenteredText(gc, "SQLite database - developed by D. Richard Hipp", credits_scroll - 7800);
+        drawCenteredText(gc, "JavaFX ", credits_scroll + MainGame.SCREEN_HEIGHT);
+        drawCenteredText(gc, "The next generation client application framework for desktop, mobile and embedded systems.", credits_scroll + MainGame.SCREEN_HEIGHT + 50);
+        drawCenteredText(gc, "OpenJDK", credits_scroll + MainGame.SCREEN_HEIGHT + 100);
+        drawCenteredText(gc, "The open source implementation of the Java Platform, Standard Edition (Java SE).", credits_scroll + MainGame.SCREEN_HEIGHT + 150);
+        drawCenteredText(gc, "Map Editor", credits_scroll + MainGame.SCREEN_HEIGHT + 200);
+        drawCenteredText(gc, "Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer", credits_scroll + MainGame.SCREEN_HEIGHT + 250);
+        drawCenteredText(gc, "TEXTURES", credits_scroll + MainGame.SCREEN_HEIGHT + 300);
+        drawCenteredText(gc, "Character textures: craftpix.net / Full copyright with their Freebie License", credits_scroll + MainGame.SCREEN_HEIGHT + 350);
+        drawCenteredText(gc, "Effect textures from: craftpix.net / Full copyright with their Freebie License", credits_scroll + MainGame.SCREEN_HEIGHT + 400);
+        drawCenteredText(gc, "Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion", credits_scroll + MainGame.SCREEN_HEIGHT + 450);
+        drawCenteredText(gc, "Item icons: DALL·E  / Image generation AI by OpenAI", credits_scroll + MainGame.SCREEN_HEIGHT + 500);
+        drawCenteredText(gc, "SOUNDS", credits_scroll + MainGame.SCREEN_HEIGHT + 550);
+        drawCenteredText(gc, "item equip sound:  https://freesound.org/people/1bob/sounds/651515/", credits_scroll - 600);
+        drawCenteredText(gc, "unfa's Laser Weapon Sounds  https://freesound.org/s/187119/", credits_scroll + MainGame.SCREEN_HEIGHT + 650);
+        drawCenteredText(gc, "Various soundeffects / public domain from freesound.org", credits_scroll + MainGame.SCREEN_HEIGHT + 650);
+        drawCenteredText(gc, "item equip sound:  https://freesound.org/people/1bob/sounds/651515/", credits_scroll + MainGame.SCREEN_HEIGHT + 700);
+        drawCenteredText(gc, "DATABASE", credits_scroll + MainGame.SCREEN_HEIGHT + 750);
+        drawCenteredText(gc, "SQLite JDBC driver 3.4 - developed by Xerial", credits_scroll + MainGame.SCREEN_HEIGHT + 800);
+        drawCenteredText(gc, "SQLite database - developed by D. Richard Hipp", credits_scroll + MainGame.SCREEN_HEIGHT + 850);
         drawCenteredText(gc, "", credits_scroll - 850);
         drawCenteredText(gc, "", credits_scroll - 900);
         drawCenteredText(gc, "", credits_scroll - 950);
@@ -118,6 +120,7 @@ public class UI {
         credits_scroll += 0.25;
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
+
 
     private void drawTitleScreen(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold50);

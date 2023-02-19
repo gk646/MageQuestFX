@@ -7,15 +7,9 @@ import javafx.animation.Timeline;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import main.system.ui.inventory.UI_InventoryPanel;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Sound {
     public static ArrayList<MediaPlayer> ambientTracks = new ArrayList<>();
@@ -31,22 +25,11 @@ public class Sound {
     private boolean fadeOut, fadeIn;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
-
+    private MediaPlayer equip, finishObjective;
 
     public Sound() {
-        getClips();
     }
 
-    public void getClips() {
-        AudioInputStream inputStream = null;
-        try {
-            Clip clip = AudioSystem.getClip();
-            inputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/travelling.wav")));
-            clip.open(inputStream);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void playSwitchSound() {
         menu_switch.stop();
@@ -61,13 +44,27 @@ public class Sound {
     }
 
     public void loadSounds() {
+        equip = new MediaPlayer(new Media(UI_InventoryPanel.class.getResource("/resources/sound/effects/inventory/equip.wav").toString()));
+        equip.setVolume(0.25);
+        finishObjective = new MediaPlayer(new Media(UI_InventoryPanel.class.getResource("/resources/sound/effects/quest/finish_objective.wav").toString()));
+        finishObjective.setVolume(0.4);
         INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro_new.wav").toString()));
         INTRO.setVolume(0.8);
-        menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_switch.wav").toString()));
-        menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu/menu_back.wav").toString()));
+        menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_switch.wav").toString()));
+        menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString()));
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
         loadDungeonAmbience();
+    }
+
+    public void playEquip() {
+        equip.seek(Duration.ZERO);
+        equip.play();
+    }
+
+    public void playFinishObjective() {
+        finishObjective.seek(Duration.ZERO);
+        finishObjective.play();
     }
 
     private void loadDungeonAmbience() {

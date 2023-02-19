@@ -172,7 +172,7 @@ public class PRJ_Control {
         }
     }
 
-    private void recordDeath(ENTITY entity) {
+    public void recordDeath(ENTITY entity) {
         if (entity instanceof ENT_Grunt) {
             GruntKilledCounter++;
         } else if (entity instanceof ENT_Shooter) {

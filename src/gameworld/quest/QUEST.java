@@ -47,6 +47,14 @@ abstract public class QUEST {
         progressStage++;
     }
 
+    protected void updateObjective(String newText) {
+        if (!checkDialogSimilarity(newText)) {
+            mg.sound.playFinishObjective();
+        }
+        objective = newText;
+    }
+
+
     /**
      * true if the play bags contain item with name
      *
@@ -101,5 +109,32 @@ abstract public class QUEST {
         } catch (ArrayIndexOutOfBoundsException e) {
             npc.dialog.loadNewLine("...");
         }
+    }
+
+    protected boolean checkDialogSimilarity(String newObjective) {
+        int len1 = objective.length();
+        int len2 = newObjective.length();
+        int[][] dp = new int[len1 + 1][len2 + 1];
+
+        for (int i = 0; i <= len1; i++) {
+            for (int j = 0; j <= len2; j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else if (objective.charAt(i - 1) == newObjective.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = 1 + Math.min(dp[i][j - 1], Math.min(dp[i - 1][j], dp[i - 1][j - 1]));
+                }
+            }
+        }
+
+        int distance = dp[len1][len2];
+        int maxLen = Math.max(len1, len2);
+        double similarity = 1.0 - ((double) distance / (double) maxLen);
+
+        // Check if the similarity is greater than or equal to 80%
+        return similarity >= 0.8;
     }
 }

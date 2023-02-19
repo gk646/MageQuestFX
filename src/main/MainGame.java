@@ -6,7 +6,6 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
 import gameworld.quest.dialog.DialogStorage;
@@ -412,25 +411,23 @@ public class MainGame {
         gameState = State.TITLE;
         loadingScreen = false;
         startThreads();
-
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
 
         ENTITIES.add(new BOS_Slime(this, 48 * 48, 49 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
-            ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
+           // ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 59, 49);
+        // wControl.loadMap(Zone.Tutorial, 59, 49);
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
         }
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3, Zone.GrassLands));
         }
-        Player.effects[21] = 0;
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
 
 

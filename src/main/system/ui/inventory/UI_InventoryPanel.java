@@ -47,6 +47,7 @@ public class UI_InventoryPanel {
     private boolean node_focused;
     private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
+
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
     private final Image sort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/sort.png")));
     private final Image character_bottom = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture.png")));
@@ -312,6 +313,7 @@ public class UI_InventoryPanel {
                                     slot.item = char_Slots[i].item;
                                     char_Slots[i].item = null;
                                     mg.player.updateEquippedItems();
+                                    mg.sound.playEquip();
                                     break;
                                 }
                             }
@@ -339,11 +341,13 @@ public class UI_InventoryPanel {
                                     slot.item = bag_Slots.get(i).item;
                                     bag_Slots.get(i).item = null;
                                     mg.player.updateEquippedItems();
+                                    mg.sound.playEquip();
                                     break;
                                 } else if (slot.type.contains(String.valueOf(bag_Slots.get(i).item.type))) {
                                     ITEM placeholder = slot.item;
                                     slot.item = bag_Slots.get(i).item;
                                     bag_Slots.get(i).item = placeholder;
+                                    mg.sound.playEquip();
                                     mg.player.updateEquippedItems();
                                     mg.inputH.mouse1Pressed = false;
                                     break;
@@ -381,6 +385,7 @@ public class UI_InventoryPanel {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
                     if (invSlot.boundBox.contains(mg.inputH.lastMousePosition) && invSlot.type.contains(String.valueOf(grabbedITEM.type))) {
+                        mg.sound.playEquip();
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -399,6 +404,7 @@ public class UI_InventoryPanel {
             if (mg.showBag) {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                        mg.sound.playEquip();
                         if (bagSlot.item != null) {
                             if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
                                 char_Slots[grabbedIndexChar].item = bagSlot.item;
@@ -417,6 +423,7 @@ public class UI_InventoryPanel {
             if (showBagEquipSlots) {
                 for (UI_InventorySlot equipBag : bagEquipSlots) {
                     if (equipBag.boundBox.contains(mg.inputH.lastMousePosition) && grabbedITEM != null) {
+                        mg.sound.playEquip();
                         if (equipBag.item == null && grabbedITEM.type == 'G') {
                             equipBag.item = grabbedITEM;
                             addBagSlots(Integer.parseInt(grabbedITEM.stats));
@@ -635,7 +642,7 @@ public class UI_InventoryPanel {
         gc.fillText("Currency", startX + 100, startY - 80 + 629);
         int y = startY + 50;
         for (int i = 1; i < 26; i++) {
-            gc.fillText(Player.effectNames[i] + mg.player.effects[i] + "%", 100 + startX, y);
+            gc.fillText(Player.effectNames[i] + Player.effects[i] + "%", 100 + startX, y);
             y += 18;
         }
     }

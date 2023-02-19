@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
+import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.Objects;
@@ -27,12 +28,20 @@ public class UI_QuestPanel {
     }
 
     public void draw(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold20);
         if (expanded) {
             gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_649, 335, 251, 400, 10, 10);
         }
         gc.setFill(Color.WHITE);
         gc.fillText("OBJECTIVES", 1_678, 361);
+        gc.setFont(FonT.minecraftBoldItalic15);
+        int y = 361;
+        for (QUEST quest : quests) {
+            if (quest != null) {
+                gc.fillText(quest.objective, 1_685, y += 30);
+            }
+        }
         gc.setFill(Colors.button);
         gc.fillRoundRect(1_872, 343, 21, 21, 5, 5);
         if (expanded) {

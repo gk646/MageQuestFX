@@ -39,6 +39,7 @@ public class WorldController {
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 clearWorldArrays();
+                mg.npcControl.loadNPC(zone);
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.player.map = map;
