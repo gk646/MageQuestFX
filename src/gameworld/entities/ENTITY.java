@@ -12,7 +12,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -29,12 +28,12 @@ abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
     public ArrayList<Effect> effects = new ArrayList<>();
-    public ArrayList<DamageNumber> damageNumbers = new ArrayList<>();
     public Zone zone;
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
-    public int amountedDamageSinceLastDamageNumber;
+    protected float amountedDamageSinceLastDamageNumber;
+    protected long timeSinceLastDamageNumber;
     public Image entityImage1;
     protected Image entityImage2;
     protected Image entityImage3;
@@ -278,17 +277,6 @@ abstract public class ENTITY {
         }
     }
 
-    public void drawDMGNumbers(GraphicsContext gc) {
-        gc.setFont(FonT.minecraftBold14);
-        Iterator<DamageNumber> iterator = damageNumbers.iterator();
-        while (iterator.hasNext()) {
-            DamageNumber dmgN = iterator.next();
-            dmgN.draw(gc, this);
-            if (dmgN.offSetY <= -30) {
-                iterator.remove();
-            }
-        }
-    }
 
     public float getHealth() {
         return this.health;
@@ -296,7 +284,9 @@ abstract public class ENTITY {
 
     abstract public void draw(GraphicsContext gc);
 
-    abstract public void update();
+    public void update() {
+        tickEffects();
+    }
 
     public void getDamageFromPlayer(float flat_damage, DamageType type) {
         switch (type) {
@@ -305,10 +295,20 @@ abstract public class ENTITY {
             case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[1];
             case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[18];
         }
+        amountedDamageSinceLastDamageNumber += flat_damage;
+        if (mg.random.nextInt(0, 101) <= Player.effects[21]) {
+            flat_damage += (flat_damage / 100.0f) * Player.effects[22];
+            mg.damageNumbers.add(new DamageNumber((int) flat_damage, type, this, true));
+            timeSinceLastDamageNumber = System.currentTimeMillis();
+            amountedDamageSinceLastDamageNumber = 0;
+        }
+        if (System.currentTimeMillis() - timeSinceLastDamageNumber >= 100 && amountedDamageSinceLastDamageNumber > 0.99) {
+            mg.damageNumbers.add(new DamageNumber((int) amountedDamageSinceLastDamageNumber, type, this, false));
+            amountedDamageSinceLastDamageNumber = 0;
+            timeSinceLastDamageNumber = System.currentTimeMillis();
+        }
         this.health -= flat_damage;
-        damageNumbers.add(new DamageNumber((int) flat_damage, type));
     }
-
 
     public void getDamage(float flat_damage) {
         this.health -= flat_damage;

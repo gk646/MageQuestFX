@@ -122,9 +122,9 @@ public class PRJ_Control {
         if (projectile instanceof PRJ_EnergySphere) {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else if (projectile instanceof PRJ_RingSalvo) {
-            entity.getDamage(5);
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else if (projectile instanceof PRJ_Lightning) {
-            entity.getDamage(1);
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
             entity.effects.add(new EFT_Burning_I(360, 1, true, 60));

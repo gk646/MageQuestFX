@@ -43,9 +43,9 @@ public class Colors {
     public static final Color white = Color.rgb(252, 252, 252, 1);
 
     //DAMAGE TYPES
-    public static final Color fire_red = Color.rgb(230, 34, 34, 0.85);
-    public static final Color arcane_blue = Color.rgb(106, 203, 241, 0.85);
-    public static final Color dark_magic_purple = Color.rgb(128, 0, 128, 0.85);
-    public static final Color physical_grey = Color.rgb(90, 105, 136, 0.85);
-    public static final Color poison_green = Color.rgb(117, 215, 44, 0.85);
+    public static final Color fire_red = Color.rgb(230, 34, 34, 1);
+    public static final Color arcane_blue = Color.rgb(106, 203, 241, 1);
+    public static final Color dark_magic_purple = Color.rgb(128, 0, 128, 1);
+    public static final Color physical_grey = Color.rgb(90, 105, 136, 1);
+    public static final Color poison_green = Color.rgb(117, 215, 44, 1);
 }

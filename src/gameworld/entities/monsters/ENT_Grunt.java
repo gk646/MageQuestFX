@@ -41,7 +41,7 @@ public class ENT_Grunt extends ENTITY {
 
     @Override
     public void update() {
-        tickEffects();
+        super.update();
         if (health <= 0) {
             dead = true;
         }

@@ -48,6 +48,7 @@ public class BOS_Slime extends BOSS {
      */
     @Override
     public void update() {
+        super.update();
         onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         searchTicks++;
         if (searchTicks % 120 == 0) {

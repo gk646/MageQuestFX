@@ -31,5 +31,7 @@ abstract public class BOSS extends ENTITY {
      *
      */
     @Override
-    abstract public void update();
+    public void update() {
+        tickEffects();
+    }
 }

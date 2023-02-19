@@ -12,10 +12,12 @@ public class FonT {
     private static Font minecraftItalic17;
     private static Font minecraftItalic30;
     public static Font minecraftBold14;
+    public static Font minecraftBold20;
     public static Font minecraftBold30;
     public static Font minecraftBold50;
 
     public static Font minecraftBold13;
+    public static Font minecraftBold16;
     public static Font minecraftBoldItalic15;
 
     //MARU MONICA
@@ -39,6 +41,8 @@ public class FonT {
         minecraftItalic17 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 17);
         minecraftItalic30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 30);
         minecraftBold13 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 13);
+        minecraftBold16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 16);
+        minecraftBold20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 25);
         minecraftBold14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 14);
         minecraftBold50 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 50);
         minecraftBoldItalic15 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBoldItalic-1y1e.otf"), 15);

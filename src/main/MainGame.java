@@ -4,6 +4,8 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.entities.boss.BOS_Slime;
+import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.Player;
@@ -63,6 +65,7 @@ public class MainGame {
     public final List<PRJ_Control> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
 
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
+    public final List<DamageNumber> damageNumbers = Collections.synchronizedList(new ArrayList<>());
 
     public Random random;
     //ITEMS
@@ -116,6 +119,7 @@ public class MainGame {
     public boolean drawKeybindings;
     public boolean drawGameplay;
     public boolean drawCodex;
+
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
@@ -277,6 +281,7 @@ public class MainGame {
             npcControl.draw(gc);
             //ENTPlayer2.draw(gc);
             player.draw(gc);
+            drawDamageNumber(gc);
             wRender.drawSecondLayer(gc);
             miniM.draw(gc);
             ui.draw(gc);
@@ -411,7 +416,7 @@ public class MainGame {
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
 
-
+        ENTITIES.add(new BOS_Slime(this, 48 * 48, 49 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
             ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
         }
@@ -425,7 +430,7 @@ public class MainGame {
         for (int i = 0; i < 10; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3, Zone.GrassLands));
         }
-
+        Player.effects[21] = 0;
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
 
 
@@ -460,8 +465,18 @@ public class MainGame {
         playerY = (int) ((Player.worldY + 24) / 48);
     }
 
-    private void loadCursor() {
+    private void drawDamageNumber(GraphicsContext gc) {
 
+        synchronized (damageNumbers) {
+            Iterator<DamageNumber> iterator = damageNumbers.iterator();
+            while (iterator.hasNext()) {
+                DamageNumber dmgN = iterator.next();
+                dmgN.draw(gc);
+                if (dmgN.offSetY <= -30) {
+                    iterator.remove();
+                }
+            }
+        }
     }
 }
 
