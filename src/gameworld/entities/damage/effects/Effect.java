@@ -14,7 +14,7 @@ abstract public class Effect {
     protected String name;
     protected Image icon;
     protected String description;
-    protected int ticker;
+    protected int ticker = 0;
     protected int tickRate;// how many ticks needed to activate
     public float full_duration, rest_duration;
 

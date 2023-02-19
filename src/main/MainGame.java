@@ -61,6 +61,7 @@ public class MainGame {
     public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
     public final List<PRJ_Control> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
+
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
 
     public Random random;
@@ -178,6 +179,7 @@ public class MainGame {
                         inventP.interactWithWindows();
                         getPlayerTile();
                         wControl.uncoverWorldMap();
+                        ent_control.removeDead();
                         wControl.update();
                         qPanel.update();
                     }
@@ -405,6 +407,7 @@ public class MainGame {
         gameState = State.TITLE;
         loadingScreen = false;
         startThreads();
+
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
 

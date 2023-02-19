@@ -28,11 +28,15 @@ public class ENT_Control {
             for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
                     entity.draw(gc);
+                    if (entity.damageNumbers.size() > 0) {
+                        entity.drawDMGNumbers(gc);
+                    }
+
                     if (entity.hpBarOn) {
                         gc.setFill(Colors.Red);
                         gc.fillRect(entity.screenX, entity.screenY - 10, (int) ((entity.getHealth() / entity.maxHealth) * 48), 8);
                         gc.setFill(Color.WHITE);
-                        gc.fillText(String.valueOf(entity.getHealth()), entity.screenX + 14, entity.screenY);
+                        gc.fillText(String.valueOf((int) entity.getHealth()), entity.screenX + 14, entity.screenY);
                     }
                 }
             }
@@ -56,6 +60,12 @@ public class ENT_Control {
                     }
                 }
             }
+        }
+    }
+
+    public void removeDead() {
+        synchronized (MainGame.ENTITIES) {
+            MainGame.ENTITIES.removeIf(entity -> entity.dead);
         }
     }
 }

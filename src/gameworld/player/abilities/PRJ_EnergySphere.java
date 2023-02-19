@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.entities.damage.DamageType;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
@@ -26,9 +27,11 @@ public class PRJ_EnergySphere extends PRJ_Control {
         activation.setVolume(0.12);
         hit = new MediaPlayer(Sound.energySphereHit);
         hit.setVolume(0.2);
+        this.type = DamageType.ArcaneDMG;
         activation.play();
         //-------VALUES-----------
         this.movementSpeed = 3;
+        this.damage = 0.5f;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
         this.collisionBox = mg.imageSto.box_secondaryFire;

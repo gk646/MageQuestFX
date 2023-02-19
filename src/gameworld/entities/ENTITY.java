@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
+import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ abstract public class ENTITY {
     protected int spriteCounter;
     protected int goalCol;
     protected int goalRow;
+    public int amountedDamageSinceLastDamageNumber;
     public Image entityImage1;
     protected Image entityImage2;
     protected Image entityImage3;
@@ -276,6 +278,18 @@ abstract public class ENTITY {
         }
     }
 
+    public void drawDMGNumbers(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold14);
+        Iterator<DamageNumber> iterator = damageNumbers.iterator();
+        while (iterator.hasNext()) {
+            DamageNumber dmgN = iterator.next();
+            dmgN.draw(gc, this);
+            if (dmgN.offSetY <= -30) {
+                iterator.remove();
+            }
+        }
+    }
+
     public float getHealth() {
         return this.health;
     }
@@ -292,6 +306,7 @@ abstract public class ENTITY {
             case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[18];
         }
         this.health -= flat_damage;
+        damageNumbers.add(new DamageNumber((int) flat_damage, type));
     }
 
 

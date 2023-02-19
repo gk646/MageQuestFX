@@ -42,6 +42,9 @@ public class ENT_Grunt extends ENTITY {
     @Override
     public void update() {
         tickEffects();
+        if (health <= 0) {
+            dead = true;
+        }
         onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
         getNearestPlayer();
         searchPath(goalCol, goalRow, 16);

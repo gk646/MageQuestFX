@@ -5,14 +5,15 @@ import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.effects.debuffs.EFT_Burning_I;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
-import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
+import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
@@ -89,29 +90,27 @@ public class PRJ_Control {
                 Iterator<PRJ_Control> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PRJ_Control projectile = iterator.next();
+                    if (projectile.dead) {
+                        iterator.remove();
+                        continue;
+                    }
                     projectile.update();
                     if (projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
                         mg.player.health -= projectile.level;
                         projectile.dead = true;
                     }
-                    if (projectile.dead) {
-                        iterator.remove();
-                        continue;
-                    }
-                    double px = Player.worldX;
-                    double py = Player.worldY;
                     Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
-                        double ex = entity.worldX;
-                        double ey = entity.worldY;
-                        double distSq = (ex - px) * (ex - px) + (ey - py) * (ey - py);
-                        if (distSq < 2_250_000 && !entity.playerTooFarAbsolute() && !(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
-                            calcProjectileDamage(projectile, entity);
-                        }
-                        if (entity.getHealth() <= 0) {
-                            recordDeath(entity);
-                            entityIterator.remove();
+                        if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
+                            if (entity.dead) {
+                                recordDeath(entity);
+                                entityIterator.remove();
+                                continue;
+                            }
+                            if (!(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                                calcProjectileDamage(projectile, entity);
+                            }
                         }
                     }
                 }
@@ -119,19 +118,21 @@ public class PRJ_Control {
         }
     }
 
-
     private void calcProjectileDamage(PRJ_Control projectile, ENTITY entity) {
-        if (projectile instanceof PRJ_AutoShot) {
+        if (projectile instanceof PRJ_EnergySphere) {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            projectile.dead = true;
-        } else if (projectile instanceof PRJ_EnergySphere) {
-            entity.getDamage(1);
-            projectile.playHitSound();
         } else if (projectile instanceof PRJ_RingSalvo) {
             entity.getDamage(5);
         } else if (projectile instanceof PRJ_Lightning) {
             entity.getDamage(1);
+        } else {
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            entity.effects.add(new EFT_Burning_I(360, 1, true, 60));
+            projectile.dead = true;
+
+            projectile.playHitSound();
         }
+        entity.hpBarOn = true;
         if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
@@ -141,11 +142,8 @@ public class PRJ_Control {
                 mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
                 mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level));
             }
-        } else {
-            entity.hpBarOn = true;
         }
     }
-
 
     public void updateProjectilePos() {
         synchronized (mg.PROJECTILES) {
