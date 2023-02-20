@@ -11,6 +11,8 @@ import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
 
+import java.awt.Point;
+
 public class QST_Tutorial extends QUEST {
     private int gruntKillCounter;
 
@@ -30,8 +32,7 @@ public class QST_Tutorial extends QUEST {
                 interactWithNpc(npc, DialogStorage.Tutorial);
                 if (progressStage == 6) {
                     updateObjective("Follow the old man!");
-                    npc.onPath = true;
-                    moveToTile(npc, 34, 34);
+                    moveToTile(npc, 34, 34, new Point(24, 4), new Point(24, 5), new Point(24, 14), new Point(12, 14), new Point(12, 34));
                 }
                 if (progressStage == 10) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3");

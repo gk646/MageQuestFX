@@ -65,13 +65,13 @@ public class NPC_OldMan extends NPC {
             dialogHideDelay++;
             show_dialog = !mg.wControl.player_went_away(playerTalkLocation);
         }
-
         if (dialogHideDelay > 600) {
             show_dialog = false;
             dialogHideDelay = 0;
         }
+
         if (onPath) {
-            followPlayer(goalTile.x, goalTile.y);
+            moveTo(goalTile.x, goalTile.y, checkPoints);
         }
     }
 

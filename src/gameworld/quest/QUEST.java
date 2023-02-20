@@ -29,19 +29,22 @@ abstract public class QUEST {
      * @param x tile x
      * @param y tile y
      */
-    protected void moveToTile(NPC npc, int x, int y) {
-        npc.onPath = true;
+    protected void moveToTile(NPC npc, int x, int y, Point... checkpoints) {
         npc.goalTile = new Point(x, y);
+        npc.checkPoints = checkpoints;
+        npc.onPath = true;
         npc.stuckCounter++;
-        if ((npc.worldX) / 48 == npc.goalTile.x && (npc.worldY) / 48 == npc.goalTile.y) {
+        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
             npc.onPath = false;
             npc.stuckCounter = 0;
-        } else if (npc.stuckCounter > 7000) {
+        }
+        if (npc.stuckCounter > 6000) {
             npc.worldX = npc.goalTile.x * 48;
             npc.worldY = npc.goalTile.y * 48;
             npc.stuckCounter = 0;
         }
     }
+
 
     protected void nextStage() {
         progressStage++;

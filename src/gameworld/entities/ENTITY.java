@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -164,8 +165,8 @@ abstract public class ENTITY {
      * @see ENTITY#searchPath(int, int, int)
      */
     public void searchPathUncapped(int goalCol, int goalRow, int maxDistance) {
-        int startCol = (int) ((worldX) / 48);
-        int startRow = (int) ((worldY) / 48);
+        int startCol = (int) ((worldX + 24) / 48);
+        int startRow = (int) ((worldY + 24) / 48);
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
@@ -229,19 +230,19 @@ abstract public class ENTITY {
         }
     }
 
+
     public void playGetHitSound() {
 
     }
 
-    public void moveToTile(int x, int y) {
-        if (onPath) {
-            if (!((worldX) / 48 == x && (worldY) / 48 == y)) {
-                searchPathUncapped(x, y, 100);
-            } else {
-                onPath = false;
-            }
-        }
+    public Point getTilePosition() {
+        return new Point((int) ((worldX + 24) / 48), (int) ((worldY + 24) / 48));
     }
+
+    public void moveToTileSuperVised(int x, int y) {
+        searchPathUncapped(x, y, 100);
+    }
+
 
     protected void getNearestPlayer() {
         /*  if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {
