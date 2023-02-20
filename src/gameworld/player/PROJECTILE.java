@@ -5,6 +5,7 @@ import gameworld.entities.damage.DamageType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
+import main.system.CollisionChecker;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -57,7 +58,7 @@ public abstract class PROJECTILE {
 
 
     protected void tileCollision() {
-        //mg.collisionChecker.checkProjectileAgainstTile(this);
+        CollisionChecker.checkProjectileAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
             this.dead = true;
         }

@@ -23,8 +23,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 942.4242424242424,
-                "y": 860.6060606060607
+                "x": 798.4848484848485,
+                "y": 798.4848484848485
             }
         },
         "City1.tmx#grassspritesheet16": {
@@ -38,15 +38,15 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 354,
-                "y": 378
+                "y": 103
             }
         },
         "GrassLands.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4027.272727272727,
-                "y": 3510.6060606060605
+                "x": 4028.787878787879,
+                "y": 3509.090909090909
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -86,8 +86,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 286,
-                "y": 265.3333333333333
+                "x": 826.6666666666666,
+                "y": 790
             }
         },
         "d.tsx": {
@@ -156,8 +156,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 274,
-                "y": 177
+                "x": 244,
+                "y": 400
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {

@@ -67,7 +67,7 @@ public class ENT_Control {
             Iterator<ENTITY> iterator = MainGame.ENTITIES.iterator();
             while (iterator.hasNext()) {
                 ENTITY entity = iterator.next();
-                if (entity.dead) {
+                if (entity.getHealth() <= 0) {
                     iterator.remove();
                     mg.prj_control.recordDeath(entity);
                 }

@@ -54,12 +54,6 @@ public class Storage {
 
     private void getShooterImages() {
         shooterImage1 = setup("/Entitys/enemies/shooter/Old_man.png");
-        BigSLimewalk1 = setupEnemyWalk("BossSlime", 1);
-        BigSLimewalk2 = setupEnemyWalk("BossSlime", 2);
-        BigSLimewalk3 = setupEnemyWalk("BossSlime", 3);
-        BigSLimewalk4 = setupEnemyWalk("BossSlime", 4);
-        BigSLimewalk5 = setupEnemyWalk("BossSlime", 5);
-        BigSLimewalk6 = setupEnemyWalk("BossSlime", 6);
     }
 
     private void getEnergySphereImages() {
@@ -100,9 +94,6 @@ public class Storage {
         return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/projectiles/EnergySphere/" + imagePath))));
     }
 
-    private Image setupEnemyWalk(String imagePath, int number) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath + "/walk/" + number + ".png")));
-    }
 
     private Image setupRun(String imagePath) {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/enemies/" + imagePath)));

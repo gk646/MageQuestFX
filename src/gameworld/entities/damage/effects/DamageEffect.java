@@ -13,8 +13,6 @@ public class DamageEffect extends Effect {
 
     @Override
     public void tick(ENTITY entity) {
-        ticker++;
-        rest_duration--;
         if (ticker >= tickRate) {
             ticker = 0;
             if (fromPlayer) {
@@ -24,5 +22,7 @@ public class DamageEffect extends Effect {
             }
             entity.hpBarOn = true;
         }
+        ticker++;
+        rest_duration--;
     }
 }

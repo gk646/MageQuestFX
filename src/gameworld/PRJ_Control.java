@@ -39,11 +39,8 @@ public class PRJ_Control {
 
     protected int spriteCounter;
 
-    public int projectileWidth;
     protected MainGame mg;
-    public boolean dead, collisionUp, collisionDown;
-    public boolean collisionLeft;
-    public boolean collisionRight;
+
     public String direction;
     public Rectangle collisionBox;
     public int movementSpeed;
@@ -111,7 +108,7 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            entity.effects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 40));
+            entity.effects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
             projectile.dead = true;
             projectile.playHitSound();
         }

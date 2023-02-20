@@ -1,5 +1,6 @@
 package gameworld.entities;
 
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -33,5 +34,15 @@ abstract public class BOSS extends ENTITY {
     @Override
     public void update() {
         tickEffects();
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+
+    public boolean playerTooFarAbsoluteBoss(int x) {
+        return Math.abs(worldX - Player.worldX) >= x || Math.abs(worldY - Player.worldY) >= x;
+    }
+
+    protected boolean isOnPlayer() {
+        return (int) (worldX + 24) / 48 == mg.playerX && (int) (worldY + 24) / 48 == mg.playerY;
     }
 }
