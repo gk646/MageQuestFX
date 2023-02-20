@@ -37,10 +37,12 @@ public class DamageNumber {
             case PhysicalDMG -> gc.setFill(Colors.physical_grey);
         }
         if (crit) {
-            gc.setFont(FonT.minecraftBold20);
+
+            gc.setFont(FonT.editUndo18);
+
             gc.fillText(String.valueOf(damage), entity.worldX + offSetX - Player.worldX + Player.screenX, entity.worldY + offSetY - Player.worldY + Player.screenY);
         } else {
-            gc.setFont(FonT.minecraftBold16);
+            gc.setFont(FonT.editUndo18);
             gc.fillText(String.valueOf(damage), entity.worldX + offSetX - Player.worldX + Player.screenX, entity.worldY + offSetY - Player.worldY + Player.screenY);
         }
         offSetY -= 0.6;

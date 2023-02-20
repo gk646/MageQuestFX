@@ -2,7 +2,6 @@ package input;
 
 
 import javafx.application.Platform;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -83,7 +82,7 @@ public class InputHandler {
                 if (mg.ui.commandNum == 0) {
                     mg.gameState = State.PLAY;
                     mg.sound.INTRO.stop();
-                    scene.setCursor(Cursor.CROSSHAIR);
+                    scene.setCursor(Runner.crosshair);
                 } else if (mg.ui.commandNum == 1) {
                     mg.gameState = State.TITLE_OPTION;
                     mg.ui.commandNum = 0;
@@ -191,7 +190,7 @@ public class InputHandler {
                     throw new RuntimeException(ex);
                 }
             } else if (mg.gameState == State.PLAY) {
-                scene.setCursor(Cursor.HAND);
+                scene.setCursor(Runner.selectCrosshair);
                 mg.gameState = State.OPTION;
                 leftPressed = false;
                 upPressed = false;
@@ -216,11 +215,11 @@ public class InputHandler {
             if (!mg.showTalents) {
                 mg.showTalents = true;
                 mg.talentP.resetTalentCollision();
-                scene.setCursor(Runner.crosshair3);
+                scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.showTalents = false;
                 mg.talentP.hideTalentCollision();
-                if (!mg.showBag || !mg.showTalents) {
+                if (!inventoryWindowOpen()) {
                     scene.setCursor(Runner.crosshair);
                 }
             }
@@ -230,11 +229,11 @@ public class InputHandler {
             if (!mg.showChar) {
                 mg.inventP.resetCharCollision();
                 mg.showChar = true;
-                scene.setCursor(Cursor.HAND);
+                scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.inventP.hideCharCollision();
                 mg.showChar = false;
-                if (!mg.showBag || !mg.showTalents) {
+                if (!inventoryWindowOpen()) {
                     scene.setCursor(Runner.crosshair);
                 }
             }
@@ -244,22 +243,24 @@ public class InputHandler {
             if (!mg.showBag) {
                 mg.inventP.resetBagCollision();
                 mg.showBag = true;
-                scene.setCursor(Runner.crosshair3);
+                scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.inventP.hideBagCollision();
                 mg.showBag = false;
-                scene.setCursor(Runner.crosshair);
+                if (!inventoryWindowOpen()) {
+                    scene.setCursor(Runner.crosshair);
+                }
             }
         }
         if (code.equals("m")) {
             if (!mg.showMap) {
                 mg.gameMap.resetMapCollision();
                 mg.showMap = true;
-                scene.setCursor(Cursor.HAND);
+                scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.gameMap.hideMapCollision();
                 mg.showMap = false;
-                if (!mg.showBag || mg.showChar || !mg.showTalents) {
+                if (!inventoryWindowOpen()) {
                     scene.setCursor(Runner.crosshair);
                 }
             }
@@ -410,5 +411,9 @@ public class InputHandler {
 
             mg.ui.codex_scroll = Math.max(-1, Math.min((mg.ui.codex_scroll - event.getDeltaY() / 1_800), 0.322f));
         }
+    }
+
+    private boolean inventoryWindowOpen() {
+        return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION;
     }
 }

@@ -41,7 +41,7 @@ public class UI_InventoryPanel {
     private int bagPanelX = 1_400;
     private int bagPanelY = 600;
     private final Point lastBagPosition = new Point(bagPanelX, bagPanelY);
-    private ITEM grabbedITEM;
+    public ITEM grabbedITEM;
     public final Rectangle bagSortButton;
     public int activeCharacterPanel = 1;
     private boolean node_focused;
@@ -76,7 +76,7 @@ public class UI_InventoryPanel {
         bagEquipSlotsBox = new Rectangle(charPanelX, charPanelY, 24, 24);
         charPanelMover = new Rectangle(charPanelX - 40, charPanelY - 75, 438, 25);
         bagPanelMover = new Rectangle(bagPanelX, bagPanelY, 355, 25);
-        wholeCharWindow = new Rectangle(charPanelX - 30, charPanelY - 15, 445, 615);
+        wholeCharWindow = new Rectangle(charPanelX - 30, charPanelY - 15, 445, 635);
         wholeBagWindow = new Rectangle(bagPanelX, bagPanelY, 365, 410);
         combatStatsHitBox = new Rectangle(bagPanelX, bagPanelY, 107, 15);
         effectsHitBox = new Rectangle(bagPanelX, bagPanelY, 80, 15);

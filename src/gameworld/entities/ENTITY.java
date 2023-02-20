@@ -34,6 +34,7 @@ abstract public class ENTITY {
     protected int goalRow;
     protected float amountedDamageSinceLastDamageNumber;
     protected long timeSinceLastDamageNumber;
+    protected long timeSinceLastDamageSound;
     public Image entityImage1;
     protected Image entityImage2;
     protected Image entityImage3;
@@ -226,6 +227,10 @@ abstract public class ENTITY {
         } else {
             searchPathUncapped(playerX, playerY, 100);
         }
+    }
+
+    public void playGetHitSound() {
+
     }
 
     public void moveToTile(int x, int y) {

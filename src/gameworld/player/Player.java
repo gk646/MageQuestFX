@@ -155,7 +155,7 @@ public class Player extends ENTITY {
 
     private void skills() {
         if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.showMap && !mg.showTalents) {
-            if (mg.inputH.mouse1Pressed) {
+            if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
                 mg.sBar.skills[4].activate();
                 getDurabilityDamageWeapon();
             }

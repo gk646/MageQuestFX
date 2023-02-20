@@ -91,6 +91,7 @@ public class PRJ_Control {
                             }
                             if (!(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
+                                entity.playGetHitSound();
                             }
                         }
                     }

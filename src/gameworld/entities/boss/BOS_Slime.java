@@ -1,7 +1,7 @@
 package gameworld.entities.boss;
 
 import gameworld.entities.BOSS;
-import gameworld.entities.loadinghelper.AnimationContainer;
+import gameworld.entities.loadinghelper.ResourceLoader;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +12,7 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 public class BOS_Slime extends BOSS {
-    private final AnimationContainer anim = new AnimationContainer("BossSlime");
+    private final ResourceLoader anim = new ResourceLoader("BossSlime");
 
 
     public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
@@ -20,7 +20,7 @@ public class BOS_Slime extends BOSS {
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
         this.enemyImage = Storage.BigSLimewalk1;
-        anim.loadImages();
+        anim.load();
     }
 
 
@@ -112,6 +112,14 @@ public class BOS_Slime extends BOSS {
         int angle = (int) (Math.atan2(Player.worldY - worldY, Player.worldX - worldX) * (180 / Math.PI));
         for (int i = -45; i < 45; i += 4) {
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
+        }
+    }
+
+    @Override
+    public void playGetHitSound() {
+        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
+            timeSinceLastDamageSound = System.currentTimeMillis();
+            anim.playGetHitSound();
         }
     }
 }

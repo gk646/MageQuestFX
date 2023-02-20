@@ -21,7 +21,7 @@ public class UI {
 
     public Font maruMonica30;
     public int commandNum = 0;
-    DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
+    public DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
     Light.Distant light = new Light.Distant();
 
     Lighting lighting = new Lighting();

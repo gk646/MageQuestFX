@@ -470,6 +470,7 @@ public class MainGame {
 
         synchronized (damageNumbers) {
             Iterator<DamageNumber> iterator = damageNumbers.iterator();
+            gc.setEffect(ui.shadow);
             while (iterator.hasNext()) {
                 DamageNumber dmgN = iterator.next();
                 dmgN.draw(gc);
@@ -477,6 +478,7 @@ public class MainGame {
                     iterator.remove();
                 }
             }
+            gc.setEffect(null);
         }
     }
 }
