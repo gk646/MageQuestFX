@@ -12,9 +12,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.GraphicsEnvironment;
 import java.io.InputStream;
 
 public class Runner extends Application {
@@ -31,8 +31,8 @@ public class Runner extends Application {
 
     @Override
     public void start(Stage stage) {
-        GraphicsEnvironment gE = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Canvas canvas = new Canvas(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight());
+        Screen screen = Screen.getPrimary();
+        Canvas canvas = new Canvas(screen.getBounds().getWidth(), screen.getBounds().getHeight());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Group root = new Group();
         root.getChildren().add(canvas);
@@ -48,8 +48,8 @@ public class Runner extends Application {
         scene.setCursor(crosshair);
         assert is != null;
         stage.getIcons().add(new Image(is));
-        stage.setMaxWidth(gE.getDefaultScreenDevice().getDisplayMode().getWidth());
-        stage.setMaxHeight(gE.getDefaultScreenDevice().getDisplayMode().getHeight());
+        stage.setMaxWidth(screen.getBounds().getWidth());
+        stage.setMaxHeight(screen.getBounds().getHeight());
         stage.setFullScreen(true);
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setFullScreenExitHint("");
@@ -62,7 +62,7 @@ public class Runner extends Application {
         slider.setVisible(false);
         slider.setPrefSize(200, 100);
         root.getChildren().add(slider);
-        MainGame mainGame = new MainGame(gE.getDefaultScreenDevice().getDisplayMode().getWidth(), gE.getDefaultScreenDevice().getDisplayMode().getHeight(), gc);
+        MainGame mainGame = new MainGame((int) screen.getBounds().getWidth(), (int) screen.getBounds().getHeight(), gc);
         InputHandler.instance = new InputHandler(mainGame, scene);
         mainGame.inputH = InputHandler.instance;
         Thread thread = new Thread(mainGame::run);

@@ -40,7 +40,7 @@ class MainGameTest {
         mg.wControl = new WorldController(mg);
         mg.npcControl = new NPC_Control(mg);
         mg.wControl.loadWorldData();
-        mg.wControl.load_tutorial(15, 15);
+        mg.wControl.loadMap(Zone.Tutorial, 15, 15);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
         mg.random = new Random(seed);
