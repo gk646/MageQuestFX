@@ -1,15 +1,14 @@
 package gameworld.player.abilities;
 
-import gameworld.PRJ_Control;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
-import main.MainGame;
 import main.system.Storage;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class PRJ_EnemyStandardShot extends PRJ_Control {
+public class PRJ_EnemyStandardShot extends PROJECTILE {
 
     /**
      * Projectile of enemy entities
@@ -17,8 +16,7 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
      * @param mg    to access display functions
      * @param level the level and damage to the player
      */
-    public PRJ_EnemyStandardShot(MainGame mg, int x, int y, int level, int goalx, int goaly) {
-        super(mg);
+    public PRJ_EnemyStandardShot(int x, int y, int level, int goalx, int goaly) {
         //-------VALUES-----------
         this.movementSpeed = 3;
         this.projectileHeight = 16;
@@ -45,6 +43,14 @@ public class PRJ_EnemyStandardShot extends PRJ_Control {
         tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void playHitSound() {
+
     }
 
     private Point2D.Double getTrajectory(int x, int y) {

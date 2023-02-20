@@ -1,12 +1,12 @@
 package gameworld.player.abilities;
 
-import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import main.MainGame;
 import main.system.Storage;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
@@ -14,15 +14,14 @@ import main.system.ui.Effects;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class PRJ_EnergySphere extends PRJ_Control {
+public class PRJ_EnergySphere extends PROJECTILE {
     MediaPlayer activation;
     MediaPlayer hit;
 
     /**
      * Energy Sphere projectile
      */
-    public PRJ_EnergySphere(MainGame mainGame) {
-        super(mainGame);
+    public PRJ_EnergySphere() {
         activation = new MediaPlayer(Sound.energySphereBeginning);
         activation.setVolume(0.12);
         hit = new MediaPlayer(Sound.energySphereHit);
@@ -34,13 +33,13 @@ public class PRJ_EnergySphere extends PRJ_Control {
         this.damage = 0.5f;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
-        this.collisionBox = mg.imageSto.box_secondaryFire;
+        this.collisionBox = Storage.box_secondaryFire;
         this.direction = "downleftrightup";
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
         this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
-        this.updateVector = getTrajectory(mainGame.inputH.lastMousePosition);
+        this.updateVector = getTrajectory(InputHandler.instance.lastMousePosition);
         getPlayerImage();
     }
 

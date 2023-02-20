@@ -1,7 +1,7 @@
 package main.system;
 
-import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import main.MainGame;
 import main.system.rendering.WorldRender;
@@ -17,7 +17,7 @@ public class CollisionChecker {
     }
 
     @SuppressWarnings("DuplicateExpressions")
-    public static void checkProjectileAgainstTile(PRJ_Control projectile) {
+    public static void checkProjectileAgainstTile(PROJECTILE projectile) {
         int entityLeftWorldX = (int) (projectile.worldPos.x + projectile.collisionBox.x);
         int entityRightWorldX = (int) (projectile.worldPos.x + projectile.collisionBox.x + projectile.collisionBox.width);
         int entityTopWorldY = (int) (projectile.worldPos.y + projectile.collisionBox.y);
@@ -71,11 +71,11 @@ public class CollisionChecker {
         return new Rectangle((int) checkingForHit.worldX, (int) checkingForHit.worldY, checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldX, (int) incomingToHit.worldY, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
-    public boolean checkEntityAgainstProjectile(ENTITY checkingForHit, PRJ_Control incomingToHit) {
+    public boolean checkEntityAgainstProjectile(ENTITY checkingForHit, PROJECTILE incomingToHit) {
         return new Rectangle((int) (checkingForHit.worldX + checkingForHit.collisionBox.x), (int) (checkingForHit.worldY + checkingForHit.collisionBox.y), checkingForHit.collisionBox.width, checkingForHit.collisionBox.height).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 
-    public boolean checkPlayerAgainstProjectile(PRJ_Control incomingToHit) {
+    public boolean checkPlayerAgainstProjectile(PROJECTILE incomingToHit) {
         return new Rectangle((int) (Player.worldX + 8), (int) (Player.worldY + 8), 37, 37).intersects(new Rectangle((int) incomingToHit.worldPos.x + incomingToHit.collisionBox.x, (int) incomingToHit.worldPos.y + incomingToHit.collisionBox.y, incomingToHit.collisionBox.width, incomingToHit.collisionBox.height));
     }
 

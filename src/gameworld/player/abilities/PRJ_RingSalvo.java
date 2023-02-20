@@ -1,15 +1,15 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import main.MainGame;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class PRJ_RingSalvo extends PRJ_Control {
+public class PRJ_RingSalvo extends PROJECTILE {
 
     private final int version;
 
@@ -17,9 +17,7 @@ public class PRJ_RingSalvo extends PRJ_Control {
      * What happens when you press (1). Part of
      * {@link PRJ_Control}
      */
-    public PRJ_RingSalvo(MainGame mainGame, int version) {
-        super(mainGame);
-
+    public PRJ_RingSalvo(int version) {
         //-------VALUES-----------
         this.movementSpeed = 5;
         this.projectileHeight = 25;
@@ -47,6 +45,14 @@ public class PRJ_RingSalvo extends PRJ_Control {
         tileCollision();
         worldPos.x += updateVector.x;
         worldPos.y += updateVector.y;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void playHitSound() {
+
     }
 
 

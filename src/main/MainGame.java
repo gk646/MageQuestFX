@@ -7,6 +7,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.multiplayer.ENT_Player2;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.MAP_UTILS;
@@ -62,7 +63,7 @@ public class MainGame {
     public final int HALF_HEIGHT;
     public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
-    public final List<PRJ_Control> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
+    public final List<PROJECTILE> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
 
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
     public final List<DamageNumber> damageNumbers = Collections.synchronizedList(new ArrayList<>());

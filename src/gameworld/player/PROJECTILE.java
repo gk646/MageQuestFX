@@ -1,8 +1,10 @@
 package gameworld.player;
 
 
+import gameworld.entities.damage.DamageType;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import main.MainGame;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -13,11 +15,14 @@ import java.awt.geom.Point2D;
  * Inherits Entity
  * Main inheritable class for all projectiles
  */
-abstract class PROJECTILE {
+public abstract class PROJECTILE {
 
-    private Point endPos;
+    protected Point endPos;
+    public MediaPlayer sound;
+    public DamageType type;
     protected Point2D.Double updateVector;
-    protected int projectileHeight;
+    public float damage;
+    public int projectileHeight;
     protected int spriteCounter;
     protected Image projectileImage1;
     protected Image projectileImage2;
@@ -29,30 +34,37 @@ abstract class PROJECTILE {
     protected Image projectileImage8;
     protected Image projectileImage9;
     protected Image projectileImage10;
-    protected int projectileWidth;
-    private final MainGame mg;
-    private boolean dead;
-    private boolean collisionUp;
-    private boolean collisionDown;
-    private boolean collisionLeft;
-    private boolean collisionRight;
+    public int projectileWidth;
+    public boolean dead, collisionUp, collisionDown;
+    public boolean collisionLeft;
+    public boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
     public int movementSpeed;
-    private Point2D.Double worldPos;
-    /*
-
-     */
+    public Point2D.Double worldPos;
+    public long lastHitTime;
     public int level;
 
-    public PROJECTILE(MainGame mg) {
-        this.mg = mg;
+    public PROJECTILE() {
     }
+
+
+    abstract public void draw(GraphicsContext gc);
+
+    abstract public void update();
+
+    abstract public void playHitSound();
 
 
     protected void tileCollision() {
         //mg.collisionChecker.checkProjectileAgainstTile(this);
         if (collisionUp || collisionDown || collisionLeft || collisionRight) {
+            this.dead = true;
+        }
+    }
+
+    protected void outOfBounds(int x) {
+        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - x * 2 || worldPos.x <= endPos.x - x * 2) {
             this.dead = true;
         }
     }
@@ -63,8 +75,17 @@ abstract class PROJECTILE {
         }
     }
 
-    private boolean playerTooFarAbsolute() {
-        return Math.abs(worldPos.x - Player.worldX) >= 650 || Math.abs(worldPos.y - Player.worldY) >= 650;
+    public void playFlightSound() {
+        if (sound != null) {
+            sound.setCycleCount(MediaPlayer.INDEFINITE);
+            sound.play();
+        }
+    }
+
+    public void stopFlightSound() {
+        if (sound != null) {
+            sound.stop();
+        }
     }
 }
 

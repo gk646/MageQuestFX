@@ -1,7 +1,7 @@
 package gameworld.player.abilities;
 
-import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
@@ -9,7 +9,7 @@ import main.system.Storage;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class PRJ_AutoShot extends PRJ_Control {
+public class PRJ_AutoShot extends PROJECTILE {
 
     /**
      * What happens when you press main mouse button
@@ -42,6 +42,14 @@ public class PRJ_AutoShot extends PRJ_Control {
         tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void playHitSound() {
+
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {

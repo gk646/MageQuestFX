@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
@@ -9,7 +10,7 @@ import main.system.ui.Effects;
 import java.awt.Rectangle;
 
 @SuppressWarnings("DuplicateBranchesInSwitch")
-public class PRJ_Lightning extends PRJ_Control {
+public class PRJ_Lightning extends PROJECTILE {
 
     /**
      * What happens when you press "2". Part of
@@ -62,6 +63,14 @@ public class PRJ_Lightning extends PRJ_Control {
     }
 
     public void update() {
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void playHitSound() {
 
     }
 

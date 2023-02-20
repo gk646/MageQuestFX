@@ -1,23 +1,16 @@
-package gameworld.entities.damage.effects.debuffs;
+package gameworld.entities.damage.effects;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.Debuff_Effect;
 
-public class EFT_Burning_I extends Debuff_Effect {
+public class DamageEffect extends Effect {
 
-
-    public EFT_Burning_I(float duration, float amount, boolean fromPlayer, int tickRate) {
+    public DamageEffect(float duration, float amount, boolean fromPlayer, DamageType type, int tickRate) {
         super(duration, amount, fromPlayer);
-        this.type = DamageType.FireDMG;
-        this.name = "Burning I";
+        this.type = type;
         this.tickRate = tickRate;
-        this.description = "The target is burning for " + this.amount + " damage every " + this.tickRate + " Ticks.";
     }
 
-    /**
-     * @param entity the receiving entity
-     */
     @Override
     public void tick(ENTITY entity) {
         ticker++;

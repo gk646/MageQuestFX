@@ -1,7 +1,7 @@
 package main.system.ui.maps;
 
-import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
+import gameworld.player.PROJECTILE;
 import gameworld.world.WorldController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
@@ -186,9 +186,9 @@ public class GameMap {
         }
 
         synchronized (mg.PROJECTILES) {
-            for (PRJ_Control PRJControl : mg.PROJECTILES) {
-                entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
-                entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
+            for (PROJECTILE projectile : mg.PROJECTILES) {
+                entityX = (int) ((projectile.worldPos.x + 24) / 48);
+                entityY = (int) ((projectile.worldPos.y + 24) / 48);
                 if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
                     y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
                     x = 785 + xOffset + (entityX - xTile_i) * zoom_i;

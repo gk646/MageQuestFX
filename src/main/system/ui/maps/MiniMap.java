@@ -1,8 +1,8 @@
 package main.system.ui.maps;
 
-import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
+import gameworld.player.PROJECTILE;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -60,9 +60,9 @@ public class MiniMap {
         }
 
         synchronized (mg.PROJECTILES) {
-            for (PRJ_Control PRJControl : mg.PROJECTILES) {
-                entityX = (int) ((PRJControl.worldPos.x + 24) / 48);
-                entityY = (int) ((PRJControl.worldPos.y + 24) / 48);
+            for (PROJECTILE projectile : mg.PROJECTILES) {
+                entityX = (int) ((projectile.worldPos.x + 24) / 48);
+                entityY = (int) ((projectile.worldPos.y + 24) / 48);
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
                     if (WorldController.currentMapCover[entityX][entityY] == 1) {
                         gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 2, 2);

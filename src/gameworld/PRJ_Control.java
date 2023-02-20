@@ -5,9 +5,10 @@ import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.debuffs.EFT_Burning_I;
+import gameworld.entities.damage.effects.DamageEffect;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.player.abilities.PRJ_EnergySphere;
@@ -17,12 +18,8 @@ import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.media.MediaPlayer;
 import main.MainGame;
-import main.system.CollisionChecker;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.util.Iterator;
@@ -34,23 +31,14 @@ import java.util.Iterator;
  */
 public class PRJ_Control {
 
-    public MediaPlayer sound;
+
     public DamageType type;
-    protected Point endPos;
-    protected Point2D.Double updateVector;
+
+
     public float damage;
-    public int projectileHeight;
+
     protected int spriteCounter;
-    protected Image projectileImage1;
-    protected Image projectileImage2;
-    protected Image projectileImage3;
-    protected Image projectileImage4;
-    protected Image projectileImage5;
-    protected Image projectileImage6;
-    protected Image projectileImage7;
-    protected Image projectileImage8;
-    protected Image projectileImage9;
-    protected Image projectileImage10;
+
     public int projectileWidth;
     protected MainGame mg;
     public boolean dead, collisionUp, collisionDown;
@@ -72,13 +60,9 @@ public class PRJ_Control {
         this.mg = mg;
     }
 
-    protected PRJ_Control() {
-
-    }
-
     public void draw(GraphicsContext gc) {
         synchronized (mg.PROJECTILES) {
-            for (PRJ_Control projectile : mg.PROJECTILES) {
+            for (PROJECTILE projectile : mg.PROJECTILES) {
                 projectile.draw(gc);
             }
         }
@@ -87,9 +71,9 @@ public class PRJ_Control {
     public void update() {
         synchronized (mg.PROJECTILES) {
             synchronized (MainGame.ENTITIES) {
-                Iterator<PRJ_Control> iterator = mg.PROJECTILES.iterator();
+                Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
-                    PRJ_Control projectile = iterator.next();
+                    PROJECTILE projectile = iterator.next();
                     if (projectile.dead) {
                         iterator.remove();
                         continue;
@@ -118,7 +102,7 @@ public class PRJ_Control {
         }
     }
 
-    private void calcProjectileDamage(PRJ_Control projectile, ENTITY entity) {
+    private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
         if (projectile instanceof PRJ_EnergySphere) {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else if (projectile instanceof PRJ_RingSalvo) {
@@ -127,7 +111,7 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            entity.effects.add(new EFT_Burning_I(360, 1, true, 60));
+            entity.effects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 40));
             projectile.dead = true;
             projectile.playHitSound();
         }
@@ -144,32 +128,6 @@ public class PRJ_Control {
         }
     }
 
-    public void updateProjectilePos() {
-        synchronized (mg.PROJECTILES) {
-            for (PRJ_Control PRJControl : mg.PROJECTILES) {
-                PRJControl.update();
-            }
-        }
-    }
-
-    protected void tileCollision() {
-        CollisionChecker.checkProjectileAgainstTile(this);
-        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
-            this.dead = true;
-        }
-    }
-
-    protected void outOfBounds() {
-        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 650 * 2 || worldPos.x <= endPos.x - 650 * 2) {
-            this.dead = true;
-        }
-    }
-
-    protected void outOfBounds(int x) {
-        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - x * 2 || worldPos.x <= endPos.x - x * 2) {
-            this.dead = true;
-        }
-    }
 
     public void recordDeath(ENTITY entity) {
         if (entity instanceof ENT_Grunt) {
@@ -179,28 +137,9 @@ public class PRJ_Control {
         }
     }
 
-    private boolean playerTooFarAbsolute() {
-        return Math.abs(worldPos.x - Player.worldX) >= 650 || Math.abs(worldPos.y - Player.worldY) >= 650;
-    }
 
 
-    public void playHitSound() {
 
-    }
-
-
-    public void playFlightSound() {
-        if (sound != null) {
-            sound.setCycleCount(MediaPlayer.INDEFINITE);
-            sound.play();
-        }
-    }
-
-    public void stopFlightSound() {
-        if (sound != null) {
-            sound.stop();
-        }
-    }
 }
 
 
