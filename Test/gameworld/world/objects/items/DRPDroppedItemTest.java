@@ -43,7 +43,7 @@ class DRPDroppedItemTest {
         int rarity5 = 0;
         int fail = 0;
         for (int i = 0; i < 10_000; i++) {
-            DRP_DroppedItem drop = new DRP_DroppedItem(mg, 1, 1, 1, WorldController.currentWorld);
+            DRP_DroppedItem drop = new DRP_DroppedItem(mg, 1, 1, mg.AMULET.get(1), WorldController.currentWorld);
             if (drop.item == null) {
                 nullitems++;
             } else if (drop.item.rarity == 1) {

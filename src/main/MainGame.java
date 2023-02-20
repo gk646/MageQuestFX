@@ -6,6 +6,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
+import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
@@ -119,6 +120,7 @@ public class MainGame {
     public boolean drawVideoSettings, drawAudioSettings;
     public boolean drawKeybindings;
     public boolean drawGameplay;
+    public DRP_DroppedItem dropI;
     public boolean drawCodex;
     public WorldAnimation wAnim;
 
@@ -310,7 +312,6 @@ public class MainGame {
             ui.draw(gc);
         }
         //RENDER END
-
         if (inputH.debugFps) {
             gc.setFont(FonT.minecraftBold30);
             gc.setFill(Color.BLACK);
@@ -325,9 +326,9 @@ public class MainGame {
             Iterator<DROP> iterator = WORLD_DROPS.iterator();
             while (iterator.hasNext()) {
                 DROP drop = iterator.next();
-                if ((drop instanceof DRP_DroppedItem && drop.item == null) && drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
+                if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
                     drop.draw(gc);
-                } else if ((drop instanceof DRP_DroppedItem && drop.item == null) || (WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld)) {
+                } else if (WORLD_DROPS.size() > 100) {
                     iterator.remove();
                 }
             }
@@ -344,6 +345,7 @@ public class MainGame {
         FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
         sqLite = new SQLite(this);
         sqLite.getConnection();
+        dropI = new DRP_DroppedItem(this);
         wAnim = new WorldAnimation(this);
         ui.updateLoadingScreen(0, gc);
         SecureRandom secureRandom = new SecureRandom();
@@ -419,17 +421,17 @@ public class MainGame {
 
         ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
-            // ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 100, Zone.Tutorial));
+            ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
         // wControl.loadMap(Zone.Tutorial, 61, 89);
         for (int i = 0; i < 10; i++) {
-            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 485 * 48, 1, 2, Zone.GrassLands));
+            dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
         for (int i = 0; i < 10; i++) {
-            WORLD_DROPS.add(new DRP_DroppedItem(this, (490 - i) * 48, 490 * 48, 1, 3, Zone.GrassLands));
+            dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
 

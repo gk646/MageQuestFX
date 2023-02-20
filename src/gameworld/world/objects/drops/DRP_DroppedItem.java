@@ -13,43 +13,8 @@ public class DRP_DroppedItem extends DROP {
     private final MainGame mg;
     private Image droppedIcon;
 
-    /**
-     * Rarity 1: 12.24%<p>
-     * Rarity 2: 7.14%<p>
-     * Rarity 3: 1.19%<p>
-     * Rarity 4: 0.27%<p>
-     * Rarity 5: 0.06% <p>
-     *
-     * @param mg     MainGame
-     * @param worldX DropLocation X
-     * @param worldY DropLocation Y
-     * @param level  Level of the dropped item
-     */
-    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, Zone zone) {
-        this.zone = zone;
+    public DRP_DroppedItem(MainGame mg) {
         this.mg = mg;
-        this.size = 32;
-        this.worldPos.x = worldX + 16;
-        this.worldPos.y = worldY + 16;
-        item = rollForItem(level);
-        if (item != null) {
-            droppedIcon = item.icon;
-        }
-    }
-
-    public DRP_DroppedItem(MainGame mg, int worldX, int worldY, int level, int rarity, Zone zone) {
-        this.mg = mg;
-        this.size = 32;
-        this.zone = zone;
-        this.worldPos.x = worldX + 16;
-        this.worldPos.y = worldY + 16;
-        item = rollForItem(level);
-        if (rarity == 2) {
-            item = getRandomRare(5);
-        } else if (rarity == 3) {
-            item = getRandomEpic(5);
-        }
-        droppedIcon = item.icon;
     }
 
     public DRP_DroppedItem(MainGame mg, int worldX, int worldY, ITEM item, Zone zone) {
@@ -63,9 +28,12 @@ public class DRP_DroppedItem extends DROP {
     }
 
     private static ITEM cloneItem(ITEM item) {
-        ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, item.quality, item.level);
-        new_ITEM.icon = item.icon;
-        return new_ITEM;
+        if (item != null) {
+            ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, item.quality, item.level);
+            new_ITEM.icon = item.icon;
+            return new_ITEM;
+        }
+        return null;
     }
 
     /**
@@ -80,19 +48,23 @@ public class DRP_DroppedItem extends DROP {
         return new_ITEM;
     }
 
-    @Override
-    public void draw(GraphicsContext gc) {
-        setRarityEffect(gc);
-        gc.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
-        gc.setEffect(null);
+
+    public void dropItem(MainGame mg, int worldX, int worldY, int level, Zone zone) {
+        ITEM item = cloneAndRollEffects(rollForItem(level));
+        if (item != null) {
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, worldX, worldY, item, zone));
+        }
     }
 
-    /**
-     *
-     */
-    @Override
-    public void update() {
+    public void dropRareItem(MainGame mg, int worldX, int worldY, int level, Zone zone) {
+        ITEM item = cloneAndRollEffects(getRandomRare(level));
+        if (item != null) {
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, worldX, worldY, item, zone));
+        }
+    }
 
+    public ITEM cloneAndRollEffects(ITEM item) {
+        return rollEffect(cloneItem(item));
     }
 
     /**
@@ -160,53 +132,15 @@ public class DRP_DroppedItem extends DROP {
     }
 
     private ITEM rollEffect(ITEM item) {
-        if (item.rarity == 2) {
-            int number = mg.random.nextInt(1, Player.effectsSizeRollable);
-            if (number == 1 || number == 2 || number == 18 || number == 19) {
-                item.effects[number] = mg.random.nextInt(0, 11);
-            } else if (number == 3) {
-                item.effects[number] = mg.random.nextInt(0, 26);
-            } else if (number == 4) {
-                item.effects[number] = mg.random.nextInt(0, 16);
-            } else if (number == 5) {
-                item.effects[number] = mg.random.nextInt(0, 26);
-            } else if (number == 6 || number == 7) {
-                item.effects[number] = mg.random.nextInt(0, 6);
-            } else if (number >= 8 & number <= 16) {
-                item.effects[number] = mg.random.nextInt(0, 6);
-            } else if (number == 17) {
-                item.effects[number] = mg.random.nextInt(0, 16);
-            } else if (number == 20) {
-                item.effects[number] = mg.random.nextInt(0, 16);
-            } else if (number == 21) {
-                item.effects[number] = mg.random.nextInt(0, 6);
-            } else if (number == 22) {
-                item.effects[number] = mg.random.nextInt(0, 16);
-            } else if (number == 23) {
-                item.effects[number] = mg.random.nextInt(0, 16);
-            } else if (number == 24 || number == 25) {
-                item.effects[number] = mg.random.nextInt(0, 11);
-            }
-        }
-        if (item.rarity == 3) {
-            int number1 = mg.random.nextInt(1, Player.effectsSizeRollable);
-            int number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
-            while (number1 == number2) {
-                number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
-            }
-            int number;
-            for (int i = 0; i < 2; i++) {
-                if (i == 1) {
-                    number = number1;
-                } else {
-                    number = number2;
-                }
+        if (item != null) {
+            if (item.rarity == 2) {
+                int number = mg.random.nextInt(1, Player.effectsSizeRollable);
                 if (number == 1 || number == 2 || number == 18 || number == 19) {
                     item.effects[number] = mg.random.nextInt(0, 11);
                 } else if (number == 3) {
                     item.effects[number] = mg.random.nextInt(0, 26);
                 } else if (number == 4) {
-                    item.effects[number] = mg.random.nextInt(0, 11);
+                    item.effects[number] = mg.random.nextInt(0, 16);
                 } else if (number == 5) {
                     item.effects[number] = mg.random.nextInt(0, 26);
                 } else if (number == 6 || number == 7) {
@@ -225,10 +159,60 @@ public class DRP_DroppedItem extends DROP {
                     item.effects[number] = mg.random.nextInt(0, 16);
                 } else if (number == 24 || number == 25) {
                     item.effects[number] = mg.random.nextInt(0, 11);
+                } else if (number == 26) {
+                    item.effects[number] = mg.random.nextInt(0, 6);
+                } else if (number == 27) {
+                    item.effects[number] = mg.random.nextInt(0, 11);
                 }
             }
+            if (item.rarity == 3) {
+                int number1 = mg.random.nextInt(1, Player.effectsSizeRollable);
+                int number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
+                while (number1 == number2) {
+                    number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
+                }
+                int number;
+                for (int i = 0; i < 2; i++) {
+                    if (i == 1) {
+                        number = number1;
+                    } else {
+                        number = number2;
+                    }
+                    if (number == 1 || number == 2 || number == 18 || number == 19) {
+                        item.effects[number] = mg.random.nextInt(0, 11);
+                    } else if (number == 3) {
+                        item.effects[number] = mg.random.nextInt(0, 26);
+                    } else if (number == 4) {
+                        item.effects[number] = mg.random.nextInt(0, 11);
+                    } else if (number == 5) {
+                        item.effects[number] = mg.random.nextInt(0, 26);
+                    } else if (number == 6 || number == 7) {
+                        item.effects[number] = mg.random.nextInt(0, 6);
+                    } else if (number >= 8 & number <= 16) {
+                        item.effects[number] = mg.random.nextInt(0, 6);
+                    } else if (number == 17) {
+                        item.effects[number] = mg.random.nextInt(0, 16);
+                    } else if (number == 20) {
+                        item.effects[number] = mg.random.nextInt(0, 16);
+                    } else if (number == 21) {
+                        item.effects[number] = mg.random.nextInt(0, 6);
+                    } else if (number == 22) {
+                        item.effects[number] = mg.random.nextInt(0, 16);
+                    } else if (number == 23) {
+                        item.effects[number] = mg.random.nextInt(0, 16);
+                    } else if (number == 24 || number == 25) {
+                        item.effects[number] = mg.random.nextInt(0, 11);
+                    } else if (number == 26) {
+                        item.effects[number] = mg.random.nextInt(0, 6);
+                    } else if (number == 27) {
+                        item.effects[number] = mg.random.nextInt(0, 11);
+                    }
+                }
+            }
+            return item;
+        } else {
+            return null;
         }
-        return item;
     }
 
     public ITEM getRandomCommon(int level) {
@@ -257,9 +241,6 @@ public class DRP_DroppedItem extends DROP {
         return cloneAndRollEffects(item);
     }
 
-    public ITEM cloneAndRollEffects(ITEM item) {
-        return rollEffect(cloneItem(item));
-    }
 
     public ITEM getRandomEpic(int level) {
         ITEM item;
@@ -315,14 +296,18 @@ public class DRP_DroppedItem extends DROP {
         }
     }
 
-    private void debugItems() {
-        System.out.println(DRP_DroppedItem.cloneItemWithLevelQuality(mg.CHEST.get(8), 80, 60).vitality);
-        System.out.println(mg.CHEST.get(8).vitality);
-        mg.CHEST.get(8).rollQuality(80);
-        System.out.println(mg.CHEST.get(8).vitality);
-        mg.CHEST.get(8).applyRarity();
-        System.out.println(mg.CHEST.get(8).vitality);
-        mg.CHEST.get(8).applyLevel();
-        System.out.println(mg.CHEST.get(8).vitality);
+    @Override
+    public void draw(GraphicsContext gc) {
+        setRarityEffect(gc);
+        gc.drawImage(droppedIcon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
+        gc.setEffect(null);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void update() {
+
     }
 }

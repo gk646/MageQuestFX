@@ -16,7 +16,6 @@ import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.player.abilities.PRJ_RingSalvo;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
-import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 
@@ -107,9 +106,9 @@ public class PRJ_Control {
             mg.player.getExperience(entity);
             entity.dead = true;
             if (entity instanceof BOSS) {
-                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, 2, entity.zone));
+                mg.dropI.dropRareItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
             } else {
-                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone));
+                mg.dropI.dropItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
                 mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level));
             }
         }
