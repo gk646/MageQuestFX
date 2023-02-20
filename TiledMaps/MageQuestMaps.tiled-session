@@ -5,8 +5,8 @@
     },
     "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
         "": {
@@ -23,8 +23,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 798.4848484848485,
-                "y": 798.4848484848485
+                "x": 800,
+                "y": 800.0000000000001
             }
         },
         "City1.tmx#grassspritesheet16": {
@@ -37,16 +37,16 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 480,
+                "x": 478,
                 "y": 207
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4028.787878787879,
-                "y": 3509.090909090909
+                "x": 6668,
+                "y": 6786
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -55,8 +55,8 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
-            "scaleInEditor": 3
+            "scaleInDock": 3,
+            "scaleInEditor": 0.75
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -83,11 +83,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
-            "selectedLayer": 1,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320,
-                "y": 438
+                "x": 525.3333333333333,
+                "y": 642.6666666666666
             }
         },
         "d.tsx": {
@@ -156,8 +156,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 244,
-                "y": 400
+                "x": 400,
+                "y": 401
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {

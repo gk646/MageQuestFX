@@ -418,17 +418,16 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
-
         ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
             ENTITIES.add(new ENT_Grunt(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        //wControl.loadMap(Zone.GrassLands, 496, 496);
+        wControl.loadMap(Zone.GrassLands, 496, 496);
         // wControl.loadMap(Zone.Tutorial, 61, 89);
         for (int i = 0; i < 10; i++) {
-            dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
+            dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
         for (int i = 0; i < 10; i++) {
             dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
