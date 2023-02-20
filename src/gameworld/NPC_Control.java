@@ -38,7 +38,7 @@ public class NPC_Control {
 
     public void draw(GraphicsContext g2) {
         for (ENTITY entity : NPC_Active) {
-            if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_500) {
+            if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_800) {
                 entity.draw(g2);
             }
         }

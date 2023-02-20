@@ -5,8 +5,8 @@
     },
     "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
-        "exports",
-        "."
+        ".",
+        "exports"
     ],
     "fileStates": {
         "": {
@@ -23,7 +23,7 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 800,
+                "x": 798.4848484848485,
                 "y": 798.4848484848485
             }
         },
@@ -38,14 +38,14 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 480,
-                "y": 206
+                "y": 207
             }
         },
         "GrassLands.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4027.272727272727,
+                "x": 4028.787878787879,
                 "y": 3509.090909090909
             }
         },
@@ -55,7 +55,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 3,
+            "scaleInDock": 1.5,
             "scaleInEditor": 3
         },
         "TileSet.tsx": {
@@ -83,11 +83,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 2,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 792,
-                "y": 790.5
+                "x": 320,
+                "y": 438
             }
         },
         "d.tsx": {
@@ -156,7 +156,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 400,
+                "x": 244,
                 "y": 400
             }
         },

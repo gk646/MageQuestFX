@@ -198,7 +198,7 @@ public class MainGame {
                     }
                     sound.update();
                     difference1 = 0;
-                    //System.out.println(counter);
+                    // System.out.println(counter);
                     counter = 0;
                 }
             }
@@ -279,8 +279,8 @@ public class MainGame {
         if (gameState == State.PLAY || gameState == State.OPTION) {
             wRender.draw(gc);
             drawDroppedItems(gc);
-            prj_control.draw(gc);
             ent_control.draw(gc);
+            prj_control.draw(gc);
             npcControl.draw(gc);
             //ENTPlayer2.draw(gc);
             player.draw(gc);
@@ -310,13 +310,12 @@ public class MainGame {
             ui.draw(gc);
         }
         //RENDER END
-        long drawEnd = System.nanoTime();
-        long difference = drawEnd - drawStart;
+
         if (inputH.debugFps) {
             gc.setFont(FonT.minecraftBold30);
             gc.setFill(Color.BLACK);
             gc.setFont(ui.maruMonica30);
-            gc.fillText(("Draw Time" + difference), 500, 600);
+            gc.fillText(("Draw Time" + (System.nanoTime() - drawStart)), 500, 600);
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
         }
     }
@@ -326,10 +325,10 @@ public class MainGame {
             Iterator<DROP> iterator = WORLD_DROPS.iterator();
             while (iterator.hasNext()) {
                 DROP drop = iterator.next();
-                if ((drop instanceof DRP_DroppedItem && drop.item == null) || (WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld)) {
-                    iterator.remove();
-                } else if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
+                if ((drop instanceof DRP_DroppedItem && drop.item == null) && drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
                     drop.draw(gc);
+                } else if ((drop instanceof DRP_DroppedItem && drop.item == null) || (WORLD_DROPS.size() > 100 && drop.zone != WorldController.currentWorld)) {
+                    iterator.remove();
                 }
             }
         }

@@ -949,133 +949,133 @@ public class WorldRender {
         setupTiles(907, "907.png", false);
         setupTiles(908, "908.png", false);
         setupTiles(909, "909.png", false);
-        setupTiles(910, "910.png", false);
-        setupTiles(911, "911.png", false);
-        setupTiles(912, "912.png", false);
-        setupTiles(913, "913.png", false);
-        setupTiles(914, "914.png", false);
-        setupTiles(915, "915.png", false);
-        setupTiles(916, "916.png", false);
-        setupTiles(917, "917.png", false);
-        setupTiles(918, "918.png", false);
-        setupTiles(919, "919.png", false);
-        setupTiles(920, "920.png", false);
-        setupTiles(921, "921.png", false);
-        setupTiles(922, "922.png", false);
-        setupTiles(923, "923.png", false);
-        setupTiles(924, "924.png", false);
-        setupTiles(925, "925.png", false);
-        setupTiles(926, "926.png", false);
-        setupTiles(927, "927.png", false);
-        setupTiles(928, "928.png", false);
-        setupTiles(929, "929.png", false);
-        setupTiles(930, "930.png", false);
-        setupTiles(931, "931.png", false);
-        setupTiles(932, "932.png", false);
-        setupTiles(933, "933.png", false);
-        setupTiles(934, "934.png", false);
-        setupTiles(935, "935.png", false);
-        setupTiles(936, "936.png", false);
-        setupTiles(937, "937.png", false);
-        setupTiles(938, "938.png", false);
-        setupTiles(939, "939.png", false);
-        setupTiles(940, "940.png", false);
-        setupTiles(941, "941.png", false);
-        setupTiles(942, "942.png", false);
-        setupTiles(943, "943.png", false);
-        setupTiles(944, "944.png", false);
-        setupTiles(945, "945.png", false);
-        setupTiles(946, "946.png", false);
-        setupTiles(947, "947.png", false);
-        setupTiles(948, "948.png", false);
-        setupTiles(949, "949.png", false);
-        setupTiles(950, "950.png", false);
-        setupTiles(951, "951.png", false);
-        setupTiles(952, "952.png", false);
-        setupTiles(953, "953.png", false);
-        setupTiles(954, "954.png", false);
-        setupTiles(955, "955.png", false);
-        setupTiles(956, "956.png", false);
-        setupTiles(957, "957.png", false);
-        setupTiles(958, "958.png", false);
-        setupTiles(959, "959.png", false);
-        setupTiles(960, "960.png", false);
-        setupTiles(961, "961.png", false);
-        setupTiles(962, "962.png", false);
-        setupTiles(963, "963.png", false);
-        setupTiles(964, "964.png", false);
-        setupTiles(965, "965.png", false);
-        setupTiles(966, "966.png", false);
-        setupTiles(967, "967.png", false);
-        setupTiles(968, "968.png", false);
-        setupTiles(969, "969.png", false);
-        setupTiles(970, "970.png", false);
-        setupTiles(971, "971.png", false);
-        setupTiles(972, "972.png", false);
-        setupTiles(973, "973.png", false);
-        setupTiles(974, "974.png", false);
-        setupTiles(975, "975.png", false);
-        setupTiles(976, "976.png", false);
-        setupTiles(977, "977.png", false);
-        setupTiles(978, "978.png", false);
-        setupTiles(979, "979.png", false);
-        setupTiles(980, "980.png", false);
-        setupTiles(981, "981.png", false);
-        setupTiles(982, "982.png", false);
-        setupTiles(983, "983.png", false);
-        setupTiles(984, "984.png", false);
-        setupTiles(985, "985.png", false);
-        setupTiles(986, "986.png", false);
-        setupTiles(987, "987.png", false);
-        setupTiles(988, "988.png", false);
-        setupTiles(989, "989.png", false);
-        setupTiles(990, "990.png", false);
-        setupTiles(991, "991.png", false);
-        setupTiles(992, "992.png", false);
-        setupTiles(993, "993.png", false);
-        setupTiles(994, "994.png", false);
-        setupTiles(995, "995.png", false);
-        setupTiles(996, "996.png", false);
-        setupTiles(997, "997.png", false);
-        setupTiles(998, "998.png", false);
-        setupTiles(999, "999.png", false);
-        setupTiles(1000, "1000.png", false);
-        setupTiles(1001, "1001.png", false);
-        setupTiles(1002, "1002.png", false);
-        setupTiles(1003, "1003.png", false);
-        setupTiles(1004, "1004.png", false);
-        setupTiles(1005, "1005.png", false);
-        setupTiles(1006, "1006.png", false);
-        setupTiles(1007, "1007.png", false);
-        setupTiles(1008, "1008.png", false);
-        setupTiles(1009, "1009.png", false);
-        setupTiles(1010, "1010.png", false);
-        setupTiles(1011, "1011.png", false);
-        setupTiles(1012, "1012.png", false);
-        setupTiles(1013, "1013.png", false);
-        setupTiles(1014, "1014.png", false);
-        setupTiles(1015, "1015.png", false);
-        setupTiles(1016, "1016.png", false);
-        setupTiles(1017, "1017.png", false);
-        setupTiles(1018, "1018.png", false);
-        setupTiles(1019, "1019.png", false);
-        setupTiles(1020, "1020.png", false);
-        setupTiles(1021, "1021.png", false);
-        setupTiles(1022, "1022.png", false);
-        setupTiles(1023, "1023.png", false);
-        setupTiles(1024, "1024.png", false);
-        setupTiles(1025, "1025.png", false);
-        setupTiles(1026, "1026.png", false);
-        setupTiles(1027, "1027.png", false);
-        setupTiles(1028, "1028.png", false);
-        setupTiles(1029, "1029.png", false);
-        setupTiles(1030, "1030.png", false);
-        setupTiles(1031, "1031.png", false);
-        setupTiles(1032, "1032.png", false);
-        setupTiles(1033, "1033.png", false);
-        setupTiles(1034, "1034.png", false);
-        setupTiles(1035, "1035.png", false);
-        setupTiles(1036, "1036.png", false);
+        setupTiles(910, "910.png", true);
+        setupTiles(911, "911.png", true);
+        setupTiles(912, "912.png", true);
+        setupTiles(913, "913.png", true);
+        setupTiles(914, "914.png", true);
+        setupTiles(915, "915.png", true);
+        setupTiles(916, "916.png", true);
+        setupTiles(917, "917.png", true);
+        setupTiles(918, "918.png", true);
+        setupTiles(919, "919.png", true);
+        setupTiles(920, "920.png", true);
+        setupTiles(921, "921.png", true);
+        setupTiles(922, "922.png", true);
+        setupTiles(923, "923.png", true);
+        setupTiles(924, "924.png", true);
+        setupTiles(925, "925.png", true);
+        setupTiles(926, "926.png", true);
+        setupTiles(927, "927.png", true);
+        setupTiles(928, "928.png", true);
+        setupTiles(929, "929.png", true);
+        setupTiles(930, "930.png", true);
+        setupTiles(931, "931.png", true);
+        setupTiles(932, "932.png", true);
+        setupTiles(933, "933.png", true);
+        setupTiles(934, "934.png", true);
+        setupTiles(935, "935.png", true);
+        setupTiles(936, "936.png", true);
+        setupTiles(937, "937.png", true);
+        setupTiles(938, "938.png", true);
+        setupTiles(939, "939.png", true);
+        setupTiles(940, "940.png", true);
+        setupTiles(941, "941.png", true);
+        setupTiles(942, "942.png", true);
+        setupTiles(943, "943.png", true);
+        setupTiles(944, "944.png", true);
+        setupTiles(945, "945.png", true);
+        setupTiles(946, "946.png", true);
+        setupTiles(947, "947.png", true);
+        setupTiles(948, "948.png", true);
+        setupTiles(949, "949.png", true);
+        setupTiles(950, "950.png", true);
+        setupTiles(951, "951.png", true);
+        setupTiles(952, "952.png", true);
+        setupTiles(953, "953.png", true);
+        setupTiles(954, "954.png", true);
+        setupTiles(955, "955.png", true);
+        setupTiles(956, "956.png", true);
+        setupTiles(957, "957.png", true);
+        setupTiles(958, "958.png", true);
+        setupTiles(959, "959.png", true);
+        setupTiles(960, "960.png", true);
+        setupTiles(961, "961.png", true);
+        setupTiles(962, "962.png", true);
+        setupTiles(963, "963.png", true);
+        setupTiles(964, "964.png", true);
+        setupTiles(965, "965.png", true);
+        setupTiles(966, "966.png", true);
+        setupTiles(967, "967.png", true);
+        setupTiles(968, "968.png", true);
+        setupTiles(969, "969.png", true);
+        setupTiles(970, "970.png", true);
+        setupTiles(971, "971.png", true);
+        setupTiles(972, "972.png", true);
+        setupTiles(973, "973.png", true);
+        setupTiles(974, "974.png", true);
+        setupTiles(975, "975.png", true);
+        setupTiles(976, "976.png", true);
+        setupTiles(977, "977.png", true);
+        setupTiles(978, "978.png", true);
+        setupTiles(979, "979.png", true);
+        setupTiles(980, "980.png", true);
+        setupTiles(981, "981.png", true);
+        setupTiles(982, "982.png", true);
+        setupTiles(983, "983.png", true);
+        setupTiles(984, "984.png", true);
+        setupTiles(985, "985.png", true);
+        setupTiles(986, "986.png", true);
+        setupTiles(987, "987.png", true);
+        setupTiles(988, "988.png", true);
+        setupTiles(989, "989.png", true);
+        setupTiles(990, "990.png", true);
+        setupTiles(991, "991.png", true);
+        setupTiles(992, "992.png", true);
+        setupTiles(993, "993.png", true);
+        setupTiles(994, "994.png", true);
+        setupTiles(995, "995.png", true);
+        setupTiles(996, "996.png", true);
+        setupTiles(997, "997.png", true);
+        setupTiles(998, "998.png", true);
+        setupTiles(999, "999.png", true);
+        setupTiles(1000, "1000.png", true);
+        setupTiles(1001, "1001.png", true);
+        setupTiles(1002, "1002.png", true);
+        setupTiles(1003, "1003.png", true);
+        setupTiles(1004, "1004.png", true);
+        setupTiles(1005, "1005.png", true);
+        setupTiles(1006, "1006.png", true);
+        setupTiles(1007, "1007.png", true);
+        setupTiles(1008, "1008.png", true);
+        setupTiles(1009, "1009.png", true);
+        setupTiles(1010, "1010.png", true);
+        setupTiles(1011, "1011.png", true);
+        setupTiles(1012, "1012.png", true);
+        setupTiles(1013, "1013.png", true);
+        setupTiles(1014, "1014.png", true);
+        setupTiles(1015, "1015.png", true);
+        setupTiles(1016, "1016.png", true);
+        setupTiles(1017, "1017.png", true);
+        setupTiles(1018, "1018.png", true);
+        setupTiles(1019, "1019.png", true);
+        setupTiles(1020, "1020.png", true);
+        setupTiles(1021, "1021.png", true);
+        setupTiles(1022, "1022.png", true);
+        setupTiles(1023, "1023.png", true);
+        setupTiles(1024, "1024.png", true);
+        setupTiles(1025, "1025.png", true);
+        setupTiles(1026, "1026.png", true);
+        setupTiles(1027, "1027.png", true);
+        setupTiles(1028, "1028.png", true);
+        setupTiles(1029, "1029.png", true);
+        setupTiles(1030, "1030.png", true);
+        setupTiles(1031, "1031.png", true);
+        setupTiles(1032, "1032.png", true);
+        setupTiles(1033, "1033.png", true);
+        setupTiles(1034, "1034.png", true);
+        setupTiles(1035, "1035.png", true);
+        setupTiles(1036, "1036.png", true);
         setupTiles(1037, "1037.png", false);
         setupTiles(1038, "1038.png", false);
         setupTiles(1039, "1039.png", false);
@@ -1135,9 +1135,9 @@ public class WorldRender {
         setupTiles(1093, "1093.png", false);
         setupTiles(1094, "1094.png", false);
         setupTiles(1095, "1095.png", false);
-        setupTiles(1096, "1096.png", false);
+        setupTiles(1096, "1096.png", true);
         setupTiles(1097, "1097.png", false);
-        setupTiles(1098, "1098.png", false);
+        setupTiles(1098, "1098.png", true);
         setupTiles(1099, "1099.png", false);
         setupTiles(1100, "1100.png", false);
         setupTiles(1101, "1101.png", false);
@@ -1300,14 +1300,14 @@ public class WorldRender {
         setupTiles(1258, "1258.png", false);
         setupTiles(1259, "1259.png", false);
         setupTiles(1260, "1260.png", false);
-        setupTiles(1261, "1261.png", false);
-        setupTiles(1262, "1262.png", false);
-        setupTiles(1263, "1263.png", false);
-        setupTiles(1264, "1264.png", false);
-        setupTiles(1265, "1265.png", false);
-        setupTiles(1266, "1266.png", false);
-        setupTiles(1267, "1267.png", false);
-        setupTiles(1268, "1268.png", false);
+        setupTiles(1261, "1261.png", true);
+        setupTiles(1262, "1262.png", true);
+        setupTiles(1263, "1263.png", true);
+        setupTiles(1264, "1264.png", true);
+        setupTiles(1265, "1265.png", true);
+        setupTiles(1266, "1266.png", true);
+        setupTiles(1267, "1267.png", true);
+        setupTiles(1268, "1268.png", true);
         setupTiles(1269, "1269.png", false);
         setupTiles(1270, "1270.png", false);
         setupTiles(1271, "1271.png", false);
@@ -1546,27 +1546,37 @@ public class WorldRender {
         int worldRow = Math.max(mg.playerY - 12, 0);
         int maxCol = Math.min(worldCol + 42, worldSize.x);
         int maxRow = Math.min(worldRow + 24, worldSize.y);
+        int worldWidth = worldSize.x * 48;
         Player.screenX = mg.HALF_WIDTH - 24;
         Player.screenY = mg.HALF_HEIGHT - 25;
-        if (Player.screenX > Player.worldX) {
-            Player.screenX = (int) Player.worldX;
-        } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
-            Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
+        int playerX = (int) Player.worldX;
+        int playerY = (int) Player.worldY;
+        int screenX = Player.screenX;
+        int screenY = Player.screenY;
+        if (screenX > playerX) {
+            Player.screenX = playerX;
+            screenX = playerX;
+        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
+            Player.screenX = (MainGame.SCREEN_WIDTH - (worldWidth - playerX));
             worldCol = Math.max(worldCol - 18, 0);
         }
-        if (Player.screenY > Player.worldY) {
-            Player.screenY = (int) Player.worldY;
-        } else if (Player.worldY + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_HEIGHT) {
-            Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
+        if (screenY > playerY) {
+            Player.screenY = playerY;
+            screenY = playerY;
+        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
+            Player.screenY = (MainGame.SCREEN_HEIGHT - (worldWidth - playerY));
             worldRow = Math.max(worldRow - 10, 0);
         }
+        int num1, num2;
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
-                if (worldData[i][b] != -1) {
-                    g2.drawImage(tileStorage[worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
+                num1 = worldData[i][b];
+                num2 = worldData1[i][b];
+                if (num1 != -1) {
+                    g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
                 }
-                if (worldData1[i][b] != -1) {
-                    g2.drawImage(tileStorage[worldData1[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
+                if (num2 != -1) {
+                    g2.drawImage(tileStorage[num2].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
                 }
             }
         }
@@ -1577,24 +1587,33 @@ public class WorldRender {
         int worldRow = Math.max(mg.playerY - 12, 0);
         int maxCol = Math.min(worldCol + 42, worldSize.x);
         int maxRow = Math.min(worldRow + 24, worldSize.y);
+        int worldWidth = worldSize.x * 48;
         Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 24;
-        if (Player.screenX > Player.worldX) {
-            Player.screenX = (int) Player.worldX;
-        } else if (Player.worldX + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_WIDTH) {
-            Player.screenX = (int) (MainGame.SCREEN_WIDTH - (worldSize.x * 48 - Player.worldX));
+        Player.screenY = mg.HALF_HEIGHT - 25;
+        int playerX = (int) Player.worldX;
+        int playerY = (int) Player.worldY;
+        int screenX = Player.screenX;
+        int screenY = Player.screenY;
+        if (screenX > playerX) {
+            Player.screenX = playerX;
+            screenX = playerX;
+        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
+            Player.screenX = (MainGame.SCREEN_WIDTH - (worldWidth - playerX));
             worldCol = Math.max(worldCol - 18, 0);
         }
-        if (Player.screenY > Player.worldY) {
-            Player.screenY = (int) Player.worldY;
-        } else if (Player.worldY + 24 > mg.wRender.worldSize.x * 48 - mg.HALF_HEIGHT) {
-            Player.screenY = (int) (MainGame.SCREEN_HEIGHT - (worldSize.x * 48 - Player.worldY));
+        if (screenY > playerY) {
+            Player.screenY = playerY;
+            screenY = playerY;
+        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
+            Player.screenY = (MainGame.SCREEN_HEIGHT - (worldWidth - playerY));
             worldRow = Math.max(worldRow - 10, 0);
         }
+        int num1;
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
-                if (worldData2[i][b] != -1) {
-                    g2.drawImage(tileStorage[worldData2[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
+                num1 = worldData2[i][b];
+                if (num1 != -1) {
+                    g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
                 }
             }
         }

@@ -20,8 +20,6 @@ import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 
-import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.util.Iterator;
 
 
@@ -32,27 +30,18 @@ import java.util.Iterator;
 public class PRJ_Control {
 
 
-    public DamageType type;
-
-
-    public float damage;
-
-    protected int spriteCounter;
-
     protected MainGame mg;
 
-    public String direction;
-    public Rectangle collisionBox;
-    public int movementSpeed;
-    public Point2D.Double worldPos;
     public int GruntKilledCounter;
     public long lastHitTime;
     private int ShooterKilledCounter;
-    /*
 
+    /**
+     * Used for handling projectiles
+     * main source of collision detection and damage provision
+     *
+     * @param mg maingame
      */
-    public int level;
-
     public PRJ_Control(MainGame mg) {
         this.mg = mg;
     }
@@ -134,10 +123,6 @@ public class PRJ_Control {
             ShooterKilledCounter++;
         }
     }
-
-
-
-
 }
 
 

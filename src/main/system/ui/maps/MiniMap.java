@@ -1,7 +1,6 @@
 package main.system.ui.maps;
 
 import gameworld.entities.ENTITY;
-import gameworld.entities.companion.ENT_Owly;
 import gameworld.player.PROJECTILE;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,49 +22,59 @@ public class MiniMap {
     public void draw(GraphicsContext gc) {
         int xTile = mg.playerX;
         int yTile = mg.playerY;
-        int tileNum;
+        gc.setFill(Colors.lightGreyMiddleAlpha);
+        gc.fillRect(1700, 25, 200, 200);
+        int tileNum, tileNum2;
         int yTileOffset, xTileOffset, entityX, entityY;
+        final int tileSize = 5;
         for (int y = 0; y < 40; y++) {
+            int yTileOffsetStart = Math.max(yTile - 20 + y, 0);
+            int yTileOffsetEnd = Math.min(yTile - 20 + y, mg.wRender.worldSize.x - 1);
             for (int x = 0; x < 40; x++) {
-                yTileOffset = Math.max(Math.min(yTile - 20 + y, mg.wRender.worldSize.x - 1), 0);
-                xTileOffset = Math.max(Math.min(xTile - 20 + x, mg.wRender.worldSize.x - 1), 0);
-                tileNum = WorldRender.worldData[xTileOffset][yTileOffset];
-                if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
-                    if (tileNum != -1 && WorldRender.tileStorage[tileNum].collision) {
-                        gc.setFill(Colors.darkBackground);
-                        gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
-                    } else {
-                        gc.setFill(Colors.map_green);
-                        gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
+                int xTileOffsetStart = Math.max(xTile - 20 + x, 0);
+                int xTileOffsetEnd = Math.min(xTile - 20 + x, mg.wRender.worldSize.x - 1);
+                for (yTileOffset = yTileOffsetStart; yTileOffset <= yTileOffsetEnd; yTileOffset++) {
+                    for (xTileOffset = xTileOffsetStart; xTileOffset <= xTileOffsetEnd; xTileOffset++) {
+                        tileNum = WorldRender.worldData[xTileOffset][yTileOffset];
+                        tileNum2 = WorldRender.worldData1[xTileOffset][yTileOffset];
+                        if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
+                            if ((tileNum != -1 && WorldRender.tileStorage[tileNum].collision) || (tileNum2 != -1 && WorldRender.tileStorage[tileNum2].collision)) {
+                                gc.setFill(Colors.darkBackground);
+                                gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                            } else {
+                                gc.setFill(Colors.map_green);
+                                gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                            }
+                        } else {
+                            gc.setFill(Colors.black);
+                            gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                        }
                     }
-                } else {
-                    gc.setFill(Colors.black);
-                    gc.fillRect(1_700 + x * 5, 25 + y * 5, 5, 5);
                 }
             }
         }
         gc.setFill(Colors.Blue);
         gc.fillRect(1_700 + 100, 25 + 100, 5, 5);
+        gc.setFill(Colors.Red);
+        final int offset = 100;
         synchronized (mg.PROXIMITY_ENTITIES) {
-            gc.setFill(Colors.Red);
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (int) ((entity.worldX + 24) / 48);
                 entityY = (int) ((entity.worldY + 24) / 48);
                 if (WorldController.currentMapCover[entityX][entityY] == 1) {
-                    if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20 && !(entity instanceof ENT_Owly)) {
-                        gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 5, 5);
+                    if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
+                        gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
                     }
                 }
             }
         }
-
         synchronized (mg.PROJECTILES) {
             for (PROJECTILE projectile : mg.PROJECTILES) {
                 entityX = (int) ((projectile.worldPos.x + 24) / 48);
                 entityY = (int) ((projectile.worldPos.y + 24) / 48);
-                if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
-                    if (WorldController.currentMapCover[entityX][entityY] == 1) {
-                        gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 2, 2);
+                if (WorldController.currentMapCover[entityX][entityY] == 1) {
+                    if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
+                        gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
                     }
                 }
             }
@@ -73,10 +82,10 @@ public class MiniMap {
         gc.setFill(Colors.blue_npc);
         for (ENTITY entity : mg.npcControl.NPC_Active) {
             entityX = (int) ((entity.worldX + 24) / 48);
-            entityY = (int) ((24 + entity.worldY) / 48);
+            entityY = (int) ((entity.worldY + 24) / 48);
             if (WorldController.currentMapCover[entityX][entityY] == 1) {
-                if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) <= 20 && yTile - entityY < 20) {
-                    gc.fillRect(1_700 + 100 + (entityX - xTile) * 5, 25 + 100 + (entityY - yTile) * 5, 5, 5);
+                if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
+                    gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
                 }
             }
         }
