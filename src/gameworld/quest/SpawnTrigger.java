@@ -30,7 +30,7 @@ public class SpawnTrigger {
 
 
     public void activate(MainGame mg) {
-        if (!triggered && playerXCloseToTile(9, x, y)) {
+        if (!triggered && playerXCloseToTile(15, x, y)) {
             if (trigger == Trigger.SINGULAR && type == Type.Grunt) {
                 MainGame.ENTITIES.add(new ENT_Grunt(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.Shooter) {

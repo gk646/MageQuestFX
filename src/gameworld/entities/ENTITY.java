@@ -4,6 +4,7 @@ import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.Effect;
+import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
 import gameworld.player.Player;
@@ -29,6 +30,8 @@ abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
     public ArrayList<Effect> effects = new ArrayList<>();
+    protected ResourceLoaderEntity animation;
+    public boolean collidingWithPlayer;
     public Zone zone;
     protected int spriteCounter;
     protected int goalCol;

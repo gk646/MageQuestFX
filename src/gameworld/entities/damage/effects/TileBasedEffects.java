@@ -4,7 +4,8 @@ import main.MainGame;
 import main.system.rendering.WorldRender;
 
 public class TileBasedEffects {
-    public static int activeTile;
+    public static int activeTile = 0;
+    private int previousTile = -1;
     MainGame mg;
 
     public TileBasedEffects(MainGame mg) {
@@ -13,10 +14,16 @@ public class TileBasedEffects {
 
 
     public void update() {
-        System.out.println(activeTile);
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
+        if (activeTile != previousTile) {
+            previousTile = activeTile;
+            checkForTileEffects();
+        }
+    }
+
+    private void checkForTileEffects() {
         if (activeTile == 225) {
-            mg.player.health = (mg.player.health * 0.6f);
+            mg.player.health -= (mg.player.maxHealth * 0.4f);
         }
     }
 }

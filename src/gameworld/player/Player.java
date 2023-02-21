@@ -498,12 +498,12 @@ public class Player extends ENTITY {
 
     private void drawLevelUp(GraphicsContext gc) {
         switch (Math.abs(spriteCounter / 12 % (2 * 6 - 2) - 6 + 1)) {
-            case 0 -> gc.drawImage(animation.images1.get(0), screenX - 118 + 24, screenY - 140);
-            case 1 -> gc.drawImage(animation.images1.get(1), screenX - 118 + 24, screenY - 140);
-            case 2 -> gc.drawImage(animation.images1.get(2), screenX - 118 + 24, screenY - 140);
-            case 3 -> gc.drawImage(animation.images1.get(3), screenX - 118 + 24, screenY - 140);
-            case 4 -> gc.drawImage(animation.images1.get(4), screenX - 118 + 24, screenY - 140);
-            case 5 -> gc.drawImage(animation.images1.get(5), screenX - 118 + 24, screenY - 140);
+            case 0 -> gc.drawImage(animation.images1.get(0), screenX - 118 + 24, screenY - 150);
+            case 1 -> gc.drawImage(animation.images1.get(1), screenX - 118 + 24, screenY - 150);
+            case 2 -> gc.drawImage(animation.images1.get(2), screenX - 118 + 24, screenY - 150);
+            case 3 -> gc.drawImage(animation.images1.get(3), screenX - 118 + 24, screenY - 150);
+            case 4 -> gc.drawImage(animation.images1.get(4), screenX - 118 + 24, screenY - 150);
+            case 5 -> gc.drawImage(animation.images1.get(5), screenX - 118 + 24, screenY - 150);
         }
     }
 
