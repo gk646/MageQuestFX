@@ -33,4 +33,15 @@ abstract public class NPC extends ENTITY {
             onPath = false;
         }
     }
+
+    @Override
+    public void update() {
+        tickEffects();
+        activeTile.x = (int) ((worldX) / 48);
+        activeTile.y = (int) ((worldY) / 48);
+        if (health <= 0) {
+            dead = true;
+            playGetHitSound();
+        }
+    }
 }

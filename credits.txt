@@ -14,7 +14,8 @@
  enegery sphere sound: https://freesound.org/s/187119/ 
  objective complete sound: https://freesound.org/people/Headphaze/sounds/277033/
  dungeon ambience: https://freesound.org/people/suonho/sounds/56364/
- Sounds from SilverIllusionist:
+ lava sound : https://freesound.org/s/133901/
+ Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/
  acid breath: https://freesound.org/people/SilverIllusionist/sounds/674223/
@@ -23,6 +24,8 @@
  torch swing : https://freesound.org/people/SilverIllusionist/sounds/472687/
  craft item : https://freesound.org/people/SilverIllusionist/sounds/580813/
  fire burst: https://freesound.org/people/SilverIllusionist/sounds/472688/
+}
+
  Various soundeffects / public domain from freesound.org 
  item equip sound: https://freesound.org/people/1bob/sounds/651515/ 
  DATABASE 
