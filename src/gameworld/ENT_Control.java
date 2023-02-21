@@ -1,11 +1,14 @@
 package gameworld;
 
+import gameworld.entities.ENTITY;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
+
+import java.util.Iterator;
 
 
 /**
@@ -46,13 +49,14 @@ public class ENT_Control {
 
     public void update() {
         synchronized (MainGame.ENTITIES) {
-            for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
+            Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
+            while (entityIterator.hasNext()) {
+                ENTITY entity = entityIterator.next();
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_500) {
                     entity.update();
-                    if (entity.getHealth() <= 0) {
-                        entity.dead = true;
-                    }
-                    if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
+                    if (entity.dead) {
+                        entityIterator.remove();
+                    } else if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
                         mg.player.health -= entity.level;
                         mg.player.getDurabilityDamageArmour();
                         entity.hitDelay = 0;

@@ -42,12 +42,14 @@ public class ENT_Grunt extends ENTITY {
     @Override
     public void update() {
         super.update();
-        if (health <= 0) {
-            dead = true;
+        onPath = !playerTooFarAbsolute() && ((worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX);
+        if (onPath && searchTicks >= Math.random() * 60) {
+            getNearestPlayerMultiplayer();
+            searchPath(goalCol, goalRow, 16);
+            searchTicks = 0;
+        } else if (onPath) {
+            trackPath();
         }
-        onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
-        getNearestPlayer();
-        searchPath(goalCol, goalRow, 16);
         hitDelay++;
         searchTicks++;
         if (hpBarCounter >= 600) {
@@ -71,20 +73,13 @@ public class ENT_Grunt extends ENTITY {
 
     private void gruntMovement() {
         if (mg.client && onPath) {
-            if (searchTicks >= Math.random() * 45) {
-                getNearestPlayerMultiplayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else {
-                trackPath(goalCol, goalRow);
-            }
         } else if (onPath) {
             if (searchTicks >= Math.random() * 45) {
                 getNearestPlayer();
                 searchPath(goalCol, goalRow, 16);
                 searchTicks = 0;
             } else {
-                trackPath(goalCol, goalRow);
+                trackPath();
             }
         }
     }

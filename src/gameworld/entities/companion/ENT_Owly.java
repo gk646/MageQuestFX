@@ -97,7 +97,7 @@ public class ENT_Owly extends ENTITY {
             searchPath(goalCol, goalRow, 50);
             searchTicks = 0;
         } else if (onPath) {
-            trackPath(goalCol, goalRow);
+            trackPath();
         }
     }
 }

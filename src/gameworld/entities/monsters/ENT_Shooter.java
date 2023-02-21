@@ -44,7 +44,8 @@ public class ENT_Shooter extends ENTITY {
 
     @Override
     public void update() {
-        onPath = !playerTooFarAbsolute() && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
+        super.update();
+        onPath = !playerTooFarAbsolute() && ((worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
@@ -81,7 +82,7 @@ public class ENT_Shooter extends ENTITY {
                 searchPath(goalCol, goalRow, 16);
                 searchTicks = 0;
             } else if (onPath) {
-                trackPath(goalCol, goalRow);
+                trackPath();
             }
         } else {
             if (onPath && searchTicks >= Math.random() * 55) {
@@ -89,7 +90,7 @@ public class ENT_Shooter extends ENTITY {
                 searchPath(goalCol, goalRow, 16);
                 searchTicks = 0;
             } else if (onPath) {
-                trackPath(goalCol, goalRow);
+                trackPath();
             }
         }
     }

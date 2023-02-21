@@ -68,14 +68,14 @@ abstract public class ENTITY {
     public Rectangle collisionBox;
     public boolean hpBarOn;
     protected int hpBarCounter;
-    private int nextCol1;
-    private int nextRow1;
-    private int nextCol2;
-    private int nextRow2;
-    private int nextCol3;
-    private int nextRow3;
-    private int nextCol4;
-    private int nextRow4;
+    public int nextCol1;
+    public int nextRow1;
+    public int nextCol2;
+    public int nextRow2;
+    public int nextCol3;
+    public int nextRow3;
+    public int nextCol4;
+    public int nextRow4;
 
     /**
      * Returns boolean value of: Is the player further than 650 worldPixels away
@@ -150,9 +150,6 @@ abstract public class ENTITY {
                 nextCol4 = mg.pathF.pathList.get(3).col;
                 nextRow4 = mg.pathF.pathList.get(3).row;
             }
-            if (nextCol1 == goalCol && nextRow1 == goalRow) {
-                onPath = false;
-            }
         }
     }
 
@@ -188,38 +185,26 @@ abstract public class ENTITY {
                 nextCol4 = mg.pathF.pathList.get(3).col;
                 nextRow4 = mg.pathF.pathList.get(3).row;
             }
-            if (nextCol1 == goalCol && nextRow1 == goalRow) {
-                onPath = false;
-            }
         }
     }
 
     /**
      * Tracks the next 4 tiles that have been saved through searchPath() without computing anymore paths
-     *
-     * @param goalCol goal tile x
-     * @param goalRow goal tile y
      */
-    protected void trackPath(int goalCol, int goalRow) {
+    protected void trackPath() {
         int nextX = nextCol1 * 48;
         int nextY = nextRow1 * 48;
-        if ((worldX + collisionBox.x) / mg.tileSize == nextCol1 && (worldY + collisionBox.y) / mg.tileSize == nextRow1) {
+        if ((int) (worldX / 48) == nextCol1 && (int) (worldY / 48) == nextRow1) {
             nextX = nextCol2 * mg.tileSize;
             nextY = nextRow2 * mg.tileSize;
-            if ((worldX + collisionBox.x) / mg.tileSize / mg.tileSize == nextCol2 * mg.tileSize && (worldY + collisionBox.y) / mg.tileSize / mg.tileSize == nextRow2 * mg.tileSize) {
-                nextX = nextCol3 * mg.tileSize;
-                nextY = nextRow3 * mg.tileSize;
-                if ((worldX + collisionBox.x) / mg.tileSize / mg.tileSize == nextCol3 * mg.tileSize && (worldY + collisionBox.y) / mg.tileSize / mg.tileSize == nextRow3 * mg.tileSize) {
-                    nextX = nextCol4 * mg.tileSize;
-                    nextY = nextRow4 * mg.tileSize;
-                }
-            }
+        } else if ((int) (worldX / 48) == nextCol2 && (int) (worldY / 48) == nextRow2) {
+            nextX = nextCol3 * mg.tileSize;
+            nextY = nextRow3 * mg.tileSize;
+        } else if ((int) (worldX / 48) == nextCol3 && (int) (worldY / 48) == nextRow3) {
+            nextX = nextCol4 * mg.tileSize + 24;
+            nextY = nextRow4 * mg.tileSize + 24;
         }
-        if (nextCol1 == goalCol && nextRow1 == goalRow) {
-            onPath = false;
-        } else {
-            decideMovement(nextX, nextY);
-        }
+        decideMovement(nextX, nextY);
     }
 
     protected void followPlayer(int playerX, int playerY) {
@@ -292,6 +277,9 @@ abstract public class ENTITY {
 
     public void update() {
         tickEffects();
+        if (health <= 0) {
+            dead = true;
+        }
     }
 
     public void getDamageFromPlayer(float flat_damage, DamageType type) {
