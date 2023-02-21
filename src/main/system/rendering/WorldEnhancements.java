@@ -24,7 +24,9 @@ public class WorldEnhancements {
     AnimationList water = new AnimationList(new int[]{911, 1262, 1263, 1264, 1265, 1266, 1267, 1268}, 25);
     AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
     AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
-
+    AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
+    AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 50);
+    AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 60);
 
     StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
     StaticLightSource torch = new StaticLightSource(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, Colors.fire_red);
@@ -126,6 +128,9 @@ public class WorldEnhancements {
         animationList.add(water);
         animationList.add(lavaCasket);
         animationList.add(lavaBecken);
+        animationList.add(waterBecken);
+        animationList.add(waterCasket);
+        animationList.add(spikes);
         lightList.add(torch);
         lightList.add(lantern);
         lightList.add(lava);

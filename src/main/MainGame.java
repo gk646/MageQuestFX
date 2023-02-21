@@ -6,6 +6,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
+import gameworld.entities.damage.effects.TileBasedEffects;
 import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
@@ -127,6 +128,7 @@ public class MainGame {
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
+    public TileBasedEffects tileBase = new TileBasedEffects(this);
     private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
@@ -186,6 +188,7 @@ public class MainGame {
                         player.checkPlayerIsMoving();
                         inventP.interactWithWindows();
                         getPlayerTile();
+                        tileBase.update();
                         wAnim.animateTiles();
                         wControl.uncoverWorldMap();
                         wControl.update();

@@ -130,8 +130,7 @@ abstract public class ENTITY {
         int startCol = activeTile.x;
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
-        if (!(startCol == goalCol && startRow == goalRow)) {
-            mg.pathF.search();
+        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
