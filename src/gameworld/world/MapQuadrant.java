@@ -1,7 +1,7 @@
 package gameworld.world;
 
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
@@ -45,7 +45,7 @@ public class MapQuadrant {
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
                 if (!WorldRender.tileStorage[mapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
-                        MainGame.ENTITIES.add(new ENT_Grunt(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
+                        MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     } else {
                         MainGame.ENTITIES.add(new ENT_Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     }

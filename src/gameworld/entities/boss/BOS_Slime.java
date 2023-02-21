@@ -119,7 +119,7 @@ public class BOS_Slime extends BOSS {
     public void playGetHitSound() {
         if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
-            anim.playGetHitSound();
+            anim.playGetHitSound(4);
         }
     }
 }

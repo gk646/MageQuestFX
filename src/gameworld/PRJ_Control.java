@@ -6,8 +6,8 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.DamageEffect;
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
@@ -116,7 +116,7 @@ public class PRJ_Control {
 
 
     public void recordDeath(ENTITY entity) {
-        if (entity instanceof ENT_Grunt) {
+        if (entity instanceof ENT_SkeletonWarrior) {
             GruntKilledCounter++;
         } else if (entity instanceof ENT_Shooter) {
             ShooterKilledCounter++;

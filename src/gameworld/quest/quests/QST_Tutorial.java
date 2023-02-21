@@ -1,7 +1,7 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
-import gameworld.entities.monsters.ENT_Grunt;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.npcs.NPC_OldMan;
 import gameworld.quest.QUEST;
 import gameworld.quest.dialog.DialogStorage;
@@ -37,9 +37,9 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 10) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3");
                     gruntKillCounter = mg.prj_control.GruntKilledCounter;
-                    MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 31, 1, Zone.Tutorial));
-                    MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 34, 1, Zone.Tutorial));
-                    MainGame.ENTITIES.add(new ENT_Grunt(mg, 48 * 46, 48 * 38, 1, Zone.Tutorial));
+                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 31, 1, Zone.Tutorial));
+                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 34, 1, Zone.Tutorial));
+                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Tutorial));
                     nextStage();
                     npc.blockInteraction = true;
                     mg.sqLite.updateQuestFacts(1, 1, 1);

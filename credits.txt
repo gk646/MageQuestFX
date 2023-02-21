@@ -1,3 +1,30 @@
-<a href="https://www.freepik.com/free-vector/set-eight-pixelated-items_25690719.htm#query=pixelart%20sprite&position=40&from_view=search&track=ais">Image by gstudioimagen1</a> on Freepik
-
-<a href="https://www.freepik.com/free-vector/green-burst-sprites-game-animation_20684324.htm#query=spritesheet&position=9&from_view=search&track=sph">Image by upklyak</a> on Freepik
+ JavaFX 
+ The next generation client application framework for desktop mobile and embedded systems. 
+ OpenJDK
+ The open source implementation of the Java Platform Standard Edition (Java SE). 
+ Map Editor 
+ Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer 
+ TEXTURES 
+ Character textures: craftpix.net / Full copyright with their Freebie License 
+ Effect textures from: craftpix.net / Full copyright with their Freebie License 
+ Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion 
+ Item icons: DALL·E / Image generation AI by OpenAI 
+ SOUNDS 
+ item equip sound: https://freesound.org/people/1bob/sounds/651515/
+ enegery sphere sound: https://freesound.org/s/187119/ 
+ objective complete sound: https://freesound.org/people/Headphaze/sounds/277033/
+ dungeon ambience: https://freesound.org/people/suonho/sounds/56364/
+ Sounds from SilverIllusionist:
+ levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
+ energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/
+ acid breath: https://freesound.org/people/SilverIllusionist/sounds/674223/
+ eating: https://freesound.org/people/SilverIllusionist/sounds/411170/
+ page turn : https://freesound.org/people/SilverIllusionist/sounds/411175/
+ torch swing : https://freesound.org/people/SilverIllusionist/sounds/472687/
+ craft item : https://freesound.org/people/SilverIllusionist/sounds/580813/
+ fire burst: https://freesound.org/people/SilverIllusionist/sounds/472688/
+ Various soundeffects / public domain from freesound.org 
+ item equip sound: https://freesound.org/people/1bob/sounds/651515/ 
+ DATABASE 
+ SQLite JDBC driver 3.4 - developed by Xerial 
+ SQLite database - developed by D. Richard Hipp 

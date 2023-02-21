@@ -16,8 +16,7 @@ public class ResourceLoaderEntity {
     public ArrayList<Image> idle = new ArrayList<>();
     public ArrayList<Image> walk = new ArrayList<>();
     public ArrayList<Image> WalkingLeft = new ArrayList<>();
-
-    public ArrayList<MediaPlayer> getHitSound = new ArrayList<>(), randomNoise = new ArrayList<>(), attackSound = new ArrayList<>();
+    public ArrayList<MediaPlayer> sounds = new ArrayList<>();
     String name;
 
     public ResourceLoaderEntity(String entityName) {
@@ -85,20 +84,20 @@ public class ResourceLoaderEntity {
         for (int i = 0; i < 5; i++) {
             URL url = getClass().getResource("/resources/sound/effects/entities/" + name + "/" + dataName + i + ".wav");
             if (url != null) {
-                getHitSound.add(new MediaPlayer(new Media(url.toString())));
+                sounds.add(new MediaPlayer(new Media(url.toString())));
             } else {
                 break;
             }
         }
-        for (MediaPlayer mediaPlayer : getHitSound) {
+        for (MediaPlayer mediaPlayer : sounds) {
             mediaPlayer.setVolume(0.3);
         }
     }
 
-    public void playGetHitSound() {
-        int num = (int) (Math.random() * getHitSound.size());
-        getHitSound.get(num).seek(Duration.ZERO);
-        getHitSound.get(num).play();
+    public void playGetHitSound(int hitSoundLimit) {
+        int num = (int) (Math.random() * hitSoundLimit);
+        sounds.get(num).seek(Duration.ZERO);
+        sounds.get(num).play();
     }
 }
 

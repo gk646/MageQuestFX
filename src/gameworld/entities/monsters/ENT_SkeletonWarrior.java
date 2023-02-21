@@ -10,7 +10,7 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 
-public class ENT_Grunt extends ENTITY {
+public class ENT_SkeletonWarrior extends ENTITY {
     private boolean attack1, attack2, attack3;
 
     /**
@@ -20,7 +20,7 @@ public class ENT_Grunt extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_Grunt(MainGame mg, int worldX, int worldY, int level, Zone zone) {
+    public ENT_SkeletonWarrior(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         this.mg = mg;
         this.animation = new ResourceLoaderEntity("skeletonWarrior");
         animation.load();
@@ -53,12 +53,13 @@ public class ENT_Grunt extends ENTITY {
             } else {
                 attack3 = true;
             }
+            animation.playGetHitSound(3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
         if (!attack2 && !attack3 && !attack1) {
-            //onPath = true;
-            // standardSeekPlayer();
+            onPath = true;
+            standardSeekPlayer();
         }
         hitDelay++;
         searchTicks++;
@@ -107,13 +108,14 @@ public class ENT_Grunt extends ENTITY {
 
     private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 210 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY);
-            case 6 -> gc.drawImage(animation.walk.get(6), screenX, screenY);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX - 35, screenY - 6);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX - 35, screenY - 6);
+            case 2 -> gc.drawImage(animation.walk.get(2),
+                    screenX - 35, screenY - 6);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX - 35, screenY - 6);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX - 35, screenY - 6);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX - 35, screenY - 6);
+            case 6 -> gc.drawImage(animation.walk.get(6), screenX - 35, screenY - 6);
         }
     }
 
@@ -150,6 +152,13 @@ public class ENT_Grunt extends ENTITY {
         }
     }
 
+    @Override
+    public void playGetHitSound() {
+        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
+            timeSinceLastDamageSound = System.currentTimeMillis();
+            //animation.playGetHitSound(4);
+        }
+    }
 
     private void gruntMovement() {
         if (mg.client && onPath) {

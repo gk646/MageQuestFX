@@ -23,6 +23,14 @@ public class ENT_Player2 extends ENTITY {
     }
 
 
+    /**
+     *
+     */
+    @Override
+    public void playGetHitSound() {
+
+    }
+
     public void draw(GraphicsContext g2) {
         g2.drawImage(player2, worldX - Player.worldX + MainGame.SCREEN_WIDTH / 2.00f - 24, worldY - Player.worldY + MainGame.SCREEN_HEIGHT / 2.00f - 24, 48, 48);
     }

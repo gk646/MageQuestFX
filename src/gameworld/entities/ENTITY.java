@@ -5,8 +5,8 @@ import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
-import gameworld.entities.monsters.ENT_Grunt;
 import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,7 +22,7 @@ import java.util.Iterator;
 /**
  * Main inheritable class for all entities
  *
- * @see ENT_Grunt
+ * @see ENT_SkeletonWarrior
  * @see ENT_Owly
  * @see ENT_Shooter
  */

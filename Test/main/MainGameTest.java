@@ -2,7 +2,7 @@ package main;
 
 import gameworld.NPC_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.monsters.ENT_Grunt;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import javafx.scene.Group;
@@ -54,16 +54,16 @@ class MainGameTest {
         Player.worldX = 4500;
         Player.worldY = 4500;
         for (int i = 0; i < 200; i++) {
-            entities[i] = new ENT_Grunt(mg, 5000, 5000, 10, Zone.Tutorial);
+            entities[i] = new ENT_SkeletonWarrior(mg, 5000, 5000, 10, Zone.Tutorial);
         }
         for (int i = 200; i < 400; i++) {
-            entities[i] = new ENT_Grunt(mg, 5000, 5000, 10, Zone.GrassLands);
+            entities[i] = new ENT_SkeletonWarrior(mg, 5000, 5000, 10, Zone.GrassLands);
         }
         for (int i = 200; i < 400; i++) {
-            entities[i] = new ENT_Grunt(mg, 1000, 1000, 10, Zone.City1);
+            entities[i] = new ENT_SkeletonWarrior(mg, 1000, 1000, 10, Zone.City1);
         }
         for (int i = 400; i < 500; i++) {
-            entities[i] = new ENT_Grunt(mg, 1200, 120, 10, Zone.City1);
+            entities[i] = new ENT_SkeletonWarrior(mg, 1200, 120, 10, Zone.City1);
         }
         long time = System.nanoTime();
         for (ENTITY entity : entities) {
