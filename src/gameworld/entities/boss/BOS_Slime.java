@@ -1,7 +1,7 @@
 package gameworld.entities.boss;
 
 import gameworld.entities.BOSS;
-import gameworld.entities.loadinghelper.ResourceLoader;
+import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,7 +12,7 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 public class BOS_Slime extends BOSS {
-    private final ResourceLoader anim = new ResourceLoader("BossSlime");
+    private final ResourceLoaderEntity anim = new ResourceLoaderEntity("BossSlime");
 
 
     public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {

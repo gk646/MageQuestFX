@@ -364,6 +364,7 @@ public class InputHandler {
 
     public void handleMouseClick(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
+            mg.player.levelup = true;
             if (mg.qPanel.expandButton.contains(lastMousePosition)) {
                 mg.qPanel.expanded = !mg.qPanel.expanded;
             } else if (mg.showChar) {

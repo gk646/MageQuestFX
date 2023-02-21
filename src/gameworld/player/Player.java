@@ -1,6 +1,7 @@
 package gameworld.player;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.player.abilities.PRJ_Lightning;
 import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 
 public class Player extends ENTITY {
+    public boolean levelup;
     public Map map;
     private boolean isMoving;
     public int maxMana;
@@ -66,6 +68,8 @@ public class Player extends ENTITY {
     public static float[] effects = new float[effectsSizeTotal];
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
+    GeneralResourceLoader animation = new GeneralResourceLoader("player");
+    private int levelupCounter;
 
     /*
     1. DMG_Arcane_Absolute
@@ -105,6 +109,8 @@ public class Player extends ENTITY {
         this.mg = mainGame;
         //-------VALUES-----------
         this.playerMovementSpeed = 4;
+        animation.loadImages1("ui/levelup");
+        animation.loadSound("levelup", "levelup");
         this.movementSpeed = 4;
         this.maxHealth = 10;
         this.maxMana = 20;
@@ -115,6 +121,7 @@ public class Player extends ENTITY {
         worldX = 24;
         worldY = 24;
         direction = "";
+
         getPlayerImage();
         this.collisionBox = new Rectangle(18, 8, 10, 32);
         this.level = 1;
@@ -358,6 +365,8 @@ public class Player extends ENTITY {
         experience += entity.level;
         if (experience >= levelUpExperience) {
             level++;
+            levelup = true;
+            animation.playSound(0);
             mg.talentP.pointsToSpend++;
             updateEquippedItems();
             this.experience -= levelUpExperience;
@@ -432,6 +441,14 @@ public class Player extends ENTITY {
         } else {
             drawIdle(gc);
         }
+        if (levelup) {
+            drawLevelUp(gc);
+            levelupCounter++;
+            if (levelupCounter >= 1_440) {
+                levelup = false;
+                levelupCounter = 0;
+            }
+        }
         spriteCounter++;
     }
 
@@ -479,6 +496,16 @@ public class Player extends ENTITY {
         }
     }
 
+    private void drawLevelUp(GraphicsContext gc) {
+        switch (Math.abs(spriteCounter / 12 % (2 * 6 - 2) - 6 + 1)) {
+            case 0 -> gc.drawImage(animation.images1.get(0), screenX - 118 + 24, screenY - 140);
+            case 1 -> gc.drawImage(animation.images1.get(1), screenX - 118 + 24, screenY - 140);
+            case 2 -> gc.drawImage(animation.images1.get(2), screenX - 118 + 24, screenY - 140);
+            case 3 -> gc.drawImage(animation.images1.get(3), screenX - 118 + 24, screenY - 140);
+            case 4 -> gc.drawImage(animation.images1.get(4), screenX - 118 + 24, screenY - 140);
+            case 5 -> gc.drawImage(animation.images1.get(5), screenX - 118 + 24, screenY - 140);
+        }
+    }
 
     private Image setupIdle(String imagePath) {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/idle/" + imagePath)));
