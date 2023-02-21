@@ -48,4 +48,7 @@ public class Colors {
     public static final Color dark_magic_purple = Color.rgb(128, 0, 128, 1);
     public static final Color physical_grey = Color.rgb(90, 105, 136, 1);
     public static final Color poison_green = Color.rgb(117, 215, 44, 1);
+
+    //MISC
+    public static final Color transparent = Color.rgb(0, 0, 0, 0.3);
 }

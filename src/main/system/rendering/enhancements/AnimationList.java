@@ -1,18 +1,18 @@
-package main.system.rendering;
+package main.system.rendering.enhancements;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 public class AnimationList {
 
-    int[] tileProgression;
-    float speedCounter;
+    public int[] tileProgression;
+    public ArrayList<Point> tilesIndices = new ArrayList<>();
     int speed = 20;
-    ArrayList<Point> tilesIndices = new ArrayList<>();
-    ArrayList<Point> tilesIndices1 = new ArrayList<>();
-    ArrayList<Point> tilesIndices2 = new ArrayList<>();
+    public ArrayList<Point> tilesIndices1 = new ArrayList<>();
+    public ArrayList<Point> tilesIndices2 = new ArrayList<>();
+    int speedCounter;
 
-    AnimationList(int[] list, int speed) {
+    public AnimationList(int[] list, int speed) {
         tileProgression = list;
         this.speed = speed;
     }
@@ -24,10 +24,8 @@ public class AnimationList {
             for (int j = 0; j < tileProgression.length; j++) {
                 if (tileProgression[j] == i) {
                     if (j < tileProgression.length - 1) {
-
                         return tileProgression[j + 1];
                     } else {
-
                         return tileProgression[0];
                     }
                 }

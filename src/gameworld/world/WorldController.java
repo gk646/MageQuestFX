@@ -43,7 +43,7 @@ public class WorldController {
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
-                mg.wAnim.cacheAnimationTiles();
+                mg.wAnim.cacheMapEnhancements();
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
                 currentWorld = map.zone;
@@ -92,14 +92,14 @@ public class WorldController {
             if (mg.playerX == 1 && mg.playerY == 1) {
                 mg.wControl.loadMap(Zone.City1, 10, 10);
                 mg.player.spawnLevel = 1;
+            } else if (mg.playerX == 71 && mg.playerY == 56) {
+                mg.wControl.loadMap(Zone.Dungeon_Tutorial, 27, 0);
             }
-        }
-        if (currentWorld == Zone.GrassLands) {
+        } else if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
                 mg.wControl.loadMap(Zone.City1, 10, 10);
             }
-        }
-        if (currentWorld == Zone.City1) {
+        } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
                     mg.playerX == 33 && mg.playerY == 0 ||
                     mg.playerX == 34 && mg.playerY == 0 ||
@@ -108,13 +108,7 @@ public class WorldController {
                     mg.playerX == 37 && mg.playerY == 0) {
                 mg.wControl.loadMap(Zone.GrassLands, 495, 495);
             }
-        }
-        if (currentWorld == Zone.Tutorial) {
-            if (mg.playerX == 71 && mg.playerY == 56) {
-                mg.wControl.loadMap(Zone.Dungeon_Tutorial, 27, 0);
-            }
-        }
-        if (currentWorld == Zone.Dungeon_Tutorial) {
+        } else if (currentWorld == Zone.Dungeon_Tutorial) {
             if (mg.playerX == 26 && mg.playerY == 0) {
                 mg.wControl.loadMap(Zone.Tutorial, 71, 55);
             }
