@@ -42,14 +42,17 @@ public class ENT_Grunt extends ENTITY {
     @Override
     public void update() {
         super.update();
-        onPath = !playerTooFarAbsolute() && ((worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX);
-        if (onPath && searchTicks >= Math.random() * 60) {
-            getNearestPlayerMultiplayer();
-            searchPath(goalCol, goalRow, 16);
-            searchTicks = 0;
-        } else if (onPath) {
-            trackPath();
+        if (playerTooFarAbsolute()) {
+            onPath = false;
+        } else if (!playerTooFarAbsolute()) {
+            if ((int) (worldX / 48) != mg.playerX || (int) (worldY / 48) != mg.playerY) {
+                onPath = true;
+            } else if ((int) (worldX / 48) == mg.playerX && (int) (worldY / 48) == mg.playerY) {
+                onPath = false;
+            }
         }
+        onPath = true;
+        standardSeekPlayer();
         hitDelay++;
         searchTicks++;
         if (hpBarCounter >= 600) {
@@ -59,6 +62,7 @@ public class ENT_Grunt extends ENTITY {
             hpBarCounter++;
         }
     }
+
 
     @Override
     public void draw(GraphicsContext gc) {

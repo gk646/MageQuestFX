@@ -50,8 +50,7 @@ public class ENT_Shooter extends ENTITY {
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
         }
-        getNearestPlayer();
-        searchPath(goalCol, goalRow, 16);
+        standardSeekPlayer();
         searchTicks++;
         shotCooldown++;
         if (hpBarCounter >= 600) {
