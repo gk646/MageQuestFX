@@ -36,6 +36,7 @@ import main.system.enums.State;
 import main.system.enums.Zone;
 import main.system.rendering.WorldEnhancements;
 import main.system.rendering.WorldRender;
+import main.system.savegame.LoadGameState;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
@@ -115,8 +116,8 @@ public class MainGame {
     public MAP_UTILS map_utils;
     public GameMap gameMap;
     private final DayNightCycle cycle = new DayNightCycle(this);
-    public final UI_SkillBar sBar = new UI_SkillBar(this);
-    public final UI_QuestPanel qPanel = new UI_QuestPanel(this);
+    public UI_SkillBar sBar;
+    public UI_QuestPanel qPanel;
     public boolean credits;
     public boolean drawVideoSettings, drawAudioSettings;
     public boolean drawKeybindings;
@@ -124,11 +125,12 @@ public class MainGame {
     public DRP_DroppedItem dropI;
     public boolean drawCodex;
     public WorldEnhancements wAnim;
+    public LoadGameState loadGameState;
 
     //---------System---------
     private MiniMap miniM;
     private Multiplayer multiplayer;
-    public TileBasedEffects tileBase = new TileBasedEffects(this);
+    public TileBasedEffects tileBase;
     private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
@@ -347,14 +349,20 @@ public class MainGame {
     private void loadGame(GraphicsContext gc) {
         FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
         sqLite = new SQLite(this);
+        loadGameState = new LoadGameState(this);
         sqLite.getConnection();
+        tileBase = new TileBasedEffects(this);
+        qPanel = new UI_QuestPanel(this);
+        sBar = new UI_SkillBar(this);
         dropI = new DRP_DroppedItem(this);
         wAnim = new WorldEnhancements(this);
+
         ui.updateLoadingScreen(0, gc);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
         random = new Random(seed);
         // 0 %
+
         sound = new Sound();
         sound.loadSounds();
         inventP = new UI_InventoryPanel(this);
@@ -384,7 +392,7 @@ public class MainGame {
 
         //48%
         ui.updateLoadingScreen(12, gc);
-        sqLite.readItemsFromDB();
+        sqLite.readAllGameData();
         talentP.assignDescriptions();
         //60%
         ui.updateLoadingScreen(12, gc);
@@ -401,7 +409,6 @@ public class MainGame {
         //84%
         ui.updateLoadingScreen(12, gc);
         multiplayer = new Multiplayer(this, ENTPlayer2);
-
         player.updateEquippedItems();
         player.health = player.maxHealth;
         player.mana = player.maxMana;
@@ -409,10 +416,9 @@ public class MainGame {
         gameMap = new GameMap(this);
         FonT.loadFonts();
 
-
         //100%
+        loadGameState.loadGame();
         ui.updateLoadingScreen(16, gc);
-        wControl.loadSpawnLevel();
         countItems();
         gameMap.getImage();
         gameState = State.TITLE;
@@ -420,6 +426,10 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
+        debug();
+    }
+
+    private void debug() {
         ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 4; i++) {
             ENTITIES.add(new ENT_SkeletonWarrior(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
@@ -427,7 +437,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 53, 49);
+        wControl.loadMap(Zone.Tutorial, 34, 34);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
@@ -435,8 +445,6 @@ public class MainGame {
             dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
-
-
     }
 
     /**

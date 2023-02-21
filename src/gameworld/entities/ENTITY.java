@@ -189,6 +189,7 @@ abstract public class ENTITY {
         }
     }
 
+
     /**
      * Tracks the next 4 tiles that have been saved through searchPath() without computing anymore paths
      */
@@ -207,7 +208,7 @@ abstract public class ENTITY {
         }
         if (activeTile.x == mg.playerX && activeTile.y == mg.playerY) {
             onPath = false;
-        } else {
+        } else if (nextX != 0 && nextY != 0) {
             decideMovement(nextX, nextY);
         }
     }
@@ -231,6 +232,7 @@ abstract public class ENTITY {
     }
 
     protected void standardSeekPlayer() {
+        onPath = !playerTooFarAbsolute();
         if (onPath && searchTicks >= Math.random() * 15) {
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
@@ -291,6 +293,7 @@ abstract public class ENTITY {
         activeTile.y = (int) ((worldY + 24) / 48);
         if (health <= 0) {
             dead = true;
+            playGetHitSound();
         }
     }
 

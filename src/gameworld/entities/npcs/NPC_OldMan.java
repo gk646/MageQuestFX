@@ -16,15 +16,15 @@ public class NPC_OldMan extends NPC {
     private Image idle1, idle2, idle3, idle4;
 
 
-    public NPC_OldMan(MainGame mainGame, int x, int y) {
+    public NPC_OldMan(MainGame mainGame, int xTile, int yTile) {
         this.dialog = new Dialog();
         this.zone = Zone.Tutorial;
         this.mg = mainGame;
         goalTile = new Point(34, 34);
         //Setting default values
         getPlayerImage();
-        worldX = x;
-        worldY = y;
+        worldX = xTile * 48;
+        worldY = yTile * 48;
         this.entityHeight = 48;
         this.entityWidth = 48;
         this.movementSpeed = 2;
@@ -61,6 +61,7 @@ public class NPC_OldMan extends NPC {
 
     @Override
     public void update() {
+        super.update();
         if (show_dialog) {
             dialogHideDelay++;
             show_dialog = !mg.wControl.player_went_away(playerTalkLocation);
@@ -69,7 +70,6 @@ public class NPC_OldMan extends NPC {
             show_dialog = false;
             dialogHideDelay = 0;
         }
-
         if (onPath) {
             moveTo(goalTile.x, goalTile.y, checkPoints);
         }

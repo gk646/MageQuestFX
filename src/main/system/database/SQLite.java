@@ -39,7 +39,7 @@ public class SQLite {
         }
     }
 
-    public void readItemsFromDB() {
+    public void readAllGameData() {
         try {
             Statement stmt = this.conn.createStatement();
             searchAMULET(stmt);
@@ -59,7 +59,6 @@ public class SQLite {
             readPlayerInventory(stmt);
             readPlayerStats(stmt);
             readPlayerBags(stmt);
-            readStartLevel(stmt);
             readSkillTree(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,14 +120,62 @@ public class SQLite {
         }
     }
 
-    private void readStartLevel(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
-        mg.player.spawnLevel = rs.getInt("startLevel");
+    public void setQuestActive(int Quest_ID) {
+        try {
+            String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?  where _ROWID_ = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "active");
+            ps.setInt(2, Quest_ID);
+            ps.executeUpdate();
+        } catch (SQLException ignored) {
+            //mg.ui.sqlException();
+        }
+    }
+
+    /**
+     * @param Quest_id the quests id
+     * @param fact_id  the quests fact id
+     * @return the number value at this place in the table
+     */
+    public int readQuestFacts(int Quest_id, int fact_id) {
+        String columnName = "FACT_" + fact_id;
+        ResultSet rs = null;
+        try {
+            String sql = " SELECT " + columnName + " FROM  QUEST_FACTS  WHERE _ROWID_ = " + Quest_id;
+            rs = conn.createStatement().executeQuery(sql);
+            return rs.getInt(columnName);
+        } catch (SQLException ignored) {
+            // mg.ui.sqlException();
+        }
+        return -1;
+    }
+
+    public String readQuestDescription(int Quest_id) {
+        ResultSet rs;
+        try {
+            String sql = " SELECT DESCRIPTION FROM  QUEST_FACTS  WHERE _ROWID_ = " + Quest_id;
+            rs = conn.createStatement().executeQuery(sql);
+            return rs.getString("DESCRIPTION");
+        } catch (SQLException ignored) {
+            // mg.ui.sqlException();
+        }
+        return "null";
+    }
+
+    public int readStartLevel() {
+        ResultSet rs;
+        try {
+            String sql = "SELECT * FROM PLAYER_STATS LIMIT 1 ";
+            rs = conn.createStatement().executeQuery(sql);
+            return rs.getInt("startLevel");
+        } catch (SQLException ignored) {
+            // mg.ui.sqlException();
+        }
+        return 0;
     }
 
 
     private void saveGameData() {
-
         try {
             savePlayerInventory();
             saveBagInventory();

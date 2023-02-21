@@ -38,15 +38,14 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
+                currentWorld = map.zone;
                 clearWorldArrays();
-                mg.npcControl.loadNPC(zone);
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.wAnim.cacheMapEnhancements();
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
-                currentWorld = map.zone;
                 currentMapCover = map.mapCover;
                 mg.player.setPosition(xTile * 48, yTile * 48);
                 break;
@@ -115,13 +114,6 @@ public class WorldController {
         }
     }
 
-    public void loadSpawnLevel() {
-        if (mg.player.spawnLevel == 0) {
-            mg.wControl.loadMap(Zone.Tutorial, 4, 4);
-        } else if (mg.player.spawnLevel == 1) {
-            mg.wControl.loadMap(Zone.City1, 40, 18);
-        }
-    }
 
     private void loadArray() {
         for (Map map : MAPS) {

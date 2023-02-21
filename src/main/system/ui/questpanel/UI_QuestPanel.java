@@ -2,7 +2,6 @@ package main.system.ui.questpanel;
 
 
 import gameworld.quest.QUEST;
-import gameworld.quest.quests.QST_Tutorial;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -11,11 +10,12 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
-    public QUEST[] quests = new QUEST[10];
+    public ArrayList<QUEST> quests = new ArrayList<>();
     public final Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
     private final MainGame mg;
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
@@ -24,7 +24,6 @@ public class UI_QuestPanel {
 
     public UI_QuestPanel(MainGame mg) {
         this.mg = mg;
-        quests[0] = new QST_Tutorial(mg, "An old man's tale");
     }
 
     public void draw(GraphicsContext gc) {
@@ -55,6 +54,14 @@ public class UI_QuestPanel {
         for (QUEST quest : quests) {
             if (quest != null) {
                 quest.update();
+            }
+        }
+    }
+
+    public void setQuestStage(String quest_name, int progressStage) {
+        for (QUEST quest : quests) {
+            if (quest.name.equals(quest_name)) {
+                quest.progressStage = progressStage;
             }
         }
     }

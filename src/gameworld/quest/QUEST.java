@@ -12,6 +12,7 @@ abstract public class QUEST {
     public String name;
     public String objective;
     public int progressStage = 1;
+    public int quest_id;
     public String progressStageName;
     protected MainGame mg;
 
@@ -34,7 +35,8 @@ abstract public class QUEST {
         npc.checkPoints = checkpoints;
         npc.onPath = true;
         npc.stuckCounter++;
-        if ((npc.worldX + 24) / 48 == npc.goalTile.x && (npc.worldY + 24) / 48 == npc.goalTile.y) {
+
+        if (npc.activeTile.equals(npc.goalTile)) {
             npc.onPath = false;
             npc.stuckCounter = 0;
         }
@@ -113,6 +115,7 @@ abstract public class QUEST {
             npc.dialog.loadNewLine("...");
         }
     }
+
 
     protected boolean checkDialogSimilarity(String newObjective) {
         int len1 = objective.length();

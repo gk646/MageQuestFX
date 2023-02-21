@@ -58,7 +58,6 @@ public class ENT_SkeletonWarrior extends ENTITY {
             collidingWithPlayer = false;
         }
         if (!attack2 && !attack3 && !attack1) {
-            onPath = true;
             standardSeekPlayer();
         }
         hitDelay++;
