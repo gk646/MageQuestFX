@@ -25,7 +25,7 @@ public class UI_TalentPanel {
     private Image talentnode_mid_purple;
     private Image talentnode_big_green;
     private Image talentnode_big_purple;
-    public int pointsToSpend = 15;
+    public int pointsToSpend = 0;
     private int pointsSpent;
     public int talentPanelX = 960 - 16;
     public int talentPanelY = 540 - 16;

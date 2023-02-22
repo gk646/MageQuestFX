@@ -252,6 +252,31 @@ public class SQLite {
         }
     }
 
+    private void resetInventory() throws SQLException {
+        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 1; i <= 41; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setString(2, null);
+            stmt.setNull(3, Types.INTEGER);
+            stmt.setNull(4, Types.INTEGER);
+            stmt.setString(5, null);
+            stmt.setInt(6, i);
+            stmt.executeUpdate();
+        }
+        sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
+        stmt = conn.prepareStatement(sql);
+        for (int i = 1; i <= 15; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setString(2, null);
+            stmt.setNull(3, Types.INTEGER);
+            stmt.setNull(4, Types.INTEGER);
+            stmt.setString(5, null);
+            stmt.setInt(6, i);
+            stmt.executeUpdate();
+        }
+    }
+
     private String getEffectString(ITEM item) {
         StringBuilder effect = new StringBuilder();
         for (int i = 1; i < Player.effectsSizeRollable; i++) {
@@ -312,10 +337,15 @@ public class SQLite {
                     stmt.setInt(1, 1);
                     stmt.setString(2, String.valueOf(i));
                     stmt.executeUpdate();
+                } else {
+                    stmt.setInt(1, 0);
+                    stmt.setString(2, String.valueOf(i));
+                    stmt.executeUpdate();
                 }
             }
         }
     }
+
 
     private void inverseArrayLists() {
         mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));
@@ -795,5 +825,41 @@ public class SQLite {
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.BAGS.add(0, new_ITEM);
         }
+    }
+
+    public void resetGame() {
+        System.out.println("STARTING RESET");
+        try {
+            resetInventory();
+            System.out.println("INVENTORY RESET");
+            resetTalents();
+            System.out.println("TALENTS RESET");
+            resetMapCovers();
+            System.out.println("MAP COVER RESET");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void resetTalents() throws SQLException {
+        String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
+            if (mg.talentP.talent_Nodes[i] != null) {
+                stmt.setInt(1, 0);
+                stmt.setString(2, String.valueOf(i));
+                stmt.executeUpdate();
+            }
+        }
+    }
+
+    private void resetMapCovers() throws SQLException {
+        for (Map map : mg.wControl.MAPS) {
+            if (map.gameMapType == GameMapType.MapCover) {
+                map.mapCover = new int[map.mapSize.x][map.mapSize.x];
+                map.saveMapCover();
+            }
+        }
+        System.out.println("FINISHED RESETTING");
     }
 }

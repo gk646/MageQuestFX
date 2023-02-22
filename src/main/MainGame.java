@@ -428,7 +428,6 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
-        debug();
     }
 
     private void debug() {
@@ -447,6 +446,8 @@ public class MainGame {
             dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
+
+
     }
 
     /**
