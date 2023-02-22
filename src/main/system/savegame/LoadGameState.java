@@ -25,12 +25,11 @@ public class LoadGameState {
     private void loadTutorial() {
         int quest_num = mg.sqLite.readQuestFacts(1, 1);
         String description = mg.sqLite.readQuestDescription(1);
-        if (description == null) {
+        if (description.equals("null")) {
             mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
             mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4));
         } else if (description.equals("active")) {
             mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
-
             switch (quest_num) {
                 case 1:
                     mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34));

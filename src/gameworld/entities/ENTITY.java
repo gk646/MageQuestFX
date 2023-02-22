@@ -5,7 +5,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
-import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
@@ -24,7 +24,7 @@ import java.util.Iterator;
  *
  * @see ENT_SkeletonWarrior
  * @see ENT_Owly
- * @see ENT_Shooter
+ * @see ENT_SkeletonArcher
  */
 abstract public class ENTITY {
     public Dialog dialog;

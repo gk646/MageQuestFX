@@ -1,6 +1,6 @@
 package gameworld.world;
 
-import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -47,7 +47,7 @@ public class MapQuadrant {
                     if (Math.random() > 0.4) {
                         MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     } else {
-                        MainGame.ENTITIES.add(new ENT_Shooter(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
+                        MainGame.ENTITIES.add(new ENT_SkeletonArcher(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     }
                     spawnedEnemies++;
                 }

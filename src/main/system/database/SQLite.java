@@ -115,8 +115,8 @@ public class SQLite {
             ps.setInt(1, Fact_Value);
             ps.setInt(2, Quest_ID);
             ps.executeUpdate();
-        } catch (SQLException ignored) {
-            //mg.ui.sqlException();
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
 
@@ -127,8 +127,8 @@ public class SQLite {
             ps.setString(1, "active");
             ps.setInt(2, Quest_ID);
             ps.executeUpdate();
-        } catch (SQLException ignored) {
-            //mg.ui.sqlException();
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
 
@@ -153,14 +153,23 @@ public class SQLite {
     public String readQuestDescription(int Quest_id) {
         ResultSet rs;
         try {
-            String sql = " SELECT DESCRIPTION FROM  QUEST_FACTS  WHERE _ROWID_ = " + Quest_id;
+            String sql = "SELECT DESCRIPTION FROM QUEST_FACTS WHERE _ROWID_ = " + Quest_id;
             rs = conn.createStatement().executeQuery(sql);
-            return rs.getString("DESCRIPTION");
-        } catch (SQLException ignored) {
-            // mg.ui.sqlException();
+            if (rs.next()) {
+                String description = rs.getString("DESCRIPTION");
+                if (rs.wasNull()) {
+                    return "null";
+                } else {
+                    return description;
+                }
+            } else {
+                return "null";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
-        return "null";
     }
+
 
     public int readStartLevel() {
         ResultSet rs;
@@ -252,30 +261,6 @@ public class SQLite {
         }
     }
 
-    private void resetInventory() throws SQLException {
-        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 1; i <= 41; i++) {
-            stmt.setNull(1, Types.INTEGER);
-            stmt.setString(2, null);
-            stmt.setNull(3, Types.INTEGER);
-            stmt.setNull(4, Types.INTEGER);
-            stmt.setString(5, null);
-            stmt.setInt(6, i);
-            stmt.executeUpdate();
-        }
-        sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
-        stmt = conn.prepareStatement(sql);
-        for (int i = 1; i <= 15; i++) {
-            stmt.setNull(1, Types.INTEGER);
-            stmt.setString(2, null);
-            stmt.setNull(3, Types.INTEGER);
-            stmt.setNull(4, Types.INTEGER);
-            stmt.setString(5, null);
-            stmt.setInt(6, i);
-            stmt.executeUpdate();
-        }
-    }
 
     private String getEffectString(ITEM item) {
         StringBuilder effect = new StringBuilder();
@@ -830,6 +815,8 @@ public class SQLite {
     public void resetGame() {
         System.out.println("STARTING RESET");
         try {
+            resetQuests();
+            System.out.println("QUESTS RESET");
             resetInventory();
             System.out.println("INVENTORY RESET");
             resetTalents();
@@ -838,6 +825,31 @@ public class SQLite {
             System.out.println("MAP COVER RESET");
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void resetInventory() throws SQLException {
+        String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 1; i <= 41; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setString(2, null);
+            stmt.setNull(3, Types.INTEGER);
+            stmt.setNull(4, Types.INTEGER);
+            stmt.setString(5, null);
+            stmt.setInt(6, i);
+            stmt.executeUpdate();
+        }
+        sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
+        stmt = conn.prepareStatement(sql);
+        for (int i = 1; i <= 15; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setString(2, null);
+            stmt.setNull(3, Types.INTEGER);
+            stmt.setNull(4, Types.INTEGER);
+            stmt.setString(5, null);
+            stmt.setInt(6, i);
+            stmt.executeUpdate();
         }
     }
 
@@ -852,6 +864,17 @@ public class SQLite {
             }
         }
     }
+
+    private void resetQuests() throws SQLException {
+        String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?, FACT_1 = NULL, FACT_2 = NULL, FACT_3 = NULL WHERE _ROWID_ = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        for (int i = 1; i < 29; i++) {
+            ps.setString(1, "null");
+            ps.setInt(2, i);
+            ps.executeUpdate();
+        }
+    }
+
 
     private void resetMapCovers() throws SQLException {
         for (Map map : mg.wControl.MAPS) {

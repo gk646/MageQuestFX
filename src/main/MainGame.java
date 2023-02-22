@@ -329,18 +329,18 @@ public class MainGame {
     }
 
 
-
-
     /**
      * Loads the game and updates loading screen
      *
      * @param gc gc
      */
     private void loadGame(GraphicsContext gc) {
-        FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
         sqLite = new SQLite(this);
-        loadGameState = new LoadGameState(this);
         sqLite.getConnection();
+
+        FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
+        loadGameState = new LoadGameState(this);
+
         tileBase = new TileBasedEffects(this);
         qPanel = new UI_QuestPanel(this);
         sBar = new UI_SkillBar(this);
@@ -407,6 +407,7 @@ public class MainGame {
         FonT.loadFonts();
 
         //100%
+        sqLite.resetGame();
         loadGameState.loadGame();
         ui.updateLoadingScreen(16, gc);
         countItems();
@@ -416,7 +417,6 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
-        debug();
     }
 
     private void debug() {
@@ -427,7 +427,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 77, 99);
+        wControl.loadMap(Zone.Tutorial, 47, 45);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

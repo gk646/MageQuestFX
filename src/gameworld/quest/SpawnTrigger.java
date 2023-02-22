@@ -1,7 +1,7 @@
 package gameworld.quest;
 
 import gameworld.entities.boss.BOS_Slime;
-import gameworld.entities.monsters.ENT_Shooter;
+import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
 import main.MainGame;
@@ -34,7 +34,7 @@ public class SpawnTrigger {
             if (trigger == Trigger.SINGULAR && type == Type.Grunt) {
                 MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.Shooter) {
-                MainGame.ENTITIES.add(new ENT_Shooter(mg, x * 48, y * 48, level, zone));
+                MainGame.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.BOSS_Slime) {
                 MainGame.ENTITIES.add(new BOS_Slime(mg, x * 48, y * 48, level, 150, zone));
             }

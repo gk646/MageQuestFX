@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TIILESET.tsx",
+    "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
         "exports",
         "."
@@ -55,8 +55,8 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
-            "scaleInEditor": 2
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -80,11 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 703.0303030303031,
-                "y": 666.6666666666666
+                "x": 1138.6666666666665,
+                "y": 1414.6666666666665
             }
         },
         "d.tsx": {
@@ -121,7 +121,8 @@
         },
         "grassspritesheet16.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
         },
         "map1.tmj": {
             "scale": 0.177978515625,
@@ -193,22 +194,23 @@
         "second floor_tutorial_castle.tmx",
         "Tutorial.tmx",
         "DungeonTutorial.tmx",
-        "TIILESET.tsx"
+        "TIILESET.tsx",
+        "grassspritesheet16.tsx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "City1.tmx",
         "GrassLands.tmx",
         "second floor_tutorial_castle.tmx",
-        "Tutorial.tmx",
-        "DungeonTutorial.tmx",
+        "grassspritesheet16.tsx",
         "TIILESET.tsx",
+        "DungeonTutorial.tmx",
+        "Tutorial.tmx",
         "unbenannt.tmx",
         "tileset16.tsx",
         "TileSet.tsx",
         "d.tsx",
-        "exports/DungeonTutorial.tmx",
-        "exports/as.tmj"
+        "exports/DungeonTutorial.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
