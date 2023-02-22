@@ -49,8 +49,11 @@ public class PathFinder {
         for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
             for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
                 int tileNum = WorldRender.worldData[i][b];
+                int tileNum2 = WorldRender.worldData1[i][b];
                 if (tileNum != -1) {
                     if (WorldRender.tileStorage[tileNum].collision) {
+                        nodes[i][b].solid = true;
+                    } else if (tileNum2 != -1 && (WorldRender.tileStorage[tileNum2].collision)) {
                         nodes[i][b].solid = true;
                     }
                     getCost(nodes[i][b]);

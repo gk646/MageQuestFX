@@ -37,8 +37,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 475.75757575757575,
-                "y": 648.4848484848484
+                "x": 396.969696969697,
+                "y": 63.636363636363626
             }
         },
         "GrassLands.tmx": {
@@ -55,7 +55,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 3,
+            "scaleInDock": 2,
             "scaleInEditor": 2
         },
         "TileSet.tsx": {
@@ -80,11 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1080.6666666666665,
-                "y": 828.3333333333333
+                "x": 826.6666666666666,
+                "y": 790
             }
         },
         "d.tsx": {

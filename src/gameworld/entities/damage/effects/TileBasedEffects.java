@@ -72,6 +72,9 @@ public class TileBasedEffects {
         return false;
     }
 
+    public boolean isInOpen() {
+        return !(activeTile >= 9 && activeTile <= 300);
+    }
 
     public void openChest() {
         if (activeTile == 137) {

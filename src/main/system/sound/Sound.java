@@ -8,6 +8,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import main.MainGame;
+import main.system.enums.State;
 import main.system.ui.inventory.UI_InventoryPanel;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Sound {
     private MediaPlayer lava;
     MainGame mg;
     public int currentTrackIndex = 0;
-    private boolean fadeOut;
+    private boolean fadeOut = false;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
     private MediaPlayer equip, finishObjective;
@@ -55,7 +56,7 @@ public class Sound {
         equip.setVolume(0.25);
         finishObjective = new MediaPlayer(new Media(UI_InventoryPanel.class.getResource("/resources/sound/effects/quest/finish_objective.wav").toString()));
         finishObjective.setVolume(0.4);
-        INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro_new.wav").toString()));
+        INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro.wav").toString()));
         INTRO.setVolume(0.8);
         menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_switch.wav").toString()));
         menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString()));
@@ -112,8 +113,10 @@ public class Sound {
     }
 
     public void update() {
-        updateZoneAmbience();
-        updateProximityAmbience();
+        if (mg.gameState == State.PLAY || mg.gameState == State.OPTION) {
+            updateZoneAmbience();
+            updateProximityAmbience();
+        }
     }
 
 
@@ -158,7 +161,7 @@ public class Sound {
                     fadeOut(currentAmbient, initialVolume);
                 }
             }
-        } else if (WorldController.currentWorld.isForest()) {
+        } else if (mg.tileBase.isInOpen()) {
             forestPlaying = true;
             if (currentAmbient != null && dungeonPlaying && !fadeOut) {
                 fadeOut(currentAmbient, initialVolume);
@@ -172,6 +175,8 @@ public class Sound {
                     fadeOut(currentAmbient, initialVolume);
                 }
             }
+        } else if (currentAmbient != null) {
+            fadeOut(currentAmbient, initialVolume);
         }
     }
 
@@ -187,16 +192,15 @@ public class Sound {
         } else if (!fadeOut) {
             fadeOut(waterAmbience, waterVolume);
         }
-
         if (mg.tileBase.isLavaNearby()) {
             if (lava.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(lava, waterVolume);
             } else if (lava.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
                 if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.93f) {
-                    fadeOut(currentAmbient, waterVolume);
+                    fadeOut(lava, waterVolume);
                 }
             }
-        } else if (!fadeOut) {
+        } else {
             fadeOut(lava, waterVolume);
         }
     }
