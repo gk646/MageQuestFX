@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Sound {
     private final double initialVolume = 0.6;
     public ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>(), forestAmbient = new ArrayList<>();
+    private final double waterVolume = 0.3f;
     public MediaPlayer INTRO;
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
@@ -29,6 +30,7 @@ public class Sound {
     public static Media energySphereHit;
     private MediaPlayer equip, finishObjective;
     private boolean forestPlaying, dungeonPlaying;
+    private MediaPlayer waterAmbience;
 
     public Sound(MainGame mg) {
         this.mg = mg;
@@ -59,6 +61,7 @@ public class Sound {
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
         chestSound = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString()));
+
         loadAmbience();
     }
 
@@ -83,6 +86,8 @@ public class Sound {
 
         loadForestAmbience("0", 0.2f);
         loadForestAmbience("1", 0.1f);
+        waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));
+        waterAmbience.setVolume(waterVolume);
     }
 
     private void addDungeonTrack(String name) {
@@ -99,55 +104,25 @@ public class Sound {
     }
 
     public void update() {
-        if (WorldController.currentWorld.isDungeon()) {
-            dungeonPlaying = true;
-            if (currentAmbient != null && forestPlaying && !fadeOut) {
-                fadeOut(currentAmbient);
-                forestPlaying = false;
-                currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
-            } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
-                currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
-                currentAmbient = dungeonAmbient.get(currentTrackIndex);
-                fadeIn(currentAmbient);
-            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                System.out.println(currentAmbient.getCurrentTime().toMillis() / currentAmbient.getTotalDuration().toMillis());
-                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
-                    fadeOut(currentAmbient);
-                }
-            }
-        } else if (WorldController.currentWorld.isForest()) {
-            forestPlaying = true;
-            if (currentAmbient != null && dungeonPlaying && !fadeOut) {
-                fadeOut(currentAmbient);
-                dungeonPlaying = false;
-            } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
-                currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
-                currentAmbient = forestAmbient.get(currentTrackIndex);
-                fadeIn(currentAmbient);
-            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                System.out.println(currentAmbient.getCurrentTime().toMillis() / currentAmbient.getTotalDuration().toMillis());
-                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
-                    fadeOut(currentAmbient);
-                }
-            }
-        }
+        updateZoneAmbience();
+        updateProximityAmbience();
     }
 
 
-    public void fadeIn(MediaPlayer mediaPlayer) {
+    public void fadeIn(MediaPlayer mediaPlayer, double volume) {
         mediaPlayer.setVolume(0.0);
         mediaPlayer.play();
         Timeline fadeIn = new Timeline(
                 new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), 0)),
-                new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), initialVolume))
+                new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), volume))
         );
         fadeIn.play();
     }
 
-    public void fadeOut(MediaPlayer mediaPlayer) {
-        mediaPlayer.setVolume(initialVolume);
+    public void fadeOut(MediaPlayer mediaPlayer, double volume) {
+        mediaPlayer.setVolume(volume);
         Timeline fadeOut = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), initialVolume)),
+                new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), volume)),
                 new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), 0))
         );
         fadeOut.setOnFinished(event -> {
@@ -157,5 +132,52 @@ public class Sound {
         });
         fadeOut.play();
         this.fadeOut = true;
+    }
+
+    private void updateZoneAmbience() {
+        if (WorldController.currentWorld.isDungeon()) {
+            dungeonPlaying = true;
+            if (currentAmbient != null && forestPlaying && !fadeOut) {
+                fadeOut(currentAmbient, initialVolume);
+                forestPlaying = false;
+                currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
+            } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
+                currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
+                currentAmbient = dungeonAmbient.get(currentTrackIndex);
+                fadeIn(currentAmbient, initialVolume);
+            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
+                    fadeOut(currentAmbient, initialVolume);
+                }
+            }
+        } else if (WorldController.currentWorld.isForest()) {
+            forestPlaying = true;
+            if (currentAmbient != null && dungeonPlaying && !fadeOut) {
+                fadeOut(currentAmbient, initialVolume);
+                dungeonPlaying = false;
+            } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
+                currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
+                currentAmbient = forestAmbient.get(currentTrackIndex);
+                fadeIn(currentAmbient, initialVolume);
+            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
+                    fadeOut(currentAmbient, initialVolume);
+                }
+            }
+        }
+    }
+
+    private void updateProximityAmbience() {
+        if (mg.tileBase.isWaterNearby()) {
+            if (waterAmbience.getStatus() != MediaPlayer.Status.PLAYING) {
+                fadeIn(waterAmbience, waterVolume);
+            } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                if (waterAmbience.getCurrentTime().toMillis() >= waterAmbience.getTotalDuration().toMillis() * 0.93f) {
+                    fadeOut(currentAmbient, waterVolume);
+                }
+            }
+        } else if (!fadeOut) {
+            fadeOut(waterAmbience, waterVolume);
+        }
     }
 }
