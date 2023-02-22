@@ -38,11 +38,23 @@ public class TileBasedEffects {
     private void checkForTileEffects() {
         if (activeTile == 225) {
             mg.player.health -= (mg.player.maxHealth * 0.4f);
+            mg.sound.playSpike();
         }
     }
 
-    public void isLavaNearby() {
-
+    public boolean isLavaNearby() {
+        for (int i = 0; i < tilesData.length; i++) {
+            int num1 = tilesData[i];
+            int num2 = tilesData1[i];
+            int num3 = tilesData2[i];
+            if ((num1 >= 95 && num1 <= 97) || (num2 >= 95 && num2 <= 97) || (num3 >= 95 && num3 <= 97)) {
+                return true;
+            }
+            if ((num1 >= 108 && num1 <= 110) || (num2 >= 108 && num2 <= 110) || (num3 >= 108 && num3 <= 110)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isWaterNearby() {
@@ -59,6 +71,7 @@ public class TileBasedEffects {
         }
         return false;
     }
+
 
     public void openChest() {
         if (activeTile == 137) {

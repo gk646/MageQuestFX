@@ -20,12 +20,13 @@ public class Sound {
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
     private MediaPlayer chestSound;
-
+    public MediaPlayer spikes;
+    public MediaPlayer currentAmbient;
     private final double fadeDuration = 3.0;
-    public MediaPlayer currentDungeonAmbient, currentAmbient;
+    private MediaPlayer lava;
     MainGame mg;
     public int currentTrackIndex = 0;
-    private boolean fadeOut, fadeIn;
+    private boolean fadeOut;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
     private MediaPlayer equip, finishObjective;
@@ -61,8 +62,13 @@ public class Sound {
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
         chestSound = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString()));
-
+        spikes = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/spike.wav").toString()));
         loadAmbience();
+    }
+
+    public void playSpike() {
+        spikes.seek(Duration.ZERO);
+        spikes.play();
     }
 
     public void playChestOpen() {
@@ -83,11 +89,13 @@ public class Sound {
     private void loadAmbience() {
         addDungeonTrack("3");
         addDungeonTrack("4");
-
+        addDungeonTrack("0");
         loadForestAmbience("0", 0.2f);
         loadForestAmbience("1", 0.1f);
         waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));
         waterAmbience.setVolume(waterVolume);
+        lava = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/lava.wav").toString()));
+        lava.setVolume(waterVolume);
     }
 
     private void addDungeonTrack(String name) {
@@ -178,6 +186,18 @@ public class Sound {
             }
         } else if (!fadeOut) {
             fadeOut(waterAmbience, waterVolume);
+        }
+
+        if (mg.tileBase.isLavaNearby()) {
+            if (lava.getStatus() != MediaPlayer.Status.PLAYING) {
+                fadeIn(lava, waterVolume);
+            } else if (lava.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.93f) {
+                    fadeOut(currentAmbient, waterVolume);
+                }
+            }
+        } else if (!fadeOut) {
+            fadeOut(lava, waterVolume);
         }
     }
 }

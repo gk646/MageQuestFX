@@ -19,6 +19,7 @@
  forest ambience: https://freesound.org/people/HerbertBoland/sounds/28239/
  forest ambience: https://freesound.org/people/dobroide/sounds/22384/
  item equip sound: https://freesound.org/people/1bob/sounds/651515/ 
+ horror ambience : https://freesound.org/people/klankbeeld/
 
  Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
