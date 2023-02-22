@@ -289,11 +289,12 @@ public class MainGame {
             drawDroppedItems(gc);
             ent_control.draw(gc);
             prj_control.draw(gc);
-            npcControl.draw(gc);
+
             //ENTPlayer2.draw(gc);
             player.draw(gc);
             drawDamageNumber(gc);
             wRender.drawSecondLayer(gc);
+            npcControl.draw(gc);
             miniM.draw(gc);
             ui.draw(gc);
             qPanel.draw(gc);

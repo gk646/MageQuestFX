@@ -65,7 +65,7 @@ public class QST_Tutorial extends QUEST {
                 }
                 if (progressStage == 15) {
                     if (WorldController.currentWorld == Zone.Tutorial) {
-                        WorldRender.worldData[48][34] = 1_214;
+                        WorldRender.worldData1[48][34] = 1_214;
                     }
                 }
                 if (progressStage == 16) {
