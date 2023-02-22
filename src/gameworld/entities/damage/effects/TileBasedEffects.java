@@ -4,13 +4,19 @@ import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_ChestItem;
 import main.MainGame;
 import main.system.rendering.WorldRender;
+import main.system.rendering.enhancements.ScriptedAnimationList;
 
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class TileBasedEffects {
     public static int activeTile = 0;
+    public static int activeTile1 = 0;
     private int previousTile = -1;
     int[] tilesData, tilesData1, tilesData2;
+    ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
     MainGame mg;
 
     public TileBasedEffects(MainGame mg) {
@@ -20,9 +26,21 @@ public class TileBasedEffects {
 
     public void update() {
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
+        activeTile1 = WorldRender.worldData1[mg.playerX][mg.playerY];
         if (activeTile != previousTile) {
             previousTile = activeTile;
             checkForTileEffects();
+        }
+        if (animationList.size() > 0) {
+            Iterator<ScriptedAnimationList> iter = animationList.iterator();
+            while (iter.hasNext()) {
+                ScriptedAnimationList list = iter.next();
+                if (list.finished) {
+                    iter.remove();
+                } else {
+                    list.progress();
+                }
+            }
         }
     }
 
@@ -65,7 +83,7 @@ public class TileBasedEffects {
             if ((num1 >= 910 && num1 <= 1_035) || (num2 >= 910 && num2 <= 1_035) || (num3 >= 910 && num3 <= 1_035)) {
                 return true;
             }
-            if ((num1 >= 1118 && num1 <= 1177) || (num2 >= 1118 && num2 <= 1177) || (num3 >= 1118 && num3 <= 1177)) {
+            if ((num1 >= 1_118 && num1 <= 1177) || (num2 >= 1118 && num2 <= 1177) || (num3 >= 1118 && num3 <= 1177)) {
                 return true;
             }
         }
@@ -77,9 +95,11 @@ public class TileBasedEffects {
     }
 
     public void openChest() {
-        if (activeTile == 137) {
+
+        if (activeTile1 == 137) {
             mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
             mg.sound.playChestOpen();
+            animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
         }
     }
 

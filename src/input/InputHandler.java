@@ -267,7 +267,6 @@ public class InputHandler {
         }
         if (code.equals("e")) {
             e_typed = true;
-
             mg.tileBase.openChest();
         }
         if (code.equals("\s")) {
