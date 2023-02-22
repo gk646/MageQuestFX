@@ -63,6 +63,7 @@ public class Sound {
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
         chestSound = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString()));
+        chestSound.setVolume(0.7);
         spikes = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/spike.wav").toString()));
         loadAmbience();
     }
