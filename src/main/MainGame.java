@@ -426,18 +426,18 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
-        // debug();
+        debug();
     }
 
     private void debug() {
         ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             ENTITIES.add(new ENT_SkeletonWarrior(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 34, 34);
+        wControl.loadMap(Zone.Tutorial, 4, 4);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

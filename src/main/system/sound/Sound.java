@@ -17,6 +17,7 @@ public class Sound {
     public MediaPlayer INTRO;
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
+    private MediaPlayer chestSound;
 
     private final double fadeDuration = 3.0;
     private final double initialVolume = 1.0;
@@ -54,7 +55,13 @@ public class Sound {
         menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString()));
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
+        chestSound = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString()));
         loadDungeonAmbience();
+    }
+
+    public void playChestOpen() {
+        chestSound.seek(Duration.ZERO);
+        chestSound.play();
     }
 
     public void playEquip() {

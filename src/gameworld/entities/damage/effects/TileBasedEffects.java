@@ -30,8 +30,9 @@ public class TileBasedEffects {
     }
 
     public void openChest() {
-        if (activeTile == 137 && mg.inputH.e_typed) {
+        if (activeTile == 137) {
             mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
+            mg.sound.playChestOpen();
         }
     }
 }
