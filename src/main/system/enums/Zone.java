@@ -12,4 +12,8 @@ public enum Zone {
     public boolean isDungeon() {
         return value == 3;
     }
+
+    public boolean isForest() {
+        return value == 1 || value == 0;
+    }
 }

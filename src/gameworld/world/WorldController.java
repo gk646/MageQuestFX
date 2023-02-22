@@ -40,6 +40,7 @@ public class WorldController {
             if (map.zone == zone) {
                 currentWorld = map.zone;
                 clearWorldArrays();
+                mg.wAnim.emptyAnimationLists();
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
@@ -92,7 +93,7 @@ public class WorldController {
                 mg.wControl.loadMap(Zone.City1, 10, 10);
                 mg.player.spawnLevel = 1;
             } else if (mg.playerX == 71 && mg.playerY == 56) {
-                mg.wControl.loadMap(Zone.Dungeon_Tutorial, 27, 0);
+                mg.wControl.loadMap(Zone.Dungeon_Tutorial, 30, 0);
             }
         } else if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
@@ -108,7 +109,7 @@ public class WorldController {
                 mg.wControl.loadMap(Zone.GrassLands, 495, 495);
             }
         } else if (currentWorld == Zone.Dungeon_Tutorial) {
-            if (mg.playerX == 26 && mg.playerY == 0) {
+            if (mg.playerX == 29 && mg.playerY == 0) {
                 mg.wControl.loadMap(Zone.Tutorial, 71, 55);
             }
         }

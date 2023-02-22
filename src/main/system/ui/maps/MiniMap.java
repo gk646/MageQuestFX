@@ -61,10 +61,11 @@ public class MiniMap {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
                 entityX = (int) ((entity.worldX + 24) / 48);
                 entityY = (int) ((entity.worldY + 24) / 48);
-                if (WorldController.currentMapCover[entityX][entityY] == 1) {
+
                     if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
-                        gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
-                    }
+                        if (WorldController.currentMapCover[entityX][entityY] == 1) {
+                            gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
+                        }
                 }
             }
         }

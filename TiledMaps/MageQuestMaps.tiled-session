@@ -3,10 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Tutorial.tmx",
+    "activeFile": "TIILESET.tsx",
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
         "": {
@@ -34,11 +34,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 424,
-                "y": 206
+                "x": 475.75757575757575,
+                "y": 648.4848484848484
             }
         },
         "GrassLands.tmx": {
@@ -80,14 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 3,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 826.6666666666666,
-                "y": 790
+                "x": 1080.6666666666665,
+                "y": 828.3333333333333
             }
         },
         "d.tsx": {
@@ -203,9 +200,9 @@
         "City1.tmx",
         "GrassLands.tmx",
         "second floor_tutorial_castle.tmx",
-        "TIILESET.tsx",
-        "DungeonTutorial.tmx",
         "Tutorial.tmx",
+        "DungeonTutorial.tmx",
+        "TIILESET.tsx",
         "unbenannt.tmx",
         "tileset16.tsx",
         "TileSet.tsx",

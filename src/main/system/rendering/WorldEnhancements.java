@@ -119,6 +119,14 @@ public class WorldEnhancements {
         }
     }
 
+    public void emptyAnimationLists() {
+        for (AnimationList animList : animationList) {
+            animList.tilesIndices.clear();
+            animList.tilesIndices1.clear();
+            animList.tilesIndices2.clear();
+        }
+    }
+
     private void setupArrays() {
         animationList.add(bigFish);
         animationList.add(smallFish);
