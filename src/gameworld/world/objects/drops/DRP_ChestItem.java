@@ -1,5 +1,6 @@
 package gameworld.world.objects.drops;
 
+import gameworld.player.Player;
 import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -56,11 +57,11 @@ public class DRP_ChestItem extends DROP {
             worldPos.y = (int) ((1 - arcPosition) * (1 - arcPosition) * startY + 2 * (1 - arcPosition) * arcPosition * controlY + arcPosition * arcPosition * endY);
             worldPos.x = Math.min(Math.max(0, worldPos.x), WorldRender.worldData.length * 48);
             worldPos.y = Math.min(Math.max(0, worldPos.y), WorldRender.worldData.length * 48);
-            gc.drawImage(icon, worldPos.x, worldPos.y, 32, 32);
+            gc.drawImage(icon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
             arcPosition += 0.01f;
         } else {
             blockPickup = false;
-            gc.drawImage(icon, worldPos.x, worldPos.y, 32, 32);
+            gc.drawImage(icon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
         }
     }
 

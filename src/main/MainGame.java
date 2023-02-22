@@ -328,19 +328,7 @@ public class MainGame {
         }
     }
 
-    private void drawDroppedItems(GraphicsContext gc) {
-        synchronized (WORLD_DROPS) {
-            Iterator<DROP> iterator = WORLD_DROPS.iterator();
-            while (iterator.hasNext()) {
-                DROP drop = iterator.next();
-                if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
-                    drop.draw(gc);
-                } else if (WORLD_DROPS.size() > 100) {
-                    iterator.remove();
-                }
-            }
-        }
-    }
+
 
 
     /**
@@ -428,6 +416,7 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
+        debug();
     }
 
     private void debug() {
@@ -438,7 +427,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 71, 53);
+        wControl.loadMap(Zone.Tutorial, 77, 99);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
@@ -491,6 +480,20 @@ public class MainGame {
                 }
             }
             gc.setEffect(null);
+        }
+    }
+
+    private void drawDroppedItems(GraphicsContext gc) {
+        synchronized (WORLD_DROPS) {
+            Iterator<DROP> iterator = WORLD_DROPS.iterator();
+            while (iterator.hasNext()) {
+                DROP drop = iterator.next();
+                if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - Player.worldX) + Math.abs(drop.worldPos.y - Player.worldY) < 1_500) {
+                    drop.draw(gc);
+                } else if (WORLD_DROPS.size() > 100) {
+                    iterator.remove();
+                }
+            }
         }
     }
 }

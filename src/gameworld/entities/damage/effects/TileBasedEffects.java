@@ -95,8 +95,7 @@ public class TileBasedEffects {
     }
 
     public void openChest() {
-
-        if (activeTile1 == 137) {
+        if (activeTile1 == 137 && animationList.size() == 0) {
             mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
             mg.sound.playChestOpen();
             animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
