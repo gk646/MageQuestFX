@@ -56,6 +56,14 @@ public class DRP_DroppedItem extends DROP {
         }
     }
 
+    public ITEM getFinishedRandomItem(int level) {
+        ITEM item = cloneAndRollEffects(rollForItem(level));
+        while (item == null) {
+            item = cloneAndRollEffects(rollForItem(level));
+        }
+        return item;
+    }
+
     public void dropRareItem(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         ITEM item = cloneAndRollEffects(getRandomRare(level));
         if (item != null) {

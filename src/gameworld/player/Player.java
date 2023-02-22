@@ -8,7 +8,6 @@ import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
-import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -137,7 +136,6 @@ public class Player extends ENTITY {
         collisionUp = false;
         direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
-        mg.ob_control.checkCollisionPlayer();
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
                 worldX -= playerMovementSpeed;
@@ -301,22 +299,26 @@ public class Player extends ENTITY {
 
 
     public void pickupDroppedItem() {
+        int x = (int) worldX;
+        int y = (int) worldY;
         synchronized (mg.WORLD_DROPS) {
             Iterator<DROP> iter = mg.WORLD_DROPS.iterator();
             while (iter.hasNext()) {
                 DROP drop = iter.next();
-                if (new Rectangle((int) worldX + mg.player.collisionBox.x, (int) worldY + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
-                    if (drop instanceof DRP_DroppedItem) {
-                        for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
-                            if (bagSlot.item == null && !bagSlot.grabbed) {
-                                bagSlot.item = drop.item;
-                                iter.remove();
-                                break;
+                if (Math.abs(drop.worldPos.x - x) + Math.abs(drop.worldPos.y - y) < 200) {
+                    if (new Rectangle(x + mg.player.collisionBox.x, y + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
+                        if (drop instanceof DRP_Coin) {
+                            mg.player.coins += ((DRP_Coin) drop).amount;
+                            iter.remove();
+                        } else if (!drop.blockPickup) {
+                            for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
+                                if (bagSlot.item == null && !bagSlot.grabbed) {
+                                    bagSlot.item = drop.item;
+                                    iter.remove();
+                                    break;
+                                }
                             }
                         }
-                    } else if (drop instanceof DRP_Coin) {
-                        mg.player.coins += ((DRP_Coin) drop).amount;
-                        iter.remove();
                     }
                 }
             }

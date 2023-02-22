@@ -306,6 +306,7 @@ public class UI_InventoryPanel {
                     if (mg.inputH.X_pressed) {
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item, WorldController.currentWorld));
                         char_Slots[i].item = null;
+                        mg.inputH.X_pressed = false;
                     } else if (mg.inputH.mouse1Pressed) {
                         if (mg.inputH.shift_pressed && mg.showBag) {
                             for (UI_InventorySlot slot : bag_Slots) {
@@ -334,6 +335,7 @@ public class UI_InventoryPanel {
                     if (mg.inputH.X_pressed) {
                         mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(i).item, WorldController.currentWorld));
                         bag_Slots.get(i).item = null;
+                        mg.inputH.X_pressed = false;
                     } else if (mg.inputH.mouse1Pressed) {
                         if (mg.inputH.shift_pressed && mg.showChar) {
                             for (UI_InventorySlot slot : char_Slots) {

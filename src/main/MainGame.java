@@ -73,7 +73,7 @@ public class MainGame {
 
     public Random random;
     //ITEMS
-    public final ArrayList<DROP> WORLD_DROPS = new ArrayList<>();
+    public final List<DROP> WORLD_DROPS = Collections.synchronizedList(new ArrayList<>());
     public final ArrayList<ITEM> AMULET = new ArrayList<>();
     public final ArrayList<ITEM> BOOTS = new ArrayList<>();
     public final ArrayList<ITEM> CHEST = new ArrayList<>();
@@ -426,7 +426,7 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
-        debug();
+        // debug();
     }
 
     private void debug() {

@@ -7,8 +7,9 @@ import main.system.enums.Zone;
 import java.awt.Point;
 
 abstract public class DROP {
-    public final Point worldPos = new Point();
+    public Point worldPos = new Point();
     public ITEM item;
+    public boolean blockPickup;
     public int size;
     protected int spriteCounter = 0;
     public Zone zone;
