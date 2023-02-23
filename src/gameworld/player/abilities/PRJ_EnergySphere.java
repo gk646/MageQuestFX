@@ -23,9 +23,9 @@ public class PRJ_EnergySphere extends PROJECTILE {
      */
     public PRJ_EnergySphere() {
         activation = new MediaPlayer(Sound.energySphereBeginning);
-        activation.setVolume(0.12);
+        activation.setVolume(Sound.EFFECTS_VOLUME);
         hit = new MediaPlayer(Sound.energySphereHit);
-        hit.setVolume(0.2);
+        hit.setVolume(Sound.EFFECTS_VOLUME);
         this.type = DamageType.ArcaneDMG;
         activation.play();
         //-------VALUES-----------

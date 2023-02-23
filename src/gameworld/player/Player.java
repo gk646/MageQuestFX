@@ -67,7 +67,7 @@ public class Player extends ENTITY {
     public static float[] effects = new float[effectsSizeTotal];
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
-    GeneralResourceLoader animation = new GeneralResourceLoader("player");
+    public GeneralResourceLoader animation = new GeneralResourceLoader("player");
     private int levelupCounter;
 
     /*
@@ -120,7 +120,6 @@ public class Player extends ENTITY {
         worldX = 24;
         worldY = 24;
         direction = "";
-
         getPlayerImage();
         this.collisionBox = new Rectangle(18, 8, 10, 32);
         this.level = 1;

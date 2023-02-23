@@ -52,7 +52,7 @@ public class UI {
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
     public final Rectangle musicSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
-    public final Rectangle effectsSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
+    public final Rectangle effectsSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 443, 25, 30);
     public float effectsSlider = 100;
 
 

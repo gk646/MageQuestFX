@@ -46,7 +46,6 @@ public class GeneralResourceLoader {
         }
     }
 
-
     public void loadSound(String path, String name) {
         for (int i = 0; i < 5; i++) {
             URL url = getClass().getResource("/resources/sound/effects/" + path + "/" + name + ".wav");

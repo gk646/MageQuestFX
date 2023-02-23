@@ -21,6 +21,7 @@ public class Sound {
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
     private MediaPlayer chestSound;
+    public static float EFFECTS_VOLUME = 0.3f;
     public MediaPlayer spikes;
     public MediaPlayer currentAmbient;
     private final double fadeDuration = 3.0;
@@ -216,7 +217,16 @@ public class Sound {
         }
     }
 
-    public void setVolumeMusic() {
-        INTRO.setVolume(0.8 * (mg.ui.musicSlider / 100.0f));
+    public void setVolumeMusic(float value) {
+        INTRO.setVolume(0.8 * (value / 100.0f));
+    }
+
+    public void setVolumeEffects(float value) {
+        finishObjective.setVolume(0.4 * (value / 100.0f));
+        chestSound.setVolume(0.7 * (value / 100.0f));
+        EFFECTS_VOLUME = 0.3f * (value / 100.0f);
+        for (MediaPlayer player : mg.player.animation.getHitSound) {
+            player.setVolume(0.8 * (value / 100.0f));
+        }
     }
 }

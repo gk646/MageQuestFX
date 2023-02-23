@@ -463,9 +463,14 @@ public class UI_InventoryPanel {
         node_focused = false;
         if (mg.ui.musicSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             mg.ui.musicSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
-            mg.sound.setVolumeMusic();
             mg.ui.musicSlider = Math.max(Math.min(100, mg.ui.musicSlider), 0);
+            mg.sound.setVolumeMusic(mg.ui.musicSlider);
             mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
+        } else if (mg.ui.effectsSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
+            mg.ui.effectsSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+            mg.ui.effectsSlider = Math.max(Math.min(100, mg.ui.effectsSlider), 0);
+            mg.sound.setVolumeEffects(mg.ui.effectsSlider);
+            mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
         } else if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
