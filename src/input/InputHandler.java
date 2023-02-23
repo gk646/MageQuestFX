@@ -8,6 +8,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import main.MainGame;
 import main.Runner;
 import main.system.enums.State;
@@ -192,8 +194,11 @@ public class InputHandler {
                     return;
                 } else if (mg.ui.commandNum == 6) {
                     mg.sqLite.saveGame();
-                    Platform.exit();
-                    System.exit(0);
+                    mg.gameState = State.TITLE;
+                    mg.sound.INTRO.seek(Duration.ZERO);
+                    mg.sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
+                    mg.sound.INTRO.play();
+                    mg.ui.commandNum = 0;
                 }
             }
         }

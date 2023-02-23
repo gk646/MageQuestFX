@@ -117,6 +117,16 @@ public class Sound {
         if (mg.gameState == State.PLAY || mg.gameState == State.OPTION) {
             updateZoneAmbience();
             updateProximityAmbience();
+        } else {
+            if (currentAmbient != null) {
+                fadeOut(currentAmbient, initialVolume);
+            }
+            if (waterAmbience != null) {
+                fadeOut(waterAmbience, waterVolume);
+            }
+            if (lava != null) {
+                fadeOut(lava, waterVolume);
+            }
         }
     }
 

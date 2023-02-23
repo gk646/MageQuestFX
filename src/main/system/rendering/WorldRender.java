@@ -17,10 +17,7 @@ public class WorldRender {
     public static int[][] worldData1;
     public static int[][] worldData2;
     public Point worldSize;
-    private int worldCol;
-    private int worldRow;
-    private int maxCol;
-    private int maxRow;
+
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
@@ -1379,7 +1376,7 @@ public class WorldRender {
         setupTiles(1337, "1337.png", false);
         setupTiles(1338, "1338.png", false);
         setupTiles(1339, "1339.png", false);
-        setupTiles(1340, "1340.png", false);
+        setupTiles(1340, "1340.png", true);
         setupTiles(1341, "1341.png", false);
         setupTiles(1342, "1342.png", false);
         setupTiles(1343, "1343.png", false);

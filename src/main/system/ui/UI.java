@@ -41,8 +41,16 @@ public class UI {
     private final Image arrows = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/arrows.png")));
     private final Image enter = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter.png")));
     private final Image wa = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown.png")));
-    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
-    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
+    private final Image wa1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown1.png")));
+    private final Image wa2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown2.png")));
+    private final Image wa3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown3.png")));
+    private final Image wa4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown4.png")));
+    private final Image enter1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter1.png")));
+    private final Image enter2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter2.png")));
+    private final Image enter3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter3.png")));
+    private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
+    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
+    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     private int spriteCounter1 = 0;
 
     public UI(MainGame mainGame) {
@@ -53,7 +61,6 @@ public class UI {
         lighting.setDiffuseConstant(1.9);
         lighting.setSurfaceScale(4);
     }
-
 
     public void draw(GraphicsContext gc) {
         if (mg.gameState == State.PLAY) {
@@ -191,10 +198,19 @@ public class UI {
             case 2 -> gc.drawImage(github2, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
             case 3 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
         }
-
-        gc.drawImage(arrows, 1472, 945);
-        gc.drawImage(wa, 1584, 923);
-        gc.drawImage(enter, 1790, 945);
+        switch (spriteCounter1 % 120 / 30) {
+            case 0 -> gc.drawImage(wa1, 1584, 930);
+            case 1 -> gc.drawImage(wa2, 1584, 930);
+            case 2 -> gc.drawImage(wa3, 1584, 930);
+            case 3 -> gc.drawImage(wa4, 1584, 930);
+        }
+        switch (spriteCounter1 % 120 / 30) {
+            case 0 -> gc.drawImage(enter1, 1785, 945);
+            case 1 -> gc.drawImage(enter2, 1785, 945);
+            case 2 -> gc.drawImage(enter3, 1785, 945);
+            case 3 -> gc.drawImage(enter4, 1785, 945);
+        }
+        gc.drawImage(arrows, 1490, 950);
         spriteCounter1++;
     }
 
@@ -232,7 +248,7 @@ public class UI {
         gc.fillText("Gameplay", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.452f);
         gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
         gc.fillText("Manual Save", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.552f);
-        gc.fillText("Quit Game", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.602f);
+        gc.fillText("Back to Main Menu", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.602f);
         /*
         gc.fillText("Framerate: 120FPS locked", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
         gc.fillText("Network Settings: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.416f);
