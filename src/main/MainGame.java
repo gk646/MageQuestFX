@@ -417,6 +417,8 @@ public class MainGame {
         gameMap.getImage();
         gameState = State.TITLE;
         loadingScreen = false;
+        sound.setVolumeAmbience(ui.ambientSlider);
+        sound.setVolumeEffects(ui.effectsSlider);
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();

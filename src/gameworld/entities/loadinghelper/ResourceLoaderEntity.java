@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import main.system.sound.Sound;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -90,7 +91,7 @@ public class ResourceLoaderEntity {
             }
         }
         for (MediaPlayer mediaPlayer : sounds) {
-            mediaPlayer.setVolume(0.3);
+            mediaPlayer.setVolume(Sound.EFFECTS_VOLUME);
         }
     }
 

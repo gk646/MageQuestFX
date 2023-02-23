@@ -55,7 +55,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 2,
             "scaleInEditor": 2
         },
         "TileSet.tsx": {
@@ -80,11 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 2,
+            "scale": 0.33,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 896,
-                "y": 790
+                "x": 975.7575757575758,
+                "y": -60.60606060606051
             }
         },
         "d.tsx": {

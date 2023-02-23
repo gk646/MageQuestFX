@@ -471,6 +471,11 @@ public class UI_InventoryPanel {
             mg.ui.effectsSlider = Math.max(Math.min(100, mg.ui.effectsSlider), 0);
             mg.sound.setVolumeEffects(mg.ui.effectsSlider);
             mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
+        } else if (mg.ui.ambientSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
+            mg.ui.ambientSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+            mg.ui.ambientSlider = Math.max(Math.min(100, mg.ui.ambientSlider), 0);
+            mg.sound.setVolumeAmbience(mg.ui.ambientSlider);
+            mg.ui.ambientSliderHitBox.x = (int) (650 + mg.ui.ambientSlider * 2 - 12);
         } else if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
             charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
             charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;

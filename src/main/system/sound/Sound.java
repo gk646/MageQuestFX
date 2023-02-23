@@ -1,5 +1,6 @@
 package main.system.sound;
 
+import gameworld.entities.ENTITY;
 import gameworld.world.WorldController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -14,17 +15,17 @@ import main.system.ui.inventory.UI_InventoryPanel;
 import java.util.ArrayList;
 
 public class Sound {
-    private final double initialVolume = 0.6;
     public ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>(), forestAmbient = new ArrayList<>();
-    private final double waterVolume = 0.3f;
+    public static float EFFECTS_VOLUME = 0.5f;
     public MediaPlayer INTRO;
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
     private MediaPlayer chestSound;
-    public static float EFFECTS_VOLUME = 0.3f;
+    public static float AMBIENCE_VOLUME = 0.5f;
+    private final double fadeDuration = 2;
     public MediaPlayer spikes;
     public MediaPlayer currentAmbient;
-    private final double fadeDuration = 3.0;
+    private double waterVolume = 0.3f;
     private MediaPlayer lava;
     MainGame mg;
     public int currentTrackIndex = 0;
@@ -93,8 +94,8 @@ public class Sound {
         addDungeonTrack("3");
         addDungeonTrack("4");
         addDungeonTrack("0");
-        loadForestAmbience("0", 0.2f);
-        loadForestAmbience("1", 0.1f);
+        loadForestAmbience("0", 1);
+        loadForestAmbience("1", 1);
         waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));
         waterAmbience.setVolume(waterVolume);
         lava = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/lava.wav").toString()));
@@ -103,14 +104,12 @@ public class Sound {
 
     private void addDungeonTrack(String name) {
         MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".wav").toString()));
-        ambientTrack1.setVolume(0.2);
         dungeonAmbient.add(ambientTrack1);
     }
 
     private void loadForestAmbience(String name, float volume) {
         MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/forestAmbience/" + name + ".wav").toString()));
         ambientTrack1.setVolume(volume);
-        ambientTrack1.seek(Duration.seconds(25));
         forestAmbient.add(ambientTrack1);
     }
 
@@ -120,13 +119,13 @@ public class Sound {
             updateProximityAmbience();
         } else {
             if (currentAmbient != null) {
-                fadeOut(currentAmbient, initialVolume);
+                fadeOut(currentAmbient, AMBIENCE_VOLUME);
             }
             if (waterAmbience != null) {
-                fadeOut(waterAmbience, waterVolume);
+                fadeOut(waterAmbience, AMBIENCE_VOLUME);
             }
             if (lava != null) {
-                fadeOut(lava, waterVolume);
+                fadeOut(lava, AMBIENCE_VOLUME);
             }
         }
     }
@@ -161,34 +160,34 @@ public class Sound {
         if (WorldController.currentWorld.isDungeon()) {
             dungeonPlaying = true;
             if (currentAmbient != null && forestPlaying && !fadeOut) {
-                fadeOut(currentAmbient, initialVolume);
+                fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 forestPlaying = false;
                 currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
                 currentAmbient = dungeonAmbient.get(currentTrackIndex);
-                fadeIn(currentAmbient, initialVolume);
+                fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
-                    fadeOut(currentAmbient, initialVolume);
+                    fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }
             }
         } else if (mg.tileBase.isInOpen()) {
             forestPlaying = true;
             if (currentAmbient != null && dungeonPlaying && !fadeOut) {
-                fadeOut(currentAmbient, initialVolume);
+                fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 dungeonPlaying = false;
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
                 currentAmbient = forestAmbient.get(currentTrackIndex);
-                fadeIn(currentAmbient, initialVolume);
+                fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
-                    fadeOut(currentAmbient, initialVolume);
+                    fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }
             }
         } else if (currentAmbient != null) {
-            fadeOut(currentAmbient, initialVolume);
+            fadeOut(currentAmbient, AMBIENCE_VOLUME);
         }
     }
 
@@ -228,5 +227,25 @@ public class Sound {
         for (MediaPlayer player : mg.player.animation.getHitSound) {
             player.setVolume(0.8 * (value / 100.0f));
         }
+        for (ENTITY entity : MainGame.ENTITIES) {
+            if (entity.animation != null) {
+                for (MediaPlayer player : entity.animation.sounds) {
+                    player.setVolume(EFFECTS_VOLUME);
+                }
+            }
+        }
+    }
+
+    public void setVolumeAmbience(float value) {
+        for (MediaPlayer player : forestAmbient) {
+            player.setVolume(AMBIENCE_VOLUME * (value / 100.0f));
+        }
+        for (MediaPlayer player : dungeonAmbient) {
+            player.setVolume(AMBIENCE_VOLUME * (value / 100.0f));
+        }
+        AMBIENCE_VOLUME = 0.5f * (value / 100.0f);
+        waterVolume = 0.3f * (value / 100.0f);
+        waterAmbience.setVolume(waterVolume);
+        lava.setVolume(waterVolume);
     }
 }

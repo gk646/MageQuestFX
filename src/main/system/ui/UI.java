@@ -51,9 +51,11 @@ public class UI {
     public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
+    public float ambientSlider = 75;
+    public final Rectangle ambientSliderHitBox = new Rectangle((int) (650 + ambientSlider * 2 - 12), 553, 25, 30);
     public final Rectangle musicSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
-    public final Rectangle effectsSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 443, 25, 30);
-    public float effectsSlider = 100;
+    public float effectsSlider = 75;
+    public final Rectangle effectsSliderHitBox = new Rectangle((int) (650 + effectsSlider * 2 - 12), 443, 25, 30);
 
 
     public UI(MainGame mainGame) {
@@ -285,14 +287,17 @@ public class UI {
         gc.setFill(Colors.darkBackground);
         gc.fillText("Music volume", 600, 300);
         gc.fillText("FX volume", 600, 410);
+        gc.fillText("Ambience Volume", 600, 520);
         gc.fillRoundRect(650, 340, 200, 15, 15, 15);
         gc.fillRoundRect(650, 450, 200, 15, 15, 15);
+        gc.fillRoundRect(650, 560, 200, 15, 15, 15);
         gc.fillText(String.valueOf((int) musicSlider), 900, 355);
         gc.fillText(String.valueOf((int) effectsSlider), 900, 465);
+        gc.fillText(String.valueOf((int) ambientSlider), 900, 575);
         gc.setFill(Colors.mediumLightGrey);
         gc.fillRoundRect(650 + musicSlider * 2 - 12, 333, 25, 30, 15, 15);
         gc.fillRoundRect(650 + effectsSlider * 2 - 12, 443, 25, 30, 15, 15);
-
+        gc.fillRoundRect(650 + ambientSlider * 2 - 12, 553, 25, 30, 15, 15);
     }
 
     private void drawSlider(GraphicsContext gc, int startX, int startY, int sliderPosition, Rectangle slider) {

@@ -30,7 +30,7 @@ abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
     public ArrayList<Effect> effects = new ArrayList<>();
-    protected ResourceLoaderEntity animation;
+    public ResourceLoaderEntity animation;
     public boolean collidingWithPlayer;
     public Zone zone;
     protected int spriteCounter;
