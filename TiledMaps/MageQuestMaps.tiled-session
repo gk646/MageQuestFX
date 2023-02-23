@@ -5,8 +5,8 @@
     },
     "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
-        "exports",
-        "."
+        ".",
+        "exports"
     ],
     "fileStates": {
         "": {
@@ -55,8 +55,8 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 1.5,
+            "scaleInEditor": 2
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -80,11 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 861.3333333333333,
-                "y": 789.3333333333333
+                "x": 648,
+                "y": 870
             }
         },
         "d.tsx": {

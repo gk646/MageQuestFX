@@ -31,6 +31,9 @@ public class PathFinder {
 
     private void resetNodes(int startCol, int startRow, int maxDistance) {
 
+    }
+
+    public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int maxDistance) {
         int wsize = mg.wRender.worldSize.x;
         int startx = Math.max(0, startCol - maxDistance);
         int starty = Math.max(0, startRow - maxDistance);
@@ -46,19 +49,9 @@ public class PathFinder {
         openList.clear();
         pathList.clear();
         goalReached = false;
-    }
-
-    public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int maxDistance) {
-        long time = System.nanoTime();
-        resetNodes(startCol, startRow, maxDistance);
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        int worldSizeX = mg.wRender.worldSize.x;
-        int startx = Math.max(0, startCol - maxDistance);
-        int starty = Math.max(0, startRow - maxDistance);
-        int endx = Math.min(worldSizeX, startCol + maxDistance);
-        int endy = Math.min(worldSizeX, startRow + maxDistance);
         int tileNum, tileNum2;
         for (int i = startx; i < endx; i++) {
             for (int b = starty; b < endy; b++) {
@@ -81,7 +74,6 @@ public class PathFinder {
                 }
             }
         }
-        System.out.println((System.nanoTime() - time) / 1_000);
     }
 
 
