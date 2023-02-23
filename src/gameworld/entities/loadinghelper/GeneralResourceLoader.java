@@ -18,8 +18,8 @@ public class GeneralResourceLoader {
     public ArrayList<MediaPlayer> getHitSound = new ArrayList<>(), randomNoise = new ArrayList<>(), attackSound = new ArrayList<>();
     String name;
 
-    public GeneralResourceLoader(String entityName) {
-        this.name = entityName;
+    public GeneralResourceLoader(String path) {
+        this.name = path;
     }
 
     public void loadImages1(String path) {

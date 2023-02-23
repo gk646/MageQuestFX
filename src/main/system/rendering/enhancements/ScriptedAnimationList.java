@@ -22,12 +22,13 @@ public class ScriptedAnimationList {
     public void progress() {
         if (!finished) {
             if (speedCounter >= speed) {
-                counter++;
                 speedCounter = 0;
-                WorldRender.worldData1[tilePos.x][tilePos.y] = list[counter];
-                if (counter >= list.length - 1) {
+                if (counter >= list.length) {
                     finished = true;
+                    return;
                 }
+                WorldRender.worldData1[tilePos.x][tilePos.y] = list[counter];
+                counter++;
             }
             speedCounter++;
         }

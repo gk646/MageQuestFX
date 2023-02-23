@@ -27,7 +27,7 @@ public class TileBasedEffects {
     public void update() {
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
         activeTile1 = WorldRender.worldData1[mg.playerX][mg.playerY];
-        if (activeTile != previousTile) {
+        if (activeTile != previousTile || activeTile1 != previousTile) {
             previousTile = activeTile;
             checkForTileEffects();
         }
@@ -54,10 +54,24 @@ public class TileBasedEffects {
     }
 
     private void checkForTileEffects() {
-        if (activeTile == 225) {
+        mg.playerPrompts.E = false;
+        if (activeTile == 225 || activeTile1 == 225) {
             mg.player.health -= (mg.player.maxHealth * 0.4f);
             mg.sound.playSpike();
+        } else if (activeTile1 == 137) {
+            mg.playerPrompts.E = true;
+            if (mg.inputH.e_typed && animationList.size() == 0) {
+                mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
+                mg.sound.playChestOpen();
+                animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
+            }
+        } else if (activeTile1 == 1382) {
+            mg.playerPrompts.E = true;
+            if (mg.inputH.e_typed && animationList.size() == 0) {
+                animationList.add(new ScriptedAnimationList(new int[]{1382, 1383}, 15, new Point(mg.playerX, mg.playerY)));
+            }
         }
+        mg.inputH.e_typed = false;
     }
 
     public boolean isLavaNearby() {
@@ -95,11 +109,7 @@ public class TileBasedEffects {
     }
 
     public void openChest() {
-        if (activeTile1 == 137 && animationList.size() == 0) {
-            mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
-            mg.sound.playChestOpen();
-            animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
-        }
+
     }
 
     private int[] getValuesInRadius(int[][] array, int centerX, int centerY) {
@@ -123,7 +133,6 @@ public class TileBasedEffects {
             }
         }
 
-        // Resize the array to the number of values added
         return Arrays.copyOf(values, index);
     }
 }

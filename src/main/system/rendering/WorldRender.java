@@ -1645,10 +1645,10 @@ public class WorldRender {
         int worldCol = Math.max(mg.playerX - 21, 0);
         int worldRow = Math.max(mg.playerY - 12, 0);
         int maxCol = Math.min(worldCol + 42, worldSize.x);
-        int maxRow = Math.min(worldRow + 24, worldSize.y);
+        int maxRow = Math.min(worldRow + 25, worldSize.y);
         int worldWidth = worldSize.x * 48;
         Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 25;
+        Player.screenY = mg.HALF_HEIGHT - 24;
         int playerX = (int) Player.worldX;
         int playerY = (int) Player.worldY;
         int screenX = Player.screenX;
@@ -1657,14 +1657,16 @@ public class WorldRender {
             Player.screenX = playerX;
             screenX = playerX;
         } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
-            Player.screenX = (MainGame.SCREEN_WIDTH - (worldWidth - playerX));
+            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
+            screenX = Player.screenX;
             worldCol = Math.max(worldCol - 18, 0);
         }
         if (screenY > playerY) {
             Player.screenY = playerY;
             screenY = playerY;
         } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
-            Player.screenY = (MainGame.SCREEN_HEIGHT - (worldWidth - playerY));
+            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
+            screenY = Player.screenY;
             worldRow = Math.max(worldRow - 10, 0);
         }
         int num1, num2;
@@ -1687,9 +1689,8 @@ public class WorldRender {
         int worldRow = Math.max(mg.playerY - 12, 0);
         int maxCol = Math.min(worldCol + 42, worldSize.x);
         int maxRow = Math.min(worldRow + 24, worldSize.y);
+        int num1;
         int worldWidth = worldSize.x * 48;
-        Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 25;
         int playerX = (int) Player.worldX;
         int playerY = (int) Player.worldY;
         int screenX = Player.screenX;
@@ -1698,17 +1699,18 @@ public class WorldRender {
             Player.screenX = playerX;
             screenX = playerX;
         } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
-            Player.screenX = (MainGame.SCREEN_WIDTH - (worldWidth - playerX));
+            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
+            screenX = Player.screenX;
             worldCol = Math.max(worldCol - 18, 0);
         }
         if (screenY > playerY) {
             Player.screenY = playerY;
             screenY = playerY;
         } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
-            Player.screenY = (MainGame.SCREEN_HEIGHT - (worldWidth - playerY));
+            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
+            screenY = Player.screenY;
             worldRow = Math.max(worldRow - 10, 0);
         }
-        int num1;
         for (int i = worldCol; i < maxCol; i++) {
             for (int b = worldRow; b < maxRow; b++) {
                 num1 = worldData2[i][b];

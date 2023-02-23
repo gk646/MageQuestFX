@@ -38,6 +38,9 @@ public class UI {
     private final Image github = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github.png")));
     private final Image github1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github2.png")));
     private final Image github2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github3.png")));
+    private final Image arrows = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/arrows.png")));
+    private final Image enter = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter.png")));
+    private final Image wa = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown.png")));
     public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
     public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f), 42, 42);
     private int spriteCounter1 = 0;
@@ -57,7 +60,6 @@ public class UI {
             drawGameUI(gc);
         } else if (mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) {
             drawOptions(gc);
-
             if (mg.drawVideoSettings) {
                 drawVideoSettings(gc);
             } else if (mg.drawAudioSettings) {
@@ -117,14 +119,14 @@ public class UI {
         drawCenteredText(gc, "", credits_scroll - 1150);
 
 
-        credits_scroll += 0.25;
+        credits_scroll -= 0.25;
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
 
 
     private void drawTitleScreen(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold50);
-        String text = "Mage Quest_2D";
+        String text = "Mage Quest ";
         int x = (int) (MainGame.SCREEN_WIDTH * 0.39f);
         int y = (int) (MainGame.SCREEN_HEIGHT * 0.044f) * 3;
         //FILL BACKGROUND WITH COLOR
@@ -132,29 +134,27 @@ public class UI {
         gc.fillRect(0, 0, MainGame.SCREEN_WIDTH, MainGame.SCREEN_HEIGHT);
         //DRAW TEXT
         gc.setFill(Colors.darkBackground);
-        gc.fillText(text, x, y);
-
+        drawCenteredText(gc, text, y);
         //MENU
         gc.setFont(FonT.minecraftBold30);
-
         text = "START GAME";
         x = (int) (MainGame.SCREEN_WIDTH * 0.448_8f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.355f);
-        gc.fillText(text, x, y);
+        drawCenteredText(gc, text, y);
         if (commandNum == 0) {
             gc.fillText(">", x - 25, y);
         }
         text = "SETTINGS";
         x = (int) (MainGame.SCREEN_WIDTH * 0.458f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.415f);
-        gc.fillText(text, x, y);
+        drawCenteredText(gc, text, y);
         if (commandNum == 1) {
             gc.fillText(">", x - 25, y);
         }
         text = "CREDITS";
         x = (int) (MainGame.SCREEN_WIDTH * 0.465_1f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.475f);
-        gc.fillText(text, x, y);
+        drawCenteredText(gc, text, y);
         if (commandNum == 2) {
             gc.fillText(">", x - 25, y);
         }
@@ -162,31 +162,39 @@ public class UI {
         text = "QUIT";
         x = (int) (MainGame.SCREEN_WIDTH * 0.481f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.53f);
-        gc.fillText(text, x, y);
+        drawCenteredText(gc, text, y);
         if (commandNum == 3) {
             gc.fillText(">", x - 25, y);
         }
-
-        text = "v3.2.1";
-        x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
+        text = "Select";
+        x = (int) (MainGame.SCREEN_WIDTH - (MainGame.SCREEN_WIDTH * 0.137f));
         y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         gc.fillText(text, x, y);
 
-        text = "\u00A9 2023 Lukas Gilch";
+        text = "v4.0.0";
+        x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
+        gc.fillText(text, x, y);
+        y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         x = (int) (MainGame.SCREEN_WIDTH * 0.415f);
+        text = "\u00A9 2023 Lukas Gilch";
         gc.fillText(text, x, y);
         switch (spriteCounter1 % 200 / 50) {
-            case 0 -> gc.drawImage(discord, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 1 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 2 -> gc.drawImage(discord2, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 3 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.859), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 0 -> gc.drawImage(discord, (MainGame.SCREEN_WIDTH * 0.475f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 1 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.475f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 2 -> gc.drawImage(discord2, (MainGame.SCREEN_WIDTH * 0.475f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 3 -> gc.drawImage(discord1, (MainGame.SCREEN_WIDTH * 0.475f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
         }
         switch (spriteCounter1 % 200 / 50) {
-            case 0 -> gc.drawImage(github, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 1 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 2 -> gc.drawImage(github2, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
-            case 3 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.89), (int) (MainGame.SCREEN_HEIGHT * 0.87f));
+            case 0 -> gc.drawImage(github, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 1 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 2 -> gc.drawImage(github2, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
+            case 3 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
         }
+
+        gc.drawImage(arrows, 1472, 945);
+        gc.drawImage(wa, 1584, 923);
+        gc.drawImage(enter, 1790, 945);
         spriteCounter1++;
     }
 
@@ -250,19 +258,22 @@ public class UI {
     }
 
     private void drawVideoSettings(GraphicsContext gc) {
-
+        gc.fillText("120 FPS - locked", 450, 250);
     }
 
     private void drawAudioSettings(GraphicsContext gc) {
 
+        gc.fillText("Music volume", 450, 250);
     }
 
     private void drawKeyBindings(GraphicsContext gc) {
-
+        String text = "C - open character window";
+        float y = 0.332f;
+        gc.fillText(text, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
     }
 
     private void drawGamePlaySettings(GraphicsContext gc) {
-
+        gc.fillText("draw skillbar ", 450, 240);
     }
 
     private void drawCodex(GraphicsContext gc, double startY) {

@@ -27,8 +27,8 @@ public class DRP_ChestItem extends DROP {
         this.zone = zone;
         this.icon = item.icon;
         blockPickup = true;
-        this.worldPos = new Point(worldX, worldY);
-        if (Math.random() > 0.5f) {
+        this.worldPos = new Point(worldX - 16, worldY - 16);
+        if (Math.random() > 0.5f && !WorldRender.tileStorage[WorldRender.worldData1[(worldPos.x + 50) / 48][worldPos.y / 48]].collision) {
             this.startX = worldPos.x;
             this.startY = worldPos.y;
             controlX = worldPos.x + 25;

@@ -11,7 +11,6 @@ import javafx.scene.input.ScrollEvent;
 import main.MainGame;
 import main.Runner;
 import main.system.enums.State;
-import main.system.enums.Zone;
 
 import java.awt.Desktop;
 import java.awt.Point;
@@ -83,38 +82,57 @@ public class InputHandler {
                     mg.gameState = State.PLAY;
                     mg.sound.INTRO.stop();
                     scene.setCursor(Runner.crosshair);
+                    return;
                 } else if (mg.ui.commandNum == 1) {
                     mg.gameState = State.TITLE_OPTION;
                     mg.ui.commandNum = 0;
+                    return;
                 } else if (mg.ui.commandNum == 2) {
                     mg.credits = true;
+                    return;
                 } else if (mg.ui.commandNum == 3) {
                     Platform.exit();
                     System.exit(0);
                 }
             }
-        }
-        if (mg.gameState == State.TITLE_OPTION) {
+        } else if (mg.gameState == State.TITLE_OPTION) {
             if (code.equals(("w"))) {
-                mg.sound.playSwitchSound();
-                mg.ui.commandNum--;
-                if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 6;
+                if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
+                    mg.sound.playSwitchSound();
+                    mg.ui.commandNum--;
+                    if (mg.ui.commandNum < 0) {
+                        mg.ui.commandNum = 6;
+                    }
                 }
             }
             if (code.equals(("s"))) {
-                mg.sound.playSwitchSound();
-                mg.ui.commandNum++;
-                if (mg.ui.commandNum > 6) {
-                    mg.ui.commandNum = 0;
+                if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
+                    mg.sound.playSwitchSound();
+                    mg.ui.commandNum++;
+                    if (mg.ui.commandNum > 6) {
+                        mg.ui.commandNum = 0;
+                    }
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
+                    mg.drawVideoSettings = true;
+                    return;
+                } else if (mg.ui.commandNum == 1) {
+                    mg.drawAudioSettings = true;
+                    return;
+                } else if (mg.ui.commandNum == 2) {
+                    mg.drawKeybindings = true;
+                    return;
+                } else if (mg.ui.commandNum == 3) {
+                    mg.drawGameplay = true;
+                    return;
                 } else if (mg.ui.commandNum == 4) {
                     mg.drawCodex = true;
+                    return;
                 } else if (mg.ui.commandNum == 5) {
                     mg.sqLite.saveGame();
+                    return;
                 } else if (mg.ui.commandNum == 6) {
                     mg.sqLite.saveGame();
                     Platform.exit();
@@ -123,47 +141,59 @@ public class InputHandler {
             }
             if (code.equals("\u001B")) {
                 mg.sound.playBackSound();
-                if (mg.drawCodex) {
-                    mg.drawCodex = false;
-                    return;
-                } else if (mg.drawAudioSettings) {
+                if (mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex) {
+                    mg.drawVideoSettings = false;
                     mg.drawAudioSettings = false;
-                    return;
-                } else if (mg.drawKeybindings) {
                     mg.drawKeybindings = false;
-                } else if (mg.drawGameplay) {
                     mg.drawGameplay = false;
+                    mg.drawCodex = false;
                 } else {
                     mg.gameState = State.TITLE;
                     mg.ui.commandNum = 1;
                 }
             }
-        }
-        if (mg.gameState == State.OPTION) {
+        } else if (mg.gameState == State.OPTION) {
             if (code.equals(("w"))) {
-                mg.sound.playSwitchSound();
-                mg.ui.commandNum--;
-                if (mg.ui.commandNum < 0) {
-                    mg.ui.commandNum = 6;
+                if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
+                    mg.sound.playSwitchSound();
+                    mg.ui.commandNum--;
+                    if (mg.ui.commandNum < 0) {
+                        mg.ui.commandNum = 6;
+                    }
                 }
             }
             if (code.equals(("s"))) {
-                mg.sound.playSwitchSound();
-                mg.ui.commandNum++;
-                if (mg.ui.commandNum > 6) {
-                    mg.ui.commandNum = 0;
+                if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
+                    mg.sound.playSwitchSound();
+                    mg.ui.commandNum++;
+                    if (mg.ui.commandNum > 6) {
+                        mg.ui.commandNum = 0;
+                    }
                 }
             }
             if (code.equals("\r")) {
                 if (mg.ui.commandNum == 0) {
+                    mg.drawVideoSettings = true;
+                    return;
+                } else if (mg.ui.commandNum == 1) {
+                    mg.drawAudioSettings = true;
+                    return;
+                } else if (mg.ui.commandNum == 2) {
+                    mg.drawKeybindings = true;
+                    return;
                 } else if (mg.ui.commandNum == 3) {
-                    mg.wControl.loadMap(Zone.GrassLands, 495, 495);
+                    mg.drawGameplay = true;
+                    return;
                 } else if (mg.ui.commandNum == 4) {
                     mg.drawCodex = true;
+                    return;
                 } else if (mg.ui.commandNum == 5) {
                     mg.sqLite.saveGame();
+                    return;
                 } else if (mg.ui.commandNum == 6) {
-                    mg.sqLite.saveGameAndExit();
+                    mg.sqLite.saveGame();
+                    Platform.exit();
+                    System.exit(0);
                 }
             }
         }

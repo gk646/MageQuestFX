@@ -11,6 +11,7 @@ import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.PlayerPrompts;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
@@ -67,7 +68,6 @@ public class MainGame {
     public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
     public final List<PROJECTILE> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
-
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
     public final List<DamageNumber> damageNumbers = Collections.synchronizedList(new ArrayList<>());
 
@@ -135,6 +135,7 @@ public class MainGame {
     private ENT_Control ent_control;
     public Sound sound;
     public OBJ_Control ob_control;
+    public PlayerPrompts playerPrompts;
 
 
     /**
@@ -289,13 +290,13 @@ public class MainGame {
             drawDroppedItems(gc);
             ent_control.draw(gc);
             prj_control.draw(gc);
-
             //ENTPlayer2.draw(gc);
             player.draw(gc);
             drawDamageNumber(gc);
             wRender.drawSecondLayer(gc);
             npcControl.draw(gc);
             miniM.draw(gc);
+            playerPrompts.draw(gc);
             ui.draw(gc);
             qPanel.draw(gc);
             sBar.draw(gc);
@@ -353,7 +354,7 @@ public class MainGame {
         long seed = secureRandom.nextLong();
         random = new Random(seed);
         // 0 %
-
+        playerPrompts = new PlayerPrompts(this);
         sound = new Sound(this);
         sound.loadSounds();
         inventP = new UI_InventoryPanel(this);
@@ -408,7 +409,7 @@ public class MainGame {
         FonT.loadFonts();
 
         //100%
-        sqLite.resetGame();
+        // sqLite.resetGame();
         loadGameState.loadGame();
         ui.updateLoadingScreen(16, gc);
         countItems();
@@ -418,6 +419,7 @@ public class MainGame {
         startThreads();
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
+        debug();
     }
 
     private void debug() {
@@ -428,7 +430,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Tutorial, 47, 45);
+        wControl.loadMap(Zone.Tutorial, 76, 86);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
