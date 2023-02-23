@@ -190,7 +190,6 @@ public class MainGame {
                         getPlayerTile();
                         player.pickupDroppedItem();
                         player.checkPlayerIsMoving();
-                        inventP.interactWithWindows();
                         getPlayerTile();
                         tileBase.update();
                         WORLD_SIZE = wRender.worldSize.x * 48;

@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.enums.State;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Objects;
 
@@ -40,8 +39,6 @@ public class UI {
     private final Image github1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github2.png")));
     private final Image github2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/github3.png")));
     private final Image arrows = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/arrows.png")));
-    private final Image enter = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter.png")));
-    private final Image wa = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown.png")));
     private final Image wa1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown1.png")));
     private final Image wa2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown2.png")));
     private final Image wa3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/updown3.png")));
@@ -53,9 +50,10 @@ public class UI {
     public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     private int spriteCounter1 = 0;
-    private final Point previousMousePosition = new Point();
-    private float musicSlider = 80;
-    private final Rectangle musicSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
+    public float musicSlider = 100;
+    public final Rectangle musicSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
+    public final Rectangle effectsSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
+    public float effectsSlider = 100;
 
 
     public UI(MainGame mainGame) {
@@ -284,19 +282,17 @@ public class UI {
 
     private void drawAudioSettings(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold20);
+        gc.setFill(Colors.darkBackground);
         gc.fillText("Music volume", 600, 300);
+        gc.fillText("FX volume", 600, 410);
         gc.fillRoundRect(650, 340, 200, 15, 15, 15);
+        gc.fillRoundRect(650, 450, 200, 15, 15, 15);
         gc.fillText(String.valueOf((int) musicSlider), 900, 355);
+        gc.fillText(String.valueOf((int) effectsSlider), 900, 465);
         gc.setFill(Colors.mediumLightGrey);
         gc.fillRoundRect(650 + musicSlider * 2 - 12, 333, 25, 30, 15, 15);
-        gc.setStroke(Colors.rareColor);
-        if (musicSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-            musicSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+        gc.fillRoundRect(650 + effectsSlider * 2 - 12, 443, 25, 30, 15, 15);
 
-            musicSlider = Math.max(Math.min(100, musicSlider), 0);
-        }
-        musicSliderHitBox.x = (int) (650 + musicSlider * 2 - 12);
-        previousMousePosition.x = mg.inputH.lastMousePosition.x;
     }
 
     private void drawSlider(GraphicsContext gc, int startX, int startY, int sliderPosition, Rectangle slider) {

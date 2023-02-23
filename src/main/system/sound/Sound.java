@@ -215,4 +215,8 @@ public class Sound {
             fadeOut(lava, waterVolume);
         }
     }
+
+    public void setVolumeMusic() {
+        INTRO.setVolume(0.8 * (mg.ui.musicSlider / 100.0f));
+    }
 }
