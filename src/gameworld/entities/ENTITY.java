@@ -151,6 +151,8 @@ abstract public class ENTITY {
                 nextCol4 = mg.pathF.pathList.get(3).col;
                 nextRow4 = mg.pathF.pathList.get(3).row;
             }
+        } else {
+            onPath = false;
         }
     }
 
@@ -232,7 +234,7 @@ abstract public class ENTITY {
     }
 
     protected void standardSeekPlayer() {
-        onPath = !playerTooFarAbsolute();
+        onPath = mg.pathF.search();
         if (onPath && searchTicks >= Math.random() * 15) {
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);

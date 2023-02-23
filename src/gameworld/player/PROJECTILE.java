@@ -64,14 +64,18 @@ public abstract class PROJECTILE {
         }
     }
 
-    protected void outOfBounds(int x) {
-        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - x * 2 || worldPos.x <= endPos.x - x * 2) {
+    protected void outOfBounds(int distance) {
+        float x = Player.worldX;
+        float y = Player.worldY;
+        if (worldPos.x >= x + distance || worldPos.y >= y + distance || worldPos.y <= x - distance || worldPos.x <= y - distance) {
             this.dead = true;
         }
     }
 
     protected void outOfBounds() {
-        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 650 * 2 || worldPos.x <= endPos.x - 650 * 2) {
+        float x = Player.worldX;
+        float y = Player.worldY;
+        if (worldPos.x >= x + 650 || worldPos.y >= y + 650 || worldPos.x <= x - 650 || worldPos.y <= y - 650) {
             this.dead = true;
         }
     }

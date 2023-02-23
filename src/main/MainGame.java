@@ -136,6 +136,7 @@ public class MainGame {
     public Sound sound;
     public OBJ_Control ob_control;
     public PlayerPrompts playerPrompts;
+    public static int WORLD_SIZE;
 
 
     /**
@@ -192,6 +193,7 @@ public class MainGame {
                         inventP.interactWithWindows();
                         getPlayerTile();
                         tileBase.update();
+                        WORLD_SIZE = wRender.worldSize.x * 48;
                         wAnim.animateTiles();
                         wControl.uncoverWorldMap();
                         wControl.update();
@@ -439,7 +441,8 @@ public class MainGame {
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
 
-
+        WorldRender.worldData2[58][37] = 1353;
+        WorldRender.worldData1[58][38] = 1366;
     }
 
     /**

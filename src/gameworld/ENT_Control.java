@@ -48,11 +48,12 @@ public class ENT_Control {
 
 
     public void update() {
+
         synchronized (MainGame.ENTITIES) {
             Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
             while (entityIterator.hasNext()) {
                 ENTITY entity = entityIterator.next();
-                if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_500) {
+                if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {
                     entity.update();
                     if (entity.dead) {
                         mg.prj_control.recordDeath(entity);

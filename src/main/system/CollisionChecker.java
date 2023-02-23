@@ -170,7 +170,6 @@ public class CollisionChecker {
         entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
         entityRightCol = Math.min(entityRightWorldX / 48, mg.wRender.worldSize.x);
         if (player.direction.contains("up")) {
-
             entityTopRow = (int) Math.min((entityTopWorldY - player.movementSpeed) / 48, mg.wRender.worldSize.x);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];

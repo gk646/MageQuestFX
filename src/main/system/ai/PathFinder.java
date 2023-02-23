@@ -4,6 +4,7 @@ import main.MainGame;
 import main.system.rendering.WorldRender;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PathFinder {
     public final ArrayList<Node> pathList = new ArrayList<>();
@@ -29,8 +30,14 @@ public class PathFinder {
     }
 
     private void resetNodes(int startCol, int startRow, int maxDistance) {
-        for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
-            for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
+
+        int wsize = mg.wRender.worldSize.x;
+        int startx = Math.max(0, startCol - maxDistance);
+        int starty = Math.max(0, startRow - maxDistance);
+        int endx = Math.min(wsize, startCol + maxDistance);
+        int endy = Math.min(wsize, startRow + maxDistance);
+        for (int i = startx; i < endx; i++) {
+            for (int b = starty; b < endy; b++) {
                 nodes[i][b].open = false;
                 nodes[i][b].checked = false;
                 nodes[i][b].solid = false;
@@ -42,24 +49,39 @@ public class PathFinder {
     }
 
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int maxDistance) {
+        long time = System.nanoTime();
         resetNodes(startCol, startRow, maxDistance);
         startNode = nodes[startCol][startRow];
         currentNode = startNode;
         goalNode = nodes[goalCol][goalRow];
-        for (int i = Math.max(0, startCol - maxDistance); i < Math.min(mg.wRender.worldSize.x, startCol + maxDistance); i++) {
-            for (int b = Math.max(0, startRow - maxDistance); b < Math.min(mg.wRender.worldSize.y, startRow + maxDistance); b++) {
-                int tileNum = WorldRender.worldData[i][b];
-                int tileNum2 = WorldRender.worldData1[i][b];
+        int worldSizeX = mg.wRender.worldSize.x;
+        int startx = Math.max(0, startCol - maxDistance);
+        int starty = Math.max(0, startRow - maxDistance);
+        int endx = Math.min(worldSizeX, startCol + maxDistance);
+        int endy = Math.min(worldSizeX, startRow + maxDistance);
+        int tileNum, tileNum2;
+        for (int i = startx; i < endx; i++) {
+            for (int b = starty; b < endy; b++) {
+                tileNum = WorldRender.worldData[i][b];
+                tileNum2 = WorldRender.worldData1[i][b];
                 if (tileNum != -1) {
                     if (WorldRender.tileStorage[tileNum].collision) {
                         nodes[i][b].solid = true;
-                    } else if (tileNum2 != -1 && (WorldRender.tileStorage[tileNum2].collision)) {
-                        nodes[i][b].solid = true;
+                    } else {
+                        getCost(nodes[i][b]);
                     }
+                } else if (tileNum2 != -1) {
+                    if (WorldRender.tileStorage[tileNum2].collision) {
+                        nodes[i][b].solid = true;
+                    } else {
+                        getCost(nodes[i][b]);
+                    }
+                } else {
                     getCost(nodes[i][b]);
                 }
             }
         }
+        System.out.println((System.nanoTime() - time) / 1_000);
     }
 
 
@@ -119,6 +141,66 @@ public class PathFinder {
             }
         }
         return false;
+    }
+
+   /* public boolean findPath() {
+        PriorityQueue<Node> openList = new PriorityQueue<>();
+        Map<Node, Boolean> closedList = new HashMap<>();
+        Node startNode = nodes[][startRow];
+        Node goalNode = nodes[goalCol][goalRow];
+        startNode.gCost = 0;
+        startNode.fCost = startNode.hCost(goalNode);
+        openList.add(startNode);
+
+        while (!openList.isEmpty()) {
+            Node currentNode = openList.poll();
+            if (currentNode == goalNode) {
+                trackPath();
+                return true;
+            }
+            closedList.put(currentNode, true);
+
+            for (Node neighbor : getNeighbors(currentNode)) {
+                if (closedList.containsKey(neighbor)) {
+                    continue;
+                }
+
+                int tentativeGCost = currentNode.gCost + neighbor.distance(currentNode);
+                if (tentativeGCost < neighbor.gCost) {
+                    neighbor.parent = currentNode;
+                    neighbor.gCost = tentativeGCost;
+                    neighbor.fCost = neighbor.gCost + neighbor.hCost(goalNode);
+                }
+                if (!openList.contains(neighbor)) {
+                    openList.add(neighbor);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    */
+
+    private List<Node> getNeighbors(Node node) {
+        List<Node> neighbors = new ArrayList<>();
+        int col = node.col;
+        int row = node.row;
+
+        if (row - 1 >= 0) {
+            neighbors.add(nodes[col][row - 1]);
+        }
+        if (col - 1 >= 0) {
+            neighbors.add(nodes[col - 1][row]);
+        }
+        if (row + 1 < mg.wRender.worldSize.y) {
+            neighbors.add(nodes[col][row + 1]);
+        }
+        if (col + 1 < mg.wRender.worldSize.x) {
+            neighbors.add(nodes[col + 1][row]);
+        }
+
+        return neighbors;
     }
 
     public boolean searchUncapped() {

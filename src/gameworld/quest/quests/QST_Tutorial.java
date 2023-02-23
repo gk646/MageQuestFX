@@ -86,7 +86,8 @@ public class QST_Tutorial extends QUEST {
                 }
                 if (progressStage == 22) {
                     moveToTile(npc, 58, 47);
-                    WorldRender.worldData[58][38] = 15;
+                    WorldRender.worldData2[58][37] = 1353;
+                    WorldRender.worldData1[58][38] = 1366;
                 }
                 if (progressStage == 24) {
                     npc.blockInteraction = true;
