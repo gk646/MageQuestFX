@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.enums.State;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Objects;
 
@@ -52,6 +53,10 @@ public class UI {
     public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     private int spriteCounter1 = 0;
+    private final Point previousMousePosition = new Point();
+    private float musicSlider = 80;
+    private final Rectangle musicSliderHitBox = new Rectangle((int) (650 + musicSlider * 2 - 12), 333, 25, 30);
+
 
     public UI(MainGame mainGame) {
         this.mg = mainGame;
@@ -278,8 +283,24 @@ public class UI {
     }
 
     private void drawAudioSettings(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold20);
+        gc.fillText("Music volume", 600, 300);
+        gc.fillRoundRect(650, 340, 200, 15, 15, 15);
+        gc.fillText(String.valueOf((int) musicSlider), 900, 355);
+        gc.setFill(Colors.mediumLightGrey);
+        gc.fillRoundRect(650 + musicSlider * 2 - 12, 333, 25, 30, 15, 15);
+        gc.setStroke(Colors.rareColor);
+        if (musicSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
+            musicSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
 
-        gc.fillText("Music volume", 450, 250);
+            musicSlider = Math.max(Math.min(100, musicSlider), 0);
+        }
+        musicSliderHitBox.x = (int) (650 + musicSlider * 2 - 12);
+        previousMousePosition.x = mg.inputH.lastMousePosition.x;
+    }
+
+    private void drawSlider(GraphicsContext gc, int startX, int startY, int sliderPosition, Rectangle slider) {
+
     }
 
     private void drawKeyBindings(GraphicsContext gc) {
