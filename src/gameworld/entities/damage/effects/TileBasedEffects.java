@@ -14,8 +14,6 @@ import java.util.Iterator;
 public class TileBasedEffects {
     public static int activeTile = 0;
     public static int activeTile1 = 0;
-    private int previousTile = -1;
-    private int previousTile1 = -1;
     int[] tilesData, tilesData1, tilesData2;
     ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
     MainGame mg;
@@ -28,11 +26,8 @@ public class TileBasedEffects {
     public void update() {
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
         activeTile1 = WorldRender.worldData1[mg.playerX][mg.playerY];
-        if (activeTile != previousTile || activeTile1 != previousTile1) {
-            previousTile = activeTile;
-            previousTile1 = activeTile1;
-            checkForTileEffects();
-        }
+        checkForTileEffects();
+
         if (animationList.size() > 0) {
             Iterator<ScriptedAnimationList> iter = animationList.iterator();
             while (iter.hasNext()) {
@@ -110,9 +105,6 @@ public class TileBasedEffects {
         return !(activeTile >= 9 && activeTile <= 300);
     }
 
-    public void openChest() {
-
-    }
 
     private int[] getValuesInRadius(int[][] array, int centerX, int centerY) {
         int radius = 7;

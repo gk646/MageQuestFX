@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +25,8 @@ public class PRJ_RingSalvo extends PROJECTILE {
         this.projectileWidth = 25;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.version = version;
+        this.type = DamageType.FireDMG;
+        this.damage = 0.5f;
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX, Player.worldY);
@@ -36,7 +39,7 @@ public class PRJ_RingSalvo extends PROJECTILE {
     @Override
     public void draw(GraphicsContext g2) {
         g2.setStroke(Color.RED);
-        g2.strokeRect((int) worldPos.x - Player.worldX + Player.screenX + 12, (int) worldPos.y - Player.worldY + Player.screenY + 12, projectileWidth, projectileHeight);
+        g2.strokeRect((int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY, projectileWidth, projectileHeight);
     }
 
     @Override
