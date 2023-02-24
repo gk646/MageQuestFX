@@ -24,7 +24,6 @@ import input.InputHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -177,6 +176,7 @@ public class MainGame {
                 difference1 += (firstTimeGate1 - lastTime1) / 1_000_000_000.0f;
                 difference2 += (firstTimeGate1 - lastTime1) / fastRenderCounter2;
                 lastTime1 = firstTimeGate1;
+
                 if (difference >= 1) {
                     inventP.interactWithWindows();
                     difference = 0;
@@ -190,7 +190,6 @@ public class MainGame {
                         getPlayerTile();
                         player.pickupDroppedItem();
                         player.checkPlayerIsMoving();
-                        getPlayerTile();
                         tileBase.update();
                         WORLD_SIZE = wRender.worldSize.x * 48;
                         wAnim.animateTiles();
@@ -205,7 +204,7 @@ public class MainGame {
                         proximitySorterENTITIES();
                     }
                     tileBase.getNearbyTiles();
-                   // sound.update();
+                    sound.update();
 
                     difference1 = 0;
                     // System.out.println(counter);
@@ -216,9 +215,7 @@ public class MainGame {
         renderHelper.start();
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-
         KeyFrame kf = new KeyFrame(Duration.seconds(0.007_9), ae -> drawGame(gc));
-
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
         Thread playerThread = new Thread(() -> {
@@ -355,15 +352,18 @@ public class MainGame {
         long seed = secureRandom.nextLong();
         random = new Random(seed);
         // 0 %
+
         playerPrompts = new PlayerPrompts(this);
+
         sound = new Sound(this);
+
         sound.loadSounds();
         inventP = new UI_InventoryPanel(this);
         wControl = new WorldController(this);
 
         //12 %
         ui.updateLoadingScreen(12, gc);
-        ob_control = new OBJ_Control(this);
+        // ob_control = new OBJ_Control(this);
         wRender = new WorldRender(this);
         wControl.loadWorldData();
         //  wControl.makeOverWorldQuadrants();
@@ -381,6 +381,7 @@ public class MainGame {
         imageSto = new Storage();
         imageSto.loadImages();
         prj_control = new PRJ_Control(this);
+
         player = new Player(this);
 
         //48%
@@ -417,11 +418,11 @@ public class MainGame {
         gameMap.getImage();
         gameState = State.TITLE;
         loadingScreen = false;
-        sound.setVolumeAmbience(ui.ambientSlider);
-        sound.setVolumeEffects(ui.effectsSlider);
+        //sound.setVolumeAmbience(ui.ambientSlider);
+        //sound.setVolumeEffects(ui.effectsSlider);
         startThreads();
-        sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
-        sound.INTRO.play();
+        //sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
+        //sound.INTRO.play();
         debug();
     }
 

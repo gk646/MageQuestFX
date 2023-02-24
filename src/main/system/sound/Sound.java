@@ -10,7 +10,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import main.MainGame;
 import main.system.enums.State;
-import main.system.ui.inventory.UI_InventoryPanel;
 
 import java.util.ArrayList;
 
@@ -54,9 +53,9 @@ public class Sound {
     }
 
     public void loadSounds() {
-        equip = new MediaPlayer(new Media(UI_InventoryPanel.class.getResource("/resources/sound/effects/inventory/equip.wav").toString()));
+        equip = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/equip.wav").toString()));
         equip.setVolume(0.25);
-        finishObjective = new MediaPlayer(new Media(UI_InventoryPanel.class.getResource("/resources/sound/effects/quest/finish_objective.wav").toString()));
+        finishObjective = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav").toString()));
         finishObjective.setVolume(0.4);
         INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro.wav").toString()));
         INTRO.setVolume(0.8);
@@ -180,8 +179,10 @@ public class Sound {
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
                 currentAmbient = forestAmbient.get(currentTrackIndex);
+                System.out.println("hey");
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                System.out.println("here");
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
                     fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }

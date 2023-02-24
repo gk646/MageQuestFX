@@ -27,7 +27,6 @@ public class TileBasedEffects {
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
         activeTile1 = WorldRender.worldData1[mg.playerX][mg.playerY];
         checkForTileEffects();
-
         if (animationList.size() > 0) {
             Iterator<ScriptedAnimationList> iter = animationList.iterator();
             while (iter.hasNext()) {
