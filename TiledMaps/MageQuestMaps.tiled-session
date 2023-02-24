@@ -80,11 +80,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 8,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 948.4848484848485,
-                "y": 787.878787878788
+                "x": 664.25,
+                "y": 757.75
             }
         },
         "d.tsx": {

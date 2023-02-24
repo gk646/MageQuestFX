@@ -38,7 +38,6 @@ public class PRJ_EnergySphere extends PROJECTILE {
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
-        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.updateVector = getTrajectory(InputHandler.instance.lastMousePosition);
         getPlayerImage();
     }

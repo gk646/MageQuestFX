@@ -39,7 +39,7 @@ public class PRJ_EnemyStandardShot extends PROJECTILE {
 
     @Override
     public void update() {
-        outOfBounds(850);
+        outOfBoundsEnemy();
         tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;

@@ -12,6 +12,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
+import main.system.ui.Colors;
+import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 import main.system.ui.talentpane.TalentNode;
 
@@ -499,6 +501,9 @@ public class Player extends ENTITY {
     }
 
     private void drawLevelUp(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold30);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("LEVEL UP", screenX - 60, screenY - 150);
         switch (Math.abs(spriteCounter / 12 % (2 * 6 - 2) - 6 + 1)) {
             case 0 -> gc.drawImage(animation.images1.get(0), screenX - 118 + 24, screenY - 150);
             case 1 -> gc.drawImage(animation.images1.get(1), screenX - 118 + 24, screenY - 150);

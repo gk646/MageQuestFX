@@ -64,10 +64,8 @@ public abstract class PROJECTILE {
         }
     }
 
-    protected void outOfBounds(int distance) {
-        float x = Player.worldX;
-        float y = Player.worldY;
-        if (worldPos.x >= x + distance || worldPos.y >= y + distance || worldPos.y <= x - distance || worldPos.x <= y - distance) {
+    protected void outOfBoundsEnemy() {
+        if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 850 * 2 || worldPos.x <= endPos.x - 850 * 2) {
             this.dead = true;
         }
     }

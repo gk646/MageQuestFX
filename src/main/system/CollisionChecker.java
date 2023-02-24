@@ -28,40 +28,56 @@ public class CollisionChecker {
         int entityTopRow = Math.max(Math.min(entityTopWorldY / 48, 499), 0);
         int entityBottomRow = Math.max(0, Math.min(entityBottomWorldY / 48, 499));
 
-        int tileNum1, tileNum2;
+        int tileNum1, tileNum2, tileNumBG1, tileNumBG1_2;
         if (projectile.direction.contains("right")) {
-            entityRightCol = Math.max(0, Math.min((entityRightWorldX + projectile.movementSpeed) / 48, 499));
+            entityRightCol = Math.min((entityRightWorldX + projectile.movementSpeed) / 48, WorldRender.worldData.length);
             tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityRightCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                projectile.collisionRight = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 projectile.collisionRight = true;
             }
         }
         if (projectile.direction.contains("left")) {
-            entityLeftCol = Math.max(0, Math.min((entityLeftWorldX - projectile.movementSpeed) / 48, 499));
+            entityLeftCol = Math.min((entityLeftWorldX - projectile.movementSpeed) / 48, WorldRender.worldData.length);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityLeftCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                projectile.collisionLeft = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 projectile.collisionLeft = true;
             }
         }
-        entityLeftCol = Math.max(0, Math.min(entityLeftWorldX / 48, 499));
-        entityRightCol = Math.max(0, Math.min(entityRightWorldX / 48, 499));
+        entityLeftCol = Math.min(entityLeftWorldX / 48, WorldRender.worldData.length);
+        entityRightCol = Math.min(entityRightWorldX / 48, WorldRender.worldData.length);
         if (projectile.direction.contains("up")) {
-            entityTopRow = Math.max(0, Math.min((entityTopWorldY - projectile.movementSpeed) / 48, 499));
+            entityTopRow = Math.min((entityTopWorldY - projectile.movementSpeed) / 48, WorldRender.worldData.length);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityTopRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                projectile.collisionUp = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 projectile.collisionUp = true;
             }
         }
-        entityLeftCol = Math.max(0, Math.min(entityLeftWorldX / 48, 499));
+        entityLeftCol = Math.min(entityLeftWorldX / 48, WorldRender.worldData.length);
 
         if (projectile.direction.contains("down")) {
-            entityBottomRow = Math.max(0, Math.min((entityBottomWorldY + projectile.movementSpeed) / 48, 499));
+            entityBottomRow = Math.min((entityBottomWorldY + projectile.movementSpeed) / 48, WorldRender.worldData.length);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
+            tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityBottomRow];
+            tileNumBG1_2 = WorldRender.worldData1[entityRightCol][entityBottomRow];
             if (WorldRender.tileStorage[tileNum1].collision || WorldRender.tileStorage[tileNum2].collision) {
+                projectile.collisionDown = true;
+            } else if (tileNumBG1 != -1 && tileNumBG1_2 != -1 && (WorldRender.tileStorage[tileNumBG1].collision && WorldRender.tileStorage[tileNumBG1_2].collision)) {
                 projectile.collisionDown = true;
             }
         }

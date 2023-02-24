@@ -49,14 +49,18 @@ public class ENT_SkeletonArcher extends ENTITY {
     @Override
     public void update() {
         super.update();
-        onPath = !playerTooFarAbsolute() && ((worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX);
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             attack1 = true;
             mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
             spriteCounter = 0;
         }
-        standardSeekPlayer();
+
+        if (!attack1) {
+            onPath = true;
+            getNearestPlayer();
+            searchPath(goalCol, goalRow, 16);
+        }
         searchTicks++;
         shotCooldown++;
         if (hpBarCounter >= 600) {

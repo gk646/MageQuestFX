@@ -39,7 +39,7 @@ public class Runner extends Application {
         Scene scene = new Scene(root);
         scene.setCursor(Cursor.HAND);
         stage.setScene(scene);
-        stage.setTitle("Mage Quest_2D");
+        stage.setTitle("Mage Quest");
         InputStream is = getClass().getResourceAsStream("/Icons/icon2.png");
         Image cursor = new Image(getClass().getResource("/ui/crosshair_1.png").toExternalForm());
         Image cursor3 = new Image(getClass().getResource("/ui/crosshair_3.png").toExternalForm());
