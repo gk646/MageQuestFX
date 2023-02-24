@@ -98,7 +98,7 @@ abstract public class SKILL {
     }
 
     protected Image setup(String imagePath) {
-        return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/" + imagePath))));
+        return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/icons/" + imagePath))));
     }
 
     abstract public void update();

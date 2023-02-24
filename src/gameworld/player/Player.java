@@ -15,6 +15,7 @@ import main.system.enums.Zone;
 import main.system.ui.inventory.UI_InventorySlot;
 import main.system.ui.talentpane.TalentNode;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Iterator;
 import java.util.Objects;
@@ -158,7 +159,8 @@ public class Player extends ENTITY {
     }
 
     private void skills() {
-        if (!mg.inventP.wholeBagWindow.contains(mg.inputH.lastMousePosition) && !mg.inventP.wholeCharWindow.contains(mg.inputH.lastMousePosition) && !mg.showMap && !mg.showTalents) {
+        Point mousePos = mg.inputH.lastMousePosition;
+        if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
             if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
                 mg.sBar.skills[4].activate();
                 getDurabilityDamageWeapon();
@@ -170,7 +172,6 @@ public class Player extends ENTITY {
                 mg.sBar.skills[0].activate();
             }
         }
-
         if (mg.inputH.TwoPressed && mana >= 20 && cdLightning == 20) {
             mg.PROJECTILES.add(new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
             mana -= 20;

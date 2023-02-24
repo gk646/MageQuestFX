@@ -399,46 +399,61 @@ public class InputHandler {
     }
 
     public void handleMouseClick(MouseEvent event) {
+        Point mousePos = lastMousePosition;
         if (event.getButton() == MouseButton.PRIMARY) {
-            if (mg.qPanel.expandButton.contains(lastMousePosition)) {
+            if (mg.qPanel.expandButton.contains(mousePos)) {
                 mg.qPanel.expanded = !mg.qPanel.expanded;
             } else if (mg.showChar) {
-                if (mg.inventP.combatStatsHitBox.contains(lastMousePosition)) {
+                if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
                     mg.inventP.showCombatStats = true;
-                } else if (mg.inventP.effectsHitBox.contains(lastMousePosition)) {
+                } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
                     mg.inventP.showCombatStats = false;
                 }
             }
-            if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mg.inputH.lastMousePosition)) {
-                mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
-                if (mg.inventP.showBagEquipSlots) {
-                    mg.inventP.bagPanelMover.y -= 30;
-                } else {
-                    mg.inventP.bagPanelMover.y += 30;
-                }
-            } else if (mg.showBag && mg.inventP.bagSortButton.contains(mg.inputH.lastMousePosition)) {
-                mg.inventP.sortBagsRarity();
+        }
+        if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
+            mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+            if (mg.inventP.showBagEquipSlots) {
+                mg.inventP.bagPanelMover.y -= 30;
+            } else {
+                mg.inventP.bagPanelMover.y += 30;
             }
-            if (mg.showChar && mg.inventP.secondPanelButton.contains(mg.inputH.lastMousePosition)) {
-                mg.inventP.activeCharacterPanel = 2;
-            } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mg.inputH.lastMousePosition)) {
-                mg.inventP.activeCharacterPanel = 1;
+        } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
+            mg.inventP.sortBagsRarity();
+        }
+        if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
+            mg.inventP.activeCharacterPanel = 2;
+        } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
+            mg.inventP.activeCharacterPanel = 1;
+        }
+        if (mg.gameState == State.TITLE && mg.ui.discord_button.contains(mousePos)) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (mg.gameState == State.TITLE && mg.ui.discord_button.contains(lastMousePosition)) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (mg.gameState == State.TITLE && mg.ui.github_button.contains(lastMousePosition)) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/gk646/MageQuestFX"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        } else if (mg.gameState == State.TITLE && mg.ui.github_button.contains(mousePos)) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/gk646/MageQuestFX"));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+        if (mg.sBar.characterBox.contains(mousePos)) {
+            mg.showChar = true;
+        } else if (mg.sBar.bagBox.contains(mousePos)) {
+            mg.showBag = true;
+        } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
+            mg.showTalents = true;
+        } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
+
+        } else if (mg.sBar.mapBox.contains(mousePos)) {
+            mg.showMap = true;
+        } else if (mg.sBar.settingsBox.contains(mousePos)) {
+            mg.gameState = State.OPTION;
+        }
     }
+
 
     public void handleScroll(ScrollEvent event) {
         if (mg.showMap) {

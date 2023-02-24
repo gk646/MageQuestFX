@@ -235,7 +235,7 @@ public class UI {
         gc.setFill(Colors.XPBarBlue);
         gc.setEffect(null);
         gc.setEffect(lighting);
-        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.515, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
+        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.500, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
         gc.setEffect(null);
     }
 
