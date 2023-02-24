@@ -122,7 +122,7 @@ public class GameMap {
         getOffset(zoom_i);
         image = new BufferedImage(1_570, 935, BufferedImage.TYPE_INT_ARGB);
         int entityX, entityY;
-        int tileNum;
+        int tileNum, tileNum1;
         int offsetx = (int) (xTile_i - 1_570.0f / (zoom_i * 2));
         int offsety = (int) (yTile_i - 935.0f / (zoom_i * 2));
         for (int y = 0; y < (935 / zoom_i) + 1; y++) {
@@ -130,11 +130,20 @@ public class GameMap {
                 if (offsetx + x < mg.wRender.worldSize.x && offsetx + x >= 0 && offsety + y < mg.wRender.worldSize.x && offsety + y >= 0) {
                     if (WorldController.currentMapCover[offsetx + x][offsety + y] == 1) {
                         tileNum = WorldRender.worldData[offsetx + x][offsety + y];
-                        if (tileNum != -1 && !WorldRender.tileStorage[tileNum].collision) {
+                        tileNum1 = WorldRender.worldData1[offsetx + x][offsety + y];
+                        if (WorldRender.tileStorage[tileNum].collision) {
                             for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                                 for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                     if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
-                                        image.setRGB((int) b, (int) i, 0xD063_C74D);
+                                        image.setRGB((int) b, (int) i, 0xD05A_6988);
+                                    }
+                                }
+                            }
+                        } else if (tileNum1 != -1 && WorldRender.tileStorage[tileNum1].collision) {
+                            for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
+                                for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
+                                    if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
+                                        image.setRGB((int) b, (int) i, 0xD05A_6988);
                                     }
                                 }
                             }
@@ -142,7 +151,7 @@ public class GameMap {
                             for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                                 for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                     if (i < 935 && b < 1_570 && i >= 0 && b >= 0) {
-                                        image.setRGB((int) b, (int) i, 0xD05A_6988);
+                                        image.setRGB((int) b, (int) i, 0xD063_C74D);
                                     }
                                 }
                             }

@@ -21,7 +21,7 @@ public class Sound {
     public MediaPlayer menu_switch;
     public MediaPlayer menu_back;
     private MediaPlayer chestSound;
-    public static float AMBIENCE_VOLUME = 0.5f;
+    public static float AMBIENCE_VOLUME = 0.7f;
     private final double fadeDuration = 2;
     public MediaPlayer spikes;
     public MediaPlayer currentAmbient;
@@ -243,7 +243,7 @@ public class Sound {
         for (MediaPlayer player : dungeonAmbient) {
             player.setVolume(AMBIENCE_VOLUME * (value / 100.0f));
         }
-        AMBIENCE_VOLUME = 0.5f * (value / 100.0f);
+        AMBIENCE_VOLUME = 0.7f * (value / 100.0f);
         waterVolume = 0.3f * (value / 100.0f);
         waterAmbience.setVolume(waterVolume);
         lava.setVolume(waterVolume);
