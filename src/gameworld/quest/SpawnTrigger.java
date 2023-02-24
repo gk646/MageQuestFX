@@ -16,7 +16,7 @@ public class SpawnTrigger {
     private final Trigger trigger;
     private final Type type;
     public final Zone zone;
-    private boolean triggered;
+    public boolean triggered;
 
     public SpawnTrigger(int x, int y, int level, Trigger trigger, Type type, Zone zone) {
         this.x = x;

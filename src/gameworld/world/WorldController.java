@@ -84,7 +84,7 @@ public class WorldController {
 
     public void update() {
         for (SpawnTrigger trigger : globalTriggers) {
-            if (trigger != null && trigger.zone == currentWorld) {
+            if (trigger != null && trigger.triggered && trigger.zone == currentWorld) {
                 trigger.activate(mg);
             }
         }

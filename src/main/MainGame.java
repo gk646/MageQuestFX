@@ -205,7 +205,7 @@ public class MainGame {
                         proximitySorterENTITIES();
                     }
                     tileBase.getNearbyTiles();
-                    sound.update();
+                   // sound.update();
 
                     difference1 = 0;
                     // System.out.println(counter);

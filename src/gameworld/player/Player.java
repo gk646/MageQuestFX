@@ -138,6 +138,7 @@ public class Player extends ENTITY {
         collisionUp = false;
         direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
+        int worldSize = mg.wRender.worldSize.x * 47;
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
                 worldX -= playerMovementSpeed;
@@ -149,12 +150,12 @@ public class Player extends ENTITY {
             }
         }
         if (mg.inputH.downPressed) {
-            if (!collisionDown && worldY < mg.wRender.worldSize.x * 48 - 48) {
+            if (!collisionDown && worldY < worldSize) {
                 worldY += playerMovementSpeed;
             }
         }
         if (mg.inputH.rightPressed) {
-            if (!collisionRight && worldX < mg.wRender.worldSize.x * 48 - 48) {
+            if (!collisionRight && worldX < worldSize) {
                 worldX += playerMovementSpeed;
             }
         }
@@ -162,15 +163,21 @@ public class Player extends ENTITY {
 
     private void skills() {
         Point mousePos = mg.inputH.lastMousePosition;
-        if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
-            if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
-                mg.sBar.skills[4].activate();
+        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
+            if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
+                mg.sBar.skills[4].activate();
             }
-            if (mg.inputH.mouse2Pressed) {
+        }
+        if (mg.inputH.mouse2Pressed) {
+            if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
+                getDurabilityDamageWeapon();
                 mg.sBar.skills[1].activate();
             }
-            if (mg.inputH.OnePressed) {
+        }
+        if (mg.inputH.OnePressed) {
+            if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
+                getDurabilityDamageWeapon();
                 mg.sBar.skills[0].activate();
             }
         }

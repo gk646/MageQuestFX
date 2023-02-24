@@ -68,7 +68,6 @@ public class Runner extends Application {
         Thread thread = new Thread(mainGame::run);
         stage.show();
         thread.start();
-
         //MOUSE
         scene.setOnMousePressed(event -> mainGame.inputH.handleMousePressed(event));
         scene.setOnMouseReleased(event -> mainGame.inputH.handleMouseReleased(event));
