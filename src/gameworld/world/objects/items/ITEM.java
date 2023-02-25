@@ -89,7 +89,7 @@ public class ITEM {
         getStats();
     }
 
-    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level) {
+    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level, float [] effects) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;

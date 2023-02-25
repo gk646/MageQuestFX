@@ -29,7 +29,7 @@ public class DRP_DroppedItem extends DROP {
 
     private static ITEM cloneItem(ITEM item) {
         if (item != null) {
-            ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, item.quality, item.level);
+            ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, item.quality, item.level, item.effects);
             new_ITEM.icon = item.icon;
             return new_ITEM;
         }
@@ -43,7 +43,7 @@ public class DRP_DroppedItem extends DROP {
      * @return a new instance of a base item with the given quality and level
      */
     public static ITEM cloneItemWithLevelQuality(ITEM item, int quality, int level) {
-        ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, quality, level);
+        ITEM new_ITEM = new ITEM(item.i_id, item.name, item.rarity, item.type, item.imagePath, item.description, item.stats, quality, level, item.effects);
         new_ITEM.icon = item.icon;
         return new_ITEM;
     }
@@ -142,6 +142,11 @@ public class DRP_DroppedItem extends DROP {
     private ITEM rollEffect(ITEM item) {
         if (item != null) {
             if (item.rarity == 2) {
+                for (int i = 0; i < Player.effectsSizeRollable; i++) {
+                    if (item.effects[i] != 0) {
+                        return item;
+                    }
+                }
                 int number = mg.random.nextInt(1, Player.effectsSizeRollable);
                 if (number == 1 || number == 2 || number == 18 || number == 19 || number == 28) {
                     item.effects[number] = mg.random.nextInt(0, 11);
@@ -174,6 +179,15 @@ public class DRP_DroppedItem extends DROP {
                 }
             }
             if (item.rarity == 3) {
+                int counter = 0;
+                for (int i = 0; i < Player.effectsSizeRollable; i++) {
+                    if (item.effects[i] != 0) {
+                        counter++;
+                    }
+                    if (counter >= 2) {
+                        return item;
+                    }
+                }
                 int number1 = mg.random.nextInt(1, Player.effectsSizeRollable);
                 int number2 = mg.random.nextInt(1, Player.effectsSizeRollable);
                 while (number1 == number2) {
