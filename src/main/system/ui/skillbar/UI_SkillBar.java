@@ -100,9 +100,7 @@ public class UI_SkillBar {
 
     public void update() {
         for (SKILL skill : skills) {
-            if (skill != null) {
-                skill.update();
-            }
+            skill.update();
         }
     }
 }
