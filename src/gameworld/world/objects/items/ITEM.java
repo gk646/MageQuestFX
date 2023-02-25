@@ -35,7 +35,7 @@ public class ITEM {
     public int quality;
     public int durability = 100;
     public int level;
-    public int[] effects = new int[Player.effectsSizeRollable];
+    public float[] effects = new float[Player.effectsSizeRollable];
 
     /*
         INT intellect + max mana / more damage on abilities
@@ -58,17 +58,6 @@ public class ITEM {
         STR - Str
         FOC - Foc
 
-        EFFECTS
-        + fire dmg
-        + lighting dmg
-        + dark magic
-        + poison
-        + arcane
-
-        + % stat
-        + % magic damage
-        + armour
-        + unique effects
      */
     public int intellect;
     public int vitality;
@@ -83,10 +72,11 @@ public class ITEM {
     public String description;
     public Image icon;
 
-    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats) {
+    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, String effect) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
+        getEffects(effect);
         this.type = type;
         this.imagePath = imagePath;
         this.description = description;
@@ -104,6 +94,7 @@ public class ITEM {
         this.name = name;
         this.rarity = rarity;
         this.type = type;
+        this.effects = effects;
         this.imagePath = imagePath;
         this.description = description;
         this.stats = stats;
@@ -209,10 +200,10 @@ public class ITEM {
          */
     }
 
-    public void getEffect(String effect) {
+    public void getEffects(String effect) {
         Pattern p;
         Matcher m;
-        p = Pattern.compile("\\[(\\d+)](\\d+)");
+        p = Pattern.compile("\\[(\\d+)]([\\d,.]+)");
         m = p.matcher(effect);
         while (m.find()) {
             effects[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));

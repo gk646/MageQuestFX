@@ -104,9 +104,14 @@ public class Player extends ENTITY {
     25. Mana Regen Percent
     26. Man Cost Reduction
     27. magic find flat ( 10)
+    28 ice magic damage +%
 
 
-
+    40.weakness to ice
+    41.weakness to arcane
+    42.weakness to dark magic
+    43.weakness to poison
+    44.weakness to fire
     45.MovementSpeed Absolute (eg. 0.5)
     46.maximum mana flat (20)
     47.maximum health flat (10)
@@ -388,6 +393,7 @@ public class Player extends ENTITY {
             quadrantTimer++;
         }
     }
+
     protected void tickEffects() {
         Iterator<Effect> iter = BuffsDeBuffEffects.iterator();
         while (iter.hasNext()) {
@@ -400,7 +406,6 @@ public class Player extends ENTITY {
                 }
 
                 iter.remove();
-
             }
         }
     }
@@ -595,7 +600,8 @@ public class Player extends ENTITY {
                 "Health Regeneration: +",
                 "Mana Regeneration: +",
                 "Mana Cost Reduction",
-                "Magic Find"
+                "Magic Find",
+                "Ice Damage",
         };
     }
 

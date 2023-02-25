@@ -345,18 +345,18 @@ public class SQLite {
         mg.TWOHANDS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.BAGS.sort(Comparator.comparingInt(o -> o.i_id));
         mg.MISC.sort(Comparator.comparingInt(o -> o.i_id));
-        mg.AMULET.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.CHEST.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.HEAD.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.OFFHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.ONEHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.PANTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.RELICS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.RINGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.BAGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
-        mg.MISC.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey"));
+        mg.AMULET.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.BOOTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.CHEST.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.HEAD.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.OFFHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.ONEHAND.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.PANTS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.RELICS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.RINGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.TWOHANDS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.BAGS.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
+        mg.MISC.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey","hey"));
     }
 
     private void readPlayerInventory(Statement stmt) throws SQLException {
@@ -535,7 +535,7 @@ public class SQLite {
                     for (ITEM item : mg.AMULET) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -544,7 +544,7 @@ public class SQLite {
                     for (ITEM item : mg.BOOTS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -553,7 +553,7 @@ public class SQLite {
                     for (ITEM item : mg.CHEST) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -562,7 +562,7 @@ public class SQLite {
                     for (ITEM item : mg.HEAD) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -571,7 +571,7 @@ public class SQLite {
                     for (ITEM item : mg.OFFHAND) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -580,7 +580,7 @@ public class SQLite {
                     for (ITEM item : mg.ONEHAND) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -589,7 +589,7 @@ public class SQLite {
                     for (ITEM item : mg.PANTS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -598,7 +598,7 @@ public class SQLite {
                     for (ITEM item : mg.RELICS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -607,7 +607,7 @@ public class SQLite {
                     for (ITEM item : mg.RINGS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -616,7 +616,7 @@ public class SQLite {
                     for (ITEM item : mg.TWOHANDS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -625,7 +625,7 @@ public class SQLite {
                     for (ITEM item : mg.BAGS) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -634,7 +634,7 @@ public class SQLite {
                     for (ITEM item : mg.MISC) {
                         if (item.i_id == i_id) {
                             new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-                            new_ITEM.getEffect(effect);
+                            new_ITEM.getEffects(effect);
                             return new_ITEM;
                         }
                     }
@@ -651,7 +651,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.AMULET.add(0, new_ITEM);
@@ -665,7 +665,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.BOOTS.add(0, new_ITEM);
@@ -679,7 +679,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.CHEST.add(0, new_ITEM);
@@ -693,7 +693,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.HEAD.add(0, new_ITEM);
@@ -707,7 +707,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.OFFHAND.add(0, new_ITEM);
@@ -721,7 +721,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.ONEHAND.add(0, new_ITEM);
@@ -735,7 +735,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.PANTS.add(0, new_ITEM);
@@ -749,7 +749,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.RELICS.add(0, new_ITEM);
@@ -763,7 +763,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.RINGS.add(0, new_ITEM);
@@ -777,7 +777,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.TWOHANDS.add(0, new_ITEM);
@@ -791,7 +791,7 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.MISC.add(0, new_ITEM);
@@ -805,12 +805,14 @@ public class SQLite {
                 continue;
             }
             //ADDED ID + NAME + RARITY + TYPE + IMGAGEPATH
-            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"));
+            ITEM new_ITEM = new ITEM(rs.getInt("i_id"), rs.getString("name"), rs.getInt("rarity"), rs.getString("type").charAt(0), rs.getString("imagePath"), rs.getString("description"), rs.getString("stats"),rs.getString("effect"));
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.BAGS.add(0, new_ITEM);
         }
     }
+
+
 
     public void resetGame() {
         System.out.println("STARTING RESET");

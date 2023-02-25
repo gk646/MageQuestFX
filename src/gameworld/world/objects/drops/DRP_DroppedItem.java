@@ -143,7 +143,7 @@ public class DRP_DroppedItem extends DROP {
         if (item != null) {
             if (item.rarity == 2) {
                 int number = mg.random.nextInt(1, Player.effectsSizeRollable);
-                if (number == 1 || number == 2 || number == 18 || number == 19) {
+                if (number == 1 || number == 2 || number == 18 || number == 19 || number == 28) {
                     item.effects[number] = mg.random.nextInt(0, 11);
                 } else if (number == 3) {
                     item.effects[number] = mg.random.nextInt(0, 26);
@@ -186,7 +186,7 @@ public class DRP_DroppedItem extends DROP {
                     } else {
                         number = number2;
                     }
-                    if (number == 1 || number == 2 || number == 18 || number == 19) {
+                    if (number == 1 || number == 2 || number == 18 || number == 19 || number == 28) {
                         item.effects[number] = mg.random.nextInt(0, 11);
                     } else if (number == 3) {
                         item.effects[number] = mg.random.nextInt(0, 26);
