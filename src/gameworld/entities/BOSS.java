@@ -34,6 +34,18 @@ abstract public class BOSS extends ENTITY {
     @Override
     public void update() {
         tickEffects();
+        activeTile.x = (int) ((worldX + 24) / 48);
+        activeTile.y = (int) ((worldY + 24) / 48);
+        if (health <= 0) {
+            dead = true;
+            playGetHitSound();
+        }
+        if (hpBarCounter >= 600) {
+            hpBarOn = false;
+            hpBarCounter = 0;
+        } else if (hpBarOn) {
+            hpBarCounter++;
+        }
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")

@@ -29,10 +29,6 @@ public class PathFinder {
         }
     }
 
-    private void resetNodes(int startCol, int startRow, int maxDistance) {
-
-    }
-
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow, int maxDistance) {
         int wsize = mg.wRender.worldSize.x;
         int startx = Math.max(0, startCol - maxDistance);

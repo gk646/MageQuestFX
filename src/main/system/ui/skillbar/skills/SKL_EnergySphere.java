@@ -5,10 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
-public class SKL_EnergySphere_I extends SKILL {
+public class SKL_EnergySphere extends SKILL {
 
 
-    public SKL_EnergySphere_I(MainGame mg) {
+    public SKL_EnergySphere(MainGame mg) {
         super(mg);
         this.totalCoolDown = 120;
         actualCoolDown = 120;

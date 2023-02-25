@@ -84,11 +84,3 @@ public class Runner extends Application {
         stage.setOnCloseRequest(e -> System.exit(0));
     }
 }
-//TODO optimizations with ai
-//TODO and maybe few misc items
-//TODO and more scripting for tutorial and quest
-//TODO upscaling all images to 48
-//TODO
-//TODO
-//TODO
-//TODO

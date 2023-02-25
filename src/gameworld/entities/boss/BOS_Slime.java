@@ -12,15 +12,17 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 public class BOS_Slime extends BOSS {
-    private final ResourceLoaderEntity anim = new ResourceLoaderEntity("BossSlime");
+
+    private boolean attack1, attack2, attack3, spitting;
 
 
     public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
+        this.animation = new ResourceLoaderEntity("BossSlime");
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
         this.enemyImage = Storage.BigSLimewalk1;
-        anim.load();
+        animation.load();
     }
 
 
@@ -31,18 +33,44 @@ public class BOS_Slime extends BOSS {
     @Override
     public void update() {
         super.update();
-        //onPath = !playerTooFarAbsoluteBoss(1000) && (worldX + 24) / 48 != mg.playerX || (worldY + 24) / 48 != mg.playerX;
-        searchTicks++;
-        if (health < 0.7 * maxHealth) {
-            if (searchTicks % 120 == 0) {
+        spitting = false;
+        if (health < 0.5 * maxHealth) {
+            if (searchTicks % 240 == 0) {
                 slimeCone();
+                spitting = true;
+                //TODO play acid breath sound
             }
-            if (!playerTooFarAbsolute() && searchTicks % 240 == 0) {
+            if (searchTicks % 480 == 0) {
                 slimeVolley();
+                spitting = true;
             }
+            standardAttackScript();
+        } else {
+            standardAttackScript();
         }
-        getNearestPlayer();
-        //searchPathUncapped(goalCol, goalRow, 40);
+        if (!attack2 && !attack3 && !attack1 && !spitting) {
+            onPath = true;
+            getNearestPlayer();
+            searchPath(goalCol, goalRow, 16);
+        }
+        hitDelay++;
+        searchTicks++;
+    }
+
+    private void standardAttackScript() {
+        if (collidingWithPlayer && !onPath && !attack2 && !attack3 && !attack1) {
+            if (Math.random() < 0.33f) {
+                attack1 = true;
+            } else if (Math.random() < 0.66f) {
+                attack2 = true;
+            } else {
+                attack3 = true;
+            }
+            //animation.playGetHitSound(3);
+            //TODO correct swing sound
+            spriteCounter = 0;
+            collidingWithPlayer = false;
+        }
     }
 
     /**
@@ -52,52 +80,65 @@ public class BOS_Slime extends BOSS {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX - 49);
         screenY = (int) (worldY - Player.worldY + Player.screenY - 45 - 48);
-        if (onPath) {
-            switch (spriteCounter % 180 / 30) {
-                case 0 -> gc.drawImage(anim.walk.get(0), screenX, screenY);
-                case 1 -> gc.drawImage(anim.walk.get(1), screenX, screenY);
-                case 2 -> gc.drawImage(anim.walk.get(2), screenX, screenY);
-                case 3 -> gc.drawImage(anim.walk.get(3), screenX, screenY);
-                case 4 -> gc.drawImage(anim.walk.get(4), screenX, screenY);
-                case 5 -> gc.drawImage(anim.walk.get(5), screenX, screenY);
-            }
-        } else if (isOnPlayer()) {
+        if (attack1) {
             drawAttack1(gc);
+        } else if (attack2) {
+            drawAttack2(gc);
+        } else if (attack3) {
+            drawAttack3(gc);
         } else {
-            gc.drawImage(anim.walk.get(0), screenX, screenY);
+            if (onPath) {
+                drawWalk(gc);
+            } else {
+                //TODO idle
+            }
         }
 
         spriteCounter++;
     }
 
-    private void drawAttack1(GraphicsContext gc) {
+    private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(anim.attack1.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(anim.attack1.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(anim.attack1.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(anim.attack1.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(anim.attack1.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(anim.attack1.get(5), screenX, screenY);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.walk.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY);
+        }
+    }
+
+    private void drawAttack1(GraphicsContext gc) {
+        switch (spriteCounter % 210 / 30) {
+            case 0 -> gc.drawImage(animation.attack1.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.attack1.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.attack1.get(3), screenX, screenY);
+            case 4 -> gc.drawImage(animation.attack1.get(4), screenX, screenY);
+            case 5 -> gc.drawImage(animation.attack1.get(5), screenX, screenY);
+            case 6 -> attack1 = false;
         }
     }
 
     private void drawAttack2(GraphicsContext gc) {
-        switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(anim.attack2.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(anim.attack2.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(anim.attack2.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(anim.attack2.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(anim.attack2.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(anim.attack2.get(5), screenX, screenY);
+        switch (spriteCounter % 210 / 30) {
+            case 0 -> gc.drawImage(animation.attack2.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.attack2.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.attack2.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.attack2.get(3), screenX, screenY);
+            case 4 -> gc.drawImage(animation.attack2.get(4), screenX, screenY);
+            case 5 -> gc.drawImage(animation.attack2.get(5), screenX, screenY);
+            case 6 -> attack2 = false;
         }
     }
 
     private void drawAttack3(GraphicsContext gc) {
-        switch (spriteCounter % 120 / 30) {
-            case 0 -> gc.drawImage(anim.attack3.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(anim.attack3.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(anim.attack3.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(anim.attack3.get(3), screenX, screenY);
+        switch (spriteCounter % 150 / 30) {
+            case 0 -> gc.drawImage(animation.attack3.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.attack3.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.attack3.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.attack3.get(3), screenX, screenY);
+            case 4 -> attack3 = false;
         }
     }
 
@@ -119,7 +160,7 @@ public class BOS_Slime extends BOSS {
     public void playGetHitSound() {
         if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
-            anim.playGetHitSound(4);
+            animation.playRandomSoundFromXToIndex(0,4);
         }
     }
 }

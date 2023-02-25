@@ -53,7 +53,7 @@ public class ENT_SkeletonWarrior extends ENTITY {
             } else {
                 attack3 = true;
             }
-            animation.playGetHitSound(3);
+            animation.playRandomSoundFromXToIndex(0, 3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }

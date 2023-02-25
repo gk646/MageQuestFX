@@ -13,8 +13,9 @@ abstract public class SKILL {
 
     protected Image icon;
     protected final MainGame mg;
-    protected Effects [] procEffects = new Effects[5];
+    protected Effects[] procEffects = new Effects[5];
     public float totalCoolDown;
+    protected int manaCost;
     public float coolDownCoefficient;
     public DamageType type;
     public float damage;
@@ -34,6 +35,13 @@ abstract public class SKILL {
         this.mg = mg;
     }
 
+    /**
+     * used for drawing the skill icon and the cooldown overlay
+     *
+     * @param gc graphics context
+     * @param x  x start
+     * @param y  y start
+     */
     abstract public void draw(GraphicsContext gc, int x, int y);
 
 
@@ -100,6 +108,10 @@ abstract public class SKILL {
         if (actualCoolDown < totalCoolDown) {
             actualCoolDown++;
         }
+    }
+
+    protected void updateCastTimer() {
+
     }
 
     abstract public void activate();

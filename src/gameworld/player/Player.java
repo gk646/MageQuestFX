@@ -105,10 +105,12 @@ public class Player extends ENTITY {
     26. Man Cost Reduction
     27. magic find flat ( 10)
 
-    45.MovementSpeed Absolute (eg. 0.5)
-    46. maximum mana flat (20)
-    47. maximum health flat (10)
 
+
+    45.MovementSpeed Absolute (eg. 0.5)
+    46.maximum mana flat (20)
+    47.maximum health flat (10)
+    48.shield ( over health shield) once given
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;

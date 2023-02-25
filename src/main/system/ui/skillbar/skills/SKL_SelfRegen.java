@@ -33,17 +33,12 @@ public class SKL_SelfRegen extends SKILL {
     @Override
     public void update() {
         super.updateCooldown();
-        if (castTimeActive > 0) {
-            castTimeActive++;
-            if (mg.player.isMoving) {
-                castTimeActive = 0;
-            }
-        }
+        super.updateCastTimer();
     }
 
     @Override
     public void activate() {
-        if (actualCoolDown == 3600 && castTimeActive == 0 && mg.player.mana >= 15) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.mana >= 15) {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {

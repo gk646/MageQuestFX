@@ -6,7 +6,7 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_AutoShot;
-import main.system.ui.skillbar.skills.SKL_EnergySphere_I;
+import main.system.ui.skillbar.skills.SKL_EnergySphere;
 import main.system.ui.skillbar.skills.SKL_Filler;
 import main.system.ui.skillbar.skills.SKL_Lightning;
 import main.system.ui.skillbar.skills.SKL_RingSalvo;
@@ -48,7 +48,7 @@ public class UI_SkillBar {
         skills[3] = new SKL_Filler(mg);
         skills[4] = new SKL_Filler(mg);
         skills[5] = new SKL_AutoShot(mg);
-        skills[6] = new SKL_EnergySphere_I(mg);
+        skills[6] = new SKL_EnergySphere(mg);
         skills[7] = new SKL_Filler(mg);
     }
 

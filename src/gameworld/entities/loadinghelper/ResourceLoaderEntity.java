@@ -95,8 +95,8 @@ public class ResourceLoaderEntity {
         }
     }
 
-    public void playGetHitSound(int hitSoundLimit) {
-        int num = (int) (Math.random() * hitSoundLimit);
+    public void playRandomSoundFromXToIndex(int startIndex, int hitSoundLimit) {
+        int num =Math.max(startIndex, (int) (Math.random() * hitSoundLimit));
         sounds.get(num).seek(Duration.ZERO);
         sounds.get(num).play();
     }

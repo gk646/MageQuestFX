@@ -169,9 +169,7 @@ abstract public class ENTITY {
         int startCol = activeTile.x;
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
-        if (startCol == goalCol && startRow == goalRow) {
-            onPath = false;
-        } else if (mg.pathF.searchUncapped()) {
+        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
@@ -189,9 +187,10 @@ abstract public class ENTITY {
                 nextCol4 = mg.pathF.pathList.get(3).col;
                 nextRow4 = mg.pathF.pathList.get(3).row;
             }
+        } else {
+            onPath = false;
         }
     }
-
 
     /**
      * Tracks the next 4 tiles that have been saved through searchPath() without computing anymore paths
@@ -297,6 +296,12 @@ abstract public class ENTITY {
         if (health <= 0) {
             dead = true;
             playGetHitSound();
+        }
+        if (hpBarCounter >= 600) {
+            hpBarOn = false;
+            hpBarCounter = 0;
+        } else if (hpBarOn) {
+            hpBarCounter++;
         }
     }
 
