@@ -97,7 +97,7 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            entity.effects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
+            entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
             projectile.dead = true;
 
         }

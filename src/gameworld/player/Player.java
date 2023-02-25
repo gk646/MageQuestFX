@@ -1,6 +1,7 @@
 package gameworld.player;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.world.MapQuadrant;
@@ -373,6 +374,7 @@ public class Player extends ENTITY {
     public void update() {
         movement();
         skills();
+        tickEffects();
         if (WorldController.currentWorld == Zone.GrassLands) {
             if (quadrantTimer >= 100) {
                 dynamicSpawns();
@@ -384,7 +386,22 @@ public class Player extends ENTITY {
             quadrantTimer++;
         }
     }
+    protected void tickEffects() {
+        Iterator<Effect> iter = BuffsDeBuffEffects.iterator();
+        while (iter.hasNext()) {
+            Effect effect = iter.next();
+            effect.tick(this);
+            if (effect.rest_duration <= 0) {
+                if (effect instanceof Buff_Effect) {
+                    ((Buff_Effect) effect).remove(this);
+                    updateEquippedItems();
+                }
 
+                iter.remove();
+
+            }
+        }
+    }
 
     public void getExperience(ENTITY entity) {
         experience += entity.level;

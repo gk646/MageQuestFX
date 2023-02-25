@@ -29,7 +29,8 @@ import java.util.Iterator;
 abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
-    public ArrayList<Effect> effects = new ArrayList<>();
+    public ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
+    public int[] effects = new int[Player.effectsSizeTotal];
     public ResourceLoaderEntity animation;
     public boolean collidingWithPlayer;
     public Zone zone;
@@ -272,7 +273,7 @@ abstract public class ENTITY {
     }
 
     protected void tickEffects() {
-        Iterator<Effect> iter = effects.iterator();
+        Iterator<Effect> iter = BuffsDebuffEffects.iterator();
         while (iter.hasNext()) {
             Effect effect = iter.next();
             effect.tick(this);

@@ -1,6 +1,6 @@
 package main.system.ui.skillbar.skills;
 
-import gameworld.entities.damage.effects.specialeffects.BUFF_HealthOverTime;
+import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -47,7 +47,7 @@ public class SKL_SelfRegen extends SKILL {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
-            mg.player.BuffsDeBuffEffects.add(new BUFF_HealthOverTime(20, 1.5f, true, 0));
+            mg.player.BuffsDeBuffEffects.add(new Buff_Effect(1200, 100, true, 24));
             mg.player.mana -= 15;
             actualCoolDown = 0;
         }
