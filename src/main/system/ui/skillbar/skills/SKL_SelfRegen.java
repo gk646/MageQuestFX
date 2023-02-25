@@ -24,6 +24,8 @@ public class SKL_SelfRegen extends SKILL {
 
     @Override
     public void activate() {
-
+        if (mg.player.mana >= 15) {
+            mg.player.mana -= 15;
+        }
     }
 }

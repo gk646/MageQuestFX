@@ -20,7 +20,7 @@ public class PRJ_EnergySphere extends PROJECTILE {
     /**
      * Energy Sphere projectile
      */
-    public PRJ_EnergySphere() {
+    public PRJ_EnergySphere(float damage) {
         sounds[0] = new MediaPlayer(Sound.energySphereBeginning);
         sounds[0].setVolume(Sound.EFFECTS_VOLUME);
         sounds[1] = new MediaPlayer(Sound.energySphereHit);
@@ -28,7 +28,7 @@ public class PRJ_EnergySphere extends PROJECTILE {
         this.type = DamageType.ArcaneDMG;
         //-------VALUES-----------
         this.movementSpeed = 3;
-        this.damage = 0.5f;
+        this.damage = damage;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
         this.collisionBox = Storage.box_secondaryFire;
@@ -69,16 +69,13 @@ public class PRJ_EnergySphere extends PROJECTILE {
         worldPos.y += updateVector.y * movementSpeed;
         if (dead) {
             sounds[0].stop();
+            sounds[1].play();
         }
     }
 
     @Override
     public void playHitSound() {
-        if (System.currentTimeMillis() - lastHitTime >= 100) {
-            sounds[1].seek(Duration.ZERO);
-            sounds[1].play();
-            lastHitTime = System.currentTimeMillis();
-        }
+      super.playHitSound();
     }
 
     private Point2D.Double getTrajectory(Point mousePosition) {

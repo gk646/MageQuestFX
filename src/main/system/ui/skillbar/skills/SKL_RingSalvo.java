@@ -24,9 +24,7 @@ public class SKL_RingSalvo extends SKILL {
 
     @Override
     public void update() {
-        if (actualCoolDown < totalCoolDown) {
-            actualCoolDown++;
-        }
+       super.updateCooldown();
     }
 
     @Override
@@ -37,7 +35,6 @@ public class SKL_RingSalvo extends SKILL {
             }
             mg.player.mana -= 10;
             actualCoolDown = 0;
-            mg.player.getDurabilityDamageWeapon();
         }
     }
 }

@@ -5,6 +5,7 @@ import gameworld.entities.damage.DamageType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import main.system.CollisionChecker;
 
 import java.awt.Point;
@@ -60,10 +61,18 @@ public abstract class PROJECTILE {
 
     abstract public void update();
 
-    abstract public void playHitSound();
+    public void playHitSound() {
+        if (System.currentTimeMillis() - lastHitTime >= 100) {
+            sounds[1].seek(Duration.ZERO);
+            sounds[1].play();
+            lastHitTime = System.currentTimeMillis();
+        }
+    }
 
     public void playStartSound() {
-        sounds[0].play();
+        if (sounds[0] != null) {
+            sounds[0].play();
+        }
     }
 
 

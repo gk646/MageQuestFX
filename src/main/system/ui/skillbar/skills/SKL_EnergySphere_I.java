@@ -5,10 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
-public class SKL_EnergySphere extends SKILL {
+public class SKL_EnergySphere_I extends SKILL {
 
 
-    public SKL_EnergySphere(MainGame mg) {
+    public SKL_EnergySphere_I(MainGame mg) {
         super(mg);
         this.totalCoolDown = 120;
         actualCoolDown = 120;
@@ -30,7 +30,7 @@ public class SKL_EnergySphere extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            mg.PROJECTILES.add(new PRJ_EnergySphere());
+            mg.PROJECTILES.add(new PRJ_EnergySphere(0.5f));
             mg.player.mana -= 10;
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();

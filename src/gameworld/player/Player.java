@@ -162,43 +162,42 @@ public class Player extends ENTITY {
 
     private void skills() {
         Point mousePos = mg.inputH.lastMousePosition;
-        if (mg.sBar.skills[0] != null && mg.inputH.OnePressed) {
+        if (mg.inputH.OnePressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[0].activate();
         }
-        if (mg.sBar.skills[1] != null && mg.inputH.TwoPressed) {
+        if (mg.inputH.TwoPressed) {
             mg.sBar.skills[1].activate();
             getDurabilityDamageWeapon();
         }
-        if (mg.sBar.skills[2] != null && mg.inputH.ThreePressed) {
+        if (mg.inputH.ThreePressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[2].activate();
         }
-        if (mg.sBar.skills[3] != null && mg.inputH.FourPressed) {
+        if (mg.inputH.FourPressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[3].activate();
         }
-        if (mg.sBar.skills[4] != null && mg.inputH.FivePressed) {
+        if (mg.inputH.FivePressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[4].activate();
         }
-        if (mg.sBar.skills[5] != null && mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
+        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[5].activate();
             }
         }
-        if (mg.sBar.skills[6] != null && mg.inputH.mouse2Pressed) {
+        if (mg.inputH.mouse2Pressed) {
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[6].activate();
             }
         }
-        if (mg.sBar.skills[7] != null && mg.inputH.q_pressed) {
+        if (mg.inputH.q_pressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[7].activate();
         }
-
         if (mana < maxMana) {
             mana += manaRegeneration;
         } else if (mana > maxMana) {

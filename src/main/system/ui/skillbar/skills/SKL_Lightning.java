@@ -28,8 +28,12 @@ public class SKL_Lightning extends SKILL {
 
     @Override
     public void activate() {
-        PROJECTILE projectile = new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
-        projectile.playStartSound();
-        mg.PROJECTILES.add(projectile);
+        if (actualCoolDown == 600 && mg.player.mana >= 15) {
+            PROJECTILE projectile = new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+            projectile.playStartSound();
+            mg.PROJECTILES.add(projectile);
+            mg.player.mana -= 15;
+            actualCoolDown = 0;
+        }
     }
 }
