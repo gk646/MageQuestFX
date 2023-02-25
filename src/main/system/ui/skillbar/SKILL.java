@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
+import main.system.ui.Effects;
 
 import java.util.Objects;
 
@@ -12,19 +13,11 @@ abstract public class SKILL {
 
     protected Image icon;
     protected final MainGame mg;
+    protected Effects [] procEffects = new Effects[5];
     public float totalCoolDown;
     public float coolDownCoefficient;
     public DamageType type;
     public float damage;
-
-    /*
-       Posion = 0
-       Fire = 1
-       Ice = 2
-       Lightning = 3
-       Arcane = 4
-       Dark = 5
-     */
     private int side1;
     private int side2;
     private int side3;
@@ -32,9 +25,10 @@ abstract public class SKILL {
     private int side5;
     public String imagePath;
     protected float actualCoolDown;
-    private int i_id;
-    private String name;
-    private String description;
+    protected int i_id;
+    protected String name;
+    protected String description;
+
 
     public SKILL(MainGame mg) {
         this.mg = mg;

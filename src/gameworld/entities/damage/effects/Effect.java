@@ -22,10 +22,6 @@ abstract public class Effect {
         this.full_duration = duration;
         this.amount = amount;
         this.fromPlayer = fromPlayer;
-        if (fromPlayer) {
-            this.full_duration += (this.full_duration / 100.0f) * Player.effects[5];
-            this.amount += (this.amount / 100.0f) * Player.effects[4];
-        }
         this.rest_duration = full_duration;
     }
 

@@ -1,13 +1,18 @@
 package gameworld.entities.damage.effects;
 
-abstract public class Buff_Effect extends Effect {
+import gameworld.entities.ENTITY;
 
+public class Buff_Effect extends Effect {
+    protected int effectIndexAffected;
 
-    public Buff_Effect(float duration, float amount, boolean fromPlayer) {
+    public Buff_Effect(float duration, float amount, boolean fromPlayer, int effectIndexAffected) {
         super(duration, amount, fromPlayer);
-        this.full_duration = duration;
-        this.rest_duration = full_duration;
-        this.amount = amount;
+        this.effectIndexAffected = effectIndexAffected;
+    }
+
+    @Override
+    public void tick(ENTITY entity) {
+
     }
 }
 

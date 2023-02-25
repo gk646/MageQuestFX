@@ -299,6 +299,10 @@ abstract public class ENTITY {
         }
     }
 
+    public void setHealth(float value) {
+        health = value;
+    }
+
     public void getDamageFromPlayer(float flat_damage, DamageType type) {
         switch (type) {
             case DarkDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[2];

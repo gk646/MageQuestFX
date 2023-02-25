@@ -2,11 +2,16 @@ package gameworld.entities.damage.effects;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.DamageType;
+import gameworld.player.Player;
 
 public class DamageEffect extends Effect {
 
     public DamageEffect(float duration, float amount, boolean fromPlayer, DamageType type, int tickRate) {
         super(duration, amount, fromPlayer);
+        if (fromPlayer) {
+            this.full_duration += (this.full_duration / 100.0f) * Player.effects[5];
+            this.amount += (this.amount / 100.0f) * Player.effects[4];
+        }
         this.type = type;
         this.tickRate = tickRate;
     }

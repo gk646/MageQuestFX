@@ -5,17 +5,15 @@ import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
-public class SKL_EnergySphere_I extends SKILL {
-
-
-    public SKL_EnergySphere_I(MainGame mg) {
+public class SKL_EnergySphere_2 extends SKILL {
+    public SKL_EnergySphere_2(MainGame mg) {
         super(mg);
-        this.totalCoolDown = 120;
-        actualCoolDown = 120;
+        this.totalCoolDown = 110;
+        actualCoolDown = totalCoolDown;
         this.coolDownCoefficient = 0;
         this.icon = setup("energy_sphere.png");
-        name = "Energy Sphere";
-        i_id = 0;
+        i_id = 1;
+        name = "Energy Sphere II";
         description = "EnergySphere is an arcane ability that conjures a pulsing orb of crackling energy. Upon activation, the sphere begins to radiate powerful arcane energy in all directions, inflicting continuous damage to all nearby enemies within a certain radius. ";
     }
 
@@ -32,9 +30,9 @@ public class SKL_EnergySphere_I extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            mg.PROJECTILES.add(new PRJ_EnergySphere(0.5f));
-            mg.player.mana -= 10;
+        if (actualCoolDown == 120 && mg.player.mana >= 45) {
+            mg.PROJECTILES.add(new PRJ_EnergySphere(1.5f));
+            mg.player.mana -= 45;
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();
         }

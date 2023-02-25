@@ -1,6 +1,7 @@
 package gameworld.player;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
@@ -18,6 +19,7 @@ import main.system.ui.talentpane.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -25,7 +27,8 @@ import java.util.Objects;
 public class Player extends ENTITY {
     public boolean levelup;
     public Map map;
-    private boolean isMoving;
+    public boolean isMoving;
+    public ArrayList<Effect> BuffsDeBuffEffects = new ArrayList<>();
     public int maxMana;
     public float mana;
     public float health;
