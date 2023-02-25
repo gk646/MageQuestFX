@@ -15,19 +15,17 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class PRJ_EnergySphere extends PROJECTILE {
-    MediaPlayer activation;
-    MediaPlayer hit;
+
 
     /**
      * Energy Sphere projectile
      */
     public PRJ_EnergySphere() {
-        activation = new MediaPlayer(Sound.energySphereBeginning);
-        activation.setVolume(Sound.EFFECTS_VOLUME);
-        hit = new MediaPlayer(Sound.energySphereHit);
-        hit.setVolume(Sound.EFFECTS_VOLUME);
+        sounds[0] = new MediaPlayer(Sound.energySphereBeginning);
+        sounds[0].setVolume(Sound.EFFECTS_VOLUME);
+        sounds[1] = new MediaPlayer(Sound.energySphereHit);
+        sounds[1].setVolume(Sound.EFFECTS_VOLUME);
         this.type = DamageType.ArcaneDMG;
-        activation.play();
         //-------VALUES-----------
         this.movementSpeed = 3;
         this.damage = 0.5f;
@@ -39,7 +37,7 @@ public class PRJ_EnergySphere extends PROJECTILE {
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
         this.updateVector = getTrajectory(InputHandler.instance.lastMousePosition);
-        getPlayerImage();
+        getProjectileImage();
     }
 
     @Override
@@ -70,16 +68,15 @@ public class PRJ_EnergySphere extends PROJECTILE {
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
         if (dead) {
-            playHitSound();
-            activation.stop();
+            sounds[0].stop();
         }
     }
 
     @Override
     public void playHitSound() {
         if (System.currentTimeMillis() - lastHitTime >= 100) {
-            hit.seek(Duration.ZERO);
-            hit.play();
+            sounds[1].seek(Duration.ZERO);
+            sounds[1].play();
             lastHitTime = System.currentTimeMillis();
         }
     }
@@ -89,28 +86,12 @@ public class PRJ_EnergySphere extends PROJECTILE {
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));
     }
 
-    private void getPlayerImage() {
+    private void getProjectileImage() {
         projectileImage1 = Storage.secondaryFire1;
         projectileImage2 = Storage.secondaryFire2;
         projectileImage3 = Storage.secondaryFire3;
         projectileImage4 = Storage.secondaryFire4;
         projectileImage5 = Storage.secondaryFire5;
         projectileImage6 = Storage.secondaryFire6;
-    }
-
-    private void controlSound() {
-        sound.play();
-        // When a projectile is fired
-
-
-        sound.seek(Duration.ZERO); // Go back to the beginning of the sound
-        sound.setCycleCount(MediaPlayer.INDEFINITE); // Loop the middle section
-        sound.setStartTime(Duration.millis(720)); // Start looping from the second of the sound
-
-        // When the projectile hits something
-        sound.stop(); // Stop looping the middle section
-        sound.setStartTime(Duration.seconds(5)); // Go to the ending of the sound
-        sound.setCycleCount(1); // Play the ending once
-        sound.play();
     }
 }

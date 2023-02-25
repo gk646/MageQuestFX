@@ -19,7 +19,13 @@ import java.awt.geom.Point2D;
 public abstract class PROJECTILE {
 
     protected Point endPos;
-    public MediaPlayer sound;
+    /**
+     * for Projectile sounds <p>
+     * 0: flight sound/ normal sound /<p>
+     * 1: hit sound / dead sound
+     */
+    public MediaPlayer[] sounds = new MediaPlayer[3];
+
     public DamageType type;
     protected Point2D.Double updateVector;
     public float damage;
@@ -56,6 +62,10 @@ public abstract class PROJECTILE {
 
     abstract public void playHitSound();
 
+    public void playStartSound() {
+        sounds[0].play();
+    }
+
 
     protected void tileCollision() {
         CollisionChecker.checkProjectileAgainstTile(this);
@@ -75,19 +85,6 @@ public abstract class PROJECTILE {
         float y = Player.worldY;
         if (worldPos.x >= x + 650 || worldPos.y >= y + 650 || worldPos.x <= x - 650 || worldPos.y <= y - 650) {
             this.dead = true;
-        }
-    }
-
-    public void playFlightSound() {
-        if (sound != null) {
-            sound.setCycleCount(MediaPlayer.INDEFINITE);
-            sound.play();
-        }
-    }
-
-    public void stopFlightSound() {
-        if (sound != null) {
-            sound.stop();
         }
     }
 }

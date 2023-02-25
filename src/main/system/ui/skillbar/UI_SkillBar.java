@@ -7,7 +7,10 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
+import main.system.ui.skillbar.skills.SKL_Filler;
+import main.system.ui.skillbar.skills.SKL_Lightning;
 import main.system.ui.skillbar.skills.SKL_RingSalvo;
+import main.system.ui.skillbar.skills.SKL_SelfRegen;
 
 import java.awt.Rectangle;
 import java.util.Objects;
@@ -15,12 +18,12 @@ import java.util.Objects;
 public class UI_SkillBar {
 
 
-    public final SKILL[] skills = new SKILL[6];
+    public final SKILL[] skills = new SKILL[8];
     private final int skillBarX = 651;
     private final int skillBarY = 1_005;
 
 
-    private final Image skillslot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
+    private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
 
     private final Image character = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/character.png")));
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/bag.png")));
@@ -40,8 +43,13 @@ public class UI_SkillBar {
 
     public UI_SkillBar(MainGame mg) {
         skills[0] = new SKL_RingSalvo(mg);
-        skills[1] = new SKL_EnergySphere(mg);
-        skills[4] = new SKL_AutoShot(mg);
+        skills[1] = new SKL_Lightning(mg);
+        skills[2] = new SKL_SelfRegen(mg);
+        skills[3] = new SKL_Filler(mg);
+        skills[4] = new SKL_Filler(mg);
+        skills[5] = new SKL_AutoShot(mg);
+        skills[6] = new SKL_EnergySphere(mg);
+        skills[7] = new SKL_Filler(mg);
     }
 
     public void draw(GraphicsContext gc) {
@@ -57,16 +65,16 @@ public class UI_SkillBar {
         gc.setFill(Colors.mediumVeryLight);
         gc.fillRoundRect(skillBarX, skillBarY - 10, 693, 85, 15, 15);
         gc.setFill(Colors.white);
-        gc.drawImage(skillslot, skillBarX + 5, skillBarY - 5);
-        gc.drawImage(skillslot, skillBarX + 64 + 5, skillBarY - 5);
-        gc.drawImage(skillslot, skillBarX + 64 * 2 + 5, skillBarY - 5);
-        gc.drawImage(skillslot, skillBarX + 64 * 3 + 5, skillBarY - 5);
-        gc.drawImage(skillslot, skillBarX + 64 * 4 + 5, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 5, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 + 5, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 2 + 5, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 3 + 5, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 4 + 5, skillBarY - 5);
 
-        gc.drawImage(skillslot, skillBarX + 64 * 5 + 10, skillBarY - 5);
-        gc.drawImage(skillslot, skillBarX + 64 * 6 + 10, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 5 + 10, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 6 + 10, skillBarY - 5);
 
-        gc.drawImage(skillslot, skillBarX + 64 * 7 + 20, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 7 + 20, skillBarY - 5);
         gc.setFont(FonT.minecraftBoldItalic15);
 
         gc.fillText("1", skillBarX + 30, skillBarY + 73);

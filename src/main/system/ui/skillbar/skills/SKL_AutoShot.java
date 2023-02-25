@@ -27,9 +27,7 @@ public class SKL_AutoShot extends SKILL {
 
     @Override
     public void update() {
-        if (actualCoolDown < totalCoolDown) {
-            actualCoolDown++;
-        }
+       super.updateCooldown();
     }
 
     @Override

@@ -24,9 +24,7 @@ public class SKL_EnergySphere extends SKILL {
 
     @Override
     public void update() {
-        if (actualCoolDown < totalCoolDown) {
-            actualCoolDown++;
-        }
+        super.updateCooldown();
     }
 
     @Override

@@ -40,9 +40,8 @@ abstract public class SKILL {
         this.mg = mg;
     }
 
-    public void draw(GraphicsContext gc, int x, int y) {
+    abstract public void draw(GraphicsContext gc, int x, int y);
 
-    }
 
     protected void drawIcon(GraphicsContext gc, int x, int y) {
         gc.drawImage(icon, x, y);
@@ -103,6 +102,11 @@ abstract public class SKILL {
 
     abstract public void update();
 
+    protected void updateCooldown() {
+        if (actualCoolDown < totalCoolDown) {
+            actualCoolDown++;
+        }
+    }
 
     abstract public void activate();
 }

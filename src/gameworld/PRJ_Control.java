@@ -99,8 +99,9 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
             entity.effects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
             projectile.dead = true;
-            projectile.playHitSound();
+
         }
+        projectile.playHitSound();
         entity.hpBarOn = true;
         if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);

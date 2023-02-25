@@ -179,10 +179,8 @@ public class Sound {
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
                 currentAmbient = forestAmbient.get(currentTrackIndex);
-                System.out.println("hey");
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                System.out.println("here");
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
                     fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }

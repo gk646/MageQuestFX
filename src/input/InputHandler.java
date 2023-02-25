@@ -26,7 +26,7 @@ public class InputHandler {
     //Keys
     public boolean upPressed;
     public boolean downPressed;
-    public boolean rightPressed;
+    public boolean rightPressed, ThreePressed, FourPressed, FivePressed, j_pressed, r_pressed, c_pressed, l_pressed, p_pressed, q_pressed, y_pressed;
     public boolean leftPressed;
     public boolean OnePressed;
     public boolean debugFps;
@@ -317,80 +317,62 @@ public class InputHandler {
 
     public void handleKeyPressed(KeyEvent e) {
         KeyCode code = e.getCode();
-        if (mg.gameState == State.PLAY) {
-            //Player Controls
-            if (code == KeyCode.W) {
-                upPressed = true;
+        switch (code) {
+            case A -> leftPressed = true;
+            case C -> c_pressed = true;
+            case D -> rightPressed = true;
+            case DIGIT1 -> OnePressed = true;
+            case DIGIT2 -> TwoPressed = true;
+            case DIGIT3 -> ThreePressed = true;
+            case DIGIT4 -> FourPressed = true;
+            case DIGIT5 -> FivePressed = true;
+            case F -> f_pressed = true;
+            case H -> debugFps = true;
+            case J -> j_pressed = true;
+            case L -> l_pressed = true;
+            case M -> multiplayer = true;
+            case P -> p_pressed = true;
+            case Q -> q_pressed = true;
+            case R -> r_pressed = true;
+            case S -> downPressed = true;
+            case SHIFT -> shift_pressed = true;
+            case W -> upPressed = true;
+            case X -> X_pressed = true;
+            case Y -> y_pressed = true;
+            default -> {
             }
-            if (code == KeyCode.SHIFT) {
-                shift_pressed = true;
-            }
-            if (code == KeyCode.A) {
-                leftPressed = true;
-            }
-            if (code == KeyCode.S) {
-                downPressed = true;
-            }
-            if (code == KeyCode.D) {
-                rightPressed = true;
-            }
-            if (code == KeyCode.M) {
-                multiplayer = true;
-            }
-            if (code == KeyCode.DIGIT1) {
-                OnePressed = true;
-            }
-            if (code == KeyCode.DIGIT2) {
-                TwoPressed = true;
-            }
-            if (code == KeyCode.F) {
-                f_pressed = true;
-            }
-            if (code == KeyCode.X) {
-                X_pressed = true;
-            }
-        }
-        if (code == KeyCode.H) {
-            debugFps = true;
         }
     }
 
     public void handleKeyReleased(KeyEvent e) {
         KeyCode code = e.getCode();
-        if (mg.gameState == State.PLAY) {
-            if (code == KeyCode.W) {
-                upPressed = false;
-            } else if (code == KeyCode.A) {
-                leftPressed = false;
-            } else if (code == KeyCode.S) {
-                downPressed = false;
-            } else if (code == KeyCode.D) {
-                rightPressed = false;
+        switch (code) {
+            case A -> leftPressed = false;
+            case C -> c_pressed = false;
+            case D -> rightPressed = false;
+            case DIGIT1 -> OnePressed = false;
+            case DIGIT2 -> TwoPressed = false;
+            case DIGIT3 -> ThreePressed = false;
+            case DIGIT4 -> FourPressed = false;
+            case DIGIT5 -> FivePressed = false;
+            case F -> f_pressed = false;
+            case H -> debugFps = false;
+            case J -> j_pressed = false;
+            case L -> l_pressed = false;
+            case M -> multiplayer = false;
+            case P -> p_pressed = false;
+            case Q -> q_pressed = false;
+            case R -> r_pressed = false;
+            case S -> downPressed = false;
+            case SHIFT -> shift_pressed = false;
+            case W -> upPressed = false;
+            case X -> X_pressed = false;
+            case Y -> y_pressed = false;
+            default -> {
             }
-            if (code == KeyCode.SHIFT) {
-                shift_pressed = false;
-            }
-            if (code == KeyCode.DIGIT1) {
-                OnePressed = false;
-            }
-            if (code == KeyCode.DIGIT2) {
-                TwoPressed = false;
-            }
-            if (code == KeyCode.X) {
-                X_pressed = false;
-            }
-        }
-        if (code == KeyCode.H) {
-            debugFps = false;
-            mg.player.mana = mg.player.maxMana;
-        }
-        if (code == KeyCode.F) {
-            f_pressed = false;
-        }
-        if (code == KeyCode.M) {
-            multiplayer = false;
         }
     }
+
 
     public void handleMouseMovement(MouseEvent event) {
         lastMousePosition.x = (int) event.getX();
@@ -402,40 +384,52 @@ public class InputHandler {
         if (event.getButton() == MouseButton.PRIMARY) {
             if (mg.qPanel.expandButton.contains(mousePos)) {
                 mg.qPanel.expanded = !mg.qPanel.expanded;
-            } else if (mg.showChar) {
+                return;
+            }
+            if (mg.showChar) {
                 if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
                     mg.inventP.showCombatStats = true;
-                } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
+                    return;
+                }
+                if (mg.inventP.effectsHitBox.contains(mousePos)) {
                     mg.inventP.showCombatStats = false;
+                    return;
                 }
             }
-        }
-        if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
-            mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
-            if (mg.inventP.showBagEquipSlots) {
-                mg.inventP.bagPanelMover.y -= 30;
-            } else {
-                mg.inventP.bagPanelMover.y += 30;
+            if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
+                mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+                mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
+                return;
             }
-        } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
-            mg.inventP.sortBagsRarity();
-        }
-        if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
-            mg.inventP.activeCharacterPanel = 2;
-        } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
-            mg.inventP.activeCharacterPanel = 1;
-        }
-        if (mg.gameState == State.TITLE && mg.ui.discord_button.contains(mousePos)) {
-            try {
-                Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
+                mg.inventP.sortBagsRarity();
+                return;
             }
-        } else if (mg.gameState == State.TITLE && mg.ui.github_button.contains(mousePos)) {
-            try {
-                Desktop.getDesktop().browse(new URI("https://github.com/gk646/MageQuestFX"));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
+                mg.inventP.activeCharacterPanel = 2;
+                return;
+            }
+            if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
+                mg.inventP.activeCharacterPanel = 1;
+                return;
+            }
+            if (mg.gameState == State.TITLE) {
+                if (mg.ui.discord_button.contains(mousePos)) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                if (mg.ui.github_button.contains(mousePos)) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://github.com/gk646/MageQuestFX"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
             }
         }
         if (mg.sBar.characterBox.contains(mousePos)) {
@@ -445,7 +439,7 @@ public class InputHandler {
         } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
             mg.showTalents = true;
         } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
-
+            // do nothing
         } else if (mg.sBar.mapBox.contains(mousePos)) {
             mg.showMap = true;
         } else if (mg.sBar.settingsBox.contains(mousePos)) {
@@ -458,7 +452,6 @@ public class InputHandler {
         if (mg.showMap) {
             mg.gameMap.zoom = (float) Math.max(3, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
         } else if (mg.drawCodex) {
-
             mg.ui.codex_scroll = Math.max(-1, Math.min((mg.ui.codex_scroll - event.getDeltaY() / 1_800), 0.322f));
         }
     }
