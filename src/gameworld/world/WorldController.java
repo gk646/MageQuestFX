@@ -8,6 +8,8 @@ import main.MainGame;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
+import main.system.ui.maps.MapMarker;
+import main.system.ui.maps.MarkerType;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class WorldController {
     private final MainGame mg;
     public static Zone currentWorld;
     public static int[][] currentMapCover;
+    public static ArrayList<MapMarker> currentMapMarkers;
     public static ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public ArrayList<Map> MAPS = new ArrayList<>();
 
@@ -45,6 +48,7 @@ public class WorldController {
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.wAnim.cacheMapEnhancements();
+                currentMapMarkers = map.mapMarkers;
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
                 currentMapCover = map.mapCover;
@@ -145,6 +149,27 @@ public class WorldController {
                 int dy = y - playerY;
                 if (dx * dx + dy * dy <= radiusSquared && Math.random() > 0.95) {
                     currentMapCover[x][y] = 1;
+                }
+            }
+        }
+    }
+
+    public void addMapMarker(String name, int xTile, int yTile, MarkerType type) {
+        for (Map map : MAPS) {
+            if (map.zone == currentWorld) {
+                map.mapMarkers.add(new MapMarker(name, xTile, yTile, type));
+            }
+        }
+    }
+
+    public void removeMapMarker(String s) {
+        for (Map map : MAPS) {
+            if (map.zone == currentWorld) {
+                for (MapMarker marker : map.mapMarkers) {
+                    if (marker.name.equals(s)) {
+                        map.mapMarkers.remove(marker);
+                        return;
+                    }
                 }
             }
         }

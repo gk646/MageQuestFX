@@ -7,6 +7,7 @@ import gameworld.world.MapQuadrant;
 import main.system.database.SQLite;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
+import main.system.ui.maps.MapMarker;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -28,6 +29,7 @@ public class Map {
     public int[][] mapDataBackGround2;
     public int[][] mapDataForeGround;
     public Point mapSize;
+    public ArrayList <MapMarker> mapMarkers = new ArrayList<>();
     public ArrayList<SpawnTrigger> spawnTriggers;
     public MapQuadrant[] mapQuadrants;
     public int[][] mapCover;
@@ -168,21 +170,5 @@ public class Map {
         stmt.close();
     }
 
-    public void resetMapCover() {
-        try {
-            String sql = "UPDATE " + name + " SET value = ? WHERE _ROWID_ = ?";
-            PreparedStatement stmt = SQLite.mapCoverConn.prepareStatement(sql);
-            for (int i = 0; i < mapCover.length; i++) {
-                for (int j = 0; j < mapCover[i].length; j++) {
-                    stmt.setInt(1, 0);
-                    stmt.setInt(2, (i * mapCover.length) + j + 1);
-                    stmt.executeUpdate();
-                }
-            }
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
 

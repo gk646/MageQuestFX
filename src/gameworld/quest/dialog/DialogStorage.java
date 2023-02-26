@@ -10,12 +10,14 @@ abstract public class DialogStorage {
 
     public static String[] Tutorial;
     public static String[] Trading;
+    public static String[] MarlaNecklace;
 
 
     public static void loadDialogs() {
         try {
             Tutorial = loadDialogByName("Tutorial");
             Trading = loadDialogByName("Trading");
+            MarlaNecklace = loadDialogByName("MarlaQuest");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

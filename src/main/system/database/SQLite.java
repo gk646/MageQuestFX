@@ -7,8 +7,8 @@ import gameworld.world.objects.items.ITEM;
 import javafx.application.Platform;
 import main.MainGame;
 import main.system.enums.GameMapType;
-import main.system.ui.talentpane.TALENT;
-import main.system.ui.talentpane.TalentNode;
+import main.system.ui.talentpanel.TALENT;
+import main.system.ui.talentpanel.TalentNode;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

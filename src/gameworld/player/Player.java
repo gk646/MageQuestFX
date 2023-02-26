@@ -16,7 +16,7 @@ import main.system.enums.Zone;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
-import main.system.ui.talentpane.TalentNode;
+import main.system.ui.talentpanel.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;

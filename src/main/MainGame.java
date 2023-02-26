@@ -46,7 +46,7 @@ import main.system.ui.maps.GameMap;
 import main.system.ui.maps.MiniMap;
 import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.UI_SkillBar;
-import main.system.ui.talentpane.UI_TalentPanel;
+import main.system.ui.talentpanel.UI_TalentPanel;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

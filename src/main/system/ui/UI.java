@@ -87,7 +87,7 @@ public class UI {
             drawCredits(gc);
         } else if (mg.gameState == State.TITLE) {
             drawTitleScreen(gc);
-        } else if (mg.gameState == State.GAMEOVER) {
+        } else if (mg.gameState == State.GAME_OVER) {
             drawGameOver(gc);
         } else if (mg.loadingScreen) {
             drawLoadingScreen(gc);

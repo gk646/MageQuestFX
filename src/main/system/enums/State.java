@@ -1,11 +1,8 @@
 package main.system.enums;
 
 public enum State {
-    START(-2), TITLE_OPTION(-1), TITLE(0), PLAY(1), OPTION(2), TALENT(3), GAMEOVER(4);
+    START(), TITLE_OPTION(), TITLE(), PLAY(), OPTION(), TALENT(), GAME_OVER();
 
-    private final int value;
-
-    State(int value) {
-        this.value = value;
+    State() {
     }
 }

@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
-import main.system.ui.talentpane.TalentNode;
+import main.system.ui.talentpanel.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;

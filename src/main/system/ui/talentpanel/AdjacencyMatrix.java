@@ -1,4 +1,4 @@
-package main.system.ui.talentpane;
+package main.system.ui.talentpanel;
 
 import java.util.ArrayList;
 

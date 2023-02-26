@@ -87,7 +87,7 @@ abstract public class QUEST {
             }
         }
         if (npc.show_dialog) {
-            if (!npc.blockInteraction && !npc.onPath && npc.dialog.dialogRenderCounter == 2000 && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+            if (!npc.blockInteraction && !npc.onPath && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
                 try {
                     nextStage();
                     npc.dialog.loadNewLine(array[progressStage]);
@@ -99,8 +99,7 @@ abstract public class QUEST {
                 npc.dialog.dialogRenderCounter = 2000;
             }
         }
-        if (mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-
+        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
             npc.show_dialog = true;
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
         }
@@ -116,6 +115,20 @@ abstract public class QUEST {
         }
     }
 
+    /**
+     * checks if the player is inside the rectangle of the given points
+     *
+     * @param p1 point 1
+     * @param p2 point2
+     * @return if the player is inside the rectangle
+     */
+    protected boolean playerNearbyRectangle(Point p1, Point p2) {
+        int x1 = Math.min(p1.x, p2.x);
+        int x2 = Math.max(p1.x, p2.x);
+        int y1 = Math.min(p1.y, p2.y);
+        int y2 = Math.max(p1.y, p2.y);
+        return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
+    }
 
     protected boolean checkDialogSimilarity(String newObjective) {
         int len1 = objective.length();

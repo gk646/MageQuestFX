@@ -1,4 +1,4 @@
-package main.system.ui.talentpane;
+package main.system.ui.talentpanel;
 
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
