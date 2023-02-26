@@ -363,7 +363,8 @@ public class UI_InventoryPanel {
                         bag_Slots.get(i).item = null;
                     } else if (activeTradingNPC != null && mg.inputH.mouse2Pressed) {
                         if (activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
-                            bag_Slots.set(i, null);
+                            bag_Slots.get(i).item = null;
+                            return;
                         }
                     }
                 }
@@ -383,6 +384,27 @@ public class UI_InventoryPanel {
                         grabbedBagEquipIndex = i;
                         removeBagSlots(Integer.parseInt(bagEquipSlots[i].item.stats));
                         bagEquipSlots[i].item = null;
+                    }
+                }
+            }
+        }
+        if (grabbedITEM == null && activeTradingNPC != null) {
+            if (activeTradingNPC.show_trade) {
+                for (int i = 0; i < activeTradingNPC.buySlots.size(); i++) {
+                    if (mg.inputH.mouse2Pressed && activeTradingNPC.buySlots.get(i).boundBox.contains(mg.inputH.lastMousePosition)) {
+                        if (activeTradingNPC.buyItem(activeTradingNPC.buySlots.get(i).item)) {
+                            activeTradingNPC.buySlots.get(i).item = null;
+                            return;
+                        }
+                    }
+                }
+            } else if (activeTradingNPC.show_buyback) {
+                for (int i = 0; i < activeTradingNPC.soldSlots.size(); i++) {
+                    if (mg.inputH.mouse2Pressed && activeTradingNPC.soldSlots.get(i).boundBox.contains(mg.inputH.lastMousePosition)) {
+                        if (activeTradingNPC.buyBackItem(activeTradingNPC.soldSlots.get(i).item)) {
+                            activeTradingNPC.soldSlots.get(i).item = null;
+                            return;
+                        }
                     }
                 }
             }

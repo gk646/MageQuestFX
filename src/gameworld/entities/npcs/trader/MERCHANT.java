@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 abstract public class MERCHANT extends NPC {
     protected Image tradeWindow;
-    protected boolean show_trade;
-    protected boolean show_buyback;
+    public boolean show_trade;
+    public boolean show_buyback;
     protected int tradeWindowX, tradeWindowY;
 
-    protected ArrayList<UI_InventorySlot> buySlots = new ArrayList<>();
-    protected ArrayList<UI_InventorySlot> soldSlots = new ArrayList<>();
+    public ArrayList<UI_InventorySlot> buySlots = new ArrayList<>();
+    public ArrayList<UI_InventorySlot> soldSlots = new ArrayList<>();
 
     public boolean sellItem(ITEM item) {
         addItemSold(item);
@@ -66,5 +66,33 @@ abstract public class MERCHANT extends NPC {
             }
             i++;
         }
+    }
+
+    public boolean buyItem(ITEM item) {
+        if (mg.player.coins >= item.level * 25 + item.rarity * 25) {
+            for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
+                if (slot.item != null) {
+                    slot.item = item;
+                    mg.player.coins -= item.level * 25 + item.rarity * 25;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public boolean buyBackItem(ITEM item) {
+        if (mg.player.coins >= item.level + item.rarity) {
+            for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
+                if (slot.item != null) {
+                    slot.item = item;
+                    mg.player.coins -= item.level + item.rarity;
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 }
