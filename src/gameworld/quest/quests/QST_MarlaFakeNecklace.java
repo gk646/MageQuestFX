@@ -10,6 +10,7 @@ import main.system.ui.maps.MarkerType;
 import java.awt.Point;
 
 public class QST_MarlaFakeNecklace extends QUEST {
+
     public QST_MarlaFakeNecklace(MainGame mg, String name) {
         super(mg, name);
         quest_id = 2;

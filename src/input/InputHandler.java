@@ -28,6 +28,7 @@ public class InputHandler {
     public boolean downPressed;
     public boolean rightPressed, ThreePressed, FourPressed, FivePressed, j_pressed, r_pressed, c_pressed, l_pressed, p_pressed, q_pressed, y_pressed;
     public boolean leftPressed;
+    public static boolean q_typed, f_typed;
     public boolean OnePressed;
     public boolean debugFps;
     public boolean multiplayer;
@@ -302,6 +303,10 @@ public class InputHandler {
         }
         if (code.equals("e")) {
             e_typed = true;
+        } else if (code.equals("q")) {
+            q_typed = true;
+        } else if (code.equals("f")) {
+            f_typed = true;
         }
         if (code.equals("\s")) {
             if (mg.showTalents) {
@@ -355,13 +360,19 @@ public class InputHandler {
             case DIGIT3 -> ThreePressed = false;
             case DIGIT4 -> FourPressed = false;
             case DIGIT5 -> FivePressed = false;
-            case F -> f_pressed = false;
+            case F -> {
+                f_pressed = false;
+                f_typed = false;
+            }
             case H -> debugFps = false;
             case J -> j_pressed = false;
             case L -> l_pressed = false;
             case M -> multiplayer = false;
             case P -> p_pressed = false;
-            case Q -> q_pressed = false;
+            case Q -> {
+                q_pressed = false;
+                q_typed = false;
+            }
             case R -> r_pressed = false;
             case S -> downPressed = false;
             case SHIFT -> shift_pressed = false;

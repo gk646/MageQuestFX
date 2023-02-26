@@ -87,7 +87,7 @@ abstract public class QUEST {
             }
         }
         if (npc.show_dialog) {
-            if (!npc.blockInteraction && !npc.onPath && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+            if (!npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
                 try {
                     nextStage();
                     npc.dialog.loadNewLine(array[progressStage]);

@@ -61,6 +61,14 @@ public class QST_Tutorial extends QUEST {
                     }
                     if (progressStage == 14) {
                         moveToTile(npc, 47, 34);
+                        int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
+                        if (choice == 10) {
+                            //TODO add spell book to inventory
+                            //TODO make activaitable items with e
+                            nextStage();
+                        } else if (choice == 20) {
+                            nextStage();
+                        }
                     }
                     if (progressStage == 15) {
                         if (WorldController.currentWorld == Zone.Tutorial) {
