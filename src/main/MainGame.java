@@ -24,6 +24,7 @@ import input.InputHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -418,11 +419,11 @@ public class MainGame {
         gameMap.getImage();
         gameState = State.TITLE;
         loadingScreen = false;
-        //sound.setVolumeAmbience(ui.ambientSlider);
-        //sound.setVolumeEffects(ui.effectsSlider);
+        sound.setVolumeAmbience(ui.ambientSlider);
+        sound.setVolumeEffects(ui.effectsSlider);
         startThreads();
-        //sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
-        //sound.INTRO.play();
+        sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
+        sound.INTRO.play();
         debug();
     }
 

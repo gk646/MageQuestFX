@@ -89,7 +89,7 @@ public class ITEM {
         getStats();
     }
 
-    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level, float [] effects) {
+    public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level, float[] effects) {
         this.i_id = i_id;
         this.name = name;
         this.rarity = rarity;
@@ -201,12 +201,15 @@ public class ITEM {
     }
 
     public void getEffects(String effect) {
+        if (effect == null) {
+            return;
+        }
         Pattern p;
         Matcher m;
         p = Pattern.compile("\\[(\\d+)]([\\d,.]+)");
         m = p.matcher(effect);
         while (m.find()) {
-            effects[Integer.parseInt(m.group(1))] = Integer.parseInt(m.group(2));
+            effects[Integer.parseInt(m.group(1))] = Float.parseFloat(m.group(2));
         }
     }
 
