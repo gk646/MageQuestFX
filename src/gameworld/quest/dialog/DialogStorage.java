@@ -9,13 +9,13 @@ import java.io.InputStreamReader;
 abstract public class DialogStorage {
 
     public static String[] Tutorial;
-    public static String[] TradingGeneral;
+    public static String[] Trading;
 
 
     public static void loadDialogs() {
         try {
             Tutorial = loadDialogByName("Tutorial");
-            TradingGeneral = loadDialogByName("TradingGeneral");
+            Trading = loadDialogByName("Trading");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

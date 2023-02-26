@@ -57,7 +57,6 @@ abstract public class ENTITY {
     public float worldX;
     public int screenX;
     public int screenY;
-    public int magicResistance;
     public Point activeTile = new Point();
     public int maxHealth;
     public float movementSpeed;
@@ -215,14 +214,6 @@ abstract public class ENTITY {
         }
     }
 
-    protected void followPlayer(int playerX, int playerY) {
-        if ((worldX) / 48 == playerX && (worldY) / 48 == playerY) {
-            onPath = false;
-        } else {
-            searchPathUncapped(playerX, playerY, 100);
-        }
-    }
-
 
     public void playGetHitSound() {
 
@@ -290,7 +281,6 @@ abstract public class ENTITY {
     abstract public void draw(GraphicsContext gc);
 
     public void update() {
-        tickEffects();
         activeTile.x = (int) ((worldX + 24) / 48);
         activeTile.y = (int) ((worldY + 24) / 48);
         if (health <= 0) {

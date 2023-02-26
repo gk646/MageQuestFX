@@ -13,7 +13,7 @@ public class UI_InventorySlot {
     public int toolTipTimer;
     public String type = "+";
 
-    UI_InventorySlot(ITEM item, int xCo, int yCo) {
+    public UI_InventorySlot(ITEM item, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
         this.item = item;
     }

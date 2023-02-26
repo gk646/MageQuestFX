@@ -1,5 +1,6 @@
 package main.system.ui.inventory;
 
+import gameworld.entities.npcs.trader.MERCHANT;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_DroppedItem;
@@ -20,7 +21,6 @@ import java.util.Objects;
 public class UI_InventoryPanel {
     private static final int SLOT_SIZE = 45;
     public final Rectangle combatStatsHitBox;
-    private static final int BAG_SLOTS = 15;
     private static final int CHAR_SLOTS = 10;
     public final UI_InventorySlot[] char_Slots;
     public final ArrayList<UI_InventorySlot> bag_Slots = new ArrayList<>();
@@ -35,6 +35,7 @@ public class UI_InventoryPanel {
     public final Rectangle effectsHitBox;
     public boolean showCombatStats = true;
     private final Point previousMousePosition = new Point(300, 300);
+    public MERCHANT activeTradingNPC;
     private int charPanelX = 300, grabbedIndexChar = -1, grabbedIndexBag = -1;
     private int charPanelY = 300;
     private final Point lastCharPosition = new Point(charPanelX, charPanelY);
@@ -44,7 +45,6 @@ public class UI_InventoryPanel {
     public ITEM grabbedITEM;
     public final Rectangle bagSortButton;
     public int activeCharacterPanel = 1;
-    private boolean node_focused;
     private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
 
@@ -249,7 +249,7 @@ public class UI_InventoryPanel {
         gc.fillText("ID: " + String.format("%04d", invSlot.item.i_id) + invSlot.item.type, startX - 78, startY + 3);
     }
 
-    private void setRarityColor(GraphicsContext gc, UI_InventorySlot slot) {
+    public void setRarityColor(GraphicsContext gc, UI_InventorySlot slot) {
         if (slot.item != null) {
             if (slot.item.rarity == 1) {
                 gc.setStroke(Colors.NormalGrey);
@@ -361,6 +361,10 @@ public class UI_InventoryPanel {
                         grabbedITEM = bag_Slots.get(i).item;
                         grabbedIndexBag = i;
                         bag_Slots.get(i).item = null;
+                    } else if (activeTradingNPC != null && mg.inputH.mouse2Pressed) {
+                        if (activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
+                            bag_Slots.set(i, null);
+                        }
                     }
                 }
             }
@@ -460,7 +464,7 @@ public class UI_InventoryPanel {
         } else {
             char_Slots[9].type = "O";
         }
-        node_focused = false;
+        boolean node_focused = false;
         if (mg.ui.musicSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
             mg.ui.musicSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
             mg.ui.musicSlider = Math.max(Math.min(100, mg.ui.musicSlider), 0);

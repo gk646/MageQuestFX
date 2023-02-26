@@ -48,7 +48,6 @@ public class ENT_Control {
 
 
     public void update() {
-
         synchronized (MainGame.ENTITIES) {
             Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
             while (entityIterator.hasNext()) {

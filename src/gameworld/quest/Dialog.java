@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import main.system.ui.FonT;
 
 public class Dialog {
-    protected int dialogRenderCounter = 0;
+    public int dialogRenderCounter = 0;
     public String dialogLine = "...";
 
 
@@ -38,7 +38,6 @@ public class Dialog {
     }
 
     public void drawDialog(GraphicsContext gc, ENTITY entity) {
-
         if (dialogRenderCounter == 2_000) {
             gc.setFont(FonT.minecraftBoldItalic15);
             gc.setFill(Color.BLACK);

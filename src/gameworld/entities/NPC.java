@@ -44,4 +44,8 @@ abstract public class NPC extends ENTITY {
             playGetHitSound();
         }
     }
+
+    protected boolean collidingWithPlayer() {
+        return activeTile.x == mg.playerX && activeTile.y == mg.playerY;
+    }
 }
