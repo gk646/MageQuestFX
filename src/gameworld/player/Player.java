@@ -191,13 +191,13 @@ public class Player extends ENTITY {
             getDurabilityDamageWeapon();
             mg.sBar.skills[4].activate();
         }
-        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null) {
+        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null) {
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[5].activate();
             }
         }
-        if (mg.inputH.mouse2Pressed) {
+        if (mg.inputH.mouse2Pressed && mg.inventP.activeTradingNPC == null) {
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[6].activate();
@@ -325,9 +325,7 @@ public class Player extends ENTITY {
 
         playerMovementSpeed += effects[45];
         maxMana += effects[46];
-
         maxMana = 2000;
-        coins = 2000;
     }
 
     public void setPosition(int x, int y) {
@@ -604,9 +602,9 @@ public class Player extends ENTITY {
                 "Carry Weight: +",
                 "Health Regeneration: +",
                 "Mana Regeneration: +",
-                "Mana Cost Reduction",
-                "Magic Find",
-                "Ice Damage",
+                "Mana Cost Reduction: +",
+                "Magic Find: +",
+                "Ice Damage: +",
         };
     }
 

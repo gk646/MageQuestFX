@@ -112,7 +112,6 @@ public class UI_InventoryPanel {
             }
         }
     }
-
     public void drawBagTooltip(GraphicsContext gc) {
         if (grabbedITEM == null && !mg.inputH.mouse1Pressed) {
             for (UI_InventorySlot bagSlot : bag_Slots) {
@@ -150,7 +149,7 @@ public class UI_InventoryPanel {
         drawBagSlots(gc, startX, (int) (startY + MainGame.SCREEN_HEIGHT * 0.007f));
     }
 
-    private void getTooltip(GraphicsContext gc, UI_InventorySlot invSlot, int startX, int startY) {
+    public void getTooltip(GraphicsContext gc, UI_InventorySlot invSlot, int startX, int startY) {
         //BACKGROUND
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.238), startY - (MainGame.SCREEN_HEIGHT * 0.314), MainGame.SCREEN_HEIGHT * 0.23, MainGame.SCREEN_HEIGHT * 0.324f, 15, 15);
@@ -314,7 +313,7 @@ public class UI_InventoryPanel {
                                     slot.item = char_Slots[i].item;
                                     char_Slots[i].item = null;
                                     mg.player.updateEquippedItems();
-                                    mg.sound.playEquip();
+                                    mg.sound.playEffectSound(0);
                                     break;
                                 }
                             }
@@ -343,13 +342,13 @@ public class UI_InventoryPanel {
                                     slot.item = bag_Slots.get(i).item;
                                     bag_Slots.get(i).item = null;
                                     mg.player.updateEquippedItems();
-                                    mg.sound.playEquip();
+                                    mg.sound.playEffectSound(0);
                                     break;
                                 } else if (slot.type.contains(String.valueOf(bag_Slots.get(i).item.type))) {
                                     ITEM placeholder = slot.item;
                                     slot.item = bag_Slots.get(i).item;
                                     bag_Slots.get(i).item = placeholder;
-                                    mg.sound.playEquip();
+                                    mg.sound.playEffectSound(0);
                                     mg.player.updateEquippedItems();
                                     mg.inputH.mouse1Pressed = false;
                                     break;
@@ -361,7 +360,7 @@ public class UI_InventoryPanel {
                         grabbedITEM = bag_Slots.get(i).item;
                         grabbedIndexBag = i;
                         bag_Slots.get(i).item = null;
-                    } else if (activeTradingNPC != null && mg.inputH.mouse2Pressed) {
+                    } else if (activeTradingNPC != null && activeTradingNPC.show_trade && mg.inputH.mouse2Pressed) {
                         if (activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
                             bag_Slots.get(i).item = null;
                             return;
@@ -402,7 +401,7 @@ public class UI_InventoryPanel {
                 }
             } else if (activeTradingNPC.show_buyback) {
                 for (int i = 0; i < activeTradingNPC.soldSlots.size(); i++) {
-                    if (mg.inputH.mouse2Pressed && activeTradingNPC.soldSlots.get(i).boundBox.contains(mg.inputH.lastMousePosition)) {
+                    if (activeTradingNPC.soldSlots.get(i).item != null && mg.inputH.mouse2Pressed && activeTradingNPC.soldSlots.get(i).boundBox.contains(mg.inputH.lastMousePosition)) {
                         if (activeTradingNPC.buyBackItem(activeTradingNPC.soldSlots.get(i).item)) {
                             activeTradingNPC.soldSlots.get(i).item = null;
                             return;
@@ -415,7 +414,7 @@ public class UI_InventoryPanel {
             if (mg.showChar) {
                 for (UI_InventorySlot invSlot : char_Slots) {
                     if (invSlot.boundBox.contains(mg.inputH.lastMousePosition) && invSlot.type.contains(String.valueOf(grabbedITEM.type))) {
-                        mg.sound.playEquip();
+                        mg.sound.playEffectSound(0);
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
@@ -434,7 +433,7 @@ public class UI_InventoryPanel {
             if (mg.showBag) {
                 for (UI_InventorySlot bagSlot : bag_Slots) {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
-                        mg.sound.playEquip();
+                        mg.sound.playEffectSound(0);
                         if (bagSlot.item != null) {
                             if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
                                 char_Slots[grabbedIndexChar].item = bagSlot.item;
@@ -453,7 +452,7 @@ public class UI_InventoryPanel {
             if (showBagEquipSlots) {
                 for (UI_InventorySlot equipBag : bagEquipSlots) {
                     if (equipBag.boundBox.contains(mg.inputH.lastMousePosition) && grabbedITEM != null) {
-                        mg.sound.playEquip();
+                        mg.sound.playEffectSound(0);
                         if (equipBag.item == null && grabbedITEM.type == 'G') {
                             equipBag.item = grabbedITEM;
                             addBagSlots(Integer.parseInt(grabbedITEM.stats));

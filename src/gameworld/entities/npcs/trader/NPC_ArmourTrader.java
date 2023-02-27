@@ -13,17 +13,17 @@ import main.system.ui.inventory.UI_InventorySlot;
 import java.awt.Rectangle;
 import java.util.Objects;
 
-public class NPC_Trader extends MERCHANT {
+public class NPC_ArmourTrader extends MERCHANT {
 
 
     //TODO when to regenerate trader inventory and make method
-    public NPC_Trader(MainGame mg, int xTile, int yTile) {
+    public NPC_ArmourTrader(MainGame mg, int xTile, int yTile) {
         this.dialog = new Dialog();
         tradeWindowX = 250;
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
             ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity >= 2) {
+            while (item.rarity > 2) {
                 item = mg.dropI.getFinishedRandomItem(mg.player.level);
             }
             buySlots.add(new UI_InventorySlot(item, 123, 123));
@@ -55,6 +55,7 @@ public class NPC_Trader extends MERCHANT {
                 mg.inventP.activeTradingNPC = null;
                 dialog.dialogRenderCounter = 0;
             }
+            drawMerchantTooltip(gc);
         } else if (show_buyback) {
             drawBuyBack(gc, tradeWindowX, tradeWindowY);
             if (!collidingWithPlayer()) {
@@ -62,6 +63,7 @@ public class NPC_Trader extends MERCHANT {
                 mg.inventP.activeTradingNPC = null;
                 dialog.dialogRenderCounter = 0;
             }
+            drawMerchantTooltip(gc);
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }

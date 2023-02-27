@@ -54,7 +54,7 @@ abstract public class QUEST {
 
     protected void updateObjective(String newText) {
         if (!checkDialogSimilarity(newText)) {
-            mg.sound.playFinishObjective();
+            mg.sound.playEffectSound(1);
         }
         objective = newText;
     }

@@ -67,14 +67,14 @@ public class InputHandler {
         String code = e.getCharacter();
         if (mg.gameState == State.TITLE) {
             if (code.equals(("w"))) {
-                mg.sound.playSwitchSound();
+                mg.sound.playEffectSound(2);
                 mg.ui.commandNum--;
                 if (mg.ui.commandNum < 0) {
                     mg.ui.commandNum = 3;
                 }
             }
             if (code.equals(("s"))) {
-                mg.sound.playSwitchSound();
+                mg.sound.playEffectSound(2);
                 mg.ui.commandNum++;
                 if (mg.ui.commandNum > 3) {
                     mg.ui.commandNum = 0;
@@ -101,7 +101,7 @@ public class InputHandler {
         } else if (mg.gameState == State.TITLE_OPTION) {
             if (code.equals(("w"))) {
                 if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
-                    mg.sound.playSwitchSound();
+                    mg.sound.playEffectSound(2);
                     mg.ui.commandNum--;
                     if (mg.ui.commandNum < 0) {
                         mg.ui.commandNum = 6;
@@ -110,7 +110,7 @@ public class InputHandler {
             }
             if (code.equals(("s"))) {
                 if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
-                    mg.sound.playSwitchSound();
+                    mg.sound.playEffectSound(2);
                     mg.ui.commandNum++;
                     if (mg.ui.commandNum > 6) {
                         mg.ui.commandNum = 0;
@@ -143,7 +143,7 @@ public class InputHandler {
                 }
             }
             if (code.equals("\u001B")) {
-                mg.sound.playBackSound();
+                mg.sound.playEffectSound(3);
                 if (mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex) {
                     mg.drawVideoSettings = false;
                     mg.drawAudioSettings = false;
@@ -158,7 +158,7 @@ public class InputHandler {
         } else if (mg.gameState == State.OPTION) {
             if (code.equals(("w"))) {
                 if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
-                    mg.sound.playSwitchSound();
+                    mg.sound.playEffectSound(2);
                     mg.ui.commandNum--;
                     if (mg.ui.commandNum < 0) {
                         mg.ui.commandNum = 6;
@@ -167,7 +167,7 @@ public class InputHandler {
             }
             if (code.equals(("s"))) {
                 if (!(mg.drawVideoSettings || mg.drawAudioSettings || mg.drawKeybindings || mg.drawGameplay || mg.drawCodex)) {
-                    mg.sound.playSwitchSound();
+                    mg.sound.playEffectSound(2);
                     mg.ui.commandNum++;
                     if (mg.ui.commandNum > 6) {
                         mg.ui.commandNum = 0;
@@ -204,7 +204,7 @@ public class InputHandler {
             }
         }
         if (code.equals("\u001B")) {
-            mg.sound.playBackSound();
+            mg.sound.playEffectSound(3);
             if (mg.gameState == State.OPTION) {
                 if (mg.drawCodex) {
                     mg.drawCodex = false;
@@ -394,38 +394,46 @@ public class InputHandler {
     public void handleMouseClick(MouseEvent event) {
         Point mousePos = lastMousePosition;
         if (event.getButton() == MouseButton.PRIMARY) {
-            if (mg.qPanel.expandButton.contains(mousePos)) {
-                mg.qPanel.expanded = !mg.qPanel.expanded;
-                return;
-            }
-            if (mg.showChar) {
-                if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
-                    mg.inventP.showCombatStats = true;
-                    return;
+            if (mg.gameState == State.PLAY) {
+                if (mg.qPanel.expandButton.contains(mousePos)) {
+                    mg.qPanel.expanded = !mg.qPanel.expanded;
+                } else if (mg.showChar) {
+                    if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
+                        mg.inventP.showCombatStats = true;
+                        return;
+                    }
+                    if (mg.inventP.effectsHitBox.contains(mousePos)) {
+                        mg.inventP.showCombatStats = false;
+                    }
+                } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
+                    mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+                    mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
+                } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
+                    mg.inventP.sortBagsRarity();
+                } else if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
+                    mg.inventP.activeCharacterPanel = 2;
+                } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
+                    mg.inventP.activeCharacterPanel = 1;
+                } else if (mg.sBar.characterBox.contains(mousePos)) {
+                    mg.showChar = true;
+                } else if (mg.sBar.bagBox.contains(mousePos)) {
+                    mg.showBag = true;
+                } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
+                    mg.showTalents = true;
+                } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
+                    // do nothing
+                } else if (mg.sBar.mapBox.contains(mousePos)) {
+                    mg.showMap = true;
+                } else if (mg.sBar.settingsBox.contains(mousePos)) {
+                    mg.gameState = State.OPTION;
+                } else if (mg.inventP.activeTradingNPC != null && mg.inventP.activeTradingNPC.firstWindow.contains(mousePos)) {
+                    mg.inventP.activeTradingNPC.show_trade = true;
+                    mg.inventP.activeTradingNPC.show_buyback = false;
+                } else if (mg.inventP.activeTradingNPC != null && mg.inventP.activeTradingNPC.secondWindow.contains(mousePos)) {
+                    mg.inventP.activeTradingNPC.show_trade = false;
+                    mg.inventP.activeTradingNPC.show_buyback = true;
                 }
-                if (mg.inventP.effectsHitBox.contains(mousePos)) {
-                    mg.inventP.showCombatStats = false;
-                    return;
-                }
-            }
-            if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
-                mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
-                mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
-                return;
-            }
-            if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
-                mg.inventP.sortBagsRarity();
-                return;
-            }
-            if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
-                mg.inventP.activeCharacterPanel = 2;
-                return;
-            }
-            if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
-                mg.inventP.activeCharacterPanel = 1;
-                return;
-            }
-            if (mg.gameState == State.TITLE) {
+            } else if (mg.gameState == State.TITLE) {
                 if (mg.ui.discord_button.contains(mousePos)) {
                     try {
                         Desktop.getDesktop().browse(new URI("https://discord.gg/STCdEcBzUv"));
@@ -440,22 +448,8 @@ public class InputHandler {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    return;
                 }
             }
-        }
-        if (mg.sBar.characterBox.contains(mousePos)) {
-            mg.showChar = true;
-        } else if (mg.sBar.bagBox.contains(mousePos)) {
-            mg.showBag = true;
-        } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
-            mg.showTalents = true;
-        } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
-            // do nothing
-        } else if (mg.sBar.mapBox.contains(mousePos)) {
-            mg.showMap = true;
-        } else if (mg.sBar.settingsBox.contains(mousePos)) {
-            mg.gameState = State.OPTION;
         }
     }
 

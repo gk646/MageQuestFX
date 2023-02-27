@@ -5,13 +5,17 @@ import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.system.ui.Colors;
+import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 abstract public class MERCHANT extends NPC {
-    protected Image tradeWindow;
+    protected Image tradeWindow = new Image(getClass().getResourceAsStream("/resources/ui/inventory/merchant_first.png"));
+    protected Image buyback = new Image(getClass().getResourceAsStream("/resources/ui/inventory/merchant_second.png"));
     public boolean show_trade;
+    public Rectangle firstWindow = new Rectangle(50, 50, 115, 27), secondWindow = new Rectangle(50, 50, 115, 27);
     public boolean show_buyback;
     protected int tradeWindowX, tradeWindowY;
 
@@ -21,16 +25,25 @@ abstract public class MERCHANT extends NPC {
     public boolean sellItem(ITEM item) {
         addItemSold(item);
         mg.player.coins += item.level * item.rarity;
+        mg.sound.playEffectSound(5);
         return true;
     }
 
     private void addItemSold(ITEM item) {
         soldSlots.remove(27);
-        soldSlots.add(new UI_InventorySlot(item, 123, 123));
+        soldSlots.add(0, new UI_InventorySlot(item, 123, 123));
     }
 
     protected void drawMerchantWindow(GraphicsContext gc, int startX, int startY) {
         gc.drawImage(tradeWindow, startX - 50, startY - 50);
+        gc.setFont(FonT.minecraftBold14);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Merchant", startX - 20, startY - 35 + 408);
+        gc.fillText("Buyback", startX + 105, startY - 35 + 408);
+        firstWindow.x = startX - 30;
+        firstWindow.y = startY - 50 + 408;
+        secondWindow.x = startX - 50 + 139;
+        secondWindow.y = startY - 50 + 408;
         int i = 0;
         int y;
         gc.setLineWidth(2);
@@ -50,6 +63,15 @@ abstract public class MERCHANT extends NPC {
     }
 
     protected void drawBuyBack(GraphicsContext gc, int startX, int startY) {
+        gc.drawImage(buyback, startX - 50, startY - 50);
+        gc.setFont(FonT.minecraftBold14);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Merchant", startX - 20, startY - 35 + 408);
+        gc.fillText("Buyback", startX + 105, startY - 35 + 408);
+        firstWindow.x = startX - 30;
+        firstWindow.y = startY - 50 + 408;
+        secondWindow.x = startX - 50 + 139;
+        secondWindow.y = startY - 50 + 408;
         int i = 0;
         int y;
         gc.setLineWidth(2);
@@ -74,6 +96,7 @@ abstract public class MERCHANT extends NPC {
                 if (slot.item == null) {
                     slot.item = item;
                     mg.player.coins -= item.level * 25 + item.rarity * 25;
+                    mg.sound.playEffectSound(7);
                     return true;
                 }
             }
@@ -85,9 +108,10 @@ abstract public class MERCHANT extends NPC {
     public boolean buyBackItem(ITEM item) {
         if (mg.player.coins >= item.level + item.rarity) {
             for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
-                if (slot.item != null) {
+                if (slot.item == null) {
                     slot.item = item;
                     mg.player.coins -= item.level + item.rarity;
+                    mg.sound.playEffectSound(7);
                     return true;
                 }
             }
@@ -95,4 +119,33 @@ abstract public class MERCHANT extends NPC {
         }
         return false;
     }
+
+    protected void drawMerchantTooltip(GraphicsContext gc) {
+        if (show_trade) {
+            for (UI_InventorySlot invSlot : buySlots) {
+                if (invSlot.item != null && invSlot.toolTipTimer >= 30) {
+                    mg.inventP.getTooltip(gc, invSlot, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
+                if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    invSlot.toolTipTimer++;
+                    break;
+                } else {
+                    invSlot.toolTipTimer = 0;
+                }
+            }
+        } else if (show_buyback) {
+            for (UI_InventorySlot invSlot : buySlots) {
+                if (invSlot.item != null && invSlot.toolTipTimer >= 30) {
+                    mg.inventP.getTooltip(gc, invSlot, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
+                if (invSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    invSlot.toolTipTimer++;
+                    break;
+                } else {
+                    invSlot.toolTipTimer = 0;
+                }
+            }
+        }
+    }
 }
+

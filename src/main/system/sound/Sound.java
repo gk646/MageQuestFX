@@ -16,13 +16,12 @@ import java.util.ArrayList;
 public class Sound {
     public ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>(), forestAmbient = new ArrayList<>();
     public static float EFFECTS_VOLUME = 0.5f;
+    public ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
-    public MediaPlayer menu_switch;
-    public MediaPlayer menu_back;
-    private MediaPlayer chestSound;
+
     public static float AMBIENCE_VOLUME = 0.7f;
     private final double fadeDuration = 2;
-    public MediaPlayer spikes;
+
     public MediaPlayer currentAmbient;
     private double waterVolume = 0.3f;
     private MediaPlayer lava;
@@ -31,7 +30,6 @@ public class Sound {
     private boolean fadeOut = false;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
-    private MediaPlayer equip, finishObjective;
     private boolean forestPlaying, dungeonPlaying;
     private MediaPlayer waterAmbience;
 
@@ -40,53 +38,27 @@ public class Sound {
     }
 
 
-    public void playSwitchSound() {
-        menu_switch.stop();
-        menu_switch.seek(Duration.ZERO);
-        menu_switch.play();
-    }
-
-    public void playBackSound() {
-        menu_back.stop();
-        menu_back.seek(Duration.ZERO);
-        menu_back.play();
-    }
-
     public void loadSounds() {
-        equip = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/equip.wav").toString()));
-        equip.setVolume(0.25);
-        finishObjective = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav").toString()));
-        finishObjective.setVolume(0.4);
-        INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro.wav").toString()));
-        INTRO.setVolume(0.8);
-        menu_switch = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_switch.wav").toString()));
-        menu_back = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString()));
+
         energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
         energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
-        chestSound = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString()));
-        chestSound.setVolume(0.7);
-        spikes = new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/spike.wav").toString()));
+
+
+        INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro.wav").toString()));
+        INTRO.setVolume(0.8);
+
+        //EFFECTS
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/equip.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_switch.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/sell.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/spike.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/buy.wav").toString())));
+
+
         loadAmbience();
-    }
-
-    public void playSpike() {
-        spikes.seek(Duration.ZERO);
-        spikes.play();
-    }
-
-    public void playChestOpen() {
-        chestSound.seek(Duration.ZERO);
-        chestSound.play();
-    }
-
-    public void playEquip() {
-        equip.seek(Duration.ZERO);
-        equip.play();
-    }
-
-    public void playFinishObjective() {
-        finishObjective.seek(Duration.ZERO);
-        finishObjective.play();
     }
 
     private void loadAmbience() {
@@ -220,11 +192,12 @@ public class Sound {
     }
 
     public void setVolumeEffects(float value) {
-        finishObjective.setVolume(0.4 * (value / 100.0f));
-        chestSound.setVolume(0.7 * (value / 100.0f));
         EFFECTS_VOLUME = 0.3f * (value / 100.0f);
         for (MediaPlayer player : mg.player.animation.getHitSound) {
             player.setVolume(0.8 * (value / 100.0f));
+        }
+        for (MediaPlayer player : effectSounds) {
+            player.setVolume(1 * (value / 100.0f));
         }
         for (ENTITY entity : MainGame.ENTITIES) {
             if (entity.animation != null) {
@@ -246,5 +219,10 @@ public class Sound {
         waterVolume = 0.3f * (value / 100.0f);
         waterAmbience.setVolume(waterVolume);
         lava.setVolume(waterVolume);
+    }
+
+    public void playEffectSound(int index) {
+        effectSounds.get(index).seek(Duration.ZERO);
+        effectSounds.get(index).play();
     }
 }

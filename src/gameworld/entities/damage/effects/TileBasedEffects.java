@@ -53,12 +53,12 @@ public class TileBasedEffects {
         mg.playerPrompts.E = false;
         if (activeTile == 225) {
             mg.player.health -= (mg.player.maxHealth * 0.4f);
-            mg.sound.playSpike();
+            mg.sound.playEffectSound(6);
         } else if (activeTile1 == 137) {
             mg.playerPrompts.E = true;
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
-                mg.sound.playChestOpen();
+                mg.sound.playEffectSound(4);
                 animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
             }
         } else if (activeTile1 == 1382) {

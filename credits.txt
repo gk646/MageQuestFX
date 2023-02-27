@@ -1,16 +1,16 @@
- JavaFX 
+JavaFX 
  The next generation client application framework for desktop mobile and embedded systems. 
- OpenJDK
+OpenJDK
  The open source implementation of the Java Platform Standard Edition (Java SE). 
  Map Editor 
  Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer 
- TEXTURES 
+TEXTURES 
  Character textures: craftpix.net / Full copyright with their Freebie License 
  Effect textures from: craftpix.net / Full copyright with their Freebie License 
  Skilltree design inspired by the Minecraft mod: Craft to Exile [Dissonance] / made by mahjerion 
  Item icons: DALL·E / Image generation AI by OpenAI 
  most talent icon:  Itch.io: https://kyrise.itch.io/
- SOUNDS 
+SOUNDS 
  item equip sound: https://freesound.org/people/1bob/sounds/651515/
  enegery sphere sound: https://freesound.org/s/187119/ 
  objective complete sound: https://freesound.org/people/Headphaze/sounds/277033/
@@ -20,8 +20,8 @@
  forest ambience: https://freesound.org/people/dobroide/sounds/22384/
  item equip sound: https://freesound.org/people/1bob/sounds/651515/ 
  horror ambience : https://freesound.org/people/klankbeeld/
-
- Sounds from SilverIllusionist:{
+ sell item : https://freesound.org/people/DWOBoyle/sounds/140382/
+Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/
  acid breath: https://freesound.org/people/SilverIllusionist/sounds/674223/
@@ -31,9 +31,9 @@
  craft item : https://freesound.org/people/SilverIllusionist/sounds/580813/
  fire burst: https://freesound.org/people/SilverIllusionist/sounds/472688/
  key pickup: https://freesound.org/people/SilverIllusionist/sounds/411179/
-}
+ }
 
- Various soundeffects / public domain from freesound.org 
- DATABASE 
+Various soundeffects / public domain from freesound.org 
+DATABASE 
  SQLite JDBC driver 3.4 - developed by Xerial 
  SQLite database - developed by D. Richard Hipp 

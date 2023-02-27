@@ -422,6 +422,7 @@ public class MainGame {
         sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
         sound.INTRO.play();
         debug();
+        player.coins = 2000;
     }
 
     private void debug() {

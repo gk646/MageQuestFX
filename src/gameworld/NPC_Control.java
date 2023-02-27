@@ -2,7 +2,7 @@ package gameworld;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
-import gameworld.entities.npcs.trader.NPC_Trader;
+import gameworld.entities.npcs.trader.NPC_ArmourTrader;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,7 +21,7 @@ public class NPC_Control {
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;
-        NPC_Tutorial.add(new NPC_Trader(mg, 67, 33));
+        NPC_Tutorial.add(new NPC_ArmourTrader(mg, 67, 33));
     }
 
 
