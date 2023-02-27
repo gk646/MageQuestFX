@@ -22,6 +22,7 @@ public class WorldEnhancements {
     AnimationList lines2 = new AnimationList(new int[]{1157, 1158, 1159, 1160, 1161, 1162, 1163, 1164}, 35);
     AnimationList lines1 = new AnimationList(new int[]{1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177}, 30);
     AnimationList water = new AnimationList(new int[]{911, 1262, 1263, 1264, 1265, 1266, 1267, 1268}, 25);
+    AnimationList campfire = new AnimationList(new int[]{1528, 1529, 1530, 1531}, 25);
     AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
     AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
     AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
@@ -139,6 +140,7 @@ public class WorldEnhancements {
         animationList.add(waterBecken);
         animationList.add(waterCasket);
         animationList.add(spikes);
+        animationList.add(campfire);
         lightList.add(torch);
         lightList.add(lantern);
         lightList.add(lava);

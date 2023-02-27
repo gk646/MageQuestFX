@@ -35,7 +35,6 @@ abstract public class QUEST {
         npc.checkPoints = checkpoints;
         npc.onPath = true;
         npc.stuckCounter++;
-
         if (npc.activeTile.equals(npc.goalTile)) {
             npc.onPath = false;
             npc.stuckCounter = 0;

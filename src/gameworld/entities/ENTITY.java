@@ -168,7 +168,9 @@ abstract public class ENTITY {
         int startCol = activeTile.x;
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
-        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
+        if (startCol == goalCol && startRow == goalRow) {
+            onPath = false;
+        } else if (mg.pathF.searchUncapped()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
@@ -186,8 +188,6 @@ abstract public class ENTITY {
                 nextCol4 = mg.pathF.pathList.get(3).col;
                 nextRow4 = mg.pathF.pathList.get(3).row;
             }
-        } else {
-            onPath = false;
         }
     }
 
@@ -281,6 +281,7 @@ abstract public class ENTITY {
     abstract public void draw(GraphicsContext gc);
 
     public void update() {
+        tickEffects();
         activeTile.x = (int) ((worldX + 24) / 48);
         activeTile.y = (int) ((worldY + 24) / 48);
         if (health <= 0) {

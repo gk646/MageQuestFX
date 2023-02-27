@@ -33,10 +33,7 @@ public class QST_Tutorial extends QUEST {
             for (NPC npc : mg.npcControl.NPC_Active)
                 if (npc instanceof NPC_OldMan) {
                     interactWithNpc(npc, DialogStorage.Tutorial);
-                    if (progressStage == 6) {
-                        updateObjective("Follow the old man!");
-                        moveToTile(npc, 34, 34, new Point(24, 4), new Point(24, 5), new Point(24, 14), new Point(12, 34));
-                    }
+
                     if (progressStage == 10) {
                         updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3");
                         gruntKillCounter = mg.prj_control.GruntKilledCounter;
@@ -61,14 +58,6 @@ public class QST_Tutorial extends QUEST {
                     }
                     if (progressStage == 14) {
                         moveToTile(npc, 47, 34);
-                        int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
-                        if (choice == 10) {
-                            //TODO add spell book to inventory
-                            //TODO make activaitable items with e
-                            nextStage();
-                        } else if (choice == 20) {
-                            nextStage();
-                        }
                     }
                     if (progressStage == 15) {
                         if (WorldController.currentWorld == Zone.Tutorial) {
@@ -102,6 +91,28 @@ public class QST_Tutorial extends QUEST {
                     if (progressStage == 25) {
                         npc.blockInteraction = false;
                     }
+                }
+        }
+        if (progressStage == 19) {
+            for (NPC npc : mg.npcControl.NPC_Active)
+                if (npc instanceof NPC_OldMan) {
+                    moveToTile(npc, 47, 34);
+                    int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
+                    if (choice == 10) {
+                        System.out.println("nextstage");
+                        //TODO add spell book to inventory
+                        //TODO make activaitable items with e
+                        nextStage();
+                    } else if (choice == 20) {
+                        nextStage();
+                    }
+                }
+        }
+        if (progressStage == 6) {
+            updateObjective("Follow the old man!");
+            for (NPC npc : mg.npcControl.NPC_Active)
+                if (npc instanceof NPC_OldMan) {
+                    moveToTile(npc, 34, 34, new Point(24, 4), new Point(24, 14), new Point(12, 14), new Point(12, 33));
                 }
         }
     }

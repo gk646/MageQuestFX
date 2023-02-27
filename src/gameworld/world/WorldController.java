@@ -33,6 +33,7 @@ public class WorldController {
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Tutorial, GameMapType.MapCover));
         // DUNGEON TUTORIAL
         MAPS.add(new Map("DungeonTutorial", new Point(60, 60), Zone.Dungeon_Tutorial));
+        MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Clearing));
         //Overworld
         //   MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         loadArray();

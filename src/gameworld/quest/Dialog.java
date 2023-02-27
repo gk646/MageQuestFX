@@ -49,30 +49,29 @@ public class Dialog {
         gc.setStroke(Color.WHITE);
         gc.setFill(Color.WHITE);
         int x = (int) (entity.worldX - Player.worldX + Player.screenX - 24 + 5 - 124);
-        //TODO check if still works
         gc.strokeRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
         if (dialogRenderCounter == 2_000) {
             int stringY = (int) (entity.worldY - Player.worldY + Player.screenY - 24 - 115 + 6);
-
             for (String string : dialogLine.split("\n")) {
                 gc.fillText(string, x, stringY += 16);
             }
             if (drawChoice) {
-                gc.fillText(choice1, x, stringY += 16);
-                gc.fillText(choice2, x + 50, stringY += 16);
+                gc.fillText(choice1, x + 15, stringY += 20);
+                gc.fillText(choice2, x + 155, stringY);
                 if (choicePointer == 0) {
                     gc.fillText(">", x, stringY);
                 } else if (choicePointer == 1) {
-                    gc.fillText(">", x + 50, stringY + 16);
+                    gc.fillText(">", x + 140, stringY);
                 }
                 if (InputHandler.q_typed) {
-                    if (choicePointer < maxChoices) {
+                    if (choicePointer < maxChoices - 1) {
                         choicePointer++;
                     } else {
                         choicePointer = 0;
                     }
+                    InputHandler.q_typed = false;
                 }
-                if (InputHandler.instance.f_pressed) {
+                if (InputHandler.f_typed) {
                     if (choicePointer == 0) {
                         choicePointer = 10;
                     } else if (choicePointer == 1) {
@@ -82,6 +81,7 @@ public class Dialog {
                     } else if (choicePointer == 3) {
                         choicePointer = 40;
                     }
+                    InputHandler.f_typed = false;
                 }
             }
         } else {
@@ -107,7 +107,6 @@ public class Dialog {
         if (drawChoice) {
             if (choicePointer == 10 || choicePointer == 20 || choicePointer == 30 || choicePointer == 40) {
                 drawChoice = false;
-                choicePointer = 0;
                 return choicePointer;
             } else {
                 return 0;

@@ -10,10 +10,8 @@ import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.abilities.PRJ_AutoShot;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
-import gameworld.player.abilities.PRJ_EnergySphere;
-import gameworld.player.abilities.PRJ_Lightning;
-import gameworld.player.abilities.PRJ_RingSalvo;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
@@ -89,17 +87,11 @@ public class PRJ_Control {
     }
 
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
-        if (projectile instanceof PRJ_EnergySphere) {
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
-        } else if (projectile instanceof PRJ_RingSalvo) {
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
-        } else if (projectile instanceof PRJ_Lightning) {
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+        if (projectile instanceof PRJ_AutoShot) {
+            projectile.dead = true;
+            entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
-            projectile.dead = true;
-
         }
         projectile.playHitSound();
         entity.hpBarOn = true;
