@@ -15,7 +15,7 @@ public class GeneralResourceLoader {
     public ArrayList<Image> images2 = new ArrayList<>();
     public ArrayList<Image> images3 = new ArrayList<>();
 
-    public ArrayList<MediaPlayer> getHitSound = new ArrayList<>(), randomNoise = new ArrayList<>(), attackSound = new ArrayList<>();
+    public ArrayList<MediaPlayer> getHitSound = new ArrayList<>(), sounds = new ArrayList<>(), attackSound = new ArrayList<>();
     String name;
 
     public GeneralResourceLoader(String path) {
@@ -41,6 +41,17 @@ public class GeneralResourceLoader {
             is = getClass().getResourceAsStream("/resources/" + path + "/" + i + ".png");
             if (is != null) {
                 images2.add(new Image(is));
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void loadProjectilesSounds() {
+        for (int i = 0; i < 10; i++) {
+            URL url = getClass().getResource("/resources/sound/effects/" + name + "/" + i + ".wav");
+            if (url != null) {
+                sounds.add(new MediaPlayer(new Media(url.toString())));
             } else {
                 break;
             }

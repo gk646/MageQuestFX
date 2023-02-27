@@ -13,6 +13,7 @@ public class ProjectilePreloader {
     public static void load() {
         SolarFlare = new GeneralResourceLoader("projectiles/solarFlare");
         voidField = new GeneralResourceLoader("projectiles/voidField");
+        voidField.loadProjectilesSounds();
         thunderStrike = new GeneralResourceLoader("projectiles/thunderStrike");
     }
 }
