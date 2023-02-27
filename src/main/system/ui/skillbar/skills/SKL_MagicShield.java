@@ -6,7 +6,8 @@ import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
 public class SKL_MagicShield extends SKILL {
-    private int castTimeActive, castTimeTotal;
+    private final int castTimeTotal;
+    private int castTimeActive;
 
     public SKL_MagicShield(MainGame mg) {
         super(mg);
@@ -27,6 +28,7 @@ public class SKL_MagicShield extends SKILL {
     public void draw(GraphicsContext gc, int x, int y) {
         //drawIcon(gc,x,y);
         drawCooldown(gc, x, y);
+        drawCastBar(gc);
     }
 
     /**
@@ -47,7 +49,7 @@ public class SKL_MagicShield extends SKILL {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
-            mg.player.BuffsDeBuffEffects.add(new Buff_Effect(1200, 100, true, 24));
+            mg.player.BuffsDebuffEffects.add(new Buff_Effect(1200, 100, true, 24));
             mg.player.mana -= 15;
             actualCoolDown = 0;
         }

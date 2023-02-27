@@ -20,7 +20,6 @@ import main.system.ui.talentpanel.TalentNode;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -29,7 +28,6 @@ public class Player extends ENTITY {
     public boolean levelup;
     public Map map;
     public boolean isMoving;
-    public ArrayList<Effect> BuffsDeBuffEffects = new ArrayList<>();
     public int maxMana;
     public float mana;
     public float health;
@@ -69,8 +67,7 @@ public class Player extends ENTITY {
     public static int effectsSizeRollable = 35;
     public static int effectsSizeTotal = 50;
     public static String[] effectNames = new String[effectsSizeTotal];
-
-    public static float[] effects = new float[effectsSizeTotal];
+    public static float[] playerEffects;
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
     public GeneralResourceLoader animation = new GeneralResourceLoader("player");
@@ -119,6 +116,7 @@ public class Player extends ENTITY {
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
+        playerEffects = effects;
         //-------VALUES-----------
         this.playerMovementSpeed = 4;
         animation.loadImages1("ui/levelup");
@@ -221,6 +219,7 @@ public class Player extends ENTITY {
         }
     }
 
+    @Override
     public void updateEquippedItems() {
         intellect = 0;
         vitality = 0;
@@ -252,6 +251,11 @@ public class Player extends ENTITY {
                 for (int i = 1; i < effectsSizeRollable; i++) {
                     effects[i] += invSlot.item.effects[i];
                 }
+            }
+        }
+        for (Effect effect : BuffsDebuffEffects) {
+            if (effect instanceof Buff_Effect buffEffect) {
+                effects[buffEffect.effectIndexAffected] += buffEffect.amount;
             }
         }
         for (TalentNode node : mg.talentP.talent_Nodes) {
@@ -321,6 +325,9 @@ public class Player extends ENTITY {
 
         playerMovementSpeed += effects[45];
         maxMana += effects[46];
+
+        maxMana = 2000;
+        coins = 2000;
     }
 
     public void setPosition(int x, int y) {
@@ -395,17 +402,15 @@ public class Player extends ENTITY {
     }
 
     protected void tickEffects() {
-        Iterator<Effect> iter = BuffsDeBuffEffects.iterator();
+        Iterator<Effect> iter = BuffsDebuffEffects.iterator();
         while (iter.hasNext()) {
             Effect effect = iter.next();
             effect.tick(this);
             if (effect.rest_duration <= 0) {
+                iter.remove();
                 if (effect instanceof Buff_Effect) {
-                    ((Buff_Effect) effect).remove(this);
                     updateEquippedItems();
                 }
-
-                iter.remove();
             }
         }
     }

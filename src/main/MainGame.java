@@ -17,7 +17,6 @@ import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
 import gameworld.world.objects.DROP;
-import gameworld.world.objects.OBJ_Control;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
@@ -131,10 +130,8 @@ public class MainGame {
     private MiniMap miniM;
     private Multiplayer multiplayer;
     public TileBasedEffects tileBase;
-    private int counter = 0;
     private ENT_Control ent_control;
     public Sound sound;
-    public OBJ_Control ob_control;
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
 
@@ -209,7 +206,7 @@ public class MainGame {
 
                     difference1 = 0;
                     // System.out.println(counter);
-                    counter = 0;
+                    // counter = 0;
                 }
             }
         });

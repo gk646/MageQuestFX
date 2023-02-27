@@ -61,7 +61,7 @@ public class UI_InventoryPanel {
     private final Image offhand = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/offhand.png")));
     private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
     private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
-
+    private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -392,9 +392,11 @@ public class UI_InventoryPanel {
             if (activeTradingNPC.show_trade) {
                 for (int i = 0; i < activeTradingNPC.buySlots.size(); i++) {
                     if (mg.inputH.mouse2Pressed && activeTradingNPC.buySlots.get(i).boundBox.contains(mg.inputH.lastMousePosition)) {
-                        if (activeTradingNPC.buyItem(activeTradingNPC.buySlots.get(i).item)) {
-                            activeTradingNPC.buySlots.get(i).item = null;
-                            return;
+                        if (activeTradingNPC.buySlots.get(i).item != null) {
+                            if (activeTradingNPC.buyItem(activeTradingNPC.buySlots.get(i).item)) {
+                                activeTradingNPC.buySlots.get(i).item = null;
+                                return;
+                            }
                         }
                     }
                 }
@@ -684,8 +686,9 @@ public class UI_InventoryPanel {
         gc.fillText("Character", startX - 17, startY - 80 + 629);
         gc.fillText("Currency", startX + 100, startY - 80 + 629);
         int y = startY + 50;
+        float[] playerEffects = mg.player.effects;
         for (int i = 1; i < 26; i++) {
-            gc.fillText(Player.effectNames[i] + Player.effects[i] + "%", 100 + startX, y);
+            gc.fillText(Player.effectNames[i] + playerEffects[i] + "%", 100 + startX, y);
             y += 18;
         }
     }
@@ -835,6 +838,8 @@ public class UI_InventoryPanel {
             gc.drawImage(bag, startX + 11, startY + 31);
             gc.drawImage(sort, startX + 41, startY + 31);
         }
+        gc.drawImage(coin, startX + 340, startY + 380);
+        gc.fillText(String.valueOf(mg.player.coins), startX + 290, startY + 393);
     }
 
     private void drawBagSlots(GraphicsContext gc, int startX, int startY) {

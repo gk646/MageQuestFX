@@ -71,7 +71,7 @@ abstract public class MERCHANT extends NPC {
     public boolean buyItem(ITEM item) {
         if (mg.player.coins >= item.level * 25 + item.rarity * 25) {
             for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
-                if (slot.item != null) {
+                if (slot.item == null) {
                     slot.item = item;
                     mg.player.coins -= item.level * 25 + item.rarity * 25;
                     return true;

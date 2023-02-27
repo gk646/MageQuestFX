@@ -360,6 +360,7 @@ public class InputHandler {
             case DIGIT3 -> ThreePressed = false;
             case DIGIT4 -> FourPressed = false;
             case DIGIT5 -> FivePressed = false;
+            case E -> e_typed = false;
             case F -> {
                 f_pressed = false;
                 f_typed = false;

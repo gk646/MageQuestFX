@@ -2,12 +2,11 @@ package gameworld.entities.damage.effects;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.DamageType;
-import gameworld.player.Player;
 import javafx.scene.image.Image;
 
 abstract public class Effect {
     protected DamageType type;
-    protected float amount;
+    public float amount;
     protected float amount_secondary;
     protected float amount_third;
     protected boolean fromPlayer;

@@ -1,6 +1,7 @@
 package main.system.ui.skillbar;
 
 import gameworld.entities.damage.DamageType;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -19,6 +20,8 @@ abstract public class SKILL {
     public float coolDownCoefficient;
     public DamageType type;
     public float damage;
+    protected int castTimeTotal;
+    protected int castTimeActive;
     private int side1;
     private int side2;
     private int side3;
@@ -98,6 +101,16 @@ abstract public class SKILL {
         }
     }
 
+    protected void drawCastBar(GraphicsContext gc) {
+        if (castTimeActive > 0) {
+            gc.setLineWidth(2);
+            gc.setFill(Colors.arcane_blue);
+            gc.fillRoundRect(Player.screenX - 24, Player.screenY + 60, (castTimeActive / (castTimeTotal * 1.0f)) * 94, 12, 10, 10);
+            gc.setStroke(Colors.darkBackground);
+            gc.strokeRoundRect(Player.screenX - 24, Player.screenY + 60, 94, 12, 10, 10);
+        }
+    }
+
     protected Image setup(String imagePath) {
         return new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/icons/" + imagePath))));
     }
@@ -111,7 +124,15 @@ abstract public class SKILL {
     }
 
     protected void updateCastTimer() {
-
+        if (castTimeActive > 0) {
+            castTimeActive++;
+            if (mg.player.isMoving) {
+                castTimeActive = 0;
+            } else if (castTimeActive >= castTimeTotal) {
+                activate();
+                castTimeActive = 0;
+            }
+        }
     }
 
     abstract public void activate();

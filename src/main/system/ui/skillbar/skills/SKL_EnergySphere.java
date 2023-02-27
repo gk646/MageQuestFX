@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.player.PROJECTILE;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -33,7 +34,9 @@ public class SKL_EnergySphere extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            mg.PROJECTILES.add(new PRJ_EnergySphere(0.5f));
+            PROJECTILE projectile = new PRJ_EnergySphere(0.5f);
+            projectile.playStartSound();
+            mg.PROJECTILES.add(projectile);
             mg.player.mana -= 10;
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();

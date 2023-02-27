@@ -30,7 +30,7 @@ abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
     public ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
-    public int[] effects = new int[Player.effectsSizeTotal];
+    public float[] effects = new float[Player.effectsSizeTotal];
     public ResourceLoaderEntity animation;
     public boolean collidingWithPlayer;
     public Zone zone;
@@ -299,16 +299,21 @@ abstract public class ENTITY {
         health = value;
     }
 
+    public void updateEquippedItems() {
+
+    }
+
     public void getDamageFromPlayer(float flat_damage, DamageType type) {
+        float[] effectsDouble = mg.player.effects;
         switch (type) {
-            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[2];
-            case FireDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[19];
-            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[1];
-            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * Player.effects[18];
+            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
+            case FireDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
+            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
+            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
         }
         amountedDamageSinceLastDamageNumber += flat_damage;
-        if (mg.random.nextInt(0, 101) <= Player.effects[21]) {
-            flat_damage += (flat_damage / 100.0f) * Player.effects[22];
+        if (mg.random.nextInt(0, 101) <= effectsDouble[21]) {
+            flat_damage += (flat_damage / 100.0f) * effectsDouble[22];
             mg.damageNumbers.add(new DamageNumber((int) flat_damage, type, this, true));
             timeSinceLastDamageNumber = System.currentTimeMillis();
             amountedDamageSinceLastDamageNumber = 0;

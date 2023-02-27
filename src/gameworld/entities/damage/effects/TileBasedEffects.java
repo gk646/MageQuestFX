@@ -67,7 +67,6 @@ public class TileBasedEffects {
                 animationList.add(new ScriptedAnimationList(new int[]{1382, 1383}, 15, new Point(mg.playerX, mg.playerY)));
             }
         }
-        mg.inputH.e_typed = false;
     }
 
     public boolean isLavaNearby() {

@@ -92,6 +92,7 @@ abstract public class QUEST {
                     nextStage();
                     npc.dialog.loadNewLine(array[progressStage]);
                     npc.dialogHideDelay = 0;
+                    mg.inputH.e_typed = false;
                 } catch (ArrayIndexOutOfBoundsException e) {
                     npc.dialog.loadNewLine("...");
                 }
@@ -102,8 +103,8 @@ abstract public class QUEST {
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
             npc.show_dialog = true;
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+            mg.inputH.e_typed = false;
         }
-        mg.inputH.e_typed = false;
     }
 
     protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
