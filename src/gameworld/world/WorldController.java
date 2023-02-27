@@ -89,7 +89,7 @@ public class WorldController {
 
     public void update() {
         for (SpawnTrigger trigger : globalTriggers) {
-            if (trigger != null && trigger.triggered && trigger.zone == currentWorld) {
+            if (trigger.zone == currentWorld && !trigger.triggered && trigger != null) {
                 trigger.activate(mg);
             }
         }
@@ -127,6 +127,7 @@ public class WorldController {
         for (Map map : MAPS) {
             globalTriggers.addAll(map.spawnTriggers);
         }
+        System.out.println(globalTriggers.size());
     }
 
     /**

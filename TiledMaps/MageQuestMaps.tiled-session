@@ -45,11 +45,11 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 343.5,
-                "y": 412
+                "x": 467,
+                "y": 395.5
             }
         },
         "GrassLands.tmx": {
@@ -66,7 +66,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 3,
             "scaleInEditor": 2
         },
         "TileSet.tsx": {
@@ -91,6 +91,9 @@
             }
         },
         "Tutorial.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {

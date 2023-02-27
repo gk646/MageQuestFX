@@ -11,6 +11,7 @@ import main.system.ui.skillbar.skills.SKL_Filler;
 import main.system.ui.skillbar.skills.SKL_Lightning;
 import main.system.ui.skillbar.skills.SKL_RingSalvo;
 import main.system.ui.skillbar.skills.SKL_SelfRegen;
+import main.system.ui.skillbar.skills.SKL_VoidField;
 
 import java.awt.Rectangle;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public class UI_SkillBar {
         skills[0] = new SKL_RingSalvo(mg);
         skills[1] = new SKL_Lightning(mg);
         skills[2] = new SKL_SelfRegen(mg);
-        skills[3] = new SKL_Filler(mg);
+        skills[3] = new SKL_VoidField(mg);
         skills[4] = new SKL_Filler(mg);
         skills[5] = new SKL_AutoShot(mg);
         skills[6] = new SKL_EnergySphere(mg);
@@ -56,7 +57,13 @@ public class UI_SkillBar {
         drawBackGround(gc);
         for (int i = 0; i < skills.length; i++) {
             if (skills[i] != null) {
-                skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
+                if (i > 6) {
+                    skills[i].draw(gc, skillBarX + 12 + i * 64 + 20, skillBarY + 2);
+                } else if (i > 4) {
+                    skills[i].draw(gc, skillBarX + 12 + i * 64 + 5, skillBarY + 2);
+                } else {
+                    skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
+                }
             }
         }
     }

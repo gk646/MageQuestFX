@@ -89,6 +89,7 @@ public class PRJ_Control {
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
         if (projectile instanceof PRJ_AutoShot) {
             projectile.dead = true;
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
             entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);

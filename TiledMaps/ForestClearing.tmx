@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <editorsettings>
+  <export target="../src/resources/Maps/Clearing.csv" format="csv"/>
+ </editorsettings>
  <tileset firstgid="1" source="TIILESET.tsx"/>
  <layer id="2" name="BG" width="100" height="100">
   <data encoding="csv">

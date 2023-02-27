@@ -20,11 +20,12 @@ public class GeneralResourceLoader {
 
     public GeneralResourceLoader(String path) {
         this.name = path;
+        loadImages1(path);
     }
 
     public void loadImages1(String path) {
         InputStream is;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             is = getClass().getResourceAsStream("/resources/" + path + "/" + i + ".png");
             if (is != null) {
                 images1.add(new Image(is));

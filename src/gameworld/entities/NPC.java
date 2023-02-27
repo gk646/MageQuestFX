@@ -5,7 +5,7 @@ import java.awt.Point;
 abstract public class NPC extends ENTITY {
     public boolean blockInteraction;
     public boolean show_dialog;
-    public Point playerTalkLocation;
+    public Point playerTalkLocation = new Point();
     public int dialogHideDelay;
     public int checkpointIndex;
     public Point[] checkPoints;

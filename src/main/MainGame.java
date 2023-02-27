@@ -11,6 +11,7 @@ import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.PlayerPrompts;
+import gameworld.player.ProjectilePreloader;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
@@ -352,7 +353,7 @@ public class MainGame {
             // 0 %
 
             playerPrompts = new PlayerPrompts(this);
-
+            ProjectilePreloader.load();
             sound = new Sound(this);
 
             sound.loadSounds();

@@ -9,12 +9,11 @@ public class PlayerPrompts {
 
     public boolean E;
     MainGame mg;
-    GeneralResourceLoader resc = new GeneralResourceLoader("hey");
+    GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
 
     public PlayerPrompts(MainGame mg) {
         this.mg = mg;
-        resc.loadImages1("ui/prompts/e");
     }
 
 

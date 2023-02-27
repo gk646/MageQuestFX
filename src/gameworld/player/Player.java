@@ -70,7 +70,7 @@ public class Player extends ENTITY {
     public static float[] playerEffects;
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
-    public GeneralResourceLoader animation = new GeneralResourceLoader("player");
+    public GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
     private int levelupCounter;
 
     /*
@@ -119,7 +119,6 @@ public class Player extends ENTITY {
         playerEffects = effects;
         //-------VALUES-----------
         this.playerMovementSpeed = 4;
-        animation.loadImages1("ui/levelup");
         animation.loadSound("levelup", "levelup");
         this.movementSpeed = 4;
         this.maxHealth = 10;

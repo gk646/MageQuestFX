@@ -2,6 +2,7 @@ package gameworld.player;
 
 
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
@@ -18,7 +19,7 @@ import java.awt.geom.Point2D;
  * Main inheritable class for all projectiles
  */
 public abstract class PROJECTILE {
-
+    protected GeneralResourceLoader resource;
     protected Point endPos;
     /**
      * for Projectile sounds <p>
@@ -52,6 +53,7 @@ public abstract class PROJECTILE {
     public Point2D.Double worldPos;
     public long lastHitTime;
     public int level;
+    public int duration;
 
     public PROJECTILE() {
     }
