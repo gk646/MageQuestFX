@@ -175,7 +175,7 @@ public class CollisionChecker {
 
         int tileNum1, tileNum2, tileNumBG1, tileNumBG1_2;
         if (player.direction.contains("right")) {
-            entityRightCol = (int) Math.min((entityRightWorldX + player.playerMovementSpeed) / 48, mg.wRender.worldSize.x);
+            entityRightCol = (int) Math.min((entityRightWorldX + player.playerMovementSpeed) / 48, mg.wRender.worldSize.x - 1);
             tileNum1 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             tileNumBG1 = WorldRender.worldData1[entityRightCol][entityTopRow];
@@ -188,7 +188,7 @@ public class CollisionChecker {
             }
         }
         if (player.direction.contains("left")) {
-            entityLeftCol = (int) Math.min((entityLeftWorldX - player.playerMovementSpeed) / 48, mg.wRender.worldSize.x);
+            entityLeftCol = (int) Math.min((entityLeftWorldX - player.playerMovementSpeed) / 48, mg.wRender.worldSize.x - 1);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
@@ -202,7 +202,7 @@ public class CollisionChecker {
         entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
         entityRightCol = Math.min(entityRightWorldX / 48, mg.wRender.worldSize.x);
         if (player.direction.contains("up")) {
-            entityTopRow = (int) Math.min((entityTopWorldY - player.playerMovementSpeed) / 48, mg.wRender.worldSize.x);
+            entityTopRow = (int) Math.min((entityTopWorldY - player.playerMovementSpeed) / 48, mg.wRender.worldSize.x - 1);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityTopRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityTopRow];
             tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityTopRow];
@@ -216,7 +216,7 @@ public class CollisionChecker {
         entityLeftCol = Math.min(entityLeftWorldX / 48, mg.wRender.worldSize.x);
 
         if (player.direction.contains("down")) {
-            entityBottomRow = (int) Math.min((entityBottomWorldY + player.playerMovementSpeed) / 48, mg.wRender.worldSize.x);
+            entityBottomRow = (int) Math.min((entityBottomWorldY + player.playerMovementSpeed) / 48, mg.wRender.worldSize.x - 1);
             tileNum1 = WorldRender.worldData[entityLeftCol][entityBottomRow];
             tileNum2 = WorldRender.worldData[entityRightCol][entityBottomRow];
             tileNumBG1 = WorldRender.worldData1[entityLeftCol][entityBottomRow];

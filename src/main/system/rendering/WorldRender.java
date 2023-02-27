@@ -1349,10 +1349,10 @@ public class WorldRender {
         setupTiles(1310, "1310.png", false);
         setupTiles(1311, "1311.png", false);
         setupTiles(1312, "1312.png", false);
-        setupTiles(1313, "1313.png", false);
-        setupTiles(1314, "1314.png", false);
-        setupTiles(1315, "1315.png", false);
-        setupTiles(1316, "1316.png", false);
+        setupTiles(1313, "1313.png", true);
+        setupTiles(1314, "1314.png", true);
+        setupTiles(1315, "1315.png", true);
+        setupTiles(1316, "1316.png", true);
         setupTiles(1317, "1317.png", false);
         setupTiles(1318, "1318.png", false);
         setupTiles(1319, "1319.png", false);

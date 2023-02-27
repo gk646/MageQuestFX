@@ -3,6 +3,7 @@ package gameworld.quest;
 import gameworld.entities.NPC;
 import gameworld.player.Player;
 import main.MainGame;
+import main.system.rendering.WorldRender;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Point;
@@ -24,26 +25,11 @@ abstract public class QUEST {
     abstract public void update();
 
 
-    /**
-     * Move the npc to a tile and proceed when he gets there
-     *
-     * @param x tile x
-     * @param y tile y
-     */
-    protected void moveToTile(NPC npc, int x, int y, Point... checkpoints) {
-        npc.goalTile = new Point(x, y);
-        npc.checkPoints = checkpoints;
-        npc.onPath = true;
-        npc.stuckCounter++;
-        if (npc.activeTile.equals(npc.goalTile)) {
-            npc.onPath = false;
-            npc.stuckCounter = 0;
-        }
-        if (npc.stuckCounter > 6000) {
-            npc.worldX = npc.goalTile.x * 48;
-            npc.worldY = npc.goalTile.y * 48;
-            npc.stuckCounter = 0;
-        }
+    protected static void openRoundDoor(int x, int y) {
+        WorldRender.worldData2[x][y] = 1304;
+        WorldRender.worldData2[x + 1][y] = 1305;
+        WorldRender.worldData1[x][y + 1] = 1317;
+        WorldRender.worldData1[x + 1][y + 1] = 1318;
     }
 
 
@@ -57,7 +43,6 @@ abstract public class QUEST {
         }
         objective = newText;
     }
-
 
     /**
      * true if the play bags contain item with name
@@ -76,58 +61,21 @@ abstract public class QUEST {
         return false;
     }
 
-    protected void interactWithNpc(NPC npc, String[] array) {
-        if (npc.dialog.dialogLine.equals("...")) {
-            try {
-                npc.dialog.loadNewLine(array[progressStage]);
-                npc.dialogHideDelay = 0;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                npc.dialog.loadNewLine("...");
-            }
-        }
-        if (npc.show_dialog) {
-            if (!npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-                try {
-                    nextStage();
-                    npc.dialog.loadNewLine(array[progressStage]);
-                    npc.dialogHideDelay = 0;
-                    mg.inputH.e_typed = false;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    npc.dialog.loadNewLine("...");
-                }
-            } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-                npc.dialog.dialogRenderCounter = 2000;
-            }
-        }
-        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-            npc.show_dialog = true;
-            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
-            mg.inputH.e_typed = false;
-        }
+    protected static void closeRoundDoor(int x, int y) {
+        WorldRender.worldData2[x][y] = 1301;
+        WorldRender.worldData2[x + 1][y] = 1302;
+        WorldRender.worldData1[x][y + 1] = 1314;
+        WorldRender.worldData1[x + 1][y + 1] = 1315;
     }
 
-    protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
-        try {
-            npc.dialog.loadNewLine(array[stageNumber]);
-            npc.dialogHideDelay = 0;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            npc.dialog.loadNewLine("...");
-        }
+    public static void openSquareDoor(int x, int y) {
+        WorldRender.worldData2[x][y] = 1353;
+        WorldRender.worldData1[x][y + 1] = 1366;
     }
 
-    /**
-     * checks if the player is inside the rectangle of the given points
-     *
-     * @param p1 point 1
-     * @param p2 point2
-     * @return if the player is inside the rectangle
-     */
-    protected boolean playerNearbyRectangle(Point p1, Point p2) {
-        int x1 = Math.min(p1.x, p2.x);
-        int x2 = Math.max(p1.x, p2.x);
-        int y1 = Math.min(p1.y, p2.y);
-        int y2 = Math.max(p1.y, p2.y);
-        return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
+    public static void closeSquareDoor(int x, int y) {
+        WorldRender.worldData2[x][y] = 1327;
+        WorldRender.worldData1[x][y + 1] = 1340;
     }
 
     protected boolean checkDialogSimilarity(String newObjective) {
@@ -155,5 +103,84 @@ abstract public class QUEST {
 
         // Check if the similarity is greater than or equal to 80%
         return similarity >= 0.8;
+    }
+
+    /**
+     * Move the npc to a tile and proceed when he gets there
+     *
+     * @param x tile x
+     * @param y tile y
+     */
+    protected boolean moveToTile(NPC npc, int x, int y, Point... checkpoints) {
+        npc.goalTile = new Point(x, y);
+        npc.checkPoints = checkpoints;
+        npc.onPath = true;
+        npc.stuckCounter++;
+        if (npc.activeTile.equals(npc.goalTile)) {
+            npc.onPath = false;
+            npc.stuckCounter = 0;
+            return true;
+        } else if (npc.stuckCounter > 6000) {
+            npc.worldX = npc.goalTile.x * 48;
+            npc.worldY = npc.goalTile.y * 48;
+            npc.stuckCounter = 0;
+        }
+        return false;
+    }
+
+    protected void interactWithNpc(NPC npc, String[] array) {
+        if (npc.dialog.dialogLine.equals("...")) {
+            try {
+                npc.dialog.loadNewLine(array[progressStage]);
+                npc.dialogHideDelay = 0;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                npc.dialog.loadNewLine("...");
+            }
+        }
+        if (npc.show_dialog) {
+            if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                try {
+                    nextStage();
+                    npc.dialog.loadNewLine(array[progressStage]);
+                    npc.dialogHideDelay = 0;
+                    mg.inputH.e_typed = false;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    npc.dialog.loadNewLine("...");
+                }
+            } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                npc.dialog.dialogRenderCounter = 2000;
+            }
+        }
+        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
+            npc.show_dialog = true;
+            npc.dialogHideDelay = 0;
+            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+            mg.inputH.e_typed = false;
+        }
+    }
+
+    protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
+        try {
+            npc.dialog.loadNewLine(array[stageNumber]);
+            npc.dialogHideDelay = 0;
+            npc.show_dialog = true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            npc.dialog.loadNewLine("...");
+        }
+    }
+
+    /**
+     * checks if the player is inside the rectangle of the given points
+     *
+     * @param p1 point 1
+     * @param p2 point2
+     * @return if the player is inside the rectangle
+     */
+    protected boolean playerInsideRectangle(Point p1, Point p2) {
+        int x1 = Math.min(p1.x, p2.x);
+        int x2 = Math.max(p1.x, p2.x);
+        int y1 = Math.min(p1.y, p2.y);
+        int y2 = Math.max(p1.y, p2.y);
+        return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
     }
 }

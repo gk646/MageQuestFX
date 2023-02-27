@@ -146,7 +146,7 @@ public class Player extends ENTITY {
         collisionUp = false;
         direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
-        int worldSize = mg.wRender.worldSize.x * 47;
+        int worldSize = mg.wRender.worldSize.x * 48;
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {
                 worldX -= playerMovementSpeed;
@@ -329,8 +329,8 @@ public class Player extends ENTITY {
     }
 
     public void setPosition(int x, int y) {
-        worldX = x;
-        worldY = y;
+        worldX = x * 48;
+        worldY = y * 48;
     }
 
 

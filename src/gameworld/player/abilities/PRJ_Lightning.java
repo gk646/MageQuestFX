@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
+import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,6 +22,8 @@ public class PRJ_Lightning extends PROJECTILE {
         this.projectileHeight = 92;
         this.projectileWidth = 70;
         this.collisionBox = new Rectangle(30, 30, 40, 30);
+        this.damage = 2.0f;
+        type = DamageType.ArcaneDMG;
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + x - Player.screenX - 24, Player.worldY + y - Player.screenY - 24);

@@ -409,7 +409,7 @@ public class MainGame {
             FonT.loadFonts();
 
             //100%
-            sqLite.resetGame();
+            //sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -421,6 +421,7 @@ public class MainGame {
             startThreads();
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
+            //TODO spawn level
         }
         debug();
         player.coins = 2000;
@@ -431,10 +432,11 @@ public class MainGame {
         for (int i = 0; i < 10; i++) {
             // ENTITIES.add(new ENT_SkeletonWarrior(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
         }
+        inventP.bag_Slots.get(3).item = MISC.get(2);
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        // wControl.loadMap(Zone.Tutorial, 11, 4);
+        wControl.loadMap(Zone.Tutorial, 98, 98);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

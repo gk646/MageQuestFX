@@ -30,7 +30,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     if (progressStage == 6) {
                         mg.wControl.addMapMarker(quest_id + "" + progressStage, 55, 50, MarkerType.Quest);
                     }
-                    if (playerNearbyRectangle(new Point(45, 50), new Point(55, 55))) {
+                    if (playerInsideRectangle(new Point(45, 50), new Point(55, 55))) {
                         nextStage();
                         mg.wControl.removeMapMarker(quest_id + "" + 6);
                     }

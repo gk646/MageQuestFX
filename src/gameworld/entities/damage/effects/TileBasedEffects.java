@@ -15,6 +15,7 @@ public class TileBasedEffects {
     public static int activeTile = 0;
     public static int activeTile1 = 0;
     int[] tilesData, tilesData1, tilesData2;
+    int previousTile;
     ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
     MainGame mg;
 
@@ -27,6 +28,7 @@ public class TileBasedEffects {
         activeTile = WorldRender.worldData[mg.playerX][mg.playerY];
         activeTile1 = WorldRender.worldData1[mg.playerX][mg.playerY];
         checkForTileEffects();
+        previousTile = activeTile;
         if (animationList.size() > 0) {
             Iterator<ScriptedAnimationList> iter = animationList.iterator();
             while (iter.hasNext()) {
@@ -51,7 +53,7 @@ public class TileBasedEffects {
 
     private void checkForTileEffects() {
         mg.playerPrompts.E = false;
-        if (activeTile == 225) {
+        if (activeTile == 225 && activeTile != previousTile) {
             mg.player.health -= (mg.player.maxHealth * 0.4f);
             mg.sound.playEffectSound(6);
         } else if (activeTile1 == 137) {

@@ -15,23 +15,17 @@ abstract public class NPC extends ENTITY {
 
     public void moveTo(int goalX, int goalY, Point... checkpoints) {
         if (checkpoints != null && checkpoints.length > 0) {
-
             if (checkpointIndex < checkpoints.length) {
-
                 if (checkpoints[checkpointIndex].equals(activeTile)) {
                     checkpointIndex++;
-                    System.out.println(checkpointIndex);
                 } else {
                     moveToTileSuperVised(checkpoints[checkpointIndex].x, checkpoints[checkpointIndex].y);
                 }
             } else if (!(new Point(goalX, goalY).equals(activeTile))) {
-
                 moveToTileSuperVised(goalX, goalY);
             } else if (new Point(goalX, goalY).equals(activeTile)) {
                 onPath = false;
                 checkpointIndex = 0;
-            } else {
-
             }
         } else if (!new Point(goalX, goalY).equals(activeTile)) {
             moveToTileSuperVised(goalX, goalY);
@@ -40,6 +34,11 @@ abstract public class NPC extends ENTITY {
 
             checkpointIndex = 0;
         }
+    }
+
+    public void setPosition(int x, int y) {
+        worldX = x * 48;
+        worldY = y * 48;
     }
 
     @Override
