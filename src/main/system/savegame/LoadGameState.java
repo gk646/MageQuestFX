@@ -29,20 +29,23 @@ public class LoadGameState {
         switch (description) {
             case "null":
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
-                mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4));
+                mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
                 break;
             case "active":
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
                 switch (quest_num) {
                     case 1:
-                        mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34));
+                        mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
                         mg.qPanel.setQuestStage("Tutorial", 13);
                         mg.player.setPosition(39, 34);
                     case 2:
-                        mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 58, 48));
+                        mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 58, 48, Zone.Tutorial));
                         mg.qPanel.setQuestStage("Tutorial", 26);
                         mg.player.setPosition(58, 35);
                         QUEST.openSquareDoor(58, 37);
+                    case 3:
+                        mg.npcControl.NPC_Clearing.add(new NPC_OldMan(mg, 20, 20, Zone.Clearing));
+                        mg.qPanel.setQuestStage("Tutorial", 37);
                 }
                 break;
             case "finished":

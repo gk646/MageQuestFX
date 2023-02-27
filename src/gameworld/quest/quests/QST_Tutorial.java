@@ -125,6 +125,7 @@ public class QST_Tutorial extends QUEST {
                     if (moveToTile(npc, 99, 99)) {
                         npc.zone = Zone.Clearing;
                         npc.setPosition(1, 1);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     }
                 }

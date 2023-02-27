@@ -16,9 +16,9 @@ public class NPC_OldMan extends NPC {
     private Image idle1, idle2, idle3, idle4;
 
 
-    public NPC_OldMan(MainGame mainGame, int xTile, int yTile) {
+    public NPC_OldMan(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
-        this.zone = Zone.Tutorial;
+        this.zone = zone;
         this.mg = mainGame;
         goalTile = new Point(34, 34);
         //Setting default values

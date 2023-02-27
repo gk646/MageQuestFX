@@ -91,11 +91,11 @@
             }
         },
         "Tutorial.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 0.33,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 896,
-                "y": 790
+                "x": 903.030303030303,
+                "y": 684.848484848485
             }
         },
         "d.tsx": {

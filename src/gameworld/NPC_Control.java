@@ -15,6 +15,7 @@ public class NPC_Control {
 
     private final ArrayList<NPC> NPC_GrassLand = new ArrayList<>();
     public final ArrayList<NPC> NPC_Tutorial = new ArrayList<>();
+    public final ArrayList<NPC> NPC_Clearing = new ArrayList<>();
     private final MainGame mg;
     private final ArrayList<NPC> NPC_City1 = new ArrayList<>();
     public ArrayList<NPC> NPC_Active = new ArrayList<>();
@@ -48,6 +49,8 @@ public class NPC_Control {
             NPC_Active = NPC_GrassLand;
         } else if (zone == Zone.City1) {
             NPC_Active = NPC_City1;
+        } else if (zone == Zone.Clearing) {
+            NPC_Active = NPC_Clearing;
         }
     }
 }

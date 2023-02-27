@@ -49,7 +49,6 @@ public class BOS_Slime extends BOSS {
             standardAttackScript();
         }
         if (!attack2 && !attack3 && !attack1 && !spitting) {
-            onPath = true;
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
         }
