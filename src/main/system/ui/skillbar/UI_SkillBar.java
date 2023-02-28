@@ -7,9 +7,8 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
-import main.system.ui.skillbar.skills.SKL_FrostNova;
 import main.system.ui.skillbar.skills.SKL_Lightning;
-import main.system.ui.skillbar.skills.SKL_ThunderSplash;
+import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.skillbar.skills.SKL_ThunderStrike;
 import main.system.ui.skillbar.skills.SKL_VoidEruption;
 import main.system.ui.skillbar.skills.SKL_VoidField;
@@ -46,15 +45,15 @@ public class UI_SkillBar {
 
     public UI_SkillBar(MainGame mg) {
         this.mg = mg;
-        skills[0] = new SKL_FrostNova(mg);
+        skills[0] = new SKL_SolarFlare(mg);
         skills[1] = new SKL_Lightning(mg);
         skills[2] = new SKL_ThunderStrike(mg);
         skills[3] = new SKL_VoidField(mg);
         skills[4] = new SKL_VoidEruption(mg);
         skills[5] = new SKL_AutoShot(mg);
         skills[6] = new SKL_EnergySphere(mg);
-        skills[7] = new SKL_ThunderSplash(mg);
-        for (int i = 0; i < skills.length; i++) {
+        skills[7] = new SKL_VoidField(mg);
+        for (int i = 0; i < 8; i++) {
             if (i > 6) {
                 hitBoxes[i] = new Rectangle(skillBarX + 12 + i * 64 + 20, skillBarY + 2, 50, 50);
             } else if (i > 4) {
@@ -91,7 +90,7 @@ public class UI_SkillBar {
         gc.drawImage(skillSlot, skillBarX + 64 * 5 + 10, skillBarY - 5);
         gc.drawImage(skillSlot, skillBarX + 64 * 6 + 10, skillBarY - 5);
 
-        gc.drawImage(skillSlot, skillBarX + 64 * 7 + 20, skillBarY - 5);
+        gc.drawImage(skillSlot, skillBarX + 64 * 7 + 25, skillBarY - 5);
         gc.setFont(FonT.minecraftBoldItalic15);
 
         gc.fillText("1", skillBarX + 30, skillBarY + 73);

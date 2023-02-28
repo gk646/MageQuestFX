@@ -4,7 +4,7 @@ import gameworld.entities.loadinghelper.GeneralResourceLoader;
 
 public class ProjectilePreloader {
 
-    public static GeneralResourceLoader SolarFlare;
+    public static GeneralResourceLoader solarFlare;
 
     public static GeneralResourceLoader voidField;
 
@@ -14,7 +14,8 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader frostNova;
 
     public static void load() {
-        SolarFlare = new GeneralResourceLoader("projectiles/solarFlare");
+        solarFlare = new GeneralResourceLoader("projectiles/solarFlare");
+        solarFlare.loadProjectilesSounds();
         voidField = new GeneralResourceLoader("projectiles/voidField");
         voidField.loadProjectilesSounds();
         thunderStrike = new GeneralResourceLoader("projectiles/thunderStrike");

@@ -21,6 +21,8 @@ SOUNDS
  item equip sound: https://freesound.org/people/1bob/sounds/651515/ 
  horror ambience : https://freesound.org/people/klankbeeld/
  sell item : https://freesound.org/people/DWOBoyle/sounds/140382/
+ solar flare sound: https://freesound.org/people/EminYILDIRIM/sounds/555519/
+ 
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

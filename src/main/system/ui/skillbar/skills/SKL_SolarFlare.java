@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.player.abilities.PRJ_SolarFlare;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
@@ -7,8 +8,12 @@ import main.system.ui.skillbar.SKILL;
 public class SKL_SolarFlare extends SKILL {
     public SKL_SolarFlare(MainGame mg) {
         super(mg);
+        totalCoolDown = 900;
+        actualCoolDown = totalCoolDown;
+        manaCost = 75;
+        icon = setup("solarFlare");
         name = "Solar Flare";
-        description= "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";
+        description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";
     }
 
     /**
@@ -18,7 +23,8 @@ public class SKL_SolarFlare extends SKILL {
      */
     @Override
     public void draw(GraphicsContext gc, int x, int y) {
-
+        drawIcon(gc, x, y);
+        drawCooldown(gc, x, y);
     }
 
     /**
@@ -26,7 +32,7 @@ public class SKL_SolarFlare extends SKILL {
      */
     @Override
     public void update() {
-
+        updateCooldown();
     }
 
     /**
@@ -34,6 +40,10 @@ public class SKL_SolarFlare extends SKILL {
      */
     @Override
     public void activate() {
-
+        if (actualCoolDown >= totalCoolDown && mg.player.mana >= manaCost) {
+            mg.player.mana -= manaCost;
+            actualCoolDown = 0;
+            mg.PROJECTILES.add(new PRJ_SolarFlare());
+        }
     }
 }

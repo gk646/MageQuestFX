@@ -13,7 +13,7 @@ public class SKL_ThunderSplash extends SKILL {
         totalCoolDown = 300;
         actualCoolDown = totalCoolDown;
         manaCost = 35;
-        icon = setup("voidEruption");
+        icon = setup("thunderSplash");
         name = "Thunder Splash";
         description = "Thunder Splash is a lightning-based ability that allows the player to call down a powerful bolt of lightning onto enemies in a targeted area. When activated, the sky darkens and crackles with electricity, signaling the impending strike. The player selects a target area, and after a short delay, a bolt of lightning strikes down, dealing massive area of effect damage to all enemies within the target area.";
     }
@@ -27,7 +27,7 @@ public class SKL_ThunderSplash extends SKILL {
      */
     @Override
     public void draw(GraphicsContext gc, int x, int y) {
-        //drawIcon(gc, x, y);
+        drawIcon(gc, x, y);
         drawCooldown(gc, x, y);
     }
 
