@@ -69,12 +69,12 @@ public class Sound {
         loadForestAmbience("1", 1);
         waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));
         waterAmbience.setVolume(waterVolume);
-        lava = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/lava.wav").toString()));
+        lava = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/lava.mp3").toString()));
         lava.setVolume(waterVolume);
     }
 
     private void addDungeonTrack(String name) {
-        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".wav").toString()));
+        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".mp3").toString()));
         dungeonAmbient.add(ambientTrack1);
     }
 

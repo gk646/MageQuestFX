@@ -90,7 +90,7 @@ public class QST_Tutorial extends QUEST {
                     openSquareDoor(58, 37);
                 } else if (progressStage == 26 || progressStage == 25) {
                     npc.blockInteraction = true;
-                    if (WorldRender.worldData1[74][84] == 1383) {
+                    if (WorldRender.worldData1[74][84] == 1383 && WorldController.currentWorld == Zone.Tutorial) {
                         openRoundDoor(35, 67);
                         WorldRender.worldData[75][72] = 131;
                         WorldRender.worldData[75][73] = 131;
@@ -98,10 +98,10 @@ public class QST_Tutorial extends QUEST {
                         WorldRender.worldData2[75][73] = -1;
                         WorldRender.worldData2[76][72] = -1;
                         WorldRender.worldData2[76][73] = -1;
-                        nextStage();
+                        progressStage = 27;
                         loadDialogStage(npc, DialogStorage.Tutorial, 27);
                         openRoundDoor(68, 77);
-                    } else if (playerInsideRectangle(new Point(68, 79), new Point(69, 79))) {
+                    } else if (playerInsideRectangle(new Point(68, 79), new Point(69, 79)) && WorldController.currentWorld == Zone.Tutorial) {
                         closeRoundDoor(68, 77);
                     }
                 } else if (progressStage == 27) {
