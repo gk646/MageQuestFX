@@ -1,27 +1,27 @@
 package main.system.ui.skillpanel;
 
-import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
+import main.system.ui.skillbar.SKILL;
 
 import java.awt.Rectangle;
 
 public class UI_SkillSlot {
 
     public final Rectangle boundBox;
-    private int SLOT_SIZE = 45;
+    private final int SLOT_SIZE = 45;
     public boolean grabbed;
-    public ITEM item;
+    public SKILL skill;
     public int toolTipTimer;
     public String type = "+";
 
-    public UI_SkillSlot(ITEM item, int xCo, int yCo) {
+    public UI_SkillSlot(SKILL skill, int xCo, int yCo) {
         this.boundBox = new Rectangle(xCo, yCo, SLOT_SIZE, SLOT_SIZE);
-        this.item = item;
+        this.skill = skill;
     }
 
 
-    public void drawIcon(GraphicsContext g2, int x, int y, int slotSize) {
-        item.drawIcon(g2, x, y, slotSize);
+    public void drawIcon(GraphicsContext g2, int x, int y) {
+        skill.drawIcon(g2, x, y);
     }
 
 

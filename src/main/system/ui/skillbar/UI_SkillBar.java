@@ -22,7 +22,7 @@ public class UI_SkillBar {
     public final SKILL[] skills = new SKILL[8];
     private final int skillBarX = 651;
     private final int skillBarY = 1_005;
-
+    public Rectangle[] hitBoxes = new Rectangle[8];
 
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
 
@@ -51,19 +51,27 @@ public class UI_SkillBar {
         skills[5] = new SKL_AutoShot(mg);
         skills[6] = new SKL_EnergySphere(mg);
         skills[7] = new SKL_Filler(mg);
+        for (int i = 0; i < skills.length; i++) {
+            if (i > 6) {
+                hitBoxes[i] = new Rectangle(skillBarX + 12 + i * 64 + 20, skillBarY + 2, 50, 50);
+            } else if (i > 4) {
+                hitBoxes[i] = new Rectangle(skillBarX + 12 + i * 64 + 5, skillBarY + 2, 50, 50);
+            } else {
+                hitBoxes[i] = new Rectangle(skillBarX + 12 + i * 64, skillBarY + 2, 50, 50);
+            }
+        }
     }
+
 
     public void draw(GraphicsContext gc) {
         drawBackGround(gc);
         for (int i = 0; i < skills.length; i++) {
-            if (skills[i] != null) {
-                if (i > 6) {
-                    skills[i].draw(gc, skillBarX + 12 + i * 64 + 20, skillBarY + 2);
-                } else if (i > 4) {
-                    skills[i].draw(gc, skillBarX + 12 + i * 64 + 5, skillBarY + 2);
-                } else {
-                    skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
-                }
+            if (i > 6) {
+                skills[i].draw(gc, skillBarX + 12 + i * 64 + 20, skillBarY + 2);
+            } else if (i > 4) {
+                skills[i].draw(gc, skillBarX + 12 + i * 64 + 5, skillBarY + 2);
+            } else {
+                skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
             }
         }
     }

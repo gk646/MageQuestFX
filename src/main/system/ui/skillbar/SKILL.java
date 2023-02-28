@@ -48,7 +48,7 @@ abstract public class SKILL {
     abstract public void draw(GraphicsContext gc, int x, int y);
 
 
-    protected void drawIcon(GraphicsContext gc, int x, int y) {
+    public void drawIcon(GraphicsContext gc, int x, int y) {
         gc.drawImage(icon, x, y);
     }
 

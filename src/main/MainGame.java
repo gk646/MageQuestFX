@@ -46,6 +46,7 @@ import main.system.ui.maps.GameMap;
 import main.system.ui.maps.MiniMap;
 import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.UI_SkillBar;
+import main.system.ui.skillpanel.UI_SkillPanel;
 import main.system.ui.talentpanel.UI_TalentPanel;
 
 import java.security.SecureRandom;
@@ -125,6 +126,7 @@ public class MainGame {
     public boolean drawCodex;
     public WorldEnhancements wAnim;
     public LoadGameState loadGameState;
+    public UI_SkillPanel skillPanel;
 
     //---------System---------
     private MiniMap miniM;
@@ -134,6 +136,7 @@ public class MainGame {
     public Sound sound;
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
+    public boolean showAbilities;
 
 
     /**
@@ -313,6 +316,10 @@ public class MainGame {
             if (showTalents) {
                 talentP.drawTalentWindow(gc);
             }
+            if (showAbilities) {
+                skillPanel.drawSkillPanel(gc);
+                skillPanel.dragAndDrop(gc);
+            }
         } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
             ui.draw(gc);
         }
@@ -345,7 +352,7 @@ public class MainGame {
             sBar = new UI_SkillBar(this);
             dropI = new DRP_DroppedItem(this);
             wAnim = new WorldEnhancements(this);
-
+            skillPanel = new UI_SkillPanel(this);
             ui.updateLoadingScreen(0, gc);
             SecureRandom secureRandom = new SecureRandom();
             long seed = secureRandom.nextLong();

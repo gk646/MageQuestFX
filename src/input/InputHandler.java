@@ -31,6 +31,7 @@ public class InputHandler {
     public static boolean q_typed, f_typed;
     public boolean OnePressed;
     public boolean debugFps;
+    public boolean p_typed;
     public boolean multiplayer;
     public boolean f_pressed;
     public boolean TwoPressed;
@@ -259,6 +260,16 @@ public class InputHandler {
                     scene.setCursor(Runner.crosshair);
                 }
             }
+        } else if (code.equals("p")) {
+            if (!mg.showAbilities) {
+                mg.showAbilities = true;
+                scene.setCursor(Runner.selectCrosshair);
+            } else {
+                mg.showAbilities = false;
+                if (!inventoryWindowOpen()) {
+                    scene.setCursor(Runner.crosshair);
+                }
+            }
         }
         //Drawing Inventor Panel
         if (code.equals("c")) {
@@ -369,7 +380,10 @@ public class InputHandler {
             case J -> j_pressed = false;
             case L -> l_pressed = false;
             case M -> multiplayer = false;
-            case P -> p_pressed = false;
+            case P -> {
+                p_pressed = false;
+                p_typed = false;
+            }
             case Q -> {
                 q_pressed = false;
                 q_typed = false;
@@ -421,7 +435,7 @@ public class InputHandler {
                 } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
                     mg.showTalents = true;
                 } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
-                    // do nothing
+                    mg.showAbilities = true;
                 } else if (mg.sBar.mapBox.contains(mousePos)) {
                     mg.showMap = true;
                 } else if (mg.sBar.settingsBox.contains(mousePos)) {
@@ -463,6 +477,6 @@ public class InputHandler {
     }
 
     private boolean inventoryWindowOpen() {
-        return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION;
+        return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION || mg.showAbilities;
     }
 }
