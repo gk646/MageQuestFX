@@ -41,8 +41,10 @@ public class UI_SkillBar {
     public Rectangle abilitiesBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY + 28, 32, 32);
     public Rectangle mapBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY + 28, 32, 32);
     public Rectangle settingsBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY + 28, 32, 32);
+    MainGame mg;
 
     public UI_SkillBar(MainGame mg) {
+        this.mg = mg;
         skills[0] = new SKL_RingSalvo(mg);
         skills[1] = new SKL_Lightning(mg);
         skills[2] = new SKL_SelfRegen(mg);

@@ -8,11 +8,12 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.Effects;
 
+import java.awt.Rectangle;
 import java.util.Objects;
 
 abstract public class SKILL {
 
-    protected Image icon;
+    public Image icon;
     protected final MainGame mg;
     protected Effects[] procEffects = new Effects[5];
     public float totalCoolDown;
@@ -22,6 +23,7 @@ abstract public class SKILL {
     public float damage;
     protected int castTimeTotal;
     protected int castTimeActive;
+    public Rectangle hitBox = new Rectangle(53, 53);
     private int side1;
     private int side2;
     private int side3;
@@ -114,7 +116,7 @@ abstract public class SKILL {
 
     public void drawSkillSlot(GraphicsContext gc, int x, int y) {
         gc.drawImage(skillSlot, x, y);
-        gc.drawImage(icon, x + 6, y + 6);
+        gc.drawImage(icon, x + 7, y + 7);
     }
 
     protected Image setup(String imagePath) {
@@ -142,4 +144,9 @@ abstract public class SKILL {
     }
 
     abstract public void activate();
+
+    public void drawToolTip(GraphicsContext gc, int x, int y) {
+        //TODO tooltip
+
+    }
 }

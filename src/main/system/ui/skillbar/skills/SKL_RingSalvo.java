@@ -14,6 +14,7 @@ public class SKL_RingSalvo extends SKILL {
         actualCoolDown = 120;
         this.coolDownCoefficient = 0;
         this.icon = setup("ring_salvo.png");
+        name = "Fire Salvo";
     }
 
     @Override
@@ -24,7 +25,7 @@ public class SKL_RingSalvo extends SKILL {
 
     @Override
     public void update() {
-       super.updateCooldown();
+        super.updateCooldown();
     }
 
     @Override

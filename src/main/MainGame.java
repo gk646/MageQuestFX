@@ -299,7 +299,7 @@ public class MainGame {
             qPanel.draw(gc);
             sBar.draw(gc);
             wAnim.drawLayerOneTwo(gc);
-            ui.draw(gc);
+
             if (showMap) {
                 gameMap.draw(gc);
             }
@@ -318,8 +318,9 @@ public class MainGame {
             }
             if (showAbilities) {
                 skillPanel.drawSkillPanel(gc);
-                skillPanel.dragAndDrop(gc);
+                skillPanel.dragAndDropSkillBar(gc);
             }
+            ui.draw(gc);
         } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
             ui.draw(gc);
         }

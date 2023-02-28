@@ -23,11 +23,12 @@ public class SKL_AutoShot extends SKILL {
     public void draw(GraphicsContext gc, int skillBarX, int skillBarY) {
         drawIcon(gc, skillBarX, skillBarY);
         drawCooldown(gc, skillBarX, skillBarY);
+        name = "Slime Ball";
     }
 
     @Override
     public void update() {
-       super.updateCooldown();
+        super.updateCooldown();
     }
 
     @Override

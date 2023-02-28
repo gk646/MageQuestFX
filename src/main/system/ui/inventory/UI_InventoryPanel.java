@@ -552,14 +552,27 @@ public class UI_InventoryPanel {
                 mg.talentP.talentPanelY += mousePos.y - previousMousePosition.y;
             }
         } else if (mg.skillPanel.wholeSkillWindow.contains(mousePos)) {
-            for (int i = 0; i < 5; i++) {
-                if (mg.inputH.mouse1Pressed && mg.skillPanel.hitBoxesSideButtons[i].contains(mousePos)) {
-                    System.out.println("hey");
-                    for (int j = 0; j < 5; j++) {
-                        mg.skillPanel.whichPanel[i] = false;
+            if (mg.skillPanel.skillPanelMover.contains(mousePos)) {
+                if (mg.inputH.mouse1Pressed) {
+                    mg.skillPanel.skillPanelX += mousePos.x - previousMousePosition.x;
+                    mg.skillPanel.skillPanelY += mousePos.y - previousMousePosition.y;
+                    mg.skillPanel.skillPanelMover.x = mg.skillPanel.skillPanelX;
+                    mg.skillPanel.skillPanelMover.y = mg.skillPanel.skillPanelY;
+                }
+            } else {
+                for (int i = 0; i < 5; i++) {
+                    if (mg.skillPanel.hitBoxesSideButtons[i].contains(mousePos)) {
+                        if (mg.inputH.mouse1Pressed) {
+                            for (int j = 0; j < 5; j++) {
+                                mg.skillPanel.whichPanel[j] = false;
+                            }
+                            mg.skillPanel.whichPanel[i] = true;
+                            mg.inputH.mouse1Pressed = false;
+                            return;
+                        } else {
+                            mg.skillPanel.toolTipNumber = i;
+                        }
                     }
-                    mg.skillPanel.whichPanel[i] = true;
-                    return;
                 }
             }
         }
@@ -567,6 +580,7 @@ public class UI_InventoryPanel {
         previousMousePosition.y = mousePos.y;
     }
 
+    //TODO prevent windows off screen dragging
     private void drawCharacterBackGroundMain(GraphicsContext gc, int startX, int startY) {
         //inventory background
         wholeCharWindow.x = startX - 47;

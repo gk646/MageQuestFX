@@ -237,6 +237,7 @@ public class InputHandler {
                 mg.showChar = false;
                 mg.showMap = false;
                 mg.showTalents = false;
+                mg.showAbilities = false;
                 try {
                     Thread.sleep(15);
                 } catch (InterruptedException ex) {

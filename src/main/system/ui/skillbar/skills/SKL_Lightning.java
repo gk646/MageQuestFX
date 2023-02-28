@@ -13,6 +13,7 @@ public class SKL_Lightning extends SKILL {
         super(mg);
         this.totalCoolDown = 600;
         this.actualCoolDown = 600;
+        name = "Lightning Strike";
     }
 
     @Override
