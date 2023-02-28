@@ -347,7 +347,7 @@ public class MainGame {
 
             FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
             loadGameState = new LoadGameState(this);
-
+            ProjectilePreloader.load();
             tileBase = new TileBasedEffects(this);
             qPanel = new UI_QuestPanel(this);
             sBar = new UI_SkillBar(this);
@@ -361,7 +361,7 @@ public class MainGame {
             // 0 %
 
             playerPrompts = new PlayerPrompts(this);
-            ProjectilePreloader.load();
+
             sound = new Sound(this);
 
             sound.loadSounds();

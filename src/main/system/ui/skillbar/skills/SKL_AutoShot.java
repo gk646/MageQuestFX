@@ -16,7 +16,7 @@ public class SKL_AutoShot extends SKILL {
         this.coolDownCoefficient = 0;
         this.damage = 1;
         this.type = DamageType.PoisonDMG;
-        this.icon = setup("energy_sphere.png");
+        this.icon = setup("energy_sphere");
     }
 
     @Override

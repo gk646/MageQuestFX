@@ -73,6 +73,7 @@ public abstract class PROJECTILE {
 
     public void playStartSound() {
         if (sounds[0] != null) {
+            sounds[0].seek(Duration.ZERO);
             sounds[0].play();
         }
     }

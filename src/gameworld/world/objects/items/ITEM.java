@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 
 
 public class ITEM {
-    public final int i_id;
-    public final String name;
-    public final int rarity;
+    public int i_id;
+    public String name;
+    public int rarity;
     public String stats;
-    public final char type;
+    public char type;
     /* H - Head slot
        C - chest
        P - pants
@@ -31,7 +31,7 @@ public class ITEM {
 
        G - Bag
      */
-    public final String imagePath;
+    public String imagePath;
     public int quality;
     public int durability = 100;
     public int level;
@@ -108,6 +108,9 @@ public class ITEM {
         applyMultipliers();
     }
 
+    public ITEM() {
+
+    }
 
     public void drawIcon(GraphicsContext gc, int x, int y, int slotSize) {
         gc.drawImage(icon, x, y, slotSize, slotSize);

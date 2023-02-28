@@ -13,7 +13,7 @@ public class SKL_RingSalvo extends SKILL {
         this.totalCoolDown = 120;
         actualCoolDown = 120;
         this.coolDownCoefficient = 0;
-        this.icon = setup("ring_salvo.png");
+        this.icon = setup("ring_salvo");
         name = "Fire Salvo";
     }
 
