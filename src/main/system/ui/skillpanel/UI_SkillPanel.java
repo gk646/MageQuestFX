@@ -71,7 +71,7 @@ public class UI_SkillPanel {
         }
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold16);
-        gc.fillText("Spell Book", skillPanelX + 160, skillPanelY + 15);
+        gc.fillText("Skills", skillPanelX + 170, skillPanelY + 20);
         wholeSkillWindow.x = skillPanelX;
         wholeSkillWindow.y = skillPanelY;
         skillPanelMover.x = skillPanelX;
@@ -169,7 +169,7 @@ public class UI_SkillPanel {
             case 0 -> gc.fillText("Arcane Magic", x + 25, y);
             case 1 -> gc.fillText("Poison Magic", x + 25, y);
             case 2 -> gc.fillText("Fire Magic", x + 25, y);
-            case 3 -> gc.fillText("Ice Magic", x + 25, y);
+            case 3 -> gc.fillText("Frost Magic", x + 25, y);
             case 4 -> gc.fillText("Dark Magic", x + 25, y);
         }
     }
