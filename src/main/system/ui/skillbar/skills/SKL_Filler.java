@@ -7,6 +7,7 @@ import main.system.ui.skillbar.SKILL;
 public class SKL_Filler extends SKILL {
     public SKL_Filler(MainGame mg) {
         super(mg);
+        this.name = "Regenerative Aura";
     }
 
     @Override

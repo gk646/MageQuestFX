@@ -30,8 +30,9 @@ abstract public class SKILL {
     public String imagePath;
     protected float actualCoolDown;
     protected int i_id;
-    protected String name;
+    private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
     protected String description;
+    public String name;
 
 
     public SKILL(MainGame mg) {
@@ -109,6 +110,11 @@ abstract public class SKILL {
             gc.setStroke(Colors.darkBackground);
             gc.strokeRoundRect(Player.screenX - 24, Player.screenY + 60, 94, 12, 10, 10);
         }
+    }
+
+    public void drawSkillSlot(GraphicsContext gc, int x, int y) {
+        gc.drawImage(skillSlot, x, y);
+        gc.drawImage(icon, x + 6, y + 6);
     }
 
     protected Image setup(String imagePath) {

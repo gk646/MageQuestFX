@@ -112,6 +112,7 @@ public class UI_InventoryPanel {
             }
         }
     }
+
     public void drawBagTooltip(GraphicsContext gc) {
         if (grabbedITEM == null && !mg.inputH.mouse1Pressed) {
             for (UI_InventorySlot bagSlot : bag_Slots) {
@@ -482,35 +483,36 @@ public class UI_InventoryPanel {
     }
 
     public void interactWithWindows() {
+        Point mousePos = mg.inputH.lastMousePosition;
         if (char_Slots[8].item != null && char_Slots[8].item.type == '2') {
             char_Slots[9].type = ",";
         } else {
             char_Slots[9].type = "O";
         }
         boolean node_focused = false;
-        if (mg.ui.musicSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-            mg.ui.musicSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+        if (mg.ui.musicSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+            mg.ui.musicSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.musicSlider = Math.max(Math.min(100, mg.ui.musicSlider), 0);
             mg.sound.setVolumeMusic(mg.ui.musicSlider);
             mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
-        } else if (mg.ui.effectsSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-            mg.ui.effectsSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+        } else if (mg.ui.effectsSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+            mg.ui.effectsSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.effectsSlider = Math.max(Math.min(100, mg.ui.effectsSlider), 0);
             mg.sound.setVolumeEffects(mg.ui.effectsSlider);
             mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
-        } else if (mg.ui.ambientSliderHitBox.contains(mg.inputH.lastMousePosition) && mg.inputH.mouse1Pressed) {
-            mg.ui.ambientSlider += (mg.inputH.lastMousePosition.x - previousMousePosition.x) / 2.0f;
+        } else if (mg.ui.ambientSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+            mg.ui.ambientSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.ambientSlider = Math.max(Math.min(100, mg.ui.ambientSlider), 0);
             mg.sound.setVolumeAmbience(mg.ui.ambientSlider);
             mg.ui.ambientSliderHitBox.x = (int) (650 + mg.ui.ambientSlider * 2 - 12);
-        } else if (mg.inputH.mouse1Pressed && charPanelMover.contains(mg.inputH.lastMousePosition)) {
-            charPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-            charPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.inputH.mouse1Pressed && charPanelMover.contains(mousePos)) {
+            charPanelX += mousePos.x - previousMousePosition.x;
+            charPanelY += mousePos.y - previousMousePosition.y;
             charPanelMover.x = charPanelX - 40;
             charPanelMover.y = charPanelY - 75;
-        } else if (mg.inputH.mouse1Pressed && bagPanelMover.contains(mg.inputH.lastMousePosition)) {
-            bagPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-            bagPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+        } else if (mg.inputH.mouse1Pressed && bagPanelMover.contains(mousePos)) {
+            bagPanelX += mousePos.x - previousMousePosition.x;
+            bagPanelY += mousePos.y - previousMousePosition.y;
             if (showBagEquipSlots) {
                 bagSortButton.x = bagPanelX + 41;
                 bagSortButton.y = bagPanelY + 1;
@@ -530,10 +532,10 @@ public class UI_InventoryPanel {
                 bagPanelMover.x = bagPanelX + 5;
                 bagPanelMover.y = bagPanelY - 2;
             }
-        } else if (mg.talentP.wholeTalentWindow.contains(mg.inputH.lastMousePosition)) {
+        } else if (mg.talentP.wholeTalentWindow.contains(mousePos)) {
             for (TalentNode node : mg.talentP.talent_Nodes) {
                 if (node != null) {
-                    if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
+                    if (node.boundBox.contains(mousePos)) {
                         if (mg.inputH.mouse1Pressed) {
                             if (mg.talentP.checkValidTalent(node) && mg.talentP.pointsToSpend > 0 && !node.activated) {
                                 node.activated = true;
@@ -546,12 +548,23 @@ public class UI_InventoryPanel {
                 }
             }
             if (!node_focused && mg.inputH.mouse1Pressed) {
-                mg.talentP.talentPanelX += mg.inputH.lastMousePosition.x - previousMousePosition.x;
-                mg.talentP.talentPanelY += mg.inputH.lastMousePosition.y - previousMousePosition.y;
+                mg.talentP.talentPanelX += mousePos.x - previousMousePosition.x;
+                mg.talentP.talentPanelY += mousePos.y - previousMousePosition.y;
+            }
+        } else if (mg.skillPanel.wholeSkillWindow.contains(mousePos)) {
+            for (int i = 0; i < 5; i++) {
+                if (mg.inputH.mouse1Pressed && mg.skillPanel.hitBoxesSideButtons[i].contains(mousePos)) {
+                    System.out.println("hey");
+                    for (int j = 0; j < 5; j++) {
+                        mg.skillPanel.whichPanel[i] = false;
+                    }
+                    mg.skillPanel.whichPanel[i] = true;
+                    return;
+                }
             }
         }
-        previousMousePosition.x = mg.inputH.lastMousePosition.x;
-        previousMousePosition.y = mg.inputH.lastMousePosition.y;
+        previousMousePosition.x = mousePos.x;
+        previousMousePosition.y = mousePos.y;
     }
 
     private void drawCharacterBackGroundMain(GraphicsContext gc, int startX, int startY) {
