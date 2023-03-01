@@ -258,8 +258,36 @@ public class GameMap {
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold13);
         gc.fillText("World Map", 925, 82);
+        drawLegend(gc);
     }
 
+    private void drawLegend(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBold14);
+        gc.setFill(Colors.mediumVeryLight);
+        gc.fillRect(1_580, 110, 155, 135);
+        gc.setLineWidth(2);
+        gc.setStroke(Colors.darkBackground);
+        gc.strokeRoundRect(1_580, 110, 155, 135, 3, 3);
+        gc.setLineWidth(1);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("SPACE : Recenter", 1_585, 125);
+        gc.fillText("SCROLL: Zoom +/-", 1_585, 240);
+        gc.setFill(Colors.Blue);
+        gc.fillRect(1_595, 135, 5, 5);
+        gc.fillText("          : Player", 1_585, 140);
+        gc.setFill(Colors.Red);
+        gc.fillRect(1_595, 155, 5, 5);
+        gc.fillText("          : Enemy", 1_585, 160);
+        gc.setFill(Colors.blue_npc);
+        gc.fillRect(1_595, 175, 5, 5);
+        gc.fillText("          : NPC", 1_585, 180);
+        gc.setFill(Colors.questMarkerYellow);
+        gc.fillRect(1_595, 195, 5, 5);
+        gc.fillText("          : Quest POI", 1_585, 200);
+        gc.setFill(Colors.darkBackground);
+        gc.fillRect(1_595, 215, 5, 5);
+        gc.fillText("          : Solid Tile", 1_585, 220);
+    }
 
     public void hideMapCollision() {
         mapMover.y = -1_100;
