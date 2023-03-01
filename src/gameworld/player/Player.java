@@ -1,5 +1,6 @@
 package gameworld.player;
 
+import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.entities.damage.effects.Effect;
@@ -417,7 +418,11 @@ public class Player extends ENTITY {
     }
 
     public void getExperience(ENTITY entity) {
-        experience += entity.level;
+        if (entity instanceof BOSS) {
+            experience += entity.level * 10;
+        } else {
+            experience += entity.level;
+        }
         if (experience >= levelUpExperience) {
             level++;
             levelup = true;

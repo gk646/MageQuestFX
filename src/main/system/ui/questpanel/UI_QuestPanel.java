@@ -32,10 +32,10 @@ public class UI_QuestPanel {
 
         if (expanded) {
             gc.setFill(Colors.lightGreyMiddleAlpha);
-            gc.fillRoundRect(1_649, 335, 251, 400, 10, 10);
+            gc.fillRoundRect(1_649, 335, 251, 400, 15, 15);
         } else {
             gc.setFill(Colors.lightGreyMiddleAlpha);
-            gc.fillRoundRect(1_655, 340, 245, 145, 10, 10);
+            gc.fillRoundRect(1_655, 340, 245, 145, 15, 15);
             gc.drawImage(small, 1649, 335);
         }
         gc.setEffect(mg.ui.shadow);

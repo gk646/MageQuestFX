@@ -20,7 +20,7 @@ public class Colors {
     public static final Color LightGreyAlpha = Color.rgb(192, 203, 220, 0.85);
     public static final Color LightGreyTransparent = Color.rgb(150, 150, 150, 0.25);
     public static final Color darkBackground = Color.rgb(90, 105, 136, 1);
-    public static final Color XPBarBlue = Color.rgb(0, 154, 219, 0.9);
+    public static final Color xpbarOrange = Color.rgb(254, 132, 23, 0.9);
     public static final Color LightGrey = Color.rgb(192, 203, 220, 1);
 
     //INTERFACE
@@ -31,6 +31,7 @@ public class Colors {
     public static final Color button = Color.rgb(77, 19, 2, 0.9);
     public static final Color lightGreyMiddleAlpha = Color.rgb(192, 203, 220, 0.6);
     public static final Color questNameBeige = Color.rgb(170, 156, 117, 1);
+    public static final Color bossNamePurple = Color.rgb(114, 69, 144, 1);
 
     // MAP
     public static final Color map_green = Color.rgb(99, 199, 77, 1);

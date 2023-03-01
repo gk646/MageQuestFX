@@ -21,7 +21,7 @@ public class UI_SkillBar {
 
 
     public final SKILL[] skills = new SKILL[8];
-    private final int skillBarX = 651;
+    private final int skillBarX = 614;
     private final int skillBarY = 1_005;
     public Rectangle[] hitBoxes = new Rectangle[8];
 
@@ -34,7 +34,7 @@ public class UI_SkillBar {
     private final Image map = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/map.png")));
     private final Image settings = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/settings.png")));
 
-    public Rectangle wholeSkillBar = new Rectangle(651, 1000, 743, 85);
+    public Rectangle wholeSkillBar = new Rectangle(614, 1000, 743, 85);
     public Rectangle characterBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY - 6, 32, 32);
     public Rectangle bagBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY - 6, 32, 32);
     public Rectangle skilltreeBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY - 6, 32, 32);
@@ -80,7 +80,7 @@ public class UI_SkillBar {
 
     private void drawBackGround(GraphicsContext gc) {
         gc.setFill(Colors.mediumVeryLight);
-        gc.fillRoundRect(skillBarX, skillBarY - 10, 693, 85, 15, 15);
+        gc.fillRoundRect(skillBarX, skillBarY - 12, 693, 87, 15, 15);
         gc.setFill(Colors.white);
         gc.drawImage(skillSlot, skillBarX + 5, skillBarY - 5);
         gc.drawImage(skillSlot, skillBarX + 64 + 5, skillBarY - 5);
@@ -94,11 +94,11 @@ public class UI_SkillBar {
         gc.drawImage(skillSlot, skillBarX + 64 * 7 + 25, skillBarY - 5);
         gc.setFont(FonT.minecraftBoldItalic15);
 
-        gc.fillText("1", skillBarX + 30, skillBarY + 73);
-        gc.fillText("2", skillBarX + 64 + 30, skillBarY + 73);
-        gc.fillText("3", skillBarX + 64 * 2 + 30, skillBarY + 73);
-        gc.fillText("4", skillBarX + 64 * 3 + 30, skillBarY + 73);
-        gc.fillText("5", skillBarX + 64 * 4 + 30, skillBarY + 73);
+        gc.fillText("1", skillBarX + 30, skillBarY + 71);
+        gc.fillText("2", skillBarX + 64 + 30, skillBarY + 71);
+        gc.fillText("3", skillBarX + 64 * 2 + 30, skillBarY + 71);
+        gc.fillText("4", skillBarX + 64 * 3 + 30, skillBarY + 71);
+        gc.fillText("5", skillBarX + 64 * 4 + 30, skillBarY + 71);
 
         // gc.fillText("5",skillBarX + 5+25, skillBarY + 70);
         //gc.fillText("5",skillBarX + 5+25, skillBarY + 70);

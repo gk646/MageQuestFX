@@ -430,17 +430,65 @@ public class InputHandler {
                 } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
                     mg.inventP.activeCharacterPanel = 1;
                 } else if (mg.sBar.characterBox.contains(mousePos)) {
-                    mg.showChar = true;
+                    if (!mg.showChar) {
+                        mg.showChar = true;
+                        mg.inventP.resetCharCollision();
+                        scene.setCursor(Runner.selectCrosshair);
+                    } else {
+                        mg.showChar = false;
+                        mg.inventP.hideCharCollision();
+                        if (!inventoryWindowOpen()) {
+                            scene.setCursor(Runner.crosshair);
+                        }
+                    }
                 } else if (mg.sBar.bagBox.contains(mousePos)) {
-                    mg.showBag = true;
+                    if (!mg.showBag) {
+                        mg.showBag = true;
+                        mg.inventP.resetBagCollision();
+                        scene.setCursor(Runner.selectCrosshair);
+                    } else {
+                        mg.showBag = false;
+                        mg.inventP.hideBagCollision();
+                        if (!inventoryWindowOpen()) {
+                            scene.setCursor(Runner.crosshair);
+                        }
+                    }
                 } else if (mg.sBar.skilltreeBox.contains(mousePos)) {
                     mg.showTalents = true;
+                    scene.setCursor(Runner.selectCrosshair);
                 } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
-                    mg.showAbilities = true;
+                    if (!mg.showAbilities) {
+                        mg.showAbilities = true;
+                        scene.setCursor(Runner.selectCrosshair);
+                    } else {
+                        mg.showAbilities = false;
+                        if (!inventoryWindowOpen()) {
+                            scene.setCursor(Runner.crosshair);
+                        }
+                    }
                 } else if (mg.sBar.mapBox.contains(mousePos)) {
-                    mg.showMap = true;
+                    if (!mg.showMap) {
+                        mg.gameMap.resetMapCollision();
+                        mg.showMap = true;
+                        scene.setCursor(Runner.selectCrosshair);
+                    } else {
+                        mg.gameMap.hideMapCollision();
+                        mg.showMap = false;
+                        if (!inventoryWindowOpen()) {
+                            scene.setCursor(Runner.crosshair);
+                        }
+                    }
                 } else if (mg.sBar.settingsBox.contains(mousePos)) {
                     mg.gameState = State.OPTION;
+                    leftPressed = false;
+                    upPressed = false;
+                    rightPressed = false;
+                    downPressed = false;
+                    mg.showBag = false;
+                    mg.showChar = false;
+                    mg.showMap = false;
+                    mg.showTalents = false;
+                    mg.showAbilities = false;
                 } else if (mg.inventP.activeTradingNPC != null && mg.inventP.activeTradingNPC.firstWindow.contains(mousePos)) {
                     mg.inventP.activeTradingNPC.show_trade = true;
                     mg.inventP.activeTradingNPC.show_buyback = false;

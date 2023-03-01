@@ -21,12 +21,12 @@ public class FonT {
     public static Font minecraftBoldItalic15;
 
     //MARU MONICA
-    private static Font maruMonica;
+    public static Font maruMonica;
 
-    private static Font maruMonica90;
+    public static Font maruMonica90;
 
     //PUBLIC PIXEL
-    private static Font publicPixel20;
+    public static Font publicPixel20;
     public static Font editUndo18;
     public static Font editUndo19;
     public static Font editUndo22;
@@ -34,6 +34,7 @@ public class FonT {
     public static Font minecraftBold17;
     public static Font minecraftItalic11;
     public static Font minecraftBoldItalic14;
+    public static Font minecraftBoldItalic18;
     public static void loadFonts() {
         minecraftRegular14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 14);
         minecraftRegular20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 20);
@@ -50,6 +51,7 @@ public class FonT {
         minecraftBold14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 14);
         minecraftBold50 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 50);
         minecraftBoldItalic15 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBoldItalic-1y1e.otf"), 15);
+        minecraftBoldItalic18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBoldItalic-1y1e.otf"), 18);
         minecraftBoldItalic14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBoldItalic-1y1e.otf"), 14);
         maruMonica = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf"), 20);
         maruMonica90 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/x12y16pxMaruMonica.ttf"), 90);

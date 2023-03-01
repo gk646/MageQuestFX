@@ -49,6 +49,8 @@ public class UI {
     private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
     public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
+
+    private final Image xpBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/xpbar.png")));
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
     public float ambientSlider = 75;
@@ -232,11 +234,12 @@ public class UI {
         gc.setEffect(shadow);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 97);
-        gc.setFill(Colors.XPBarBlue);
         gc.setEffect(null);
-        gc.setEffect(lighting);
-        gc.fillRoundRect(MainGame.SCREEN_WIDTH * 0.296f, MainGame.SCREEN_WIDTH * 0.500, (mg.player.experience / (float) mg.player.levelUpExperience) * 780, 13, 5, 5);
-        gc.setEffect(null);
+        gc.setFill(Colors.lightGreyMiddleAlpha);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, 700, 12);
+        gc.setFill(Colors.xpbarOrange);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 12);
+        gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
     }
 
 

@@ -21,6 +21,7 @@ public class BOSS_Slime extends BOSS {
         this.animation = new ResourceLoaderEntity("BossSlime");
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
+        name = "Big Bloated";
         this.enemyImage = Storage.BigSLimewalk1;
         animation.load();
         animation.playRandomSoundFromXToIndex(7, 7);
@@ -34,6 +35,7 @@ public class BOSS_Slime extends BOSS {
     @Override
     public void update() {
         super.update();
+        hpBarOn = false;
         spitting = false;
         if (health < 0.5 * maxHealth) {
             if (searchTicks % 240 == 0) {
@@ -94,7 +96,7 @@ public class BOSS_Slime extends BOSS {
                 drawIdle(gc);
             }
         }
-
+        drawBossHealthBar(gc);
         spriteCounter++;
     }
 

@@ -97,7 +97,6 @@ public class PRJ_Control {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         }
         projectile.playHitSound();
-
         entity.hpBarOn = true;
         if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
