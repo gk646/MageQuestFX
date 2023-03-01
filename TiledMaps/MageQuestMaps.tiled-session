@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "ForestClearing.tmx",
+    "activeFile": "FirstDungeon.tmx",
     "expandedProjectPaths": [
         "exports",
         "."
@@ -37,27 +37,35 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.33,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 396.969696969697,
-                "y": 63.636363636363626
+                "x": 548,
+                "y": 254
+            }
+        },
+        "FirstDungeon.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -64,
+                "y": 228
             }
         },
         "ForestClearing.tmx": {
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 467,
-                "y": 395.5
+                "x": 466.5,
+                "y": 395
             }
         },
         "GrassLands.tmx": {
             "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4028,
-                "y": 2824
+                "x": 4016,
+                "y": 2804
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -66,7 +74,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 3,
+            "scaleInDock": 1.5,
             "scaleInEditor": 2
         },
         "TileSet.tsx": {
@@ -94,11 +102,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 948.4848484848485,
-                "y": 787.878787878788
+                "x": 1042.5,
+                "y": 1329.5
             }
         },
         "d.tsx": {
@@ -168,8 +176,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 244,
-                "y": 400
+                "x": 242,
+                "y": 399
             }
         },
         "second floor_tutorial_castle.tmx#TileSet": {
@@ -187,8 +195,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 241.33333333333331,
-                "y": 205.99999999999994
+                "x": 240,
+                "y": 204.66666666666666
             }
         }
     },
@@ -196,26 +204,20 @@
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
-    "map.height": 100,
+    "map.height": 60,
     "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 100,
+    "map.width": 60,
     "openFiles": [
-        "City1.tmx",
-        "GrassLands.tmx",
-        "second floor_tutorial_castle.tmx",
-        "Tutorial.tmx",
-        "DungeonTutorial.tmx",
-        "TIILESET.tsx",
-        "grassspritesheet16.tsx",
-        "ForestClearing.tmx"
+        "FirstDungeon.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
-        "City1.tmx",
+        "FirstDungeon.tmx",
         "GrassLands.tmx",
+        "City1.tmx",
         "second floor_tutorial_castle.tmx",
         "Tutorial.tmx",
         "DungeonTutorial.tmx",
@@ -224,8 +226,7 @@
         "ForestClearing.tmx",
         "unbenannt.tmx",
         "tileset16.tsx",
-        "TileSet.tsx",
-        "d.tsx"
+        "TileSet.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
