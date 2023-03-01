@@ -15,7 +15,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
 
 
     public PRJ_VoidEruption() {
-        this.damage = 1;
+        this.damage = 50;
         this.resource = ProjectilePreloader.voidEruption;
         this.sounds[0] = resource.sounds.get(0);
         type = DamageType.DarkDMG;
