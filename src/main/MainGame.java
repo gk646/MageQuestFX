@@ -7,6 +7,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
@@ -45,6 +46,7 @@ import main.system.ui.inventory.UI_InventoryPanel;
 import main.system.ui.maps.GameMap;
 import main.system.ui.maps.MiniMap;
 import main.system.ui.questpanel.UI_QuestPanel;
+import main.system.ui.skillbar.SKILL;
 import main.system.ui.skillbar.UI_SkillBar;
 import main.system.ui.skillpanel.UI_SkillPanel;
 import main.system.ui.talentpanel.UI_TalentPanel;
@@ -299,7 +301,11 @@ public class MainGame {
             qPanel.draw(gc);
             sBar.draw(gc);
             wAnim.drawLayerOneTwo(gc);
-
+            ui.draw(gc);
+            if (showAbilities) {
+                skillPanel.drawSkillPanel(gc);
+                skillPanel.dragAndDropSkillBar(gc);
+            }
             if (showMap) {
                 gameMap.draw(gc);
             }
@@ -316,11 +322,6 @@ public class MainGame {
             if (showTalents) {
                 talentP.drawTalentWindow(gc);
             }
-            if (showAbilities) {
-                skillPanel.drawSkillPanel(gc);
-                skillPanel.dragAndDropSkillBar(gc);
-            }
-            ui.draw(gc);
         } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
             ui.draw(gc);
         }
@@ -330,6 +331,10 @@ public class MainGame {
             gc.setFill(Color.BLACK);
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + (System.nanoTime() - drawStart)), 500, 600);
+            for (SKILL skill : sBar.skills) {
+                skill.actualCoolDown = skill.totalCoolDown;
+            }
+            player.mana = player.maxMana;
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
         }
     }
@@ -438,8 +443,8 @@ public class MainGame {
 
     private void debug() {
         ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
-        for (int i = 0; i < 10; i++) {
-            // ENTITIES.add(new ENT_SkeletonWarrior(this, 4 * 48, 4 * 48, 1, Zone.Tutorial));
+        for (int i = 0; i < 1; i++) {
+            ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
         inventP.bag_Slots.get(3).item = MISC.get(2);
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);

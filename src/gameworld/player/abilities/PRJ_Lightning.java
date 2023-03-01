@@ -4,6 +4,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
 import main.system.ui.Effects;
@@ -22,7 +23,8 @@ public class PRJ_Lightning extends PROJECTILE {
         this.projectileHeight = 92;
         this.projectileWidth = 70;
         this.collisionBox = new Rectangle(30, 30, 40, 30);
-        this.damage = 2.0f;
+        this.damage = 25.0f;
+        projectileType = ProjectileType.OneHitNoDMG;
         type = DamageType.ArcaneDMG;
 
         //------POSITION-----------

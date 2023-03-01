@@ -30,7 +30,7 @@ abstract public class SKILL {
     private int side4;
     private int side5;
     public String imagePath;
-    protected float actualCoolDown;
+    public float actualCoolDown;
     protected int i_id;
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
     protected String description;

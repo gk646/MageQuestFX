@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
-import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
+import main.system.ui.skillbar.skills.SKL_IceLance;
 import main.system.ui.skillbar.skills.SKL_RingSalvo;
 import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.skillbar.skills.SKL_ThunderSplash;
@@ -51,7 +51,7 @@ public class UI_SkillBar {
         skills[2] = new SKL_ThunderStrike(mg);
         skills[3] = new SKL_VoidField(mg);
         skills[4] = new SKL_VoidEruption(mg);
-        skills[5] = new SKL_AutoShot(mg);
+        skills[5] = new SKL_IceLance(mg);
         skills[6] = new SKL_EnergySphere(mg);
         skills[7] = new SKL_ThunderSplash(mg);
         for (int i = 0; i < 8; i++) {

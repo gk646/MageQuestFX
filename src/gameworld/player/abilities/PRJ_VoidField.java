@@ -4,6 +4,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
+import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -14,7 +15,7 @@ import java.awt.geom.Point2D;
 public class PRJ_VoidField extends PROJECTILE {
 
     public PRJ_VoidField(int durationInTicks) {
-        this.damage = 0.5f;
+        this.damage = 0.1f;
         this.type = DamageType.DarkDMG;
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);
@@ -22,6 +23,7 @@ public class PRJ_VoidField extends PROJECTILE {
         collisionBox = new Rectangle(-32, -32, 64, 64);
         direction = "leftrightdownup";
         this.duration = durationInTicks;
+        projectileType = ProjectileType.Continuous;
         playStartSound();
     }
 

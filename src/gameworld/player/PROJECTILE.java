@@ -30,6 +30,7 @@ public abstract class PROJECTILE {
 
     public DamageType type;
     protected Point2D.Double updateVector;
+    public ProjectileType projectileType;
     public float damage;
     public int projectileHeight;
     protected int spriteCounter;
@@ -43,6 +44,7 @@ public abstract class PROJECTILE {
     protected Image projectileImage8;
     protected Image projectileImage9;
     protected Image projectileImage10;
+    public boolean damageDead;
     public int projectileWidth;
     public boolean dead, collisionUp, collisionDown;
     public boolean collisionLeft;

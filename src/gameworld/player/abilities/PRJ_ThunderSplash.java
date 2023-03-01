@@ -4,6 +4,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
+import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -16,11 +17,13 @@ public class PRJ_ThunderSplash extends PROJECTILE {
     public PRJ_ThunderSplash() {
         this.damage = 1.0f;
         this.type = DamageType.ArcaneDMG;
+        damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;
         //this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
-        collisionBox = new Rectangle(-24, -24, 48, 48);
+        collisionBox = new Rectangle(0, 0, 48, 48);
         direction = "leftrightdownup";
+        projectileType = ProjectileType.OneHitNoDMG;
         //playStartSound();
         //TODO sound
     }
@@ -41,8 +44,10 @@ public class PRJ_ThunderSplash extends PROJECTILE {
                     gc.drawImage(resource.images1.get(4), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 5 ->
                     gc.drawImage(resource.images1.get(5), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
-            case 6 ->
-                    gc.drawImage(resource.images1.get(6), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
+            case 6 -> {
+                damageDead = false;
+                gc.drawImage(resource.images1.get(6), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
+            }
             case 7 ->
                     gc.drawImage(resource.images1.get(7), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 8 ->
@@ -59,6 +64,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
                     gc.drawImage(resource.images1.get(13), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 14 -> dead = true;
         }
+
 
         spriteCounter++;
     }

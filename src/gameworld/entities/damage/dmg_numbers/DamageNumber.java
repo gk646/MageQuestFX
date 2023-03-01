@@ -29,12 +29,16 @@ public class DamageNumber {
     }
 
     public void draw(GraphicsContext gc) {
-        switch (type) {
-            case DarkDMG -> gc.setFill(Colors.dark_magic_purple);
-            case FireDMG -> gc.setFill(Colors.fire_red);
-            case ArcaneDMG -> gc.setFill(Colors.arcane_blue);
-            case PoisonDMG -> gc.setFill(Colors.poison_green);
-            case PhysicalDMG -> gc.setFill(Colors.physical_grey);
+        if (type == DamageType.DarkDMG) {
+            gc.setFill(Colors.dark_magic_purple);
+        } else if (type == DamageType.FireDMG) {
+            gc.setFill(Colors.fire_red);
+        } else if (type == DamageType.ArcaneDMG) {
+            gc.setFill(Colors.arcane_blue);
+        } else if (type == DamageType.PoisonDMG) {
+            gc.setFill(Colors.poison_green);
+        } else if (type == DamageType.PhysicalDMG) {
+            gc.setFill(Colors.physical_grey);
         }
         if (crit) {
             gc.setFont(FonT.editUndo22);

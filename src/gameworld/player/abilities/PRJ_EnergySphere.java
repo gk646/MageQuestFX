@@ -3,10 +3,10 @@ package gameworld.player.abilities;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import main.system.Storage;
 import main.system.sound.Sound;
 import main.system.ui.Effects;
@@ -26,6 +26,7 @@ public class PRJ_EnergySphere extends PROJECTILE {
         sounds[1] = new MediaPlayer(Sound.energySphereHit);
         sounds[1].setVolume(Sound.EFFECTS_VOLUME);
         this.type = DamageType.ArcaneDMG;
+        projectileType = ProjectileType.Continuous;
         //-------VALUES-----------
         this.movementSpeed = 3;
         this.damage = damage;

@@ -12,6 +12,7 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader voidEruption;
     public static GeneralResourceLoader thunderSplash;
     public static GeneralResourceLoader frostNova;
+    public static GeneralResourceLoader iceLance;
 
     public static void load() {
         solarFlare = new GeneralResourceLoader("projectiles/solarFlare");
@@ -23,5 +24,7 @@ public class ProjectilePreloader {
         voidEruption.loadProjectilesSounds();
         thunderSplash = new GeneralResourceLoader("projectiles/thunderSplash");
         frostNova = new GeneralResourceLoader("projectiles/frostNova");
+        iceLance = new GeneralResourceLoader("projectiles/iceLance");
+        iceLance.loadProjectilesSounds();
     }
 }

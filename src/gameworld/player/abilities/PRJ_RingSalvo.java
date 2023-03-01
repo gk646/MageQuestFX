@@ -4,6 +4,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -23,6 +24,7 @@ public class PRJ_RingSalvo extends PROJECTILE {
         this.movementSpeed = 5;
         this.projectileHeight = 25;
         this.projectileWidth = 25;
+        projectileType = ProjectileType.Continuous;
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.version = version;
         this.type = DamageType.FireDMG;

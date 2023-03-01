@@ -4,6 +4,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
+import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.Rectangle;
@@ -13,12 +14,13 @@ public class PRJ_FrostNova extends PROJECTILE {
 
 
     public PRJ_FrostNova() {
+        projectileType = ProjectileType.OneHitNoDMG;
         this.damage = 1.0f;
         this.type = DamageType.FrostDMG;
         this.resource = ProjectilePreloader.frostNova;
         //this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX, Player.worldY);
-        collisionBox = new Rectangle(-24, -24, 48, 48);
+        collisionBox = new Rectangle(0, 0, 48, 48);
         direction = "leftrightdownup";
         //playStartSound();
         //TODO sound

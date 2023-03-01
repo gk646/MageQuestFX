@@ -2,6 +2,7 @@ package gameworld.player.abilities;
 
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
 
@@ -19,6 +20,7 @@ public class PRJ_EnemyStandardShot extends PROJECTILE {
     public PRJ_EnemyStandardShot(int x, int y, int level, int goalx, int goaly) {
         //-------VALUES-----------
         this.movementSpeed = 3;
+        projectileType = ProjectileType.OneHitCompletelyDead;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;

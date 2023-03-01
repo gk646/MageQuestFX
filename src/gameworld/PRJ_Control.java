@@ -3,14 +3,11 @@ package gameworld;
 
 import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
-import gameworld.entities.companion.ENT_Owly;
-import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.DamageEffect;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
-import gameworld.player.abilities.PRJ_AutoShot;
+import gameworld.player.ProjectileType;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
@@ -75,7 +72,7 @@ public class PRJ_Control {
                                 entityIterator.remove();
                                 continue;
                             }
-                            if (!(projectile instanceof PRJ_EnemyStandardShot) && !(entity instanceof ENT_Owly) && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            if (!(projectile instanceof PRJ_EnemyStandardShot) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
                                 entity.playGetHitSound();
                             }
@@ -87,10 +84,13 @@ public class PRJ_Control {
     }
 
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
-        if (projectile instanceof PRJ_AutoShot) {
+        if (projectile.projectileType == ProjectileType.OneHitCompletelyDead) {
             projectile.dead = true;
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
+            //entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
+        } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
+            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            projectile.damageDead = true;
         } else {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         }

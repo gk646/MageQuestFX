@@ -4,6 +4,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
+import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -21,6 +22,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 36, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 36);
         collisionBox = new Rectangle(-36, -36, 72, 72);
         direction = "leftrightdownup";
+        projectileType = ProjectileType.OneHitNoDMG;
         playStartSound();
     }
 
