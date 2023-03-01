@@ -17,7 +17,6 @@ public class PRJ_SolarFlare extends PROJECTILE {
 
     public PRJ_SolarFlare() {
         this.damage = 50.0f;
-        damageDead = false;
         this.type = DamageType.FireDMG;
         this.resource = ProjectilePreloader.solarFlare;
         this.sounds[0] = resource.sounds.get(0);
@@ -50,7 +49,6 @@ public class PRJ_SolarFlare extends PROJECTILE {
                     gc.drawImage(resource.images1.get(7), (int) worldPos.x - Player.worldX + Player.screenX - 10, (int) worldPos.y - Player.worldY + Player.screenY - 80);
             case 8 -> dead = true;
         }
-
         spriteCounter++;
     }
 

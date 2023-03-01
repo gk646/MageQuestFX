@@ -74,7 +74,6 @@ public class PRJ_Control {
                             }
                             if (!(projectile instanceof PRJ_EnemyStandardShot) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
-                                entity.playGetHitSound();
                             }
                         }
                     }
@@ -87,14 +86,18 @@ public class PRJ_Control {
         if (projectile.projectileType == ProjectileType.OneHitCompletelyDead) {
             projectile.dead = true;
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            entity.playGetHitSound();
             //entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
         } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
             projectile.damageDead = true;
+            entity.playGetHitSound();
         } else {
+            entity.playGetHitSound();
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
         }
         projectile.playHitSound();
+
         entity.hpBarOn = true;
         if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);

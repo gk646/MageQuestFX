@@ -15,7 +15,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
 
 
     public PRJ_ThunderSplash() {
-        this.damage = 1.0f;
+        this.damage = 15.0f;
         this.type = DamageType.ArcaneDMG;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;
@@ -44,10 +44,8 @@ public class PRJ_ThunderSplash extends PROJECTILE {
                     gc.drawImage(resource.images1.get(4), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 5 ->
                     gc.drawImage(resource.images1.get(5), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
-            case 6 -> {
-                damageDead = false;
-                gc.drawImage(resource.images1.get(6), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
-            }
+            case 6 ->
+                    gc.drawImage(resource.images1.get(6), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 7 ->
                     gc.drawImage(resource.images1.get(7), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 8 ->
@@ -65,7 +63,9 @@ public class PRJ_ThunderSplash extends PROJECTILE {
             case 14 -> dead = true;
         }
 
-
+        if (spriteCounter == 60) {
+            damageDead = false;
+        }
         spriteCounter++;
     }
 

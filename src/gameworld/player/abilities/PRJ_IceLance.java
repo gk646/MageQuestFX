@@ -23,7 +23,7 @@ public class PRJ_IceLance extends PROJECTILE {
         projectileType = ProjectileType.OneHitCompletelyDead;
         this.resource = ProjectilePreloader.iceLance;
         this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
-        this.worldPos = new Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
+        this.worldPos = new Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f - 32, Player.worldY + 24 - projectileHeight / 2.0f - 32);
         this.updateVector = getTrajectory(new Point(x, y));
         collisionBox = new Rectangle(0, 0, 15, 15);
         direction = "leftrightdownup";

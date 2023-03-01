@@ -7,7 +7,6 @@ import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
-import main.system.ui.Colors;
 
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
@@ -44,10 +43,8 @@ public class PRJ_ThunderStrike extends PROJECTILE {
                     gc.drawImage(resource.images1.get(3), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
             case 4 ->
                     gc.drawImage(resource.images1.get(4), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
-            case 5 -> {
-                gc.drawImage(resource.images1.get(5), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
-                damageDead = false;
-            }
+            case 5 ->
+                    gc.drawImage(resource.images1.get(5), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
             case 6 ->
                     gc.drawImage(resource.images1.get(6), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
             case 7 ->
@@ -64,9 +61,10 @@ public class PRJ_ThunderStrike extends PROJECTILE {
                     gc.drawImage(resource.images1.get(12), (int) worldPos.x - Player.worldX + Player.screenX - 16, (int) worldPos.y - Player.worldY + Player.screenY - 16);
             case 13 -> dead = true;
         }
-        gc.setFill(Colors.Red);
-        gc.fillRect(worldPos.x + collisionBox.x - Player.worldX + Player.screenX, worldPos.y + collisionBox.y - Player.worldY + Player.screenY, collisionBox.width, collisionBox.height);
 
+        if (spriteCounter == 60) {
+            damageDead = false;
+        }
         spriteCounter++;
     }
 

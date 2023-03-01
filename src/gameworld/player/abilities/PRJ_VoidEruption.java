@@ -20,7 +20,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
         this.sounds[0] = resource.sounds.get(0);
         type = DamageType.DarkDMG;
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 36, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 36);
-        collisionBox = new Rectangle(-36, -36, 72, 72);
+        collisionBox = new Rectangle(-3, -3, 76, 76);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
         playStartSound();
@@ -63,6 +63,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
                     gc.drawImage(resource.images1.get(15), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 16 -> dead = true;
         }
+
         spriteCounter++;
     }
 

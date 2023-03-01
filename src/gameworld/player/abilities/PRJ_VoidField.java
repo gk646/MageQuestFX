@@ -20,7 +20,7 @@ public class PRJ_VoidField extends PROJECTILE {
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 32, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 32);
-        collisionBox = new Rectangle(-32, -32, 64, 64);
+        collisionBox = new Rectangle(-5, -5, 74, 74);
         direction = "leftrightdownup";
         this.duration = durationInTicks;
         projectileType = ProjectileType.Continuous;
@@ -100,6 +100,7 @@ public class PRJ_VoidField extends PROJECTILE {
                         gc.drawImage(resource.images1.get(24), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             }
         }
+
 
         spriteCounter++;
     }
