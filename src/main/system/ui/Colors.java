@@ -30,6 +30,7 @@ public class Colors {
 
     public static final Color button = Color.rgb(77, 19, 2, 0.9);
     public static final Color lightGreyMiddleAlpha = Color.rgb(192, 203, 220, 0.6);
+    public static final Color questNameBeige = Color.rgb(170, 156, 117, 1);
 
     // MAP
     public static final Color map_green = Color.rgb(99, 199, 77, 1);

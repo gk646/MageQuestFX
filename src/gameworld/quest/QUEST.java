@@ -45,8 +45,9 @@ abstract public class QUEST {
         if (!checkDialogSimilarity(newText, index)) {
             mg.sound.playEffectSound(1);
         }
-        objectives[index] = newText;
+        objectives[index] = Dialog.insertNewLine(newText, 20);
     }
+
 
     /**
      * true if the play bags contain item with name

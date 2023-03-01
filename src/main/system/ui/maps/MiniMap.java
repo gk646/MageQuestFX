@@ -23,7 +23,7 @@ public class MiniMap {
         int xTile = mg.playerX;
         int yTile = mg.playerY;
         gc.setFill(Colors.lightGreyMiddleAlpha);
-        gc.fillRect(1700, 25, 200, 200);
+        gc.fillRect(1686, 25, 200, 200);
         int tileNum, tileNum2;
         int yTileOffset, xTileOffset, entityX, entityY;
         final int tileSize = 5;
@@ -40,21 +40,21 @@ public class MiniMap {
                         if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
                             if ((tileNum != -1 && WorldRender.tileStorage[tileNum].collision) || (tileNum2 != -1 && WorldRender.tileStorage[tileNum2].collision)) {
                                 gc.setFill(Colors.darkBackground);
-                                gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                                gc.fillRect(1686 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
                             } else {
                                 gc.setFill(Colors.map_green);
-                                gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                                gc.fillRect(1686 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
                             }
                         } else {
                             gc.setFill(Colors.black);
-                            gc.fillRect(1_700 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
+                            gc.fillRect(1686 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
                         }
                     }
                 }
             }
         }
         gc.setFill(Colors.Blue);
-        gc.fillRect(1_700 + 100, 25 + 100, 5, 5);
+        gc.fillRect(1686 + 100, 25 + 100, 5, 5);
         gc.setFill(Colors.Red);
         final int offset = 100;
         synchronized (mg.PROXIMITY_ENTITIES) {
@@ -63,7 +63,7 @@ public class MiniMap {
                 entityY = (int) ((entity.worldY + 24) / 48);
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
                     if (WorldController.currentMapCover[entityX][entityY] == 1) {
-                        gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
+                        gc.fillRect(1686 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
                     }
                 }
             }
@@ -74,7 +74,7 @@ public class MiniMap {
                 entityY = (int) ((projectile.worldPos.y + 24) / 48);
                 if (entityX < WorldController.currentMapCover.length && entityY < WorldController.currentMapCover.length && WorldController.currentMapCover[entityX][entityY] == 1) {
                     if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
-                        gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, 2, 2);
+                        gc.fillRect(1686 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, 2, 2);
                     }
                 }
             }
@@ -85,11 +85,11 @@ public class MiniMap {
             entityY = (int) ((entity.worldY + 24) / 48);
             if (WorldController.currentMapCover[entityX][entityY] == 1) {
                 if ((entityX - xTile) < 20 && xTile - entityX <= 20 && (entityY - yTile) < 20 && yTile - entityY <= 20) {
-                    gc.fillRect(1_700 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
+                    gc.fillRect(1686 + offset + (entityX - xTile) * tileSize, 25 + offset + (entityY - yTile) * tileSize, tileSize, tileSize);
                 }
             }
         }
-        gc.drawImage(miniMapFrame, 1663, 0);
+        gc.drawImage(miniMapFrame, 1649, 0);
     }
 }
 

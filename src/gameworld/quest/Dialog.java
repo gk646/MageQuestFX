@@ -24,12 +24,12 @@ public class Dialog {
     public Dialog() {
     }
 
-    public static String insertNewLine(String str) {
+    public static String insertNewLine(String str, int number) {
         StringBuilder sb = new StringBuilder();
         String[] words = str.split("\\s+");
         int count = 0;
         for (String word : words) {
-            if (count + word.length() > 39) {
+            if (count + word.length() > number) {
                 sb.append("\n");
                 count = 0;
             }
@@ -156,7 +156,7 @@ public class Dialog {
     }
 
     public void loadNewLine(String dialogLine) {
-        this.dialogLine = insertNewLine(dialogLine);
+        this.dialogLine = insertNewLine(dialogLine, 39);
         this.dialogRenderCounter = 0;
     }
 

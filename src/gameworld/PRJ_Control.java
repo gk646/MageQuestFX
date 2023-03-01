@@ -5,11 +5,10 @@ import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
+import gameworld.player.EnemyProjectile;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectileType;
-import gameworld.player.abilities.PRJ_AcidBreath;
-import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
@@ -60,7 +59,7 @@ public class PRJ_Control {
                         continue;
                     }
                     projectile.update();
-                    if (projectile instanceof PRJ_EnemyStandardShot && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
+                    if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
                         mg.player.health -= projectile.level;
                         projectile.dead = true;
                     }
@@ -73,7 +72,7 @@ public class PRJ_Control {
                                 entityIterator.remove();
                                 continue;
                             }
-                            if (!(projectile instanceof PRJ_EnemyStandardShot || projectile instanceof PRJ_AcidBreath) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
                             }
                         }

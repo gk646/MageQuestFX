@@ -112,7 +112,7 @@ public class QST_Tutorial extends QUEST {
 
                     if (playerInsideRectangle(new Point(78, 36), new Point(81, 42)) && objective3Progress == 0) {
                         objective3Progress = 1;
-                        updateObjective("Follow the path", 2);
+                        updateObjective("Look around", 2);
                     }
                     if (playerBagsContainItem("Booze")) {
                         removeObjective(2);

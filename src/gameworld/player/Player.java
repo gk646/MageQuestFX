@@ -147,8 +147,8 @@ public class Player extends ENTITY {
         collisionLeft = false;
         collisionDown = false;
         collisionUp = false;
-        direction = "updownleftright";
         mg.collisionChecker.checkPlayerAgainstTile(this);
+        //TODO rewrite collison
         int worldSize = mg.wRender.worldSize.x * 48;
         if (mg.inputH.leftPressed) {
             if (!collisionLeft && worldX > 0) {

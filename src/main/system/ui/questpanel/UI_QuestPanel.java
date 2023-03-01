@@ -4,7 +4,6 @@ package main.system.ui.questpanel;
 import gameworld.quest.QUEST;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
@@ -18,10 +17,11 @@ public class UI_QuestPanel {
     public ArrayList<QUEST> quests = new ArrayList<>();
 
     public QUEST activeQuest;
-    public final Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
+    public final Rectangle expandButton = new Rectangle(1_870, 350, 21, 21);
     private final MainGame mg;
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
     private final Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
+    private final Image small = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/questpanel_small.png"))));
 
 
     public UI_QuestPanel(MainGame mg) {
@@ -29,34 +29,45 @@ public class UI_QuestPanel {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.setFont(FonT.minecraftBold20);
+
         if (expanded) {
             gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_649, 335, 251, 400, 10, 10);
+        } else {
+            gc.setFill(Colors.lightGreyMiddleAlpha);
+            gc.fillRoundRect(1_655, 340, 245, 145, 10, 10);
+            gc.drawImage(small, 1649, 335);
         }
-        gc.setFill(Color.WHITE);
-        gc.fillText("OBJECTIVES", 1_678, 361);
-        gc.setFont(FonT.minecraftBoldItalic15);
-        int y = 361;
-        gc.fillText(activeQuest.name, 1_685, y += 30);
+        gc.setEffect(mg.ui.shadow);
+        gc.setFont(FonT.minecraftBold17);
+        gc.setFill(Colors.white);
+        gc.fillText("OBJECTIVES", 1_715, 361);
+        gc.setFont(FonT.minecraftBold16);
+        int y = 390;
+        gc.setFill(Colors.questNameBeige);
+        gc.fillText(activeQuest.name, 1_670, y += 30);
+        gc.setFill(Colors.white);
+        gc.setFont(FonT.minecraftBoldItalic14);
+        y += 10;
         for (int i = 0; i < 3; i++) {
             if (activeQuest.objectives[i] != null) {
-                gc.fillText(activeQuest.objectives[i], 1_500, y += 30);
+                for (String string : activeQuest.objectives[i].split("\n")) {
+                    gc.fillText(string, 1_680, y += 15);
+                }
+                y += 20;
             }
         }
+        gc.setEffect(null);
 
-
-        gc.setFill(Colors.button);
-        gc.fillRoundRect(1_872, 343, 21, 21, 5, 5);
         if (expanded) {
-            gc.drawImage(collapseImage, 1_878, 350);
+            gc.drawImage(collapseImage, 1_870, 350);
             for (QUEST quest : quests) {
                 if (quest != null) {
                     gc.fillText(quest.name, 1_685, y += 30);
                 }
             }
         } else {
-            gc.drawImage(expandImage, 1_876, 347);
+            gc.drawImage(expandImage, 1_870, 350);
         }
     }
 
