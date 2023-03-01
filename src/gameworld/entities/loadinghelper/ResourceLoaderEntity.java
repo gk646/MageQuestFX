@@ -80,10 +80,8 @@ public class ResourceLoaderEntity {
     }
 
     private void loadSounds() {
-        String dataName;
-        dataName = "getHit";
-        for (int i = 0; i < 5; i++) {
-            URL url = getClass().getResource("/resources/sound/effects/entities/" + name + "/" + dataName + i + ".wav");
+        for (int i = 0; i < 10; i++) {
+            URL url = getClass().getResource("/resources/sound/effects/entities/" + name + "/" + i + ".wav");
             if (url != null) {
                 sounds.add(new MediaPlayer(new Media(url.toString())));
             } else {
@@ -96,7 +94,7 @@ public class ResourceLoaderEntity {
     }
 
     public void playRandomSoundFromXToIndex(int startIndex, int hitSoundLimit) {
-        int num =Math.max(startIndex, (int) (Math.random() * hitSoundLimit));
+        int num = Math.max(startIndex, (int) (Math.random() * hitSoundLimit));
         sounds.get(num).seek(Duration.ZERO);
         sounds.get(num).play();
     }

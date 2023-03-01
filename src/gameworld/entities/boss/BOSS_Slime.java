@@ -3,7 +3,7 @@ package gameworld.entities.boss;
 import gameworld.entities.BOSS;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
-import gameworld.player.abilities.PRJ_EnemyStandardShot;
+import gameworld.player.abilities.PRJ_AcidBreath;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.Storage;
@@ -11,18 +11,19 @@ import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
-public class BOS_Slime extends BOSS {
+public class BOSS_Slime extends BOSS {
 
     private boolean attack1, attack2, attack3, spitting;
 
 
-    public BOS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
+    public BOSS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
         this.animation = new ResourceLoaderEntity("BossSlime");
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
         this.enemyImage = Storage.BigSLimewalk1;
         animation.load();
+        animation.playRandomSoundFromXToIndex(7, 7);
     }
 
 
@@ -49,6 +50,7 @@ public class BOS_Slime extends BOSS {
             standardAttackScript();
         }
         if (!attack2 && !attack3 && !attack1 && !spitting) {
+            onPath = true;
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
         }
@@ -89,7 +91,7 @@ public class BOS_Slime extends BOSS {
             if (onPath) {
                 drawWalk(gc);
             } else {
-                //TODO idle
+                drawIdle(gc);
             }
         }
 
@@ -104,6 +106,18 @@ public class BOS_Slime extends BOSS {
             case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY);
             case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY);
+        }
+        if (spriteCounter % 90 / 15 == 0) {
+            animation.playRandomSoundFromXToIndex(6, 6);
+        }
+    }
+
+    private void drawIdle(GraphicsContext gc) {
+        switch (spriteCounter % 180 / 30) {
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX, screenY);
         }
     }
 
@@ -144,22 +158,24 @@ public class BOS_Slime extends BOSS {
 
     private void slimeVolley() {
         for (int i = 0; i < 720; i += 4) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos(i % 360 * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin(i % 360 * (Math.PI / 180))))));
+            mg.PROJECTILES.add(new PRJ_AcidBreath((int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos(i % 360 * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin(i % 360 * (Math.PI / 180))))));
         }
+        animation.playRandomSoundFromXToIndex(4, 5);
     }
 
     private void slimeCone() {
         int angle = (int) (Math.atan2(Player.worldY - worldY, Player.worldX - worldX) * (180 / Math.PI));
         for (int i = -45; i < 45; i += 4) {
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
+            mg.PROJECTILES.add(new PRJ_AcidBreath((int) worldX, (int) worldY, level, (int) (worldX + (150 * Math.cos((angle + i) * (Math.PI / 180)))), (int) (worldY + (150 * Math.sin((angle + i) * (Math.PI / 180))))));
         }
+        animation.playRandomSoundFromXToIndex(4, 5);
     }
 
     @Override
     public void playGetHitSound() {
         if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
-            animation.playRandomSoundFromXToIndex(0,4);
+            animation.playRandomSoundFromXToIndex(0, 4);
         }
     }
 }

@@ -4,7 +4,7 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.boss.BOS_Slime;
+import gameworld.entities.boss.BOSS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
@@ -445,7 +445,7 @@ public class MainGame {
     }
 
     private void debug() {
-        ENTITIES.add(new BOS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
+        ENTITIES.add(new BOSS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
@@ -453,7 +453,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        // wControl.loadMap(Zone.Tutorial, 98, 98);
+        wControl.loadMap(Zone.Tutorial, 68, 75);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

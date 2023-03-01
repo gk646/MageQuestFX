@@ -118,7 +118,6 @@ public class QST_Tutorial extends QUEST {
                         removeObjective(2);
                         mg.wControl.removeMapMarker("path3");
                     }
-
                     npc.blockInteraction = true;
                     if (npc.show_dialog && playerBagsContainItem("Booze") && playerBagsContainItem("Silver Key")) {
                         nextStage();
@@ -174,6 +173,18 @@ public class QST_Tutorial extends QUEST {
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     }
+                }
+                if (WorldRender.worldData1[74][84] == 1383 && WorldController.currentWorld == Zone.Tutorial) {
+                    openRoundDoor(35, 67);
+                    WorldRender.worldData[75][72] = 131;
+                    WorldRender.worldData[75][73] = 131;
+                    WorldRender.worldData2[75][72] = -1;
+                    WorldRender.worldData2[75][73] = -1;
+                    WorldRender.worldData2[76][72] = -1;
+                    WorldRender.worldData2[76][73] = -1;
+                    progressStage = 27;
+                    loadDialogStage(npc, DialogStorage.Tutorial, 27);
+                    openRoundDoor(68, 77);
                 }
             }
         }

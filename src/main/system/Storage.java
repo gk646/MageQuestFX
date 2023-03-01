@@ -9,11 +9,13 @@ import java.util.Objects;
 public class Storage {
     public final static Rectangle box_primaryFire = new Rectangle(0, 0, 16, 16);
     public static final Rectangle box_secondaryFire = new Rectangle(-7, -7, 46, 46);
+    public static final Rectangle acidBreathBox = new Rectangle(0, 0, 10, 8);
     public static Image Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
     public static Image secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
     public static Image BigSLimewalk1, BigSLimewalk2, BigSLimewalk3, BigSLimewalk4, BigSLimewalk5, BigSLimewalk6;
     public static Image primaryFire1;
     public static Image gruntImage1;
+    public static Image acidBreath;
     public static Image shooterImage1;
     public static Image coin1, coin2, coin3, coin4;
 
@@ -80,6 +82,7 @@ public class Storage {
 
     private void getPrimaryFireImages() {
         primaryFire1 = setup("/projectiles/PrimaryFire/PrimaryFire01.png");
+        acidBreath = setup("/projectiles/acidBreath/0.png");
     }
 
     private Image setup(String imagePath) {

@@ -8,6 +8,7 @@ import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectileType;
+import gameworld.player.abilities.PRJ_AcidBreath;
 import gameworld.player.abilities.PRJ_EnemyStandardShot;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
@@ -72,7 +73,7 @@ public class PRJ_Control {
                                 entityIterator.remove();
                                 continue;
                             }
-                            if (!(projectile instanceof PRJ_EnemyStandardShot) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            if (!(projectile instanceof PRJ_EnemyStandardShot || projectile instanceof PRJ_AcidBreath) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
                             }
                         }
