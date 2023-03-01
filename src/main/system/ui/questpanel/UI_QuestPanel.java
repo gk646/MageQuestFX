@@ -16,6 +16,8 @@ import java.util.Objects;
 public class UI_QuestPanel {
     public boolean expanded = false;
     public ArrayList<QUEST> quests = new ArrayList<>();
+
+    public QUEST activeQuest;
     public final Rectangle expandButton = new Rectangle(1_872, 343, 21, 21);
     private final MainGame mg;
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
@@ -36,15 +38,23 @@ public class UI_QuestPanel {
         gc.fillText("OBJECTIVES", 1_678, 361);
         gc.setFont(FonT.minecraftBoldItalic15);
         int y = 361;
-        for (QUEST quest : quests) {
-            if (quest != null) {
-                gc.fillText(quest.objective, 1_685, y += 30);
+        gc.fillText(activeQuest.name, 1_685, y += 30);
+        for (int i = 0; i < 3; i++) {
+            if (activeQuest.objectives[i] != null) {
+                gc.fillText(activeQuest.objectives[i], 1_500, y += 30);
             }
         }
+
+
         gc.setFill(Colors.button);
         gc.fillRoundRect(1_872, 343, 21, 21, 5, 5);
         if (expanded) {
             gc.drawImage(collapseImage, 1_878, 350);
+            for (QUEST quest : quests) {
+                if (quest != null) {
+                    gc.fillText(quest.name, 1_685, y += 30);
+                }
+            }
         } else {
             gc.drawImage(expandImage, 1_876, 347);
         }

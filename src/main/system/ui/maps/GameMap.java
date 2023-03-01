@@ -226,8 +226,8 @@ public class GameMap {
         }
         for (MapMarker mapMarker : WorldController.currentMapMarkers) {
             if (mapMarker.type == MarkerType.Quest) {
-                y = 465 + yOffset + (mapMarker.xTile - yTile_i) * zoom_i;
-                x = 785 + xOffset + (mapMarker.yTile - xTile_i) * zoom_i;
+                y = 465 + yOffset + (mapMarker.yTile - yTile_i) * zoom_i;
+                x = 785 + xOffset + (mapMarker.xTile - xTile_i) * zoom_i;
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1_570 && i > 0 && b > 0) {

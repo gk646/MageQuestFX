@@ -301,6 +301,9 @@ public class MainGame {
             qPanel.draw(gc);
             sBar.draw(gc);
             wAnim.drawLayerOneTwo(gc);
+            if (player.drawDialog) {
+                player.dialog.drawDialogPlayer(gc);
+            }
             ui.draw(gc);
             if (showAbilities) {
                 skillPanel.drawSkillPanel(gc);

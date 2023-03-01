@@ -4,6 +4,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
+import gameworld.quest.Dialog;
 import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
@@ -26,6 +27,7 @@ import java.util.Objects;
 
 public class Player extends ENTITY {
     public boolean levelup;
+    public Dialog dialog = new Dialog();
     public Map map;
     public boolean isMoving;
     public int maxMana;
@@ -72,6 +74,7 @@ public class Player extends ENTITY {
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
     public GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
     private int levelupCounter;
+    public boolean drawDialog;
 
     /*
     1. DMG_Arcane_Absolute
@@ -117,6 +120,7 @@ public class Player extends ENTITY {
     public Player(MainGame mainGame) {
         this.mg = mainGame;
         playerEffects = effects;
+        dialog.dialogLine = null;
         //-------VALUES-----------
         this.playerMovementSpeed = 4;
         animation.loadSound("levelup", "levelup");
@@ -483,6 +487,15 @@ public class Player extends ENTITY {
 
     @Override
     public void draw(GraphicsContext gc) {
+        if (dialog.dialogLine != null) {
+            drawDialog = true;
+            if (dialog.dialogRenderCounter >= 2_000) {
+                dialog.dialogRenderCounter++;
+                if (dialog.dialogRenderCounter >= 2_500) {
+                    drawDialog = false;
+                }
+            }
+        }
         if (isMoving) {
             if (movingLeft) {
                 drawRunLeft(gc);

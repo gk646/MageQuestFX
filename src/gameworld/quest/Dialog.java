@@ -98,6 +98,63 @@ public class Dialog {
         }
     }
 
+    public void drawDialogPlayer(GraphicsContext gc) {
+        gc.setFont(FonT.minecraftBoldItalic15);
+        gc.setFill(Color.BLACK);
+        gc.fillRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);
+        gc.setLineWidth(2);
+        gc.setStroke(Color.WHITE);
+        gc.setFill(Color.WHITE);
+        int x = Player.screenX - 24 + 5 - 124;
+        gc.strokeRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);
+        if (dialogRenderCounter == 2_000) {
+            int stringY = Player.screenY - 24 - 115 + 6;
+            for (String string : dialogLine.split("\n")) {
+                gc.fillText(string, x, stringY += 16);
+            }
+            if (drawChoice) {
+                gc.fillText(choice1, x + 15, stringY += 20);
+                gc.fillText(choice2, x + 155, stringY);
+                if (choicePointer == 0) {
+                    gc.fillText(">", x, stringY);
+                } else if (choicePointer == 1) {
+                    gc.fillText(">", x + 140, stringY);
+                }
+                if (InputHandler.q_typed) {
+                    if (choicePointer < maxChoices - 1) {
+                        choicePointer++;
+                    } else {
+                        choicePointer = 0;
+                    }
+                    InputHandler.q_typed = false;
+                }
+                if (InputHandler.f_typed) {
+                    if (choicePointer == 0) {
+                        choicePointer = 10;
+                    } else if (choicePointer == 1) {
+                        choicePointer = 20;
+                    } else if (choicePointer == 2) {
+                        choicePointer = 30;
+                    } else if (choicePointer == 3) {
+                        choicePointer = 40;
+                    }
+                    InputHandler.f_typed = false;
+                }
+            }
+        } else {
+            gc.strokeRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);
+            int stringY = Player.screenY - 24 - 115 + 6;
+            for (String string : dialogLine.substring(0, Math.min(dialogLine.length(), dialogRenderCounter / 4)).split("\n")) {
+                gc.fillText(string, x, stringY += 16);
+            }
+            if (dialogRenderCounter / 4 >= dialogLine.length() && dialogRenderCounter < 2_000) {
+                dialogRenderCounter = 2000;
+            } else {
+                dialogRenderCounter++;
+            }
+        }
+    }
+
     public void loadNewLine(String dialogLine) {
         this.dialogLine = insertNewLine(dialogLine);
         this.dialogRenderCounter = 0;

@@ -11,10 +11,11 @@ import java.awt.Point;
 abstract public class QUEST {
 
     public String name;
-    public String objective;
+    public String[] objectives = new String[3];
     public int progressStage = 1;
     public int quest_id;
     public String progressStageName;
+    public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
     protected MainGame mg;
 
     public QUEST(MainGame mg, String name) {
@@ -32,16 +33,19 @@ abstract public class QUEST {
         WorldRender.worldData1[x + 1][y + 1] = 1318;
     }
 
+    protected void removeObjective(int index) {
+        objectives[index] = null;
+    }
 
     protected void nextStage() {
         progressStage++;
     }
 
-    protected void updateObjective(String newText) {
-        if (!checkDialogSimilarity(newText)) {
+    protected void updateObjective(String newText, int index) {
+        if (!checkDialogSimilarity(newText, index)) {
             mg.sound.playEffectSound(1);
         }
-        objective = newText;
+        objectives[index] = newText;
     }
 
     /**
@@ -78,8 +82,11 @@ abstract public class QUEST {
         WorldRender.worldData1[x][y + 1] = 1340;
     }
 
-    protected boolean checkDialogSimilarity(String newObjective) {
-        int len1 = objective.length();
+    protected boolean checkDialogSimilarity(String newObjective, int index) {
+        if (objectives[index] == null) {
+            return false;
+        }
+        int len1 = objectives[index].length();
         int len2 = newObjective.length();
         int[][] dp = new int[len1 + 1][len2 + 1];
 
@@ -89,7 +96,7 @@ abstract public class QUEST {
                     dp[i][j] = j;
                 } else if (j == 0) {
                     dp[i][j] = i;
-                } else if (objective.charAt(i - 1) == newObjective.charAt(j - 1)) {
+                } else if (objectives[index].charAt(i - 1) == newObjective.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
                     dp[i][j] = 1 + Math.min(dp[i][j - 1], Math.min(dp[i - 1][j], dp[i - 1][j - 1]));

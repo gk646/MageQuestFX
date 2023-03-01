@@ -14,7 +14,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
     public QST_MarlaFakeNecklace(MainGame mg, String name) {
         super(mg, name);
         quest_id = 2;
-        updateObjective("Head east and pickup the mysterious adventurers trail!");
+        updateObjective("Head east and pickup the mysterious adventurers trail!", 0);
         mg.sqLite.setQuestActive(quest_id);
     }
 
