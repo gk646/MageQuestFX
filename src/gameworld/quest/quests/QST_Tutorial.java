@@ -16,13 +16,17 @@ import java.awt.Point;
 
 public class QST_Tutorial extends QUEST {
     private int gruntKillCounter;
+    private boolean once;
 
-
-    public QST_Tutorial(MainGame mg, String name) {
+    public QST_Tutorial(MainGame mg, String name, boolean completed) {
         super(mg, name);
         this.objectives[0] = "Talk to the old man";
         this.quest_id = 1;
-        mg.sqLite.setQuestActive(quest_id);
+        if (!completed) {
+            mg.sqLite.setQuestActive(quest_id);
+        } else {
+            mg.sqLite.finishQuest(quest_id);
+        }
     }
 
     /**
@@ -131,6 +135,7 @@ public class QST_Tutorial extends QUEST {
                     moveToTile(npc, 58, 47);
                     openSquareDoor(58, 37);
                 } else if (progressStage == 26 || progressStage == 25) {
+                    updateObjective("Search the ruins for a way out", 0);
                     npc.blockInteraction = true;
                     if (WorldRender.worldData1[74][84] == 1_383 && WorldController.currentWorld == Zone.Tutorial) {
                         openRoundDoor(35, 67);
@@ -173,6 +178,33 @@ public class QST_Tutorial extends QUEST {
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     }
+                } else if (progressStage == 37) {
+                    if (npc.activeTile.x == 1) {
+                        loadDialogStage(npc, DialogStorage.Tutorial, 37);
+                    }
+                    if (moveToTile(npc, 20, 20, new Point(4, 4), new Point(8, 8), new Point(12, 10))) {
+
+                    }
+                } else if (progressStage == 40) {
+                    int num = npc.dialog.drawChoice("Iam in a hurry!", "Tell me everything...", null, null);
+                    if (num == 10) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.Tutorial, 41);
+                    } else if (num == 20) {
+                        progressStage = 50;
+                        loadDialogStage(npc, DialogStorage.Tutorial, 50);
+                    }
+                } else if (progressStage == 45 || progressStage == 58) {
+                    if (!once) {
+                        mg.player.coins += 25;
+                        mg.sound.playEffectSound(9);
+                        once = true;
+                    }
+                } else if (progressStage == 60 || progressStage == 47) {
+                    mg.sqLite.updateQuestFacts(quest_id, 1, 4);
+                    mg.sqLite.finishQuest(quest_id);
+                    npc.show_dialog = false;
+                    completed = true;
                 }
                 if (WorldController.currentWorld == Zone.Tutorial && WorldRender.worldData1[74][84] == 1_383) {
                     openRoundDoor(35, 67);

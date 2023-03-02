@@ -17,6 +17,7 @@ abstract public class QUEST {
     public String progressStageName;
     public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
     protected final MainGame mg;
+    public boolean completed;
 
     public QUEST(MainGame mg, String name) {
         this.name = name;
@@ -41,7 +42,7 @@ abstract public class QUEST {
         progressStage++;
     }
 
-    protected void updateObjective(String newText, int index) {
+    public void updateObjective(String newText, int index) {
         if (!checkDialogSimilarity(newText, index)) {
             mg.sound.playEffectSound(1);
         }

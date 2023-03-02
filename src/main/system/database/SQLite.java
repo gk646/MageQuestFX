@@ -132,6 +132,18 @@ public class SQLite {
         }
     }
 
+    public void finishQuest(int Quest_ID) {
+        try {
+            String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?  where _ROWID_ = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "finished");
+            ps.setInt(2, Quest_ID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+
     /**
      * @param Quest_id the quests id
      * @param fact_id  the quests fact id
@@ -228,7 +240,7 @@ public class SQLite {
         Platform.exit();
     }
 
-    private void savePlayerStats() throws SQLException {
+    public void savePlayerStats() throws SQLException {
         String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? WHERE _ROWID_ = 1";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, mg.player.coins);

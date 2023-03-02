@@ -7,6 +7,8 @@ import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.enums.Zone;
 
+import java.sql.SQLException;
+
 public class LoadGameState {
     final MainGame mg;
 
@@ -22,19 +24,22 @@ public class LoadGameState {
 
     private void loadQuests() {
         loadTutorial();
-        mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
+        if (mg.qPanel.quests.size() > 0) {
+            mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
+        }
     }
 
     private void loadTutorial() {
         int quest_num = mg.sqLite.readQuestFacts(1, 1);
         String description = mg.sqLite.readQuestDescription(1);
+
         switch (description) {
             case "null":
-                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
+                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
                 break;
             case "active":
-                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial"));
+                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 if (quest_num == 1) {
                     mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 13);
@@ -44,14 +49,23 @@ public class LoadGameState {
                 } else if (quest_num == 2) {
                     mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 58, 48, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 26);
+                    mg.qPanel.getQuest("Tutorial").updateObjective("Search the ruins for a way out", 0);
                     mg.player.setPosition(58, 35);
                     QUEST.openSquareDoor(58, 37);
                 } else if (quest_num == 3) {
-                    mg.npcControl.NPC_Clearing.add(new NPC_OldMan(mg, 20, 20, Zone.Clearing));
+                    mg.npcControl.NPC_Clearing.add(new NPC_OldMan(mg, 1, 1, Zone.Clearing));
                     mg.qPanel.setQuestStage("Tutorial", 37);
-                    mg.player.setPosition(1, 1);
+                    mg.qPanel.getQuest("Tutorial").updateObjective("Follow the old man", 0);
+                    mg.wControl.loadMap(Zone.Clearing, 0, 0);
                 }
             case "finished":
+                mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, "Tutorial", true));
+                mg.player.spawnLevel = 1;
+                try {
+                    mg.sqLite.savePlayerStats();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 
@@ -59,9 +73,9 @@ public class LoadGameState {
         int num = mg.sqLite.readStartLevel();
         switch (num) {
             case 0:
-               // mg.wControl.loadMap(Zone.Tutorial, 4, 4);
+                mg.wControl.loadMap(Zone.Tutorial, 4, 4);
             case 1:
-                // mg.wControl.loadMap(Zone.City1, 40, 18);
+                mg.wControl.loadMap(Zone.Clearing, 20, 20);
         }
     }
 }

@@ -10,11 +10,13 @@ import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
     public final ArrayList<QUEST> quests = new ArrayList<>();
+    public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
 
     public QUEST activeQuest;
     public final Rectangle expandButton = new Rectangle(1_870, 350, 21, 21);
@@ -45,19 +47,23 @@ public class UI_QuestPanel {
         gc.setFont(FonT.minecraftBold16);
         int y = 390;
         gc.setFill(Colors.questNameBeige);
-        gc.fillText(activeQuest.name, 1_670, y += 30);
-        gc.setFill(Colors.white);
-        gc.setFont(FonT.minecraftBoldItalic14);
-        y += 10;
-        for (int i = 0; i < 3; i++) {
-            if (activeQuest.objectives[i] != null) {
-                for (String string : activeQuest.objectives[i].split("\n")) {
-                    gc.fillText(string, 1_680, y += 15);
+        if (activeQuest != null) {
+            gc.fillText(activeQuest.name, 1_670, y += 30);
+            gc.setFill(Colors.white);
+            gc.setFont(FonT.minecraftBoldItalic14);
+            y += 10;
+            for (int i = 0; i < 3; i++) {
+                if (activeQuest.objectives[i] != null) {
+                    for (String string : activeQuest.objectives[i].split("\n")) {
+                        gc.fillText(string, 1_680, y += 15);
+                    }
+                    y += 20;
                 }
-                y += 20;
             }
+            gc.setEffect(null);
+        } else {
+            gc.fillText("Find new quests!", 1_670, y += 30);
         }
-        gc.setEffect(null);
 
         if (expanded) {
             gc.drawImage(collapseImage, 1_870, 350);
@@ -72,11 +78,23 @@ public class UI_QuestPanel {
     }
 
     public void update() {
-        for (QUEST quest : quests) {
-            if (quest != null) {
-                quest.update();
+        Iterator<QUEST> iterator = quests.iterator();
+        while (iterator.hasNext()) {
+            QUEST quest = iterator.next();
+            quest.update();
+            if (quest.completed) {
+                iterator.remove();
             }
         }
+    }
+
+    public QUEST getQuest(String name) {
+        for (QUEST quest : quests) {
+            if (quest.name.equals(name)) {
+                return quest;
+            }
+        }
+        return null;
     }
 
     public void setQuestStage(String quest_name, int progressStage) {
