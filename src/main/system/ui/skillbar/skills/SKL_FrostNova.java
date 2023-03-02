@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_FrostNova;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -12,6 +13,7 @@ public class SKL_FrostNova extends SKILL {
         description = "";
         totalCoolDown = 600;
         actualCoolDown = totalCoolDown;
+        type = DamageType.FrostDMG;
         manaCost = 75;
     }
 

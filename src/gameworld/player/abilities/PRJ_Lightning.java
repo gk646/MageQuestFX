@@ -4,6 +4,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
+import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
@@ -25,11 +26,14 @@ public class PRJ_Lightning extends PROJECTILE {
         this.collisionBox = new Rectangle(30, 30, 40, 30);
         this.damage = 25.0f;
         projectileType = ProjectileType.OneHitNoDMG;
+        resource = ProjectilePreloader.lightning;
+        sounds[0] = resource.sounds.get(0);
         type = DamageType.ArcaneDMG;
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + x - Player.screenX - 24, Player.worldY + y - Player.screenY - 24);
         getImages();
+        playStartSound();
     }
 
     @Override

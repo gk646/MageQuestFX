@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_SolarFlare;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -11,6 +12,8 @@ public class SKL_SolarFlare extends SKILL {
         totalCoolDown = 900;
         actualCoolDown = totalCoolDown;
         manaCost = 75;
+        damage = 50;
+        type = DamageType.FireDMG;
         icon = setup("solarFlare");
         name = "Solar Flare";
         description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";

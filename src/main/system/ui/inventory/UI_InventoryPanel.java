@@ -362,7 +362,7 @@ public class UI_InventoryPanel {
                         grabbedIndexBag = i;
                         bag_Slots.get(i).item = null;
                     } else if (activeTradingNPC != null && activeTradingNPC.show_trade && mg.inputH.mouse2Pressed) {
-                        if (activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
+                        if (!bag_Slots.get(i).type.equals("M") && activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
                             bag_Slots.get(i).item = null;
                             return;
                         }

@@ -2,11 +2,14 @@ package main.system.ui.skillbar;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.player.Player;
+import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.Effects;
+import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.Objects;
@@ -33,9 +36,10 @@ abstract public class SKILL {
     public float actualCoolDown;
     protected int i_id;
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
+    private final Image fancy = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/tooltip_fancy.png")));
     protected String description;
     public String name;
-
+    public int toolTipTimer = 0;
 
     public SKILL(MainGame mg) {
         this.mg = mg;
@@ -145,8 +149,70 @@ abstract public class SKILL {
 
     abstract public void activate();
 
-    public void drawToolTip(GraphicsContext gc, int x, int y) {
-        //TODO tooltip
+    public void drawToolTip(GraphicsContext gc, int startX, int startY) {
+        if (toolTipTimer > 30) {
+            gc.setFont(FonT.editUndo19);
+            gc.setFill(Colors.LightGrey);
+            gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.238), startY - (MainGame.SCREEN_HEIGHT * 0.234), MainGame.SCREEN_HEIGHT * 0.231, MainGame.SCREEN_HEIGHT * 0.224f, 15, 15);
+            //OUTLINE
+            gc.drawImage(fancy, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.224));
+            gc.setLineWidth(1);
+            setStrokeTypeColor(gc);
+            gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.235), startY - (MainGame.SCREEN_HEIGHT * 0.231), MainGame.SCREEN_HEIGHT * 0.225, MainGame.SCREEN_HEIGHT * 0.218f, 15, 15);
+            //NAME
+            setTypeColor(gc);
+            drawCenteredTextToolTip(gc, name, (float) (startY - (MainGame.SCREEN_HEIGHT * 0.206)), (int) (startX - (MainGame.SCREEN_HEIGHT * 0.238)));
+            gc.setFont(FonT.minecraftBoldItalic14);
+            gc.fillText("DMG: " + damage * 0.95f + " - " + damage * 1.05f + " " + type.toString(), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.140));
+            gc.setFill(Colors.Blue);
+            gc.fillText("Mana Cost: " + manaCost, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.160));
+            gc.setFill(Colors.darkBackground);
+            int y = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.140));
+            for (String string : Dialog.insertNewLine(description, 20).split("\n")) {
+                gc.fillText(string, startX - (MainGame.SCREEN_HEIGHT * 0.228), y += 15);
+            }
+        } else {
+            toolTipTimer++;
+        }
+    }
+
+    private void setTypeColor(GraphicsContext gc) {
+        if (type == DamageType.FireDMG) {
+            gc.setFill(Colors.fire_red);
+        } else if (type == DamageType.ArcaneDMG) {
+            gc.setFill(Colors.arcane_blue);
+        } else if (type == DamageType.DarkDMG) {
+            gc.setFill(Colors.dark_magic_purple);
+        } else if (type == DamageType.PoisonDMG) {
+            gc.setFill(Colors.poison_green);
+        } else {
+            gc.setFill(Colors.darkBackground);
+        }
+    }
+
+    private void setStrokeTypeColor(GraphicsContext gc) {
+        if (type == DamageType.FireDMG) {
+            gc.setStroke(Colors.fire_red);
+        } else if (type == DamageType.ArcaneDMG) {
+            gc.setStroke(Colors.arcane_blue);
+        } else if (type == DamageType.DarkDMG) {
+            gc.setStroke(Colors.dark_magic_purple);
+        } else if (type == DamageType.PoisonDMG) {
+            gc.setStroke(Colors.poison_green);
+        } else {
+            gc.setStroke(Colors.darkBackground);
+        }
+    }
+
+    private void drawCenteredTextToolTip(GraphicsContext gc, String text, float y, int offsetx) {
+        Text textNode = new Text(text);
+        textNode.setFont(gc.getFont());
+        double textWidth = textNode.getLayoutBounds().getWidth();
+        double x = (MainGame.SCREEN_HEIGHT * 0.23 - textWidth) / 2 + offsetx;
+        gc.fillText(text, x, y);
+    }
+
+    private String getSkillDamage() {
 
     }
 }

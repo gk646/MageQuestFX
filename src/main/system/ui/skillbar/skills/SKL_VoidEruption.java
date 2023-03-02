@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_VoidEruption;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -13,6 +14,8 @@ public class SKL_VoidEruption extends SKILL {
         actualCoolDown = totalCoolDown;
         manaCost = 35;
         icon = setup("voidEruption");
+        type = DamageType.DarkDMG;
+        this.damage = 50.0f;
         name = "Void Eruption";
         description = "Void Eruption is a powerful ability that channels the dark energies of the void to unleash a devastating blast on enemies in the area. After a short build-up, the energy explodes in a shockwave of pure void energy, dealing massive damage to all enemies within the radius.";
     }

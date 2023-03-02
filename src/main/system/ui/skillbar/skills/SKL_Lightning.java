@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
 import gameworld.player.abilities.PRJ_Lightning;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,7 +14,11 @@ public class SKL_Lightning extends SKILL {
         super(mg);
         this.totalCoolDown = 600;
         this.actualCoolDown = 600;
+        this.damage = 25;
+        icon = setup("lightning");
         name = "Lightning Strike";
+        this.type = DamageType.ArcaneDMG;
+        description = "Lightning Strike is a powerful ability that allows the player to call forth bolts of lightning to strike down enemies with electrifying force.The lightning strike is especially effective against groups of enemies or those that are vulnerable to electricity.";
     }
 
     @Override
@@ -23,7 +28,7 @@ public class SKL_Lightning extends SKILL {
 
     @Override
     public void draw(GraphicsContext gc, int skillBarX, int skillBarY) {
-        // drawIcon(gc, skillBarX, skillBarY);
+        drawIcon(gc, skillBarX, skillBarY);
         drawCooldown(gc, skillBarX, skillBarY);
     }
 

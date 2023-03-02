@@ -7,13 +7,14 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
-import main.system.ui.skillbar.skills.SKL_RingSalvo;
+import main.system.ui.skillbar.skills.SKL_Lightning;
 import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.skillbar.skills.SKL_ThunderSplash;
 import main.system.ui.skillbar.skills.SKL_ThunderStrike;
 import main.system.ui.skillbar.skills.SKL_VoidEruption;
 import main.system.ui.skillbar.skills.SKL_VoidField;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Objects;
 
@@ -47,7 +48,7 @@ public class UI_SkillBar {
     public UI_SkillBar(MainGame mg) {
         this.mg = mg;
         skills[0] = new SKL_SolarFlare(mg);
-        skills[1] = new SKL_RingSalvo(mg);
+        skills[1] = new SKL_Lightning(mg);
         skills[2] = new SKL_ThunderStrike(mg);
         skills[3] = new SKL_VoidField(mg);
         skills[4] = new SKL_VoidEruption(mg);
@@ -67,6 +68,7 @@ public class UI_SkillBar {
 
     public void draw(GraphicsContext gc) {
         drawBackGround(gc);
+        Point mousePos = mg.inputH.lastMousePosition;
         for (int i = 0; i < skills.length; i++) {
             if (i > 6) {
                 skills[i].draw(gc, skillBarX + 12 + i * 64 + 20, skillBarY + 2);
@@ -74,6 +76,11 @@ public class UI_SkillBar {
                 skills[i].draw(gc, skillBarX + 12 + i * 64 + 5, skillBarY + 2);
             } else {
                 skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
+            }
+            if (hitBoxes[i].contains(mousePos) && mg.skillPanel.draggedSKILL == null) {
+                skills[i].drawToolTip(gc, mousePos.x, mousePos.y);
+            } else {
+                skills[i].toolTipTimer = 0;
             }
         }
     }
@@ -100,8 +107,7 @@ public class UI_SkillBar {
         gc.fillText("4", skillBarX + 64 * 3 + 30, skillBarY + 71);
         gc.fillText("5", skillBarX + 64 * 4 + 30, skillBarY + 71);
 
-        // gc.fillText("5",skillBarX + 5+25, skillBarY + 70);
-        //gc.fillText("5",skillBarX + 5+25, skillBarY + 70);
+        //TODO mouse button texture
 
         gc.fillText("Q", skillBarX + 64 * 7 + 30 + 20, skillBarY + 73);
 

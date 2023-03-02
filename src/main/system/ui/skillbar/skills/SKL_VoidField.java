@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_VoidField;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -13,6 +14,8 @@ public class SKL_VoidField extends SKILL {
         actualCoolDown = totalCoolDown;
         icon = setup("voidField");
         name = "Void Field";
+        type = DamageType.DarkDMG;
+        damage = 0.1f;
         description = "Creates a localized zone of darkness and destruction. Upon activation, the caster summons a swirling void, consuming everything in its path. Enemies caught in the Void Field are taking damage over time as they struggle to escape the field's grasp. They are also weakened against further dark magic damage";
     }
 

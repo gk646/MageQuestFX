@@ -5,6 +5,7 @@ import gameworld.player.Player;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import main.system.ui.FonT;
 
 public class Dialog {
@@ -57,11 +58,13 @@ public class Dialog {
             }
             if (drawChoice) {
                 gc.fillText(choice1, x + 15, stringY += 20);
-                gc.fillText(choice2, x + 155, stringY);
+                Text text = new Text(choice1);
+                text.setFont(gc.getFont());
+                gc.fillText(choice2, x + 30 + text.getLayoutBounds().getWidth(), stringY);
                 if (choicePointer == 0) {
                     gc.fillText(">", x, stringY);
                 } else if (choicePointer == 1) {
-                    gc.fillText(">", x + 140, stringY);
+                    gc.fillText(">", x + 20 + text.getLayoutBounds().getWidth(), stringY);
                 }
                 if (InputHandler.q_typed) {
                     if (choicePointer < maxChoices - 1) {

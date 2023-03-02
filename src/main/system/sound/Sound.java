@@ -65,6 +65,7 @@ public class Sound {
         addDungeonTrack("3");
         addDungeonTrack("4");
         addDungeonTrack("0");
+        addDungeonTrack("5");
         loadForestAmbience("0", 1);
         loadForestAmbience("1", 1);
         waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));

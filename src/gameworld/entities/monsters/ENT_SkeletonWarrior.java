@@ -58,9 +58,9 @@ public class ENT_SkeletonWarrior extends ENTITY {
             collidingWithPlayer = false;
         }
         if (!attack2 && !attack3 && !attack1) {
-            //onPath = true;
+            onPath = true;
             getNearestPlayer();
-            //searchPath(goalCol, goalRow, 16);
+            searchPath(goalCol, goalRow, 16);
         }
         hitDelay++;
         searchTicks++;

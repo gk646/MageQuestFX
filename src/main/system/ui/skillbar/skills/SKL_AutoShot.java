@@ -17,6 +17,8 @@ public class SKL_AutoShot extends SKILL {
         this.damage = 1;
         this.type = DamageType.PoisonDMG;
         this.icon = setup("energy_sphere");
+        name = "Poison Ball";
+        description = "Simple mud ball.";
     }
 
     @Override

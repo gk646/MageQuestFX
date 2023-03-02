@@ -14,17 +14,21 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader frostNova;
     public static GeneralResourceLoader iceLance;
 
+    public static GeneralResourceLoader lightning;
     public static void load() {
         solarFlare = new GeneralResourceLoader("projectiles/solarFlare");
         solarFlare.loadProjectilesSounds();
         voidField = new GeneralResourceLoader("projectiles/voidField");
         voidField.loadProjectilesSounds();
         thunderStrike = new GeneralResourceLoader("projectiles/thunderStrike");
+        thunderStrike.loadProjectilesSounds();
         voidEruption = new GeneralResourceLoader("projectiles/voidEruption");
         voidEruption.loadProjectilesSounds();
         thunderSplash = new GeneralResourceLoader("projectiles/thunderSplash");
         frostNova = new GeneralResourceLoader("projectiles/frostNova");
         iceLance = new GeneralResourceLoader("projectiles/iceLance");
         iceLance.loadProjectilesSounds();
+        lightning = new GeneralResourceLoader("projectiles/lightning");
+        lightning.loadProjectilesSounds();
     }
 }

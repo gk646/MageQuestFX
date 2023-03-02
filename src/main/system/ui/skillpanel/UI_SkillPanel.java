@@ -182,7 +182,7 @@ public class UI_SkillPanel {
                 for (int i = 0; i < 8; i++) {
                     if (mg.sBar.hitBoxes[i].contains(mousePos)) {
                         for (SKILL skill : mg.sBar.skills) {
-                            if (skill.name.equals(mg.sBar.skills[i].name)) {
+                            if (skill.name.equals(mg.sBar.skills[i].name) || skill.actualCoolDown < skill.totalCoolDown) {
                                 draggedSKILL = null;
                                 return;
                             }

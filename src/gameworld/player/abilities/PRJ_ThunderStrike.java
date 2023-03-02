@@ -20,13 +20,12 @@ public class PRJ_ThunderStrike extends PROJECTILE {
         this.type = DamageType.ArcaneDMG;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderStrike;
-        //this.sounds[0] = resource.sounds.get(0);
+        this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
         collisionBox = new Rectangle(0, 0, 48, 48);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
-        //playStartSound();
-        //TODO sound
+        playStartSound();
     }
 
 
