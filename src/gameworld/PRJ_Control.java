@@ -24,7 +24,7 @@ import java.util.Iterator;
 public class PRJ_Control {
 
 
-    protected MainGame mg;
+    protected final MainGame mg;
 
     public int GruntKilledCounter;
     public long lastHitTime;

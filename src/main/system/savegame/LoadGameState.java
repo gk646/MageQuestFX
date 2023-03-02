@@ -8,7 +8,7 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 public class LoadGameState {
-    MainGame mg;
+    final MainGame mg;
 
 
     public LoadGameState(MainGame mg) {

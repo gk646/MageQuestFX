@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 public class TALENT {
     public final int i_id;
     final String name;
-    public float[] effects = new float[Player.effectsSizeTotal];
+    public final float[] effects = new float[Player.effectsSizeTotal];
 
-    public String imagePath;
+    public final String imagePath;
     private final Image icon;
     String description;
     public int intellect;

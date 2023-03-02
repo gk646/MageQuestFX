@@ -29,7 +29,7 @@ abstract public class SKILL {
     public float damage;
     protected int castTimeTotal;
     protected int castTimeActive;
-    public Rectangle hitBox = new Rectangle(53, 53);
+    public final Rectangle hitBox = new Rectangle(53, 53);
     private int side1;
     private int side2;
     private int side3;

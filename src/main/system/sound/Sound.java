@@ -12,11 +12,13 @@ import main.MainGame;
 import main.system.enums.State;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Sound {
-    public ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>(), forestAmbient = new ArrayList<>();
+    public final ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>();
+    public final ArrayList<MediaPlayer> forestAmbient = new ArrayList<>();
     public static float EFFECTS_VOLUME = 0.5f;
-    public ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
+    public final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
 
     public static float AMBIENCE_VOLUME = 0.7f;
@@ -25,7 +27,7 @@ public class Sound {
     public MediaPlayer currentAmbient;
     private double waterVolume = 0.3f;
     private MediaPlayer lava;
-    MainGame mg;
+    final MainGame mg;
     public int currentTrackIndex = 0;
     private boolean fadeOut = false;
     public static Media energySphereBeginning;
@@ -40,22 +42,22 @@ public class Sound {
 
     public void loadSounds() {
 
-        energySphereBeginning = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav").toString());
-        energySphereHit = new Media(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav").toString());
+        energySphereBeginning = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav")).toString());
+        energySphereHit = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav")).toString());
 
 
-        INTRO = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/intro.wav").toString()));
+        INTRO = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro.wav")).toString()));
         INTRO.setVolume(0.8);
 
         //EFFECTS
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/equip.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_switch.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/menu_back.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/sell.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/environment/spike.wav").toString())));
-        effectSounds.add(new MediaPlayer(new Media(getClass().getResource("/resources/sound/effects/inventory/buy.wav").toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/equip.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/menu_switch.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/menu_back.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/sell.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/spike.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/buy.wav")).toString())));
 
 
         loadAmbience();
@@ -68,19 +70,19 @@ public class Sound {
         addDungeonTrack("5");
         loadForestAmbience("0", 1);
         loadForestAmbience("1", 1);
-        waterAmbience = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/waterAmbience/0.wav").toString()));
+        waterAmbience = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/waterAmbience/0.wav")).toString()));
         waterAmbience.setVolume(waterVolume);
-        lava = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/lava.mp3").toString()));
+        lava = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/lava.mp3")).toString()));
         lava.setVolume(waterVolume);
     }
 
     private void addDungeonTrack(String name) {
-        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".mp3").toString()));
+        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/dungeonAmbience/" + name + ".mp3")).toString()));
         dungeonAmbient.add(ambientTrack1);
     }
 
     private void loadForestAmbience(String name, float volume) {
-        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(getClass().getResource("/resources/sound/music/forestAmbience/" + name + ".wav").toString()));
+        MediaPlayer ambientTrack1 = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/forestAmbience/" + name + ".wav")).toString()));
         ambientTrack1.setVolume(volume);
         forestAmbient.add(ambientTrack1);
     }

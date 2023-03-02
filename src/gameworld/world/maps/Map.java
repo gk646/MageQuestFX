@@ -19,21 +19,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Map {
-    public GameMapType gameMapType;
-    public Zone zone;
-    public int[][] mapDataBackGround;
-    public int[][] mapDataBackGround2;
-    public int[][] mapDataForeGround;
-    public Point mapSize;
-    public ArrayList <MapMarker> mapMarkers = new ArrayList<>();
-    public ArrayList<SpawnTrigger> spawnTriggers;
-    public MapQuadrant[] mapQuadrants;
+    public final GameMapType gameMapType;
+    public final Zone zone;
+    public final int[][] mapDataBackGround;
+    public final int[][] mapDataBackGround2;
+    public final int[][] mapDataForeGround;
+    public final Point mapSize;
+    public final ArrayList<MapMarker> mapMarkers = new ArrayList<>();
+    public final ArrayList<SpawnTrigger> spawnTriggers;
+    public final MapQuadrant[] mapQuadrants;
     public int[][] mapCover;
-    public String name;
+    public final String name;
 
     public Map(String name, Point mapSize, Zone zone) {
         this.name = name;
@@ -68,7 +69,7 @@ public class Map {
         int[][] worldData = new int[worldSize][worldSize];
         String[] numbers;
         try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + filename + ".csv")) {
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream), 32_768)) {
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)), 32_768)) {
                 for (int i = 0; i < worldSize; i++) {
                     numbers = bufferedReader.readLine().split(",");
                     for (int b = 0; b < worldSize; b++) {
@@ -89,12 +90,12 @@ public class Map {
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
         Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho|slimeB)(\\d{0,3})");
         try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             Matcher matcher;
             String line;
             int level = 0;
             Type type = null;
-            int newTriggerx = 0, newTriggery = 0;
+            int newTriggerx = 0, newTriggery;
             boolean xfound = false, typefound = false;
             while ((line = bufferedReader.readLine()) != null) {
                 if (!typefound) {

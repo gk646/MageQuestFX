@@ -19,8 +19,8 @@ public class WorldController {
     public static Zone currentWorld;
     public static int[][] currentMapCover;
     public static ArrayList<MapMarker> currentMapMarkers;
-    public static ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
-    public ArrayList<Map> MAPS = new ArrayList<>();
+    public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
+    public final ArrayList<Map> MAPS = new ArrayList<>();
 
     public WorldController(MainGame mg) {
         this.mg = mg;
@@ -89,7 +89,7 @@ public class WorldController {
 
     public void update() {
         for (SpawnTrigger trigger : globalTriggers) {
-            if (trigger.zone == currentWorld && !trigger.triggered && trigger != null) {
+            if (trigger.zone == currentWorld && !trigger.triggered) {
                 trigger.activate(mg);
             }
         }

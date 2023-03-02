@@ -29,8 +29,8 @@ import java.util.Iterator;
 abstract public class ENTITY {
     public Dialog dialog;
     protected float health;
-    public ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
-    public float[] effects = new float[Player.effectsSizeTotal];
+    public final ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
+    public final float[] effects = new float[Player.effectsSizeTotal];
     public ResourceLoaderEntity animation;
     public boolean collidingWithPlayer;
     public Zone zone;
@@ -57,7 +57,7 @@ abstract public class ENTITY {
     public float worldX;
     public int screenX;
     public int screenY;
-    public Point activeTile = new Point();
+    public final Point activeTile = new Point();
     public int maxHealth;
     public float movementSpeed;
     public int level;

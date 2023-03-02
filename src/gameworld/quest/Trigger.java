@@ -1,10 +1,10 @@
 package gameworld.quest;
 
 public enum Trigger {
-    SINGULAR(1), SPREAD_Random(2), SPREAD_Circle(3);
-    private final int value;
+    SINGULAR, SPREAD_Random, SPREAD_Circle;
 
-    Trigger(int val) {
-        value = val;
+
+    Trigger() {
+
     }
 }

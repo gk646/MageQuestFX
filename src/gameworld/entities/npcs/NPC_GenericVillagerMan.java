@@ -5,7 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class NPC_GenericVillagerMan extends NPC {
     /**
-     * @param gc
      */
     @Override
     public void draw(GraphicsContext gc) {

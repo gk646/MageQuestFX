@@ -1,11 +1,8 @@
 package main.system.enums;
 
 public enum GameMapType {
-    MapCover(0), NoMapCover(1);
+    MapCover, NoMapCover;
 
-    private final int value;
-
-    GameMapType(int val) {
-        value = val;
+    GameMapType() {
     }
 }

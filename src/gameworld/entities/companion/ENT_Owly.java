@@ -9,7 +9,6 @@ import main.MainGame;
 import java.awt.Rectangle;
 import java.util.Objects;
 
-@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public class ENT_Owly extends ENTITY {
     /**
      * A possible companion

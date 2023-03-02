@@ -12,7 +12,6 @@ public class PRJ_SlimeBall extends PROJECTILE {
     }
 
     /**
-     * @param gc
      */
     @Override
     public void draw(GraphicsContext gc) {

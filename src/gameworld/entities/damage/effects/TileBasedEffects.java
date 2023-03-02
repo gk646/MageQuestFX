@@ -16,8 +16,8 @@ public class TileBasedEffects {
     public static int activeTile1 = 0;
     int[] tilesData, tilesData1, tilesData2;
     int previousTile;
-    ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
-    MainGame mg;
+    final ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
+    final MainGame mg;
 
     public TileBasedEffects(MainGame mg) {
         this.mg = mg;

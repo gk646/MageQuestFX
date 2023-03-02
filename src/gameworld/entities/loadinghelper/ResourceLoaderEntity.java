@@ -11,14 +11,14 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ResourceLoaderEntity {
-    public ArrayList<Image> attack1 = new ArrayList<>();
-    public ArrayList<Image> attack2 = new ArrayList<>();
-    public ArrayList<Image> attack3 = new ArrayList<>();
-    public ArrayList<Image> idle = new ArrayList<>();
-    public ArrayList<Image> walk = new ArrayList<>();
+    public final ArrayList<Image> attack1 = new ArrayList<>();
+    public final ArrayList<Image> attack2 = new ArrayList<>();
+    public final ArrayList<Image> attack3 = new ArrayList<>();
+    public final ArrayList<Image> idle = new ArrayList<>();
+    public final ArrayList<Image> walk = new ArrayList<>();
     public ArrayList<Image> WalkingLeft = new ArrayList<>();
-    public ArrayList<MediaPlayer> sounds = new ArrayList<>();
-    String name;
+    public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
+    final String name;
 
     public ResourceLoaderEntity(String entityName) {
         this.name = entityName;

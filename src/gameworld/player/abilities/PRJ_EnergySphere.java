@@ -74,11 +74,6 @@ public class PRJ_EnergySphere extends PROJECTILE {
         }
     }
 
-    @Override
-    public void playHitSound() {
-      super.playHitSound();
-    }
-
     private Point2D.Double getTrajectory(Point mousePosition) {
         double angle = Math.atan2(mousePosition.y - Player.screenY - 24, mousePosition.x - Player.screenX - 24);
         return new Point2D.Double(Math.cos(angle), Math.sin(angle));

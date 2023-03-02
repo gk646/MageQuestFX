@@ -139,7 +139,7 @@ public class SQLite {
      */
     public int readQuestFacts(int Quest_id, int fact_id) {
         String columnName = "FACT_" + fact_id;
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             String sql = " SELECT " + columnName + " FROM  QUEST_FACTS  WHERE _ROWID_ = " + Quest_id;
             rs = conn.createStatement().executeQuery(sql);
@@ -320,13 +320,11 @@ public class SQLite {
             if (mg.talentP.talent_Nodes[i] != null) {
                 if (mg.talentP.talent_Nodes[i].activated) {
                     stmt.setInt(1, 1);
-                    stmt.setString(2, String.valueOf(i));
-                    stmt.executeUpdate();
                 } else {
                     stmt.setInt(1, 0);
-                    stmt.setString(2, String.valueOf(i));
-                    stmt.executeUpdate();
                 }
+                stmt.setString(2, String.valueOf(i));
+                stmt.executeUpdate();
             }
         }
     }

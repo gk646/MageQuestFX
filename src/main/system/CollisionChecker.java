@@ -16,7 +16,6 @@ public class CollisionChecker {
         this.mg = mainGame;
     }
 
-    @SuppressWarnings("DuplicateExpressions")
     public static void checkProjectileAgainstTile(PROJECTILE projectile) {
         int tileNum1, tileNum2, tileNumBG1, tileNumBG1_2;
 

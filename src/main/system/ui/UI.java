@@ -21,10 +21,9 @@ public class UI {
 
     public Font maruMonica30;
     public int commandNum = 0;
-    public DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
-    Light.Distant light = new Light.Distant();
-
-    Lighting lighting = new Lighting();
+    public final DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
+    public final Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
+    public final Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
 
     private Image playerUI;
     private int loadingProgress = 0;
@@ -47,8 +46,8 @@ public class UI {
     private final Image enter2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter2.png")));
     private final Image enter3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter3.png")));
     private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
-    public Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
-    public Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
+    final Light.Distant light = new Light.Distant();
+    final Lighting lighting = new Lighting();
 
     private final Image xpBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/xpbar.png")));
     private int spriteCounter1 = 0;
@@ -137,11 +136,10 @@ public class UI {
         gc.fillText("ESC to back", MainGame.SCREEN_WIDTH * 0.859, MainGame.SCREEN_HEIGHT * 0.925);
     }
 
-
     private void drawTitleScreen(GraphicsContext gc) {
         gc.setFont(FonT.minecraftBold50);
         String text = "Mage Quest ";
-        int x = (int) (MainGame.SCREEN_WIDTH * 0.39f);
+        int x;
         int y = (int) (MainGame.SCREEN_HEIGHT * 0.044f) * 3;
         //FILL BACKGROUND WITH COLOR
         gc.setFill(Colors.LightGrey);
@@ -257,12 +255,7 @@ public class UI {
         gc.fillText("Codex", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.502f);
         gc.fillText("Manual Save", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.552f);
         gc.fillText("Back to Main Menu", MainGame.SCREEN_HEIGHT * 0.152f, MainGame.SCREEN_HEIGHT * 0.602f);
-        /*
-        gc.fillText("Framerate: 120FPS locked", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.277f);
-        gc.fillText("Network Settings: ", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.416f);
-        gc.fillText("Quit Game?", MainGame.SCREEN_HEIGHT * 0.462f, MainGame.SCREEN_HEIGHT * 0.648f);
 
-         */
         if (commandNum == 0) {
             gc.fillText(">", MainGame.SCREEN_HEIGHT * 0.122f, MainGame.SCREEN_HEIGHT * 0.302f);
         } else if (commandNum == 1) {
@@ -303,14 +296,10 @@ public class UI {
         gc.fillRoundRect(650 + ambientSlider * 2 - 12, 553, 25, 30, 15, 15);
     }
 
-    private void drawSlider(GraphicsContext gc, int startX, int startY, int sliderPosition, Rectangle slider) {
-
-    }
-
     private void drawKeyBindings(GraphicsContext gc) {
         String text = "C - open character window";
         float y = 0.332f;
-        gc.fillText(text, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y += 0.013));
+        gc.fillText(text, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y + 0.013));
     }
 
     private void drawGamePlaySettings(GraphicsContext gc) {

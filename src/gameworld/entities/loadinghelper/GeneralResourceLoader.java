@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 public class GeneralResourceLoader {
 
-    public ArrayList<Image> images1 = new ArrayList<>();
-    public ArrayList<Image> images2 = new ArrayList<>();
+    public final ArrayList<Image> images1 = new ArrayList<>();
+    public final ArrayList<Image> images2 = new ArrayList<>();
     public ArrayList<Image> images3 = new ArrayList<>();
 
-    public ArrayList<MediaPlayer> getHitSound = new ArrayList<>(), sounds = new ArrayList<>(), attackSound = new ArrayList<>();
-    String name;
+    public final ArrayList<MediaPlayer> getHitSound = new ArrayList<>();
+    public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
+    final String name;
+    public ArrayList<MediaPlayer> attackSound = new ArrayList<>();
 
     public GeneralResourceLoader(String path) {
         this.name = path;

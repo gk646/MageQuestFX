@@ -14,28 +14,28 @@ import java.util.Objects;
 
 public class WorldEnhancements {
 
-    Image torchs = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/effects/torch_effect.png")));
+    final Image torchs = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/effects/torch_effect.png")));
 
-    AnimationList bigFish = new AnimationList(new int[]{1_118, 1119, 1120, 1121, 1122, 1123, 1124, 1125}, 20);
-    AnimationList smallFish = new AnimationList(new int[]{1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138}, 15);
-    AnimationList lines3 = new AnimationList(new int[]{1144, 1145, 1146, 1147, 1148, 1149, 1150, 1151}, 40);
-    AnimationList lines2 = new AnimationList(new int[]{1157, 1158, 1159, 1160, 1161, 1162, 1163, 1164}, 35);
-    AnimationList lines1 = new AnimationList(new int[]{1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177}, 30);
-    AnimationList water = new AnimationList(new int[]{911, 1262, 1263, 1264, 1265, 1266, 1267, 1268}, 25);
-    AnimationList campfire = new AnimationList(new int[]{1528, 1529, 1530, 1531}, 25);
-    AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
-    AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
-    AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
-    AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 50);
-    AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 60);
+    final AnimationList bigFish = new AnimationList(new int[]{1_118, 1119, 1120, 1121, 1122, 1123, 1124, 1125}, 20);
+    final AnimationList smallFish = new AnimationList(new int[]{1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138}, 15);
+    final AnimationList lines3 = new AnimationList(new int[]{1144, 1145, 1146, 1147, 1148, 1149, 1150, 1151}, 40);
+    final AnimationList lines2 = new AnimationList(new int[]{1157, 1158, 1159, 1160, 1161, 1162, 1163, 1164}, 35);
+    final AnimationList lines1 = new AnimationList(new int[]{1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177}, 30);
+    final AnimationList water = new AnimationList(new int[]{911, 1262, 1263, 1264, 1265, 1266, 1267, 1268}, 25);
+    final AnimationList campfire = new AnimationList(new int[]{1528, 1529, 1530, 1531}, 25);
+    final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
+    final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
+    final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
+    final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 50);
+    final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 60);
 
-    StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
-    StaticLightSource torch = new StaticLightSource(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, Colors.fire_red);
-    StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
+    final StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
+    final StaticLightSource torch = new StaticLightSource(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, Colors.fire_red);
+    final StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
 
-    ArrayList<AnimationList> animationList = new ArrayList<>();
-    ArrayList<StaticLightSource> lightList = new ArrayList<>();
-    MainGame mg;
+    final ArrayList<AnimationList> animationList = new ArrayList<>();
+    final ArrayList<StaticLightSource> lightList = new ArrayList<>();
+    final MainGame mg;
 
     public WorldEnhancements(MainGame mg) {
         this.mg = mg;

@@ -8,8 +8,8 @@ import main.MainGame;
 public class PlayerPrompts {
 
     public boolean E;
-    MainGame mg;
-    GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
+    final MainGame mg;
+    final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
 
     public PlayerPrompts(MainGame mg) {

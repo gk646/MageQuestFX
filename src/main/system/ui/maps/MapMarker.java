@@ -1,9 +1,10 @@
 package main.system.ui.maps;
 
 public class MapMarker {
-    public MarkerType type;
-    public String name;
-    public int xTile, yTile;
+    public final MarkerType type;
+    public final String name;
+    public final int xTile;
+    public final int yTile;
 
     public MapMarker(String name, int xTile, int yTile, MarkerType type) {
         this.name = name;

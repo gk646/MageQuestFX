@@ -28,7 +28,6 @@ public class PRJ_VoidField extends PROJECTILE {
     }
 
     /**
-     * @param gc
      */
     @Override
     public void draw(GraphicsContext gc) {

@@ -10,13 +10,13 @@ import java.awt.Point;
 
 abstract public class QUEST {
 
-    public String name;
-    public String[] objectives = new String[3];
+    public final String name;
+    public final String[] objectives = new String[3];
     public int progressStage = 1;
     public int quest_id;
     public String progressStageName;
     public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
-    protected MainGame mg;
+    protected final MainGame mg;
 
     public QUEST(MainGame mg, String name) {
         this.name = name;

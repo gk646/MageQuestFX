@@ -10,17 +10,18 @@ import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Objects;
 
 abstract public class MERCHANT extends NPC {
-    protected Image tradeWindow = new Image(getClass().getResourceAsStream("/resources/ui/inventory/merchant_first.png"));
-    protected Image buyback = new Image(getClass().getResourceAsStream("/resources/ui/inventory/merchant_second.png"));
+    public final Rectangle firstWindow = new Rectangle(50, 50, 115, 27);
+    public final Rectangle secondWindow = new Rectangle(50, 50, 115, 27);
     public boolean show_trade;
-    public Rectangle firstWindow = new Rectangle(50, 50, 115, 27), secondWindow = new Rectangle(50, 50, 115, 27);
+    public final ArrayList<UI_InventorySlot> buySlots = new ArrayList<>();
+    public final ArrayList<UI_InventorySlot> soldSlots = new ArrayList<>();
     public boolean show_buyback;
     protected int tradeWindowX, tradeWindowY;
-
-    public ArrayList<UI_InventorySlot> buySlots = new ArrayList<>();
-    public ArrayList<UI_InventorySlot> soldSlots = new ArrayList<>();
+    protected final Image tradeWindow = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_first.png")));
+    protected final Image buyback = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_second.png")));
 
     public boolean sellItem(ITEM item) {
         addItemSold(item);

@@ -26,7 +26,7 @@ public abstract class PROJECTILE {
      * 0: flight sound/ normal sound /<p>
      * 1: hit sound / dead sound
      */
-    public MediaPlayer[] sounds = new MediaPlayer[3];
+    public final MediaPlayer[] sounds = new MediaPlayer[3];
 
     public DamageType type;
     protected Point2D.Double updateVector;

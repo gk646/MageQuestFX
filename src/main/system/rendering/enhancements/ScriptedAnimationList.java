@@ -6,9 +6,9 @@ import java.awt.Point;
 
 public class ScriptedAnimationList {
     public boolean finished;
-    int speed;
-    Point tilePos;
-    int[] list;
+    final int speed;
+    final Point tilePos;
+    final int[] list;
     int counter;
     private int speedCounter;
 

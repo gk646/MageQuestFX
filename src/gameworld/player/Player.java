@@ -28,7 +28,7 @@ import java.util.Objects;
 
 public class Player extends ENTITY {
     public boolean levelup;
-    public Dialog dialog = new Dialog();
+    public static final int effectsSizeRollable = 35;
     public Map map;
     public boolean isMoving;
     public int maxMana;
@@ -45,8 +45,6 @@ public class Player extends ENTITY {
     public int strength;
     public int focus;
     public float critChance, dotDamageMultiplier, dotLengthMultiplier, buffLengthMultiplier, speechSkill, resistChance, carryWeight;
-    private int cooldownOneSecond;
-    private int cooldownTwoSecond;
     public float experience;
     public int coins;
     public int spawnLevel;
@@ -54,8 +52,6 @@ public class Player extends ENTITY {
     public float healthRegeneration = 0.002f;
     public float playerMovementSpeed;
     public int armour;
-    private int cooldownPrimary;
-    private int cdLightning;
     private int playerQuadrant;
     public int levelUpExperience = 10;
     private int quadrantTimer;
@@ -67,13 +63,13 @@ public class Player extends ENTITY {
     private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
     private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
-    public static int effectsSizeRollable = 35;
-    public static int effectsSizeTotal = 50;
+    public static final int effectsSizeTotal = 50;
+    public final Dialog dialog = new Dialog();
     public static String[] effectNames = new String[effectsSizeTotal];
     public static float[] playerEffects;
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
-    public GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
+    public final GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
     private int levelupCounter;
     public boolean drawDialog;
 

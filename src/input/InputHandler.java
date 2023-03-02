@@ -313,12 +313,10 @@ public class InputHandler {
                 }
             }
         }
-        if (code.equals("e")) {
-            e_typed = true;
-        } else if (code.equals("q")) {
-            q_typed = true;
-        } else if (code.equals("f")) {
-            f_typed = true;
+        switch (code) {
+            case "e" -> e_typed = true;
+            case "q" -> q_typed = true;
+            case "f" -> f_typed = true;
         }
         if (code.equals("\s")) {
             if (mg.showTalents) {
@@ -525,6 +523,7 @@ public class InputHandler {
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean inventoryWindowOpen() {
         return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION || mg.showAbilities;
     }

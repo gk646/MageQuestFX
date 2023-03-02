@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class MiniMap {
     private final MainGame mg;
-    Image miniMapFrame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/minimap_frame.png")));
+    final Image miniMapFrame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/minimap_frame.png")));
 
     public MiniMap(MainGame mg) {
         this.mg = mg;

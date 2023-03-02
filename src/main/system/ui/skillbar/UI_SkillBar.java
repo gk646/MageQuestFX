@@ -24,7 +24,7 @@ public class UI_SkillBar {
     public final SKILL[] skills = new SKILL[8];
     private final int skillBarX = 614;
     private final int skillBarY = 1_005;
-    public Rectangle[] hitBoxes = new Rectangle[8];
+    public final Rectangle[] hitBoxes = new Rectangle[8];
 
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
 
@@ -35,15 +35,15 @@ public class UI_SkillBar {
     private final Image map = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/map.png")));
     private final Image settings = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/settings.png")));
 
-    public Rectangle wholeSkillBar = new Rectangle(614, 1000, 743, 85);
-    public Rectangle characterBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY - 6, 32, 32);
-    public Rectangle bagBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY - 6, 32, 32);
-    public Rectangle skilltreeBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY - 6, 32, 32);
+    public final Rectangle wholeSkillBar = new Rectangle(614, 1000, 743, 85);
+    public final Rectangle characterBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY - 6, 32, 32);
+    public final Rectangle bagBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY - 6, 32, 32);
+    public final Rectangle skilltreeBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY - 6, 32, 32);
 
-    public Rectangle abilitiesBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY + 28, 32, 32);
-    public Rectangle mapBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY + 28, 32, 32);
-    public Rectangle settingsBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY + 28, 32, 32);
-    MainGame mg;
+    public final Rectangle abilitiesBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY + 28, 32, 32);
+    public final Rectangle mapBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY + 28, 32, 32);
+    public final Rectangle settingsBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY + 28, 32, 32);
+    final MainGame mg;
 
     public UI_SkillBar(MainGame mg) {
         this.mg = mg;

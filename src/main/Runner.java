@@ -16,6 +16,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 public class Runner extends Application {
     public static ImageCursor crosshair;
@@ -41,8 +42,8 @@ public class Runner extends Application {
         stage.setScene(scene);
         stage.setTitle("Mage Quest");
         InputStream is = getClass().getResourceAsStream("/Icons/icon2.png");
-        Image cursor = new Image(getClass().getResource("/ui/crosshair_1.png").toExternalForm());
-        Image cursor3 = new Image(getClass().getResource("/ui/crosshair_3.png").toExternalForm());
+        Image cursor = new Image(Objects.requireNonNull(getClass().getResource("/ui/crosshair_1.png")).toExternalForm());
+        Image cursor3 = new Image(Objects.requireNonNull(getClass().getResource("/ui/crosshair_3.png")).toExternalForm());
         crosshair = new ImageCursor(cursor, 8, 8);
         selectCrosshair = new ImageCursor(cursor3, 16, 16);
         scene.setCursor(crosshair);

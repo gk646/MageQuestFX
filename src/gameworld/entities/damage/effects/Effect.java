@@ -9,7 +9,7 @@ abstract public class Effect {
     public float amount;
     protected float amount_secondary;
     protected float amount_third;
-    protected boolean fromPlayer;
+    protected final boolean fromPlayer;
     protected String name;
     protected Image icon;
     protected String description;

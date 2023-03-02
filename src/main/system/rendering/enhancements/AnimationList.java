@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class AnimationList {
 
-    public int[] tileProgression;
-    public ArrayList<Point> tilesIndices = new ArrayList<>();
-    int speed = 20;
-    public ArrayList<Point> tilesIndices1 = new ArrayList<>();
-    public ArrayList<Point> tilesIndices2 = new ArrayList<>();
+    public final int[] tileProgression;
+    public final ArrayList<Point> tilesIndices = new ArrayList<>();
+    public final ArrayList<Point> tilesIndices1 = new ArrayList<>();
+    public final ArrayList<Point> tilesIndices2 = new ArrayList<>();
+    int speed;
     int speedCounter;
 
     public AnimationList(int[] list, int speed) {

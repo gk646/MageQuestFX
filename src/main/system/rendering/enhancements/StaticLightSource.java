@@ -8,12 +8,12 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class StaticLightSource {
-    public int[] tileProgression;
+    public final int[] tileProgression;
     public Color color;
-    public ArrayList<Point> tilesIndices = new ArrayList<>();
-    public ArrayList<Point> tilesIndices1 = new ArrayList<>();
-    public ArrayList<Point> tilesIndices2 = new ArrayList<>();
-    public DropShadow glow = new DropShadow();
+    public final ArrayList<Point> tilesIndices = new ArrayList<>();
+    public final ArrayList<Point> tilesIndices1 = new ArrayList<>();
+    public final ArrayList<Point> tilesIndices2 = new ArrayList<>();
+    public final DropShadow glow = new DropShadow();
 
 
     public StaticLightSource(int[] list, Color color) {

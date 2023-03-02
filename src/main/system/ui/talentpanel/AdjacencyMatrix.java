@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class AdjacencyMatrix {
 
-    public int length;
+    public final int length;
     private final int[][] adjacency_matrix;
     public static final ArrayList<int[]> edge_list = new ArrayList<>();
 

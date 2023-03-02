@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
-    public ArrayList<QUEST> quests = new ArrayList<>();
+    public final ArrayList<QUEST> quests = new ArrayList<>();
 
     public QUEST activeQuest;
     public final Rectangle expandButton = new Rectangle(1_870, 350, 21, 21);

@@ -13,9 +13,6 @@ public class SKL_ManaShield extends SKILL {
     }
 
     /**
-     * @param gc
-     * @param x
-     * @param y
      */
     @Override
     public void draw(GraphicsContext gc, int x, int y) {

@@ -26,7 +26,6 @@ public class NPC_Marla extends NPC {
     }
 
     /**
-     * @param gc
      */
     @Override
     public void draw(GraphicsContext gc) {

@@ -10,7 +10,7 @@ public class UI_SkillSlot {
     public final Rectangle boundBox;
     private final int SLOT_SIZE = 45;
     public boolean grabbed;
-    public SKILL skill;
+    public final SKILL skill;
     public int toolTipTimer;
     public String type = "+";
 

@@ -3,7 +3,7 @@ package gameworld.entities.damage.effects;
 import gameworld.entities.ENTITY;
 
 public class Buff_Effect extends Effect {
-    public int effectIndexAffected;
+    public final int effectIndexAffected;
     protected boolean activated;
 
     public Buff_Effect(float duration, float amount, boolean fromPlayer, int effectIndexAffected) {
