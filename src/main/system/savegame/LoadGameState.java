@@ -32,14 +32,14 @@ public class LoadGameState {
     private void loadTutorial() {
         int quest_num = mg.sqLite.readQuestFacts(1, 1);
         String description = mg.sqLite.readQuestDescription(1);
-
         switch (description) {
-            case "null":
+            case "null" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
-                break;
-            case "active":
+            }
+            case "active" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
+                mg.wControl.loadMap(Zone.Tutorial, 4, 4);
                 if (quest_num == 1) {
                     mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 13);
@@ -58,7 +58,8 @@ public class LoadGameState {
                     mg.qPanel.getQuest("Tutorial").updateObjective("Follow the old man", 0);
                     mg.wControl.loadMap(Zone.Clearing, 0, 0);
                 }
-            case "finished":
+            }
+            case "finished" -> {
                 mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, "Tutorial", true));
                 mg.player.spawnLevel = 1;
                 try {
@@ -66,6 +67,7 @@ public class LoadGameState {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+            }
         }
     }
 

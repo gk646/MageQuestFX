@@ -1,12 +1,14 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
+import gameworld.entities.damage.DamageType;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.npcs.NPC_OldMan;
 import gameworld.quest.QUEST;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_DroppedItem;
+import gameworld.world.objects.items.ITM_SpellBook;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
@@ -71,11 +73,11 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 19) {
                     int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
                     if (choice == 10) {
-                        //TODO add spell book to inventory
-                        //TODO make activtable items with e
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.ArcaneDMG));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     } else if (choice == 20) {
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.ArcaneDMG));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     }

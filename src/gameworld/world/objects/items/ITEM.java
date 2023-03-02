@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 public class ITEM {
     public int i_id;
+    public int cost;
     public String name;
     public int rarity;
     public String stats;
@@ -101,6 +102,7 @@ public class ITEM {
         this.level = level;
         this.icon = setup(imagePath);
         this.quality = quality;
+        this.cost = level * 25 + rarity * 25;
         if (this.stats == null) {
             this.stats = "a";
         }

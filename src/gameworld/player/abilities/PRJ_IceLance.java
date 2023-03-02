@@ -19,7 +19,7 @@ public class PRJ_IceLance extends PROJECTILE {
 
     public PRJ_IceLance(int x, int y) {
         this.damage = 1.0f;
-        this.type = DamageType.FrostDMG;
+        this.type = DamageType.IceDMG;
         projectileType = ProjectileType.OneHitCompletelyDead;
         this.resource = ProjectilePreloader.iceLance;
         this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());

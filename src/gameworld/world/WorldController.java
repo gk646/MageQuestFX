@@ -42,7 +42,7 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
-                currentWorld = map.zone;
+                currentWorld = zone;
                 clearWorldArrays();
                 mg.wAnim.emptyAnimationLists();
                 WorldRender.worldData = map.mapDataBackGround;

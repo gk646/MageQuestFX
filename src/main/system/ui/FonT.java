@@ -7,6 +7,7 @@ public class FonT {
 
     public static Font minecraftItalic12;
     public static Font minecraftRegular20;
+    public static Font minecraftRegular18;
     private static Font minecraftRegular14;
     public static Font minecraftItalic15;
     private static Font minecraftItalic17;
@@ -38,6 +39,7 @@ public class FonT {
     public static void loadFonts() {
         minecraftRegular14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 14);
         minecraftRegular20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 20);
+        minecraftRegular18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 18);
         minecraftItalic12 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 12);
         minecraftItalic14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 14);
         minecraftItalic11 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 11);

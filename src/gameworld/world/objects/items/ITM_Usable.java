@@ -1,5 +1,7 @@
 package gameworld.world.objects.items;
 
+import main.MainGame;
+
 public class ITM_Usable extends ITEM {
 
 
@@ -7,12 +9,9 @@ public class ITM_Usable extends ITEM {
         this.name = name;
         this.rarity = rarity;
         this.description = description;
-        this.icon = setup(imagePath);
     }
 
-    public void activate() {
-        if (name.equals("Spell Book: Void Field")) {
+    public void activate(MainGame mg) {
 
-        }
     }
 }

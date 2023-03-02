@@ -1,35 +1,40 @@
 package gameworld.entities.npcs.trader;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
 import gameworld.quest.dialog.DialogStorage;
-import gameworld.world.objects.items.ITEM;
+import gameworld.world.objects.items.ITM_SpellBook;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.ui.Colors;
-import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
 import java.util.Objects;
 
-public class NPC_ArmourTrader extends MERCHANT {
+
+public class NPC_AbilityTrader extends MERCHANT {
 
 
-    //TODO when to regenerate trader inventory and make method
-    public NPC_ArmourTrader(MainGame mg, int xTile, int yTile, Zone zone) {
+    public NPC_AbilityTrader(MainGame mg, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
         tradeWindowX = 250;
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
-            ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity > 2 || !(item.type == 'H' || item.type == 'C' || item.type == 'P' || item.type == 'B')) {
-                item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            }
-            buySlots.add(new UI_InventorySlot(item, 123, 123));
+            buySlots.add(new UI_InventorySlot(null, 123, 123));
         }
+        buySlots.get(0).item = new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.ArcaneDMG);
+        buySlots.get(1).item = new ITM_SpellBook("Frost Nova", 2, null, null, DamageType.IceDMG);
+        buySlots.get(2).item = new ITM_SpellBook("Lightning Strike", 2, null, null, DamageType.ArcaneDMG);
+        buySlots.get(3).item = new ITM_SpellBook("Ring Salvo", 2, null, null, DamageType.FireDMG);
+        buySlots.get(4).item = new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.ArcaneDMG);
+        buySlots.get(5).item = new ITM_SpellBook("Thunder Splash", 2, null, null, DamageType.ArcaneDMG);
+        buySlots.get(6).item = new ITM_SpellBook("Thunder Strike", 2, null, null, DamageType.ArcaneDMG);
+        buySlots.get(7).item = new ITM_SpellBook("Void Eruption", 2, null, null, DamageType.DarkDMG);
+        buySlots.get(8).item = new ITM_SpellBook("Void Field", 2, null, null, DamageType.DarkDMG);
+
         for (int i = 0; i < 28; i++) {
             soldSlots.add(new UI_InventorySlot(null, 123, 123));
         }
@@ -45,7 +50,6 @@ public class NPC_ArmourTrader extends MERCHANT {
         direction = "updownleftright";
     }
 
-    //TODO make misc items and display value / make quest item type
     @Override
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
@@ -70,9 +74,7 @@ public class NPC_ArmourTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.setFont(FonT.minecraftBold14);
-        gc.setFill(Colors.white);
-        gc.fillText("Armour Trader", screenX - 25, screenY + 58);
+        gc.fillText("Ability Trader", screenX - 25, screenY + 58);
     }
 
     @Override
@@ -94,3 +96,4 @@ public class NPC_ArmourTrader extends MERCHANT {
         }
     }
 }
+

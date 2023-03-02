@@ -2,7 +2,9 @@ package gameworld;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
+import gameworld.entities.npcs.trader.NPC_AbilityTrader;
 import gameworld.entities.npcs.trader.NPC_ArmourTrader;
+import gameworld.entities.npcs.trader.NPC_WeaponTrader;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,7 +24,10 @@ public class NPC_Control {
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;
-        NPC_Tutorial.add(new NPC_ArmourTrader(mg, 67, 33));
+        NPC_Clearing.add(new NPC_ArmourTrader(mg, 27, 31, Zone.Clearing));
+        NPC_Clearing.add(new NPC_WeaponTrader(mg, 33, 31, Zone.Clearing));
+        NPC_Clearing.add(new NPC_AbilityTrader(mg, 30, 31, Zone.Clearing));
+        NPC_Clearing.add(new NPC_AbilityTrader(mg, 30, 31, Zone.Clearing));
     }
 
 

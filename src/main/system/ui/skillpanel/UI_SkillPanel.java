@@ -297,7 +297,7 @@ public class UI_SkillPanel {
                 darkSkills.set(grabIndex, new SKL_Filler(mg));
             } else if (draggedSKILL.type == DamageType.PoisonDMG) {
                 poisonSkills.set(grabIndex, new SKL_Filler(mg));
-            } else if (draggedSKILL.type == DamageType.FrostDMG) {
+            } else if (draggedSKILL.type == DamageType.IceDMG) {
                 iceSkills.set(grabIndex, new SKL_Filler(mg));
             }
         }
@@ -352,7 +352,7 @@ public class UI_SkillPanel {
                     return;
                 }
             }
-        } else if (newSkill.type == DamageType.FrostDMG) {
+        } else if (newSkill.type == DamageType.IceDMG) {
             for (int i = 0; i < iceSkills.size(); i++) {
                 if (iceSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : iceSkills) {

@@ -79,6 +79,9 @@ public class UI_SkillBar {
             }
             if (hitBoxes[i].contains(mousePos) && mg.skillPanel.draggedSKILL == null) {
                 skills[i].drawToolTip(gc, mousePos.x, mousePos.y);
+                if (mg.inputH.shift_pressed && mg.inputH.mouse1Pressed) {
+                    skills[i] = new SKL_Filler(mg);
+                }
             } else {
                 skills[i].toolTipTimer = 0;
             }

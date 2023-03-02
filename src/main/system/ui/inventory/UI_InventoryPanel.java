@@ -5,12 +5,13 @@ import gameworld.player.Player;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
+import gameworld.world.objects.items.ITM_SpellBook;
+import gameworld.world.objects.items.ITM_Usable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
-import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.talentpanel.TalentNode;
 
 import java.awt.Point;
@@ -161,7 +162,12 @@ public class UI_InventoryPanel {
         gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.235), startY - (MainGame.SCREEN_HEIGHT * 0.311), MainGame.SCREEN_HEIGHT * 0.224, MainGame.SCREEN_HEIGHT * 0.318f, 15, 15);
         //NAME
         setRarityColor(gc, invSlot);
-        gc.setFont(FonT.minecraftRegular20);
+        if (invSlot.item.name.length() < 23) {
+            gc.setFont(FonT.minecraftRegular20);
+        } else {
+            gc.setFont(FonT.minecraftRegular18);
+        }
+
         gc.fillText(invSlot.item.name, startX - MainGame.SCREEN_HEIGHT * 0.229f, startY - MainGame.SCREEN_HEIGHT * 0.268f);
         //Quality
         applyQualityColor(invSlot, gc);
@@ -173,7 +179,7 @@ public class UI_InventoryPanel {
         }
         //STATS
         gc.setFill(Colors.darkBackground);
-        if ((invSlot.item.type == 'M')) {
+        if ((invSlot.item.type == 'M') || invSlot.item.type == 'X') {
 
         } else if ((invSlot.item.type == 'G')) {
             gc.setFont(FonT.minecraftItalic15);
@@ -367,13 +373,14 @@ public class UI_InventoryPanel {
                             bag_Slots.get(i).item = null;
                             return;
                         }
-                    } else if (mg.inputH.e_typed) {
-                        if (bag_Slots.get(i).item.name.equals("Booze")) {
-                            mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
-                            mg.inputH.e_typed = false;
+                    } else if (mg.inputH.e_typed && bag_Slots.get(i).item instanceof ITM_Usable) {
+                        if (bag_Slots.get(i).item instanceof ITM_SpellBook) {
+                            ((ITM_SpellBook) bag_Slots.get(i).item).activate(mg);
+                            bag_Slots.get(i).item = null;
                             mg.sound.playEffectSound(10);
                             return;
                         }
+                        mg.inputH.e_typed = false;
                     }
                 }
             }
@@ -893,6 +900,15 @@ public class UI_InventoryPanel {
                 slot.drawIcon(gc, i % 7 * 50 + startX + 10, 60 + y + startY, SLOT_SIZE);
             }
             i++;
+        }
+    }
+
+    public void addItemToBag(ITEM item) {
+        for (UI_InventorySlot slot : bag_Slots) {
+            if (slot.item == null) {
+                slot.item = item;
+                return;
+            }
         }
     }
 

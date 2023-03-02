@@ -8,24 +8,22 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.ui.Colors;
-import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
 import java.util.Objects;
 
-public class NPC_ArmourTrader extends MERCHANT {
+
+public class NPC_AccessoriesTrader extends MERCHANT {
 
 
-    //TODO when to regenerate trader inventory and make method
-    public NPC_ArmourTrader(MainGame mg, int xTile, int yTile, Zone zone) {
+    public NPC_AccessoriesTrader(MainGame mg, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
         tradeWindowX = 250;
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
             ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity > 2 || !(item.type == 'H' || item.type == 'C' || item.type == 'P' || item.type == 'B')) {
+            while (item.rarity > 2 && !(item.type == 'W' || item.type == '2' || item.type == 'O')) {
                 item = mg.dropI.getFinishedRandomItem(mg.player.level);
             }
             buySlots.add(new UI_InventorySlot(item, 123, 123));
@@ -70,9 +68,7 @@ public class NPC_ArmourTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.setFont(FonT.minecraftBold14);
-        gc.setFill(Colors.white);
-        gc.fillText("Armour Trader", screenX - 25, screenY + 58);
+        gc.fillText("Accessories Trader", screenX - 25, screenY + 58);
     }
 
     @Override
@@ -94,3 +90,4 @@ public class NPC_ArmourTrader extends MERCHANT {
         }
     }
 }
+
