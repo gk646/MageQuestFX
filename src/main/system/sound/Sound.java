@@ -41,10 +41,8 @@ public class Sound {
 
 
     public void loadSounds() {
-
         energySphereBeginning = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav")).toString());
         energySphereHit = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav")).toString());
-
 
         INTRO = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro.wav")).toString()));
         INTRO.setVolume(0.8);
@@ -55,9 +53,14 @@ public class Sound {
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/menu_switch.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/menu_back.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/chestOpen.wav")).toString())));
+        //5
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/sell.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/spike.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/buy.wav")).toString())));
+        //8
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/openInventory.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/pickupGold.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/readBook.wav")).toString())));
 
 
         loadAmbience();

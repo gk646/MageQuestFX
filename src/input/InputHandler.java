@@ -277,6 +277,7 @@ public class InputHandler {
             if (!mg.showChar) {
                 mg.inventP.resetCharCollision();
                 mg.showChar = true;
+                mg.sound.playEffectSound(8);
                 scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.inventP.hideCharCollision();
@@ -430,6 +431,7 @@ public class InputHandler {
                 } else if (mg.sBar.characterBox.contains(mousePos)) {
                     if (!mg.showChar) {
                         mg.showChar = true;
+                        mg.sound.playEffectSound(8);
                         mg.inventP.resetCharCollision();
                         scene.setCursor(Runner.selectCrosshair);
                     } else {

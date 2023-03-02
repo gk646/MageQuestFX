@@ -22,7 +22,9 @@ SOUNDS
  horror ambience : https://freesound.org/people/klankbeeld/
  sell item : https://freesound.org/people/DWOBoyle/sounds/140382/
  solar flare sound: https://freesound.org/people/EminYILDIRIM/sounds/555519/
- 
+ Book, Flipping Through Pages, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+ Gold pickup: https://freesound.org/people/LittleRobotSoundFactory/sounds/270405/
+ inventory open : https://freesound.org/people/LittleRobotSoundFactory/sounds/270393/
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

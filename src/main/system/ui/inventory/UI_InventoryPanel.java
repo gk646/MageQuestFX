@@ -371,6 +371,7 @@ public class UI_InventoryPanel {
                         if (bag_Slots.get(i).item.name.equals("Booze")) {
                             mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
                             mg.inputH.e_typed = false;
+                            mg.sound.playEffectSound(10);
                             return;
                         }
                     }

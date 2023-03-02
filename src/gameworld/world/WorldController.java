@@ -170,7 +170,7 @@ public class WorldController {
         for (Map map : MAPS) {
             if (map.zone == currentWorld) {
                 for (MapMarker marker : map.mapMarkers) {
-                    if (marker.name.equals(s)) {
+                    if (marker.name().equals(s)) {
                         map.mapMarkers.remove(marker);
                         return;
                     }

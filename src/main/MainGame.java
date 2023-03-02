@@ -4,7 +4,6 @@ import gameworld.ENT_Control;
 import gameworld.NPC_Control;
 import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
-import gameworld.entities.boss.BOSS_Slime;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
@@ -445,7 +444,6 @@ public class MainGame {
     }
 
     private void debug() {
-        ENTITIES.add(new BOSS_Slime(this, 70 * 48, 89 * 48, 1, 150, Zone.Tutorial));
         for (int i = 0; i < 1; i++) {
             ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
