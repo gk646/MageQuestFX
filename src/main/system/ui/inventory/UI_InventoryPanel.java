@@ -10,6 +10,7 @@ import gameworld.world.objects.items.ITM_Usable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.State;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.talentpanel.TalentNode;
@@ -505,17 +506,17 @@ public class UI_InventoryPanel {
             char_Slots[9].type = "O";
         }
         boolean node_focused = false;
-        if (mg.ui.musicSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+        if ((mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) && mg.ui.musicSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
             mg.ui.musicSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.musicSlider = Math.max(Math.min(100, mg.ui.musicSlider), 0);
             mg.sound.setVolumeMusic(mg.ui.musicSlider);
             mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
-        } else if (mg.ui.effectsSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+        } else if ((mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) && mg.ui.effectsSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
             mg.ui.effectsSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.effectsSlider = Math.max(Math.min(100, mg.ui.effectsSlider), 0);
             mg.sound.setVolumeEffects(mg.ui.effectsSlider);
             mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
-        } else if (mg.ui.ambientSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
+        } else if ((mg.gameState == State.OPTION || mg.gameState == State.TITLE_OPTION) && mg.ui.ambientSliderHitBox.contains(mousePos) && mg.inputH.mouse1Pressed) {
             mg.ui.ambientSlider += (mousePos.x - previousMousePosition.x) / 2.0f;
             mg.ui.ambientSlider = Math.max(Math.min(100, mg.ui.ambientSlider), 0);
             mg.sound.setVolumeAmbience(mg.ui.ambientSlider);
@@ -915,6 +916,7 @@ public class UI_InventoryPanel {
     public void hideCharCollision() {
         wholeCharWindow.x = -1_000;
         wholeCharWindow.y = -1_000;
+        charPanelMover.y = -1000;
     }
 
     private void applyQualityColor(UI_InventorySlot invSlot, GraphicsContext gc) {
@@ -932,17 +934,19 @@ public class UI_InventoryPanel {
     public void hideBagCollision() {
         wholeBagWindow.x = -1_000;
         wholeBagWindow.y = -1_000;
+        bagPanelMover.y = -1000;
     }
 
     public void resetCharCollision() {
         wholeCharWindow.x = lastCharPosition.x;
         wholeCharWindow.y = lastCharPosition.y;
+        charPanelMover.y = wholeCharWindow.y - 75;
     }
 
     public void resetBagCollision() {
-
         wholeBagWindow.x = lastBagPosition.x;
         wholeBagWindow.y = lastBagPosition.y;
+        bagPanelMover.y = wholeBagWindow.y;
     }
 
     private void createCharSlots() {

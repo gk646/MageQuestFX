@@ -235,9 +235,13 @@ public class InputHandler {
                 downPressed = false;
                 mg.showBag = false;
                 mg.showChar = false;
+
                 mg.showMap = false;
                 mg.showTalents = false;
                 mg.showAbilities = false;
+                mg.inventP.hideBagCollision();
+                mg.inventP.hideCharCollision();
+                mg.skillPanel.hideSkillPanelCollision();
                 try {
                     Thread.sleep(15);
                 } catch (InterruptedException ex) {
@@ -491,6 +495,9 @@ public class InputHandler {
                     mg.showMap = false;
                     mg.showTalents = false;
                     mg.showAbilities = false;
+                    mg.inventP.hideBagCollision();
+                    mg.inventP.hideCharCollision();
+                    mg.skillPanel.hideSkillPanelCollision();
                 } else if (mg.inventP.activeTradingNPC != null && mg.inventP.activeTradingNPC.firstWindow.contains(mousePos)) {
                     mg.inventP.activeTradingNPC.show_trade = true;
                     mg.inventP.activeTradingNPC.show_buyback = false;
