@@ -32,7 +32,7 @@ public class WorldController {
         // TUTORIAL
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Tutorial, GameMapType.MapCover));
         // DUNGEON TUTORIAL
-        MAPS.add(new Map("DungeonTutorial", new Point(60, 60), Zone.Dungeon_Tutorial));
+        MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Dungeon_Tutorial));
         MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Clearing));
         //Overworld
         //   MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
@@ -98,7 +98,7 @@ public class WorldController {
                 loadMap(Zone.City1, 10, 10);
                 mg.player.spawnLevel = 1;
             } else if (mg.playerX == 71 && mg.playerY == 56) {
-                loadMap(Zone.Dungeon_Tutorial, 30, 0);
+                loadMap(Zone.Dungeon_Tutorial, 28, 4);
             } else if (mg.playerX == 99 && mg.playerY == 99) {
                 loadMap(Zone.Clearing, 1, 1);
             }
@@ -116,7 +116,7 @@ public class WorldController {
                 loadMap(Zone.GrassLands, 495, 495);
             }
         } else if (currentWorld == Zone.Dungeon_Tutorial) {
-            if (mg.playerX == 29 && mg.playerY == 0) {
+            if (mg.playerX == 27 && mg.playerY == 4) {
                 loadMap(Zone.Tutorial, 71, 55);
             }
         }

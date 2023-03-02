@@ -10,8 +10,8 @@ public class SKL_SelfRegen extends SKILL {
 
     public SKL_SelfRegen(MainGame mg) {
         super(mg);
-        this.totalCoolDown = 3600;
-        this.actualCoolDown = 3600;
+        this.totalCoolDown = 3_600;
+        this.actualCoolDown = 3_600;
         castTimeTotal = 300;
         castTimeActive = 0;
         name = "Regenerative Aura";

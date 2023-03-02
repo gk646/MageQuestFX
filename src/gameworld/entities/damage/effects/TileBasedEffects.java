@@ -63,10 +63,10 @@ public class TileBasedEffects {
                 mg.sound.playEffectSound(4);
                 animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
             }
-        } else if (activeTile1 == 1382) {
+        } else if (activeTile1 == 1_382) {
             mg.playerPrompts.E = true;
             if (mg.inputH.e_typed && animationList.size() == 0) {
-                animationList.add(new ScriptedAnimationList(new int[]{1382, 1383}, 15, new Point(mg.playerX, mg.playerY)));
+                animationList.add(new ScriptedAnimationList(new int[]{1_382, 1_383}, 15, new Point(mg.playerX, mg.playerY)));
             }
         }
     }
@@ -94,7 +94,7 @@ public class TileBasedEffects {
             if ((num1 >= 910 && num1 <= 1_035) || (num2 >= 910 && num2 <= 1_035) || (num3 >= 910 && num3 <= 1_035)) {
                 return true;
             }
-            if ((num1 >= 1_118 && num1 <= 1177) || (num2 >= 1118 && num2 <= 1177) || (num3 >= 1118 && num3 <= 1177)) {
+            if ((num1 >= 1_118 && num1 <= 1_177) || (num2 >= 1_118 && num2 <= 1_177) || (num3 >= 1_118 && num3 <= 1_177)) {
                 return true;
             }
         }

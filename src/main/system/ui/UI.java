@@ -126,10 +126,10 @@ public class UI {
         drawCenteredText(gc, "", credits_scroll - 850);
         drawCenteredText(gc, "", credits_scroll - 900);
         drawCenteredText(gc, "", credits_scroll - 950);
-        drawCenteredText(gc, "", credits_scroll - 1000);
-        drawCenteredText(gc, "", credits_scroll - 1050);
-        drawCenteredText(gc, "", credits_scroll - 1100);
-        drawCenteredText(gc, "", credits_scroll - 1150);
+        drawCenteredText(gc, "", credits_scroll - 1_000);
+        drawCenteredText(gc, "", credits_scroll - 1_050);
+        drawCenteredText(gc, "", credits_scroll - 1_100);
+        drawCenteredText(gc, "", credits_scroll - 1_150);
 
 
         credits_scroll -= 0.25;
@@ -204,18 +204,18 @@ public class UI {
             case 3 -> gc.drawImage(github1, (MainGame.SCREEN_WIDTH * 0.510f), (int) (MainGame.SCREEN_HEIGHT * 0.803f));
         }
         switch (spriteCounter1 % 120 / 30) {
-            case 0 -> gc.drawImage(wa1, 1584, 930);
-            case 1 -> gc.drawImage(wa2, 1584, 930);
-            case 2 -> gc.drawImage(wa3, 1584, 930);
-            case 3 -> gc.drawImage(wa4, 1584, 930);
+            case 0 -> gc.drawImage(wa1, 1_584, 930);
+            case 1 -> gc.drawImage(wa2, 1_584, 930);
+            case 2 -> gc.drawImage(wa3, 1_584, 930);
+            case 3 -> gc.drawImage(wa4, 1_584, 930);
         }
         switch (spriteCounter1 % 120 / 30) {
-            case 0 -> gc.drawImage(enter1, 1785, 945);
-            case 1 -> gc.drawImage(enter2, 1785, 945);
-            case 2 -> gc.drawImage(enter3, 1785, 945);
-            case 3 -> gc.drawImage(enter4, 1785, 945);
+            case 0 -> gc.drawImage(enter1, 1_785, 945);
+            case 1 -> gc.drawImage(enter2, 1_785, 945);
+            case 2 -> gc.drawImage(enter3, 1_785, 945);
+            case 3 -> gc.drawImage(enter4, 1_785, 945);
         }
-        gc.drawImage(arrows, 1490, 950);
+        gc.drawImage(arrows, 1_490, 950);
         spriteCounter1++;
     }
 

@@ -231,7 +231,7 @@ public class GameMap {
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                            image.setRGB((int) b, (int) i, 0xA0FEE761);
+                            image.setRGB((int) b, (int) i, 0xA0FE_E761);
                         }
                     }
                 }

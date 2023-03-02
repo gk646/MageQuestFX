@@ -36,7 +36,7 @@ public class UI_QuestPanel {
         } else {
             gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_655, 340, 245, 145, 15, 15);
-            gc.drawImage(small, 1649, 335);
+            gc.drawImage(small, 1_649, 335);
         }
         gc.setEffect(mg.ui.shadow);
         gc.setFont(FonT.minecraftBold17);

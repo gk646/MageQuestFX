@@ -132,7 +132,7 @@ public class QST_Tutorial extends QUEST {
                     openSquareDoor(58, 37);
                 } else if (progressStage == 26 || progressStage == 25) {
                     npc.blockInteraction = true;
-                    if (WorldRender.worldData1[74][84] == 1383 && WorldController.currentWorld == Zone.Tutorial) {
+                    if (WorldRender.worldData1[74][84] == 1_383 && WorldController.currentWorld == Zone.Tutorial) {
                         openRoundDoor(35, 67);
                         WorldRender.worldData[75][72] = 131;
                         WorldRender.worldData[75][73] = 131;
@@ -174,7 +174,7 @@ public class QST_Tutorial extends QUEST {
                         nextStage();
                     }
                 }
-                if (WorldRender.worldData1[74][84] == 1383 && WorldController.currentWorld == Zone.Tutorial) {
+                if (WorldController.currentWorld == Zone.Tutorial && WorldRender.worldData1[74][84] == 1_383) {
                     openRoundDoor(35, 67);
                     WorldRender.worldData[75][72] = 131;
                     WorldRender.worldData[75][73] = 131;

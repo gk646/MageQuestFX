@@ -27,10 +27,10 @@ abstract public class QUEST {
 
 
     protected static void openRoundDoor(int x, int y) {
-        WorldRender.worldData2[x][y] = 1304;
-        WorldRender.worldData2[x + 1][y] = 1305;
-        WorldRender.worldData1[x][y + 1] = 1317;
-        WorldRender.worldData1[x + 1][y + 1] = 1318;
+        WorldRender.worldData2[x][y] = 1_304;
+        WorldRender.worldData2[x + 1][y] = 1_305;
+        WorldRender.worldData1[x][y + 1] = 1_317;
+        WorldRender.worldData1[x + 1][y + 1] = 1_318;
     }
 
     protected void removeObjective(int index) {
@@ -67,20 +67,20 @@ abstract public class QUEST {
     }
 
     protected static void closeRoundDoor(int x, int y) {
-        WorldRender.worldData2[x][y] = 1301;
-        WorldRender.worldData2[x + 1][y] = 1302;
-        WorldRender.worldData1[x][y + 1] = 1314;
-        WorldRender.worldData1[x + 1][y + 1] = 1315;
+        WorldRender.worldData2[x][y] = 1_301;
+        WorldRender.worldData2[x + 1][y] = 1_302;
+        WorldRender.worldData1[x][y + 1] = 1_314;
+        WorldRender.worldData1[x + 1][y + 1] = 1_315;
     }
 
     public static void openSquareDoor(int x, int y) {
-        WorldRender.worldData2[x][y] = 1353;
-        WorldRender.worldData1[x][y + 1] = 1366;
+        WorldRender.worldData2[x][y] = 1_353;
+        WorldRender.worldData1[x][y + 1] = 1_366;
     }
 
     public static void closeSquareDoor(int x, int y) {
-        WorldRender.worldData2[x][y] = 1327;
-        WorldRender.worldData1[x][y + 1] = 1340;
+        WorldRender.worldData2[x][y] = 1_327;
+        WorldRender.worldData1[x][y + 1] = 1_340;
     }
 
     protected boolean checkDialogSimilarity(String newObjective, int index) {
@@ -128,7 +128,7 @@ abstract public class QUEST {
             npc.onPath = false;
             npc.stuckCounter = 0;
             return true;
-        } else if (npc.stuckCounter > 6000) {
+        } else if (npc.stuckCounter > 6_000) {
             npc.worldX = npc.goalTile.x * 48;
             npc.worldY = npc.goalTile.y * 48;
             npc.stuckCounter = 0;
@@ -146,7 +146,7 @@ abstract public class QUEST {
             }
         }
         if (npc.show_dialog) {
-            if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+            if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2_000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
                 try {
                     nextStage();
                     npc.dialog.loadNewLine(array[progressStage]);
@@ -156,7 +156,7 @@ abstract public class QUEST {
                     npc.dialog.loadNewLine("...");
                 }
             } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-                npc.dialog.dialogRenderCounter = 2000;
+                npc.dialog.dialogRenderCounter = 2_000;
             }
         }
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {

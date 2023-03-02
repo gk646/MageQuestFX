@@ -155,7 +155,7 @@ public class ENT_SkeletonWarrior extends ENTITY {
 
     @Override
     public void playGetHitSound() {
-        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
+        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3_500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
             //animation.playGetHitSound(4);
         }

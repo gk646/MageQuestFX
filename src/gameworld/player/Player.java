@@ -325,7 +325,7 @@ public class Player extends ENTITY {
 
         playerMovementSpeed += effects[45];
         maxMana += effects[46];
-        maxMana = 2000;
+        maxMana = 2_000;
     }
 
     public void setPosition(int x, int y) {
@@ -351,6 +351,7 @@ public class Player extends ENTITY {
                             for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
                                 if (bagSlot.item == null && !bagSlot.grabbed) {
                                     bagSlot.item = drop.item;
+                                    mg.sound.playEffectSound(9);
                                     iter.remove();
                                     break;
                                 }

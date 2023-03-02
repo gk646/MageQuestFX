@@ -94,7 +94,7 @@ public class Dialog {
                 gc.fillText(string, x, stringY += 16);
             }
             if (dialogRenderCounter / 4 >= dialogLine.length()) {
-                dialogRenderCounter = 2000;
+                dialogRenderCounter = 2_000;
             } else {
                 dialogRenderCounter++;
             }
@@ -151,7 +151,7 @@ public class Dialog {
                 gc.fillText(string, x, stringY += 16);
             }
             if (dialogRenderCounter / 4 >= dialogLine.length() && dialogRenderCounter < 2_000) {
-                dialogRenderCounter = 2000;
+                dialogRenderCounter = 2_000;
             } else {
                 dialogRenderCounter++;
             }

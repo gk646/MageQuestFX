@@ -35,7 +35,7 @@ public class UI_SkillBar {
     private final Image map = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/map.png")));
     private final Image settings = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/settings.png")));
 
-    public final Rectangle wholeSkillBar = new Rectangle(614, 1000, 743, 85);
+    public final Rectangle wholeSkillBar = new Rectangle(614, 1_000, 743, 85);
     public final Rectangle characterBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY - 6, 32, 32);
     public final Rectangle bagBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY - 6, 32, 32);
     public final Rectangle skilltreeBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY - 6, 32, 32);

@@ -175,7 +175,7 @@ public class BOSS_Slime extends BOSS {
 
     @Override
     public void playGetHitSound() {
-        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3500) {
+        if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3_500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
             animation.playRandomSoundFromXToIndex(0, 4);
         }

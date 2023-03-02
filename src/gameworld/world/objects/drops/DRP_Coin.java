@@ -5,6 +5,7 @@ import gameworld.world.objects.DROP;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.system.Storage;
+import main.system.enums.Zone;
 
 public class DRP_Coin extends DROP {
     private Image coin1;
@@ -15,9 +16,10 @@ public class DRP_Coin extends DROP {
     public final int amount;
 
 
-    public DRP_Coin(int x, int y, int amount) {
+    public DRP_Coin(int x, int y, int amount, Zone zone) {
         getImages();
         this.amount = amount;
+        this.zone = zone;
         this.size = 10;
         this.worldPos.x = x + 5;
         this.worldPos.y = y + 5;
