@@ -10,11 +10,14 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.Effects;
 import main.system.ui.FonT;
+import main.system.ui.skillbar.skills.SKL_Filler;
 
 import java.awt.Rectangle;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 abstract public class SKILL {
+    private final DecimalFormat df = new DecimalFormat("#.##");
 
     public Image icon;
     protected final MainGame mg;
@@ -150,6 +153,9 @@ abstract public class SKILL {
     abstract public void activate();
 
     public void drawToolTip(GraphicsContext gc, int startX, int startY) {
+        if (this instanceof SKL_Filler) {
+            return;
+        }
         if (toolTipTimer > 30) {
             gc.setFont(FonT.editUndo19);
             gc.setFill(Colors.LightGrey);
@@ -163,13 +169,15 @@ abstract public class SKILL {
             setTypeColor(gc);
             drawCenteredTextToolTip(gc, name, (float) (startY - (MainGame.SCREEN_HEIGHT * 0.206)), (int) (startX - (MainGame.SCREEN_HEIGHT * 0.238)));
             gc.setFont(FonT.minecraftBoldItalic14);
-            gc.fillText("DMG: " + damage * 0.95f + " - " + damage * 1.05f + " " + type.toString(), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.140));
+            gc.fillText("DMG: " + getSkillDamage(), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.145));
             gc.setFill(Colors.Blue);
-            gc.fillText("Mana Cost: " + manaCost, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.160));
+            gc.fillText("Mana Cost: " + manaCost, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.165));
             gc.setFill(Colors.darkBackground);
-            int y = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.140));
-            for (String string : Dialog.insertNewLine(description, 20).split("\n")) {
-                gc.fillText(string, startX - (MainGame.SCREEN_HEIGHT * 0.228), y += 15);
+            gc.fillText("CD: " + df.format(totalCoolDown / 60.0f) + "s", startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.125));
+            gc.setFont(FonT.minecraftItalic11);
+            int y = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.120));
+            for (String string : Dialog.insertNewLine(description, 40).split("\n")) {
+                gc.fillText(string, startX - (MainGame.SCREEN_HEIGHT * 0.228), y += 12);
             }
         } else {
             toolTipTimer++;
@@ -214,5 +222,13 @@ abstract public class SKILL {
 
     private String getSkillDamage() {
 
+        float flat_damage = damage;
+        switch (type) {
+            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[2];
+            case FireDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[19];
+            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[1];
+            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[18];
+        }
+        return df.format(flat_damage * 0.95f) + " - " + df.format(flat_damage * 1.05f) + " " + type;
     }
 }

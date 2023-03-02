@@ -195,8 +195,8 @@ public class Player extends ENTITY {
             getDurabilityDamageWeapon();
             mg.sBar.skills[4].activate();
         }
-        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null) {
-            if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
+        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null && mg.skillPanel.draggedSKILL == null) {
+            if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.skillPanel.wholeSkillWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[5].activate();
             }

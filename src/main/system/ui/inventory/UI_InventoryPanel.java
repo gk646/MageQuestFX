@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
+import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.talentpanel.TalentNode;
 
 import java.awt.Point;
@@ -364,6 +365,12 @@ public class UI_InventoryPanel {
                     } else if (activeTradingNPC != null && activeTradingNPC.show_trade && mg.inputH.mouse2Pressed) {
                         if (!bag_Slots.get(i).type.equals("M") && activeTradingNPC.sellItem(bag_Slots.get(i).item)) {
                             bag_Slots.get(i).item = null;
+                            return;
+                        }
+                    } else if (mg.inputH.e_typed) {
+                        if (bag_Slots.get(i).item.name.equals("Booze")) {
+                            mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
+                            mg.inputH.e_typed = false;
                             return;
                         }
                     }

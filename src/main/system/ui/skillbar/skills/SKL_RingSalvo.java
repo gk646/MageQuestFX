@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_RingSalvo;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -13,9 +14,11 @@ public class SKL_RingSalvo extends SKILL {
         this.totalCoolDown = 120;
         actualCoolDown = 120;
         this.damage = 0.5f;
+        type = DamageType.FireDMG;
         this.coolDownCoefficient = 0;
         this.icon = setup("ring_salvo");
         name = "Fire Salvo";
+        description = "Fiery wave of flame projectiles";
     }
 
     @Override

@@ -1,5 +1,6 @@
 package main.system.ui.skillpanel;
 
+import gameworld.entities.damage.DamageType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -7,7 +8,6 @@ import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.SKILL;
 import main.system.ui.skillbar.skills.SKL_Filler;
-import main.system.ui.skillbar.skills.SKL_RingSalvo;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -33,6 +33,7 @@ public class UI_SkillPanel {
     public Rectangle skillPanelMover = new Rectangle(409, 29);
     public int toolTipNumber;
     public SKILL draggedSKILL;
+    private int grabIndex;
 
 
     public UI_SkillPanel(MainGame mg) {
@@ -43,7 +44,7 @@ public class UI_SkillPanel {
             hitBoxesSideButtons[i] = new Rectangle(123, 123, 32, 41);
         }
         for (int i = 0; i < 10; i++) {
-            arcaneSkills.add(new SKL_RingSalvo(mg));
+            arcaneSkills.add(new SKL_Filler(mg));
             fireSkills.add(new SKL_Filler(mg));
             poisonSkills.add(new SKL_Filler(mg));
             iceSkills.add(new SKL_Filler(mg));
@@ -90,6 +91,7 @@ public class UI_SkillPanel {
         y += 100;//?
         gc.setFont(FonT.minecraftItalic12);
         gc.setFill(Colors.darkBackground);
+
         if (whichPanel[0]) {
             for (int i = 0; i < arcaneSkills.size(); i++) {
                 arcaneSkills.get(i).drawSkillSlot(gc, x - 5, y - 40);
@@ -100,6 +102,11 @@ public class UI_SkillPanel {
                 gc.fillText(arcaneSkills.get(i + 1).name, x + 260, y - 25);
                 arcaneSkills.get(i + 1).hitBox.x = x + 197;
                 arcaneSkills.get(i + 1).hitBox.y = y - 33;
+                if (arcaneSkills.get(i).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    arcaneSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else if (arcaneSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    arcaneSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
                 i++;
                 y += 85;
             }
@@ -113,6 +120,11 @@ public class UI_SkillPanel {
                 gc.fillText(poisonSkills.get(i + 1).name, x + 260, y - 25);
                 poisonSkills.get(i + 1).hitBox.x = x + 197;
                 poisonSkills.get(i + 1).hitBox.y = y - 33;
+                if (poisonSkills.get(i).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    poisonSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else if (poisonSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    poisonSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
                 i++;
                 y += 85;
             }
@@ -126,7 +138,11 @@ public class UI_SkillPanel {
                 gc.fillText(fireSkills.get(i + 1).name, x + 260, y - 25);
                 fireSkills.get(i + 1).hitBox.x = x + 197;
                 fireSkills.get(i + 1).hitBox.y = y - 33;
-
+                if (fireSkills.get(i).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    fireSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else if (fireSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    fireSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
                 i++;
                 y += 85;
             }
@@ -140,6 +156,11 @@ public class UI_SkillPanel {
                 gc.fillText(iceSkills.get(i + 1).name, x + 260, y - 25);
                 iceSkills.get(i + 1).hitBox.x = x + 197;
                 iceSkills.get(i + 1).hitBox.y = y - 33;
+                if (iceSkills.get(i).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    iceSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else if (iceSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    iceSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
                 i++;
                 y += 85;
             }
@@ -153,6 +174,11 @@ public class UI_SkillPanel {
                 gc.fillText(darkSkills.get(i + 1).name, x + 260, y - 25);
                 darkSkills.get(i + 1).hitBox.x = x + 197;
                 darkSkills.get(i + 1).hitBox.y = y - 33;
+                if (darkSkills.get(i).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    darkSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else if (darkSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
+                    darkSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                }
                 i++;
                 y += 85;
             }
@@ -182,52 +208,70 @@ public class UI_SkillPanel {
                 for (int i = 0; i < 8; i++) {
                     if (mg.sBar.hitBoxes[i].contains(mousePos)) {
                         for (SKILL skill : mg.sBar.skills) {
-                            if (skill.name.equals(mg.sBar.skills[i].name) || skill.actualCoolDown < skill.totalCoolDown) {
+                            if (draggedSKILL.name.equals(skill.name) || skill.actualCoolDown < skill.totalCoolDown) {
                                 draggedSKILL = null;
+                                grabIndex = -1;
                                 return;
                             }
                         }
                         mg.sBar.skills[i] = draggedSKILL;
+                        removeSKill(draggedSKILL);
                         draggedSKILL = null;
+                        grabIndex = -1;
                         return;
                     }
                 }
                 draggedSKILL = null;
+                grabIndex = -1;
             }
         }
         if (draggedSKILL == null && mg.inputH.mouse1Pressed) {
-            if (mg.skillPanel.whichPanel[0]) {
-                for (SKILL skill : arcaneSkills) {
+            for (int i = 0; i < arcaneSkills.size(); i++) {
+                if (mg.skillPanel.whichPanel[0]) {
+                    SKILL skill = arcaneSkills.get(i);
                     if (skill.hitBox.contains(mousePos)) {
                         draggedSKILL = skill;
+                        grabIndex = i;
                         return;
                     }
                 }
-            } else if (mg.skillPanel.whichPanel[1]) {
-                for (SKILL skill : poisonSkills) {
+            }
+            for (int i = 0; i < poisonSkills.size(); i++) {
+                if (mg.skillPanel.whichPanel[1]) {
+                    SKILL skill = poisonSkills.get(i);
                     if (skill.hitBox.contains(mousePos)) {
                         draggedSKILL = skill;
+                        grabIndex = i;
                         return;
                     }
                 }
-            } else if (mg.skillPanel.whichPanel[2]) {
-                for (SKILL skill : fireSkills) {
+            }
+            for (int i = 0; i < fireSkills.size(); i++) {
+                if (mg.skillPanel.whichPanel[2]) {
+                    SKILL skill = fireSkills.get(i);
                     if (skill.hitBox.contains(mousePos)) {
                         draggedSKILL = skill;
+                        grabIndex = i;
                         return;
                     }
                 }
-            } else if (mg.skillPanel.whichPanel[3]) {
-                for (SKILL skill : iceSkills) {
+            }
+            for (int i = 0; i < iceSkills.size(); i++) {
+                if (mg.skillPanel.whichPanel[3]) {
+                    SKILL skill = iceSkills.get(i);
                     if (skill.hitBox.contains(mousePos)) {
                         draggedSKILL = skill;
+                        grabIndex = i;
                         return;
                     }
                 }
-            } else if (mg.skillPanel.whichPanel[4]) {
-                for (SKILL skill : darkSkills) {
+            }
+            for (int i = 0; i < darkSkills.size(); i++) {
+                if (mg.skillPanel.whichPanel[4]) {
+                    SKILL skill = darkSkills.get(i);
                     if (skill.hitBox.contains(mousePos)) {
                         draggedSKILL = skill;
+                        grabIndex = i;
                         return;
                     }
                 }
@@ -235,9 +279,66 @@ public class UI_SkillPanel {
             for (int i = 0; i < 8; i++) {
                 if (mg.sBar.hitBoxes[i].contains(mousePos)) {
                     draggedSKILL = mg.sBar.skills[i];
+                    grabIndex = i;
+                    return;
+                }
+            }
+        }
+    }
+
+    private void removeSKill(SKILL draggedSKILL) {
+        if (grabIndex != -1) {
+            if (draggedSKILL.type == DamageType.FireDMG) {
+                fireSkills.set(grabIndex, new SKL_Filler(mg));
+            } else if (draggedSKILL.type == DamageType.ArcaneDMG) {
+                arcaneSkills.set(grabIndex, new SKL_Filler(mg));
+            } else if (draggedSKILL.type == DamageType.DarkDMG) {
+                darkSkills.set(grabIndex, new SKL_Filler(mg));
+            } else if (draggedSKILL.type == DamageType.PoisonDMG) {
+                poisonSkills.set(grabIndex, new SKL_Filler(mg));
+            } else if (draggedSKILL.type == DamageType.FrostDMG) {
+                iceSkills.set(grabIndex, new SKL_Filler(mg));
+            }
+        }
+    }
+
+    public void addSKill(SKILL newSkill) {
+        if (newSkill.type == DamageType.FireDMG) {
+            for (int i = 0; i < fireSkills.size(); i++) {
+                if (fireSkills.get(i) instanceof SKL_Filler) {
+                    fireSkills.set(i, newSkill);
+                    return;
+                }
+            }
+        } else if (newSkill.type == DamageType.ArcaneDMG) {
+            for (int i = 0; i < arcaneSkills.size(); i++) {
+                if (arcaneSkills.get(i) instanceof SKL_Filler) {
+                    arcaneSkills.set(i, newSkill);
+                    return;
+                }
+            }
+        } else if (newSkill.type == DamageType.DarkDMG) {
+            for (int i = 0; i < darkSkills.size(); i++) {
+                if (darkSkills.get(i) instanceof SKL_Filler) {
+                    darkSkills.set(i, newSkill);
+                    return;
+                }
+            }
+        } else if (newSkill.type == DamageType.PoisonDMG) {
+            for (int i = 0; i < poisonSkills.size(); i++) {
+                if (poisonSkills.get(i) instanceof SKL_Filler) {
+                    poisonSkills.set(i, newSkill);
+                    return;
+                }
+            }
+        } else if (newSkill.type == DamageType.FrostDMG) {
+            for (int i = 0; i < iceSkills.size(); i++) {
+                if (iceSkills.get(i) instanceof SKL_Filler) {
+                    iceSkills.set(i, newSkill);
                     return;
                 }
             }
         }
     }
 }
+
