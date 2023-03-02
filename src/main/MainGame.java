@@ -424,7 +424,7 @@ public class MainGame {
             FonT.loadFonts();
 
             //100%
-            sqLite.resetGame();
+            // sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();

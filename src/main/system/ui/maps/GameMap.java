@@ -210,15 +210,17 @@ public class GameMap {
             }
         }
         for (ENTITY entity : mg.npcControl.NPC_Active) {
-            entityX = (int) ((entity.worldX + 24) / 48);
-            entityY = (int) ((entity.worldY + 24) / 48);
-            y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
-            x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
-            if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                for (float i = y; i < y + zoom_i; i++) {
-                    for (float b = x; b < x + zoom_i; b++) {
-                        if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                            image.setRGB((int) b, (int) i, 0xD012_4E89);
+            if (entity.zone == WorldController.currentWorld) {
+                entityX = (int) ((entity.worldX + 24) / 48);
+                entityY = (int) ((entity.worldY + 24) / 48);
+                y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
+                if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                    for (float i = y; i < y + zoom_i; i++) {
+                        for (float b = x; b < x + zoom_i; b++) {
+                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xD012_4E89);
+                            }
                         }
                     }
                 }

@@ -57,6 +57,8 @@ public class LoadGameState {
                     mg.qPanel.setQuestStage("Tutorial", 37);
                     mg.qPanel.getQuest("Tutorial").updateObjective("Follow the old man", 0);
                     mg.wControl.loadMap(Zone.Clearing, 0, 0);
+                } else {
+                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
                 }
             }
             case "finished" -> {
