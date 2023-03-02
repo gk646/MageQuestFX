@@ -424,7 +424,7 @@ public class MainGame {
             FonT.loadFonts();
 
             //100%
-            //sqLite.resetGame();
+            sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -438,8 +438,8 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        debug();
         player.coins = 2_000;
+
     }
 
     private void debug() {
@@ -450,7 +450,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Clearing, 35, 24);
+        wControl.loadMap(Zone.Tutorial, 96, 94);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

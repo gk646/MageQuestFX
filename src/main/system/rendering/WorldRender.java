@@ -53,7 +53,7 @@ public class WorldRender {
         } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
             Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
             screenX = Player.screenX;
-            worldCol = Math.max(worldCol - 18, 0);
+            worldCol = Math.min(Math.max(worldCol - 18, 0), worldSize.y);
         }
         if (screenY > playerY) {
             Player.screenY = playerY;
@@ -61,7 +61,7 @@ public class WorldRender {
         } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
             Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
             screenY = Player.screenY;
-            worldRow = Math.max(worldRow - 10, 0);
+            worldRow = Math.min(Math.max(worldRow - 10, 0), worldSize.x);
         }
         int num1, num2;
         for (int i = worldCol; i < maxCol; i++) {

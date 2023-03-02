@@ -25,7 +25,7 @@ public class NPC_ArmourTrader extends MERCHANT {
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
             ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity > 2 || !(item.type == 'H' || item.type == 'C' || item.type == 'P' || item.type == 'B')) {
+            while (item.rarity > 10 || !(item.type == 'H' || item.type == 'C' || item.type == 'P' || item.type == 'B')) {
                 item = mg.dropI.getFinishedRandomItem(mg.player.level);
             }
             buySlots.add(new UI_InventorySlot(item, 123, 123));

@@ -83,7 +83,7 @@ public class WorldController {
     }
 
     private void clearWorldArrays() {
-        mg.npcControl.loadNPC(currentWorld);
+
         mg.PROJECTILES.clear();
     }
 

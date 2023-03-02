@@ -52,8 +52,8 @@ public class UI_SkillPanel {
             iceSkills.add(new SKL_Filler(mg));
             darkSkills.add(new SKL_Filler(mg));
         }
-        hideSkillPanelCollision();
         addSKill(new SKL_AutoShot(mg));
+        hideSkillPanelCollision();
     }
 
 

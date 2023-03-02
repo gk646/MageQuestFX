@@ -146,14 +146,14 @@ public class Player extends ENTITY {
         collisionUp = false;
         mg.collisionChecker.checkPlayerAgainstTile(this);
         //TODO rewrite collison
-        int worldSize = mg.wRender.worldSize.x * 48;
+        int worldSize = (mg.wRender.worldSize.x - 1) * 48;
         if (mg.inputH.leftPressed) {
-            if (!collisionLeft && worldX > 0) {
+            if (!collisionLeft && worldX > 0 + playerMovementSpeed) {
                 worldX -= playerMovementSpeed;
             }
         }
         if (mg.inputH.upPressed) {
-            if (!collisionUp && worldY > 0) {
+            if (!collisionUp && worldY > 0 + playerMovementSpeed) {
                 worldY -= playerMovementSpeed;
             }
         }
@@ -325,7 +325,6 @@ public class Player extends ENTITY {
 
         playerMovementSpeed += effects[45];
         maxMana += effects[46];
-        maxMana = 2_000;
     }
 
     public void setPosition(int x, int y) {
@@ -427,8 +426,6 @@ public class Player extends ENTITY {
             animation.playSound(0);
             mg.talentP.pointsToSpend++;
             updateEquippedItems();
-            this.experience -= levelUpExperience;
-            levelUpExperience = 0;
             for (int i = 1; i <= level; i++) {
                 levelUpExperience += (i + i - 1) * (10 + i - 1);
             }
@@ -441,7 +438,6 @@ public class Player extends ENTITY {
             level++;
             mg.talentP.pointsToSpend++;
             updateEquippedItems();
-            this.experience -= levelUpExperience;
             levelUpExperience = 0;
             for (int i = 1; i <= level; i++) {
                 levelUpExperience += (i + i - 1) * (10 + i - 1);

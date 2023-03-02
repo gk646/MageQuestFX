@@ -31,7 +31,6 @@ public class UI_QuestPanel {
     }
 
     public void draw(GraphicsContext gc) {
-
         if (expanded) {
             gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_649, 335, 251, 400, 15, 15);
@@ -83,6 +82,9 @@ public class UI_QuestPanel {
             QUEST quest = iterator.next();
             quest.update();
             if (quest.completed) {
+                if (activeQuest == quest) {
+                    activeQuest = null;
+                }
                 iterator.remove();
             }
         }

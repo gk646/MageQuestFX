@@ -35,25 +35,25 @@ public class LoadGameState {
         switch (description) {
             case "null" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
-                mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
+                mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Tutorial));
             }
             case "active" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.wControl.loadMap(Zone.Tutorial, 4, 4);
                 if (quest_num == 1) {
-                    mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
+                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 13);
                     mg.player.setPosition(39, 34);
                     mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 94, 48 * 44, mg.MISC.get(2), Zone.Tutorial));
                     mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 96, 48 * 13, mg.MISC.get(4), Zone.Tutorial));
                 } else if (quest_num == 2) {
-                    mg.npcControl.NPC_Tutorial.add(new NPC_OldMan(mg, 58, 48, Zone.Tutorial));
+                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 26);
                     mg.qPanel.getQuest("Tutorial").updateObjective("Search the ruins for a way out", 0);
                     mg.player.setPosition(58, 35);
                     QUEST.openSquareDoor(58, 37);
                 } else if (quest_num == 3) {
-                    mg.npcControl.NPC_Clearing.add(new NPC_OldMan(mg, 1, 1, Zone.Clearing));
+                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 1, 1, Zone.Clearing));
                     mg.qPanel.setQuestStage("Tutorial", 37);
                     mg.qPanel.getQuest("Tutorial").updateObjective("Follow the old man", 0);
                     mg.wControl.loadMap(Zone.Clearing, 0, 0);
@@ -74,10 +74,8 @@ public class LoadGameState {
     private void loadSpawnLevel() {
         int num = mg.sqLite.readStartLevel();
         switch (num) {
-            case 0:
-                mg.wControl.loadMap(Zone.Tutorial, 4, 4);
-            case 1:
-                mg.wControl.loadMap(Zone.Clearing, 20, 20);
+            case 0 -> mg.wControl.loadMap(Zone.Tutorial, 4, 4);
+            case 1 -> mg.wControl.loadMap(Zone.Clearing, 20, 20);
         }
     }
 }

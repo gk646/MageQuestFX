@@ -39,6 +39,7 @@ public class QST_Tutorial extends QUEST {
         for (NPC npc : mg.npcControl.NPC_Active) {
             if (npc instanceof NPC_OldMan) {
                 interactWithNpc(npc, DialogStorage.Tutorial);
+
                 if (progressStage == 6) {
                     updateObjective("Follow the old man!", 0);
                     moveToTile(npc, 34, 34, new Point(24, 4), new Point(24, 14), new Point(12, 14), new Point(12, 33));
@@ -113,6 +114,7 @@ public class QST_Tutorial extends QUEST {
                     }
                     if (playerBagsContainItem("Silver Key")) {
                         removeObjective(1);
+                        objective2Progress = 3;
                         mg.wControl.removeMapMarker("path2");
                     }
 
@@ -122,11 +124,16 @@ public class QST_Tutorial extends QUEST {
                     }
                     if (playerBagsContainItem("Booze")) {
                         removeObjective(2);
+                        objective3Progress = 3;
                         mg.wControl.removeMapMarker("path3");
+                    }
+                    if (objective1Progress == 3 && objective2Progress == 3 && objective3Progress == 3) {
+                        updateObjective("Return the stuff you found", 0);
                     }
                     npc.blockInteraction = true;
                     if (npc.show_dialog && playerBagsContainItem("Booze") && playerBagsContainItem("Silver Key")) {
                         nextStage();
+                        loadDialogStage(npc, DialogStorage.Tutorial, 22);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                     }
                 } else if (progressStage == 22) {
@@ -140,7 +147,7 @@ public class QST_Tutorial extends QUEST {
                     mg.wControl.addMapMarker("path1", 68, 77, MarkerType.Quest);
                     updateObjective("Search the ruins for a way out", 0);
                     npc.blockInteraction = true;
-                    if (WorldRender.worldData1[74][84] == 1_383 && WorldController.currentWorld == Zone.Tutorial) {
+                    if (WorldController.currentWorld == Zone.Tutorial && WorldRender.worldData1[74][84] == 1_383) {
                         updateObjective("Get back to the old man and escape", 0);
                         mg.wControl.removeMapMarker("path1");
                         openRoundDoor(35, 67);
@@ -163,33 +170,34 @@ public class QST_Tutorial extends QUEST {
                     mg.wControl.addMapMarker("path1", 95, 95, MarkerType.Quest);
                     if (moveToTile(npc, 36, 52)) {
                         nextStage();
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 29);
-                        npc.playerTalkLocation = npc.activeTile;
                     }
                 } else if (progressStage == 29) {
                     if (moveToTile(npc, 68, 75, new Point(36, 71))) {
                         nextStage();
-                        npc.playerTalkLocation = npc.activeTile;
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 30);
                     }
                 } else if (progressStage == 30) {
                     if (moveToTile(npc, 95, 95, new Point(84, 76), new Point(89, 85))) {
                         nextStage();
-                        npc.playerTalkLocation = npc.activeTile;
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 31);
                     }
                 } else if (progressStage == 36) {
+
                     if (moveToTile(npc, 99, 99)) {
                         npc.zone = Zone.Clearing;
                         npc.setPosition(1, 1);
                         mg.wControl.removeMapMarker("path1");
-
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     }
                 } else if (progressStage == 37) {
                     mg.wControl.addMapMarker("path1", 20, 20, MarkerType.Quest);
                     if (npc.activeTile.x == 1) {
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 37);
                     }
                     if (moveToTile(npc, 20, 20, new Point(4, 4), new Point(8, 8), new Point(12, 10))) {
@@ -201,9 +209,11 @@ public class QST_Tutorial extends QUEST {
                     if (num == 10) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 41);
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                     } else if (num == 20) {
                         progressStage = 50;
                         loadDialogStage(npc, DialogStorage.Tutorial, 50);
+                        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                     }
                 } else if (progressStage == 45 || progressStage == 58) {
                     if (!once) {
@@ -212,22 +222,11 @@ public class QST_Tutorial extends QUEST {
                         once = true;
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
+                    updateObjective("Quest Finished", 0);
                     mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     mg.sqLite.finishQuest(quest_id);
                     npc.show_dialog = false;
                     completed = true;
-                }
-                if (WorldController.currentWorld == Zone.Tutorial && WorldRender.worldData1[74][84] == 1_383) {
-                    openRoundDoor(35, 67);
-                    WorldRender.worldData[75][72] = 131;
-                    WorldRender.worldData[75][73] = 131;
-                    WorldRender.worldData2[75][72] = -1;
-                    WorldRender.worldData2[75][73] = -1;
-                    WorldRender.worldData2[76][72] = -1;
-                    WorldRender.worldData2[76][73] = -1;
-                    progressStage = 27;
-                    loadDialogStage(npc, DialogStorage.Tutorial, 27);
-                    openRoundDoor(68, 77);
                 }
             }
         }

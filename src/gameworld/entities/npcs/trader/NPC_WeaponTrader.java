@@ -23,7 +23,7 @@ public class NPC_WeaponTrader extends MERCHANT {
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
             ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity > 2 && !(item.type == 'W' || item.type == '2' || item.type == 'O')) {
+            while (item.rarity > 10 || !(item.type == 'W' || item.type == '2' || item.type == 'O')) {
                 item = mg.dropI.getFinishedRandomItem(mg.player.level);
             }
             buySlots.add(new UI_InventorySlot(item, 123, 123));
