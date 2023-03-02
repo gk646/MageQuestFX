@@ -61,7 +61,9 @@ public class Sound {
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/openInventory.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/pickupGold.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/readBook.wav")).toString())));
-
+        //10
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/zipTabs.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/closeInventory.wav")).toString())));
 
         loadAmbience();
     }

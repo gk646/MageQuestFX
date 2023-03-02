@@ -264,9 +264,11 @@ public class InputHandler {
         } else if (code.equals("p")) {
             if (!mg.showAbilities) {
                 mg.showAbilities = true;
+                mg.skillPanel.resetSkillPanelCollision();
                 scene.setCursor(Runner.selectCrosshair);
             } else {
                 mg.showAbilities = false;
+                mg.skillPanel.hideSkillPanelCollision();
                 if (!inventoryWindowOpen()) {
                     scene.setCursor(Runner.crosshair);
                 }
@@ -282,6 +284,7 @@ public class InputHandler {
             } else {
                 mg.inventP.hideCharCollision();
                 mg.showChar = false;
+                mg.sound.playEffectSound(12);
                 if (!inventoryWindowOpen()) {
                     scene.setCursor(Runner.crosshair);
                 }
@@ -411,14 +414,10 @@ public class InputHandler {
             if (mg.gameState == State.PLAY) {
                 if (mg.qPanel.expandButton.contains(mousePos)) {
                     mg.qPanel.expanded = !mg.qPanel.expanded;
-                } else if (mg.showChar) {
-                    if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
-                        mg.inventP.showCombatStats = true;
-                        return;
-                    }
-                    if (mg.inventP.effectsHitBox.contains(mousePos)) {
-                        mg.inventP.showCombatStats = false;
-                    }
+                } else if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
+                    mg.inventP.showCombatStats = true;
+                } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
+                    mg.inventP.showCombatStats = false;
                 } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
                     mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
                     mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
@@ -436,6 +435,7 @@ public class InputHandler {
                         scene.setCursor(Runner.selectCrosshair);
                     } else {
                         mg.showChar = false;
+                        mg.sound.playEffectSound(12);
                         mg.inventP.hideCharCollision();
                         if (!inventoryWindowOpen()) {
                             scene.setCursor(Runner.crosshair);
@@ -459,9 +459,11 @@ public class InputHandler {
                 } else if (mg.sBar.abilitiesBox.contains(mousePos)) {
                     if (!mg.showAbilities) {
                         mg.showAbilities = true;
+                        mg.skillPanel.resetSkillPanelCollision();
                         scene.setCursor(Runner.selectCrosshair);
                     } else {
                         mg.showAbilities = false;
+                        mg.skillPanel.hideSkillPanelCollision();
                         if (!inventoryWindowOpen()) {
                             scene.setCursor(Runner.crosshair);
                         }

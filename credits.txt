@@ -25,6 +25,7 @@ SOUNDS
  Book, Flipping Through Pages, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
  Gold pickup: https://freesound.org/people/LittleRobotSoundFactory/sounds/270405/
  inventory open : https://freesound.org/people/LittleRobotSoundFactory/sounds/270393/
+ inventory close : https://freesound.org/people/TriqyStudio/sounds/467605/
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

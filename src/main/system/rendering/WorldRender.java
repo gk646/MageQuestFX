@@ -16,7 +16,7 @@ public class WorldRender {
     public static int[][] worldData;
     public static int[][] worldData1;
     public static int[][] worldData2;
-    public Point worldSize;
+    public Point worldSize = new Point();
 
 
     public WorldRender(MainGame mg) {

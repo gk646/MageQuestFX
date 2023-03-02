@@ -59,9 +59,9 @@ public class LoadGameState {
         int num = mg.sqLite.readStartLevel();
         switch (num) {
             case 0:
-                mg.wControl.loadMap(Zone.Tutorial, 4, 4);
+               // mg.wControl.loadMap(Zone.Tutorial, 4, 4);
             case 1:
-                mg.wControl.loadMap(Zone.City1, 40, 18);
+                // mg.wControl.loadMap(Zone.City1, 40, 18);
         }
     }
 }

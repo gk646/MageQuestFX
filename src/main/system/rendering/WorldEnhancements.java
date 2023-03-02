@@ -22,7 +22,7 @@ public class WorldEnhancements {
     final AnimationList lines2 = new AnimationList(new int[]{1_157, 1_158, 1_159, 1_160, 1_161, 1_162, 1_163, 1_164}, 35);
     final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 30);
     final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 25);
-    final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 25);
+    final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 15);
     final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
     final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
     final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
@@ -58,6 +58,7 @@ public class WorldEnhancements {
                 }
             }
         }
+
         for (int i = 0; i < WorldRender.worldData1.length; i++) {
             for (int j = 0; j < WorldRender.worldData1.length; j++) {
                 for (AnimationList animList : animationList) {
@@ -105,10 +106,10 @@ public class WorldEnhancements {
                 WorldRender.worldData[point.x][point.y] = animList.progress(WorldRender.worldData[point.x][point.y]);
             }
             for (Point point : animList.tilesIndices1) {
-                WorldRender.worldData1[point.x][point.y] = animList.progress(WorldRender.worldData[point.x][point.y]);
+                WorldRender.worldData1[point.x][point.y] = animList.progress(WorldRender.worldData1[point.x][point.y]);
             }
             for (Point point : animList.tilesIndices2) {
-                WorldRender.worldData2[point.x][point.y] = animList.progress(WorldRender.worldData[point.x][point.y]);
+                WorldRender.worldData2[point.x][point.y] = animList.progress(WorldRender.worldData2[point.x][point.y]);
             }
         }
     }
@@ -144,7 +145,7 @@ public class WorldEnhancements {
 
     public boolean contains(int[] arr, int value) {
         for (int arrValue : arr) {
-            if (arrValue == value) {
+            if (value == arrValue) {
                 return true;
             }
         }

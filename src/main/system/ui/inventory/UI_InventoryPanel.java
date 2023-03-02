@@ -576,6 +576,7 @@ public class UI_InventoryPanel {
                             }
                             mg.skillPanel.whichPanel[i] = true;
                             mg.inputH.mouse1Pressed = false;
+                            mg.sound.playEffectSound(11);
                             return;
                         } else {
                             mg.skillPanel.toolTipNumber = i;

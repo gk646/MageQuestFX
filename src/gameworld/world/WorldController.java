@@ -18,7 +18,7 @@ public class WorldController {
     private final MainGame mg;
     public static Zone currentWorld;
     public static int[][] currentMapCover;
-    public static ArrayList<MapMarker> currentMapMarkers;
+    public static ArrayList<MapMarker> currentMapMarkers = new ArrayList<>();
     public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public final ArrayList<Map> MAPS = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class WorldController {
                 mg.wRender.worldSize = map.mapSize;
                 currentMapCover = map.mapCover;
                 mg.player.setPosition(xTile, yTile);
-                break;
+                return;
             }
         }
     }
@@ -127,7 +127,7 @@ public class WorldController {
         for (Map map : MAPS) {
             globalTriggers.addAll(map.spawnTriggers);
         }
-        System.out.println(globalTriggers.size());
+        System.out.println(globalTriggers.size() + " total Spawn Triggers!");
     }
 
     /**
