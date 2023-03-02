@@ -161,6 +161,11 @@ public class WorldController {
     public void addMapMarker(String name, int xTile, int yTile, MarkerType type) {
         for (Map map : MAPS) {
             if (map.zone == currentWorld) {
+                for (MapMarker marker : map.mapMarkers) {
+                    if (marker.name().equals(name)) {
+                        return;
+                    }
+                }
                 map.mapMarkers.add(new MapMarker(name, xTile, yTile, type));
             }
         }

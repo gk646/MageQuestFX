@@ -137,9 +137,12 @@ public class QST_Tutorial extends QUEST {
                     moveToTile(npc, 58, 47);
                     openSquareDoor(58, 37);
                 } else if (progressStage == 26 || progressStage == 25) {
+                    mg.wControl.addMapMarker("path1", 68, 77, MarkerType.Quest);
                     updateObjective("Search the ruins for a way out", 0);
                     npc.blockInteraction = true;
                     if (WorldRender.worldData1[74][84] == 1_383 && WorldController.currentWorld == Zone.Tutorial) {
+                        updateObjective("Get back to the old man and escape", 0);
+                        mg.wControl.removeMapMarker("path1");
                         openRoundDoor(35, 67);
                         WorldRender.worldData[75][72] = 131;
                         WorldRender.worldData[75][73] = 131;
@@ -156,6 +159,8 @@ public class QST_Tutorial extends QUEST {
                 } else if (progressStage == 27) {
                     npc.blockInteraction = false;
                 } else if (progressStage == 28) {
+                    updateObjective("Follow the old man... again", 0);
+                    mg.wControl.addMapMarker("path1", 95, 95, MarkerType.Quest);
                     if (moveToTile(npc, 36, 52)) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 29);
@@ -177,17 +182,21 @@ public class QST_Tutorial extends QUEST {
                     if (moveToTile(npc, 99, 99)) {
                         npc.zone = Zone.Clearing;
                         npc.setPosition(1, 1);
+                        mg.wControl.removeMapMarker("path1");
+
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     }
                 } else if (progressStage == 37) {
+                    mg.wControl.addMapMarker("path1", 20, 20, MarkerType.Quest);
                     if (npc.activeTile.x == 1) {
                         loadDialogStage(npc, DialogStorage.Tutorial, 37);
                     }
                     if (moveToTile(npc, 20, 20, new Point(4, 4), new Point(8, 8), new Point(12, 10))) {
-
+                        updateObjective("Speak with the old man", 0);
                     }
                 } else if (progressStage == 40) {
+                    mg.wControl.removeMapMarker("path1");
                     int num = npc.dialog.drawChoice("Iam in a hurry!", "Tell me everything...", null, null);
                     if (num == 10) {
                         nextStage();

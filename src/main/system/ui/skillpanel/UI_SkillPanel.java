@@ -7,6 +7,7 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.SKILL;
+import main.system.ui.skillbar.skills.SKL_AutoShot;
 import main.system.ui.skillbar.skills.SKL_Filler;
 
 import java.awt.Point;
@@ -52,6 +53,7 @@ public class UI_SkillPanel {
             darkSkills.add(new SKL_Filler(mg));
         }
         hideSkillPanelCollision();
+        addSKill(new SKL_AutoShot(mg));
     }
 
 

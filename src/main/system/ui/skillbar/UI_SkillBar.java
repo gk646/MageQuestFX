@@ -6,13 +6,7 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_AutoShot;
-import main.system.ui.skillbar.skills.SKL_EnergySphere;
 import main.system.ui.skillbar.skills.SKL_Filler;
-import main.system.ui.skillbar.skills.SKL_Lightning;
-import main.system.ui.skillbar.skills.SKL_ThunderSplash;
-import main.system.ui.skillbar.skills.SKL_ThunderStrike;
-import main.system.ui.skillbar.skills.SKL_VoidEruption;
-import main.system.ui.skillbar.skills.SKL_VoidField;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -48,13 +42,13 @@ public class UI_SkillBar {
     public UI_SkillBar(MainGame mg) {
         this.mg = mg;
         skills[0] = new SKL_Filler(mg);
-        skills[1] = new SKL_Lightning(mg);
-        skills[2] = new SKL_ThunderStrike(mg);
-        skills[3] = new SKL_VoidField(mg);
-        skills[4] = new SKL_VoidEruption(mg);
+        skills[1] = new SKL_Filler(mg);
+        skills[2] = new SKL_Filler(mg);
+        skills[3] = new SKL_Filler(mg);
+        skills[4] = new SKL_Filler(mg);
         skills[5] = new SKL_AutoShot(mg);
-        skills[6] = new SKL_EnergySphere(mg);
-        skills[7] = new SKL_ThunderSplash(mg);
+        skills[6] = new SKL_Filler(mg);
+        skills[7] = new SKL_Filler(mg);
         for (int i = 0; i < 8; i++) {
             if (i > 6) {
                 hitBoxes[i] = new Rectangle(skillBarX + 12 + i * 64 + 20, skillBarY + 2, 50, 50);

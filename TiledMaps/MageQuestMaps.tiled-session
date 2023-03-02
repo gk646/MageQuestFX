@@ -53,11 +53,11 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 81.33333333333331,
-                "y": 203.33333333333331
+                "x": 386,
+                "y": 486.5
             }
         },
         "GrassLands.tmx": {
