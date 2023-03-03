@@ -57,13 +57,13 @@ public class ENT_Control {
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {
                     if (!entity.dead) {
                         entity.update();
+                        if (mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
+                            entity.collidingWithPlayer = true;
+                            mg.player.getDurabilityDamageArmour();
+                        }
                     } else if (entity.AfterAnimationDead) {
                         mg.prj_control.recordDeath(entity);
                         entityIterator.remove();
-                    } else if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
-                        entity.collidingWithPlayer = true;
-                        mg.player.getDurabilityDamageArmour();
-                        entity.hitDelay = 0;
                     }
                 }
             }

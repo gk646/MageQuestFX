@@ -16,7 +16,7 @@ public class SKL_AutoShot extends SKILL {
         this.coolDownCoefficient = 0;
         this.damage = 1;
         this.type = DamageType.Poison;
-        this.icon = setup("energy_sphere");
+        this.icon = setup("slimeBall");
         name = "Poison Ball";
         description = "Simple mud ball.";
     }
