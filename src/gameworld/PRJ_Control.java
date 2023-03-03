@@ -15,6 +15,7 @@ import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -30,6 +31,7 @@ public class PRJ_Control {
     public int GruntKilledCounter;
     public long lastHitTime;
     private int ShooterKilledCounter;
+    private final ArrayList<PROJECTILE> toBeDamageDead = new ArrayList<>();
 
     /**
      * Used for handling projectiles
@@ -50,6 +52,7 @@ public class PRJ_Control {
     }
 
     public void update() {
+        toBeDamageDead.clear();
         synchronized (mg.PROJECTILES) {
             synchronized (mg.ENTITIES) {
                 Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
@@ -74,7 +77,7 @@ public class PRJ_Control {
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
                         if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
-                            if (entity.dead) {
+                            if (entity.AfterAnimationDead) {
                                 recordDeath(entity);
                                 entityIterator.remove();
                                 continue;
@@ -87,6 +90,9 @@ public class PRJ_Control {
                 }
             }
         }
+        for (PROJECTILE projectile : toBeDamageDead) {
+            projectile.damageDead = true;
+        }
     }
 
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
@@ -97,7 +103,7 @@ public class PRJ_Control {
             //entity.BuffsDebuffEffects.add(new DamageEffect(360, 1, true, DamageType.FireDMG, 60));
         } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
             entity.getDamageFromPlayer(projectile.damage, projectile.type);
-            projectile.damageDead = true;
+            toBeDamageDead.add(projectile);
             entity.playGetHitSound();
         } else {
             entity.playGetHitSound();
@@ -105,7 +111,7 @@ public class PRJ_Control {
         }
         projectile.playHitSound();
         entity.hpBarOn = true;
-        if (entity.getHealth() <= 0) {
+        if (!entity.dead && entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
             if (entity instanceof BOSS) {

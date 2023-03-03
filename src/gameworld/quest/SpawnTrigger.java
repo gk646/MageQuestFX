@@ -5,6 +5,7 @@ import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.monsters.ENT_Snake;
+import gameworld.entities.monsters.ENT_Wolf;
 import gameworld.player.Player;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -44,6 +45,8 @@ public class SpawnTrigger {
                     mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
                 } else if (type == Type.snake) {
                     mg.ENTITIES.add(new ENT_Snake(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.wolf) {
+                    mg.ENTITIES.add(new ENT_Wolf(mg, x * 48, y * 48, level, zone));
                 }
             }
             triggered = true;

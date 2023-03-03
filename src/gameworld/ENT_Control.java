@@ -29,7 +29,6 @@ public class ENT_Control {
      */
     public void draw(GraphicsContext gc) {
         gc.setFont(FonT.editUndo18);
-
         synchronized (mg.ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.ENTITIES) {
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
@@ -57,7 +56,7 @@ public class ENT_Control {
                 ENTITY entity = entityIterator.next();
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {
                     entity.update();
-                    if (entity.dead) {
+                    if (entity.AfterAnimationDead) {
                         mg.prj_control.recordDeath(entity);
                         entityIterator.remove();
                     } else if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {

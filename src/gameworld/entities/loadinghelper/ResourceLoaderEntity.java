@@ -81,7 +81,7 @@ public class ResourceLoaderEntity {
                 break;
             }
         }
-        folderName = "dead";
+        folderName = "death";
         for (int i = 0; i < 15; i++) {
             is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
             if (is != null) {

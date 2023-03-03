@@ -27,6 +27,7 @@ import java.util.Iterator;
  * @see ENT_SkeletonArcher
  */
 abstract public class ENTITY {
+    public boolean AfterAnimationDead;
     public Dialog dialog;
     protected float health;
     public final ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();

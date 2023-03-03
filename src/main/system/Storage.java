@@ -12,9 +12,9 @@ public class Storage {
     public static final Rectangle acidBreathBox = new Rectangle(0, 0, 10, 8);
     public static Image Lightning1, Lightning2, Lightning3, Lightning4, Lightning5, Lightning6, Lightning7, Lightning8, Lightning9, Lightning10;
     public static Image secondaryFire1, secondaryFire2, secondaryFire3, secondaryFire4, secondaryFire5, secondaryFire6;
-    public static Image BigSLimewalk1, BigSLimewalk2, BigSLimewalk3, BigSLimewalk4, BigSLimewalk5, BigSLimewalk6;
+    public static Image BigSLimewalk1;
     public static Image primaryFire1;
-    public static Image gruntImage1;
+
     public static Image acidBreath;
     public static Image shooterImage1;
     public static Image coin1, coin2, coin3, coin4;
@@ -24,7 +24,6 @@ public class Storage {
 
     public void loadImages() {
         loadAbilityImages();
-        loadEntityImages();
         loadDropImages();
     }
 
@@ -32,10 +31,6 @@ public class Storage {
         loadCoinImages();
     }
 
-    private void loadEntityImages() {
-        getGruntImages();
-        getShooterImages();
-    }
 
     private void loadCoinImages() {
         coin1 = setup("/items/drops/coin1.png");
@@ -50,13 +45,6 @@ public class Storage {
         getPrimaryFireImages();
     }
 
-    private void getGruntImages() {
-        gruntImage1 = setup("/Entitys/enemies/enemy01.png");
-    }
-
-    private void getShooterImages() {
-        shooterImage1 = setup("/Entitys/enemies/shooter/Old_man.png");
-    }
 
     private void getEnergySphereImages() {
         secondaryFire1 = setupEnergySphere("SecondaryFire01.png");
