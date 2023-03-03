@@ -70,6 +70,7 @@ public class Runner extends Application {
         stage.show();
         thread.start();
 
+
         //MOUSE
         scene.setOnMousePressed(event -> mainGame.inputH.handleMousePressed(event));
         scene.setOnMouseReleased(event -> mainGame.inputH.handleMouseReleased(event));

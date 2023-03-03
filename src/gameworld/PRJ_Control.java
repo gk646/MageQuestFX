@@ -54,15 +54,17 @@ public class PRJ_Control {
                 Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PROJECTILE projectile = iterator.next();
+
                     if (projectile.dead) {
                         iterator.remove();
                         continue;
                     }
-                    projectile.update();
                     mg.collisionChecker.checkProjectileAgainstTile(projectile);
                     if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
                         projectile.dead = true;
                     }
+                    projectile.update();
+
                     if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
                         mg.player.health -= projectile.level;
                         projectile.dead = true;

@@ -137,6 +137,7 @@ public class MainGame {
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
     public boolean showAbilities;
+    public float counter;
 
 
     /**
@@ -205,18 +206,17 @@ public class MainGame {
                         proximitySorterENTITIES();
                     }
                     tileBase.getNearbyTiles();
-                    //sound.update();
-
+                    sound.update();
                     difference1 = 0;
                     // System.out.println(counter);
-                    // counter = 0;
+                    //counter += 0.5;
                 }
             }
         });
         renderHelper.start();
         Timeline gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame kf = new KeyFrame(Duration.seconds(0.007_9), ae -> drawGame(gc));
+        KeyFrame kf = new KeyFrame(Duration.seconds(0.008), ae -> drawGame(gc));
         gameLoop.getKeyFrames().add(kf);
         gameLoop.play();
         Thread playerThread = new Thread(() -> {
