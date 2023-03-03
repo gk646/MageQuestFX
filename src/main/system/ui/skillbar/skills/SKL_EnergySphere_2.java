@@ -10,6 +10,7 @@ public class SKL_EnergySphere_2 extends SKILL {
         super(mg);
         this.totalCoolDown = 110;
         actualCoolDown = totalCoolDown;
+        manaCost = 45;
         this.coolDownCoefficient = 0;
         this.icon = setup("energy_sphere.png");
         i_id = 1;
@@ -30,9 +31,9 @@ public class SKL_EnergySphere_2 extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 120 && mg.player.mana >= 45) {
+        if (actualCoolDown == 120 && mg.player.getMana() >= 45) {
             mg.PROJECTILES.add(new PRJ_EnergySphere(1.5f));
-            mg.player.mana -= 45;
+            mg.player.loseMana(manaCost);
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();
         }

@@ -224,14 +224,14 @@ public class UI {
         gc.setFill(Colors.Red);
         gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, Math.min((int) ((mg.player.health / mg.player.maxHealth) * 225), 225), 10);
         gc.setFill(Colors.Blue);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, Math.min((int) ((mg.player.mana / mg.player.maxMana) * 162), 162), 10);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, Math.min((int) ((mg.player.getMana() / mg.player.maxMana) * 162), 162), 10);
         gc.setEffect(null);
         gc.drawImage(playerUI, 40, 40, 330, 150);
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.editUndo18);
         gc.setEffect(shadow);
         gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
-        gc.fillText((int) mg.player.mana + "/" + mg.player.maxMana, 173, 97);
+        gc.fillText((int) mg.player.getMana() + "/" + mg.player.maxMana, 173, 97);
         gc.setEffect(null);
         gc.setFill(Colors.lightGreyMiddleAlpha);
         gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, 700, 12);

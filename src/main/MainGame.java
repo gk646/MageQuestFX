@@ -336,7 +336,7 @@ public class MainGame {
             for (SKILL skill : sBar.skills) {
                 skill.actualCoolDown = skill.totalCoolDown;
             }
-            player.mana = player.maxMana;
+            player.setMana(player.maxMana);
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
         }
     }
@@ -419,7 +419,7 @@ public class MainGame {
             multiplayer = new Multiplayer(this, ENTPlayer2);
             player.updateEquippedItems();
             player.health = player.maxHealth;
-            player.mana = player.maxMana;
+            player.setMana(player.maxMana);
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
             FonT.loadFonts();

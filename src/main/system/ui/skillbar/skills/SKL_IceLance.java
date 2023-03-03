@@ -40,8 +40,8 @@ public class SKL_IceLance extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown >= totalCoolDown && mg.player.mana >= manaCost) {
-            mg.player.mana -= manaCost;
+        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
+            mg.player.loseMana(manaCost);
             actualCoolDown = 0;
             mg.PROJECTILES.add(new PRJ_IceLance(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
         }

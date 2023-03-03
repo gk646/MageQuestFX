@@ -60,7 +60,6 @@ public class ENT_Control {
                         mg.prj_control.recordDeath(entity);
                         entityIterator.remove();
                     } else if (entity.hitDelay >= 30 && mg.collisionChecker.checkEntityAgainstPlayer(entity, 8)) {
-                        mg.player.health -= entity.level;
                         entity.collidingWithPlayer = true;
                         mg.player.getDurabilityDamageArmour();
                         entity.hitDelay = 0;

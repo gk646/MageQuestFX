@@ -51,7 +51,6 @@ public class ENT_SkeletonArcher extends ENTITY {
         super.update();
         if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
             attack1 = true;
-            mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
             shotCooldown = 0;
             spriteCounter = 0;
         }
@@ -137,7 +136,10 @@ public class ENT_SkeletonArcher extends ENTITY {
             case 12 -> gc.drawImage(animation.attack1.get(12), screenX - 20, screenY - 14);
             case 13 -> gc.drawImage(animation.attack1.get(13), screenX - 20, screenY - 14);
             case 14 -> gc.drawImage(animation.attack1.get(14), screenX - 20, screenY - 14);
-            case 15 -> attack1 = false;
+            case 15 -> {
+                attack1 = false;
+                mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
+            }
         }
     }
 

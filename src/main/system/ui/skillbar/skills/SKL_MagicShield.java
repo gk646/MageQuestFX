@@ -14,6 +14,7 @@ public class SKL_MagicShield extends SKILL {
         this.coolDownCoefficient = 0;
         this.totalCoolDown = 7_200;
         actualCoolDown = totalCoolDown;
+        manaCost = 25;
         castTimeTotal = 500;
         description = "This ability creates a shimmering, protective barrier around the character, made of pure magical energy. The Arcane Barrier not only absorbs incoming attacks, but it also actively repels enemies that come into contact with it, dealing damage and knocking them back.";
         name = "Arcane Barrier";
@@ -45,12 +46,12 @@ public class SKL_MagicShield extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.mana >= 50) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= 50) {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
             mg.player.BuffsDebuffEffects.add(new Buff_Effect(1_200, 100, true, 24));
-            mg.player.mana -= 15;
+            mg.player.loseMana(manaCost);
             mg.player.playCastAnimation(2);
             actualCoolDown = 0;
         }

@@ -33,7 +33,7 @@ public class Player extends ENTITY {
     public Map map;
     public boolean isMoving;
     public int maxMana;
-    public float mana;
+    private float mana;
     public float health;
     //STATS
     public int intellect;
@@ -689,6 +689,18 @@ public class Player extends ENTITY {
                 "Magic Find: +",
                 "Ice Damage: +",
         };
+    }
+
+    public float getMana() {
+        return mana;
+    }
+
+    public void setMana(float mana) {
+        this.mana = mana;
+    }
+
+    public void loseMana(float manaCost) {
+        mana -= manaCost - (manaCost / 100.0f) * effects[28];
     }
 
     private void getPlayerImage() {

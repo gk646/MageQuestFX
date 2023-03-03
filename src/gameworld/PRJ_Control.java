@@ -65,7 +65,7 @@ public class PRJ_Control {
                         }
                     }
                     if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
-                        mg.player.health -= projectile.level;
+                        mg.player.health -= projectile.damage;
                         projectile.dead = true;
                     }
                     projectile.update();

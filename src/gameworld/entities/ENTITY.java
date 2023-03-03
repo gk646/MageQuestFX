@@ -312,6 +312,7 @@ abstract public class ENTITY {
             case Fire -> flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
             case Arcane -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
             case Poison -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
+            case Ice -> flat_damage += (flat_damage / 100.0f) * effectsDouble[28];
         }
         flat_damage *= mg.random.nextDouble(0.95, 1.05);
         amountedDamageSinceLastDamageNumber += flat_damage;

@@ -14,6 +14,7 @@ public class SKL_RingSalvo extends SKILL {
         this.totalCoolDown = 120;
         actualCoolDown = 120;
         this.damage = 0.5f;
+        manaCost = 15;
         type = DamageType.Fire;
         this.coolDownCoefficient = 0;
         this.icon = setup("ring_salvo");
@@ -34,12 +35,12 @@ public class SKL_RingSalvo extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 120 && mg.player.mana >= 10) {
+        if (actualCoolDown == 120 && mg.player.getMana() >= 10) {
             for (int i = 0; i <= 7; i++) {
                 mg.PROJECTILES.add(new PRJ_RingSalvo(i));
             }
             mg.player.playCastAnimation(2);
-            mg.player.mana -= 10;
+            mg.player.loseMana(manaCost);
             actualCoolDown = 0;
         }
     }

@@ -43,12 +43,12 @@ public class SKL_VoidField extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.mana >= manaCost) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= manaCost) {
             castTimeActive++;
             mg.player.playCastAnimation(3);
         }
         if (castTimeActive == castTimeTotal) {
-            mg.player.mana -= manaCost;
+            mg.player.loseMana(manaCost);
             castTimeActive = 0;
             actualCoolDown = 0;
             mg.PROJECTILES.add(new PRJ_VoidField(300));

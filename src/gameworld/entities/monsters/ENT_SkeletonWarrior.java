@@ -3,6 +3,7 @@ package gameworld.entities.monsters;
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
+import gameworld.player.abilities.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -47,11 +48,14 @@ public class ENT_SkeletonWarrior extends ENTITY {
         super.update();
         if (collidingWithPlayer && !onPath && !attack2 && !attack3 && !attack1) {
             if (Math.random() < 0.33f) {
+                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * level));
                 attack1 = true;
             } else if (Math.random() < 0.66f) {
                 attack2 = true;
+                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * level));
             } else {
                 attack3 = true;
+                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2.3f * level));
             }
             animation.playRandomSoundFromXToIndex(0, 3);
             spriteCounter = 0;

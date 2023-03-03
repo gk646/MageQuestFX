@@ -46,8 +46,8 @@ public class SKL_VoidEruption extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown >= totalCoolDown && mg.player.mana >= manaCost) {
-            mg.player.mana -= manaCost;
+        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
+            mg.player.loseMana(manaCost);
             mg.player.playCastAnimation(2);
             actualCoolDown = 0;
             mg.PROJECTILES.add(new PRJ_VoidEruption());

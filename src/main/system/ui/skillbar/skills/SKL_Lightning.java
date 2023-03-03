@@ -15,6 +15,7 @@ public class SKL_Lightning extends SKILL {
         this.totalCoolDown = 600;
         this.actualCoolDown = 600;
         this.damage = 25;
+        manaCost = 15;
         icon = setup("lightning");
         name = "Lightning Strike";
         this.type = DamageType.Arcane;
@@ -34,12 +35,12 @@ public class SKL_Lightning extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 600 && mg.player.mana >= 15) {
+        if (actualCoolDown == 600 && mg.player.getMana() >= 15) {
             PROJECTILE projectile = new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
             projectile.playStartSound();
             mg.PROJECTILES.add(projectile);
             mg.player.playCastAnimation(3);
-            mg.player.mana -= 15;
+            mg.player.loseMana(manaCost);
             actualCoolDown = 0;
         }
     }
