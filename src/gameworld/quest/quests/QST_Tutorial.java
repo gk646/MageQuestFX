@@ -47,9 +47,9 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 10) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3", 0);
                     gruntKillCounter = mg.prj_control.GruntKilledCounter;
-                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 31, 1, Zone.Tutorial));
-                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 34, 1, Zone.Tutorial));
-                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Tutorial));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 31, 1, Zone.Tutorial));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 34, 1, Zone.Tutorial));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Tutorial));
                     nextStage();
                     npc.blockInteraction = true;
                     mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 94, 48 * 44, mg.MISC.get(2), Zone.Tutorial));

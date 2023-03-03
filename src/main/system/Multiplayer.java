@@ -37,14 +37,14 @@ public class Multiplayer {
             ENTPlayer2.worldX = Integer.parseInt(mg.player2Information, 0, 5, 10) - 50_000;
             ENTPlayer2.worldY = Integer.parseInt(mg.player2Information, 5, 10, 10) - 50_000;
             if (mg.player2Information.length() != messageLength) {
-                MainGame.ENTITIES.clear();
+                mg.ENTITIES.clear();
                 for (int i = 0; i < mg.player2Information.length() - 10; i += 15) {
-                    MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000, Integer.parseInt(mg.player2Information, index + 5, index + 10, 10) - 50_000, Integer.parseInt(mg.player2Information, index + 10, index + 15, 10) - 50_000, Zone.GrassLands));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000, Integer.parseInt(mg.player2Information, index + 5, index + 10, 10) - 50_000, Integer.parseInt(mg.player2Information, index + 10, index + 15, 10) - 50_000, Zone.GrassLands));
                     index += 15;
                 }
             }
             index = 10;
-            for (ENTITY entity : MainGame.ENTITIES) {
+            for (ENTITY entity : mg.ENTITIES) {
                 entity.worldX = Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000;
                 index += 5;
                 entity.worldY = Integer.parseInt(mg.player2Information, index, index + 5, 10) - 50_000;
@@ -61,7 +61,7 @@ public class Multiplayer {
 
     private void updateMultiplayerOutput() {
         try {
-            for (ENTITY entity : MainGame.ENTITIES) {
+            for (ENTITY entity : mg.ENTITIES) {
                 //outputString.append(entity.worldX + 50_000).append(entity.worldY + 50_000).append(entity.health + 50_000);
             }
             //System.out.println(outputString);

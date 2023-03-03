@@ -207,7 +207,7 @@ public class Sound {
         for (MediaPlayer player : effectSounds) {
             player.setVolume(1 * (value / 100.0f));
         }
-        for (ENTITY entity : MainGame.ENTITIES) {
+        for (ENTITY entity : mg.ENTITIES) {
             if (entity.animation != null) {
                 for (MediaPlayer player : entity.animation.sounds) {
                     player.setVolume(EFFECTS_VOLUME);

@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 
 public class WorldRender {
-    public static Tile[] tileStorage;
+    public Tile[] tileStorage;
     private final MainGame mg;
     public static int[][] worldData;
     public static int[][] worldData1;
@@ -21,7 +21,7 @@ public class WorldRender {
 
     public WorldRender(MainGame mg) {
         this.mg = mg;
-        tileStorage = new Tile[3000];
+        tileStorage = new Tile[3_000];
         getTileImagesNew();
     }
 

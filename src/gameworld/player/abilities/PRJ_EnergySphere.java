@@ -65,11 +65,12 @@ public class PRJ_EnergySphere extends PROJECTILE {
     @Override
     public void update() {
         outOfBounds();
-        tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
         if (dead) {
             sounds[0].stop();
+            sounds[0].dispose();
+            sounds[1].setOnEndOfMedia(() -> sounds[1].dispose());
             sounds[1].play();
         }
     }

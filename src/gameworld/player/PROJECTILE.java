@@ -7,7 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import main.system.CollisionChecker;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -81,12 +80,6 @@ public abstract class PROJECTILE {
     }
 
 
-    protected void tileCollision() {
-        CollisionChecker.checkProjectileAgainstTile(this);
-        if (collisionUp || collisionDown || collisionLeft || collisionRight) {
-            this.dead = true;
-        }
-    }
 
     protected void outOfBoundsEnemy() {
         if (worldPos.x >= endPos.x || worldPos.y >= endPos.y || worldPos.y <= endPos.y - 850 * 2 || worldPos.x <= endPos.x - 850 * 2) {

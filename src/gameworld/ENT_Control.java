@@ -27,8 +27,8 @@ public class ENT_Control {
      * Draws all entities and healthbars
      */
     public void draw(GraphicsContext gc) {
-        synchronized (MainGame.ENTITIES) {
-            for (gameworld.entities.ENTITY entity : MainGame.ENTITIES) {
+        synchronized (mg.ENTITIES) {
+            for (gameworld.entities.ENTITY entity : mg.ENTITIES) {
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
                     entity.draw(gc);
                     if (entity.hpBarOn) {
@@ -48,8 +48,8 @@ public class ENT_Control {
 
 
     public void update() {
-        synchronized (MainGame.ENTITIES) {
-            Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
+        synchronized (mg.ENTITIES) {
+            Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
             while (entityIterator.hasNext()) {
                 ENTITY entity = entityIterator.next();
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {

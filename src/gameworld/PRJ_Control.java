@@ -50,7 +50,7 @@ public class PRJ_Control {
 
     public void update() {
         synchronized (mg.PROJECTILES) {
-            synchronized (MainGame.ENTITIES) {
+            synchronized (mg.ENTITIES) {
                 Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PROJECTILE projectile = iterator.next();
@@ -59,11 +59,15 @@ public class PRJ_Control {
                         continue;
                     }
                     projectile.update();
+                    mg.collisionChecker.checkProjectileAgainstTile(projectile);
+                    if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
+                        projectile.dead = true;
+                    }
                     if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
                         mg.player.health -= projectile.level;
                         projectile.dead = true;
                     }
-                    Iterator<ENTITY> entityIterator = MainGame.ENTITIES.iterator();
+                    Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
                         if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {

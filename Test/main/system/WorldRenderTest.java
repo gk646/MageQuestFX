@@ -37,7 +37,7 @@ class WorldRenderTest {
             }
             for (int i = worldCol; i < maxCol; i++) {
                 for (int b = worldRow; b < maxRow; b++) {
-                    mg.gc.drawImage(WorldRender.tileStorage[WorldRender.worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);
+                    mg.gc.drawImage(mg.wRender.tileStorage[WorldRender.worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY, 48, 48);
                 }
             }
         }
@@ -64,7 +64,7 @@ class WorldRenderTest {
             }
             for (int i = worldCol; i < maxCol; i++) {
                 for (int b = worldRow; b < maxRow; b++) {
-                    mg.gc.drawImage(WorldRender.tileStorage[WorldRender.worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
+                    mg.gc.drawImage(mg.wRender.tileStorage[WorldRender.worldData[i][b]].tileImage, i * 48 - Player.worldX + Player.screenX, b * 48 - Player.worldY + Player.screenY);
                 }
             }
         }

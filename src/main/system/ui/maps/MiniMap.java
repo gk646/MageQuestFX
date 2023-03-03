@@ -38,7 +38,7 @@ public class MiniMap {
                         tileNum = WorldRender.worldData[xTileOffset][yTileOffset];
                         tileNum2 = WorldRender.worldData1[xTileOffset][yTileOffset];
                         if (WorldController.currentMapCover[xTileOffset][yTileOffset] == 1) {
-                            if ((tileNum != -1 && WorldRender.tileStorage[tileNum].collision) || (tileNum2 != -1 && WorldRender.tileStorage[tileNum2].collision)) {
+                            if ((tileNum != -1 && mg.wRender.tileStorage[tileNum].collision) || (tileNum2 != -1 && mg.wRender.tileStorage[tileNum2].collision)) {
                                 gc.setFill(Colors.darkBackground);
                                 gc.fillRect(1_686 + x * tileSize, 25 + y * tileSize, tileSize, tileSize);
                             } else {

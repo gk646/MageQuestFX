@@ -40,7 +40,6 @@ public class PRJ_AutoShot extends PROJECTILE {
     @Override
     public void update() {
         outOfBounds();
-        tileCollision();
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
     }

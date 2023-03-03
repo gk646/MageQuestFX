@@ -47,7 +47,7 @@ public class PRJ_RingSalvo extends PROJECTILE {
     @Override
     public void update() {
         outOfBounds();
-        tileCollision();
+
         worldPos.x += updateVector.x;
         worldPos.y += updateVector.y;
     }

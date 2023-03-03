@@ -32,11 +32,11 @@ public class SpawnTrigger {
     public void activate(MainGame mg) {
         if (!triggered && playerXCloseToTile(14, x, y)) {
             if (trigger == Trigger.SINGULAR && type == Type.Grunt) {
-                MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
+                mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.Shooter) {
-                MainGame.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
+                mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
             } else if (trigger == Trigger.SINGULAR && type == Type.BOSS_Slime) {
-                MainGame.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
+                mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
             }
             triggered = true;
         }

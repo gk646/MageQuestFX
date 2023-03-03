@@ -41,7 +41,7 @@ public class PRJ_AcidBreath extends EnemyProjectile {
     @Override
     public void update() {
         outOfBoundsEnemy();
-        tileCollision();
+
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
     }

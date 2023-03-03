@@ -46,6 +46,7 @@ import main.system.ui.maps.MiniMap;
 import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.SKILL;
 import main.system.ui.skillbar.UI_SkillBar;
+import main.system.ui.skillbar.skills.SKL_EnergySphere;
 import main.system.ui.skillpanel.UI_SkillPanel;
 import main.system.ui.talentpanel.UI_TalentPanel;
 
@@ -60,12 +61,11 @@ import java.util.Random;
 public class MainGame {
 
 
-    private static final float FRAMES_PER_SECOND = 120;
     public static int SCREEN_WIDTH = 1_920;
     public static int SCREEN_HEIGHT = 1_080;
     public final int HALF_WIDTH;
     public final int HALF_HEIGHT;
-    public static final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
+    public final List<ENTITY> ENTITIES = Collections.synchronizedList(new ArrayList<>());
     //---------VARIABLES----------
     public final List<PROJECTILE> PROJECTILES = Collections.synchronizedList(new ArrayList<>());
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
@@ -205,7 +205,7 @@ public class MainGame {
                         proximitySorterENTITIES();
                     }
                     tileBase.getNearbyTiles();
-                    sound.update();
+                    //sound.update();
 
                     difference1 = 0;
                     // System.out.println(counter);
@@ -438,15 +438,15 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
+        debug();
         player.coins = 2_000;
-
     }
 
     private void debug() {
         for (int i = 0; i < 1; i++) {
             //ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
-        inventP.bag_Slots.get(3).item = MISC.get(2);
+        sBar.skills[5] = new SKL_EnergySphere(this);
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);

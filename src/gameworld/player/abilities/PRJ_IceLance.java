@@ -95,7 +95,7 @@ public class PRJ_IceLance extends PROJECTILE {
     @Override
     public void update() {
         outOfBounds();
-        tileCollision();
+
         if (dead) {
             sounds[0].stop();
         }

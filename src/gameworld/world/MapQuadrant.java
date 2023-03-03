@@ -4,7 +4,6 @@ import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.rendering.WorldRender;
 
 public class MapQuadrant {
 
@@ -43,11 +42,11 @@ public class MapQuadrant {
             while (spawnedEnemies < numberOfEnemies) {
                 xTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileX, 499));
                 yTile = Math.max(0, Math.min((int) (Math.random() * size + 1) + startTileY, 499));
-                if (!WorldRender.tileStorage[mapData[xTile][yTile]].collision) {
+                if (!mg.wRender.tileStorage[mapData[xTile][yTile]].collision) {
                     if (Math.random() > 0.4) {
-                        MainGame.ENTITIES.add(new ENT_SkeletonWarrior(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
+                        mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     } else {
-                        MainGame.ENTITIES.add(new ENT_SkeletonArcher(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
+                        mg.ENTITIES.add(new ENT_SkeletonArcher(mg, xTile * mg.tileSize, yTile * mg.tileSize, difficulty, zone));
                     }
                     spawnedEnemies++;
                 }

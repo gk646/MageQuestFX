@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Tutorial.tmx",
+    "activeFile": "GrassLands.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -64,11 +64,11 @@
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.125,
-            "selectedLayer": 0,
+            "scale": 0.0625,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 4024,
-                "y": 3928
+                "x": 5656,
+                "y": 3792
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -78,7 +78,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 3,
             "scaleInEditor": 1
         },
         "TileSet.tsx": {
@@ -226,12 +226,12 @@
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "FirstDungeon.tmx",
-        "GrassLands.tmx",
-        "DungeonTutorial.tmx",
-        "ForestClearing.tmx",
-        "TIILESET.tsx",
-        "unbenannt.tmx",
         "Tutorial.tmx",
+        "unbenannt.tmx",
+        "TIILESET.tsx",
+        "ForestClearing.tmx",
+        "DungeonTutorial.tmx",
+        "GrassLands.tmx",
         "City1.tmx",
         "second floor_tutorial_castle.tmx",
         "grassspritesheet16.tsx",
