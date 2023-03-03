@@ -77,7 +77,9 @@ public class ENT_SkeletonSpearman extends ENTITY {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (attack1) {
+        if (dead) {
+            drawDeath(gc);
+        } else if (attack1) {
             drawAttack1(gc);
         } else if (attack2) {
             drawAttack2(gc);
@@ -90,7 +92,6 @@ public class ENT_SkeletonSpearman extends ENTITY {
                 drawIdle(gc);
             }
         }
-
         spriteCounter++;
     }
 
@@ -147,6 +148,17 @@ public class ENT_SkeletonSpearman extends ENTITY {
             case 3 -> gc.drawImage(animation.attack3.get(3), screenX - 15, screenY - 48);
             case 4 -> gc.drawImage(animation.attack3.get(4), screenX - 15, screenY - 48);
             case 5 -> attack3 = false;
+        }
+    }
+
+    private void drawDeath(GraphicsContext gc) {
+        switch (spriteCounter % 245 / 35) {
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 15, screenY - 48);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 15, screenY - 48);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 15, screenY - 48);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 15, screenY - 48);
+            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 15, screenY - 48);
+            case 5 -> AfterAnimationDead = true;
         }
     }
 

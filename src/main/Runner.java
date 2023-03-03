@@ -70,7 +70,6 @@ public class Runner extends Application {
         stage.show();
         thread.start();
 
-
         //MOUSE
         scene.setOnMousePressed(event -> mainGame.inputH.handleMousePressed(event));
         scene.setOnMouseReleased(event -> mainGame.inputH.handleMouseReleased(event));
@@ -83,6 +82,6 @@ public class Runner extends Application {
         scene.setOnKeyPressed(event -> mainGame.inputH.handleKeyPressed(event));
         scene.setOnKeyReleased(event -> mainGame.inputH.handleKeyReleased(event));
 
-        stage.setOnCloseRequest(e -> System.exit(0));
+        stage.setOnCloseRequest(e -> mainGame.sqLite.saveGameAndExit());
     }
 }

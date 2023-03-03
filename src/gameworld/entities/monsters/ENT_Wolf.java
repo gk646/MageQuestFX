@@ -47,7 +47,7 @@ public class ENT_Wolf extends ENTITY {
         super.update();
         if (collidingWithPlayer && !onPath && !attack1) {
             attack1 = true;
-            //animation.playRandomSoundFromXToIndex(0, 3);
+            animation.playRandomSoundFromXToIndex(0, 3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
@@ -117,7 +117,7 @@ public class ENT_Wolf extends ENTITY {
     }
 
     private void drawDeath(GraphicsContext gc) {
-        switch (spriteCounter % 175 / 25) {
+        switch (spriteCounter % 245 / 35) {
             case 0 -> gc.drawImage(animation.dead.get(0), screenX, screenY);
             case 1 -> gc.drawImage(animation.dead.get(1), screenX, screenY);
             case 2 -> gc.drawImage(animation.dead.get(2), screenX, screenY);

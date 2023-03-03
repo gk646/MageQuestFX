@@ -75,7 +75,10 @@ public class ENT_SkeletonArcher extends ENTITY {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (attack1) {
+
+        if (dead) {
+            drawDeath(gc);
+        } else if (attack1) {
             drawAttack1(gc);
         } else if (attack2) {
             // drawAttack2(gc);
@@ -135,6 +138,17 @@ public class ENT_SkeletonArcher extends ENTITY {
             case 13 -> gc.drawImage(animation.attack1.get(13), screenX - 20, screenY - 14);
             case 14 -> gc.drawImage(animation.attack1.get(14), screenX - 20, screenY - 14);
             case 15 -> attack1 = false;
+        }
+    }
+
+    private void drawDeath(GraphicsContext gc) {
+        switch (spriteCounter % 210 / 35) {
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 20, screenY - 14);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 20, screenY - 14);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 20, screenY - 14);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 20, screenY - 14);
+            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 20, screenY - 14);
+            case 5 -> AfterAnimationDead = true;
         }
     }
 

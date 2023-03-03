@@ -82,7 +82,7 @@ public class PRJ_Control {
                                 entityIterator.remove();
                                 continue;
                             }
-                            if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && !entity.dead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
                             }
                         }
@@ -111,7 +111,7 @@ public class PRJ_Control {
         }
         projectile.playHitSound();
         entity.hpBarOn = true;
-        if (!entity.dead && entity.getHealth() <= 0) {
+        if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
             if (entity instanceof BOSS) {

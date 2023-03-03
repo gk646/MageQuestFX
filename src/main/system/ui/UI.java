@@ -222,9 +222,9 @@ public class UI {
     private void drawGameUI(GraphicsContext gc) {
         gc.setEffect(lighting);
         gc.setFill(Colors.Red);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, (int) ((mg.player.health / mg.player.maxHealth) * 225), 10);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, Math.min((int) ((mg.player.health / mg.player.maxHealth) * 225), 225), 10);
         gc.setFill(Colors.Blue);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, (int) ((mg.player.mana / mg.player.maxMana) * 162), 10);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, Math.min((int) ((mg.player.mana / mg.player.maxMana) * 162), 162), 10);
         gc.setEffect(null);
         gc.drawImage(playerUI, 40, 40, 330, 150);
         gc.setFill(Color.WHITE);

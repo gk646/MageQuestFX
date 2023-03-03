@@ -578,7 +578,7 @@ public class UI_InventoryPanel {
                 }
             } else {
                 for (int i = 0; i < 5; i++) {
-                    if (mg.skillPanel.hitBoxesSideButtons[i].contains(mousePos)) {
+                    if (mg.skillPanel.draggedSKILL == null && mg.skillPanel.hitBoxesSideButtons[i].contains(mousePos)) {
                         if (mg.inputH.mouse1Pressed) {
                             for (int j = 0; j < 5; j++) {
                                 mg.skillPanel.whichPanel[j] = false;

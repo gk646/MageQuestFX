@@ -54,7 +54,7 @@ public class ENT_Control {
             Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
             while (entityIterator.hasNext()) {
                 ENTITY entity = entityIterator.next();
-                if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {
+                if (entity.zone == WorldController.currentWorld && !entity.dead && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 900) {
                     entity.update();
                     if (entity.AfterAnimationDead) {
                         mg.prj_control.recordDeath(entity);
