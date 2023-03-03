@@ -25,7 +25,7 @@ public class PRJ_EnergySphere extends CollisionProjectiles {
         sounds[0].setVolume(Sound.EFFECTS_VOLUME);
         sounds[1] = new MediaPlayer(Sound.energySphereHit);
         sounds[1].setVolume(Sound.EFFECTS_VOLUME);
-        this.type = DamageType.ArcaneDMG;
+        this.type = DamageType.Arcane;
         projectileType = ProjectileType.Continuous;
         //-------VALUES-----------
         this.movementSpeed = 3;

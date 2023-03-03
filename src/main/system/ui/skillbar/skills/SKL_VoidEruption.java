@@ -14,7 +14,7 @@ public class SKL_VoidEruption extends SKILL {
         actualCoolDown = totalCoolDown;
         manaCost = 35;
         icon = setup("voidEruption");
-        type = DamageType.DarkDMG;
+        type = DamageType.DarkMagic;
         this.damage = 50.0f;
         name = "Void Eruption";
         description = "Void Eruption is a powerful ability that channels the dark energies of the void to unleash a devastating blast on enemies in the area. After a short build-up, the energy explodes in a shockwave of pure void energy, dealing massive damage to all enemies within the radius.";

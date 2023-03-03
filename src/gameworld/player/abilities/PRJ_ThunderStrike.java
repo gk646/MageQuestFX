@@ -17,7 +17,7 @@ public class PRJ_ThunderStrike extends PROJECTILE {
 
     public PRJ_ThunderStrike() {
         this.damage = 35.0f;
-        this.type = DamageType.ArcaneDMG;
+        this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderStrike;
         this.sounds[0] = resource.sounds.get(0);

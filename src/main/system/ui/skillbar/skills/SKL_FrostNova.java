@@ -13,7 +13,7 @@ public class SKL_FrostNova extends SKILL {
         description = "";
         totalCoolDown = 600;
         actualCoolDown = totalCoolDown;
-        type = DamageType.IceDMG;
+        type = DamageType.Ice;
         manaCost = 75;
     }
 

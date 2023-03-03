@@ -17,7 +17,7 @@ public class PRJ_SolarFlare extends PROJECTILE {
 
     public PRJ_SolarFlare() {
         this.damage = 50.0f;
-        this.type = DamageType.FireDMG;
+        this.type = DamageType.Fire;
         this.resource = ProjectilePreloader.solarFlare;
         this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);

@@ -307,10 +307,10 @@ abstract public class ENTITY {
     public void getDamageFromPlayer(float flat_damage, DamageType type) {
         float[] effectsDouble = mg.player.effects;
         switch (type) {
-            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
-            case FireDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
-            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
-            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
+            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
+            case Fire -> flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
+            case Arcane -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
+            case Poison -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
         }
         flat_damage *= mg.random.nextDouble(0.95, 1.05);
         amountedDamageSinceLastDamageNumber += flat_damage;

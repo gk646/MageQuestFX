@@ -16,7 +16,7 @@ public class SKL_EnergySphere extends SKILL {
         actualCoolDown = 120;
         this.coolDownCoefficient = 0;
         this.icon = setup("energy_sphere");
-        type = DamageType.ArcaneDMG;
+        type = DamageType.Arcane;
         name = "Energy Sphere";
         damage = 0.5f;
         i_id = 0;

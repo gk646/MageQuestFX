@@ -21,7 +21,7 @@ public class PRJ_AutoShot extends CollisionProjectiles {
         projectileType = ProjectileType.OneHitCompletelyDead;
         this.movementSpeed = 5;
         this.damage = damage;
-        this.type = DamageType.PoisonDMG;
+        this.type = DamageType.Poison;
         this.projectileHeight = 16;
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;

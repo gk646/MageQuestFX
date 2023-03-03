@@ -15,7 +15,7 @@ public class SKL_AutoShot extends SKILL {
         actualCoolDown = 30;
         this.coolDownCoefficient = 0;
         this.damage = 1;
-        this.type = DamageType.PoisonDMG;
+        this.type = DamageType.Poison;
         this.icon = setup("energy_sphere");
         name = "Poison Ball";
         description = "Simple mud ball.";

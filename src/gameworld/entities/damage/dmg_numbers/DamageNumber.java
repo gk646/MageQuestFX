@@ -29,13 +29,13 @@ public class DamageNumber {
     }
 
     public void draw(GraphicsContext gc) {
-        if (type == DamageType.DarkDMG) {
+        if (type == DamageType.DarkMagic) {
             gc.setFill(Colors.dark_magic_purple);
-        } else if (type == DamageType.FireDMG) {
+        } else if (type == DamageType.Fire) {
             gc.setFill(Colors.fire_red);
-        } else if (type == DamageType.ArcaneDMG) {
+        } else if (type == DamageType.Arcane) {
             gc.setFill(Colors.arcane_blue);
-        } else if (type == DamageType.PoisonDMG) {
+        } else if (type == DamageType.Poison) {
             gc.setFill(Colors.poison_green);
         } else if (type == DamageType.PhysicalDMG) {
             gc.setFill(Colors.physical_grey);

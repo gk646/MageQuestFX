@@ -14,7 +14,7 @@ public class SKL_RingSalvo extends SKILL {
         this.totalCoolDown = 120;
         actualCoolDown = 120;
         this.damage = 0.5f;
-        type = DamageType.FireDMG;
+        type = DamageType.Fire;
         this.coolDownCoefficient = 0;
         this.icon = setup("ring_salvo");
         name = "Fire Salvo";

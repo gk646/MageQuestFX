@@ -185,13 +185,13 @@ abstract public class SKILL {
     }
 
     private void setTypeColor(GraphicsContext gc) {
-        if (type == DamageType.FireDMG) {
+        if (type == DamageType.Fire) {
             gc.setFill(Colors.fire_red);
-        } else if (type == DamageType.ArcaneDMG) {
+        } else if (type == DamageType.Arcane) {
             gc.setFill(Colors.arcane_blue);
-        } else if (type == DamageType.DarkDMG) {
+        } else if (type == DamageType.DarkMagic) {
             gc.setFill(Colors.dark_magic_purple);
-        } else if (type == DamageType.PoisonDMG) {
+        } else if (type == DamageType.Poison) {
             gc.setFill(Colors.poison_green);
         } else {
             gc.setFill(Colors.darkBackground);
@@ -199,13 +199,13 @@ abstract public class SKILL {
     }
 
     private void setStrokeTypeColor(GraphicsContext gc) {
-        if (type == DamageType.FireDMG) {
+        if (type == DamageType.Fire) {
             gc.setStroke(Colors.fire_red);
-        } else if (type == DamageType.ArcaneDMG) {
+        } else if (type == DamageType.Arcane) {
             gc.setStroke(Colors.arcane_blue);
-        } else if (type == DamageType.DarkDMG) {
+        } else if (type == DamageType.DarkMagic) {
             gc.setStroke(Colors.dark_magic_purple);
-        } else if (type == DamageType.PoisonDMG) {
+        } else if (type == DamageType.Poison) {
             gc.setStroke(Colors.poison_green);
         } else {
             gc.setStroke(Colors.darkBackground);
@@ -224,10 +224,10 @@ abstract public class SKILL {
 
         float flat_damage = damage;
         switch (type) {
-            case DarkDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[2];
-            case FireDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[19];
-            case ArcaneDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[1];
-            case PoisonDMG -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[18];
+            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[2];
+            case Fire -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[19];
+            case Arcane -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[1];
+            case Poison -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[18];
         }
         return df.format(flat_damage * 0.95f) + " - " + df.format(flat_damage * 1.05f) + " " + type;
     }

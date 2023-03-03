@@ -25,15 +25,15 @@ public class NPC_AbilityTrader extends MERCHANT {
         for (int i = 0; i < 14; i++) {
             buySlots.add(new UI_InventorySlot(null, 123, 123));
         }
-        buySlots.get(0).item = new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.ArcaneDMG);
-        buySlots.get(1).item = new ITM_SpellBook("Frost Nova", 2, null, null, DamageType.IceDMG);
-        buySlots.get(2).item = new ITM_SpellBook("Lightning Strike", 2, null, null, DamageType.ArcaneDMG);
-        buySlots.get(3).item = new ITM_SpellBook("Ring Salvo", 2, null, null, DamageType.FireDMG);
-        buySlots.get(4).item = new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.ArcaneDMG);
-        buySlots.get(5).item = new ITM_SpellBook("Thunder Splash", 2, null, null, DamageType.ArcaneDMG);
-        buySlots.get(6).item = new ITM_SpellBook("Thunder Strike", 2, null, null, DamageType.ArcaneDMG);
-        buySlots.get(7).item = new ITM_SpellBook("Void Eruption", 2, null, null, DamageType.DarkDMG);
-        buySlots.get(8).item = new ITM_SpellBook("Void Field", 2, null, null, DamageType.DarkDMG);
+        buySlots.get(0).item = new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.Arcane);
+        buySlots.get(1).item = new ITM_SpellBook("Frost Nova", 2, null, null, DamageType.Ice);
+        buySlots.get(2).item = new ITM_SpellBook("Lightning Strike", 2, null, null, DamageType.Arcane);
+        buySlots.get(3).item = new ITM_SpellBook("Ring Salvo", 2, null, null, DamageType.Fire);
+        buySlots.get(4).item = new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.Arcane);
+        buySlots.get(5).item = new ITM_SpellBook("Thunder Splash", 2, null, null, DamageType.Arcane);
+        buySlots.get(6).item = new ITM_SpellBook("Thunder Strike", 2, null, null, DamageType.Arcane);
+        buySlots.get(7).item = new ITM_SpellBook("Void Eruption", 2, null, null, DamageType.DarkMagic);
+        buySlots.get(8).item = new ITM_SpellBook("Void Field", 2, null, null, DamageType.DarkMagic);
 
         for (int i = 0; i < 28; i++) {
             soldSlots.add(new UI_InventorySlot(null, 123, 123));

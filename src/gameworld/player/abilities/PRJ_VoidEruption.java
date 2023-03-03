@@ -18,7 +18,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
         this.damage = 50;
         this.resource = ProjectilePreloader.voidEruption;
         this.sounds[0] = resource.sounds.get(0);
-        type = DamageType.DarkDMG;
+        type = DamageType.DarkMagic;
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 36, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 36);
         collisionBox = new Rectangle(-3, -3, 76, 76);
         direction = "leftrightdownup";

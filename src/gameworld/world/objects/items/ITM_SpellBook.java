@@ -13,15 +13,15 @@ public class ITM_SpellBook extends ITM_Usable {
 
     public ITM_SpellBook(String name, int rarity, String description, String imagePath, DamageType type) {
         super(name, rarity, description, imagePath);
-        if (type == DamageType.FireDMG) {
+        if (type == DamageType.Fire) {
             icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/items/usables/fire.png")));
-        } else if (type == DamageType.ArcaneDMG) {
+        } else if (type == DamageType.Arcane) {
             icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/items/usables/arcane.png")));
-        } else if (type == DamageType.DarkDMG) {
+        } else if (type == DamageType.DarkMagic) {
             icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/items/usables/dark.png")));
-        } else if (type == DamageType.PoisonDMG) {
+        } else if (type == DamageType.Poison) {
             icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/items/usables/poison.png")));
-        } else if (type == DamageType.IceDMG) {
+        } else if (type == DamageType.Ice) {
             icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/items/usables/ice.png")));
         }
         this.rarity = 2;

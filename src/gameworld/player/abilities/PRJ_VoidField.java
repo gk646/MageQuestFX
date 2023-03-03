@@ -16,7 +16,7 @@ public class PRJ_VoidField extends PROJECTILE {
 
     public PRJ_VoidField(int durationInTicks) {
         this.damage = 0.1f;
-        this.type = DamageType.DarkDMG;
+        this.type = DamageType.DarkMagic;
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 32, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 32);

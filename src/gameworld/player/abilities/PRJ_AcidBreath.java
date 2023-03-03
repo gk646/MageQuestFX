@@ -23,7 +23,7 @@ public class PRJ_AcidBreath extends EnemyProjectile {
         this.collisionBox = Storage.acidBreathBox;
         this.level = level;
         this.direction = "downleftrightup";
-        type = DamageType.PoisonDMG;
+        type = DamageType.Poison;
         this.damage = 1;
 
         //------POSITION-----------

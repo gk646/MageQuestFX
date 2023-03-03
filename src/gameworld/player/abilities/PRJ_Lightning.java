@@ -28,7 +28,7 @@ public class PRJ_Lightning extends PROJECTILE {
         projectileType = ProjectileType.OneHitNoDMG;
         resource = ProjectilePreloader.lightning;
         sounds[0] = resource.sounds.get(0);
-        type = DamageType.ArcaneDMG;
+        type = DamageType.Arcane;
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + x - Player.screenX - 24, Player.worldY + y - Player.screenY - 24);

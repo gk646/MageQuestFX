@@ -16,7 +16,7 @@ public class SKL_ThunderSplash extends SKILL {
         manaCost = 35;
         this.damage = 15.0f;
         icon = setup("thunderSplash");
-        type = DamageType.ArcaneDMG;
+        type = DamageType.Arcane;
         name = "Thunder Clap";
         description = "Thunder Clap is a powerful spell that unleashes a shockwave of lightning energy, stunning all enemies within a small radius and dealing a moderate amount of damage.";
     }

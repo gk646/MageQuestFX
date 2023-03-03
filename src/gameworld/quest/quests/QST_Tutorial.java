@@ -74,11 +74,11 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 19) {
                     int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
                     if (choice == 10) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.ArcaneDMG));
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.Arcane));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     } else if (choice == 20) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.ArcaneDMG));
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.Arcane));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     }

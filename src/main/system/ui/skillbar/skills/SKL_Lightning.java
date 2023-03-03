@@ -17,7 +17,7 @@ public class SKL_Lightning extends SKILL {
         this.damage = 25;
         icon = setup("lightning");
         name = "Lightning Strike";
-        this.type = DamageType.ArcaneDMG;
+        this.type = DamageType.Arcane;
         description = "Lightning Strike is a powerful ability that allows the player to call forth bolts of lightning to strike down enemies with electrifying force.The lightning strike is especially effective against groups of enemies or those that are vulnerable to electricity.";
     }
 

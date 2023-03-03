@@ -13,7 +13,7 @@ public class SKL_SolarFlare extends SKILL {
         actualCoolDown = totalCoolDown;
         manaCost = 75;
         damage = 50;
-        type = DamageType.FireDMG;
+        type = DamageType.Fire;
         icon = setup("solarFlare");
         name = "Solar Flare";
         description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";

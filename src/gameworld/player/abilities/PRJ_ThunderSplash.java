@@ -16,7 +16,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
 
     public PRJ_ThunderSplash() {
         this.damage = 15.0f;
-        this.type = DamageType.ArcaneDMG;
+        this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;
         //this.sounds[0] = resource.sounds.get(0);

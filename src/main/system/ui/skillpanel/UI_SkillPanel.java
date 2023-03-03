@@ -291,22 +291,22 @@ public class UI_SkillPanel {
 
     private void removeSKill(SKILL draggedSKILL) {
         if (grabIndex != -1) {
-            if (draggedSKILL.type == DamageType.FireDMG) {
+            if (draggedSKILL.type == DamageType.Fire) {
                 fireSkills.set(grabIndex, new SKL_Filler(mg));
-            } else if (draggedSKILL.type == DamageType.ArcaneDMG) {
+            } else if (draggedSKILL.type == DamageType.Arcane) {
                 arcaneSkills.set(grabIndex, new SKL_Filler(mg));
-            } else if (draggedSKILL.type == DamageType.DarkDMG) {
+            } else if (draggedSKILL.type == DamageType.DarkMagic) {
                 darkSkills.set(grabIndex, new SKL_Filler(mg));
-            } else if (draggedSKILL.type == DamageType.PoisonDMG) {
+            } else if (draggedSKILL.type == DamageType.Poison) {
                 poisonSkills.set(grabIndex, new SKL_Filler(mg));
-            } else if (draggedSKILL.type == DamageType.IceDMG) {
+            } else if (draggedSKILL.type == DamageType.Ice) {
                 iceSkills.set(grabIndex, new SKL_Filler(mg));
             }
         }
     }
 
     public void addSKill(SKILL newSkill) {
-        if (newSkill.type == DamageType.FireDMG) {
+        if (newSkill.type == DamageType.Fire) {
             for (int i = 0; i < fireSkills.size(); i++) {
                 if (fireSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : fireSkills) {
@@ -318,7 +318,7 @@ public class UI_SkillPanel {
                     return;
                 }
             }
-        } else if (newSkill.type == DamageType.ArcaneDMG) {
+        } else if (newSkill.type == DamageType.Arcane) {
             for (int i = 0; i < arcaneSkills.size(); i++) {
                 if (arcaneSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : arcaneSkills) {
@@ -330,7 +330,7 @@ public class UI_SkillPanel {
                     return;
                 }
             }
-        } else if (newSkill.type == DamageType.DarkDMG) {
+        } else if (newSkill.type == DamageType.DarkMagic) {
             for (int i = 0; i < darkSkills.size(); i++) {
                 if (darkSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : darkSkills) {
@@ -342,7 +342,7 @@ public class UI_SkillPanel {
                     return;
                 }
             }
-        } else if (newSkill.type == DamageType.PoisonDMG) {
+        } else if (newSkill.type == DamageType.Poison) {
             for (int i = 0; i < poisonSkills.size(); i++) {
                 if (poisonSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : poisonSkills) {
@@ -354,7 +354,7 @@ public class UI_SkillPanel {
                     return;
                 }
             }
-        } else if (newSkill.type == DamageType.IceDMG) {
+        } else if (newSkill.type == DamageType.Ice) {
             for (int i = 0; i < iceSkills.size(); i++) {
                 if (iceSkills.get(i) instanceof SKL_Filler) {
                     for (SKILL skill : iceSkills) {

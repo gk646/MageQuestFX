@@ -2,9 +2,9 @@ package gameworld.entities.damage;
 
 public enum DamageType {
 
-    FireDMG(0), PoisonDMG(1), DarkDMG(2), ArcaneDMG(3), TrueDMG(4), PhysicalDMG(5), IceDMG(6);
+    Fire, Poison, DarkMagic, Arcane, TrueDMG, PhysicalDMG, Ice;
 
-    DamageType(int val) {
+    DamageType() {
     }
 }
 
