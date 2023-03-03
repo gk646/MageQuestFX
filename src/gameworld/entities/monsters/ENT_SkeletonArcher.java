@@ -145,11 +145,11 @@ public class ENT_SkeletonArcher extends ENTITY {
 
     private void drawDeath(GraphicsContext gc) {
         switch (spriteCounter % 210 / 35) {
-            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 24, screenY - 51);
-            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 24, screenY - 51);
-            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 24, screenY - 51);
-            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 24, screenY - 51);
-            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 24, screenY - 51);
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 15, screenY - 51);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 15, screenY - 51);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 15, screenY - 51);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 15, screenY - 51);
+            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 15, screenY - 51);
             case 5 -> AfterAnimationDead = true;
         }
     }

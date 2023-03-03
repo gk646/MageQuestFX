@@ -35,7 +35,7 @@ abstract public class ENTITY {
     public ResourceLoaderEntity animation;
     public boolean collidingWithPlayer;
     public Zone zone;
-    protected int spriteCounter;
+    public int spriteCounter;
     protected int goalCol;
     protected int goalRow;
     protected float amountedDamageSinceLastDamageNumber;

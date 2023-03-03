@@ -114,6 +114,7 @@ public class PRJ_Control {
         if (entity.getHealth() <= 0) {
             mg.player.getExperience(entity);
             entity.dead = true;
+            entity.spriteCounter = 0;
             if (entity instanceof BOSS) {
                 mg.dropI.dropRareItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
             } else {
