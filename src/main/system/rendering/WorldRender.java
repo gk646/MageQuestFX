@@ -68,9 +68,7 @@ public class WorldRender {
             for (int b = worldRow; b < maxRow; b++) {
                 num1 = worldData[i][b];
                 num2 = worldData1[i][b];
-                if (num1 != -1) {
-                    g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
-                }
+                g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
                 if (num2 != -1) {
                     g2.drawImage(tileStorage[num2].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
                 }

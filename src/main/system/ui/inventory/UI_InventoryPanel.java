@@ -65,6 +65,7 @@ public class UI_InventoryPanel {
     private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
     private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
     private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
+    private boolean showTutorial;
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;

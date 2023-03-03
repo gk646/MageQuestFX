@@ -200,10 +200,10 @@
   <object id="1" name="gru1" x="410.5" y="150"/>
   <object id="2" name="sho1" x="507.5" y="147"/>
   <object id="3" name="gru1" x="410.5" y="327.5"/>
-  <object id="4" name="gru1" x="510.5" y="281"/>
+  <object id="4" name="spear1" x="510.5" y="281"/>
   <object id="5" name="sho1" x="624.5" y="326"/>
   <object id="6" name="gru1" x="306" y="392.333"/>
-  <object id="7" name="gru1" x="459.333" y="478"/>
+  <object id="7" name="spear1" x="459.333" y="478"/>
   <object id="8" name="gru1" x="158.667" y="651"/>
   <object id="9" name="gru1" x="235.667" y="648.333"/>
   <object id="10" name="sho1" x="140.25" y="705.917"/>
@@ -213,9 +213,9 @@
   <object id="14" name="sho1" x="387.667" y="945"/>
   <object id="15" name="sho1" x="736.667" y="656"/>
   <object id="16" name="sho1" x="876" y="450.083"/>
-  <object id="17" name="gru2" x="457.167" y="918.667"/>
+  <object id="17" name="spear2" x="457.167" y="918.667"/>
   <object id="18" name="gru1" x="718.5" y="815.667"/>
-  <object id="19" name="gru1" x="916.727" y="741.212"/>
+  <object id="19" name="spear1" x="921.636" y="743.757"/>
   <object id="20" name="gru1" x="722.97" y="470.061"/>
  </objectgroup>
 </map>

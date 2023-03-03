@@ -37,7 +37,7 @@ public class SKL_EnergySphere extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 120 && mg.player.mana >= 10) {
-            PROJECTILE projectile = new PRJ_EnergySphere(0.5f);
+            PROJECTILE projectile = new PRJ_EnergySphere(0.3f);
             projectile.playStartSound();
             mg.PROJECTILES.add(projectile);
             mg.player.playCastAnimation(2);

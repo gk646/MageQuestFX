@@ -43,7 +43,7 @@ public class SKL_VoidField extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.mana >= 15) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.mana >= manaCost) {
             castTimeActive++;
             mg.player.playCastAnimation(3);
         }

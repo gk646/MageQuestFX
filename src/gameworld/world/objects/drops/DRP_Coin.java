@@ -33,14 +33,10 @@ public class DRP_Coin extends DROP {
         spriteCounter++;
         int spriteIndex = spriteCounter % 80 / 20;
         switch (spriteIndex) {
-            case 0 ->
-                    gc.drawImage(coin1, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
-            case 1 ->
-                    gc.drawImage(coin2, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
-            case 2 ->
-                    gc.drawImage(coin3, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
-            case 3 ->
-                    gc.drawImage(coin4, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+            case 0 -> gc.drawImage(coin1, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+            case 1 -> gc.drawImage(coin2, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+            case 2 -> gc.drawImage(coin3, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
+            case 3 -> gc.drawImage(coin4, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY);
         }
     }
 

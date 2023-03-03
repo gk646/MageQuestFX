@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.MainGame;
 import main.system.ui.Colors;
+import main.system.ui.FonT;
 
 import java.util.Iterator;
 
@@ -27,6 +28,8 @@ public class ENT_Control {
      * Draws all entities and healthbars
      */
     public void draw(GraphicsContext gc) {
+        gc.setFont(FonT.editUndo18);
+
         synchronized (mg.ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.ENTITIES) {
                 if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {

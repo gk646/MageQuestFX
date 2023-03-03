@@ -356,7 +356,7 @@ public class Player extends ENTITY {
             while (iter.hasNext()) {
                 DROP drop = iter.next();
                 if (Math.abs(drop.worldPos.x - x) + Math.abs(drop.worldPos.y - y) < 200) {
-                    if (new Rectangle(x + mg.player.collisionBox.x, y + mg.player.collisionBox.y, mg.player.collisionBox.width, mg.player.collisionBox.height).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
+                    if (new Rectangle(x, y, 40, 40).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
                         if (drop instanceof DRP_Coin) {
                             mg.player.coins += ((DRP_Coin) drop).amount;
                             mg.sound.playEffectSound(9);

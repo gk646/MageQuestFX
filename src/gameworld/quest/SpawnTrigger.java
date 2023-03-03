@@ -2,7 +2,9 @@ package gameworld.quest;
 
 import gameworld.entities.boss.BOSS_Slime;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
+import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
+import gameworld.entities.monsters.ENT_Snake;
 import gameworld.player.Player;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -31,12 +33,18 @@ public class SpawnTrigger {
 
     public void activate(MainGame mg) {
         if (!triggered && playerXCloseToTile(14, x, y)) {
-            if (trigger == Trigger.SINGULAR && type == Type.Grunt) {
-                mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
-            } else if (trigger == Trigger.SINGULAR && type == Type.Shooter) {
-                mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
-            } else if (trigger == Trigger.SINGULAR && type == Type.BOSS_Slime) {
-                mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
+            if (trigger == Trigger.SINGULAR) {
+                if (type == Type.Grunt) {
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.Shooter) {
+                    mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.BOSS_Slime) {
+                    mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
+                } else if (type == Type.Spear) {
+                    mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.snake) {
+                    mg.ENTITIES.add(new ENT_Snake(mg, x * 48, y * 48, level, zone));
+                }
             }
             triggered = true;
         }

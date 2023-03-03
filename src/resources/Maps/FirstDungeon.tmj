@@ -257,7 +257,7 @@
                  "class":"",
                  "height":0,
                  "id":4,
-                 "name":"gru1",
+                 "name":"spear1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
@@ -284,17 +284,17 @@
                  "visible":true,
                  "width":0,
                  "x":306,
-                 "y":392.333333333333
+                 "y":392.333
                 }, 
                 {
                  "class":"",
                  "height":0,
                  "id":7,
-                 "name":"gru1",
+                 "name":"spear1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":459.333333333333,
+                 "x":459.333,
                  "y":478
                 }, 
                 {
@@ -305,7 +305,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":158.666666666667,
+                 "x":158.667,
                  "y":651
                 }, 
                 {
@@ -316,8 +316,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":235.666666666667,
-                 "y":648.333333333333
+                 "x":235.667,
+                 "y":648.333
                 }, 
                 {
                  "class":"",
@@ -328,7 +328,7 @@
                  "visible":true,
                  "width":0,
                  "x":140.25,
-                 "y":705.916666666667
+                 "y":705.917
                 }, 
                 {
                  "class":"",
@@ -360,8 +360,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":546.666666666667,
-                 "y":941.333333333333
+                 "x":546.667,
+                 "y":941.333
                 }, 
                 {
                  "class":"",
@@ -371,7 +371,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":387.666666666667,
+                 "x":387.667,
                  "y":945
                 }, 
                 {
@@ -382,7 +382,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":736.666666666667,
+                 "x":736.667,
                  "y":656
                 }, 
                 {
@@ -394,18 +394,18 @@
                  "visible":true,
                  "width":0,
                  "x":876,
-                 "y":450.083333333333
+                 "y":450.083
                 }, 
                 {
                  "class":"",
                  "height":0,
                  "id":17,
-                 "name":"gru2",
+                 "name":"spear2",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":457.166666666667,
-                 "y":918.666666666667
+                 "x":457.167,
+                 "y":918.667
                 }, 
                 {
                  "class":"",
@@ -416,18 +416,18 @@
                  "visible":true,
                  "width":0,
                  "x":718.5,
-                 "y":815.666666666667
+                 "y":815.667
                 }, 
                 {
                  "class":"",
                  "height":0,
                  "id":19,
-                 "name":"gru1",
+                 "name":"spear1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":916.727272727273,
-                 "y":741.212121212121
+                 "x":921.636090909091,
+                 "y":743.757454545454
                 }, 
                 {
                  "class":"",
@@ -437,8 +437,19 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":722.969696969697,
-                 "y":470.060606060606
+                 "x":722.97,
+                 "y":470.061
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":21,
+                 "name":"snake1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":773.5,
+                 "y":742.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -447,7 +458,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":21,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -457,12 +468,12 @@
          "columns":13,
          "firstgid":1,
          "image":"..\/..\/..\/TiledMaps\/grassspritesheet16.png",
-         "imageheight":4096,
+         "imageheight":6000,
          "imagewidth":223,
          "margin":0,
          "name":"grassspritesheet16",
          "spacing":0,
-         "tilecount":3328,
+         "tilecount":4875,
          "tileheight":16,
          "tilewidth":16
         }],

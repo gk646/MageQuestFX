@@ -88,7 +88,7 @@ public class Map {
         ArrayList<SpawnTrigger> spawnTriggers = new ArrayList<>();
         Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
-        Pattern namefinder = Pattern.compile("\"name\":\"(gru|sho|slimeB)(\\d{0,3})");
+        Pattern namefinder = Pattern.compile("\"name\":\"(\\D+)(\\d{0,3})");
         try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             Matcher matcher;
@@ -102,12 +102,19 @@ public class Map {
                     matcher = namefinder.matcher(line);
                     if (matcher.find()) {
                         String name = matcher.group(1);
-                        level = Integer.parseInt(matcher.group(2));
                         switch (name) {
                             case "gru" -> type = Type.Grunt;
                             case "sho" -> type = Type.Shooter;
-                            case "slimeB" -> type = Type.BOSS_Slime;
+                            case "slimeboss" -> type = Type.BOSS_Slime;
+                            case "spear" -> type = Type.Spear;
+                            case "snake" -> type = Type.snake;
                         }
+                        if (type != null) {
+                            level = Integer.parseInt(matcher.group(2));
+                        } else {
+                            level = 1;
+                        }
+
                         typefound = true;
                     }
                 } else if (!xfound) {
@@ -123,6 +130,7 @@ public class Map {
                         xfound = false;
                         typefound = false;
                         spawnTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SINGULAR, type, zone));
+                        type = null;
                     }
                 }
             }
@@ -170,6 +178,5 @@ public class Map {
         }
         stmt.close();
     }
-
 }
 

@@ -83,7 +83,7 @@ public class UI_SkillBar {
     }
 
     private void drawBackGround(GraphicsContext gc) {
-        gc.setFill(Colors.mediumVeryLight);
+        gc.setFill(Colors.mediumLightGreyTransparent);
         gc.fillRoundRect(skillBarX, skillBarY - 12, 693, 87, 15, 15);
         gc.setFill(Colors.white);
         gc.drawImage(skillSlot, skillBarX + 5, skillBarY - 5);
