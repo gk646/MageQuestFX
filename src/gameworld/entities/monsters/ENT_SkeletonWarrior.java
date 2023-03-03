@@ -161,10 +161,10 @@ public class ENT_SkeletonWarrior extends ENTITY {
 
     private void drawDeath(GraphicsContext gc) {
         switch (spriteCounter % 245 / 35) {
-            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 33, screenY - 23);
-            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 33, screenY - 23);
-            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 33, screenY - 23);
-            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 33, screenY - 23);
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 32, screenY - 52);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 32, screenY - 52);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 32, screenY - 52);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 32, screenY - 52);
             case 4 -> AfterAnimationDead = true;
         }
     }

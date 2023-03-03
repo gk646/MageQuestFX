@@ -461,7 +461,6 @@ public class MainGame {
         for (int i = 0; i < 10; i++) {
             dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }
-
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
     }
 

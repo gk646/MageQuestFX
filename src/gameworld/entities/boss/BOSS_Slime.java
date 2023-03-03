@@ -4,6 +4,7 @@ import gameworld.entities.BOSS;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_AcidBreath;
+import gameworld.player.abilities.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.Storage;
@@ -69,8 +70,8 @@ public class BOSS_Slime extends BOSS {
             } else {
                 attack3 = true;
             }
+            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 70, 64, 64, -8, -8, 3 * level));
             //animation.playGetHitSound(3);
-            //TODO correct swing sound
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
