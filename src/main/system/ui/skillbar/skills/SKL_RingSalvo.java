@@ -38,6 +38,7 @@ public class SKL_RingSalvo extends SKILL {
             for (int i = 0; i <= 7; i++) {
                 mg.PROJECTILES.add(new PRJ_RingSalvo(i));
             }
+            mg.player.playCastAnimation(2);
             mg.player.mana -= 10;
             actualCoolDown = 0;
         }

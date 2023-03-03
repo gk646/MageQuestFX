@@ -51,6 +51,7 @@ public class SKL_ThunderStrike extends SKILL {
         if (actualCoolDown >= totalCoolDown && mg.player.mana >= manaCost) {
             mg.player.mana -= manaCost;
             actualCoolDown = 0;
+            mg.player.playCastAnimation(3);
             mg.PROJECTILES.add(new PRJ_ThunderStrike());
         }
     }

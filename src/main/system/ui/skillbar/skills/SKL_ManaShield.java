@@ -32,6 +32,6 @@ public class SKL_ManaShield extends SKILL {
      */
     @Override
     public void activate() {
-
+        mg.player.playCastAnimation(2);
     }
 }

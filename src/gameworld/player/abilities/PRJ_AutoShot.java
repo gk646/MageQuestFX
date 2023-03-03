@@ -1,7 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
+import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,7 +10,7 @@ import main.system.Storage;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class PRJ_AutoShot extends PROJECTILE {
+public class PRJ_AutoShot extends CollisionProjectiles {
 
     /**
      * What happens when you press main mouse button

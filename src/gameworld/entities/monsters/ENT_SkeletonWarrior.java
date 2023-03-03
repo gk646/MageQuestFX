@@ -22,7 +22,7 @@ public class ENT_SkeletonWarrior extends ENTITY {
      */
     public ENT_SkeletonWarrior(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         this.mg = mg;
-        this.animation = new ResourceLoaderEntity("skeletonWarrior");
+        this.animation = new ResourceLoaderEntity("enemies/skeletonWarrior");
         animation.load();
         this.zone = zone;
         //Setting default values

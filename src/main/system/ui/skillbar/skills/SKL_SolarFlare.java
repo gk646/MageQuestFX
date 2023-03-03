@@ -46,6 +46,7 @@ public class SKL_SolarFlare extends SKILL {
         if (actualCoolDown >= totalCoolDown && mg.player.mana >= manaCost) {
             mg.player.mana -= manaCost;
             actualCoolDown = 0;
+            mg.player.playCastAnimation(1);
             mg.PROJECTILES.add(new PRJ_SolarFlare());
         }
     }

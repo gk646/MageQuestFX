@@ -2,7 +2,7 @@ package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
+import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class PRJ_RingSalvo extends PROJECTILE {
+public class PRJ_RingSalvo extends CollisionProjectiles {
 
     private final int version;
 

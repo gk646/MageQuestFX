@@ -38,6 +38,7 @@ public class SKL_Lightning extends SKILL {
             PROJECTILE projectile = new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
             projectile.playStartSound();
             mg.PROJECTILES.add(projectile);
+            mg.player.playCastAnimation(3);
             mg.player.mana -= 15;
             actualCoolDown = 0;
         }

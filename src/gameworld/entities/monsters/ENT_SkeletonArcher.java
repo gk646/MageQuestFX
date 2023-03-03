@@ -28,7 +28,7 @@ public class ENT_SkeletonArcher extends ENTITY {
         this.mg = mg;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
-        this.animation = new ResourceLoaderEntity("skeletonArcher");
+        this.animation = new ResourceLoaderEntity("enemies/skeletonArcher");
         animation.load();
         this.health = maxHealth;
         this.worldX = worldX;

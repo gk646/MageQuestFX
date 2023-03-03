@@ -18,7 +18,7 @@ public class BOSS_Slime extends BOSS {
 
     public BOSS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
-        this.animation = new ResourceLoaderEntity("BossSlime");
+        this.animation = new ResourceLoaderEntity("enemies/BossSlime");
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
         name = "Big Bloated";

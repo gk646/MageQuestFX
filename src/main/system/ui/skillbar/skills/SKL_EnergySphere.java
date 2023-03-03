@@ -40,6 +40,7 @@ public class SKL_EnergySphere extends SKILL {
             PROJECTILE projectile = new PRJ_EnergySphere(0.5f);
             projectile.playStartSound();
             mg.PROJECTILES.add(projectile);
+            mg.player.playCastAnimation(2);
             mg.player.mana -= 10;
             actualCoolDown = 0;
             mg.player.getDurabilityDamageWeapon();

@@ -5,6 +5,7 @@ import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
+import gameworld.player.CollisionProjectiles;
 import gameworld.player.EnemyProjectile;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
@@ -54,20 +55,20 @@ public class PRJ_Control {
                 Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PROJECTILE projectile = iterator.next();
-
-                    if (projectile.dead) {
-                        iterator.remove();
-                        continue;
-                    }
-                    mg.collisionChecker.checkProjectileAgainstTile(projectile);
-                    if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
-                        projectile.dead = true;
+                    if (projectile instanceof CollisionProjectiles) {
+                        mg.collisionChecker.checkProjectileAgainstTile(projectile);
+                        if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
+                            projectile.dead = true;
+                        }
                     }
                     projectile.update();
-
                     if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
                         mg.player.health -= projectile.level;
                         projectile.dead = true;
+                    }
+                    if (projectile.dead) {
+                        iterator.remove();
+                        continue;
                     }
                     Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {

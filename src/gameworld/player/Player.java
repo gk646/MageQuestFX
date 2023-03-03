@@ -5,6 +5,7 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
+import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
 import gameworld.world.MapQuadrant;
 import gameworld.world.WorldController;
@@ -70,8 +71,10 @@ public class Player extends ENTITY {
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
     public final GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
+    public final ResourceLoaderEntity resource = new ResourceLoaderEntity("player");
     private int levelupCounter;
     public boolean drawDialog;
+    private boolean attack1, attack2, attack3;
 
     /*
     1. DMG_Arcane_Absolute
@@ -128,6 +131,7 @@ public class Player extends ENTITY {
         this.mana = maxMana;
         this.entityHeight = 48;
         this.entityWidth = 48;
+        resource.load();
         worldX = 24;
         worldY = 24;
         direction = "";
@@ -165,6 +169,17 @@ public class Player extends ENTITY {
         if (mg.inputH.rightPressed) {
             if (!collisionRight && worldX < worldSize) {
                 worldX += playerMovementSpeed;
+            }
+        }
+    }
+
+    public void playCastAnimation(int index) {
+        if (!attack1 && !attack2 && !attack3) {
+            spriteCounter = 0;
+            switch (index) {
+                case 1 -> attack1 = true;
+                case 2 -> attack2 = true;
+                case 3 -> attack3 = true;
             }
         }
     }
@@ -495,15 +510,6 @@ public class Player extends ENTITY {
                 }
             }
         }
-        if (isMoving) {
-            if (movingLeft) {
-                drawRunLeft(gc);
-            } else {
-                drawRun(gc);
-            }
-        } else {
-            drawIdle(gc);
-        }
         if (levelup) {
             drawLevelUp(gc);
             levelupCounter++;
@@ -512,37 +518,60 @@ public class Player extends ENTITY {
                 levelupCounter = 0;
             }
         }
+        if (attack1) {
+            drawAttack1(gc);
+        } else if (attack2) {
+            drawAttack2(gc);
+        } else if (attack3) {
+            drawAttack3(gc);
+        } else {
+            if (isMoving) {
+                if (movingLeft) {
+                    drawRunLeft(gc);
+                } else {
+                    drawRun(gc);
+                }
+            } else {
+                drawIdle(gc);
+            }
+        }
+
         spriteCounter++;
     }
 
     public void checkPlayerIsMoving() {
         movingLeft = mg.inputH.leftPressed;
         isMoving = mg.inputH.upPressed || mg.inputH.downPressed || mg.inputH.leftPressed || mg.inputH.rightPressed;
+        if (isMoving) {
+            attack3 = false;
+            attack2 = false;
+            attack1 = false;
+        }
     }
 
     private void drawIdle(GraphicsContext gc) {
-        switch (spriteCounter % 144 / 18) {
-            case 0 -> gc.drawImage(idle1, screenX, screenY);
-            case 1 -> gc.drawImage(idle2, screenX, screenY);
-            case 2 -> gc.drawImage(idle3, screenX, screenY);
-            case 3 -> gc.drawImage(idle4, screenX, screenY);
-            case 4 -> gc.drawImage(idle5, screenX, screenY);
-            case 5 -> gc.drawImage(idle6, screenX, screenY);
-            case 6 -> gc.drawImage(idle7, screenX, screenY);
-            case 7 -> gc.drawImage(idle8, screenX, screenY);
+        switch (spriteCounter % 200 / 25) {
+            case 0 -> gc.drawImage(resource.idle.get(0), screenX - 24, screenY - 48);
+            case 1 -> gc.drawImage(resource.idle.get(1), screenX - 24, screenY - 48);
+            case 2 -> gc.drawImage(resource.idle.get(2), screenX - 24, screenY - 48);
+            case 3 -> gc.drawImage(resource.idle.get(3), screenX - 24, screenY - 48);
+            case 4 -> gc.drawImage(resource.idle.get(4), screenX - 24, screenY - 48);
+            case 5 -> gc.drawImage(resource.idle.get(5), screenX - 24, screenY - 48);
+            case 6 -> gc.drawImage(resource.idle.get(6), screenX - 24, screenY - 48);
+            case 7 -> gc.drawImage(resource.idle.get(7), screenX - 24, screenY - 48);
         }
     }
 
     private void drawRun(GraphicsContext gc) {
         switch (spriteCounter % 136 / 17) {
-            case 0 -> gc.drawImage(run1, screenX, screenY);
-            case 1 -> gc.drawImage(run2, screenX, screenY);
-            case 2 -> gc.drawImage(run3, screenX, screenY);
-            case 3 -> gc.drawImage(run4, screenX, screenY);
-            case 4 -> gc.drawImage(run5, screenX, screenY);
-            case 5 -> gc.drawImage(run6, screenX, screenY);
-            case 6 -> gc.drawImage(run7, screenX, screenY);
-            case 7 -> gc.drawImage(run8, screenX, screenY);
+            case 0 -> gc.drawImage(resource.run.get(0), screenX - 24, screenY - 48);
+            case 1 -> gc.drawImage(resource.run.get(1), screenX - 24, screenY - 48);
+            case 2 -> gc.drawImage(resource.run.get(2), screenX - 24, screenY - 48);
+            case 3 -> gc.drawImage(resource.run.get(3), screenX - 24, screenY - 48);
+            case 4 -> gc.drawImage(resource.run.get(4), screenX - 24, screenY - 48);
+            case 5 -> gc.drawImage(resource.run.get(5), screenX - 24, screenY - 48);
+            case 6 -> gc.drawImage(resource.run.get(6), screenX - 24, screenY - 48);
+            case 7 -> gc.drawImage(resource.run.get(7), screenX - 24, screenY - 48);
         }
     }
 
@@ -573,13 +602,56 @@ public class Player extends ENTITY {
         }
     }
 
-    private Image setupIdle(String imagePath) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/idle/" + imagePath)));
+    private void drawAttack1(GraphicsContext gc) {
+        switch (spriteCounter % 80 / 10) {
+            case 0 -> gc.drawImage(resource.attack1.get(0), screenX - 24, screenY - 48);
+            case 1 -> gc.drawImage(resource.attack1.get(1), screenX - 24, screenY - 48);
+            case 2 -> gc.drawImage(resource.attack1.get(2), screenX - 24, screenY - 48);
+            case 3 -> gc.drawImage(resource.attack1.get(3), screenX - 24, screenY - 48);
+            case 4 -> gc.drawImage(resource.attack1.get(4), screenX - 24, screenY - 48);
+            case 5 -> gc.drawImage(resource.attack1.get(5), screenX - 24, screenY - 48);
+            case 6 -> gc.drawImage(resource.attack1.get(6), screenX - 24, screenY - 48);
+            case 7 -> attack1 = false;
+        }
     }
 
-    private Image setupRun(String imagePath) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/run/" + imagePath)));
+    private void drawAttack2(GraphicsContext gc) {
+        switch (spriteCounter % 80 / 8) {
+            case 0 -> gc.drawImage(resource.attack2.get(0), screenX - 24, screenY - 48);
+            case 1 -> gc.drawImage(resource.attack2.get(1), screenX - 24, screenY - 48);
+            case 2 -> gc.drawImage(resource.attack2.get(2), screenX - 24, screenY - 48);
+            case 3 -> gc.drawImage(resource.attack2.get(3), screenX - 24, screenY - 48);
+            case 4 -> gc.drawImage(resource.attack2.get(4), screenX - 24, screenY - 48);
+            case 5 -> gc.drawImage(resource.attack2.get(5), screenX - 24, screenY - 48);
+            case 6 -> gc.drawImage(resource.attack2.get(6), screenX - 24, screenY - 48);
+            case 7 -> gc.drawImage(resource.attack2.get(7), screenX - 24, screenY - 48);
+            case 8 -> gc.drawImage(resource.attack2.get(8), screenX - 24, screenY - 48);
+            case 9 -> attack2 = false;
+        }
     }
+
+    private void drawAttack3(GraphicsContext gc) {
+        switch (spriteCounter % 170 / 10) {
+            case 0 -> gc.drawImage(resource.attack3.get(0), screenX - 24, screenY - 48);
+            case 1 -> gc.drawImage(resource.attack3.get(1), screenX - 24, screenY - 48);
+            case 2 -> gc.drawImage(resource.attack3.get(2), screenX - 24, screenY - 48);
+            case 3 -> gc.drawImage(resource.attack3.get(3), screenX - 24, screenY - 48);
+            case 4 -> gc.drawImage(resource.attack3.get(4), screenX - 24, screenY - 48);
+            case 5 -> gc.drawImage(resource.attack3.get(5), screenX - 24, screenY - 48);
+            case 6 -> gc.drawImage(resource.attack3.get(6), screenX - 24, screenY - 48);
+            case 7 -> gc.drawImage(resource.attack3.get(7), screenX - 24, screenY - 48);
+            case 8 -> gc.drawImage(resource.attack3.get(8), screenX - 24, screenY - 48);
+            case 9 -> gc.drawImage(resource.attack3.get(9), screenX - 24, screenY - 48);
+            case 10 -> gc.drawImage(resource.attack3.get(10), screenX - 24, screenY - 48);
+            case 11 -> gc.drawImage(resource.attack3.get(11), screenX - 24, screenY - 48);
+            case 12 -> gc.drawImage(resource.attack3.get(12), screenX - 24, screenY - 48);
+            case 13 -> gc.drawImage(resource.attack3.get(13), screenX - 24, screenY - 48);
+            case 14 -> gc.drawImage(resource.attack3.get(14), screenX - 24, screenY - 48);
+            case 15 -> gc.drawImage(resource.attack3.get(15), screenX - 24, screenY - 48);
+            case 16 -> attack3 = false;
+        }
+    }
+
 
     private Image setupRunM(String imagePath) {
         return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/runMirrored/" + imagePath)));
@@ -620,22 +692,6 @@ public class Player extends ENTITY {
     }
 
     private void getPlayerImage() {
-        idle1 = setupIdle("1.png");
-        idle2 = setupIdle("2.png");
-        idle3 = setupIdle("3.png");
-        idle4 = setupIdle("4.png");
-        idle5 = setupIdle("5.png");
-        idle6 = setupIdle("6.png");
-        idle7 = setupIdle("7.png");
-        idle8 = setupIdle("8.png");
-        run1 = setupRun("1.png");
-        run2 = setupRun("2.png");
-        run3 = setupRun("3.png");
-        run4 = setupRun("4.png");
-        run5 = setupRun("5.png");
-        run6 = setupRun("6.png");
-        run7 = setupRun("7.png");
-        run8 = setupRun("8.png");
         runM1 = setupRunM("1.png");
         runM2 = setupRunM("2.png");
         runM3 = setupRunM("3.png");

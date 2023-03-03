@@ -51,6 +51,7 @@ public class SKL_MagicShield extends SKILL {
         if (castTimeActive >= castTimeTotal) {
             mg.player.BuffsDebuffEffects.add(new Buff_Effect(1_200, 100, true, 24));
             mg.player.mana -= 15;
+            mg.player.playCastAnimation(2);
             actualCoolDown = 0;
         }
     }
