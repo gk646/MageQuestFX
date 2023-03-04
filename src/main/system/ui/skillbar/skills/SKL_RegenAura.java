@@ -5,10 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
-public class SKL_SelfRegen extends SKILL {
+public class SKL_RegenAura extends SKILL {
 
 
-    public SKL_SelfRegen(MainGame mg) {
+    public SKL_RegenAura(MainGame mg) {
         super(mg);
         this.totalCoolDown = 3_600;
         this.actualCoolDown = 3_600;

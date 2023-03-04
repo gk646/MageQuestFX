@@ -7,8 +7,7 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.SKILL;
-import main.system.ui.skillbar.skills.SKL_AutoShot;
-import main.system.ui.skillbar.skills.SKL_Filler;
+import main.system.ui.skillbar.skills.*;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -17,6 +16,7 @@ import java.util.Objects;
 
 public class UI_SkillPanel {
     public final boolean[] whichPanel = new boolean[5];
+    public final SKILL[] allSkills = new SKILL[50];
     private final Image a1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_first.png")));
     private final Image a2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_2.png")));
     private final Image a3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_3.png")));
@@ -27,11 +27,11 @@ public class UI_SkillPanel {
     public final Rectangle[] hitBoxesSideButtons = new Rectangle[5];
     public int skillPanelX = 500, skillPanelY = 250;
     public final Rectangle skillPanelMover = new Rectangle(409, 29);
-    final ArrayList<SKILL> arcaneSkills = new ArrayList<>();
-    final ArrayList<SKILL> fireSkills = new ArrayList<>();
-    final ArrayList<SKILL> poisonSkills = new ArrayList<>();
-    final ArrayList<SKILL> iceSkills = new ArrayList<>();
-    final ArrayList<SKILL> darkSkills = new ArrayList<>();
+    public final ArrayList<SKILL> arcaneSkills = new ArrayList<>();
+    public final ArrayList<SKILL> fireSkills = new ArrayList<>();
+    public final ArrayList<SKILL> poisonSkills = new ArrayList<>();
+    public final ArrayList<SKILL> iceSkills = new ArrayList<>();
+    public final ArrayList<SKILL> darkSkills = new ArrayList<>();
     public int toolTipNumber;
     public SKILL draggedSKILL;
     private int lastY;
@@ -52,7 +52,22 @@ public class UI_SkillPanel {
             iceSkills.add(new SKL_Filler(mg));
             darkSkills.add(new SKL_Filler(mg));
         }
-        addSKill(new SKL_AutoShot(mg));
+        allSkills[0] = new SKL_AutoShot(mg);
+        allSkills[1] = new SKL_EnergySphere(mg);
+        allSkills[2] = new SKL_EnergySphere_2(mg);
+        allSkills[3] = new SKL_Filler(mg);
+        allSkills[4] = new SKL_FrostNova(mg);
+        allSkills[5] = new SKL_IceLance(mg);
+        allSkills[6] = new SKL_Lightning(mg);
+        allSkills[7] = new SKL_MagicShield(mg);
+        allSkills[8] = new SKL_ManaShield(mg);
+        allSkills[9] = new SKL_RegenAura(mg);
+        allSkills[10] = new SKL_RingSalvo(mg);
+        allSkills[11] = new SKL_SolarFlare(mg);
+        allSkills[12] = new SKL_ThunderSplash(mg);
+        allSkills[13] = new SKL_ThunderStrike(mg);
+        allSkills[14] = new SKL_VoidEruption(mg);
+        allSkills[15] = new SKL_VoidField(mg);
         hideSkillPanelCollision();
     }
 

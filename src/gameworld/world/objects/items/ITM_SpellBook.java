@@ -53,7 +53,7 @@ public class ITM_SpellBook extends ITM_Usable {
         } else if (spellName.equals("Lightning Strike")) {
             mg.skillPanel.addSKill(new SKL_Lightning(mg));
         } else if (spellName.equals("Regenerative Aura")) {
-            mg.skillPanel.addSKill(new SKL_SelfRegen(mg));
+            mg.skillPanel.addSKill(new SKL_RegenAura(mg));
         }
     }
 }

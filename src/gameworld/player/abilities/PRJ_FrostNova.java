@@ -101,10 +101,10 @@ public class PRJ_FrostNova extends PROJECTILE {
      */
     @Override
     public void update() {
-        // outOfBounds();
+        outOfBounds();
         //tileCollision();
         if (dead) {
-            sounds[0].stop();
+            // sounds[0].stop();
         }
     }
 }

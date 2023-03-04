@@ -7,6 +7,8 @@ import gameworld.world.objects.items.ITEM;
 import javafx.application.Platform;
 import main.MainGame;
 import main.system.enums.GameMapType;
+import main.system.ui.skillbar.SKILL;
+import main.system.ui.skillbar.skills.SKL_Filler;
 import main.system.ui.talentpanel.TALENT;
 import main.system.ui.talentpanel.TalentNode;
 
@@ -60,6 +62,7 @@ public class SQLite {
             readPlayerStats(stmt);
             readPlayerBags(stmt);
             readSkillTree(stmt);
+            readSKillPanel(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -202,6 +205,7 @@ public class SQLite {
             saveBagInventory();
             savePlayerStats();
             saveTalentTree();
+            saveSkillPanel();
             for (Map map : mg.wControl.MAPS) {
                 if (map.gameMapType == GameMapType.MapCover) {
                     map.saveMapCover();
@@ -209,6 +213,94 @@ public class SQLite {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void saveSkillPanel() throws SQLException {
+        String sql = "UPDATE SKL_Skills SET skill_index = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        int counter = 1;
+        for (SKILL skill : mg.skillPanel.arcaneSkills) {
+            if (!(skill instanceof SKL_Filler)) {
+                stmt.setInt(1, getSkillNumber(skill));
+                stmt.setInt(2, counter);
+                stmt.executeUpdate();
+                counter++;
+            }
+        }
+        for (SKILL skill : mg.skillPanel.fireSkills) {
+            if (!(skill instanceof SKL_Filler)) {
+                stmt.setInt(1, getSkillNumber(skill));
+                stmt.setInt(2, counter);
+                stmt.executeUpdate();
+                counter++;
+            }
+        }
+        for (SKILL skill : mg.skillPanel.poisonSkills) {
+            if (!(skill instanceof SKL_Filler)) {
+                stmt.setInt(1, getSkillNumber(skill));
+                stmt.setInt(2, counter);
+                stmt.executeUpdate();
+                counter++;
+            }
+        }
+        for (SKILL skill : mg.skillPanel.iceSkills) {
+            if (!(skill instanceof SKL_Filler)) {
+                stmt.setInt(1, getSkillNumber(skill));
+                stmt.setInt(2, counter);
+                stmt.executeUpdate();
+                counter++;
+            }
+        }
+        for (SKILL skill : mg.skillPanel.darkSkills) {
+            if (!(skill instanceof SKL_Filler)) {
+                stmt.setInt(1, getSkillNumber(skill));
+                stmt.setInt(2, counter);
+                stmt.executeUpdate();
+                counter++;
+            }
+        }
+        sql = "UPDATE SKL_Skills SET activeSkills = ? WHERE _ROWID_ = ?";
+        stmt = conn.prepareStatement(sql);
+        counter = 1;
+        for (SKILL skill : mg.sBar.skills) {
+            if (skill instanceof SKL_Filler) {
+                stmt.setNull(1, getSkillNumber(skill));
+            } else {
+                stmt.setInt(1, getSkillNumber(skill));
+            }
+            stmt.setInt(2, counter);
+            stmt.executeUpdate();
+            counter++;
+        }
+    }
+
+
+    private int getSkillNumber(SKILL skill) {
+        for (int i = 0; i < mg.skillPanel.allSkills.length; i++) {
+            if (skill.getClass() == mg.skillPanel.allSkills[i].getClass()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void readSKillPanel(Statement stmt) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT skill_index FROM  SKL_Skills ");
+        while (rs.next()) {
+            int num = rs.getInt("skill_Index");
+            if (rs.wasNull()) {
+                break;
+            } else {
+                mg.skillPanel.addSKill(mg.skillPanel.allSkills[rs.getInt("skill_Index")]);
+            }
+        }
+        rs = stmt.executeQuery("SELECT activeSkills FROM  SKL_Skills ");
+        while (rs.next()) {
+            int num = rs.getInt("activeSkills");
+            if (!rs.wasNull()) {
+                mg.sBar.skills[rs.getRow() - 1] = mg.skillPanel.allSkills[rs.getInt("activeSkills")];
+            }
         }
     }
 
@@ -241,11 +333,12 @@ public class SQLite {
     }
 
     public void savePlayerStats() throws SQLException {
-        String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? WHERE _ROWID_ = 1";
+        String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? , talentPointsToSpend = ? WHERE _ROWID_ = 1";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, mg.player.coins);
         stmt.setInt(2, (int) mg.player.experience);
         stmt.setInt(3, mg.player.spawnLevel);
+        stmt.setInt(3, mg.talentP.pointsToSpend);
         stmt.executeUpdate();
     }
 
