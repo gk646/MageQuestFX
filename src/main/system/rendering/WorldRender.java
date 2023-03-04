@@ -7,6 +7,7 @@ import main.MainGame;
 import main.system.tiles.Tile;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -32,6 +33,11 @@ public class WorldRender {
         if (is != null) {
             tileStorage[index].tileImage = new Image(is);
             tileStorage[index].collision = collision;
+        }
+        try {
+            is.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

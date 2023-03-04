@@ -27,7 +27,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import main.system.CollisionChecker;
-import main.system.Multiplayer;
 import main.system.Storage;
 import main.system.ai.PathFinder;
 import main.system.database.SQLite;
@@ -132,7 +131,7 @@ public class MainGame {
 
     //---------System---------
     private MiniMap miniM;
-    private Multiplayer multiplayer;
+    //private Multiplayer multiplayer;
     public TileBasedEffects tileBase;
     private ENT_Control ent_control;
     public Sound sound;
@@ -165,54 +164,56 @@ public class MainGame {
      * Starts the 4 game threads
      */
     private void startThreads() {
-        float logicCounter = 1_000_000_000 / 60.0f;
         Thread renderHelper = new Thread(() -> {
             long firstTimeGate1;
-            long lastTime1 = System.nanoTime();
+            long lastTime1 = System.currentTimeMillis();
             float difference = 0;
             float difference1 = 0;
             float difference2 = 0;
-            float fastRenderCounter = 1_000_000_000 / 360.0f;
-            float fastRenderCounter2 = 1_000_000_000 / 120.0f;
-            while (true) {
-                firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / fastRenderCounter;
-                difference1 += (firstTimeGate1 - lastTime1) / 1_000_000_000.0f;
-                difference2 += (firstTimeGate1 - lastTime1) / fastRenderCounter2;
-                lastTime1 = firstTimeGate1;
+            float fastRenderCounter = 1_000 / 360.0f;
+            float fastRenderCounter2 = 1_000 / 60.0f;
+            try {
+                while (true) {
+                    firstTimeGate1 = System.currentTimeMillis();
+                    difference += (firstTimeGate1 - lastTime1) / fastRenderCounter;
+                    difference1 += (firstTimeGate1 - lastTime1) / 1_000.0f;
+                    difference2 += (firstTimeGate1 - lastTime1) / fastRenderCounter2;
+                    lastTime1 = firstTimeGate1;
+                    if (difference >= 1) {
+                        inventP.interactWithWindows();
 
-                if (difference >= 1) {
-                    inventP.interactWithWindows();
-                    difference = 0;
-                }
-                if (difference2 >= 1) {
-                    if (gameState == State.PLAY) {
-                        if (showMap) {
-                            gameMap.dragMap();
-                            gameMap.getImage();
+                        difference = 0;
+                    }
+                    if (difference2 >= 1) {
+                        if (gameState == State.PLAY) {
+                            if (showMap) {
+                                gameMap.dragMap();
+                                gameMap.getImage();
+                            }
+                            getPlayerTile();
+                            player.pickupDroppedItem();
+                            player.checkPlayerIsMoving();
+                            tileBase.update();
+                            WORLD_SIZE = wRender.worldSize.x * 48;
+                            wAnim.animateTiles();
+                            wControl.uncoverWorldMap();
+                            wControl.update();
+                            qPanel.update();
                         }
-                        getPlayerTile();
-                        player.pickupDroppedItem();
-                        player.checkPlayerIsMoving();
-                        tileBase.update();
-                        WORLD_SIZE = wRender.worldSize.x * 48;
-                        wAnim.animateTiles();
-                        wControl.uncoverWorldMap();
-                        wControl.update();
-                        qPanel.update();
+                        difference2 = 0;
                     }
-                    difference2 = 0;
-                }
-                if (difference1 >= 0.5) {
-                    synchronized (PROXIMITY_ENTITIES) {
-                        proximitySorterENTITIES();
+                    if (difference1 >= 0.5) {
+                        synchronized (PROXIMITY_ENTITIES) {
+                            proximitySorterENTITIES();
+                        }
+                        tileBase.getNearbyTiles();
+                        sound.update();
+                        difference1 = 0;
                     }
-                    tileBase.getNearbyTiles();
-                    sound.update();
-                    difference1 = 0;
-                    // System.out.println(counter);
-                    //counter += 0.5;
+                    Thread.sleep(2);
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
         renderHelper.start();
@@ -223,56 +224,50 @@ public class MainGame {
         gameLoop.play();
         Thread playerThread = new Thread(() -> {
             long firstTimeGate1;
-            long lastTime1 = System.nanoTime();
+            float logicCounter = 1_000 / 70.0f;
+            long lastTime1 = System.currentTimeMillis();
             float difference = 0;
-            while (true) {
-                firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicCounter;
-                lastTime1 = firstTimeGate1;
-                if (difference >= 1) {
-                    if (gameState == State.PLAY) {
-                        player.update();
-                        sBar.update();
+            try {
+                while (true) {
+                    firstTimeGate1 = System.currentTimeMillis();
+                    difference += (firstTimeGate1 - lastTime1) / logicCounter;
+                    lastTime1 = firstTimeGate1;
+                    if (difference >= 1) {
+                        if (gameState == State.PLAY) {
+                            player.update();
+                            sBar.update();
+                        }
+                        difference = 0;
                     }
-                    difference = 0;
+                    Thread.sleep(4);
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
         playerThread.start();
         Thread updateThread = new Thread(() -> {
-            long firstTimeGate1;
-            long lastTime1 = 0;
+            long lastTime1 = System.currentTimeMillis();
+            float logicCounter = 1_000.0f / 70.0f;
             float difference = 0;
-            while (true) {
-                firstTimeGate1 = System.nanoTime();
-                difference += (firstTimeGate1 - lastTime1) / logicCounter;
-                lastTime1 = firstTimeGate1;
-                if (difference >= 1) {
-                    if (gameState == State.PLAY || gameState == State.OPTION || gameState == State.TALENT) {
-                        /*
-                        if (inputH.debugFps && inputH.f_pressed) {
-                            multiplayer.startMultiplayerClient();
+            long firstTimeGate1;
+            try {
+                while (true) {
+                    firstTimeGate1 = System.currentTimeMillis();
+                    difference += (firstTimeGate1 - lastTime1) / logicCounter;
+                    lastTime1 = firstTimeGate1;
+                    if (difference >= 1) {
+                        if (gameState == State.PLAY || gameState == State.OPTION) {
+                            prj_control.update();
+                            ent_control.update();
+                            npcControl.update();
                         }
-                        if (inputH.debugFps && inputH.multiplayer) {
-                            multiplayer.startMultiplayerServer();
-                        }
-                        if (multiplayer.multiplayerStarted) {
-                            multiplayer.updateMultiplayerInput();
-                        }
-
-                         */
-                        prj_control.update();
-                        ent_control.update();
-                        npcControl.update();
-                        /*
-                        if (multiplayer.multiplayerStarted) {
-                            multiplayer.updateMultiplayerOutput();
-                        }
-
-                         */
+                        difference = 0;
                     }
-                    difference = 0;
+                    Thread.sleep(4);
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
         updateThread.start();
@@ -352,7 +347,6 @@ public class MainGame {
         {
             sqLite = new SQLite(this);
             sqLite.getConnection();
-
             FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
             loadGameState = new LoadGameState(this);
             ProjectilePreloader.load();
@@ -416,7 +410,7 @@ public class MainGame {
 
             //84%
             ui.updateLoadingScreen(12, gc);
-            multiplayer = new Multiplayer(this, ENTPlayer2);
+            //multiplayer = new Multiplayer(this, ENTPlayer2);
             player.updateEquippedItems();
             player.health = player.maxHealth;
             player.setMana(player.maxMana);
@@ -439,7 +433,7 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        //debug();
+        debug();
         player.coins = 2_000;
     }
 

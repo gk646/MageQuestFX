@@ -45,13 +45,13 @@ public class WorldController {
                 currentWorld = zone;
                 clearWorldArrays();
                 mg.wAnim.emptyAnimationLists();
+                mg.wRender.worldSize = map.mapSize;
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.wAnim.cacheMapEnhancements();
                 currentMapMarkers = map.mapMarkers;
                 mg.player.map = map;
-                mg.wRender.worldSize = map.mapSize;
                 currentMapCover = map.mapCover;
                 mg.player.setPosition(xTile, yTile);
                 return;

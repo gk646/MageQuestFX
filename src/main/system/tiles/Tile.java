@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public class Tile {
     public Image tileImage;
-    public boolean collision, UpCollision;
+    public boolean collision;
 
 
     public Tile() {

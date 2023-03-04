@@ -21,9 +21,9 @@ public class PathFinder {
     }
 
     public void instantiateNodes() {
-        nodes = new Node[700][700];
-        for (int i = 0; i < 700; i++) {
-            for (int b = 0; b < 700; b++) {
+        nodes = new Node[100][100];
+        for (int i = 0; i < 100; i++) {
+            for (int b = 0; b < 100; b++) {
                 nodes[i][b] = new Node(i, b);
             }
         }

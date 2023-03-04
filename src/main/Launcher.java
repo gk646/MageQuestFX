@@ -11,6 +11,7 @@ public class Launcher {
             PrintWriter writer = new PrintWriter("error.log");
             e.printStackTrace(writer);
             writer.close();
+            System.exit(1);
         }
     }
 }

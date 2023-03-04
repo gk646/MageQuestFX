@@ -8,14 +8,12 @@ import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
 import gameworld.world.MapQuadrant;
-import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
-import main.system.enums.Zone;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
@@ -75,6 +73,8 @@ public class Player extends ENTITY {
     private int levelupCounter;
     public boolean drawDialog;
     private boolean attack1, attack2, attack3;
+    private final Rectangle player = new Rectangle(40, 40);
+    private Rectangle check2;
 
     /*
     1. DMG_Arcane_Absolute
@@ -349,14 +349,14 @@ public class Player extends ENTITY {
 
 
     public void pickupDroppedItem() {
-        int x = (int) worldX;
-        int y = (int) worldY;
+        player.x = (int) worldX;
+        player.y = (int) worldY;
         synchronized (mg.WORLD_DROPS) {
             Iterator<DROP> iter = mg.WORLD_DROPS.iterator();
             while (iter.hasNext()) {
                 DROP drop = iter.next();
-                if (Math.abs(drop.worldPos.x - x) + Math.abs(drop.worldPos.y - y) < 200) {
-                    if (new Rectangle(x, y, 40, 40).intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
+                if (Math.abs(drop.worldPos.x - worldX) + Math.abs(drop.worldPos.y - worldY) < 200) {
+                    if (player.intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
                         if (drop instanceof DRP_Coin) {
                             mg.player.coins += ((DRP_Coin) drop).amount;
                             mg.sound.playEffectSound(9);
@@ -403,9 +403,10 @@ public class Player extends ENTITY {
         movement();
         skills();
         tickEffects();
+        /*
         if (WorldController.currentWorld == Zone.GrassLands) {
             if (quadrantTimer >= 100) {
-                //dynamicSpawns();
+                dynamicSpawns();
                 if (respawnsDone) {
                     quadrantTimer = 0;
                     respawnsDone = false;
@@ -413,6 +414,8 @@ public class Player extends ENTITY {
             }
             quadrantTimer++;
         }
+
+         */
     }
 
     protected void tickEffects() {

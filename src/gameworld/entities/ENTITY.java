@@ -12,6 +12,7 @@ import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.ai.Node;
 import main.system.enums.Zone;
 
 import java.awt.Point;
@@ -28,6 +29,7 @@ import java.util.Iterator;
  */
 abstract public class ENTITY {
     public boolean AfterAnimationDead;
+    public Node[][] pathFindArray = new Node[16][16];
     public Dialog dialog;
     protected float health;
     public final ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
