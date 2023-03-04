@@ -425,7 +425,7 @@ public class MainGame {
             FonT.loadFonts();
 
             //100%
-            //sqLite.resetGame();
+            sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -439,7 +439,7 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        debug();
+        // debug();
         player.coins = 2_000;
     }
 
@@ -450,7 +450,6 @@ public class MainGame {
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_VoidField(this);
-
 
         player.maxMana = 2000;
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);

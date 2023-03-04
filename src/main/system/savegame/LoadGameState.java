@@ -21,7 +21,7 @@ public class LoadGameState {
     public void loadGame() {
         loadSpawnLevel();
         loadQuests();
-        loadSkills();
+        loadPlayerSave();
     }
 
     private void loadQuests() {
@@ -83,11 +83,12 @@ public class LoadGameState {
         }
     }
 
-    private void loadSkills() {
-
+    private void loadPlayerSave() {
         try {
             Statement stmt = mg.sqLite.conn.createStatement();
             mg.sqLite.readSKillPanel(stmt);
+            mg.sqLite.readPlayerInventory(stmt);
+            mg.sqLite.readPlayerBags(stmt);
         } catch (SQLException e) {
             throw new RuntimeException();
         }

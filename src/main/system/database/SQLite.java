@@ -58,9 +58,7 @@ public class SQLite {
             searchMISC(stmt);
             readPlayerBagEquip(stmt);
             inverseArrayLists();
-            readPlayerInventory(stmt);
             readPlayerStats(stmt);
-            readPlayerBags(stmt);
             readSkillTree(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -467,7 +465,7 @@ public class SQLite {
         mg.MISC.add(0, new ITEM(0, "FILLER", 10, '2', "/resources/items/filler/smiley", "OMEGA", "hey", "hey"));
     }
 
-    private void readPlayerInventory(Statement stmt) throws SQLException {
+    public void readPlayerInventory(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM  PLAYER_INV");
         int counter = 0;
         while (rs.next()) {
@@ -506,7 +504,7 @@ public class SQLite {
         }
     }
 
-    private void readPlayerBags(Statement stmt) throws SQLException {
+    public void readPlayerBags(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_BAG");
         int counter = 1;
         while (rs.next()) {
