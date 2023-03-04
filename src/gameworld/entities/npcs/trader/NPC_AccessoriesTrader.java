@@ -68,7 +68,7 @@ public class NPC_AccessoriesTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.fillText("Accessories Trader", screenX - 25, screenY + 58);
+        drawNPCName(gc, "Accessories Trader");
     }
 
     @Override

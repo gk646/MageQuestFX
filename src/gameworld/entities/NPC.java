@@ -1,5 +1,10 @@
 package gameworld.entities;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import main.system.ui.FonT;
+
 import java.awt.Point;
 
 abstract public class NPC extends ENTITY {
@@ -49,5 +54,20 @@ abstract public class NPC extends ENTITY {
 
     protected boolean collidingWithPlayer() {
         return activeTile.x == mg.playerX && activeTile.y == mg.playerY;
+    }
+
+    protected void drawNPCName(GraphicsContext gc, String name) {
+        gc.setEffect(mg.ui.shadow);
+        gc.setFill(Color.WHITE);
+        gc.setFont(FonT.editUndo16);
+        drawCenteredTextAroundX(screenX + 28, gc, name, screenY - 15);
+        gc.setEffect(null);
+    }
+
+    protected void drawCenteredTextAroundX(int x, GraphicsContext gc, String text, float y) {
+        Text textNode = new Text(text);
+        textNode.setFont(gc.getFont());
+        double textWidth = textNode.getLayoutBounds().getWidth();
+        gc.fillText(text, x - (textWidth / 2), y);
     }
 }

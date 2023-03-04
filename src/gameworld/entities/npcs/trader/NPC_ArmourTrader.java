@@ -8,8 +8,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.ui.Colors;
-import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Rectangle;
@@ -70,9 +68,7 @@ public class NPC_ArmourTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.setFont(FonT.minecraftBold14);
-        gc.setFill(Colors.white);
-        gc.fillText("Armour Trader", screenX - 25, screenY + 58);
+        drawNPCName(gc, "Armour Trader");
     }
 
     @Override

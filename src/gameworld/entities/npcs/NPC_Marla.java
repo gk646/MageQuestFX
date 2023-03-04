@@ -47,6 +47,7 @@ public class NPC_Marla extends NPC {
             drawIdle(gc);
         }
         spriteCounter++;
+        drawNPCName(gc, "Marla");
     }
 
     private void drawIdle(GraphicsContext gc) {

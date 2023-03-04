@@ -31,7 +31,7 @@ public class NPC_GenericVillagerMan extends NPC {
      */
     @Override
     public void draw(GraphicsContext gc) {
-
+        drawNPCName(gc, "Villager");
     }
 
     /**

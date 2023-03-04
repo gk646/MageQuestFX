@@ -74,7 +74,7 @@ public class NPC_AbilityTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.fillText("Ability Trader", screenX - 25, screenY + 58);
+        drawNPCName(gc, "Ability Trader");
     }
 
     @Override

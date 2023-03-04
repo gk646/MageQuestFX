@@ -68,7 +68,7 @@ public class NPC_WeaponTrader extends MERCHANT {
         } else if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        gc.fillText("Weapon Trader", screenX - 25, screenY + 58);
+        drawNPCName(gc, "Weapon Trader");
     }
 
     @Override

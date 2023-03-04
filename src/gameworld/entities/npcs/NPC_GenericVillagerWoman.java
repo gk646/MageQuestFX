@@ -49,25 +49,26 @@ public class NPC_GenericVillagerWoman extends NPC {
             drawIdle(gc);
         }
         spriteCounter++;
+        drawNPCName(gc, "Villager");
     }
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 120 / 30) {
-            case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY - 20);
-            case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY - 20);
-            case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY - 20);
-            case 3 -> gc.drawImage(animation.idle.get(3), screenX, screenY - 20);
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX + 10, screenY - 20);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX + 10, screenY - 20);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX + 10, screenY - 20);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX + 10, screenY - 20);
         }
     }
 
     private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX, screenY - 20);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX, screenY - 20);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX, screenY - 20);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY - 20);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY - 20);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY - 20);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX + 10, screenY - 20);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX + 10, screenY - 20);
+            case 2 -> gc.drawImage(animation.walk.get(2), screenX + 10, screenY - 20);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX + 10, screenY - 20);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX + 10, screenY - 20);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX + 10, screenY - 20);
         }
     }
 }
