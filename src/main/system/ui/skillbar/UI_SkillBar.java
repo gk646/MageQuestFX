@@ -28,6 +28,9 @@ public class UI_SkillBar {
     private final Image abilities = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/abilities.png")));
     private final Image map = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/map.png")));
     private final Image settings = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/settings.png")));
+    private final Image mouseleft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/mouseleft.png")));
+
+    private final Image mouseright = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/mouseright.png")));
 
     public final Rectangle wholeSkillBar = new Rectangle(614, 1_000, 743, 85);
     public final Rectangle characterBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY - 6, 32, 32);
@@ -71,13 +74,12 @@ public class UI_SkillBar {
             } else {
                 skills[i].draw(gc, skillBarX + 12 + i * 64, skillBarY + 2);
             }
+
             if (hitBoxes[i].contains(mousePos) && mg.skillPanel.draggedSKILL == null) {
                 skills[i].drawToolTip(gc, mousePos.x, mousePos.y);
                 if (mg.inputH.shift_pressed && mg.inputH.mouse1Pressed) {
                     skills[i] = new SKL_Filler(mg);
                 }
-            } else {
-                skills[i].toolTipTimer = 0;
             }
         }
     }
@@ -104,7 +106,8 @@ public class UI_SkillBar {
         gc.fillText("4", skillBarX + 64 * 3 + 30, skillBarY + 71);
         gc.fillText("5", skillBarX + 64 * 4 + 30, skillBarY + 71);
 
-        //TODO mouse button texture
+        gc.drawImage(mouseleft, skillBarX + 64 * 5 + 10 + 25, skillBarY + 55);
+        gc.drawImage(mouseright, skillBarX + 64 * 6 + 10 + 25, skillBarY + 55);
 
         gc.fillText("Q", skillBarX + 64 * 7 + 30 + 20, skillBarY + 73);
 

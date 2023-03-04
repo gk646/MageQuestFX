@@ -110,7 +110,6 @@ public class UI_SkillPanel {
         y += 100;//?
         gc.setFont(FonT.minecraftItalic12);
         gc.setFill(Colors.darkBackground);
-
         if (whichPanel[0]) {
             for (int i = 0; i < arcaneSkills.size(); i++) {
                 arcaneSkills.get(i).drawSkillSlot(gc, x - 5, y - 40);
@@ -125,6 +124,9 @@ public class UI_SkillPanel {
                     arcaneSkills.get(i).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
                 } else if (arcaneSkills.get(i + 1).hitBox.contains(mg.inputH.lastMousePosition)) {
                     arcaneSkills.get(i + 1).drawToolTip(gc, mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
+                } else {
+                    arcaneSkills.get(i).toolTipTimer = 0;
+                    arcaneSkills.get(i + 1).toolTipTimer = 0;
                 }
                 i++;
                 y += 85;
@@ -221,11 +223,11 @@ public class UI_SkillPanel {
 
     public void dragAndDropSkillBar(GraphicsContext gc) {
         Point mousePos = mg.inputH.lastMousePosition;
-        if (draggedSKILL != null) {
+        if (draggedSKILL != null && !(draggedSKILL instanceof SKL_Filler)) {
             gc.drawImage(draggedSKILL.icon, mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25);
             gc.setStroke(Colors.darkBackground);
             gc.setLineWidth(4);
-            gc.strokeRoundRect(mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25, 50, 50, 15, 15);
+            gc.strokeRoundRect(mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25, 50, 50, 10, 10);
             if (!mg.inputH.mouse1Pressed) {
                 for (int i = 0; i < 8; i++) {
                     if (mg.sBar.hitBoxes[i].contains(mousePos)) {

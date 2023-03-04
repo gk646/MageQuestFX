@@ -8,6 +8,7 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class LoadGameState {
     final MainGame mg;
@@ -20,6 +21,7 @@ public class LoadGameState {
     public void loadGame() {
         loadSpawnLevel();
         loadQuests();
+        loadSkills();
     }
 
     private void loadQuests() {
@@ -78,6 +80,16 @@ public class LoadGameState {
         switch (num) {
             case 0 -> mg.wControl.loadMap(Zone.Tutorial, 4, 4);
             case 1 -> mg.wControl.loadMap(Zone.Clearing, 20, 20);
+        }
+    }
+
+    private void loadSkills() {
+
+        try {
+            Statement stmt = mg.sqLite.conn.createStatement();
+            mg.sqLite.readSKillPanel(stmt);
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
 }

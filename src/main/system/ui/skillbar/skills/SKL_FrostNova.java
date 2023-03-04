@@ -27,6 +27,7 @@ public class SKL_FrostNova extends SKILL {
      */
     @Override
     public void draw(GraphicsContext gc, int x, int y) {
+        drawIcon(gc, x, y);
         drawCooldown(gc, x, y);
     }
 

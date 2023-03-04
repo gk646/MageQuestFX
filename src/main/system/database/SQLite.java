@@ -62,7 +62,6 @@ public class SQLite {
             readPlayerStats(stmt);
             readPlayerBags(stmt);
             readSkillTree(stmt);
-            readSKillPanel(stmt);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -285,7 +284,7 @@ public class SQLite {
         return 0;
     }
 
-    private void readSKillPanel(Statement stmt) throws SQLException {
+    public void readSKillPanel(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT skill_index FROM  SKL_Skills ");
         while (rs.next()) {
             int num = rs.getInt("skill_Index");
@@ -932,12 +931,32 @@ public class SQLite {
             System.out.println("TALENTS RESET");
             resetMapCovers();
             System.out.println("MAP COVER RESET");
+            resetSKills();
+            System.out.println("SKILLS RESET");
             mg.player.spawnLevel = 0;
             mg.player.experience = 0;
             mg.player.coins = 0;
+            mg.talentP.pointsToSpend = 0;
             savePlayerStats();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void resetSKills() throws SQLException {
+        String sql = "UPDATE SKL_Skills SET skill_index = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 1; i < 50; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setInt(2, i);
+            stmt.executeUpdate();
+        }
+        sql = "UPDATE SKL_Skills SET activeSkills = ? WHERE _ROWID_ = ?";
+        stmt = conn.prepareStatement(sql);
+        for (int i = 1; i < 50; i++) {
+            stmt.setNull(1, Types.INTEGER);
+            stmt.setInt(2, i);
+            stmt.executeUpdate();
         }
     }
 
