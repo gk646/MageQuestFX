@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.Buff_Effect;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -14,6 +15,8 @@ public class SKL_RegenAura extends SKILL {
         this.actualCoolDown = 3_600;
         castTimeTotal = 300;
         manaCost = 10;
+        type = DamageType.Arcane;
+        icon = setup("frostNova");
         castTimeActive = 0;
         name = "Regenerative Aura";
         description = "Regenerative Aura creates a soothing aura around the character, stimulating the natural healing processes of the body and allowing them to gradually recover from any wounds or injuries sustained in battle. As long as the aura remains active, the character will experience a steady stream of rejuvenation, gradually restoring their health over time.";
@@ -22,8 +25,9 @@ public class SKL_RegenAura extends SKILL {
 
     @Override
     public void draw(GraphicsContext gc, int x, int y) {
-        drawCooldown(gc, x, y);
         drawCastBar(gc);
+        drawIcon(gc, x, y);
+        drawCooldown(gc, x, y);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class SKL_RegenAura extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= 15) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= manaCost) {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {

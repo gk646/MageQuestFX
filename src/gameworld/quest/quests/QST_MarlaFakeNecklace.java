@@ -1,7 +1,7 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
-import gameworld.entities.npcs.marlaquest.NPC_Marla;
+import gameworld.entities.npcs.NPC_Marla;
 import gameworld.quest.QUEST;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;

@@ -34,26 +34,17 @@ public class ITM_SpellBook extends ITM_Usable {
 
     @Override
     public void activate(MainGame mg) {
-        if (spellName.equals("Solar Flare")) {
-            mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
-        } else if (spellName.equals("Energy Sphere")) {
-            mg.skillPanel.addSKill(new SKL_EnergySphere(mg));
-        } else if (spellName.equals("Thunder Strike")) {
-            mg.skillPanel.addSKill(new SKL_ThunderStrike(mg));
-        } else if (spellName.equals("Ring Salvo")) {
-            mg.skillPanel.addSKill(new SKL_RingSalvo(mg));
-        } else if (spellName.equals("Frost Nova")) {
-            mg.skillPanel.addSKill(new SKL_FrostNova(mg));
-        } else if (spellName.equals("Thunder Splash")) {
-            mg.skillPanel.addSKill(new SKL_ThunderSplash(mg));
-        } else if (spellName.equals("Void Eruption")) {
-            mg.skillPanel.addSKill(new SKL_VoidEruption(mg));
-        } else if (spellName.equals("Void Field")) {
-            mg.skillPanel.addSKill(new SKL_VoidField(mg));
-        } else if (spellName.equals("Lightning Strike")) {
-            mg.skillPanel.addSKill(new SKL_Lightning(mg));
-        } else if (spellName.equals("Regenerative Aura")) {
-            mg.skillPanel.addSKill(new SKL_RegenAura(mg));
+        switch (spellName) {
+            case "Solar Flare" -> mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
+            case "Energy Sphere" -> mg.skillPanel.addSKill(new SKL_EnergySphere(mg));
+            case "Thunder Strike" -> mg.skillPanel.addSKill(new SKL_ThunderStrike(mg));
+            case "Ring Salvo" -> mg.skillPanel.addSKill(new SKL_RingSalvo(mg));
+            case "Frost Nova" -> mg.skillPanel.addSKill(new SKL_FrostNova(mg));
+            case "Thunder Splash" -> mg.skillPanel.addSKill(new SKL_ThunderSplash(mg));
+            case "Void Eruption" -> mg.skillPanel.addSKill(new SKL_VoidEruption(mg));
+            case "Void Field" -> mg.skillPanel.addSKill(new SKL_VoidField(mg));
+            case "Lightning Strike" -> mg.skillPanel.addSKill(new SKL_Lightning(mg));
+            case "Regenerative Aura" -> mg.skillPanel.addSKill(new SKL_RegenAura(mg));
         }
     }
 }

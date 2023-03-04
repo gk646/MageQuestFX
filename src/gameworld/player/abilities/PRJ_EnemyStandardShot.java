@@ -16,7 +16,7 @@ public class PRJ_EnemyStandardShot extends EnemyProjectile {
      *
      * @param level the level and damage to the player
      */
-    public PRJ_EnemyStandardShot(int x, int y, int level, int goalx, int goaly) {
+    public PRJ_EnemyStandardShot(int x, int y, int level, int goalx, int goaly, float damage) {
         //-------VALUES-----------
         this.movementSpeed = 3;
         projectileType = ProjectileType.OneHitCompletelyDead;
@@ -24,6 +24,7 @@ public class PRJ_EnemyStandardShot extends EnemyProjectile {
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;
         this.level = level;
+        this.damage = damage;
         this.direction = "downleftrightup";
 
         //------POSITION-----------

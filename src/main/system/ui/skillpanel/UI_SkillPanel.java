@@ -223,11 +223,13 @@ public class UI_SkillPanel {
 
     public void dragAndDropSkillBar(GraphicsContext gc) {
         Point mousePos = mg.inputH.lastMousePosition;
-        if (draggedSKILL != null && !(draggedSKILL instanceof SKL_Filler)) {
-            gc.drawImage(draggedSKILL.icon, mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25);
-            gc.setStroke(Colors.darkBackground);
-            gc.setLineWidth(4);
-            gc.strokeRoundRect(mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25, 50, 50, 10, 10);
+        if (draggedSKILL != null) {
+            if (!(draggedSKILL instanceof SKL_Filler)) {
+                gc.drawImage(draggedSKILL.icon, mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25);
+                gc.setStroke(Colors.darkBackground);
+                gc.setLineWidth(4);
+                gc.strokeRoundRect(mg.inputH.lastMousePosition.x - 25, mg.inputH.lastMousePosition.y - 25, 50, 50, 10, 10);
+            }
             if (!mg.inputH.mouse1Pressed) {
                 for (int i = 0; i < 8; i++) {
                     if (mg.sBar.hitBoxes[i].contains(mousePos)) {

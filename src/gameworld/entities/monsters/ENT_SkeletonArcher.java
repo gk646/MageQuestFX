@@ -138,7 +138,7 @@ public class ENT_SkeletonArcher extends ENTITY {
             case 14 -> gc.drawImage(animation.attack1.get(14), screenX - 20, screenY - 14);
             case 15 -> {
                 attack1 = false;
-                mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY));
+                mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY, level));
             }
         }
     }

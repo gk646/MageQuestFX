@@ -523,6 +523,7 @@ public class SQLite {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
         mg.player.coins = rs.getInt("coins");
         mg.player.setLevel(rs.getInt("experience"));
+        mg.talentP.pointsToSpend = rs.getInt("talentPointsToSpend");
     }
 
     private ITEM getItemWithQuality(int i_id, String type, int quality, int level) {

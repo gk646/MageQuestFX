@@ -3,6 +3,7 @@ package gameworld.entities.monsters;
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
+import gameworld.player.abilities.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -53,6 +54,7 @@ public class ENT_SkeletonSpearman extends ENTITY {
             } else {
                 attack3 = true;
             }
+            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 60, 48, 48, 0, 0, level));
             //animation.playRandomSoundFromXToIndex(0, 3);
             spriteCounter = 0;
             collidingWithPlayer = false;
