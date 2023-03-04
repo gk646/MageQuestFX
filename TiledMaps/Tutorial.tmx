@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="90">
  <editorsettings>
   <export target="../src/resources/Maps/Tutorial.tmj" format="json"/>
  </editorsettings>
@@ -335,17 +335,18 @@
   <object id="64" name="gru1" x="359.667" y="1112.33"/>
   <object id="65" name="gru1" x="782.333" y="1115"/>
   <object id="66" name="gru1" x="919.667" y="1175.67"/>
-  <object id="69" name="gru1" x="612.773" y="156.909"/>
-  <object id="70" name="gru1" x="766.773" y="188.909"/>
-  <object id="71" name="gru1" x="604.273" y="269.409"/>
-  <object id="72" name="sho1" x="726.773" y="335.909"/>
-  <object id="73" name="gru1" x="1391.27" y="311.242"/>
-  <object id="74" name="gru1" x="1428.61" y="433.242"/>
-  <object id="75" name="sho1" x="1541.94" y="67.9091"/>
-  <object id="76" name="gru1" x="1528.61" y="267.909"/>
-  <object id="77" name="sho1" x="1552.27" y="767.576"/>
-  <object id="78" name="sho1" x="1562.61" y="729.576"/>
-  <object id="79" name="gru1" x="1462.27" y="744.576"/>
+  <object id="70" name="snake1" x="766.773" y="188.909"/>
+  <object id="72" name="snake1" x="726.773" y="335.909"/>
+  <object id="78" name="snake1" x="1521.94" y="695.909"/>
+  <object id="79" name="wolf1" x="1459.85" y="732.576"/>
   <object id="80" name="slimeboss1" x="1175.61" y="1427.91"/>
+  <object id="81" name="wolf1" x="613.939" y="155.909"/>
+  <object id="82" name="wolf1" x="603.356" y="269.326"/>
+  <object id="83" name="snake1" x="1495.27" y="781.576"/>
+  <object id="84" name="snake1" x="1493.27" y="401.212"/>
+  <object id="85" name="snake1" x="1372.94" y="326.909"/>
+  <object id="87" name="wolf1" x="1405.85" y="414.712"/>
+  <object id="88" name="wolf1" x="1554.94" y="269.909"/>
+  <object id="89" name="wolf1" x="1539.27" y="82.9091"/>
  </objectgroup>
 </map>

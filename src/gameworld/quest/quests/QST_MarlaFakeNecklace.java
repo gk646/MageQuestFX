@@ -29,7 +29,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
         for (NPC npc : mg.npcControl.NPC_Active) {
             if (npc instanceof NPC_Marla) {
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
-
                 if (progressStage == 1 && objective1Progress == 0) {
                     npc.dialog.loadNewLine(DialogStorage.MarlaNecklace[0]);
                     objective1Progress++;

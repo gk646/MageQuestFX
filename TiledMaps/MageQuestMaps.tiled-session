@@ -41,7 +41,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 373,
-                "y": 205
+                "y": 201
             }
         },
         "FirstDungeon.tmx": {
@@ -56,19 +56,22 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 1.5,
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 631.6666666666666,
-                "y": 316
+                "x": 196.66666666666669,
+                "y": 565.3333333333333
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.0625,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 4000,
-                "y": 4000
+                "x": 7510.5,
+                "y": 7616
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -106,11 +109,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 0.33,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 791.6666666666666,
-                "y": 790.3333333333333
+                "x": 1880.3030303030303,
+                "y": 854.5454545454547
             }
         },
         "d.tsx": {

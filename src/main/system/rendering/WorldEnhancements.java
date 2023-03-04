@@ -102,14 +102,21 @@ public class WorldEnhancements {
 
     public void animateTiles() {
         for (AnimationList animList : animationList) {
-            for (Point point : animList.tilesIndices) {
-                WorldRender.worldData[point.x][point.y] = animList.progress(WorldRender.worldData[point.x][point.y]);
+            for (int i = 0; i < animList.tilesIndices.size(); i++) {
+                Point point = animList.tilesIndices.get(i);
+                WorldRender.worldData[point.x][point.y] = animList.progress(WorldRender.worldData[point.x][point.y], i, 0);
             }
-            for (Point point : animList.tilesIndices1) {
-                WorldRender.worldData1[point.x][point.y] = animList.progress(WorldRender.worldData1[point.x][point.y]);
+        }
+        for (AnimationList animList : animationList) {
+            for (int i = 0; i < animList.tilesIndices1.size(); i++) {
+                Point point = animList.tilesIndices1.get(i);
+                WorldRender.worldData1[point.x][point.y] = animList.progress(WorldRender.worldData1[point.x][point.y], i, 1);
             }
-            for (Point point : animList.tilesIndices2) {
-                WorldRender.worldData2[point.x][point.y] = animList.progress(WorldRender.worldData2[point.x][point.y]);
+        }
+        for (AnimationList animList : animationList) {
+            for (int i = 0; i < animList.tilesIndices2.size(); i++) {
+                Point point = animList.tilesIndices2.get(i);
+                WorldRender.worldData2[point.x][point.y] = animList.progress(WorldRender.worldData2[point.x][point.y], i, 2);
             }
         }
     }

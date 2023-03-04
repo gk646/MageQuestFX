@@ -35,7 +35,7 @@ public class WorldController {
         MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Dungeon_Tutorial));
         MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Clearing, GameMapType.MapCover));
         //Overworld
-        //   MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+        MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         loadArray();
     }
 
@@ -104,7 +104,7 @@ public class WorldController {
             }
         } else if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
-                loadMap(Zone.City1, 10, 10);
+                loadMap(Zone.Clearing, 18, 98);
             }
         } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
@@ -118,6 +118,10 @@ public class WorldController {
         } else if (currentWorld == Zone.Dungeon_Tutorial) {
             if (mg.playerX == 27 && mg.playerY == 4) {
                 loadMap(Zone.Tutorial, 71, 55);
+            }
+        } else if (currentWorld == Zone.Clearing) {
+            if (mg.playerY == 99 && (mg.playerX == 17 || mg.playerX == 18 || mg.playerX == 19)) {
+                loadMap(Zone.GrassLands, 498, 498);
             }
         }
     }
@@ -134,8 +138,8 @@ public class WorldController {
      * @param playerLocation in awt Point
      * @return true if the player is further than 500 pixels from the given points
      */
-    public boolean player_went_away(Point playerLocation) {
-        return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > 500;
+    public boolean player_went_away(Point playerLocation, int distance) {
+        return Point.distance(playerLocation.x, playerLocation.y, Player.worldX, Player.worldY) > distance;
     }
 
     public void uncoverWorldMap() {

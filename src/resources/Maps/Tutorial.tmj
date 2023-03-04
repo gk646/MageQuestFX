@@ -547,19 +547,8 @@
                 {
                  "class":"",
                  "height":0,
-                 "id":69,
-                 "name":"gru1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":612.773,
-                 "y":156.909
-                }, 
-                {
-                 "class":"",
-                 "height":0,
                  "id":70,
-                 "name":"gru1",
+                 "name":"snake1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
@@ -569,19 +558,8 @@
                 {
                  "class":"",
                  "height":0,
-                 "id":71,
-                 "name":"gru1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":604.273,
-                 "y":269.409
-                }, 
-                {
-                 "class":"",
-                 "height":0,
                  "id":72,
-                 "name":"sho1",
+                 "name":"snake1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
@@ -591,79 +569,24 @@
                 {
                  "class":"",
                  "height":0,
-                 "id":73,
-                 "name":"gru1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1391.27,
-                 "y":311.242
-                }, 
-                {
-                 "class":"",
-                 "height":0,
-                 "id":74,
-                 "name":"gru1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1428.61,
-                 "y":433.242
-                }, 
-                {
-                 "class":"",
-                 "height":0,
-                 "id":75,
-                 "name":"sho1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1541.94,
-                 "y":67.9091
-                }, 
-                {
-                 "class":"",
-                 "height":0,
-                 "id":76,
-                 "name":"gru1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1528.61,
-                 "y":267.909
-                }, 
-                {
-                 "class":"",
-                 "height":0,
-                 "id":77,
-                 "name":"sho1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":1552.27,
-                 "y":767.576
-                }, 
-                {
-                 "class":"",
-                 "height":0,
                  "id":78,
-                 "name":"sho1",
+                 "name":"snake1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1562.61,
-                 "y":729.576
+                 "x":1521.94333333333,
+                 "y":695.909333333333
                 }, 
                 {
                  "class":"",
                  "height":0,
                  "id":79,
-                 "name":"gru1",
+                 "name":"wolf1",
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1462.27,
-                 "y":744.576
+                 "x":1459.85333333333,
+                 "y":732.576
                 }, 
                 {
                  "class":"",
@@ -675,6 +598,94 @@
                  "width":0,
                  "x":1175.61,
                  "y":1427.91
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":81,
+                 "name":"wolf1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":613.939366666667,
+                 "y":155.9091
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":82,
+                 "name":"wolf1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":603.356033333333,
+                 "y":269.325766666667
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":83,
+                 "name":"snake1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1495.2727,
+                 "y":781.575766666667
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":84,
+                 "name":"snake1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1493.2727,
+                 "y":401.21213030303
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":85,
+                 "name":"snake1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1372.93936666667,
+                 "y":326.9091
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":87,
+                 "name":"wolf1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1405.84845757576,
+                 "y":414.71213030303
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":88,
+                 "name":"wolf1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1554.93936666667,
+                 "y":269.9091
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":89,
+                 "name":"wolf1",
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1539.2727,
+                 "y":82.9091
                 }],
          "offsetx":-15.2727,
          "offsety":-17.9091,
@@ -685,7 +696,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":81,
+ "nextobjectid":90,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

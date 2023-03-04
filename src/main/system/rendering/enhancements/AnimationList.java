@@ -10,7 +10,8 @@ public class AnimationList {
     public final ArrayList<Point> tilesIndices1 = new ArrayList<>();
     public final ArrayList<Point> tilesIndices2 = new ArrayList<>();
     int speed;
-    int speedCounter;
+    int[][] speedCounters = new int[3][50];
+
 
     public AnimationList(int[] list, int speed) {
         tileProgression = list;
@@ -18,9 +19,9 @@ public class AnimationList {
     }
 
 
-    public int progress(int i) {
-        if (speedCounter >= speed) {
-            speedCounter = 0;
+    public int progress(int i, int index, int array) {
+        if (speedCounters[array][index] >= speed) {
+            speedCounters[array][index] = 0;
             for (int j = 0; j < tileProgression.length; j++) {
                 if (tileProgression[j] == i) {
                     if (j < tileProgression.length - 1) {
@@ -31,7 +32,7 @@ public class AnimationList {
                 }
             }
         }
-        speedCounter++;
+        speedCounters[array][index]++;
         return i;
     }
 }

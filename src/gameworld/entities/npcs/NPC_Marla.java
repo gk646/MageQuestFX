@@ -41,7 +41,7 @@ public class NPC_Marla extends NPC {
         super.update();
         if (show_dialog) {
             dialogHideDelay++;
-            show_dialog = !mg.wControl.player_went_away(playerTalkLocation);
+            show_dialog = !mg.wControl.player_went_away(playerTalkLocation, 800);
         }
         if (dialogHideDelay > 600) {
             show_dialog = false;
@@ -54,11 +54,13 @@ public class NPC_Marla extends NPC {
             if (!once && QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 400)) {
                 dialog.loadNewLine("Hey, you. Yeah you with the bat black coat. Would you hear out a damsel in distress?");
                 show_dialog = true;
+                dialogHideDelay = 0;
                 playerTalkLocation = new Point(activeTile.x * 48, activeTile.y * 48);
                 once = true;
             } else if (!twice && !show_dialog && QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 400)) {
                 dialog.loadNewLine("Hello? Dont you see iam talking to you?!");
                 show_dialog = true;
+                dialogHideDelay = 0;
                 playerTalkLocation = new Point(activeTile.x * 48, activeTile.y * 48);
                 twice = true;
             } else if (once && !QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 600)) {

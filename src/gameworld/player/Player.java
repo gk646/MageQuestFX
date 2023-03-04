@@ -405,7 +405,7 @@ public class Player extends ENTITY {
         tickEffects();
         if (WorldController.currentWorld == Zone.GrassLands) {
             if (quadrantTimer >= 100) {
-                dynamicSpawns();
+                //dynamicSpawns();
                 if (respawnsDone) {
                     quadrantTimer = 0;
                     respawnsDone = false;

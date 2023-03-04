@@ -168,6 +168,7 @@ public class Map {
     }
 
     public void saveMapCover() throws SQLException {
+        System.out.println(name);
         String sql = "UPDATE " + name + " SET value = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = SQLite.mapCoverConn.prepareStatement(sql);
         for (int i = 0; i < mapCover.length; i++) {
