@@ -40,8 +40,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 372,
-                "y": 206
+                "x": 373,
+                "y": 205
             }
         },
         "FirstDungeon.tmx": {
@@ -56,11 +56,11 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 800,
-                "y": 799.5
+                "x": 631.6666666666666,
+                "y": 316
             }
         },
         "GrassLands.tmx": {

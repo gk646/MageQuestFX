@@ -8,6 +8,7 @@ public class FonT {
     public static Font minecraftItalic12;
     public static Font minecraftRegular20;
     public static Font minecraftRegular18;
+    public static Font antParty16;
     private static Font minecraftRegular14;
     public static Font minecraftItalic15;
     private static Font minecraftItalic17;
@@ -37,6 +38,9 @@ public class FonT {
     public static Font minecraftItalic11;
     public static Font minecraftBoldItalic14;
     public static Font minecraftBoldItalic18;
+    public static Font antParty18;
+    public static Font antParty20;
+
     public static void loadFonts() {
         minecraftRegular14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 14);
         minecraftRegular20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 20);
@@ -63,5 +67,8 @@ public class FonT {
         editUndo16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 16);
         editUndo19 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 19);
         editUndo22 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 22);
+        antParty18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 18);
+        antParty20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 20);
+        antParty16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 16);
     }
 }

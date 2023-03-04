@@ -128,6 +128,7 @@ public class MainGame {
     public WorldEnhancements wAnim;
     public LoadGameState loadGameState;
     public UI_SkillPanel skillPanel;
+    public boolean showJournal;
 
     //---------System---------
     private MiniMap miniM;
@@ -368,7 +369,6 @@ public class MainGame {
             // 0 %
 
             playerPrompts = new PlayerPrompts(this);
-
             sound = new Sound(this);
 
             sound.loadSounds();
@@ -425,7 +425,7 @@ public class MainGame {
             FonT.loadFonts();
 
             //100%
-            sqLite.resetGame();
+            //sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -439,7 +439,7 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        // debug();
+        debug();
         player.coins = 2_000;
     }
 
@@ -447,6 +447,7 @@ public class MainGame {
         for (int i = 0; i < 1; i++) {
             //ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
+        sound.setVolumeAmbience(0);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_VoidField(this);
@@ -455,7 +456,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         //wControl.loadMap(Zone.GrassLands, 496, 496);
-        wControl.loadMap(Zone.Clearing, 45, 45);
+        wControl.loadMap(Zone.Clearing, 35, 35);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
         }

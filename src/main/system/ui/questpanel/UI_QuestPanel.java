@@ -24,13 +24,102 @@ public class UI_QuestPanel {
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
     private final Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
     private final Image small = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/questpanel_small.png"))));
+    public final Rectangle wholeJournalWindow = new Rectangle(480, 260, 960, 563);
+    public final Rectangle leftSide = new Rectangle(508 + 480, 260 + 11, 414, 510);
+    private final Image journal = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/journal.png"))));
+    private final Image trackBox = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBox.png"))));
+    private final Image trackBoxHover = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBoxHover.png"))));
+    public double scroll = 280;
+    Rectangle[] trackBoxes = new Rectangle[10];
+    private int lastY;
 
 
     public UI_QuestPanel(MainGame mg) {
         this.mg = mg;
+        for (int i = 0; i < 10; i++) {
+            trackBoxes[i] = new Rectangle(24, 27);
+        }
+        hideJournalCollision();
     }
 
     public void draw(GraphicsContext gc) {
+        drawQuestBar(gc);
+        if (mg.showJournal) {
+            drawJournal(gc);
+        }
+    }
+
+    private void drawJournal(GraphicsContext gc) {
+        gc.drawImage(journal, 480, 260);
+        gc.setFont(FonT.antParty20);
+        gc.setFill(Colors.journalBrown);
+        gc.fillText("Tracked Quest:", 545, 300);
+        gc.fillText(activeQuest.name, 560, 325);
+        int y = 330;
+        for (String string : activeQuest.objectives) {
+            if (string != null) {
+                y += 15;
+                gc.fillText(string, 560 + 25, y);
+            }
+        }
+        y += 15;
+        y += 40;
+        int x = 560;
+        gc.fillText("All Quests: " + numberOfQuests() + "/ 10", 545, y);
+        for (int i = 0; i < quests.size(); i++) {
+            if (quests.get(i).name.equals(activeQuest.name)) {
+                continue;
+            }
+            trackBoxes[i].x = 850;
+            trackBoxes[i].y = y;
+            if (trackBoxes[i].contains(mg.inputH.lastMousePosition)) {
+                gc.drawImage(trackBoxHover, 850, y);
+                if (mg.inputH.mouse1Pressed) {
+                    mg.inputH.mouse1Pressed = false;
+                    activeQuest = quests.get(i);
+                }
+            } else {
+                gc.drawImage(trackBox, 850, y);
+            }
+            gc.fillText(quests.get(i).name, x, y += 25);
+            for (String string : quests.get(i).objectives) {
+                if (string != null) {
+                    gc.fillText(string, x + 25, y += 20);
+                }
+            }
+        }
+        gc.setFont(FonT.antParty16);
+        y = (int) scroll;
+        for (String string : activeQuest.questRecap) {
+            y += 10;
+            if (string != null) {
+                for (String str : string.split("\n")) {
+                    y += 15;
+                    if (y < 290 || y > 710) {
+                        continue;
+                    }
+                    gc.fillText(str, 1030, y);
+                }
+            }
+        }
+        if (mg.inputH.mouse2Pressed) {
+            scroll = 280;
+            mg.inputH.mouse2Pressed = false;
+        }
+    }
+
+
+    private int numberOfQuests() {
+        int counter = 0;
+        for (QUEST quest : quests) {
+            if (quest != null) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    private void drawQuestBar(GraphicsContext gc) {
         if (expanded) {
             gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_649, 335, 251, 400, 15, 15);
@@ -105,5 +194,22 @@ public class UI_QuestPanel {
                 quest.progressStage = progressStage;
             }
         }
+    }
+
+    public void hideJournalCollision() {
+        wholeJournalWindow.y = -1_000;
+    }
+
+    public void resetJournalCollision() {
+        wholeJournalWindow.y = 260;
+    }
+
+    public boolean PlayerHasQuests(String name) {
+        for (QUEST quest : quests) {
+            if (quest.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -28,7 +28,7 @@ abstract public class DialogStorage {
         InputStream inputStream = DialogStorage.class.getResourceAsStream("/Dialog/" + txtName + ".txt");
         assert inputStream != null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder("d\n");
+        StringBuilder stringBuilder = new StringBuilder("\n");
         text = bufferedReader.readLine();
         while (text != null) {
             stringBuilder.append(text);

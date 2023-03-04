@@ -12,6 +12,7 @@ abstract public class QUEST {
 
     public final String name;
     public final String[] objectives = new String[3];
+    public final String[] questRecap = new String[50];
     public int progressStage = 1;
     public int quest_id;
     public String progressStageName;
@@ -42,11 +43,25 @@ abstract public class QUEST {
         progressStage++;
     }
 
-    public void updateObjective(String newText, int index) {
-        if (!checkDialogSimilarity(newText, index)) {
-            mg.sound.playEffectSound(1);
+    /**
+     * @param worldX
+     * @param worldY
+     * @param distance
+     * @return if the player is close to coordinates / absolute numbers
+     */
+    public static boolean playerCloseToAbsolute(int worldX, int worldY, int distance) {
+        return new Point((int) Player.worldX, (int) Player.worldY).distance(new Point(worldX, worldY)) < distance;
+    }
+
+    private void cacheDialog(String text) {
+        for (int i = 0; i < questRecap.length; i++) {
+            if (questRecap[i] == null) {
+                questRecap[i] = Dialog.insertNewLine(text, 43);
+                break;
+            } else if (questRecap[i].equals(Dialog.insertNewLine(text, 43))) {
+                break;
+            }
         }
-        objectives[index] = Dialog.insertNewLine(newText, 20);
     }
 
 
@@ -137,35 +152,19 @@ abstract public class QUEST {
         return false;
     }
 
-    protected void interactWithNpc(NPC npc, String[] array) {
-        if (npc.dialog.dialogLine.equals("...")) {
-            try {
-                npc.dialog.loadNewLine(array[progressStage]);
-                npc.dialogHideDelay = 0;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                npc.dialog.loadNewLine("...");
+    public void updateObjective(String newText, int index) {
+        if (!checkDialogSimilarity(newText, index)) {
+            mg.sound.playEffectSound(1);
+        }
+        for (int i = 0; i < questRecap.length; i++) {
+            if (questRecap[i] == null) {
+                questRecap[i] = newText;
+                break;
+            } else if (questRecap[i].equals(newText)) {
+                break;
             }
         }
-        if (npc.show_dialog) {
-            if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2_000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-                try {
-                    nextStage();
-                    npc.dialog.loadNewLine(array[progressStage]);
-                    npc.dialogHideDelay = 0;
-                    mg.inputH.e_typed = false;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    npc.dialog.loadNewLine("...");
-                }
-            } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
-                npc.dialog.dialogRenderCounter = 2_000;
-            }
-        }
-        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
-            npc.show_dialog = true;
-            npc.dialogHideDelay = 0;
-            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
-            mg.inputH.e_typed = false;
-        }
+        objectives[index] = Dialog.insertNewLine(newText, 20);
     }
 
     protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
@@ -191,5 +190,37 @@ abstract public class QUEST {
         int y1 = Math.min(p1.y, p2.y);
         int y2 = Math.max(p1.y, p2.y);
         return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
+    }
+
+    protected void interactWithNpc(NPC npc, String[] array) {
+        if (npc.dialog.dialogLine.equals("...")) {
+            try {
+                npc.dialog.loadNewLine(array[progressStage]);
+                npc.dialogHideDelay = 0;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                npc.dialog.loadNewLine("...");
+            }
+        }
+        if (npc.show_dialog) {
+            if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2_000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                try {
+                    nextStage();
+                    npc.dialog.loadNewLine(array[progressStage]);
+                    npc.dialogHideDelay = 0;
+                    mg.inputH.e_typed = false;
+                    cacheDialog(array[progressStage]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    npc.dialog.loadNewLine("...");
+                }
+            } else if (!npc.blockInteraction && !npc.onPath && mg.inputH.e_typed && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+                npc.dialog.dialogRenderCounter = 2_000;
+            }
+        }
+        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
+            npc.show_dialog = true;
+            npc.dialogHideDelay = 0;
+            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+            mg.inputH.e_typed = false;
+        }
     }
 }

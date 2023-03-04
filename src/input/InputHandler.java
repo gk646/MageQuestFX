@@ -321,6 +321,19 @@ public class InputHandler {
                 }
             }
         }
+        if (code.equals("j")) {
+            if (!mg.showJournal) {
+                mg.qPanel.resetJournalCollision();
+                mg.showJournal = true;
+                scene.setCursor(Runner.selectCrosshair);
+            } else {
+                mg.qPanel.hideJournalCollision();
+                mg.showJournal = false;
+                if (!inventoryWindowOpen()) {
+                    scene.setCursor(Runner.crosshair);
+                }
+            }
+        }
         switch (code) {
             case "e" -> e_typed = true;
             case "q" -> q_typed = true;
@@ -531,11 +544,14 @@ public class InputHandler {
             mg.gameMap.zoom = (float) Math.max(3, Math.min((mg.gameMap.zoom + event.getDeltaY() / 80), 14));
         } else if (mg.drawCodex) {
             mg.ui.codex_scroll = Math.max(-1, Math.min((mg.ui.codex_scroll - event.getDeltaY() / 1_800), 0.322f));
+        } else if (mg.showJournal && mg.qPanel.leftSide.contains(lastMousePosition)) {
+            System.out.println(mg.qPanel.scroll);
+            mg.qPanel.scroll = mg.qPanel.scroll - event.getDeltaY() / 3;
         }
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean inventoryWindowOpen() {
-        return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION || mg.showAbilities;
+        return mg.showChar || mg.showMap || mg.showTalents || mg.showBag || mg.gameState == State.OPTION || mg.showAbilities || mg.showJournal;
     }
 }

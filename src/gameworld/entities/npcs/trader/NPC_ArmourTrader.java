@@ -76,7 +76,7 @@ public class NPC_ArmourTrader extends MERCHANT {
         super.update();
         if (mg.inputH.e_typed && collidingWithPlayer()) {
             if (dialog.dialogRenderCounter == 0) {
-                dialog.loadNewLine(DialogStorage.Trading[mg.random.nextInt(0, DialogStorage.Trading.length)]);
+                dialog.loadNewLine(DialogStorage.Trading[mg.random.nextInt(0, DialogStorage.Trading.length - 1)]);
                 show_dialog = true;
             } else if (dialog.dialogRenderCounter < 2_000) {
                 dialog.dialogRenderCounter = 2_000;

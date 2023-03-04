@@ -4,6 +4,8 @@ import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
+import gameworld.quest.QUEST;
+import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -12,6 +14,10 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 public class NPC_Marla extends NPC {
+    private boolean once;
+    private int counter;
+    private boolean twice;
+    private boolean gotQuest;
 
     public NPC_Marla(MainGame mainGame, int xTile, int yTile) {
         this.dialog = new Dialog();
@@ -32,7 +38,43 @@ public class NPC_Marla extends NPC {
 
     @Override
     public void update() {
-
+        super.update();
+        if (show_dialog) {
+            dialogHideDelay++;
+            show_dialog = !mg.wControl.player_went_away(playerTalkLocation);
+        }
+        if (dialogHideDelay > 600) {
+            show_dialog = false;
+            dialogHideDelay = 0;
+        }
+        if (onPath) {
+            moveTo(goalTile.x, goalTile.y, checkPoints);
+        }
+        if (!gotQuest) {
+            if (!once && QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 400)) {
+                dialog.loadNewLine("Hey, you. Yeah you with the bat black coat. Would you hear out a damsel in distress?");
+                show_dialog = true;
+                playerTalkLocation = new Point(activeTile.x * 48, activeTile.y * 48);
+                once = true;
+            } else if (!twice && !show_dialog && QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 400)) {
+                dialog.loadNewLine("Hello? Dont you see iam talking to you?!");
+                show_dialog = true;
+                playerTalkLocation = new Point(activeTile.x * 48, activeTile.y * 48);
+                twice = true;
+            } else if (once && !QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 600)) {
+                counter++;
+                if (counter >= 1500) {
+                    once = false;
+                    twice = false;
+                }
+            }
+            if (mg.collisionChecker.checkEntityAgainstPlayer(this, 8) && mg.inputH.e_typed && !mg.qPanel.PlayerHasQuests("The Fake Necklace")) {
+                mg.inputH.e_typed = false;
+                mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace"));
+                gotQuest = true;
+                dialog.dialogRenderCounter = 2000;
+            }
+        }
     }
 
     /**
@@ -45,6 +87,9 @@ public class NPC_Marla extends NPC {
             drawWalk(gc);
         } else {
             drawIdle(gc);
+        }
+        if (show_dialog) {
+            dialog.drawDialog(gc, this);
         }
         spriteCounter++;
         drawNPCName(gc, "Marla");
