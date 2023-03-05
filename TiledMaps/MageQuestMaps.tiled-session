@@ -41,37 +41,37 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 817,
-                "y": 201
+                "y": 199
             }
         },
         "FirstDungeon.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 2,
+            "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 479.75,
-                "y": 479.75
+                "x": 428.66666666666663,
+                "y": 644
             }
         },
         "ForestClearing.tmx": {
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 4,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 494.375,
-                "y": 114.75
+                "x": 691,
+                "y": 774
             }
         },
         "GrassLands.tmx": {
-            "scale": 1.5,
+            "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 6901,
-                "y": 7495.333333333333
+                "x": 7000,
+                "y": 6096
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -112,8 +112,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 791,
-                "y": 789
+                "x": 621,
+                "y": 1106
             }
         },
         "caveMarla.tmx": {
@@ -210,8 +210,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.33333333333334,
-                "y": -22.666666666666686
+                "x": 239.33333333333331,
+                "y": -22
             }
         }
     },

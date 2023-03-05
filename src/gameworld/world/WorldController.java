@@ -101,8 +101,8 @@ public class WorldController {
                 loadMap(Zone.Hillcrest, 1, 1);
             }
         } else if (currentWorld == Zone.GrassLands) {
-            if (mg.playerX == 495 && mg.playerY == 495) {
-                loadMap(Zone.Hillcrest, 5, 95);
+            if (mg.playerX == 499 && mg.playerY == 499) {
+                loadMap(Zone.Hillcrest, 4, 94);
             }
         } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
@@ -119,7 +119,7 @@ public class WorldController {
             }
         } else if (currentWorld == Zone.Hillcrest) {
             if (mg.playerY == 99 && mg.playerX == 0) {
-                loadMap(Zone.GrassLands, 498, 498);
+                loadMap(Zone.GrassLands, 495, 495);
             }
         }
     }

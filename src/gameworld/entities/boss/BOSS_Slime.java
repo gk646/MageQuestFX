@@ -55,7 +55,7 @@ public class BOSS_Slime extends BOSS {
         if (!attack2 && !attack3 && !attack1 && !spitting) {
             onPath = true;
             getNearestPlayer();
-            searchPath(goalCol, goalRow, 16);
+            searchPath(goalCol, goalRow, 30);
         }
         hitDelay++;
         searchTicks++;
@@ -84,19 +84,20 @@ public class BOSS_Slime extends BOSS {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX - 49);
         screenY = (int) (worldY - Player.worldY + Player.screenY - 45 - 48);
-        if (attack1) {
+        if (dead) {
+            drawDeath(gc);
+        } else if (attack1) {
             drawAttack1(gc);
         } else if (attack2) {
             drawAttack2(gc);
         } else if (attack3) {
             drawAttack3(gc);
+        } else if (onPath) {
+            drawWalk(gc);
         } else {
-            if (onPath) {
-                drawWalk(gc);
-            } else {
-                drawIdle(gc);
-            }
+            drawIdle(gc);
         }
+
         drawBossHealthBar(gc);
         spriteCounter++;
     }
@@ -116,7 +117,7 @@ public class BOSS_Slime extends BOSS {
     }
 
     private void drawIdle(GraphicsContext gc) {
-        switch (spriteCounter % 180 / 30) {
+        switch (spriteCounter % 120 / 30) {
             case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY);
             case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY);
             case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY);
@@ -158,6 +159,15 @@ public class BOSS_Slime extends BOSS {
         }
     }
 
+    private void drawDeath(GraphicsContext gc) {
+        switch (spriteCounter % 245 / 35) {
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 32, screenY - 52);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 32, screenY - 52);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 32, screenY - 52);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 32, screenY - 52);
+            case 4 -> AfterAnimationDead = true;
+        }
+    }
 
     private void slimeVolley() {
         for (int i = 0; i < 720; i += 4) {

@@ -10,12 +10,14 @@ import main.system.ui.FonT;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 public class UI_QuestPanel {
     public boolean expanded = false;
-    public final ArrayList<QUEST> quests = new ArrayList<>();
+    public final List<QUEST> quests = Collections.synchronizedList(new ArrayList<>());
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
 
     public QUEST activeQuest;
@@ -54,12 +56,28 @@ public class UI_QuestPanel {
         gc.setFont(FonT.antParty20);
         gc.setFill(Colors.journalBrown);
         gc.fillText("Tracked Quest:", 545, 300);
-        gc.fillText(activeQuest.name, 560, 325);
         int y = 330;
-        for (String string : activeQuest.objectives) {
-            if (string != null) {
-                y += 15;
-                gc.fillText(string, 560 + 25, y);
+        if (activeQuest != null) {
+            gc.fillText(activeQuest.name, 560, 325);
+            for (String string : activeQuest.objectives) {
+                if (string != null) {
+                    y += 15;
+                    gc.fillText(string, 560 + 25, y);
+                }
+            }
+            gc.setFont(FonT.antParty16);
+            y = (int) scroll;
+            for (String string : activeQuest.questRecap) {
+                y += 10;
+                if (string != null) {
+                    for (String str : string.split("\n")) {
+                        y += 15;
+                        if (y < 290 || y > 710) {
+                            continue;
+                        }
+                        gc.fillText(str, 1030, y);
+                    }
+                }
             }
         }
         y += 15;
@@ -67,7 +85,7 @@ public class UI_QuestPanel {
         int x = 560;
         gc.fillText("All Quests: " + numberOfQuests() + "/ 10", 545, y);
         for (int i = 0; i < quests.size(); i++) {
-            if (quests.get(i).name.equals(activeQuest.name)) {
+            if (activeQuest == null || quests.get(i).name.equals(activeQuest.name)) {
                 continue;
             }
             trackBoxes[i].x = 850;
@@ -85,20 +103,6 @@ public class UI_QuestPanel {
             for (String string : quests.get(i).objectives) {
                 if (string != null) {
                     gc.fillText(string, x + 25, y += 20);
-                }
-            }
-        }
-        gc.setFont(FonT.antParty16);
-        y = (int) scroll;
-        for (String string : activeQuest.questRecap) {
-            y += 10;
-            if (string != null) {
-                for (String str : string.split("\n")) {
-                    y += 15;
-                    if (y < 290 || y > 710) {
-                        continue;
-                    }
-                    gc.fillText(str, 1030, y);
                 }
             }
         }
@@ -160,15 +164,17 @@ public class UI_QuestPanel {
     }
 
     public void update() {
-        Iterator<QUEST> iterator = quests.iterator();
-        while (iterator.hasNext()) {
-            QUEST quest = iterator.next();
-            quest.update();
-            if (quest.completed) {
-                if (activeQuest == quest) {
-                    activeQuest = null;
+        synchronized (quests) {
+            Iterator<QUEST> iterator = quests.iterator();
+            while (iterator.hasNext()) {
+                QUEST quest = iterator.next();
+                quest.update();
+                if (quest.completed) {
+                    if (activeQuest == quest) {
+                        activeQuest = null;
+                    }
+                    iterator.remove();
                 }
-                iterator.remove();
             }
         }
     }
