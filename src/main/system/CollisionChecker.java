@@ -179,11 +179,9 @@ public class CollisionChecker {
     }
 
     public boolean checkPlayerLeft() {
-        float x = Player.worldX;
-        int left = (int) ((x - Player.playerEffects[45]) / 48);
-        int num = WorldRender.worldData[left][mg.playerY];
+        int left = (int) ((Player.worldX - Player.playerEffects[45]) / 48);
         int num1 = WorldRender.worldData1[left][mg.playerY];
-        if (mg.wRender.tileStorage[num].collision) {
+        if (mg.wRender.tileStorage[WorldRender.worldData[left][mg.playerY]].collision) {
             return true;
         } else return num1 != -1 && mg.wRender.tileStorage[num1].collision;
     }
