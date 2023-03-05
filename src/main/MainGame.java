@@ -17,7 +17,7 @@ import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
-import gameworld.world.objects.drops.DRP_DroppedItem;
+import gameworld.world.objects.DropManager;
 import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
 import javafx.animation.KeyFrame;
@@ -123,7 +123,7 @@ public class MainGame {
     public boolean drawVideoSettings, drawAudioSettings;
     public boolean drawKeybindings;
     public boolean drawGameplay;
-    public DRP_DroppedItem dropI;
+    public DropManager dropManager;
     public boolean drawCodex;
     public WorldEnhancements wAnim;
     public LoadGameState loadGameState;
@@ -353,13 +353,13 @@ public class MainGame {
         {
             sqLite = new SQLite(this);
             sqLite.getConnection();
+            dropManager = new DropManager(this);
             FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
             loadGameState = new LoadGameState(this);
             ProjectilePreloader.load();
             tileBase = new TileBasedEffects(this);
             qPanel = new UI_QuestPanel(this);
             sBar = new UI_SkillBar(this);
-            dropI = new DRP_DroppedItem(this);
             wAnim = new WorldEnhancements(this);
             skillPanel = new UI_SkillPanel(this);
             ui.updateLoadingScreen(0, gc);
@@ -417,11 +417,13 @@ public class MainGame {
             //84%
             ui.updateLoadingScreen(12, gc);
             //multiplayer = new Multiplayer(this, ENTPlayer2);
+
             player.updateEquippedItems();
             player.health = player.maxHealth;
             player.setMana(player.maxMana);
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
+
             FonT.loadFonts();
 
             //100%
@@ -439,7 +441,7 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        debug();
+        //debug();
         player.coins = 2_000;
     }
 
@@ -455,15 +457,24 @@ public class MainGame {
             map.mapCover = new int[map.mapSize.x][map.mapSize.x];
         }
         player.maxMana = 2000;
+
+        for (ITEM item : CHEST) {
+            for (Float f : item.effects) {
+                if (f != 0) {
+                    System.out.println("ring" + item.name);
+                }
+            }
+        }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        wControl.loadMap(Zone.Hillcrest, 55, 91);
+        wControl.loadMap(Zone.Hillcrest, 13, 15);
         // wControl.loadMap(Zone.Clearing, 35, 35);
         for (int i = 0; i < 10; i++) {
-            dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
+            // dropI.dropRareItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
-        for (int i = 0; i < 10; i++) {
-            dropI.dropItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);
+
+        for (int i = 0; i < 2; i++) {
+            //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
     }
@@ -492,7 +503,7 @@ public class MainGame {
         }
     }
 
-    private void getPlayerTile() {
+    public void getPlayerTile() {
         playerX = (int) ((Player.worldX + 24) / 48);
         playerY = (int) ((Player.worldY + 24) / 48);
     }

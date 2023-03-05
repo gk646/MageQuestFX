@@ -55,9 +55,9 @@ abstract public class QUEST {
     private void cacheDialog(String text) {
         for (int i = 0; i < questRecap.length; i++) {
             if (questRecap[i] == null) {
-                questRecap[i] = Dialog.insertNewLine(text, 39);
+                questRecap[i] = Dialog.insertNewLine(text, 42);
                 break;
-            } else if (questRecap[i].equals(Dialog.insertNewLine(text, 39))) {
+            } else if (questRecap[i].equals(Dialog.insertNewLine(text, 42))) {
                 break;
             }
         }

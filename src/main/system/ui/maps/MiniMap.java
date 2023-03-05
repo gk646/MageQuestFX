@@ -8,17 +8,13 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.rendering.WorldRender;
 import main.system.ui.Colors;
-import main.system.ui.FonT;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class MiniMap {
     private final MainGame mg;
     final Image miniMapFrame = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/minimap_frame.png")));
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public MiniMap(MainGame mg) {
         this.mg = mg;
@@ -94,11 +90,7 @@ public class MiniMap {
                 }
             }
         }
-        gc.setFill(Colors.white);
-        gc.setFont(FonT.minecraftRegular18);
-        gc.fillText(LocalTime.now().format(formatter), 1860, 23);
-        gc.setFont(FonT.antParty20);
-        gc.fillText(WorldController.currentWorld.toString(), 1700, 23);
+
         gc.drawImage(miniMapFrame, 1_649, 20);
     }
 

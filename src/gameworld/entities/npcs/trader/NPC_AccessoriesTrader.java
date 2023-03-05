@@ -3,7 +3,6 @@ package gameworld.entities.npcs.trader;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
 import gameworld.quest.dialog.DialogStorage;
-import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -22,11 +21,7 @@ public class NPC_AccessoriesTrader extends MERCHANT {
         tradeWindowX = 250;
         tradeWindowY = 250;
         for (int i = 0; i < 14; i++) {
-            ITEM item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            while (item.rarity > 10 || !(item.type == 'A' || item.type == 'R' || item.type == 'T')) {
-                item = mg.dropI.getFinishedRandomItem(mg.player.level);
-            }
-            buySlots.add(new UI_InventorySlot(item, 123, 123));
+            buySlots.add(new UI_InventorySlot(mg.dropManager.getGuaranteedRandomItem(mg.player.level), 123, 123));
         }
         for (int i = 0; i < 28; i++) {
             soldSlots.add(new UI_InventorySlot(null, 123, 123));

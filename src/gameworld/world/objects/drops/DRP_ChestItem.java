@@ -23,7 +23,7 @@ public class DRP_ChestItem extends DROP {
 
 
     public DRP_ChestItem(MainGame mg, int worldX, int worldY, Zone zone, int level) {
-        this.item = mg.dropI.getFinishedRandomItem(level);
+        this.item = mg.dropManager.getGuaranteedRandomItem(level);
         this.zone = zone;
         this.icon = item.icon;
         blockPickup = true;

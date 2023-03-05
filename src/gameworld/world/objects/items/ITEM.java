@@ -90,6 +90,10 @@ public class ITEM {
         getStats();
     }
 
+    public ITEM() {
+
+    }
+
     public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level, float[] effects) {
         this.i_id = i_id;
         this.name = name;
@@ -110,9 +114,6 @@ public class ITEM {
         applyMultipliers();
     }
 
-    public ITEM() {
-
-    }
 
     public void drawIcon(GraphicsContext gc, int x, int y, int slotSize) {
         gc.drawImage(icon, x, y, slotSize, slotSize);

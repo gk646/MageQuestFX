@@ -798,6 +798,7 @@ public class SQLite {
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.AMULET.add(0, new_ITEM);
+
         }
     }
 
@@ -1034,7 +1035,7 @@ public class SQLite {
     }
 
     private void resetQuests() throws SQLException {
-        String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?, FACT_1 = NULL, FACT_2 = NULL, FACT_3 = NULL WHERE _ROWID_ = ?";
+        String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?, JournalText = NULL , FACT_1 = NULL, FACT_2 = NULL, FACT_3 = NULL WHERE _ROWID_ = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         for (int i = 1; i < 29; i++) {
             ps.setString(1, "null");

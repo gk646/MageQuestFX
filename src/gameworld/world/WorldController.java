@@ -42,18 +42,19 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
+                mg.player.map = map;
+                mg.wRender.worldSize = map.mapSize;
+                mg.player.setPosition(xTile, yTile);
+                mg.getPlayerTile();
                 currentWorld = zone;
                 clearWorldArrays();
                 mg.wAnim.emptyAnimationLists();
-                mg.wRender.worldSize = map.mapSize;
+                currentMapMarkers = map.mapMarkers;
+                currentMapCover = map.mapCover;
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.wAnim.cacheMapEnhancements();
-                currentMapMarkers = map.mapMarkers;
-                mg.player.map = map;
-                currentMapCover = map.mapCover;
-                mg.player.setPosition(xTile, yTile);
                 return;
             }
         }
@@ -103,8 +104,8 @@ public class WorldController {
                 loadMap(Zone.Hillcrest, 1, 1);
             }
         } else if (currentWorld == Zone.GrassLands) {
-            if (mg.playerX == 499 && mg.playerY == 499) {
-                loadMap(Zone.Hillcrest, 18, 98);
+            if (mg.playerX == 495 && mg.playerY == 495) {
+                loadMap(Zone.Hillcrest, 5, 95);
             }
         } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
@@ -120,7 +121,7 @@ public class WorldController {
                 loadMap(Zone.Woodland_Edge, 71, 55);
             }
         } else if (currentWorld == Zone.Hillcrest) {
-            if (mg.playerY == 99 && (mg.playerX == 17 || mg.playerX == 18 || mg.playerX == 19)) {
+            if (mg.playerY == 99 && mg.playerX == 0) {
                 loadMap(Zone.GrassLands, 498, 498);
             }
         }

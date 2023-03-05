@@ -9,6 +9,7 @@ public class FonT {
     public static Font minecraftRegular20;
     public static Font minecraftRegular18;
     public static Font antParty16;
+    public static Font varnished14;
     private static Font minecraftRegular14;
     public static Font minecraftItalic15;
     private static Font minecraftItalic17;
@@ -40,6 +41,7 @@ public class FonT {
     public static Font minecraftBoldItalic18;
     public static Font antParty18;
     public static Font antParty20;
+    public static Font varnished16;
 
     public static void loadFonts() {
         minecraftRegular14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftRegular-Bmg3.otf"), 14);
@@ -70,5 +72,7 @@ public class FonT {
         antParty18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 18);
         antParty20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 20);
         antParty16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 16);
+        varnished14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Varnished.ttf"), 14);
+        varnished16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Varnished.ttf"), 16);
     }
 }

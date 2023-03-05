@@ -25,10 +25,13 @@ public class NPC_Control {
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;
+
         NPC_Active.add(new NPC_ArmourTrader(mg, 27, 31, Zone.Hillcrest));
+
         NPC_Active.add(new NPC_WeaponTrader(mg, 33, 31, Zone.Hillcrest));
         NPC_Active.add(new NPC_AbilityTrader(mg, 30, 31, Zone.Hillcrest));
         NPC_Active.add(new NPC_AccessoriesTrader(mg, 36, 31, Zone.Hillcrest));
+
         NPC_Active.add(new NPC_GenericVillagerWoman(mg, 26, 20, Zone.Hillcrest));
         NPC_Active.add(new NPC_Marla(mg, 41, 28));
     }

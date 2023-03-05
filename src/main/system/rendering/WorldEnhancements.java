@@ -18,17 +18,17 @@ public class WorldEnhancements {
 
     final AnimationList bigFish = new AnimationList(new int[]{1_118, 1_119, 1_120, 1_121, 1_122, 1_123, 1_124, 1_125}, 20);
     final AnimationList smallFish = new AnimationList(new int[]{1_131, 1_132, 1_133, 1_134, 1_135, 1_136, 1_137, 1_138}, 15);
-    final AnimationList lines3 = new AnimationList(new int[]{1_144, 1_145, 1_146, 1_147, 1_148, 1_149, 1_150, 1_151}, 40);
-    final AnimationList lines2 = new AnimationList(new int[]{1_157, 1_158, 1_159, 1_160, 1_161, 1_162, 1_163, 1_164}, 35);
-    final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 30);
-    final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 25);
-    final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 15);
+    final AnimationList lines3 = new AnimationList(new int[]{1_144, 1_145, 1_146, 1_147, 1_148, 1_149, 1_150, 1_151}, 20);
+    final AnimationList lines2 = new AnimationList(new int[]{1_157, 1_158, 1_159, 1_160, 1_161, 1_162, 1_163, 1_164}, 20);
+    final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 15);
+    final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 15);
+    final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 8);
     final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
-    final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
-    final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
-    final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
-    final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 50);
-    final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 60);
+    final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 35);
+    final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 35);
+    final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 35);
+    final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 35);
+    final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 35);
     final StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
     final StaticLightSource torch = new StaticLightSource(new int[]{1_404, 1_405, 1_406, 1_407, 1_408, 1_409, 1_410, 1_411}, Colors.fire_red);
     final StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
@@ -134,6 +134,7 @@ public class WorldEnhancements {
         }
         for (StaticLightSource lightSource : lightList) {
             lightSource.tilesIndices.clear();
+            lightSource.tilesIndices1.clear();
         }
     }
 

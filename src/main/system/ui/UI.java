@@ -1,5 +1,6 @@
 package main.system.ui;
 
+import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Light;
@@ -12,6 +13,8 @@ import main.MainGame;
 import main.system.enums.State;
 
 import java.awt.Rectangle;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class UI {
@@ -48,7 +51,7 @@ public class UI {
     private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
     final Light.Distant light = new Light.Distant();
     final Lighting lighting = new Lighting();
-
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
     private final Image xpBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/xpbar.png")));
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
@@ -238,6 +241,11 @@ public class UI {
         gc.setFill(Colors.xpbarOrange);
         gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 12);
         gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
+        gc.setFill(Colors.white);
+        gc.setFont(FonT.varnished16);
+        gc.fillText(LocalTime.now().format(formatter), 1860, 23);
+        gc.setFont(FonT.antParty20);
+        gc.fillText(WorldController.currentWorld.toString(), 1700, 25);
     }
 
 

@@ -43,7 +43,7 @@ public class Dialog {
     }
 
     public void drawDialog(GraphicsContext gc, ENTITY entity) {
-        gc.setFont(FonT.minecraftBoldItalic15);
+        gc.setFont(FonT.varnished14);
         gc.setFill(Color.BLACK);
         gc.fillRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);
         gc.setLineWidth(2);
@@ -159,7 +159,7 @@ public class Dialog {
     }
 
     public void loadNewLine(String dialogLine) {
-        this.dialogLine = insertNewLine(dialogLine, 39);
+        this.dialogLine = insertNewLine(dialogLine, 47);
         this.dialogRenderCounter = 0;
     }
 

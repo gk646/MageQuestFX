@@ -124,17 +124,16 @@ public class UI_QuestPanel {
             gc.fillRoundRect(1_655, 340, 245, 145, 15, 15);
             gc.drawImage(small, 1_649, 335);
         }
-        gc.setEffect(mg.ui.shadow);
-        gc.setFont(FonT.minecraftBold17);
+        gc.setFont(FonT.antParty20);
         gc.setFill(Colors.white);
         gc.fillText("OBJECTIVES", 1_715, 361);
-        gc.setFont(FonT.minecraftBold16);
+        gc.setFont(FonT.antParty18);
         int y = 390;
         gc.setFill(Colors.questNameBeige);
         if (activeQuest != null) {
             gc.fillText(activeQuest.name, 1_670, y += 30);
             gc.setFill(Colors.white);
-            gc.setFont(FonT.minecraftBoldItalic14);
+            gc.setFont(FonT.antParty16);
             y += 10;
             for (int i = 0; i < 3; i++) {
                 if (activeQuest.objectives[i] != null) {
@@ -144,7 +143,6 @@ public class UI_QuestPanel {
                     y += 20;
                 }
             }
-            gc.setEffect(null);
         } else {
             gc.fillText("Find new quests!", 1_670, y += 30);
         }

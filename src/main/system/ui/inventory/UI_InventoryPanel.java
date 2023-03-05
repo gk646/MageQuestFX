@@ -313,7 +313,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < char_Slots.length; i++) {
                 if (char_Slots[i].boundBox.contains(mg.inputH.lastMousePosition) && char_Slots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item, WorldController.currentWorld));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem((int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item, WorldController.currentWorld));
                         char_Slots[i].item = null;
                         mg.inputH.X_pressed = false;
                     } else if (mg.inputH.mouse1Pressed) {
@@ -342,7 +342,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < bag_Slots.size(); i++) {
                 if (bag_Slots.get(i).boundBox.contains(mg.inputH.lastMousePosition) && bag_Slots.get(i).item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(i).item, WorldController.currentWorld));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem((int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(i).item, WorldController.currentWorld));
                         bag_Slots.get(i).item = null;
                         mg.inputH.X_pressed = false;
                     } else if (mg.inputH.mouse1Pressed) {
@@ -391,7 +391,7 @@ public class UI_InventoryPanel {
             for (int i = 0; i < bagEquipSlots.length; i++) {
                 if (bagEquipSlots[i].boundBox.contains(mg.inputH.lastMousePosition) && bagEquipSlots[i].item != null) {
                     if (mg.inputH.X_pressed) {
-                        mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bagEquipSlots[i].item, WorldController.currentWorld));
+                        mg.WORLD_DROPS.add(new DRP_DroppedItem((int) (Player.worldX - 50), (int) Player.worldY, bagEquipSlots[i].item, WorldController.currentWorld));
                         removeBagSlots(Integer.parseInt(bagEquipSlots[i].item.stats));
                         bagEquipSlots[i].item = null;
                         break;
@@ -990,7 +990,7 @@ public class UI_InventoryPanel {
     private void removeBagSlots(int size) {
         for (int i = 1; i <= size; i++) {
             if (bag_Slots.get(bag_Slots.size() - 1).item != null) {
-                mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, (int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(bag_Slots.size() - 1).item, WorldController.currentWorld));
+                mg.WORLD_DROPS.add(new DRP_DroppedItem((int) (Player.worldX - 50), (int) Player.worldY, bag_Slots.get(bag_Slots.size() - 1).item, WorldController.currentWorld));
             }
             bag_Slots.remove(bag_Slots.size() - 1);
         }
