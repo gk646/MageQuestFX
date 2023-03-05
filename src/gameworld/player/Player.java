@@ -74,7 +74,7 @@ public class Player extends ENTITY {
     public boolean drawDialog;
     private boolean attack1, attack2, attack3;
     private final Rectangle player = new Rectangle(40, 40);
-    private Rectangle check2;
+
 
     /*
     1. DMG_Arcane_Absolute
@@ -144,32 +144,18 @@ public class Player extends ENTITY {
     }
 
     private void movement() {
-        collisionRight = false;
-        collisionLeft = false;
-        collisionDown = false;
-        collisionUp = false;
-        mg.collisionChecker.checkPlayerAgainstTile(this);
-        //TODO rewrite collison
         int worldSize = (mg.wRender.worldSize.x - 1) * 48;
-        if (mg.inputH.leftPressed) {
-            if (!collisionLeft && worldX > 0 + playerMovementSpeed) {
-                worldX -= playerMovementSpeed;
-            }
+        if (mg.inputH.leftPressed && worldX > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerLeft()) {
+            worldX -= playerMovementSpeed;
         }
-        if (mg.inputH.upPressed) {
-            if (!collisionUp && worldY > 0 + playerMovementSpeed) {
-                worldY -= playerMovementSpeed;
-            }
+        if (mg.inputH.upPressed && worldY > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerUp()) {
+            worldY -= playerMovementSpeed;
         }
-        if (mg.inputH.downPressed) {
-            if (!collisionDown && worldY < worldSize) {
-                worldY += playerMovementSpeed;
-            }
+        if (mg.inputH.downPressed && worldY < worldSize && !mg.collisionChecker.checkPlayerDown()) {
+            worldY += playerMovementSpeed;
         }
-        if (mg.inputH.rightPressed) {
-            if (!collisionRight && worldX < worldSize) {
-                worldX += playerMovementSpeed;
-            }
+        if (mg.inputH.rightPressed && worldX < worldSize && !mg.collisionChecker.checkPlayerRight()) {
+            worldX += playerMovementSpeed;
         }
     }
 
@@ -339,6 +325,7 @@ public class Player extends ENTITY {
 
 
         playerMovementSpeed += effects[45];
+        effects[45] = playerMovementSpeed;
         maxMana += effects[46];
     }
 
