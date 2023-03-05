@@ -1,4 +1,4 @@
-package gameworld.entities.npcs;
+package gameworld.entities.npcs.quests;
 
 import gameworld.entities.NPC;
 import gameworld.player.Player;

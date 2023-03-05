@@ -454,7 +454,7 @@ public class MainGame {
         player.maxMana = 2000;
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        wControl.loadMap(Zone.Tutorial, 65, 53);
+        wControl.loadMap(Zone.Woodland_Edge, 65, 53);
         // wControl.loadMap(Zone.Clearing, 35, 35);
         for (int i = 0; i < 10; i++) {
             dropI.dropRareItem(this, (490 - i) * 48, 485 * 48, 1, Zone.GrassLands);

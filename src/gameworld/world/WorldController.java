@@ -30,10 +30,10 @@ public class WorldController {
         // CITY 1
         // MAPS.add(new Map("city1", new Point(100, 100), Zone.City1, GameMapType.MapCover));
         // TUTORIAL
-        MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Tutorial, GameMapType.MapCover));
+        MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Woodland_Edge, GameMapType.MapCover));
         // DUNGEON TUTORIAL
-        MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Dungeon_Tutorial));
-        MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Clearing, GameMapType.MapCover));
+        MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Ruin_Dungeon));
+        MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Hillcrest, GameMapType.MapCover));
         //Overworld
         MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         loadArray();
@@ -93,18 +93,18 @@ public class WorldController {
                 trigger.activate(mg);
             }
         }
-        if (currentWorld == Zone.Tutorial) {
+        if (currentWorld == Zone.Woodland_Edge) {
             if (mg.playerX == 1 && mg.playerY == 1) {
                 loadMap(Zone.City1, 10, 10);
                 mg.player.spawnLevel = 1;
             } else if (mg.playerX == 71 && mg.playerY == 56) {
-                loadMap(Zone.Dungeon_Tutorial, 28, 4);
+                loadMap(Zone.Ruin_Dungeon, 28, 4);
             } else if (mg.playerX == 99 && mg.playerY == 99) {
-                loadMap(Zone.Clearing, 1, 1);
+                loadMap(Zone.Hillcrest, 1, 1);
             }
         } else if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
-                loadMap(Zone.Clearing, 18, 98);
+                loadMap(Zone.Hillcrest, 18, 98);
             }
         } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
@@ -115,11 +115,11 @@ public class WorldController {
                     mg.playerX == 37 && mg.playerY == 0) {
                 loadMap(Zone.GrassLands, 495, 495);
             }
-        } else if (currentWorld == Zone.Dungeon_Tutorial) {
+        } else if (currentWorld == Zone.Ruin_Dungeon) {
             if (mg.playerX == 27 && mg.playerY == 4) {
-                loadMap(Zone.Tutorial, 71, 55);
+                loadMap(Zone.Woodland_Edge, 71, 55);
             }
-        } else if (currentWorld == Zone.Clearing) {
+        } else if (currentWorld == Zone.Hillcrest) {
             if (mg.playerY == 99 && (mg.playerX == 17 || mg.playerX == 18 || mg.playerX == 19)) {
                 loadMap(Zone.GrassLands, 498, 498);
             }

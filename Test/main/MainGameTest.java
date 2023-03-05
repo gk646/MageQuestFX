@@ -40,7 +40,7 @@ class MainGameTest {
         mg.wControl = new WorldController(mg);
         mg.npcControl = new NPC_Control(mg);
         mg.wControl.loadWorldData();
-        mg.wControl.loadMap(Zone.Tutorial, 15, 15);
+        mg.wControl.loadMap(Zone.Woodland_Edge, 15, 15);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
         mg.random = new Random(seed);
@@ -50,11 +50,11 @@ class MainGameTest {
     void run() {
         ArrayList<Integer> arrayList = new ArrayList<>();
         ENTITY[] entities = new ENTITY[500];
-        WorldController.currentWorld = Zone.Tutorial;
+        WorldController.currentWorld = Zone.Woodland_Edge;
         Player.worldX = 4500;
         Player.worldY = 4500;
         for (int i = 0; i < 200; i++) {
-            entities[i] = new ENT_SkeletonWarrior(mg, 5000, 5000, 10, Zone.Tutorial);
+            entities[i] = new ENT_SkeletonWarrior(mg, 5000, 5000, 10, Zone.Woodland_Edge);
         }
         for (int i = 200; i < 400; i++) {
             entities[i] = new ENT_SkeletonWarrior(mg, 5000, 5000, 10, Zone.GrassLands);

@@ -1,4 +1,4 @@
-package gameworld.entities.npcs;
+package gameworld.entities.npcs.quests;
 
 import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
@@ -23,7 +23,7 @@ public class NPC_Marla extends NPC {
         this.dialog = new Dialog();
         this.animation = new ResourceLoaderEntity("npc/marla");
         animation.load();
-        this.zone = Zone.Clearing;
+        this.zone = Zone.Hillcrest;
         this.mg = mainGame;
         goalTile = new Point();
         worldX = xTile * 48;

@@ -1,4 +1,4 @@
-package gameworld.entities.npcs;
+package gameworld.entities.npcs.quests;
 
 import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
@@ -11,15 +11,15 @@ import main.system.enums.Zone;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class NPC_GenericVillagerWoman extends NPC {
+public class NPC_Aria extends NPC {
+    private boolean attack1;
 
-
-    public NPC_GenericVillagerWoman(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_Aria(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
-        this.animation = new ResourceLoaderEntity("npc/woman");
+        this.animation = new ResourceLoaderEntity("npc/aria");
         animation.load();
-        this.mg = mainGame;
         this.zone = zone;
+        this.mg = mainGame;
         goalTile = new Point();
         worldX = xTile * 48;
         worldY = yTile * 48;
@@ -33,23 +33,41 @@ public class NPC_GenericVillagerWoman extends NPC {
 
     @Override
     public void update() {
+        super.update();
+        if (show_dialog) {
+            dialogHideDelay++;
+            show_dialog = !mg.wControl.player_went_away(playerTalkLocation, 800);
+        }
+        if (dialogHideDelay > 600) {
+            show_dialog = false;
+            dialogHideDelay = 0;
+        }
         if (onPath) {
             moveTo(goalTile.x, goalTile.y, checkPoints);
         }
     }
 
-
-    @Override
+    /**
+     *
+     */
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (onPath) {
+        if (dead) {
+            drawDeath(gc);
+        } else if (attack1) {
+            drawAttack1(gc);
+        } else if (onPath) {
             drawWalk(gc);
         } else {
             drawIdle(gc);
         }
+
+        if (show_dialog) {
+            dialog.drawDialog(gc, this);
+        }
         spriteCounter++;
-        drawNPCName(gc, "Villager");
+        drawNPCName(gc, "Aria");
     }
 
     private void drawIdle(GraphicsContext gc) {
@@ -69,6 +87,29 @@ public class NPC_GenericVillagerWoman extends NPC {
             case 3 -> gc.drawImage(animation.walk.get(3), screenX + 10, screenY - 20);
             case 4 -> gc.drawImage(animation.walk.get(4), screenX + 10, screenY - 20);
             case 5 -> gc.drawImage(animation.walk.get(5), screenX + 10, screenY - 20);
+        }
+    }
+
+    private void drawAttack1(GraphicsContext gc) {
+        switch (spriteCounter % 160 / 10) {
+            case 0 -> gc.drawImage(animation.attack1.get(0), screenX - 20, screenY - 14);
+            case 1 -> gc.drawImage(animation.attack1.get(1), screenX - 20, screenY - 14);
+            case 2 -> gc.drawImage(animation.attack1.get(2), screenX - 20, screenY - 14);
+            case 3 -> gc.drawImage(animation.attack1.get(3), screenX - 20, screenY - 14);
+            case 4 -> gc.drawImage(animation.attack1.get(4), screenX - 20, screenY - 14);
+            case 5 -> gc.drawImage(animation.attack1.get(5), screenX - 20, screenY - 14);
+            case 6 -> attack1 = false;
+        }
+    }
+
+    private void drawDeath(GraphicsContext gc) {
+        switch (spriteCounter % 210 / 35) {
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 15, screenY - 51);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 15, screenY - 51);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 15, screenY - 51);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 15, screenY - 51);
+            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 15, screenY - 51);
+            case 5 -> gc.drawImage(animation.dead.get(5), screenX - 15, screenY - 51);
         }
     }
 }

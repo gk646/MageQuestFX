@@ -1,4 +1,4 @@
-package gameworld.entities.npcs;
+package gameworld.entities.npcs.generic;
 
 import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;

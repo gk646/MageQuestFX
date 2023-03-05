@@ -1,7 +1,8 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
-import gameworld.entities.npcs.NPC_Marla;
+import gameworld.entities.npcs.quests.NPC_Aria;
+import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.props.DeadWolf;
 import gameworld.quest.QUEST;
 import gameworld.quest.dialog.DialogStorage;
@@ -18,7 +19,11 @@ public class QST_MarlaFakeNecklace extends QUEST {
         quest_id = 2;
         updateObjective("Talk to Marla", 0);
         mg.sqLite.setQuestActive(quest_id);
-
+        if (!completed) {
+            mg.sqLite.setQuestActive(quest_id);
+        } else {
+            mg.sqLite.finishQuest(quest_id);
+        }
     }
 
     /**
@@ -53,11 +58,11 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 11) {
                     npc.blockInteraction = true;
                     if (objective3Progress == 0) {
-                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Clearing));
-                        mg.ENTITIES.add(new DeadWolf(84, 51, Zone.Clearing));
-                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Clearing));
-                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Clearing));
-
+                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                        mg.ENTITIES.add(new DeadWolf(84, 51, Zone.Hillcrest));
+                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                        mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                        mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 59, 55, Zone.Hillcrest));
                         objective3Progress++;
                     }
                     updateObjective("Head east and pickup the mysterious adventurers trail!", 0);
@@ -68,6 +73,9 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         mg.wControl.removeMapMarker(quest_id + "" + 11);
                     }
                 }
+            }
+            if (npc instanceof NPC_Aria) {
+
             }
         }
     }

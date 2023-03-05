@@ -95,8 +95,9 @@ public class MiniMap {
             }
         }
         gc.setFill(Colors.white);
-        gc.setFont(FonT.editUndo22);
+        gc.setFont(FonT.minecraftRegular18);
         gc.fillText(LocalTime.now().format(formatter), 1860, 23);
+        gc.setFont(FonT.antParty20);
         gc.fillText(WorldController.currentWorld.toString(), 1700, 23);
         gc.drawImage(miniMapFrame, 1_649, 20);
     }

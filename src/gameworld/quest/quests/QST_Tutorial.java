@@ -3,7 +3,7 @@ package gameworld.quest.quests;
 import gameworld.entities.NPC;
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
-import gameworld.entities.npcs.NPC_OldMan;
+import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.quest.QUEST;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
@@ -47,13 +47,13 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 10) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3", 0);
                     gruntKillCounter = mg.prj_control.GruntKilledCounter;
-                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 31, 1, Zone.Tutorial));
-                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 34, 1, Zone.Tutorial));
-                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Tutorial));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 31, 1, Zone.Woodland_Edge));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 34, 1, Zone.Woodland_Edge));
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Woodland_Edge));
                     nextStage();
                     npc.blockInteraction = true;
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 94, 48 * 44, mg.MISC.get(2), Zone.Tutorial));
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 96, 48 * 13, mg.MISC.get(4), Zone.Tutorial));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(mg, 48 * 96, 48 * 13, mg.MISC.get(4), Zone.Woodland_Edge));
                 } else if (progressStage == 11) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3", 0);
                 }
@@ -65,7 +65,7 @@ public class QST_Tutorial extends QUEST {
                 } else if (progressStage == 14) {
                     moveToTile(npc, 47, 34);
                 } else if (progressStage == 15) {
-                    if (WorldController.currentWorld == Zone.Tutorial) {
+                    if (WorldController.currentWorld == Zone.Woodland_Edge) {
                         WorldRender.worldData1[48][34] = 1_214;
                     }
                 } else if (progressStage == 16) {
@@ -147,7 +147,7 @@ public class QST_Tutorial extends QUEST {
                     mg.wControl.addMapMarker("path1", 68, 77, MarkerType.Quest);
                     updateObjective("Search the ruins for a way out", 0);
                     npc.blockInteraction = true;
-                    if (WorldController.currentWorld == Zone.Tutorial && WorldRender.worldData1[74][84] == 1_383) {
+                    if (WorldController.currentWorld == Zone.Woodland_Edge && WorldRender.worldData1[74][84] == 1_383) {
                         updateObjective("Get back to the old man and escape", 0);
                         mg.wControl.removeMapMarker("path1");
                         openRoundDoor(35, 67);
@@ -160,7 +160,7 @@ public class QST_Tutorial extends QUEST {
                         progressStage = 27;
                         loadDialogStage(npc, DialogStorage.Tutorial, 27);
                         openRoundDoor(68, 77);
-                    } else if (playerInsideRectangle(new Point(68, 79), new Point(69, 79)) && WorldController.currentWorld == Zone.Tutorial) {
+                    } else if (playerInsideRectangle(new Point(68, 79), new Point(69, 79)) && WorldController.currentWorld == Zone.Woodland_Edge) {
                         closeRoundDoor(68, 77);
                     }
                 } else if (progressStage == 27) {
@@ -188,7 +188,7 @@ public class QST_Tutorial extends QUEST {
                 } else if (progressStage == 36) {
 
                     if (moveToTile(npc, 99, 99)) {
-                        npc.zone = Zone.Clearing;
+                        npc.zone = Zone.Hillcrest;
                         npc.setPosition(1, 1);
                         mg.wControl.removeMapMarker("path1");
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
