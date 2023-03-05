@@ -22,6 +22,7 @@ public class QST_Tutorial extends QUEST {
 
     public QST_Tutorial(MainGame mg, String name, boolean completed) {
         super(mg, name);
+        this.name = "Tutorial";
         this.objectives[0] = "Talk to the old man";
         this.quest_id = 1;
         if (!completed) {
@@ -186,7 +187,6 @@ public class QST_Tutorial extends QUEST {
                         loadDialogStage(npc, DialogStorage.Tutorial, 31);
                     }
                 } else if (progressStage == 36) {
-
                     if (moveToTile(npc, 99, 99)) {
                         npc.zone = Zone.Hillcrest;
                         npc.setPosition(1, 1);
@@ -202,6 +202,7 @@ public class QST_Tutorial extends QUEST {
                     }
                     if (moveToTile(npc, 20, 20, new Point(4, 4), new Point(8, 8), new Point(12, 10))) {
                         updateObjective("Speak with the old man", 0);
+                        mg.player.spawnLevel = 1;
                     }
                 } else if (progressStage == 40) {
                     mg.wControl.removeMapMarker("path1");

@@ -95,10 +95,7 @@ public class WorldController {
             }
         }
         if (currentWorld == Zone.Woodland_Edge) {
-            if (mg.playerX == 1 && mg.playerY == 1) {
-                loadMap(Zone.City1, 10, 10);
-                mg.player.spawnLevel = 1;
-            } else if (mg.playerX == 71 && mg.playerY == 56) {
+            if (mg.playerX == 71 && mg.playerY == 56) {
                 loadMap(Zone.Ruin_Dungeon, 28, 4);
             } else if (mg.playerX == 99 && mg.playerY == 99) {
                 loadMap(Zone.Hillcrest, 1, 1);

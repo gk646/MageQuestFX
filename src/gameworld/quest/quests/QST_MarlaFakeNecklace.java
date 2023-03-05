@@ -14,9 +14,10 @@ import java.awt.Point;
 
 public class QST_MarlaFakeNecklace extends QUEST {
 
-    public QST_MarlaFakeNecklace(MainGame mg, String name) {
+    public QST_MarlaFakeNecklace(MainGame mg, String name, boolean completed) {
         super(mg, name);
         quest_id = 2;
+        name = "The Fake Necklace";
         updateObjective("Talk to Marla", 0);
         mg.sqLite.setQuestActive(quest_id);
         if (!completed) {
@@ -71,6 +72,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         nextStage();
                         updateObjective("Look around", 0);
                         mg.wControl.removeMapMarker(quest_id + "" + 11);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 1);
                     }
                 }
             }

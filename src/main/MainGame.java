@@ -441,7 +441,7 @@ public class MainGame {
             sound.INTRO.play();
             //TODO spawn level
         }
-        //debug();
+        debug();
         player.coins = 2_000;
     }
 

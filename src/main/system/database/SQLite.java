@@ -245,7 +245,7 @@ public class SQLite {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
-            return new String[75];
+            return new String[150];
         }
     }
 

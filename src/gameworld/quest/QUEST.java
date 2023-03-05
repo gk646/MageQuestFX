@@ -10,7 +10,7 @@ import java.awt.Point;
 
 abstract public class QUEST {
 
-    public final String name;
+    public String name;
     public final String[] objectives = new String[3];
     public String[] questRecap = new String[50];
     public int progressStage = 1;

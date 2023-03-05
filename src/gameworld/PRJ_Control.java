@@ -118,7 +118,7 @@ public class PRJ_Control {
             if (entity instanceof BOSS) {
                 //mg.dropI.dropRareItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
             } else {
-                // mg.dropI.dropItem(mg, (int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
+                mg.dropManager.useDropChance((int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
                 mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level, WorldController.currentWorld));
             }
         }

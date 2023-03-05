@@ -1,6 +1,7 @@
 package gameworld.quest;
 
 import gameworld.entities.boss.BOSS_Slime;
+import gameworld.entities.monsters.ENT_Mushroom;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
@@ -47,6 +48,12 @@ public class SpawnTrigger {
                     mg.ENTITIES.add(new ENT_Snake(mg, x * 48, y * 48, level, zone));
                 } else if (type == Type.wolf) {
                     mg.ENTITIES.add(new ENT_Wolf(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.Mushroom) {
+                    mg.ENTITIES.add(new ENT_Mushroom(mg, x * 48, y * 48, level, zone));
+                } else if (type == Type.WizardBoss1) {
+
+                } else if (type == Type.WizardBoss2) {
+
                 }
             }
             triggered = true;

@@ -4,6 +4,7 @@ import gameworld.player.Player;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
+import main.system.enums.Zone;
 
 public class DropManager {
     MainGame mg;
@@ -148,9 +149,12 @@ public class DropManager {
         return item;
     }
 
-    public ITEM getRandomItem(int level) {
+    public void useDropChance(int x, int y, int level, Zone zone) {
         ITEM item = goThroughArrays(mg.random.nextInt(0, 11), level);
-        return getItemWithDropChance(rollEffect(item));
+        item = getItemWithDropChance(rollEffect(item));
+        if (item != null) {
+            mg.WORLD_DROPS.add(new DRP_DroppedItem(x, y, item, zone));
+        }
     }
 
     public ITEM getGuaranteedRandomItem(int level) {
