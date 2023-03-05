@@ -15,7 +15,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public class Runner extends Application {
@@ -26,12 +28,12 @@ public class Runner extends Application {
      * @author Lukas Gilch
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         Screen screen = Screen.getPrimary();
         Canvas canvas = new Canvas(screen.getBounds().getWidth(), screen.getBounds().getHeight());
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -83,5 +85,15 @@ public class Runner extends Application {
         scene.setOnKeyReleased(event -> mainGame.inputH.handleKeyReleased(event));
 
         stage.setOnCloseRequest(e -> mainGame.sqLite.saveGameAndExit());
+        Thread.setDefaultUncaughtExceptionHandler((s, throwable) -> {
+            PrintWriter writer = null;
+            try {
+                writer = new PrintWriter("error.log");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            throwable.printStackTrace(writer);
+            writer.close();
+        });
     }
 }

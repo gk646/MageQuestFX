@@ -57,7 +57,7 @@ public class UI_QuestPanel {
         gc.setFill(Colors.journalBrown);
         gc.fillText("Tracked Quest:", 545, 300);
         int y = 330;
-        if (activeQuest != null) {
+        if (activeQuest == null) {
             gc.fillText(activeQuest.name, 560, 325);
             for (String string : activeQuest.objectives) {
                 if (string != null) {
