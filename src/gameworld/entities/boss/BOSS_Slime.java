@@ -55,7 +55,7 @@ public class BOSS_Slime extends BOSS {
         if (!attack2 && !attack3 && !attack1 && !spitting) {
             onPath = true;
             getNearestPlayer();
-            searchPath(goalCol, goalRow, 30);
+            searchPathBigEnemies(goalCol, goalRow, 30);
         }
         hitDelay++;
         searchTicks++;

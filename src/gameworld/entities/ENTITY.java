@@ -124,6 +124,7 @@ abstract public class ENTITY {
         }
     }
 
+
     /**
      * Searches a path from active tile to goalTile.
      * Limited to a distance of 16 in both directions
@@ -140,24 +141,11 @@ abstract public class ENTITY {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
-            nextCol1 = mg.pathF.pathList.get(0).col;
-            nextRow1 = mg.pathF.pathList.get(0).row;
-            if (mg.pathF.pathList.size() >= 2) {
-                nextCol2 = mg.pathF.pathList.get(1).col;
-                nextRow2 = mg.pathF.pathList.get(1).row;
-            }
-            if (mg.pathF.pathList.size() >= 3) {
-                nextCol3 = mg.pathF.pathList.get(2).col;
-                nextRow3 = mg.pathF.pathList.get(2).row;
-            }
-            if (mg.pathF.pathList.size() >= 4) {
-                nextCol4 = mg.pathF.pathList.get(3).col;
-                nextRow4 = mg.pathF.pathList.get(3).row;
-            }
         } else {
             onPath = false;
         }
     }
+
 
     /**
      * Same as searchPath(int, int, int) but not limited in distance

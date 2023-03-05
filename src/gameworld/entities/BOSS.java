@@ -83,4 +83,46 @@ abstract public class BOSS extends ENTITY {
         double x = (gc.getCanvas().getWidth() - textWidth) / 2;
         gc.fillText(text, x, y);
     }
+
+    private void decideMovementBoss(int nextX, int nextY) {
+        float enLeftX = worldX;
+        float enRightX = (worldX + entityWidth);
+        float enTopY = worldY;
+        float enBottomY = (worldY + entityHeight);
+        collisionRight = false;
+        collisionLeft = false;
+        collisionDown = false;
+        collisionUp = false;
+        mg.collisionChecker.checkBossAgainstTile(this);
+        if (enLeftX < nextX && !collisionRight) {
+            worldX += movementSpeed;
+        } else if (enLeftX > nextX && !collisionLeft) {
+            worldX -= movementSpeed;
+        } else if (enTopY < nextY && !collisionDown) {
+            worldY += movementSpeed;
+        } else if (enTopY > nextY && !collisionUp) {
+            worldY -= movementSpeed;
+        } else if (enRightX > nextX) {
+            worldX -= movementSpeed;
+        } else if (enRightX < nextX) {
+            worldX += movementSpeed;
+        } else if (enBottomY > nextY) {
+            worldX -= movementSpeed;
+        } else if (enBottomY < nextX) {
+            worldX += movementSpeed;
+        }
+    }
+
+    protected void searchPathBigEnemies(int goalCol, int goalRow, int maxDistance) {
+        int startCol = activeTile.x;
+        int startRow = activeTile.y;
+        mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
+        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
+            int nextX = mg.pathF.pathList.get(0).col * 48;
+            int nextY = mg.pathF.pathList.get(0).row * 48;
+            decideMovementBoss(nextX, nextY);
+        } else {
+            onPath = false;
+        }
+    }
 }
