@@ -42,6 +42,7 @@ public class LoadGameState {
             case "active" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.wControl.loadMap(Zone.Tutorial, 4, 4);
+                mg.qPanel.getQuest("Tutorial").questRecap = mg.sqLite.readQuestJournal(1, 50);
                 if (quest_num == 1) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Tutorial));
                     mg.qPanel.setQuestStage("Tutorial", 13);

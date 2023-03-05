@@ -102,10 +102,6 @@ public class UI_QuestPanel {
                 }
             }
         }
-        if (mg.inputH.mouse2Pressed) {
-            scroll = 280;
-            mg.inputH.mouse2Pressed = false;
-        }
     }
 
 

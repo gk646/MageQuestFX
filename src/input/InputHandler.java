@@ -545,8 +545,7 @@ public class InputHandler {
         } else if (mg.drawCodex) {
             mg.ui.codex_scroll = Math.max(-1, Math.min((mg.ui.codex_scroll - event.getDeltaY() / 1_800), 0.322f));
         } else if (mg.showJournal && mg.qPanel.leftSide.contains(lastMousePosition)) {
-            System.out.println(mg.qPanel.scroll);
-            mg.qPanel.scroll = mg.qPanel.scroll - event.getDeltaY() / 3;
+            mg.qPanel.scroll = Math.min(mg.qPanel.scroll - event.getDeltaY() / 3, 280);
         }
     }
 

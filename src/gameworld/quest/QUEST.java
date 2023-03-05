@@ -12,10 +12,9 @@ abstract public class QUEST {
 
     public final String name;
     public final String[] objectives = new String[3];
-    public final String[] questRecap = new String[50];
+    public String[] questRecap = new String[50];
     public int progressStage = 1;
     public int quest_id;
-    public String progressStageName;
     public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
     protected final MainGame mg;
     public boolean completed;
@@ -56,9 +55,9 @@ abstract public class QUEST {
     private void cacheDialog(String text) {
         for (int i = 0; i < questRecap.length; i++) {
             if (questRecap[i] == null) {
-                questRecap[i] = Dialog.insertNewLine(text, 43);
+                questRecap[i] = Dialog.insertNewLine(text, 40);
                 break;
-            } else if (questRecap[i].equals(Dialog.insertNewLine(text, 43))) {
+            } else if (questRecap[i].equals(Dialog.insertNewLine(text, 40))) {
                 break;
             }
         }
@@ -156,7 +155,7 @@ abstract public class QUEST {
         if (!checkDialogSimilarity(newText, index)) {
             mg.sound.playEffectSound(1);
         }
-        for (int i = 0; i < questRecap.length; i++) {
+        for (int i = 0; i < 50; i++) {
             if (questRecap[i] == null) {
                 questRecap[i] = newText;
                 break;

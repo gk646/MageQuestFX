@@ -1,6 +1,7 @@
 package main.system.database;
 
 import gameworld.player.Player;
+import gameworld.quest.QUEST;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
@@ -19,7 +20,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class SQLite {
 
@@ -203,6 +206,7 @@ public class SQLite {
             savePlayerStats();
             saveTalentTree();
             saveSkillPanel();
+            saveQuests();
             for (Map map : mg.wControl.MAPS) {
                 if (map.gameMapType == GameMapType.MapCover) {
                     map.saveMapCover();
@@ -212,6 +216,39 @@ public class SQLite {
             throw new RuntimeException(e);
         }
     }
+
+    private void saveQuests() throws SQLException {
+        String sql = "UPDATE QUEST_FACTS SET JournalText = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        String delimiter;
+        String myString;
+        for (QUEST quest : mg.qPanel.quests) {
+            delimiter = ">";
+            String[] nonNullValues = Arrays.stream(quest.questRecap)
+                    .filter(Objects::nonNull)
+                    .toArray(String[]::new);
+            myString = String.join(delimiter, nonNullValues);
+            stmt.setString(1, myString);
+            stmt.setInt(2, quest.quest_id);
+            stmt.executeUpdate();
+        }
+    }
+
+    public String[] readQuestJournal(int questID, int fixedSize) {
+        try {
+            String sql = "SELECT JournalText FROM QUEST_FACTS WHERE _ROWID_ = " + questID;
+            ResultSet rs = conn.prepareStatement(sql).executeQuery();
+            String[] entries = rs.getString("JournalText").split(">");
+            String[] result = new String[fixedSize];
+            System.arraycopy(entries, 0, result, 0, entries.length);
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            return new String[75];
+        }
+    }
+
 
     private void saveSkillPanel() throws SQLException {
         String sql = "UPDATE SKL_Skills SET skill_index = ? WHERE _ROWID_ = ?";
