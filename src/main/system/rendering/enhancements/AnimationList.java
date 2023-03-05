@@ -21,7 +21,7 @@ public class AnimationList {
 
     public int progress(int i, int index, int array) {
         if (speedCounters[array][index] >= speed) {
-            speedCounters[array][index] = 0;
+            speedCounters[array][index] = (int) (Math.random() * 3);
             for (int j = 0; j < tileProgression.length; j++) {
                 if (tileProgression[j] == i) {
                     if (j < tileProgression.length - 1) {

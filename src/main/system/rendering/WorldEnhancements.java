@@ -23,13 +23,12 @@ public class WorldEnhancements {
     final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 30);
     final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 25);
     final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 15);
-    final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 15);
+    final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
     final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 50);
     final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 50);
     final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 50);
     final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 50);
     final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 60);
-
     final StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
     final StaticLightSource torch = new StaticLightSource(new int[]{1_404, 1_405, 1_406, 1_407, 1_408, 1_409, 1_410, 1_411}, Colors.fire_red);
     final StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
@@ -93,7 +92,12 @@ public class WorldEnhancements {
     public void drawLayerOneTwo(GraphicsContext gc) {
         for (StaticLightSource lightSource : lightList) {
             for (Point point : lightSource.tilesIndices) {
-                if (Math.abs(mg.playerX - point.x) < 25 && Math.abs(mg.playerY - point.y) < 25) {
+                if (Math.abs(mg.playerX - point.x) + (mg.playerY - point.y) < 35) {
+                    gc.drawImage(torchs, point.x * 48 - 11 - Player.worldX + Player.screenX, point.y * 48 - 11 - Player.worldY + Player.screenY);
+                }
+            }
+            for (Point point : lightSource.tilesIndices1) {
+                if (Math.abs(mg.playerX - point.x) + (mg.playerY - point.y) < 35) {
                     gc.drawImage(torchs, point.x * 48 - 11 - Player.worldX + Player.screenX, point.y * 48 - 11 - Player.worldY + Player.screenY);
                 }
             }

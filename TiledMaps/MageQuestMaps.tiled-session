@@ -59,19 +59,19 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1309.5,
-                "y": 1490
+                "x": 899.3333333333333,
+                "y": 1289.3333333333335
             }
         },
         "GrassLands.tmx": {
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 6929.666666666666,
-                "y": 7496
+                "x": 6901,
+                "y": 7495.333333333333
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -120,8 +120,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 297,
-                "y": 188
+                "x": 579,
+                "y": 444
             }
         },
         "d.tsx": {

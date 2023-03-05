@@ -404,8 +404,8 @@ public class WorldRender {
         setupTiles(281, "281.png", false);
         setupTiles(282, "282.png", false);
         setupTiles(283, "283.png", false);
-        setupTiles(284, "284.png", false);
-        setupTiles(285, "285.png", false);
+        setupTiles(284, "284.png", true);
+        setupTiles(285, "285.png", true);
         setupTiles(286, "286.png", false);
         setupTiles(287, "287.png", false);
         setupTiles(288, "288.png", false);
@@ -416,9 +416,9 @@ public class WorldRender {
         setupTiles(293, "293.png", true);
         setupTiles(294, "294.png", true);
         setupTiles(295, "295.png", true);
-        setupTiles(296, "296.png", false);
+        setupTiles(296, "296.png", true);
         setupTiles(297, "297.png", false);
-        setupTiles(298, "298.png", false);
+        setupTiles(298, "298.png", true);
         setupTiles(299, "299.png", false);
         setupTiles(300, "300.png", false);
         setupTiles(301, "301.png", false);
@@ -706,11 +706,11 @@ public class WorldRender {
         setupTiles(583, "583.png", true);
         setupTiles(584, "584.png", true);
         setupTiles(585, "585.png", true);
-        setupTiles(586, "586.png", true);
+        setupTiles(586, "586.png", false);
         setupTiles(587, "587.png", true);
         setupTiles(588, "588.png", true);
         setupTiles(589, "589.png", true);
-        setupTiles(590, "590.png", true);
+        setupTiles(590, "590.png", false);
         setupTiles(591, "591.png", true);
         setupTiles(592, "592.png", true);
         setupTiles(593, "593.png", true);
@@ -1404,7 +1404,7 @@ public class WorldRender {
         setupTiles(1_281, "1281.png", false);
         setupTiles(1_282, "1282.png", false);
         setupTiles(1_283, "1283.png", false);
-        setupTiles(1_284, "1284.png", false);
+        setupTiles(1_284, "1284.png", true);
         setupTiles(1_285, "1285.png", false);
         setupTiles(1_286, "1286.png", false);
         setupTiles(1_287, "1287.png", false);
@@ -1726,7 +1726,7 @@ public class WorldRender {
         setupTiles(1603, "1603.png", true);
         setupTiles(1604, "1604.png", true);
         setupTiles(1605, "1605.png", true);
-        setupTiles(1606, "1606.png", true);
+        setupTiles(1606, "1606.png", false);
         setupTiles(1607, "1607.png", true);
         setupTiles(1608, "1608.png", true);
         setupTiles(1609, "1609.png", true);
@@ -2418,7 +2418,7 @@ public class WorldRender {
         setupTiles(2295, "2295.png", false);
         setupTiles(2296, "2296.png", false);
         setupTiles(2297, "2297.png", false);
-        setupTiles(2298, "2298.png", false);
+        setupTiles(2298, "2298.png", true);
         setupTiles(2299, "2299.png", false);
         setupTiles(2300, "2300.png", false);
         setupTiles(2301, "2301.png", false);
