@@ -6,6 +6,6 @@ java.lang.NullPointerException: Cannot invoke "com.sun.media.jfxmediaimpl.platfo
 	at javafx.base@20-ea/javafx.beans.property.DoublePropertyBase.set(DoublePropertyBase.java:148)
 	at javafx.media@20-ea/javafx.scene.media.MediaPlayer.setVolume(MediaPlayer.java:881)
 	at main.system.sound.Sound.fadeOut(Sound.java:123)
-	at main.system.sound.Sound.update(Sound.java:100)
+	at main.system.sound.Sound.update(Sound.java:103)
 	at main.MainGame.lambda$startThreads$0(MainGame.java:212)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

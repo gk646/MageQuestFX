@@ -426,8 +426,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":921.636090909091,
-                 "y":743.757454545454
+                 "x":921.636,
+                 "y":743.757
                 }, 
                 {
                  "class":"",
@@ -439,17 +439,6 @@
                  "width":0,
                  "x":722.97,
                  "y":470.061
-                }, 
-                {
-                 "class":"",
-                 "height":0,
-                 "id":21,
-                 "name":"wolf1",
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":773.5,
-                 "y":742.5
                 }],
          "opacity":1,
          "type":"objectgroup",

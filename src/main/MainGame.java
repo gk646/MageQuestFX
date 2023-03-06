@@ -424,7 +424,7 @@ public class MainGame {
             gameMap = new GameMap(this);
             FonT.loadFonts();
             //100%
-            //sqLite.resetGame();
+            sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -437,6 +437,8 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
+        wControl.loadMap(Zone.Ruin_Dungeon, 45, 45
+        );
         //debug();
         player.coins = 2_000;
     }

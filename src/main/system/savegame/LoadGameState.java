@@ -141,10 +141,8 @@ public class LoadGameState {
 
     private void loadSpawnLevel() {
         int num = mg.sqLite.readStartLevel();
-        System.out.println(num);
-        switch (num) {
-            case 0 -> mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
-            case 1 -> mg.wControl.loadMap(Zone.Hillcrest, 20, 20);
+        if (num == 1) {
+            mg.wControl.loadMap(Zone.Hillcrest, 20, 20);
         }
     }
 }

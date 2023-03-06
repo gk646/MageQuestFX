@@ -234,17 +234,18 @@ public class SQLite {
     }
 
     private void readSettings() throws SQLException {
+
         for (int i = 1; i < 4; i++) {
             String sql = "SELECT AudioSettings FROM  SETTINGS_SAVE WHERE _ROWID_ =" + i;
             ResultSet rs = conn.createStatement().executeQuery(sql);
             if (i == 1) {
-                mg.ui.musicSlider = rs.getInt("AudioSettings");
+                mg.ui.musicSlider = rs.getInt("AudioSettings") > 0 ? rs.getInt("AudioSettings") : 100;
                 mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
             } else if (i == 2) {
-                mg.ui.ambientSlider = rs.getInt("AudioSettings");
+                mg.ui.ambientSlider = rs.getInt("AudioSettings") > 0 ? rs.getInt("AudioSettings") : 75;
                 mg.ui.ambientSliderHitBox.x = (int) (650 + mg.ui.ambientSlider * 2 - 12);
             } else {
-                mg.ui.effectsSlider = rs.getInt("AudioSettings");
+                mg.ui.effectsSlider = rs.getInt("AudioSettings") > 0 ? rs.getInt("AudioSettings") : 75;
                 mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
             }
         }
