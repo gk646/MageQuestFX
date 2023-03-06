@@ -425,7 +425,6 @@ public class MainGame {
             FonT.loadFonts();
             //100%
             //sqLite.resetGame();
-
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -438,7 +437,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
         player.coins = 2_000;
     }
 

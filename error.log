@@ -1,8 +1,11 @@
-java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
-	at gameworld.world.maps.Map.getTriggers(Map.java:93)
-	at gameworld.world.maps.Map.<init>(Map.java:60)
-	at gameworld.world.WorldController.loadWorldData(WorldController.java:39)
-	at main.MainGame.loadGame(MainGame.java:383)
-	at main.MainGame.run(MainGame.java:162)
+java.lang.NullPointerException: Cannot invoke "com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMedia.getNativeMediaRef()" because "this.gstMedia" is null
+	at javafx.media@20-ea/com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMediaPlayer.playerSetVolume(GSTMediaPlayer.java:219)
+	at javafx.media@20-ea/com.sun.media.jfxmediaimpl.NativeMediaPlayer.setVolume(NativeMediaPlayer.java:1109)
+	at javafx.media@20-ea/javafx.scene.media.MediaPlayer$5.invalidated(MediaPlayer.java:901)
+	at javafx.base@20-ea/javafx.beans.property.DoublePropertyBase.markInvalid(DoublePropertyBase.java:113)
+	at javafx.base@20-ea/javafx.beans.property.DoublePropertyBase.set(DoublePropertyBase.java:148)
+	at javafx.media@20-ea/javafx.scene.media.MediaPlayer.setVolume(MediaPlayer.java:881)
+	at main.system.sound.Sound.fadeOut(Sound.java:123)
+	at main.system.sound.Sound.update(Sound.java:100)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:212)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
