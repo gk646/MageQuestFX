@@ -29,8 +29,8 @@ public class ENT_Mushroom extends ENTITY {
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
-        this.worldX = worldX;
-        this.worldY = worldY;
+        this.worldX = worldX * 48;
+        this.worldY = worldY * 48;
         movementSpeed = 2;
         this.level = level;
         direction = "updownleftright";
@@ -97,9 +97,6 @@ public class ENT_Mushroom extends ENTITY {
             case 1 -> gc.drawImage(animation.idle.get(1), screenX - 20, screenY - 6);
             case 2 -> gc.drawImage(animation.idle.get(2), screenX - 20, screenY - 6);
             case 3 -> gc.drawImage(animation.idle.get(3), screenX - 20, screenY - 6);
-            case 4 -> gc.drawImage(animation.idle.get(4), screenX - 20, screenY - 6);
-            case 5 -> gc.drawImage(animation.idle.get(5), screenX - 20, screenY - 6);
-            case 6 -> gc.drawImage(animation.idle.get(6), screenX - 20, screenY - 6);
         }
     }
 

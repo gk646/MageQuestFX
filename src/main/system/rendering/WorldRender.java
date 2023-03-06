@@ -783,7 +783,7 @@ public class WorldRender {
     }
 
 
-    private void setupCollision(int index, String imagePath, boolean collision) {
+    private void setupTiles(int index, String imagePath, boolean collision) {
         tileStorage[index] = new Tile();
         InputStream is = getClass().getResourceAsStream("/resources/tilesNew/" + imagePath);
         if (is != null) {
@@ -881,7 +881,7 @@ public class WorldRender {
 
     private void getTileImagesNew() {
         for (int i = 0; i < 4000; i++) {
-            setupCollision(i, i + ".png", trueCollision[i] == 1);
+            setupTiles(i, i + ".png", trueCollision[i] == 1);
         }
     }
 }

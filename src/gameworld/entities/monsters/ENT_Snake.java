@@ -28,8 +28,8 @@ public class ENT_Snake extends ENTITY {
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
         this.health = maxHealth;
-        this.worldX = worldX;
-        this.worldY = worldY;
+        this.worldX = worldX * 48;
+        this.worldY = worldY * 48;
         movementSpeed = 2;
         this.level = level;
         direction = "updownleftright";

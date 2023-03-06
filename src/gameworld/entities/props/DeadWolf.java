@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.system.enums.Zone;
 
+import java.awt.Rectangle;
 import java.util.Objects;
 
 public class DeadWolf extends ENTITY {
@@ -15,6 +16,7 @@ public class DeadWolf extends ENTITY {
         this.zone = zone;
         this.worldY = y * 48;
         this.entityImage1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/Entitys/enemies/wolf/death/5.png")));
+        this.collisionBox = new Rectangle();
     }
 
     /**

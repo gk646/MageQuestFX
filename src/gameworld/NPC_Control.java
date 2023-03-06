@@ -22,7 +22,7 @@ public class NPC_Control {
 
     private final MainGame mg;
 
-    public ArrayList<NPC> NPC_Active = new ArrayList<>();
+    public final ArrayList<NPC> NPC_Active = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;
@@ -41,17 +41,21 @@ public class NPC_Control {
 
 
     public void update() {
-        for (ENTITY entity : NPC_Active) {
-            if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 4_500) {
-                entity.update();
+        synchronized (NPC_Active) {
+            for (ENTITY entity : NPC_Active) {
+                if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 4_500) {
+                    entity.update();
+                }
             }
         }
     }
 
     public void draw(GraphicsContext g2) {
-        for (ENTITY entity : NPC_Active) {
-            if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_800) {
-                entity.draw(g2);
+        synchronized (NPC_Active) {
+            for (ENTITY entity : NPC_Active) {
+                if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 1_800) {
+                    entity.draw(g2);
+                }
             }
         }
     }

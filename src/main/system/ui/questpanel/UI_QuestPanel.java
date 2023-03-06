@@ -57,7 +57,7 @@ public class UI_QuestPanel {
         gc.setFill(Colors.journalBrown);
         gc.fillText("Tracked Quest:", 545, 300);
         int y = 330;
-        if (activeQuest == null) {
+        if (activeQuest != null) {
             gc.fillText(activeQuest.name, 560, 325);
             for (String string : activeQuest.objectives) {
                 if (string != null) {
@@ -80,9 +80,11 @@ public class UI_QuestPanel {
                 }
             }
         }
+        y = 330;
         y += 15;
         y += 40;
         int x = 560;
+        gc.setFont(FonT.antParty20);
         gc.fillText("All Quests: " + numberOfQuests() + "/ 10", 545, y);
         for (int i = 0; i < quests.size(); i++) {
             if (activeQuest == null || quests.get(i).name.equals(activeQuest.name)) {
@@ -150,7 +152,6 @@ public class UI_QuestPanel {
         } else {
             gc.fillText("Find new quests!", 1_670, y += 30);
         }
-
         if (expanded) {
             gc.drawImage(collapseImage, 1_870, 350);
             for (QUEST quest : quests) {

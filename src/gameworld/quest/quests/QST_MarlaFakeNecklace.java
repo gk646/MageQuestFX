@@ -36,7 +36,8 @@ public class QST_MarlaFakeNecklace extends QUEST {
      */
     @Override
     public void update() {
-        for (NPC npc : mg.npcControl.NPC_Active) {
+        for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
+            NPC npc = mg.npcControl.NPC_Active.get(i);
             if (npc instanceof NPC_Marla) {
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
                 if (progressStage == 1 && objective1Progress == 0) {
@@ -77,19 +78,26 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         updateObjective("Look around", 0);
                         mg.wControl.removeMapMarker(quest_id + "" + 11);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 1);
+                        objective3Progress = 0;
                     }
                 }
             }
             if (npc instanceof NPC_Aria) {
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
                 if (progressStage == 13) {
-                    objective3Progress = 0;
+                    if (objective3Progress == 0 && playerCloseToAbsolute((int) npc.worldX, (int) npc.worldY, 500)) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 13);
+                        objective3Progress++;
+                    }
                     int num = npc.dialog.drawChoice("Beat you to what?", null, null, null);
                     if (num == 10) {
                         nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 14);
                     }
                 } else if (progressStage == 14) {
+                    objective3Progress = 0;
                     npc.blockInteraction = true;
+                    System.out.println(npc.dialog.dialogRenderCounter);
                     if (npc.dialog.dialogRenderCounter == 2000) {
                         nextStage();
                         enemiesKilled = mg.prj_control.ENEMIES_KILLED;
@@ -116,5 +124,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
         }
     }
 }
+
 
 

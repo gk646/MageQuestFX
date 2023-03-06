@@ -45,11 +45,11 @@ public class SpawnTrigger {
                 } else if (type == Type.Spear) {
                     mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
                 } else if (type == Type.snake) {
-                    mg.ENTITIES.add(new ENT_Snake(mg, x * 48, y * 48, level, zone));
+                    mg.ENTITIES.add(new ENT_Snake(mg, x, y, level, zone));
                 } else if (type == Type.wolf) {
-                    mg.ENTITIES.add(new ENT_Wolf(mg, x * 48, y * 48, level, zone));
+                    mg.ENTITIES.add(new ENT_Wolf(mg, x, y, level, zone));
                 } else if (type == Type.Mushroom) {
-                    mg.ENTITIES.add(new ENT_Mushroom(mg, x * 48, y * 48, level, zone));
+                    mg.ENTITIES.add(new ENT_Mushroom(mg, x, y, level, zone));
                 } else if (type == Type.WizardBoss1) {
 
                 } else if (type == Type.WizardBoss2) {
