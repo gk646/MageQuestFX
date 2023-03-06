@@ -95,8 +95,7 @@ public class InputHandler {
                     mg.credits = true;
                     return;
                 } else if (mg.ui.commandNum == 3) {
-                    Platform.exit();
-                    System.exit(0);
+                    mg.sqLite.saveGameAndExit();
                 }
             }
         } else if (mg.gameState == State.TITLE_OPTION) {
@@ -195,12 +194,12 @@ public class InputHandler {
                     mg.sqLite.saveGame();
                     return;
                 } else if (mg.ui.commandNum == 6) {
-                    mg.sqLite.saveGame();
                     mg.gameState = State.TITLE;
                     mg.sound.INTRO.seek(Duration.ZERO);
                     mg.sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
                     mg.sound.INTRO.play();
                     mg.ui.commandNum = 0;
+                    return;
                 }
             }
         }

@@ -19,6 +19,7 @@ public class NPC_OldMan extends NPC {
         this.zone = zone;
         this.mg = mainGame;
         this.animation = new ResourceLoaderEntity("npc/oldman");
+        animation.load();
         goalTile = new Point(34, 34);
         worldX = xTile * 48;
         worldY = yTile * 48;

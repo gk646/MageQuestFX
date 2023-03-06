@@ -25,6 +25,106 @@ public class WorldRender {
         this.mg = mg;
         tileStorage = new Tile[5000];
         getTileImagesNew();
+    }
+
+
+    private void setupTiles(int index, String imagePath, boolean collision) {
+        tileStorage[index] = new Tile();
+        InputStream is = getClass().getResourceAsStream("/resources/tilesNew/" + imagePath);
+        if (is != null) {
+            tileStorage[index].tileImage = new Image(is);
+            tileStorage[index].collision = collision;
+        }
+        try {
+            is.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void draw(GraphicsContext g2) {
+        int worldCol = Math.max(mg.playerX - 21, 0);
+        int worldRow = Math.max(mg.playerY - 12, 0);
+        int maxCol = Math.min(worldCol + 42, worldSize.x);
+        int maxRow = Math.min(worldRow + 25, worldSize.y);
+        int worldWidth = worldSize.x * 48;
+        Player.screenX = mg.HALF_WIDTH - 24;
+        Player.screenY = mg.HALF_HEIGHT - 24;
+        int playerX = (int) Player.worldX;
+        int playerY = (int) Player.worldY;
+        int screenX = Player.screenX;
+        int screenY = Player.screenY;
+        if (screenX > playerX) {
+            Player.screenX = playerX;
+            screenX = playerX;
+        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
+            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
+            screenX = Player.screenX;
+            worldCol = Math.min(Math.max(worldCol - 18, 0), worldSize.y);
+        }
+        if (screenY > playerY) {
+            Player.screenY = playerY;
+            screenY = playerY;
+        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
+            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
+            screenY = Player.screenY;
+            worldRow = Math.min(Math.max(worldRow - 10, 0), worldSize.x);
+        }
+        int num1, num2;
+        for (int i = worldCol; i < maxCol; i++) {
+            for (int b = worldRow; b < maxRow; b++) {
+                num1 = worldData[i][b];
+                num2 = worldData1[i][b];
+                g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
+                if (num2 != -1) {
+                    g2.drawImage(tileStorage[num2].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
+                }
+            }
+        }
+    }
+
+    public void drawSecondLayer(GraphicsContext g2) {
+        int worldCol = Math.max(mg.playerX - 21, 0);
+        int worldRow = Math.max(mg.playerY - 12, 0);
+        int maxCol = Math.min(worldCol + 42, worldSize.x);
+        int maxRow = Math.min(worldRow + 24, worldSize.y);
+        int num1;
+        int worldWidth = worldSize.x * 48;
+        int playerX = (int) Player.worldX;
+        int playerY = (int) Player.worldY;
+        int screenX = Player.screenX;
+        int screenY = Player.screenY;
+        if (screenX > playerX) {
+            Player.screenX = playerX;
+            screenX = playerX;
+        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
+            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
+            screenX = Player.screenX;
+            worldCol = Math.max(worldCol - 18, 0);
+        }
+        if (screenY > playerY) {
+            Player.screenY = playerY;
+            screenY = playerY;
+        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
+            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
+            screenY = Player.screenY;
+            worldRow = Math.max(worldRow - 10, 0);
+        }
+        for (int i = worldCol; i < maxCol; i++) {
+            for (int b = worldRow; b < maxRow; b++) {
+                num1 = worldData2[i][b];
+                if (num1 != -1) {
+                    g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
+                }
+            }
+        }
+    }
+
+    private void setupCollision(int index) {
+        trueCollision[index] = 1;
+    }
+
+    private void getTileImagesNew() {
         {
             setupCollision(4);
             setupCollision(5);
@@ -780,106 +880,6 @@ public class WorldRender {
             setupCollision(2945);
             setupCollision(2949);
         }
-    }
-
-
-    private void setupTiles(int index, String imagePath, boolean collision) {
-        tileStorage[index] = new Tile();
-        InputStream is = getClass().getResourceAsStream("/resources/tilesNew/" + imagePath);
-        if (is != null) {
-            tileStorage[index].tileImage = new Image(is);
-            tileStorage[index].collision = collision;
-        }
-        try {
-            is.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void draw(GraphicsContext g2) {
-        int worldCol = Math.max(mg.playerX - 21, 0);
-        int worldRow = Math.max(mg.playerY - 12, 0);
-        int maxCol = Math.min(worldCol + 42, worldSize.x);
-        int maxRow = Math.min(worldRow + 25, worldSize.y);
-        int worldWidth = worldSize.x * 48;
-        Player.screenX = mg.HALF_WIDTH - 24;
-        Player.screenY = mg.HALF_HEIGHT - 24;
-        int playerX = (int) Player.worldX;
-        int playerY = (int) Player.worldY;
-        int screenX = Player.screenX;
-        int screenY = Player.screenY;
-        if (screenX > playerX) {
-            Player.screenX = playerX;
-            screenX = playerX;
-        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
-            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
-            screenX = Player.screenX;
-            worldCol = Math.min(Math.max(worldCol - 18, 0), worldSize.y);
-        }
-        if (screenY > playerY) {
-            Player.screenY = playerY;
-            screenY = playerY;
-        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
-            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
-            screenY = Player.screenY;
-            worldRow = Math.min(Math.max(worldRow - 10, 0), worldSize.x);
-        }
-        int num1, num2;
-        for (int i = worldCol; i < maxCol; i++) {
-            for (int b = worldRow; b < maxRow; b++) {
-                num1 = worldData[i][b];
-                num2 = worldData1[i][b];
-                g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
-                if (num2 != -1) {
-                    g2.drawImage(tileStorage[num2].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
-                }
-            }
-        }
-    }
-
-    public void drawSecondLayer(GraphicsContext g2) {
-        int worldCol = Math.max(mg.playerX - 21, 0);
-        int worldRow = Math.max(mg.playerY - 12, 0);
-        int maxCol = Math.min(worldCol + 42, worldSize.x);
-        int maxRow = Math.min(worldRow + 24, worldSize.y);
-        int num1;
-        int worldWidth = worldSize.x * 48;
-        int playerX = (int) Player.worldX;
-        int playerY = (int) Player.worldY;
-        int screenX = Player.screenX;
-        int screenY = Player.screenY;
-        if (screenX > playerX) {
-            Player.screenX = playerX;
-            screenX = playerX;
-        } else if (playerX + 24 > worldWidth - mg.HALF_WIDTH) {
-            Player.screenX = MainGame.SCREEN_WIDTH - (worldWidth - playerX);
-            screenX = Player.screenX;
-            worldCol = Math.max(worldCol - 18, 0);
-        }
-        if (screenY > playerY) {
-            Player.screenY = playerY;
-            screenY = playerY;
-        } else if (playerY + 24 > worldWidth - mg.HALF_HEIGHT) {
-            Player.screenY = MainGame.SCREEN_HEIGHT - (worldWidth - playerY);
-            screenY = Player.screenY;
-            worldRow = Math.max(worldRow - 10, 0);
-        }
-        for (int i = worldCol; i < maxCol; i++) {
-            for (int b = worldRow; b < maxRow; b++) {
-                num1 = worldData2[i][b];
-                if (num1 != -1) {
-                    g2.drawImage(tileStorage[num1].tileImage, i * 48 - playerX + screenX, b * 48 - playerY + screenY);
-                }
-            }
-        }
-    }
-
-    private void setupCollision(int index) {
-        trueCollision[index] = 1;
-    }
-
-    private void getTileImagesNew() {
         for (int i = 0; i < 4000; i++) {
             setupTiles(i, i + ".png", trueCollision[i] == 1);
         }

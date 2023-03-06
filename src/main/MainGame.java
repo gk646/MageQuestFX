@@ -18,6 +18,7 @@ import gameworld.world.effects.DayNightCycle;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.DropManager;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import input.InputHandler;
 import javafx.animation.KeyFrame;
@@ -416,17 +417,15 @@ public class MainGame {
             //84%
             ui.updateLoadingScreen(12, gc);
             //multiplayer = new Multiplayer(this, ENTPlayer2);
-
             player.updateEquippedItems();
             player.health = player.maxHealth;
             player.setMana(player.maxMana);
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
-
             FonT.loadFonts();
-
             //100%
             //sqLite.resetGame();
+
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -439,7 +438,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        //debug();
+        debug();
         player.coins = 2_000;
     }
 
@@ -454,6 +453,7 @@ public class MainGame {
         for (Map map : wControl.MAPS) {
             map.mapCover = new int[map.mapSize.x][map.mapSize.x];
         }
+
         player.maxMana = 2000;
         for (ITEM item : CHEST) {
             for (Float f : item.effects) {
@@ -466,10 +466,9 @@ public class MainGame {
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         wControl.loadMap(Zone.Hillcrest, 24, 24);
         // wControl.loadMap(Zone.Clearing, 35, 35);
-        for (int i = 0; i < 10; i++) {
-            // dropI.dropRareItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
+        for (int i = 0; i < 20; i++) {
+            WORLD_DROPS.add(new DRP_DroppedItem((10 + i) * 48, 15 * 48, dropManager.getGuaranteedRandomItem(15), Zone.Hillcrest));
         }
-
         for (int i = 0; i < 2; i++) {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }

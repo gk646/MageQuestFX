@@ -343,10 +343,10 @@ public class SQLite {
             mg.ui.drawSaveMessage = true;
             try {
                 saveGameData();
-                mg.ui.saveMessageStage = 400;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            mg.ui.saveMessageStage = 400;
         });
         saveThread.start();
     }
@@ -515,6 +515,7 @@ public class SQLite {
             mg.inventP.char_Slots[counter].item = getItemWithQualityEffect(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"), rs.getString("effect"));
             counter++;
         }
+
     }
 
     private void readPlayerBagEquip(Statement stmt) throws SQLException {
@@ -576,7 +577,6 @@ public class SQLite {
                 for (ITEM item : mg.BOOTS) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -585,7 +585,6 @@ public class SQLite {
                 for (ITEM item : mg.CHEST) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -594,7 +593,6 @@ public class SQLite {
                 for (ITEM item : mg.HEAD) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -603,7 +601,6 @@ public class SQLite {
                 for (ITEM item : mg.OFFHAND) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -611,8 +608,8 @@ public class SQLite {
             case "W":
                 for (ITEM item : mg.ONEHAND) {
                     if (item.i_id == i_id) {
+                        System.out.println("hey");
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -621,7 +618,6 @@ public class SQLite {
                 for (ITEM item : mg.PANTS) {
                     if (item.i_id == i_id) {
                         new_ITEM = DRP_DroppedItem.cloneItemWithLevelQuality(item, quality, level);
-
                         return new_ITEM;
                     }
                 }
@@ -667,6 +663,7 @@ public class SQLite {
                 }
                 break;
         }
+
         return null;
     }
 
@@ -783,7 +780,9 @@ public class SQLite {
                     }
                     break;
             }
-        } else getItemWithQuality(i_id, type, quality, level);
+        } else {
+            return getItemWithQuality(i_id, type, quality, level);
+        }
         return null;
     }
 
