@@ -54,6 +54,8 @@ public class SpawnTrigger {
 
                 } else if (type == Type.WizardBoss2) {
 
+                } else if (type == Type.KnightBoss) {
+
                 }
             }
             triggered = true;

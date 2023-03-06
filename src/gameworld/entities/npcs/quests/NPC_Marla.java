@@ -17,7 +17,7 @@ public class NPC_Marla extends NPC {
     private boolean once;
     private int counter;
     private boolean twice;
-    private boolean gotQuest;
+    public boolean gotQuest;
 
     public NPC_Marla(MainGame mainGame, int xTile, int yTile) {
         this.dialog = new Dialog();

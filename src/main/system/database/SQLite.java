@@ -194,10 +194,9 @@ public class SQLite {
             String sql = "SELECT * FROM PLAYER_STATS LIMIT 1 ";
             rs = conn.createStatement().executeQuery(sql);
             return rs.getInt("startLevel");
-        } catch (SQLException ignored) {
-            // mg.ui.sqlException();
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
-        return 0;
     }
 
 

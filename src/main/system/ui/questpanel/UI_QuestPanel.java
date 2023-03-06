@@ -1,6 +1,7 @@
 package main.system.ui.questpanel;
 
 
+import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class UI_QuestPanel {
     public boolean expanded = false;
     public final List<QUEST> quests = Collections.synchronizedList(new ArrayList<>());
+    public final ArrayList<HiddenQUEST> hiddenQuests = new ArrayList<>();
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
 
     public QUEST activeQuest;
@@ -57,6 +59,7 @@ public class UI_QuestPanel {
         gc.setFill(Colors.journalBrown);
         gc.fillText("Tracked Quest:", 545, 300);
         int y = 330;
+        int y2;
         if (activeQuest != null) {
             gc.fillText(activeQuest.name, 560, 325);
             for (String string : activeQuest.objectives) {
@@ -66,23 +69,21 @@ public class UI_QuestPanel {
                 }
             }
             gc.setFont(FonT.antParty16);
-            y = (int) scroll;
+            y2 = (int) scroll;
             for (String string : activeQuest.questRecap) {
-                y += 10;
+                y2 += 10;
                 if (string != null) {
                     for (String str : string.split("\n")) {
-                        y += 15;
-                        if (y < 290 || y > 710) {
+                        y2 += 15;
+                        if (y2 < 290 || y2 > 710) {
                             continue;
                         }
-                        gc.fillText(str, 1030, y);
+                        gc.fillText(str, 1030, y2);
                     }
                 }
             }
         }
-        y = 330;
-        y += 15;
-        y += 40;
+        y += 75;
         int x = 560;
         gc.setFont(FonT.antParty20);
         gc.fillText("All Quests: " + numberOfQuests() + "/ 10", 545, y);
@@ -166,15 +167,26 @@ public class UI_QuestPanel {
 
     public void update() {
         synchronized (quests) {
-            Iterator<QUEST> iterator = quests.iterator();
-            while (iterator.hasNext()) {
-                QUEST quest = iterator.next();
-                quest.update();
-                if (quest.completed) {
-                    if (activeQuest == quest) {
-                        activeQuest = null;
+            synchronized (hiddenQuests) {
+                Iterator<QUEST> iterator = quests.iterator();
+                while (iterator.hasNext()) {
+                    QUEST quest = iterator.next();
+                    quest.update();
+                    if (quest.completed) {
+                        if (activeQuest == quest) {
+                            activeQuest = null;
+                        }
+                        iterator.remove();
                     }
-                    iterator.remove();
+                }
+                Iterator<HiddenQUEST> hidden = hiddenQuests.iterator();
+                while (hidden.hasNext()) {
+                    HiddenQUEST quest = hidden.next();
+                    quest.update();
+                    if (quest.activated) {
+                        quests.add((QUEST) quests);
+                        hidden.remove();
+                    }
                 }
             }
         }

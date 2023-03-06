@@ -22,7 +22,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
         super(mg, name);
         quest_id = 2;
         name = "The Fake Necklace";
-        updateObjective("Talk to Marla", 0);
+
         mg.sqLite.setQuestActive(quest_id);
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
@@ -41,6 +41,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
             if (npc instanceof NPC_Marla) {
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
                 if (progressStage == 1 && objective1Progress == 0) {
+                    updateObjective("Talk to Marla", 0);
                     npc.dialog.loadNewLine(DialogStorage.MarlaNecklace[0]);
                     objective1Progress++;
                 } else if (progressStage == 8) {
@@ -97,7 +98,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 14) {
                     objective3Progress = 0;
                     npc.blockInteraction = true;
-                    System.out.println(npc.dialog.dialogRenderCounter);
                     if (npc.dialog.dialogRenderCounter == 2000) {
                         nextStage();
                         enemiesKilled = mg.prj_control.ENEMIES_KILLED;
@@ -111,14 +111,39 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 15) {
                     if (mg.prj_control.ENEMIES_KILLED >= enemiesKilled + 6) {
                         npc.blockInteraction = false;
-                        objective3Progress = 1;
-                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 15);
+                        if (objective3Progress == 0) {
+                            loadDialogStage(npc, DialogStorage.MarlaNecklace, 15);
+                            objective3Progress = 1;
+                        }
                         int num = npc.dialog.drawChoice("You couldn't have done it without me!", null, null, null);
                         if (num == 10) {
                             nextStage();
                             loadDialogStage(npc, DialogStorage.MarlaNecklace, 16);
                         }
                     }
+                } else if (progressStage == 16) {
+                    int num = npc.dialog.drawChoice("The necklace is fake!", "Ill come along!", null, null);
+                    if (num == 10) {
+                        progressStage = 75;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
+                    } else if (num == 20) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, progressStage);
+                    }
+                } else if (progressStage == 17) {
+                    moveToTile(npc, 38, 61, new Point(53, 59));
+                } else if (progressStage == 18) {
+                    //TODO add usable item and lock q slot
+                } else if (progressStage == 19) {
+                    int num = npc.dialog.drawChoice("Yep, lets go", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 20);
+                    }
+                } else if (progressStage == 20) {
+                    moveToTile(npc, 68, 73, new Point(49, 75));
+                } else if (progressStage == 21) {
+                    moveToTile(npc, 75, 71);
                 }
             }
         }

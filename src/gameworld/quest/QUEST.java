@@ -157,9 +157,9 @@ abstract public class QUEST {
         }
         for (int i = 0; i < 50; i++) {
             if (questRecap[i] == null) {
-                questRecap[i] = newText;
+                questRecap[i] = Dialog.insertNewLine(newText, 20);
                 break;
-            } else if (questRecap[i].equals(newText)) {
+            } else if (questRecap[i].equals(Dialog.insertNewLine(newText, 20))) {
                 break;
             }
         }

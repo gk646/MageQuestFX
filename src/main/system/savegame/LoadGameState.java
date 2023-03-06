@@ -1,7 +1,13 @@
 package main.system.savegame;
 
+import gameworld.entities.NPC;
+import gameworld.entities.npcs.quests.NPC_Aria;
+import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.quests.NPC_OldMan;
+import gameworld.entities.props.DeadWolf;
+import gameworld.quest.Dialog;
 import gameworld.quest.QUEST;
+import gameworld.quest.hiddenquests.QST_StaturePuzzleHillcrest;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import gameworld.quest.quests.QST_Tutorial;
 import gameworld.world.objects.drops.DRP_DroppedItem;
@@ -27,6 +33,8 @@ public class LoadGameState {
 
     private void loadQuests() {
         loadTutorial();
+        loadMarla();
+        loadHiddenQuests();
         if (mg.qPanel.quests.size() > 0) {
             mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
         }
@@ -67,11 +75,8 @@ public class LoadGameState {
             }
             case "finished" -> {
                 mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, "Tutorial", true));
-                mg.player.spawnLevel = 1;
-                try {
-                    mg.sqLite.savePlayerStats();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                if (mg.player.spawnLevel < 1) {
+                    mg.player.spawnLevel = 1;
                 }
             }
         }
@@ -85,12 +90,20 @@ public class LoadGameState {
             }
             case "active" -> {
                 mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
-                mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
                 mg.qPanel.getQuest("The Fake Necklace").questRecap = mg.sqLite.readQuestJournal(2, 150);
                 if (quest_num == 1) {
                     mg.qPanel.setQuestStage("The Fake Necklace", 11);
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(4), Zone.Woodland_Edge));
+                    for (NPC npc : mg.npcControl.NPC_Active) {
+                        if (npc instanceof NPC_Marla) {
+                            ((NPC_Marla) npc).gotQuest = true;
+                        }
+                    }
+                    mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                    mg.ENTITIES.add(new DeadWolf(84, 51, Zone.Hillcrest));
+                    mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                    mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                    mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 59, 55, Zone.Hillcrest));
+                    mg.qPanel.getQuest("The Fake Necklace").objectives[0] = Dialog.insertNewLine("Head east and pickup the mysterious adventurers trail!", 20);
                 } else if (quest_num == 2) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Woodland_Edge));
                     mg.qPanel.setQuestStage("Tutorial", 26);
@@ -106,15 +119,16 @@ public class LoadGameState {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
                 }
             }
-            case "finished" -> {
-                mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, "a", true));
-                mg.player.spawnLevel = 1;
-                try {
-                    mg.sqLite.savePlayerStats();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, "a", true));
+        }
+    }
+
+    private void loadHiddenQuests() {
+        String description = mg.sqLite.readQuestDescription(4);
+        if (description.equals("finished")) {
+            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "4 Statures", true));
+        } else {
+            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "4 Statures", false));
         }
     }
 
@@ -131,6 +145,7 @@ public class LoadGameState {
 
     private void loadSpawnLevel() {
         int num = mg.sqLite.readStartLevel();
+        System.out.println(num);
         switch (num) {
             case 0 -> mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
             case 1 -> mg.wControl.loadMap(Zone.Hillcrest, 20, 20);

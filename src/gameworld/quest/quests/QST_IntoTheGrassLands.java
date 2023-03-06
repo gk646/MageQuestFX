@@ -8,7 +8,7 @@ public class QST_IntoTheGrassLands extends QUEST {
     public QST_IntoTheGrassLands(MainGame mg, String name, boolean completed) {
         super(mg, name);
         this.objectives[0] = "Pay the road tax";
-        this.quest_id = 1;
+        this.quest_id = 5;
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {
