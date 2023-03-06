@@ -12,10 +12,11 @@ public class ScriptedAnimationList {
     int counter;
     private int speedCounter;
 
-    public ScriptedAnimationList(int[] list, int speed, Point tilePos) {
+    public ScriptedAnimationList(int[] list, int speed, Point tilePos, int start) {
         this.list = list;
         this.speed = speed;
         this.tilePos = tilePos;
+        speedCounter = start;
     }
 
 

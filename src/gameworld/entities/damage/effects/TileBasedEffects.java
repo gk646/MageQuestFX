@@ -61,12 +61,17 @@ public class TileBasedEffects {
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
                 mg.sound.playEffectSound(4);
-                animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY)));
+                animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
         } else if (activeTile1 == 1_382) {
             mg.playerPrompts.E = true;
             if (mg.inputH.e_typed && animationList.size() == 0) {
-                animationList.add(new ScriptedAnimationList(new int[]{1_382, 1_383}, 15, new Point(mg.playerX, mg.playerY)));
+                animationList.add(new ScriptedAnimationList(new int[]{1_382, 1_383}, 15, new Point(mg.playerX, mg.playerY), 0));
+            }
+        } else if (activeTile1 == 2_191) {
+            mg.playerPrompts.E = true;
+            if (mg.inputH.e_typed && animationList.size() == 0) {
+                animationList.add(new ScriptedAnimationList(new int[]{2_193, 2_195}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
         }
     }

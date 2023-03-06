@@ -7,7 +7,7 @@ import main.MainGame;
 
 public class PlayerPrompts {
 
-    public boolean E;
+    public boolean E, F;
     final MainGame mg;
     final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
@@ -25,6 +25,8 @@ public class PlayerPrompts {
                 case 2 -> gc.drawImage(resc.images1.get(2), Player.screenX, Player.screenY - 48);
                 case 3 -> gc.drawImage(resc.images1.get(3), Player.screenX, Player.screenY - 48);
             }
+        } else if (F) {
+
         }
         spriteCounter++;
     }

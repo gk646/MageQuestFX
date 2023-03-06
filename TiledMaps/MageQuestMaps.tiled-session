@@ -59,11 +59,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.25,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1116,
-                "y": 1324
+                "x": 1043.3333333333333,
+                "y": 1094.6666666666665
             }
         },
         "GrassLands.tmx": {
@@ -79,10 +79,18 @@
             "scaleInDock": 1,
             "scaleInEditor": 0.125
         },
+        "HillCrestPuzzleCellar.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 507.99999999999994,
+                "y": 368
+            }
+        },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.33,
-            "scaleInEditor": 4
+            "scaleInEditor": 2
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -219,12 +227,12 @@
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
-    "map.height": 60,
-    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 60,
+    "map.width": 50,
     "openFiles": [
         "FirstDungeon.tmx",
         "Tutorial.tmx",
@@ -237,18 +245,18 @@
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
+        "TIILESET.tsx",
+        "HillCrestPuzzleCellar.tmx",
         "FirstDungeon.tmx",
         "Tutorial.tmx",
         "unbenannt.tmx",
-        "TIILESET.tsx",
         "ForestClearing.tmx",
         "DungeonTutorial.tmx",
         "caveMarla.tmx",
         "GrassLands.tmx",
         "City1.tmx",
         "second floor_tutorial_castle.tmx",
-        "grassspritesheet16.tsx",
-        "tileset16.tsx"
+        "grassspritesheet16.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

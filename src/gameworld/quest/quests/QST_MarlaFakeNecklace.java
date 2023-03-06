@@ -144,6 +144,8 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     moveToTile(npc, 68, 73, new Point(49, 75));
                 } else if (progressStage == 21) {
                     moveToTile(npc, 75, 71);
+                } else if (progressStage == 22) {
+                    moveToTile(npc, 93, 59, new Point(86, 62));
                 }
             }
         }

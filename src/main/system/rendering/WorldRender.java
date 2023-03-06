@@ -130,6 +130,10 @@ public class WorldRender {
             setupCollision(592);
             setupCollision(283);
             setupCollision(336);
+            setupCollision(335);
+            setupCollision(322);
+            setupCollision(324);
+            setupCollision(190);
             setupCollision(5);
             setupCollision(6);
             setupCollision(17);
@@ -852,8 +856,6 @@ public class WorldRender {
             setupCollision(2581);
             setupCollision(2582);
             setupCollision(2583);
-
-
             setupCollision(2730);
             setupCollision(2731);
             setupCollision(2732);

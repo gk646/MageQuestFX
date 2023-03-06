@@ -184,7 +184,7 @@ public class UI_QuestPanel {
                     HiddenQUEST quest = hidden.next();
                     quest.update();
                     if (quest.activated) {
-                        quests.add((QUEST) quests);
+                        quests.add(quest);
                         hidden.remove();
                     }
                 }

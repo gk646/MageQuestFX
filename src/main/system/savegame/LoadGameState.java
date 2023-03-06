@@ -92,6 +92,7 @@ public class LoadGameState {
                 mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
                 mg.qPanel.getQuest("The Fake Necklace").questRecap = mg.sqLite.readQuestJournal(2, 150);
                 if (quest_num == 1) {
+                    mg.qPanel.getQuest("The Fake Necklace").objective3Progress = 1;
                     mg.qPanel.setQuestStage("The Fake Necklace", 11);
                     for (NPC npc : mg.npcControl.NPC_Active) {
                         if (npc instanceof NPC_Marla) {
@@ -105,30 +106,25 @@ public class LoadGameState {
                     mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 59, 55, Zone.Hillcrest));
                     mg.qPanel.getQuest("The Fake Necklace").objectives[0] = Dialog.insertNewLine("Head east and pickup the mysterious adventurers trail!", 20);
                 } else if (quest_num == 2) {
-                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Woodland_Edge));
-                    mg.qPanel.setQuestStage("Tutorial", 26);
-                    mg.qPanel.getQuest("Tutorial").objectives[0] = ("Search the ruins for a way out");
-                    mg.player.setPosition(58, 35);
-                    QUEST.openSquareDoor(58, 37);
+                    mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 38, 61, Zone.Hillcrest));
+                    mg.qPanel.setQuestStage("The Fake Necklace", 19);
+                    mg.qPanel.getQuest("The Fake Necklace").objectives[0] = ("Help Aria find the mountain top");
                 } else if (quest_num == 3) {
-                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 1, 1, Zone.Hillcrest));
-                    mg.qPanel.setQuestStage("Tutorial", 37);
-                    mg.qPanel.getQuest("Tutorial").objectives[0] = ("Follow the old man");
-                    mg.wControl.loadMap(Zone.Hillcrest, 0, 0);
+
                 } else {
-                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
+
                 }
             }
-            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, "a", true));
+            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", true));
         }
     }
 
     private void loadHiddenQuests() {
         String description = mg.sqLite.readQuestDescription(4);
         if (description.equals("finished")) {
-            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "4 Statures", true));
+            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", true));
         } else {
-            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "4 Statures", false));
+            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", false));
         }
     }
 

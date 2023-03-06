@@ -36,6 +36,7 @@ public class WorldController {
         MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Hillcrest, GameMapType.MapCover));
         //Overworld
         MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+        MAPS.add(new Map("HillCrestPuzzleCellar", new Point(50, 50), Zone.Treasure_Cave));
         loadArray();
     }
 
@@ -118,8 +119,21 @@ public class WorldController {
                 loadMap(Zone.Woodland_Edge, 71, 55);
             }
         } else if (currentWorld == Zone.Hillcrest) {
-            if (mg.playerY == 99 && mg.playerX == 0) {
+            if (mg.playerX == 0 && mg.playerY == 99) {
                 loadMap(Zone.GrassLands, 495, 495);
+            } else if (mg.playerX == 64 && mg.playerY == 66) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Treasure_Cave, 26, 18);
+                }
+            }
+        } else if (currentWorld == Zone.Treasure_Cave) {
+            if (mg.playerX == 26 && mg.playerY == 18) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    loadMap(Zone.Hillcrest, 64, 65);
+                }
             }
         }
     }

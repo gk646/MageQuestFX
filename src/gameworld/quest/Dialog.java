@@ -102,7 +102,7 @@ public class Dialog {
     }
 
     public void drawDialogPlayer(GraphicsContext gc) {
-        gc.setFont(FonT.minecraftBoldItalic15);
+        gc.setFont(FonT.varnished14);
         gc.setFill(Color.BLACK);
         gc.fillRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);
         gc.setLineWidth(2);
