@@ -302,11 +302,11 @@ public class MainGame {
             wAnim.drawLayerOneTwo(gc);
             qPanel.draw(gc);
             miniM.draw(gc);
+            sBar.draw(gc);
             if (player.drawDialog) {
                 player.dialog.drawDialogPlayer(gc);
             }
             ui.draw(gc);
-            sBar.draw(gc);
             if (showAbilities) {
                 skillPanel.drawSkillPanel(gc);
                 skillPanel.dragAndDropSkillBar(gc);

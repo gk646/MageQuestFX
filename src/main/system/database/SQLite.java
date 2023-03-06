@@ -63,6 +63,7 @@ public class SQLite {
             inverseArrayLists();
             readPlayerStats(stmt);
             readSkillTree(stmt);
+            readSettings();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,6 +93,7 @@ public class SQLite {
             throw new RuntimeException(e);
         }
     }
+
 
     private String insertNewLine(String str) {
         StringBuilder sb = new StringBuilder();
@@ -207,6 +209,7 @@ public class SQLite {
             saveTalentTree();
             saveSkillPanel();
             saveQuests();
+            saveSettings();
             for (Map map : mg.wControl.MAPS) {
                 if (map.gameMapType == GameMapType.MapCover) {
                     map.saveMapCover();
@@ -214,6 +217,37 @@ public class SQLite {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void saveSettings() throws SQLException {
+        String sql = "UPDATE SETTINGS_SAVE SET AudioSettings = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, (int) mg.ui.musicSlider);
+        stmt.setInt(2, 1);
+        stmt.executeUpdate();
+        stmt.setInt(1, (int) mg.ui.ambientSlider);
+        stmt.setInt(2, 2);
+        stmt.executeUpdate();
+        stmt.setInt(1, (int) mg.ui.effectsSlider);
+        stmt.setInt(2, 3);
+        stmt.executeUpdate();
+    }
+
+    private void readSettings() throws SQLException {
+        for (int i = 1; i < 4; i++) {
+            String sql = "SELECT AudioSettings FROM  SETTINGS_SAVE WHERE _ROWID_ =" + i;
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            if (i == 1) {
+                mg.ui.musicSlider = rs.getInt("AudioSettings");
+                mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
+            } else if (i == 2) {
+                mg.ui.ambientSlider = rs.getInt("AudioSettings");
+                mg.ui.ambientSliderHitBox.x = (int) (650 + mg.ui.ambientSlider * 2 - 12);
+            } else {
+                mg.ui.effectsSlider = rs.getInt("AudioSettings");
+                mg.ui.effectsSliderHitBox.x = (int) (650 + mg.ui.effectsSlider * 2 - 12);
+            }
         }
     }
 
@@ -356,11 +390,11 @@ public class SQLite {
             mg.ui.drawSaveMessage = true;
             try {
                 saveGameData();
-                mg.ui.saveMessageStage = 400;
-                System.exit(0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            mg.ui.saveMessageStage = 400;
+            System.exit(0);
         });
         saveThread.start();
         Platform.exit();
@@ -515,7 +549,6 @@ public class SQLite {
             mg.inventP.char_Slots[counter].item = getItemWithQualityEffect(rs.getInt("i_id"), rs.getString("type"), rs.getInt("quality"), rs.getInt("level"), rs.getString("effect"));
             counter++;
         }
-
     }
 
     private void readPlayerBagEquip(Statement stmt) throws SQLException {
@@ -797,7 +830,6 @@ public class SQLite {
             new_ITEM.description = insertNewLine(new_ITEM.description);
             new_ITEM.icon = new_ITEM.setup(new_ITEM.imagePath);
             mg.AMULET.add(0, new_ITEM);
-
         }
     }
 

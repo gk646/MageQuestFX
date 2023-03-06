@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import main.system.sound.Sound;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -53,7 +54,9 @@ public class GeneralResourceLoader {
         for (int i = 0; i < 10; i++) {
             URL url = getClass().getResource("/resources/sound/effects/" + name + "/" + i + ".wav");
             if (url != null) {
-                sounds.add(new MediaPlayer(new Media(url.toString())));
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(url.toString()));
+                mediaPlayer.setVolume(Sound.EFFECTS_VOLUME);
+                sounds.add(mediaPlayer);
             } else {
                 break;
             }

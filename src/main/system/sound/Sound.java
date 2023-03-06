@@ -1,6 +1,8 @@
 package main.system.sound;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.loadinghelper.GeneralResourceLoader;
+import gameworld.player.ProjectilePreloader;
 import gameworld.world.WorldController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -209,6 +211,11 @@ public class Sound {
                 for (MediaPlayer player : entity.animation.sounds) {
                     player.setVolume(EFFECTS_VOLUME);
                 }
+            }
+        }
+        for (GeneralResourceLoader load : ProjectilePreloader.projectileSounds) {
+            for (MediaPlayer player : load.sounds) {
+                player.setVolume(1 * (value / 100.0f));
             }
         }
     }
