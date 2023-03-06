@@ -48,16 +48,10 @@ public class ENT_Mushroom extends ENTITY {
         super.update();
         if (collidingWithPlayer && !onPath && !attack2 && !attack3 && !attack1) {
             if (Math.random() < 0.33f) {
-                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * level));
+                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2.5f * level));
                 attack1 = true;
-            } else if (Math.random() < 0.66f) {
-                attack2 = true;
-                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * level));
-            } else {
-                attack3 = true;
-                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2.3f * level));
             }
-            animation.playRandomSoundFromXToIndex(0, 3);
+            //animation.playRandomSoundFromXToIndex(0, 3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
@@ -85,10 +79,6 @@ public class ENT_Mushroom extends ENTITY {
             drawDeath(gc);
         } else if (attack1) {
             drawAttack1(gc);
-        } else if (attack2) {
-            drawAttack2(gc);
-        } else if (attack3) {
-            drawAttack3(gc);
         } else {
             if (onPath) {
                 drawWalk(gc);
@@ -137,27 +127,6 @@ public class ENT_Mushroom extends ENTITY {
         }
     }
 
-    private void drawAttack2(GraphicsContext gc) {
-        switch (spriteCounter % 210 / 30) {
-            case 0 -> gc.drawImage(animation.attack2.get(0), screenX - 33, screenY - 23);
-            case 1 -> gc.drawImage(animation.attack2.get(1), screenX - 33, screenY - 23);
-            case 2 -> gc.drawImage(animation.attack2.get(2), screenX - 33, screenY - 23);
-            case 3 -> gc.drawImage(animation.attack2.get(3), screenX - 33, screenY - 23);
-            case 4 -> gc.drawImage(animation.attack2.get(4), screenX - 33, screenY - 23);
-            case 5 -> gc.drawImage(animation.attack2.get(5), screenX - 33, screenY - 23);
-            case 6 -> attack2 = false;
-        }
-    }
-
-    private void drawAttack3(GraphicsContext gc) {
-        switch (spriteCounter % 150 / 30) {
-            case 0 -> gc.drawImage(animation.attack3.get(0), screenX - 25, screenY - 14);
-            case 1 -> gc.drawImage(animation.attack3.get(1), screenX - 25, screenY - 14);
-            case 2 -> gc.drawImage(animation.attack3.get(2), screenX - 25, screenY - 14);
-            case 3 -> gc.drawImage(animation.attack3.get(3), screenX - 25, screenY - 14);
-            case 4 -> attack3 = false;
-        }
-    }
 
     private void drawDeath(GraphicsContext gc) {
         switch (spriteCounter % 245 / 35) {

@@ -1,6 +1,9 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
+import gameworld.entities.monsters.ENT_Mushroom;
+import gameworld.entities.monsters.ENT_Snake;
+import gameworld.entities.monsters.ENT_Wolf;
 import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.props.DeadWolf;
@@ -13,6 +16,7 @@ import main.system.ui.maps.MarkerType;
 import java.awt.Point;
 
 public class QST_MarlaFakeNecklace extends QUEST {
+    private int enemiesKilled;
 
     public QST_MarlaFakeNecklace(MainGame mg, String name, boolean completed) {
         super(mg, name);
@@ -69,7 +73,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     updateObjective("Head east and pickup the mysterious adventurers trail!", 0);
                     mg.wControl.addMapMarker(quest_id + "" + progressStage, 83, 41, MarkerType.Quest);
                     if (playerInsideRectangle(new Point(81, 40), new Point(85, 45))) {
-                        nextStage();
+                        progressStage = 13;
                         updateObjective("Look around", 0);
                         mg.wControl.removeMapMarker(quest_id + "" + 11);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 1);
@@ -77,9 +81,40 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 }
             }
             if (npc instanceof NPC_Aria) {
-
+                interactWithNpc(npc, DialogStorage.MarlaNecklace);
+                if (progressStage == 13) {
+                    objective3Progress = 0;
+                    int num = npc.dialog.drawChoice("Beat you to what?", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                    }
+                } else if (progressStage == 14) {
+                    npc.blockInteraction = true;
+                    if (npc.dialog.dialogRenderCounter == 2000) {
+                        nextStage();
+                        enemiesKilled = mg.prj_control.ENEMIES_KILLED;
+                        mg.ENTITIES.add(new ENT_Wolf(mg, 52, 52, 2, Zone.Hillcrest));
+                        mg.ENTITIES.add(new ENT_Mushroom(mg, 49, 58, 2, Zone.Hillcrest));
+                        mg.ENTITIES.add(new ENT_Mushroom(mg, 60, 63, 2, Zone.Hillcrest));
+                        mg.ENTITIES.add(new ENT_Mushroom(mg, 53, 61, 2, Zone.Hillcrest));
+                        mg.ENTITIES.add(new ENT_Wolf(mg, 57, 50, 2, Zone.Hillcrest));
+                        mg.ENTITIES.add(new ENT_Snake(mg, 48, 62, 2, Zone.Hillcrest));
+                    }
+                } else if (progressStage == 15) {
+                    if (mg.prj_control.ENEMIES_KILLED >= enemiesKilled + 6) {
+                        npc.blockInteraction = false;
+                        objective3Progress = 1;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 15);
+                        int num = npc.dialog.drawChoice("You couldn't have done it without me!", null, null, null);
+                        if (num == 10) {
+                            nextStage();
+                            loadDialogStage(npc, DialogStorage.MarlaNecklace, 16);
+                        }
+                    }
+                }
             }
         }
     }
 }
+
 

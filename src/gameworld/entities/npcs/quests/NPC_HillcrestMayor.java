@@ -11,15 +11,17 @@ import main.system.enums.Zone;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class NPC_OldMan extends NPC {
+
+public class NPC_HillcrestMayor extends NPC {
 
 
-    public NPC_OldMan(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_HillcrestMayor(MainGame mainGame, int xTile, int yTile) {
         this.dialog = new Dialog();
-        this.zone = zone;
-        this.mg = mainGame;
         this.animation = new ResourceLoaderEntity("npc/oldman");
-        goalTile = new Point(34, 34);
+        animation.load();
+        this.zone = Zone.Hillcrest;
+        this.mg = mainGame;
+        goalTile = new Point();
         worldX = xTile * 48;
         worldY = yTile * 48;
         this.entityHeight = 48;
@@ -27,9 +29,28 @@ public class NPC_OldMan extends NPC {
         this.movementSpeed = 2;
         this.collisionBox = new Rectangle(0, 0, 42, 42);
         direction = "updownleftright";
+        spriteCounter = (int) (Math.random() * 20);
     }
 
     @Override
+    public void update() {
+        super.update();
+        if (show_dialog) {
+            dialogHideDelay++;
+            show_dialog = !mg.wControl.player_went_away(playerTalkLocation, 800);
+        }
+        if (dialogHideDelay > 600) {
+            show_dialog = false;
+            dialogHideDelay = 0;
+        }
+        if (onPath) {
+            moveTo(goalTile.x, goalTile.y, checkPoints);
+        }
+    }
+
+    /**
+     *
+     */
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
@@ -42,6 +63,7 @@ public class NPC_OldMan extends NPC {
             dialog.drawDialog(gc, this);
         }
         spriteCounter++;
+        drawNPCName(gc, "Mayor Flitwick");
     }
 
     private void drawIdle(GraphicsContext gc) {
@@ -61,22 +83,6 @@ public class NPC_OldMan extends NPC {
             case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY);
             case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY);
-        }
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        if (show_dialog) {
-            dialogHideDelay++;
-            show_dialog = !mg.wControl.player_went_away(playerTalkLocation, 500);
-        }
-        if (dialogHideDelay > 600) {
-            show_dialog = false;
-            dialogHideDelay = 0;
-        }
-        if (onPath) {
-            moveTo(goalTile.x, goalTile.y, checkPoints);
         }
     }
 }

@@ -201,6 +201,7 @@ abstract public class QUEST {
             }
         }
         if (npc.show_dialog) {
+            mg.player.interactingWithNPC = true;
             if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2_000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
                 try {
                     nextStage();

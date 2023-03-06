@@ -30,6 +30,7 @@ public class PRJ_Control {
 
     public int GruntKilledCounter;
     public long lastHitTime;
+    public int ENEMIES_KILLED;
     private int ShooterKilledCounter;
     private final ArrayList<PROJECTILE> toBeDamageDead = new ArrayList<>();
 
@@ -131,6 +132,7 @@ public class PRJ_Control {
         } else if (entity instanceof ENT_SkeletonArcher) {
             ShooterKilledCounter++;
         }
+        ENEMIES_KILLED++;
     }
 }
 

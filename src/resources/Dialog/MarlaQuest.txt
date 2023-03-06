@@ -9,24 +9,9 @@ I cant pay much but ill find something iam sure. Will you help me?
 I see how it is. You're not willing to help out a fellow traveler in need. I thought you were different, but I guess I was wrong.
 I was somehow convinced you would help me after I saw you...
 She headed east, so I've marked it on your map. Make sure she doesn't come back here and ruin everything, please!
+ARIA
+You came right on time, who ever you might be?! You're not here to rob me or beat me to it?
+Sure ill tell YOU?... ... Watch out!
+Arrgh, those little pesky mushroom thingys. Hate em. So, yeah bla bla you helped me. Don't make me say it!
+*Sigh*, okay. You can come along. I could definitely use the help with how dangerous everything got recently...
 
-
-
-
-
-
-
-
-
-
-
-
-marla sold a fake necklace because she lost the real one ,in order to pay off a debt. but the buyer is a adventuere aswell and could see that its fake. also the buyer said he wants to search around the area for treasure and might stumble upon the real necklace. She wants you to help her find the real necklace so she's safe in case he returns or can sell it.
-
-As you search for the necklace, you come across the person who bought the fakenecklace from Marla. They tell you the truth about the situation, and ask that you don't reveal their role in the transaction. You must then decide whether to keep Marla's secret and help her pass off the fake necklace as the real one, or confront her with the truth and risk damaging her reputation and possibly causing her to turn on you.
-
-When you return the fake necklace to Marla, she is overjoyed, and thanks you profusely for your help. But if you chose to confront her, she may become angry or refuse to provide you with further assistance. Or, if you kept her secret and someone else found out the truth, you may face consequences down the line.
-
-generate the npc text of marla explaining to the player about the lost necklace and to search for it 
-the path is somewhat easy to find cause there a big rocks along the path
-also explain that marla cant go looking for herself cause 

@@ -3,6 +3,7 @@ package gameworld;
 import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
 import gameworld.entities.npcs.generic.NPC_GenericVillagerWoman;
+import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.trader.NPC_AbilityTrader;
 import gameworld.entities.npcs.trader.NPC_AccessoriesTrader;
@@ -34,6 +35,8 @@ public class NPC_Control {
 
         NPC_Active.add(new NPC_GenericVillagerWoman(mg, 26, 20, Zone.Hillcrest));
         NPC_Active.add(new NPC_Marla(mg, 41, 28));
+
+        NPC_Active.add(new NPC_HillcrestMayor(mg, 4, 36));
     }
 
 

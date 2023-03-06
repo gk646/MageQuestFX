@@ -31,6 +31,7 @@ public class Player extends ENTITY {
     public Map map;
     public boolean isMoving;
     public int maxMana;
+    public boolean interactingWithNPC;
     private float mana;
     public float health;
     //STATS
@@ -171,7 +172,6 @@ public class Player extends ENTITY {
     }
 
     private void skills() {
-        Point mousePos = mg.inputH.lastMousePosition;
         if (mg.inputH.OnePressed) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[0].activate();
@@ -193,18 +193,20 @@ public class Player extends ENTITY {
             mg.sBar.skills[4].activate();
         }
         if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null && mg.skillPanel.draggedSKILL == null) {
+            Point mousePos = mg.inputH.lastMousePosition;
             if (!mg.qPanel.wholeJournalWindow.contains(mousePos) && !mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.skillPanel.wholeSkillWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[5].activate();
             }
         }
         if (mg.inputH.mouse2Pressed && mg.inventP.activeTradingNPC == null) {
+            Point mousePos = mg.inputH.lastMousePosition;
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[6].activate();
             }
         }
-        if (mg.inputH.q_pressed) {
+        if (mg.inputH.q_pressed && !interactingWithNPC) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[7].activate();
         }
@@ -218,6 +220,7 @@ public class Player extends ENTITY {
         } else if (health > maxHealth) {
             health = maxHealth;
         }
+        interactingWithNPC = false;
     }
 
     @Override
@@ -390,6 +393,7 @@ public class Player extends ENTITY {
         movement();
         skills();
         tickEffects();
+
         /*
         if (WorldController.currentWorld == Zone.GrassLands) {
             if (quadrantTimer >= 100) {

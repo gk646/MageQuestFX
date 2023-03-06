@@ -94,6 +94,7 @@ public class Runner extends Application {
             }
             throwable.printStackTrace(writer);
             writer.close();
+            throwable.printStackTrace();
         });
     }
 }

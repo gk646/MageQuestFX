@@ -109,7 +109,7 @@ public class QST_Tutorial extends QUEST {
                         mg.wControl.removeMapMarker("path1");
                         objective1Progress = 3;
                     }
-                    if (playerInsideRectangle(new Point(83, 2), new Point(85, 7)) && objective2Progress < 3) {
+                    if (playerInsideRectangle(new Point(83, 2), new Point(85, 7)) && objective2Progress < 2) {
                         mg.player.dialog.loadNewLine("I should look around here");
                         objective2Progress = 2;
                     }
@@ -221,6 +221,7 @@ public class QST_Tutorial extends QUEST {
                         mg.player.coins += 25;
                         mg.sound.playEffectSound(9);
                         once = true;
+                        mg.qPanel.quests.add(new QST_TheAudition(mg, "The Audition", false));
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
                     updateObjective("Quest Finished", 0);

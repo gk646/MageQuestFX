@@ -20,9 +20,9 @@ public class LoadGameState {
     }
 
     public void loadGame() {
-        loadSpawnLevel();
         loadQuests();
         loadPlayerSave();
+        loadSpawnLevel();
     }
 
     private void loadQuests() {
@@ -118,14 +118,6 @@ public class LoadGameState {
         }
     }
 
-    private void loadSpawnLevel() {
-        int num = mg.sqLite.readStartLevel();
-        switch (num) {
-            case 0 -> mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
-            case 1 -> mg.wControl.loadMap(Zone.Hillcrest, 20, 20);
-        }
-    }
-
     private void loadPlayerSave() {
         try {
             Statement stmt = mg.sqLite.conn.createStatement();
@@ -134,6 +126,14 @@ public class LoadGameState {
             mg.sqLite.readPlayerBags(stmt);
         } catch (SQLException e) {
             throw new RuntimeException();
+        }
+    }
+
+    private void loadSpawnLevel() {
+        int num = mg.sqLite.readStartLevel();
+        switch (num) {
+            case 0 -> mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
+            case 1 -> mg.wControl.loadMap(Zone.Hillcrest, 20, 20);
         }
     }
 }
