@@ -1,6 +1,7 @@
 package gameworld.quest.hiddenquests;
 
 import gameworld.quest.HiddenQUEST;
+import gameworld.quest.QUEST_NAME;
 import gameworld.world.WorldController;
 import main.MainGame;
 import main.system.enums.Zone;

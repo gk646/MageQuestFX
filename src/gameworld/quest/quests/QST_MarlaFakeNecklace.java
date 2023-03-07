@@ -8,6 +8,7 @@ import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.props.DeadWolf;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
 import main.system.enums.Zone;

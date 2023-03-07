@@ -24,17 +24,17 @@ public class WorldEnhancements {
     final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 15);
     final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
     final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 8);
-    final AnimationList flowersred = new AnimationList(new int[]{1235, 1240, 1245, 2140}, 15);
-    final AnimationList flowersred1 = new AnimationList(new int[]{1236, 1241, 1246, 2141}, 15);
-    final AnimationList flowersred2 = new AnimationList(new int[]{1237, 1242, 1247, 2142}, 15);
-    final AnimationList flowersred3 = new AnimationList(new int[]{1238, 1243, 2138, 2143}, 15);
-    final AnimationList flowersred4 = new AnimationList(new int[]{1239, 1244, 2139, 2144}, 15);
+    final AnimationList flowersred = new AnimationList(new int[]{1235, 1240, 1245, 2140}, 25);
+    final AnimationList flowersred1 = new AnimationList(new int[]{1236, 1241, 1246, 2141}, 25);
+    final AnimationList flowersred2 = new AnimationList(new int[]{1237, 1242, 1247, 2142}, 25);
+    final AnimationList flowersred3 = new AnimationList(new int[]{1238, 1243, 2138, 2143}, 25);
+    final AnimationList flowersred4 = new AnimationList(new int[]{1239, 1244, 2139, 2144}, 25);
 
-    final AnimationList whiteflower1 = new AnimationList(new int[]{1248, 1253, 1258, 2153}, 15);
-    final AnimationList whiteflower2 = new AnimationList(new int[]{1249, 1254, 1259, 2154}, 15);
-    final AnimationList whiteflower3 = new AnimationList(new int[]{1250, 1255, 1260, 2155}, 15);
-    final AnimationList whiteflower4 = new AnimationList(new int[]{1251, 1256, 2151, 2156}, 15);
-    final AnimationList whiteflower5 = new AnimationList(new int[]{1252, 1257, 2152, 2157}, 15);
+    final AnimationList whiteflower1 = new AnimationList(new int[]{1248, 1253, 1258, 2153}, 25);
+    final AnimationList whiteflower2 = new AnimationList(new int[]{1249, 1254, 1259, 2154}, 25);
+    final AnimationList whiteflower3 = new AnimationList(new int[]{1250, 1255, 1260, 2155}, 25);
+    final AnimationList whiteflower4 = new AnimationList(new int[]{1251, 1256, 2151, 2156}, 25);
+    final AnimationList whiteflower5 = new AnimationList(new int[]{1252, 1257, 2152, 2157}, 25);
 
     final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 35);
     final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 35);

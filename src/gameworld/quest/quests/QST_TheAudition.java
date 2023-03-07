@@ -3,6 +3,7 @@ package gameworld.quest.quests;
 import gameworld.entities.NPC;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
 

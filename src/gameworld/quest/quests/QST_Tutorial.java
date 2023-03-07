@@ -5,6 +5,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_DroppedItem;
@@ -25,7 +26,6 @@ public class QST_Tutorial extends QUEST {
         this.name = "Tutorial";
         this.logicName = QUEST_NAME.Tutorial;
         this.quest_id = logicName.val;
-
         this.objectives[0] = "Talk to the old man";
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);

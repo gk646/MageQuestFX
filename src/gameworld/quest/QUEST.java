@@ -225,11 +225,5 @@ abstract public class QUEST {
         }
     }
 
-    public enum QUEST_NAME {
-        Tutorial(1), TheFakeNecklace(2), TheAudition(3), HillcrestPuzzle(4);
-        public int val;
 
-        QUEST_NAME(int val) {
-        }
-    }
 }

@@ -90,6 +90,7 @@ public class DRP_ChestItem extends DROP {
             blockPickup = false;
             gc.drawImage(icon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
         }
+        gc.setEffect(null);
     }
 
     private void setRarityEffect(GraphicsContext gc) {
