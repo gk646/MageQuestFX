@@ -17,14 +17,15 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
     private final String[] inscriptions = new String[]{"I am shorter than the statue below", "Iam taller then the statue to the left, but shorter then the tallest", "Iam the oldest", "Iam the least tall statue"};
     int counter = 0;
 
-    public QST_StaturePuzzleHillcrest(MainGame mg, String name, boolean completed) {
-        super(mg, name);
+    public QST_StaturePuzzleHillcrest(MainGame mg, boolean completed) {
+        super(mg);
         for (int i = 0; i < 4; i++) {
             user[i] = -1;
         }
-        quest_id = 4;
+        name = "The 4 Statues";
+        logicName = QUEST_NAME.HillcrestPuzzle;
+        quest_id = logicName.val;
         progressStage = 1;
-        mg.sqLite.setQuestActive(quest_id);
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {

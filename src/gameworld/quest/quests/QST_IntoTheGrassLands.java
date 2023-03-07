@@ -6,7 +6,7 @@ import main.MainGame;
 
 public class QST_IntoTheGrassLands extends QUEST {
     public QST_IntoTheGrassLands(MainGame mg, String name, boolean completed) {
-        super(mg, name);
+        super(mg);
         this.objectives[0] = "Pay the road tax";
         this.quest_id = 5;
         if (!completed) {

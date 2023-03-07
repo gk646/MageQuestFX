@@ -5,7 +5,7 @@ import main.MainGame;
 abstract public class HiddenQUEST extends QUEST {
     public boolean activated;
 
-    public HiddenQUEST(MainGame mg, String name) {
-        super(mg, name);
+    public HiddenQUEST(MainGame mg) {
+        super(mg);
     }
 }

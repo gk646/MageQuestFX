@@ -131,9 +131,9 @@ public class LoadGameState {
     private void loadHiddenQuests() {
         String description = mg.sqLite.readQuestDescription(4);
         if (description.equals("finished")) {
-            mg.qPanel.finishedQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", true));
+            mg.qPanel.finishedQuests.add(new QST_StaturePuzzleHillcrest(mg, true));
         } else {
-            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", false));
+            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, false));
         }
     }
 
