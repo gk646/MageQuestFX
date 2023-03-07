@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
+import main.system.ui.Effects;
 
 import java.awt.Point;
 
@@ -77,6 +78,7 @@ public class DRP_ChestItem extends DROP {
      */
     @Override
     public void draw(GraphicsContext gc) {
+        setRarityEffect(gc);
         if (arcPosition <= 1.0) {
             worldPos.x = (int) ((1 - arcPosition) * (1 - arcPosition) * startX + 2 * (1 - arcPosition) * arcPosition * controlX + arcPosition * arcPosition * endX);
             worldPos.y = (int) ((1 - arcPosition) * (1 - arcPosition) * startY + 2 * (1 - arcPosition) * arcPosition * controlY + arcPosition * arcPosition * endY);
@@ -87,6 +89,20 @@ public class DRP_ChestItem extends DROP {
         } else {
             blockPickup = false;
             gc.drawImage(icon, worldPos.x - Player.worldX + Player.screenX, worldPos.y - Player.worldY + Player.screenY, 32, 32);
+        }
+    }
+
+    private void setRarityEffect(GraphicsContext gc) {
+        if (item.rarity == 1) {
+            gc.setEffect(Effects.rarity_1glow);
+        } else if (item.rarity == 2) {
+            gc.setEffect(Effects.rarity_2glow);
+        } else if (item.rarity == 3) {
+            gc.setEffect(Effects.rarity_3glow);
+        } else if (item.rarity == 4 || item.rarity == 10) {
+            gc.setEffect(Effects.rarity_4glow);
+        } else if (item.rarity == 5) {
+            gc.setEffect(Effects.rarity_5glow);
         }
     }
 

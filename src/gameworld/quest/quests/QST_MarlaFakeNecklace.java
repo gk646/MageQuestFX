@@ -81,6 +81,38 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         mg.sqLite.updateQuestFacts(quest_id, 1, 1);
                         objective3Progress = 0;
                     }
+                } else if (progressStage == 75) {
+                    npc.blockInteraction = true;
+                } else if (progressStage == 77) {
+                    npc.blockInteraction = true;
+                } else if (progressStage == 79) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 79);
+                    }
+                    objective1Progress++;
+                    if (objective1Progress >= 450) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 82) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 82);
+                        objective1Progress = 1;
+                    }
+                    int num = npc.dialog.drawChoice("*Pay the 50 coins*", "*Do nothing*", null, null);
+                    if (num == 10) {
+                        if (mg.player.coins >= 50) {
+                            progressStage = 100;
+                            mg.player.coins -= 50;
+                            mg.sound.playEffectSound(5);
+                            objective1Progress = 0;
+                        } else {
+
+                        }
+                    } else if (num == 20) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
                 }
             }
             if (npc instanceof NPC_Aria) {
@@ -126,6 +158,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     if (num == 10) {
                         progressStage = 75;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, -1);
                     } else if (num == 20) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, progressStage);
@@ -143,9 +176,77 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 20) {
                     moveToTile(npc, 68, 73, new Point(49, 75));
                 } else if (progressStage == 21) {
-                    moveToTile(npc, 75, 71);
+                    moveToTile(npc, 76, 71);
+                    mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                 } else if (progressStage == 22) {
                     moveToTile(npc, 93, 59, new Point(86, 62));
+                } else if (progressStage == 77) {
+                    if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 78);
+                    }
+                } else if (progressStage == 78) {
+                    npc.blockInteraction = true;
+                    objective1Progress++;
+                    if (objective1Progress >= 360) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 80) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 80);
+                    }
+                    objective1Progress++;
+                    if (objective1Progress >= 450) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 81) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 81);
+                    }
+                    objective1Progress++;
+                    if (objective1Progress >= 450) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 83) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 83);
+                    }
+                    objective1Progress++;
+                    if (objective1Progress >= 450) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 84) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 84);
+                    }
+                    objective1Progress++;
+                    if (objective1Progress >= 500) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                } else if (progressStage == 85) {
+                    if (moveToTile(npc, 0, 99, new Point(31, 26), new Point(23, 29), new Point(18, 34), new Point(18, 83))) {
+                        npc.zone = Zone.Woodland_Edge;
+                        mg.sqLite.finishQuest(quest_id);
+                    }
+                } else if (progressStage == 100) {
+                    if (objective1Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 100);
+                    }
+                    if (objective1Progress >= 360) {
+                        nextStage();
+                        objective1Progress = 0;
+                    }
+                    objective1Progress++;
+                } else if (progressStage == 101) {
+                    if (moveToTile(npc, 0, 99, new Point(31, 26), new Point(23, 29), new Point(18, 34), new Point(18, 83))) {
+                        npc.zone = Zone.Woodland_Edge;
+                        mg.sqLite.finishQuest(quest_id);
+                    }
                 }
             }
         }

@@ -225,4 +225,13 @@ public class UI_QuestPanel {
         }
         return false;
     }
+
+    public boolean questIsFinished(String name) {
+        for (QUEST quest : finishedQuests) {
+            if (quest.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

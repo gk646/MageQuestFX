@@ -72,7 +72,7 @@ public class TileBasedEffects {
             mg.playerPrompts.E = true;
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.dropManager.epicChestEvent(mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level);
-                mg.sound.playEffectSound(12);
+                mg.sound.playEffectSound(13);
                 animationList.add(new ScriptedAnimationList(new int[]{2_193, 2_195}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
         }

@@ -64,11 +64,14 @@ public class Sound {
         //8
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/openInventory.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/pickupGold.wav")).toString())));
-        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/readBook.wav")).toString())));
         //10
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/readBook.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/zipTabs.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/closeInventory.wav")).toString())));
+        //13
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/epicChestOpen.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/levelup/getTalent.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/interact.wav")).toString())));
 
 
         loadAmbience();
@@ -240,5 +243,11 @@ public class Sound {
     public void playEffectSound(int index) {
         effectSounds.get(index).seek(Duration.ZERO);
         effectSounds.get(index).play();
+    }
+
+    public void playNewEffectSound(int index) {
+        MediaPlayer mediaPlayer = new MediaPlayer(effectSounds.get(index).getMedia());
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
     }
 }

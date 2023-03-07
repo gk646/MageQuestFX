@@ -434,7 +434,6 @@ public class SQLite {
         }
     }
 
-
     private String getEffectString(ITEM item) {
         StringBuilder effect = new StringBuilder();
         for (int i = 1; i < Player.effectsSizeRollable; i++) {
@@ -507,7 +506,6 @@ public class SQLite {
             }
         }
     }
-
 
     private void inverseArrayLists() {
         mg.AMULET.sort(Comparator.comparingInt(o -> o.i_id));

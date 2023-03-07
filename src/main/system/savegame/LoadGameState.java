@@ -92,7 +92,16 @@ public class LoadGameState {
             case "active" -> {
                 mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
                 mg.qPanel.getQuest("The Fake Necklace").questRecap = mg.sqLite.readQuestJournal(2, 150);
-                if (quest_num == 1) {
+
+                if (quest_num == -1) {
+                    for (NPC npc : mg.npcControl.NPC_Active) {
+                        if (npc instanceof NPC_Marla) {
+                            ((NPC_Marla) npc).gotQuest = true;
+                        }
+                    }
+                    mg.qPanel.setQuestStage("The Fake Necklace", 77);
+                    mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 43, 31, Zone.Hillcrest));
+                } else if (quest_num == 1) {
                     mg.qPanel.getQuest("The Fake Necklace").objective3Progress = 1;
                     mg.qPanel.setQuestStage("The Fake Necklace", 11);
                     for (NPC npc : mg.npcControl.NPC_Active) {
@@ -100,10 +109,10 @@ public class LoadGameState {
                             ((NPC_Marla) npc).gotQuest = true;
                         }
                     }
-                    mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                    mg.ENTITIES.add(new DeadWolf(82, 48, Zone.Hillcrest));
                     mg.ENTITIES.add(new DeadWolf(84, 51, Zone.Hillcrest));
                     mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
-                    mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
+                    mg.ENTITIES.add(new DeadWolf(84, 53, Zone.Hillcrest));
                     mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 59, 55, Zone.Hillcrest));
                     mg.qPanel.getQuest("The Fake Necklace").objectives[0] = Dialog.insertNewLine("Head east and pickup the mysterious adventurers trail!", 20);
                 } else if (quest_num == 2) {

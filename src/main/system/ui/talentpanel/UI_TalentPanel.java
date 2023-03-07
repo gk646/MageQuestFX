@@ -46,6 +46,7 @@ public class UI_TalentPanel {
     public void spendTalentPoint() {
         pointsSpent++;
         pointsToSpend--;
+        mg.sound.playNewEffectSound(14);
     }
 
     public void drawTalentWindow(GraphicsContext gc) {

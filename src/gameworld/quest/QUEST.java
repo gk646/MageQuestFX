@@ -171,6 +171,7 @@ abstract public class QUEST {
             npc.dialog.loadNewLine(array[stageNumber]);
             npc.dialogHideDelay = 0;
             npc.show_dialog = true;
+            npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
         } catch (ArrayIndexOutOfBoundsException e) {
             npc.dialog.loadNewLine("...");
         }

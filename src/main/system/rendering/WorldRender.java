@@ -129,6 +129,10 @@ public class WorldRender {
             setupCollision(4);
             setupCollision(592);
             setupCollision(283);
+            setupCollision(2267);
+            setupCollision(2462);
+            setupCollision(2514);
+            setupCollision(2228);
             setupCollision(336);
             setupCollision(335);
             setupCollision(322);
