@@ -73,7 +73,7 @@ public class NPC_Marla extends NPC {
             if (mg.collisionChecker.checkEntityAgainstPlayer(this, 8) && mg.inputH.e_typed && !mg.qPanel.PlayerHasQuests("The Fake Necklace")) {
                 show_dialog = true;
                 mg.inputH.e_typed = false;
-                mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
+                mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, false));
                 gotQuest = true;
                 dialog.dialogRenderCounter = 2000;
             }

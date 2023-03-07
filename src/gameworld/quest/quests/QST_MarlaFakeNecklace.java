@@ -18,12 +18,11 @@ import java.awt.Point;
 public class QST_MarlaFakeNecklace extends QUEST {
     private int enemiesKilled;
 
-    public QST_MarlaFakeNecklace(MainGame mg, String name, boolean completed) {
-        super(mg, name);
-        quest_id = 2;
+    public QST_MarlaFakeNecklace(MainGame mg, boolean completed) {
+        super(mg);
+        logicName = QUEST_NAME.TheFakeNecklace;
+        quest_id = logicName.val;
         name = "The Fake Necklace";
-
-        mg.sqLite.setQuestActive(quest_id);
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {

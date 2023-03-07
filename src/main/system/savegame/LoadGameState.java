@@ -45,12 +45,12 @@ public class LoadGameState {
         String description = mg.sqLite.readQuestDescription(1);
         switch (description) {
             case "null" -> {
-                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
+                mg.qPanel.quests.add(new QST_Tutorial(mg, false));
                 mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
                 mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
             }
             case "active" -> {
-                mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
+                mg.qPanel.quests.add(new QST_Tutorial(mg, false));
                 mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
                 mg.qPanel.getQuest("Tutorial").questRecap = mg.sqLite.readQuestJournal(1, 150);
                 if (quest_num == 1) {
@@ -75,7 +75,7 @@ public class LoadGameState {
             }
             case "finished" -> {
                 mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 44, 21, Zone.Hillcrest));
-                mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, "Tutorial", true));
+                mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, true));
                 if (mg.player.spawnLevel < 1) {
                     mg.player.spawnLevel = 1;
                 }
@@ -90,7 +90,7 @@ public class LoadGameState {
             case "null" -> {
             }
             case "active" -> {
-                mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
+                mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, false));
                 mg.qPanel.getQuest("The Fake Necklace").questRecap = mg.sqLite.readQuestJournal(2, 150);
                 for (NPC npc : mg.npcControl.NPC_Active) {
                     if (npc instanceof NPC_Marla) {
@@ -119,7 +119,7 @@ public class LoadGameState {
 
                 }
             }
-            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", true));
+            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, true));
         }
     }
 

@@ -7,12 +7,12 @@ import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
 
 public class QST_TheAudition extends QUEST {
-    public QST_TheAudition(MainGame mg, String name, boolean completed) {
-        super(mg, name);
-        quest_id = 3;
+    public QST_TheAudition(MainGame mg, boolean completed) {
+        super(mg);
+        logicName = QUEST_NAME.TheAudition;
+        quest_id = logicName.val;
         name = "The Audition";
         updateObjective("Talk to the mayor", 0);
-        mg.sqLite.setQuestActive(quest_id);
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {

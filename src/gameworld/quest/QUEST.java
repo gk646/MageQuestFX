@@ -11,6 +11,7 @@ import java.awt.Point;
 abstract public class QUEST {
 
     public String name;
+    public QUEST_NAME logicName;
     public final String[] objectives = new String[3];
     public String[] questRecap = new String[50];
     public int progressStage = 1;
@@ -19,8 +20,7 @@ abstract public class QUEST {
     protected final MainGame mg;
     public boolean completed;
 
-    public QUEST(MainGame mg, String name) {
-        this.name = name;
+    public QUEST(MainGame mg) {
         this.mg = mg;
     }
 
@@ -222,6 +222,14 @@ abstract public class QUEST {
             npc.dialogHideDelay = 0;
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
             mg.inputH.e_typed = false;
+        }
+    }
+
+    public enum QUEST_NAME {
+        Tutorial(1), TheFakeNecklace(2), TheAudition(3), HillcrestPuzzle(4);
+        public int val;
+
+        QUEST_NAME(int val) {
         }
     }
 }

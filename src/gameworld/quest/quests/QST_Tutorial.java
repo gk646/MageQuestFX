@@ -20,11 +20,13 @@ public class QST_Tutorial extends QUEST {
     private int gruntKillCounter;
     private boolean once;
 
-    public QST_Tutorial(MainGame mg, String name, boolean completed) {
-        super(mg, name);
+    public QST_Tutorial(MainGame mg, boolean completed) {
+        super(mg);
         this.name = "Tutorial";
+        this.logicName = QUEST_NAME.Tutorial;
+        this.quest_id = logicName.val;
+
         this.objectives[0] = "Talk to the old man";
-        this.quest_id = 1;
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {
@@ -224,7 +226,7 @@ public class QST_Tutorial extends QUEST {
                         mg.player.coins += 25;
                         mg.sound.playEffectSound(9);
                         once = true;
-                        mg.qPanel.quests.add(new QST_TheAudition(mg, "The Audition", false));
+                        mg.qPanel.quests.add(new QST_TheAudition(mg, false));
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
                     moveToTile(npc, 44, 21, new Point(25, 23));
