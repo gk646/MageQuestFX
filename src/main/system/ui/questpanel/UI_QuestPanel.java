@@ -169,6 +169,11 @@ public class UI_QuestPanel {
         synchronized (quests) {
             synchronized (hiddenQuests) {
                 for (int i = 0; i < quests.size(); i++) {
+                    if (activeQuest == null) {
+                        if (quests.get(i) != null) {
+                            activeQuest = quests.get(i);
+                        }
+                    }
                     quests.get(i).update();
                     if (quests.get(i).completed) {
                         if (activeQuest == quests.get(i)) {

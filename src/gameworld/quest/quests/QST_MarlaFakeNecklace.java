@@ -237,7 +237,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     if (objective1Progress == 0) {
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 100);
                     }
-                    if (objective1Progress >= 360) {
+                    if (objective1Progress >= 600) {
                         nextStage();
                         objective1Progress = 0;
                     }
