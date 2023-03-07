@@ -68,6 +68,7 @@ public class Sound {
         //10
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/zipTabs.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/closeInventory.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/epicChestOpen.wav")).toString())));
 
 
         loadAmbience();
