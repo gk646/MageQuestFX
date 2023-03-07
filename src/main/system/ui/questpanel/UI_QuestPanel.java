@@ -168,17 +168,15 @@ public class UI_QuestPanel {
     public void update() {
         synchronized (quests) {
             synchronized (hiddenQuests) {
-                Iterator<QUEST> iterator = quests.iterator();
-                while (iterator.hasNext()) {
-                    QUEST quest = iterator.next();
-                    quest.update();
-                    if (quest.completed) {
-                        if (activeQuest == quest) {
+                for (int i = 0; i < quests.size(); i++) {
+                    quests.get(i).update();
+                    if (quests.get(i).completed) {
+                        if (activeQuest == quests.get(i)) {
                             activeQuest = null;
                         }
-                        iterator.remove();
                     }
                 }
+                quests.removeIf(quest -> quest.completed);
                 Iterator<HiddenQUEST> hidden = hiddenQuests.iterator();
                 while (hidden.hasNext()) {
                     HiddenQUEST quest = hidden.next();

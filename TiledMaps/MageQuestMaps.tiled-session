@@ -59,11 +59,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 0.33,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1272,
-                "y": 1054.6666666666665
+                "x": 430.30303030303025,
+                "y": 827.2727272727273
             }
         },
         "GrassLands.tmx": {
@@ -120,8 +120,8 @@
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 881,
-                "y": 1034
+                "x": 748,
+                "y": 956
             }
         },
         "caveMarla.tmx": {

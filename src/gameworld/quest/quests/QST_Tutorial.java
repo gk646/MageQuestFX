@@ -193,18 +193,21 @@ public class QST_Tutorial extends QUEST {
                         mg.wControl.removeMapMarker("path1");
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
+                        objective3Progress = 0;
                     }
                 } else if (progressStage == 37) {
                     mg.wControl.addMapMarker("path1", 20, 20, MarkerType.Quest);
-                    if (npc.activeTile.x == 1) {
+                    if (objective3Progress == 0) {
                         npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 37);
+                        objective3Progress = 1;
                     }
                     if (moveToTile(npc, 20, 20, new Point(4, 4), new Point(8, 8), new Point(12, 10))) {
                         updateObjective("Speak with the old man", 0);
                         mg.player.spawnLevel = 1;
                     }
                 } else if (progressStage == 40) {
+                    objective3Progress = 0;
                     mg.wControl.removeMapMarker("path1");
                     int num = npc.dialog.drawChoice("Iam in a hurry!", "Tell me everything...", null, null);
                     if (num == 10) {
@@ -224,6 +227,7 @@ public class QST_Tutorial extends QUEST {
                         mg.qPanel.quests.add(new QST_TheAudition(mg, "The Audition", false));
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
+                    moveToTile(npc, 44, 21, new Point(25, 23));
                     updateObjective("Quest Finished", 0);
                     mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     mg.sqLite.finishQuest(quest_id);

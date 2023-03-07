@@ -31,6 +31,7 @@ public class Sound {
     public MediaPlayer currentAmbient;
     private double waterVolume = 0.3f;
     private MediaPlayer lava;
+    private MediaPlayer firePlace;
     final MainGame mg;
     public int currentTrackIndex = 0;
     private boolean fadeOut = false;
@@ -84,6 +85,7 @@ public class Sound {
         addDungeonTrack("5");
         loadForestAmbience("0");
         loadForestAmbience("1");
+        firePlace = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/fireplace.wav")).toString()));
         waterAmbience = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/waterAmbience/0.wav")).toString()));
         waterAmbience.setVolume(waterVolume);
         lava = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/lava.mp3")).toString()));
@@ -112,6 +114,9 @@ public class Sound {
             if (lava != null) {
                 fadeOut(lava, AMBIENCE_VOLUME);
             }
+            if (firePlace != null) {
+                fadeOut(firePlace, AMBIENCE_VOLUME);
+            }
         }
     }
 
@@ -127,7 +132,6 @@ public class Sound {
     }
 
     public void fadeOut(MediaPlayer mediaPlayer, double volume) {
-        mediaPlayer.setVolume(volume);
         Timeline fadeOut = new Timeline(
                 new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), volume)),
                 new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), 0))
@@ -153,7 +157,7 @@ public class Sound {
                 currentAmbient = dungeonAmbient.get(currentTrackIndex);
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
+                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }
             }
@@ -167,7 +171,7 @@ public class Sound {
                 currentAmbient = forestAmbient.get(currentTrackIndex);
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
             } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.93f) {
+                if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(currentAmbient, AMBIENCE_VOLUME);
                 }
             }
@@ -181,7 +185,7 @@ public class Sound {
             if (waterAmbience.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(waterAmbience, waterVolume);
             } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                if (waterAmbience.getCurrentTime().toMillis() >= waterAmbience.getTotalDuration().toMillis() * 0.93f) {
+                if (waterAmbience.getCurrentTime().toMillis() >= waterAmbience.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(currentAmbient, waterVolume);
                 }
             }
@@ -192,12 +196,21 @@ public class Sound {
             if (lava.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(lava, waterVolume);
             } else if (lava.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.93f) {
+                if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(lava, waterVolume);
                 }
             }
         } else {
             fadeOut(lava, waterVolume);
+        }
+        if (mg.tileBase.isFireNearby()) {
+            if (firePlace.getStatus() != MediaPlayer.Status.PLAYING) {
+                fadeIn(firePlace, waterVolume);
+            } else if (firePlace.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+                if (firePlace.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.95f) {
+                    fadeOut(firePlace, waterVolume);
+                }
+            }
         }
     }
 

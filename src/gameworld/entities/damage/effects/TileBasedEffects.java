@@ -136,4 +136,14 @@ public class TileBasedEffects {
 
         return Arrays.copyOf(values, index);
     }
+
+    public boolean isFireNearby() {
+        for (int i = 0; i < tilesData.length; i++) {
+            int num2 = tilesData1[i];
+            if ((num2 >= 1_528 && num2 <= 1_531)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -436,7 +436,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
         player.coins = 2_000;
     }
 
@@ -461,7 +461,7 @@ public class MainGame {
         }
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
-        wControl.loadMap(Zone.Hillcrest, 41, 31);
+        wControl.loadMap(Zone.Hillcrest, 3, 69);
         // wControl.loadMap(Zone.Clearing, 35, 35);
         for (int i = 0; i < 20; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem((10 + i) * 48, 15 * 48, dropManager.getGuaranteedRandomItem(15), Zone.Hillcrest));

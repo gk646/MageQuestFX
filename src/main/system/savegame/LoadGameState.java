@@ -47,18 +47,19 @@ public class LoadGameState {
             case "null" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
+                mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
             }
             case "active" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
-                System.out.println("hey");
-                mg.qPanel.getQuest("Tutorial").questRecap = mg.sqLite.readQuestJournal(1, 50);
+                mg.qPanel.getQuest("Tutorial").questRecap = mg.sqLite.readQuestJournal(1, 150);
                 if (quest_num == 1) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Woodland_Edge));
                     mg.qPanel.setQuestStage("Tutorial", 13);
                     mg.player.setPosition(39, 34);
                     mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
                     mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(4), Zone.Woodland_Edge));
+                    mg.qPanel.getQuest("Tutorial").objectives[0] = ("Talk to the old man");
                 } else if (quest_num == 2) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Woodland_Edge));
                     mg.qPanel.setQuestStage("Tutorial", 26);
@@ -69,12 +70,11 @@ public class LoadGameState {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 1, 1, Zone.Hillcrest));
                     mg.qPanel.setQuestStage("Tutorial", 37);
                     mg.qPanel.getQuest("Tutorial").objectives[0] = ("Follow the old man");
-                    mg.wControl.loadMap(Zone.Hillcrest, 0, 0);
-                } else {
-                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
+                    mg.wControl.loadMap(Zone.Hillcrest, 4, 4);
                 }
             }
             case "finished" -> {
+                mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 44, 21, Zone.Hillcrest));
                 mg.qPanel.finishedQuests.add(new QST_Tutorial(mg, "Tutorial", true));
                 if (mg.player.spawnLevel < 1) {
                     mg.player.spawnLevel = 1;
@@ -92,23 +92,17 @@ public class LoadGameState {
             case "active" -> {
                 mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, "The Fake Necklace", false));
                 mg.qPanel.getQuest("The Fake Necklace").questRecap = mg.sqLite.readQuestJournal(2, 150);
-
-                if (quest_num == -1) {
-                    for (NPC npc : mg.npcControl.NPC_Active) {
-                        if (npc instanceof NPC_Marla) {
-                            ((NPC_Marla) npc).gotQuest = true;
-                        }
+                for (NPC npc : mg.npcControl.NPC_Active) {
+                    if (npc instanceof NPC_Marla) {
+                        ((NPC_Marla) npc).gotQuest = true;
                     }
+                }
+                if (quest_num == -1) {
                     mg.qPanel.setQuestStage("The Fake Necklace", 77);
                     mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 43, 31, Zone.Hillcrest));
                 } else if (quest_num == 1) {
                     mg.qPanel.getQuest("The Fake Necklace").objective3Progress = 1;
                     mg.qPanel.setQuestStage("The Fake Necklace", 11);
-                    for (NPC npc : mg.npcControl.NPC_Active) {
-                        if (npc instanceof NPC_Marla) {
-                            ((NPC_Marla) npc).gotQuest = true;
-                        }
-                    }
                     mg.ENTITIES.add(new DeadWolf(82, 48, Zone.Hillcrest));
                     mg.ENTITIES.add(new DeadWolf(84, 51, Zone.Hillcrest));
                     mg.ENTITIES.add(new DeadWolf(82, 50, Zone.Hillcrest));
@@ -129,10 +123,15 @@ public class LoadGameState {
         }
     }
 
+    private void loadAudition() {
+        int quest_num = mg.sqLite.readQuestFacts(2, 1);
+        String description = mg.sqLite.readQuestDescription(2);
+    }
+
     private void loadHiddenQuests() {
         String description = mg.sqLite.readQuestDescription(4);
         if (description.equals("finished")) {
-            mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", true));
+            mg.qPanel.finishedQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", true));
         } else {
             mg.qPanel.hiddenQuests.add(new QST_StaturePuzzleHillcrest(mg, "The 4 Statures", false));
         }
