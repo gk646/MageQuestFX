@@ -417,28 +417,25 @@ public class MainGame {
             //84%
             ui.updateLoadingScreen(12, gc);
             //multiplayer = new Multiplayer(this, ENTPlayer2);
-            player.updateEquippedItems();
-            player.health = player.maxHealth;
-            player.setMana(player.maxMana);
+
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
             FonT.loadFonts();
             //100%
-            sqLite.resetGame();
+            //sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
             gameMap.getImage();
             gameState = State.TITLE;
             loadingScreen = false;
+            sound.setVolumeMusic(ui.musicSlider);
             sound.setVolumeAmbience(ui.ambientSlider);
             sound.setVolumeEffects(ui.effectsSlider);
             startThreads();
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        wControl.loadMap(Zone.Ruin_Dungeon, 45, 45
-        );
         //debug();
         player.coins = 2_000;
     }
@@ -474,6 +471,7 @@ public class MainGame {
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
     }
+
     /**
      * Prints out the total item count across all categories
      */

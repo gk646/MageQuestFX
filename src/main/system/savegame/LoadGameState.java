@@ -51,6 +51,7 @@ public class LoadGameState {
             case "active" -> {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, "Tutorial", false));
                 mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
+                System.out.println("hey");
                 mg.qPanel.getQuest("Tutorial").questRecap = mg.sqLite.readQuestJournal(1, 50);
                 if (quest_num == 1) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Woodland_Edge));
@@ -134,6 +135,9 @@ public class LoadGameState {
             mg.sqLite.readSKillPanel(stmt);
             mg.sqLite.readPlayerInventory(stmt);
             mg.sqLite.readPlayerBags(stmt);
+            mg.player.updateEquippedItems();
+            mg.player.health = mg.player.maxHealth;
+            mg.player.setMana(mg.player.maxMana);
         } catch (SQLException e) {
             throw new RuntimeException();
         }

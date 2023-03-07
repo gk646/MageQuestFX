@@ -295,7 +295,7 @@ public class Player extends ENTITY {
         maxMana = (int) ((20.0f + intellect * 3 + wisdom) * Math.sqrt(Math.min(level, 50)));
         manaRegeneration = Math.round(1 + ((wisdom * 2 + intellect) / Math.sqrt(Math.max(10, level + 5))) / 60.0f * 100.0f) / 100.0f;
         healthRegeneration = Math.round(2 + ((endurance * 2 + vitality) / Math.sqrt(Math.max(10, level + 10))) / 110.0f * 100.0f) / 100.0f;
-        playerMovementSpeed = Math.round(((3.5f + (agility * 0.4 / (float) Math.max(10, level)))) * 100.0f) / 100.0f;
+        playerMovementSpeed = Math.round(((3.0f + (agility * 0.4 / (float) Math.max(10, level)))) * 100.0f) / 100.0f;
         critChance = Math.min((Math.round(((5.0f + ((luck * 2) / Math.sqrt(Math.max(10, level))) * 100.0f) / 100.0f))), 75);
         speechSkill = Math.round((5.0f + (level / 10.0f) + (1.5f * charisma) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f;
         resistChance = Math.min((Math.round((5.0f + (level / 10.0f) + (endurance * 1.0f) * (1.0f - (level / 64.0f))) * 100.0f) / 100.0f), 50);

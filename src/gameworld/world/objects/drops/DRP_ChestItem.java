@@ -2,6 +2,7 @@ package gameworld.world.objects.drops;
 
 import gameworld.player.Player;
 import gameworld.world.objects.DROP;
+import gameworld.world.objects.items.ITEM;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -22,13 +23,37 @@ public class DRP_ChestItem extends DROP {
     private float arcPosition = 0;
 
 
-    public DRP_ChestItem(MainGame mg, int worldX, int worldY, Zone zone, int level) {
+    public DRP_ChestItem(MainGame mg, int worldX, int worldY, Zone zone, int level, boolean left) {
         this.item = mg.dropManager.getGuaranteedRandomItem(level);
         this.zone = zone;
         this.icon = item.icon;
         blockPickup = true;
         this.worldPos = new Point(worldX - 16, worldY - 16);
-        if (Math.random() > 0.5f && !mg.wRender.tileStorage[WorldRender.worldData[(worldPos.x + 40) / 48][worldPos.y / 48]].collision) {
+        if (!left && (Math.random() > 0.5f && !mg.wRender.tileStorage[WorldRender.worldData[(worldPos.x + 40) / 48][worldPos.y / 48]].collision)) {
+            this.startX = worldPos.x;
+            this.startY = worldPos.y;
+            controlX = worldPos.x + 25;
+            controlY = worldPos.y - 100;
+            endX = worldPos.x + 50;
+            endY = worldPos.y;
+        } else {
+            this.startX = worldPos.x;
+            this.startY = worldPos.y;
+            controlX = worldPos.x - 25;
+            controlY = worldPos.y - 100;
+            endX = worldPos.x - 50;
+            endY = worldPos.y;
+        }
+        this.size = 32;
+    }
+
+    public DRP_ChestItem(MainGame mg, int worldX, int worldY, Zone zone, boolean left, ITEM item) {
+        this.item = item;
+        this.zone = zone;
+        this.icon = item.icon;
+        blockPickup = true;
+        this.worldPos = new Point(worldX - 16, worldY - 16);
+        if (!left && (Math.random() > 0.5f && !mg.wRender.tileStorage[WorldRender.worldData[(worldPos.x + 40) / 48][worldPos.y / 48]].collision)) {
             this.startX = worldPos.x;
             this.startY = worldPos.y;
             controlX = worldPos.x + 25;

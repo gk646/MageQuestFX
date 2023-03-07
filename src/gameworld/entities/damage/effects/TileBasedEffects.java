@@ -59,7 +59,7 @@ public class TileBasedEffects {
         } else if (activeTile1 == 137) {
             mg.playerPrompts.E = true;
             if (mg.inputH.e_typed && animationList.size() == 0) {
-                mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level));
+                mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level, false));
                 mg.sound.playEffectSound(4);
                 animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
@@ -70,7 +70,9 @@ public class TileBasedEffects {
             }
         } else if (activeTile1 == 2_191) {
             mg.playerPrompts.E = true;
+
             if (mg.inputH.e_typed && animationList.size() == 0) {
+                mg.dropManager.epicChestEvent(mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level);
                 animationList.add(new ScriptedAnimationList(new int[]{2_193, 2_195}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
         }

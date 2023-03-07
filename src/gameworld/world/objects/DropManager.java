@@ -1,6 +1,7 @@
 package gameworld.world.objects;
 
 import gameworld.player.Player;
+import gameworld.world.objects.drops.DRP_ChestItem;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import gameworld.world.objects.items.ITEM;
 import main.MainGame;
@@ -158,7 +159,29 @@ public class DropManager {
     }
 
     public ITEM getGuaranteedRandomItem(int level) {
-        ITEM item = goThroughArrays(mg.random.nextInt(0, 11), level);
+        ITEM item = getItemWithDropChance(goThroughArrays(mg.random.nextInt(0, 11), level));
+        while (item == null) {
+            item = getItemWithDropChance(goThroughArrays(mg.random.nextInt(0, 11), level));
+        }
         return rollEffect(item);
+    }
+
+    public void bossDieEvent(int x, int y, Zone zone, int level) {
+        ITEM item = getGuaranteedRandomItem(level);
+        while (item.rarity != 2) {
+            item = getGuaranteedRandomItem(level);
+        }
+        mg.WORLD_DROPS.add(new DRP_ChestItem(mg, x, y, zone, true, item));
+        mg.WORLD_DROPS.add(new DRP_ChestItem(mg, x, y, zone, level, false));
+        mg.WORLD_DROPS.add(new DRP_ChestItem(mg, x, y, zone, level, false));
+    }
+
+    public void epicChestEvent(int x, int y, Zone zone, int level) {
+        ITEM item = getGuaranteedRandomItem(level);
+        while (item.rarity != 3) {
+            item = getGuaranteedRandomItem(level);
+        }
+        mg.WORLD_DROPS.add(new DRP_ChestItem(mg, x, y, zone, true, item));
+        mg.WORLD_DROPS.add(new DRP_ChestItem(mg, x, y, zone, level, false));
     }
 }

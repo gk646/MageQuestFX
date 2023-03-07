@@ -243,9 +243,9 @@ public class UI {
         gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
         gc.setFill(Colors.white);
         gc.setFont(FonT.varnished16);
-        gc.fillText(LocalTime.now().format(formatter), 1860, 23);
+        gc.fillText(LocalTime.now().format(formatter), 1_860, 23);
         gc.setFont(FonT.antParty20);
-        gc.fillText(WorldController.currentWorld.toString(), 1700, 25);
+        gc.fillText(WorldController.currentWorld.toString(), 1_700, 25);
     }
 
 

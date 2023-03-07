@@ -4,8 +4,10 @@ import gameworld.entities.ENTITY;
 import gameworld.player.Player;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import main.system.sound.Sound;
 import main.system.ui.FonT;
 
 public class Dialog {
@@ -96,6 +98,11 @@ public class Dialog {
             if (dialogRenderCounter / 4 >= dialogLine.length()) {
                 dialogRenderCounter = 2_000;
             } else {
+                if (dialogRenderCounter % 8 == 0) {
+                    MediaPlayer mediaPlayer = new MediaPlayer(Sound.dialogBeep);
+                    mediaPlayer.play();
+                    mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
+                }
                 dialogRenderCounter++;
             }
         }

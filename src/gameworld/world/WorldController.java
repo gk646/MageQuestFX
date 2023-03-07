@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class WorldController {
     private final MainGame mg;
-    public static Zone currentWorld;
+    public static Zone currentWorld = Zone.Woodland_Edge;
     public static int[][] currentMapCover;
     public static ArrayList<MapMarker> currentMapMarkers = new ArrayList<>();
     public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
@@ -43,11 +43,11 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
+                currentWorld = zone;
                 mg.player.map = map;
                 mg.wRender.worldSize = map.mapSize;
                 mg.player.setPosition(xTile, yTile);
                 mg.getPlayerTile();
-                currentWorld = zone;
                 clearWorldArrays();
                 mg.wAnim.emptyAnimationLists();
                 currentMapMarkers = map.mapMarkers;

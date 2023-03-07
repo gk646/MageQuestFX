@@ -19,6 +19,8 @@ import java.util.Objects;
 public class Sound {
     public final ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>();
     public final ArrayList<MediaPlayer> forestAmbient = new ArrayList<>();
+    public static final Media dialogBeep = new Media(Objects.requireNonNull(Sound.class.getResource("/resources/sound/effects/quest/speak.wav")).toString());
+
     public static float EFFECTS_VOLUME = 0.5f;
     public final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
@@ -66,6 +68,7 @@ public class Sound {
         //10
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/zipTabs.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/closeInventory.wav")).toString())));
+
 
         loadAmbience();
     }

@@ -406,7 +406,7 @@ public class SQLite {
         stmt.setInt(1, mg.player.coins);
         stmt.setInt(2, (int) mg.player.experience);
         stmt.setInt(3, mg.player.spawnLevel);
-        stmt.setInt(3, mg.talentP.pointsToSpend);
+        stmt.setInt(4, mg.talentP.pointsToSpend);
         stmt.executeUpdate();
     }
 
@@ -590,6 +590,7 @@ public class SQLite {
 
     private void readPlayerStats(Statement stmt) throws SQLException {
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
+        mg.player.spawnLevel = rs.getInt("startLevel");
         mg.player.coins = rs.getInt("coins");
         mg.player.setLevel(rs.getInt("experience"));
         mg.talentP.pointsToSpend = rs.getInt("talentPointsToSpend");
