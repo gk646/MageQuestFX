@@ -125,11 +125,11 @@
             }
         },
         "caveMarla.tmx": {
-            "scale": 0.75,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 476.66666666666663,
-                "y": 637.3333333333333
+                "x": 60.25,
+                "y": 197
             }
         },
         "d.tsx": {

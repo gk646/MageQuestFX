@@ -241,7 +241,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     objective1Progress++;
                     if (objective1Progress == 200) {
                         if (moveToTile(npc, 87, 94)) {
-                            npc.zone = Zone.Hillcrest_MountainCave;
+                            npc.zone = Zone.Hillcrest_Mountain_Cave;
                         }
                     }
                 } else if (progressStage == 77) {

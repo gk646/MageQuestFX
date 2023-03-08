@@ -34,7 +34,7 @@ public class WorldController {
         //Overworld
         MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         MAPS.add(new Map("HillCrestPuzzleCellar", new Point(50, 50), Zone.Treasure_Cave));
-        MAPS.add(new Map("caveMarla", new Point(60, 60), Zone.Hillcrest_MountainCave));
+        MAPS.add(new Map("caveMarla", new Point(60, 60), Zone.Hillcrest_Mountain_Cave));
         loadArray();
     }
 
@@ -125,7 +125,7 @@ public class WorldController {
                     loadMap(Zone.Treasure_Cave, 26, 18);
                 }
             } else if (mg.playerX == 87 && mg.playerY == 94) {
-                loadMap(Zone.Hillcrest_MountainCave, 56, 57);
+                loadMap(Zone.Hillcrest_Mountain_Cave, 56, 57);
             }
         } else if (currentWorld == Zone.Treasure_Cave) {
             if (mg.playerX == 26 && mg.playerY == 18) {
@@ -134,9 +134,11 @@ public class WorldController {
                     loadMap(Zone.Hillcrest, 64, 65);
                 }
             }
-        } else if (currentWorld == Zone.Hillcrest_MountainCave) {
+        } else if (currentWorld == Zone.Hillcrest_Mountain_Cave) {
             if (mg.playerY == 59 && (mg.playerX == 54 || mg.playerX == 55 || mg.playerX == 56 || mg.playerX == 57 || mg.playerX == 58)) {
                 loadMap(Zone.Hillcrest, 88, 96);
+            } else if (mg.playerX == 0 && (mg.playerY == 13 || mg.playerY == 14 || mg.playerY == 15 || mg.playerY == 16)) {
+                loadMap(Zone.Hillcrest, 75, 85);
             }
         }
     }
