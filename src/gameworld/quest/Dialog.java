@@ -60,17 +60,32 @@ public class Dialog {
                 gc.fillText(string, x, stringY += 16);
             }
             if (drawChoice) {
-                gc.fillText(choice1, x + 15, stringY += 20);
+                gc.fillText(choice1, x + 15, stringY + 20);
                 Text text = new Text(choice1);
                 text.setFont(gc.getFont());
-                gc.fillText(choice2, x + 30 + text.getLayoutBounds().getWidth(), stringY);
+                gc.fillText(choice2, x + 35 + text.getLayoutBounds().getWidth(), stringY + 20);
+                if (maxChoices > 2) {
+                    gc.fillText(choice3, x + 15, stringY + 40);
+                }
+                if (maxChoices > 3) {
+                    text = new Text(choice3);
+                    text.setFont(gc.getFont());
+                    gc.fillText(choice4, x + 35 + text.getLayoutBounds().getWidth(), stringY + 40);
+                }
                 if (choicePointer == 0) {
-                    gc.fillText(">", x, stringY);
+                    gc.fillText(">", x, stringY + 20);
                 } else if (choicePointer == 1) {
-                    gc.fillText(">", x + 20 + text.getLayoutBounds().getWidth(), stringY);
+                    text = new Text(choice1);
+                    text.setFont(gc.getFont());
+                    gc.fillText(">", x + 20 + text.getLayoutBounds().getWidth(), stringY + 20);
+                } else if (choicePointer == 2) {
+                    gc.fillText(">", x, stringY + 40);
+                } else if (choicePointer == 3) {
+                    text = new Text(choice3);
+                    text.setFont(gc.getFont());
+                    gc.fillText(">", x + 20 + text.getLayoutBounds().getWidth(), stringY + 40);
                 }
                 if (InputHandler.q_typed) {
-
                     if (choicePointer < maxChoices - 1) {
                         choicePointer++;
                     } else {
@@ -112,7 +127,7 @@ public class Dialog {
 
     public void drawDialogPlayer(GraphicsContext gc) {
         gc.setFont(FonT.varnished14);
-        gc.setFill(Color.BLACK);
+        gc.setFill(Colors.black_transparent);
         gc.fillRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);
         gc.setLineWidth(2);
         gc.setStroke(Color.WHITE);
@@ -182,10 +197,13 @@ public class Dialog {
             }
         } else {
             drawChoice = true;
-            maxChoices = 2;
+            maxChoices = 1;
             choice1 = option1;
-            choice2 = option2;
             choicePointer = 0;
+            if (option2 != null) {
+                choice2 = option2;
+                maxChoices++;
+            }
             if (option3 != null) {
                 maxChoices++;
                 choice3 = option3;

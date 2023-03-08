@@ -1,5 +1,5 @@
-java.lang.NullPointerException: Cannot read field "tileImage" because "this.tileStorage[num2]" is null
-	at main.system.rendering.WorldRender.draw(WorldRender.java:80)
+java.lang.ArrayIndexOutOfBoundsException: Index 78 out of bounds for length 60
+	at main.system.rendering.WorldRender.draw(WorldRender.java:76)
 	at main.MainGame.drawGame(MainGame.java:292)
 	at main.MainGame.lambda$startThreads$1(MainGame.java:224)
 	at javafx.graphics@20-ea/com.sun.scenario.animation.shared.TimelineClipCore.visitKeyFrame(TimelineClipCore.java:239)

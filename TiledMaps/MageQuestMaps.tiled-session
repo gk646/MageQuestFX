@@ -59,11 +59,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1053.030303030303,
-                "y": 1112.121212121212
+                "x": 1463.5,
+                "y": 1556.6666666666665
             }
         },
         "GrassLands.tmx": {
@@ -128,8 +128,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 60.25,
-                "y": 197
+                "x": 799.25,
+                "y": 886.5
             }
         },
         "d.tsx": {

@@ -10,6 +10,7 @@ import gameworld.entities.props.DeadWolf;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
+import gameworld.world.WorldController;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
@@ -155,7 +156,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         }
                     }
                 } else if (progressStage == 16) {
-                    int num = npc.dialog.drawChoice("The necklace is fake!", "Ill come along!", null, null);
+                    int num = npc.dialog.drawChoice("Ill come along!", null, null, null);
                     if (num == 10) {
                         progressStage = 75;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
@@ -169,7 +170,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 18) {
                     //TODO add usable item and lock q slot
                 } else if (progressStage == 19) {
-                    int num = npc.dialog.drawChoice("Yep, lets go", null, null, null);
+                    int num = npc.dialog.drawChoice("Yep, lets go", "The necklace is fake!", null, null);
                     if (num == 10) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 20);
@@ -236,12 +237,26 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     } else if (num == 20) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 41);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     }
                 } else if (progressStage == 41) {
+                    npc.blockInteraction = true;
                     objective1Progress++;
-                    if (objective1Progress == 200) {
+                    if (objective1Progress >= 200) {
                         if (moveToTile(npc, 87, 94)) {
                             npc.zone = Zone.Hillcrest_Mountain_Cave;
+                            npc.setPosition(56, 58);
+                            nextStage();
+                            objective1Progress = 0;
+                        }
+                    }
+                } else if (progressStage == 42) {
+                    if (WorldController.currentWorld == Zone.Hillcrest_Mountain_Cave) {
+                        moveToTile(npc, 45, 54);
+                        if (objective1Progress == 0) {
+                            loadDialogStage(npc, DialogStorage.MarlaNecklace, 42);
+                            npc.blockInteraction = false;
+                            objective1Progress++;
                         }
                     }
                 } else if (progressStage == 77) {
