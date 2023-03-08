@@ -229,6 +229,9 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     WorldRender.worldData1[97][77] = -1;
                     moveToTile(npc, 91, 96);
                 } else if (progressStage == 40) {
+                    if (WorldController.currentWorld == Zone.Hillcrest) {
+                        WorldRender.worldData1[97][77] = -1;
+                    }
                     int num = npc.dialog.drawChoice("The necklace is fake!", "Its just you! *wink*", null, null);
                     if (num == 10) {
                         progressStage = 75;
@@ -259,6 +262,28 @@ public class QST_MarlaFakeNecklace extends QUEST {
                             objective1Progress++;
                         }
                     }
+                } else if (progressStage == 43) {
+                    moveToTile(npc, 22, 30, new Point(36, 50), new Point(11, 45));
+                } else if (progressStage == 44) {
+                    int num = npc.dialog.drawChoice("Sure thing!", "I hereby give you full rights to go first", null, null);
+                    if (num == 10) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 45);
+                    } else if (num == 20) {
+                        progressStage = 46;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 46);
+                    }
+                } else if (progressStage == 45) {
+                    if (playerInsideRectangle(new Point(33, 27), new Point(36, 39))) {
+                        objective1Progress = 1;
+                    }
+                    if (objective1Progress == 1) {
+                        moveToTile(npc, 36, 8);
+                    }
+                } else if (progressStage == 46) {
+
+                } else if (progressStage == 47) {
+                    moveToTile(npc, 20, 9, new Point(39, 22), new Point(29, 9));
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
                         nextStage();

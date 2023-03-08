@@ -72,44 +72,44 @@ public class NPC_Aria extends NPC {
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 120 / 30) {
-            case 0 -> gc.drawImage(animation.idle.get(0), screenX + 10, screenY - 20);
-            case 1 -> gc.drawImage(animation.idle.get(1), screenX + 10, screenY - 20);
-            case 2 -> gc.drawImage(animation.idle.get(2), screenX + 10, screenY - 20);
-            case 3 -> gc.drawImage(animation.idle.get(3), screenX + 10, screenY - 20);
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY - 20);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY - 20);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY - 20);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX, screenY - 20);
         }
     }
 
     private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX + 10, screenY - 20);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX + 10, screenY - 20);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX + 10, screenY - 20);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX + 10, screenY - 20);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX + 10, screenY - 20);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX + 10, screenY - 20);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX, screenY - 20);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX, screenY - 20);
+            case 2 -> gc.drawImage(animation.walk.get(2), screenX, screenY - 20);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY - 20);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY - 20);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY - 20);
         }
     }
 
     private void drawAttack1(GraphicsContext gc) {
-        switch (spriteCounter % 160 / 10) {
-            case 0 -> gc.drawImage(animation.attack1.get(0), screenX - 20, screenY - 14);
-            case 1 -> gc.drawImage(animation.attack1.get(1), screenX - 20, screenY - 14);
-            case 2 -> gc.drawImage(animation.attack1.get(2), screenX - 20, screenY - 14);
-            case 3 -> gc.drawImage(animation.attack1.get(3), screenX - 20, screenY - 14);
-            case 4 -> gc.drawImage(animation.attack1.get(4), screenX - 20, screenY - 14);
-            case 5 -> gc.drawImage(animation.attack1.get(5), screenX - 20, screenY - 14);
+        switch (spriteCounter % 160) {
+            case 0 -> gc.drawImage(animation.attack1.get(0), screenX, screenY - 20);
+            case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY - 20);
+            case 2 -> gc.drawImage(animation.attack1.get(2), screenX, screenY - 20);
+            case 3 -> gc.drawImage(animation.attack1.get(3), screenX, screenY - 20);
+            case 4 -> gc.drawImage(animation.attack1.get(4), screenX, screenY - 20);
+            case 5 -> gc.drawImage(animation.attack1.get(5), screenX, screenY - 20);
             case 6 -> attack1 = false;
         }
     }
 
     private void drawDeath(GraphicsContext gc) {
-        switch (spriteCounter % 210 / 35) {
-            case 0 -> gc.drawImage(animation.dead.get(0), screenX - 15, screenY - 51);
-            case 1 -> gc.drawImage(animation.dead.get(1), screenX - 15, screenY - 51);
-            case 2 -> gc.drawImage(animation.dead.get(2), screenX - 15, screenY - 51);
-            case 3 -> gc.drawImage(animation.dead.get(3), screenX - 15, screenY - 51);
-            case 4 -> gc.drawImage(animation.dead.get(4), screenX - 15, screenY - 51);
-            case 5 -> gc.drawImage(animation.dead.get(5), screenX - 15, screenY - 51);
+        switch (spriteCounter % 240 / 35) {
+            case 0 -> gc.drawImage(animation.dead.get(0), screenX, screenY - 20);
+            case 1 -> gc.drawImage(animation.dead.get(1), screenX, screenY - 20);
+            case 2 -> gc.drawImage(animation.dead.get(2), screenX, screenY - 20);
+            case 3 -> gc.drawImage(animation.dead.get(3), screenX, screenY - 20);
+            case 4 -> gc.drawImage(animation.dead.get(4), screenX, screenY - 20);
+            case 5 -> gc.drawImage(animation.dead.get(5), screenX, screenY - 20);
         }
     }
 }

@@ -55,7 +55,9 @@ public class LoadGameState {
                 mg.qPanel.quests.add(new QST_Tutorial(mg, false));
                 mg.wControl.loadMap(Zone.Woodland_Edge, 4, 4);
                 mg.qPanel.getQuest(QUEST_NAME.Tutorial).questRecap = mg.sqLite.readQuestJournal(1, 150);
-                if (quest_num == 1) {
+                if (quest_num == 0) {
+                    mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 11, 4, Zone.Woodland_Edge));
+                } else if (quest_num == 1) {
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Tutorial, 13, "Talk to the old man");
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Woodland_Edge));
                     mg.player.setPosition(39, 34);

@@ -39,7 +39,7 @@ public class BOSS_Knight extends BOSS {
         } else {
             standardAttackScript();
         }
-        if (!attack2 && !attack3 && !attack1) {
+        if (!attack2 && !attack3 && !attack1 && !attack4) {
             onPath = true;
             getNearestPlayer();
             searchPathBigEnemies(goalCol, goalRow, 30);

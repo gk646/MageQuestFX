@@ -245,7 +245,7 @@ public class UI {
         gc.setFont(FonT.varnished16);
         gc.fillText(LocalTime.now().format(formatter), 1_860, 23);
         gc.setFont(FonT.antParty18);
-        gc.fillText(WorldController.currentWorld.toString(), 1_680, 25);
+        gc.fillText(WorldController.currentWorld.toString(), 1_600, 25);
     }
 
 

@@ -438,14 +438,15 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
-        player.coins = 2_000;
+        //debug();
+
     }
 
     private void debug() {
         for (int i = 0; i < 1; i++) {
             //ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
+        player.coins = 2_000;
         //sound.setVolumeAmbience(0);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);

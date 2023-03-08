@@ -47,21 +47,21 @@ public class NPC_OldMan extends NPC {
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 120 / 30) {
-            case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(animation.idle.get(3), screenX, screenY);
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX + 17, screenY - 5);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX + 17, screenY - 5);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX + 17, screenY - 5);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX + 17, screenY - 5);
         }
     }
 
     private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX, screenY);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX + 17, screenY - 5);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX + 17, screenY - 5);
+            case 2 -> gc.drawImage(animation.walk.get(2), screenX + 17, screenY - 5);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX + 17, screenY - 5);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX + 17, screenY - 5);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX + 17, screenY - 5);
         }
     }
 

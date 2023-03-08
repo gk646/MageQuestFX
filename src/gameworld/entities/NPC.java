@@ -48,8 +48,8 @@ abstract public class NPC extends ENTITY {
 
     @Override
     public void update() {
-        activeTile.x = (int) ((worldX) / 48);
-        activeTile.y = (int) ((worldY) / 48);
+        activeTile.x = (int) ((worldX + 24) / 48);
+        activeTile.y = (int) ((worldY + 24) / 48);
     }
 
     protected boolean collidingWithPlayer() {
