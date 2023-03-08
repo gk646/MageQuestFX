@@ -13,7 +13,6 @@ import gameworld.world.objects.items.ITM_SpellBook;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
-import main.system.ui.maps.MarkerType;
 
 import java.awt.Point;
 
@@ -88,9 +87,9 @@ public class QST_Tutorial extends QUEST {
                 } else if (progressStage == 21) {
                     if (objective1Progress == 0) {
                         updateObjective("Look around to find something useful", 0);
-                        mg.wControl.addMapMarker("path1", 47, 4, MarkerType.Quest);
-                        mg.wControl.addMapMarker("path2", 83, 5, MarkerType.Quest);
-                        mg.wControl.addMapMarker("path3", 80, 37, MarkerType.Quest);
+                        addQuestMarker("path1", 47, 4, Zone.Woodland_Edge);
+                        addQuestMarker("path2", 83, 5, Zone.Woodland_Edge);
+                        addQuestMarker("path3", 80, 37, Zone.Woodland_Edge);
                     }
                     if (playerInsideRectangle(new Point(57, 18), new Point(59, 21)) && objective1Progress == 0) {
                         updateObjective("Follow the path", 0);
@@ -108,7 +107,7 @@ public class QST_Tutorial extends QUEST {
                     if (playerInsideRectangle(new Point(42, 19), new Point(47, 21)) && objective1Progress < 3) {
                         mg.player.dialog.loadNewLine("Hmm, nothing to find here; i gotta keep looking...");
                         removeObjective(0);
-                        mg.wControl.removeMapMarker("path1");
+                        removeQuestMarker("path1");
                         objective1Progress = 3;
                     }
                     if (playerInsideRectangle(new Point(83, 2), new Point(85, 7)) && objective2Progress < 2) {
@@ -118,7 +117,7 @@ public class QST_Tutorial extends QUEST {
                     if (playerBagsContainItem("Silver Key")) {
                         removeObjective(1);
                         objective2Progress = 3;
-                        mg.wControl.removeMapMarker("path2");
+                        removeQuestMarker("path2");
                     }
 
                     if (playerInsideRectangle(new Point(78, 36), new Point(81, 42)) && objective3Progress == 0) {
@@ -128,7 +127,7 @@ public class QST_Tutorial extends QUEST {
                     if (playerBagsContainItem("Booze")) {
                         removeObjective(2);
                         objective3Progress = 3;
-                        mg.wControl.removeMapMarker("path3");
+                        removeQuestMarker("path3");
                     }
                     if (objective1Progress == 3 && objective2Progress == 3 && objective3Progress == 3) {
                         updateObjective("Return the stuff you found", 0);
@@ -147,12 +146,12 @@ public class QST_Tutorial extends QUEST {
                     moveToTile(npc, 58, 47);
                     openSquareDoor(58, 37);
                 } else if (progressStage == 26 || progressStage == 25) {
-                    mg.wControl.addMapMarker("path1", 68, 77, MarkerType.Quest);
+                    addQuestMarker("path1", 68, 77, Zone.Woodland_Edge);
                     updateObjective("Search the ruins for a way out", 0);
                     npc.blockInteraction = true;
                     if (WorldController.currentWorld == Zone.Woodland_Edge && WorldRender.worldData1[74][84] == 1_383) {
                         updateObjective("Get back to the old man and escape", 0);
-                        mg.wControl.removeMapMarker("path1");
+                        removeQuestMarker("path1");
                         openRoundDoor(35, 67);
                         WorldRender.worldData[75][72] = 131;
                         WorldRender.worldData[75][73] = 131;
@@ -170,7 +169,7 @@ public class QST_Tutorial extends QUEST {
                     npc.blockInteraction = false;
                 } else if (progressStage == 28) {
                     updateObjective("Follow the old man... again", 0);
-                    mg.wControl.addMapMarker("path1", 95, 95, MarkerType.Quest);
+                    addQuestMarker("path1", 95, 95, Zone.Woodland_Edge);
                     if (moveToTile(npc, 36, 52)) {
                         nextStage();
                         npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
@@ -192,13 +191,13 @@ public class QST_Tutorial extends QUEST {
                     if (moveToTile(npc, 99, 99)) {
                         npc.zone = Zone.Hillcrest;
                         npc.setPosition(1, 1);
-                        mg.wControl.removeMapMarker("path1");
+                        removeQuestMarker("path1");
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                         objective3Progress = 0;
                     }
                 } else if (progressStage == 37) {
-                    mg.wControl.addMapMarker("path1", 20, 20, MarkerType.Quest);
+                    addQuestMarker("path1", 20, 20, Zone.Hillcrest);
                     if (objective3Progress == 0) {
                         npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
                         loadDialogStage(npc, DialogStorage.Tutorial, 37);
@@ -210,7 +209,7 @@ public class QST_Tutorial extends QUEST {
                     }
                 } else if (progressStage == 40) {
                     objective3Progress = 0;
-                    mg.wControl.removeMapMarker("path1");
+                    removeQuestMarker("path1");
                     int num = npc.dialog.drawChoice("Iam in a hurry!", "Tell me everything...", null, null);
                     if (num == 10) {
                         nextStage();

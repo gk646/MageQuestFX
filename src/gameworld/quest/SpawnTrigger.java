@@ -1,5 +1,6 @@
 package gameworld.quest;
 
+import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.boss.BOSS_Slime;
 import gameworld.entities.monsters.ENT_Mushroom;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
@@ -55,7 +56,7 @@ public class SpawnTrigger {
                 } else if (type == Type.WizardBoss2) {
 
                 } else if (type == Type.KnightBoss) {
-
+                    mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
                 }
             }
             triggered = true;

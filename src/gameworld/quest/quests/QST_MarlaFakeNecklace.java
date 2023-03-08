@@ -12,7 +12,6 @@ import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
 import main.system.enums.Zone;
-import main.system.ui.maps.MarkerType;
 
 import java.awt.Point;
 
@@ -73,11 +72,11 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         objective3Progress++;
                     }
                     updateObjective("Head east and pickup the mysterious adventurers trail!", 0);
-                    mg.wControl.addMapMarker(quest_id + "" + progressStage, 83, 41, MarkerType.Quest);
+                    addQuestMarker(quest_id + "" + progressStage, 83, 41, Zone.Hillcrest);
                     if (playerInsideRectangle(new Point(81, 40), new Point(85, 45))) {
                         progressStage = 13;
                         updateObjective("Look around", 0);
-                        mg.wControl.removeMapMarker(quest_id + "" + 11);
+                        removeQuestMarker(quest_id + "" + 11);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 1);
                         objective3Progress = 0;
                     }

@@ -2,6 +2,7 @@ package main.system.ui.maps;
 
 import gameworld.entities.ENTITY;
 import gameworld.player.PROJECTILE;
+import gameworld.quest.QuestMarker;
 import gameworld.world.WorldController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.GraphicsContext;
@@ -226,14 +227,16 @@ public class GameMap {
                 }
             }
         }
-        for (MapMarker mapMarker : WorldController.currentMapMarkers) {
-            if (mapMarker.type() == MarkerType.Quest) {
-                y = 465 + yOffset + (mapMarker.yTile() - yTile_i) * zoom_i;
-                x = 785 + xOffset + (mapMarker.xTile() - xTile_i) * zoom_i;
-                for (float i = y; i < y + zoom_i; i++) {
-                    for (float b = x; b < x + zoom_i; b++) {
-                        if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                            image.setRGB((int) b, (int) i, 0xA0FE_E761);
+        if (mg.qPanel.activeQuest != null) {
+            for (QuestMarker questMarker : mg.qPanel.activeQuest.questMarkers) {
+                if (questMarker.zone() == WorldController.currentWorld) {
+                    y = 465 + yOffset + (questMarker.yTile() - yTile_i) * zoom_i;
+                    x = 785 + xOffset + (questMarker.xTile() - xTile_i) * zoom_i;
+                    for (float i = y; i < y + zoom_i; i++) {
+                        for (float b = x; b < x + zoom_i; b++) {
+                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                                image.setRGB((int) b, (int) i, 0xA0FE_E761);
+                            }
                         }
                     }
                 }

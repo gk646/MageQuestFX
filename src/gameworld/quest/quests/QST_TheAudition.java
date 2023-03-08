@@ -6,6 +6,9 @@ import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
+import main.system.enums.Zone;
+
+import java.awt.Point;
 
 public class QST_TheAudition extends QUEST {
     public QST_TheAudition(MainGame mg, boolean completed) {
@@ -29,7 +32,12 @@ public class QST_TheAudition extends QUEST {
         for (NPC npc : mg.npcControl.NPC_Active) {
             if (npc instanceof NPC_HillcrestMayor) {
                 interactWithNpc(npc, DialogStorage.AuditionMayor);
-                if (progressStage == 2) {
+                if (progressStage == 1) {
+                    addQuestMarker("1", 8, 37, Zone.Hillcrest);
+                    if (playerInsideRectangle(new Point(10, 36), new Point(14, 37))) {
+                        removeQuestMarker("1");
+                    }
+                } else if (progressStage == 2) {
                     int num = npc.dialog.drawChoice("Iam here for information!", "Sure, 25 coin donation", null, null);
                     if (num == 10) {
                         progressStage = 4;

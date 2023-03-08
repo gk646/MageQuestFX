@@ -9,6 +9,7 @@ import main.system.enums.Zone;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 
+import java.awt.Point;
 import java.util.Objects;
 
 
@@ -65,6 +66,10 @@ abstract public class BOSS extends ENTITY {
         return (int) (worldX + 24) / 48 == mg.playerX && (int) (worldY + 24) / 48 == mg.playerY;
     }
 
+    protected boolean closeToPlayer(int distance) {
+        return new Point((int) Player.worldX, (int) Player.worldY).distance(worldX, worldY) < distance;
+    }
+
     protected void drawBossHealthBar(GraphicsContext gc) {
         gc.setEffect(mg.ui.shadow);
         gc.setFill(Colors.bossNamePurple);
@@ -117,7 +122,7 @@ abstract public class BOSS extends ENTITY {
         int startCol = activeTile.x;
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
-        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
+        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.searchUncapped()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovementBoss(nextX, nextY);

@@ -3,14 +3,17 @@ package gameworld.quest;
 import gameworld.entities.NPC;
 import gameworld.player.Player;
 import main.MainGame;
+import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
 import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 abstract public class QUEST {
 
     public String name;
+    public ArrayList<QuestMarker> questMarkers = new ArrayList<>();
     public QUEST_NAME logicName;
     public final String[] objectives = new String[3];
     public String[] questRecap = new String[50];
@@ -225,5 +228,16 @@ abstract public class QUEST {
         }
     }
 
+    protected void addQuestMarker(String name, int x, int y, Zone zone) {
+        for (QuestMarker marker : questMarkers) {
+            if (marker.xTile() == x && marker.yTile() == y) {
+                return;
+            }
+        }
+        questMarkers.add(new QuestMarker(name, x, y, zone));
+    }
 
+    protected void removeQuestMarker(String name) {
+        questMarkers.removeIf(marker -> marker.name().equals(name));
+    }
 }

@@ -12,7 +12,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import main.MainGame;
 import main.system.enums.State;
+import main.system.enums.Zone;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,7 +26,7 @@ public class Sound {
     public static float EFFECTS_VOLUME = 0.5f;
     public final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
-
+    public MediaPlayer HillCrest;
     public static float AMBIENCE_VOLUME = 0.7f;
     private final double fadeDuration = 2;
 
@@ -48,7 +50,7 @@ public class Sound {
     public void loadSounds() {
         energySphereBeginning = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/fullsound.wav")).toString());
         energySphereHit = new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/projectiles/energySphere/hit.wav")).toString());
-
+        HillCrest = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/townAmbience/town1.mp3")).toString()));
         INTRO = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro.wav")).toString()));
         INTRO.setVolume(0.8);
 
@@ -184,7 +186,7 @@ public class Sound {
         if (mg.tileBase.isWaterNearby()) {
             if (waterAmbience.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(waterAmbience, waterVolume);
-            } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+            } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (waterAmbience.getCurrentTime().toMillis() >= waterAmbience.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(currentAmbient, waterVolume);
                 }
@@ -195,27 +197,43 @@ public class Sound {
         if (mg.tileBase.isLavaNearby()) {
             if (lava.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(lava, waterVolume);
-            } else if (lava.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+            } else if (lava.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(lava, waterVolume);
                 }
             }
-        } else {
+        } else if (!fadeOut) {
             fadeOut(lava, waterVolume);
         }
         if (mg.tileBase.isFireNearby()) {
             if (firePlace.getStatus() != MediaPlayer.Status.PLAYING) {
-                fadeIn(firePlace, waterVolume);
-            } else if (firePlace.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
-                if (firePlace.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(firePlace, waterVolume);
+                fadeIn(firePlace, waterVolume + 0.2);
+            } else if (firePlace.getStatus() == MediaPlayer.Status.PLAYING) {
+                if (firePlace.getCurrentTime().toMillis() >= firePlace.getTotalDuration().toMillis() * 0.95f) {
+                    fadeOut(firePlace, waterVolume + 0.2);
                 }
+            }
+        } else if (!fadeOut) {
+            fadeOut(firePlace, waterVolume + 0.2);
+        }
+        if (WorldController.currentWorld == Zone.Hillcrest) {
+            if (playerInsideRectangle(new Point(2, 14), new Point(46, 31))) {
+                if (HillCrest.getStatus() != MediaPlayer.Status.PLAYING) {
+                    fadeIn(HillCrest, 0.8);
+                } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING) {
+                    if (HillCrest.getCurrentTime().toMillis() >= HillCrest.getTotalDuration().toMillis() * 0.95f) {
+                        fadeOut(HillCrest, 0.8);
+                    }
+                }
+            } else if (!fadeOut) {
+                fadeOut(HillCrest, 0.8);
             }
         }
     }
 
     public void setVolumeMusic(float value) {
         INTRO.setVolume(0.8 * (value / 100.0f));
+        HillCrest.setVolume(0.8 * (value / 100.0f));
     }
 
     public void setVolumeEffects(float value) {
@@ -251,6 +269,7 @@ public class Sound {
         waterVolume = 0.3f * (value / 100.0f);
         waterAmbience.setVolume(waterVolume);
         lava.setVolume(waterVolume);
+        firePlace.setVolume(waterVolume);
     }
 
     public void playEffectSound(int index) {
@@ -262,5 +281,13 @@ public class Sound {
         MediaPlayer mediaPlayer = new MediaPlayer(effectSounds.get(index).getMedia());
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
+    }
+
+    private boolean playerInsideRectangle(Point p1, Point p2) {
+        int x1 = Math.min(p1.x, p2.x);
+        int x2 = Math.max(p1.x, p2.x);
+        int y1 = Math.min(p1.y, p2.y);
+        int y2 = Math.max(p1.y, p2.y);
+        return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
     }
 }

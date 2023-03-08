@@ -20,6 +20,8 @@ public class ResourceLoaderEntity {
     public final ArrayList<Image> hurt = new ArrayList<>();
     public final ArrayList<Image> walk = new ArrayList<>();
     public final ArrayList<Image> run = new ArrayList<>();
+    public ArrayList<Image> attack4 = new ArrayList<>();
+    public ArrayList<Image> idle2 = new ArrayList<>();
     public ArrayList<Image> WalkingLeft = new ArrayList<>();
     public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
     final String name;
@@ -59,6 +61,15 @@ public class ResourceLoaderEntity {
             is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
             if (is != null) {
                 attack3.add(new Image(is));
+            } else {
+                break;
+            }
+        }
+        folderName = "attack4";
+        for (int i = 0; i < 25; i++) {
+            is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
+            if (is != null) {
+                attack4.add(new Image(is));
             } else {
                 break;
             }
@@ -104,6 +115,15 @@ public class ResourceLoaderEntity {
             is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
             if (is != null) {
                 run.add(new Image(is));
+            } else {
+                break;
+            }
+        }
+        folderName = "idle2";
+        for (int i = 0; i < 15; i++) {
+            is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
+            if (is != null) {
+                idle2.add(new Image(is));
             } else {
                 break;
             }

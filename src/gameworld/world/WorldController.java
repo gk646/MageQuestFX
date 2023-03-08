@@ -8,8 +8,6 @@ import main.MainGame;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
-import main.system.ui.maps.MapMarker;
-import main.system.ui.maps.MarkerType;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -18,7 +16,6 @@ public class WorldController {
     private final MainGame mg;
     public static Zone currentWorld = Zone.Woodland_Edge;
     public static int[][] currentMapCover;
-    public static ArrayList<MapMarker> currentMapMarkers = new ArrayList<>();
     public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public final ArrayList<Map> MAPS = new ArrayList<>();
 
@@ -50,7 +47,6 @@ public class WorldController {
                 mg.getPlayerTile();
                 clearWorldArrays();
                 mg.wAnim.emptyAnimationLists();
-                currentMapMarkers = map.mapMarkers;
                 currentMapCover = map.mapCover;
                 WorldRender.worldData = map.mapDataBackGround;
                 WorldRender.worldData1 = map.mapDataBackGround2;
@@ -174,7 +170,7 @@ public class WorldController {
         }
     }
 
-    public void addMapMarker(String name, int xTile, int yTile, MarkerType type) {
+   /* public void addMapMarker(String name, int xTile, int yTile, MarkerType type) {
         for (Map map : MAPS) {
             if (map.zone == currentWorld) {
                 for (MapMarker marker : map.mapMarkers) {
@@ -199,6 +195,8 @@ public class WorldController {
             }
         }
     }
+
+    */
 }
 
 

@@ -3,6 +3,7 @@ package main.system.ui.questpanel;
 
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
@@ -195,19 +196,28 @@ public class UI_QuestPanel {
         }
     }
 
-    public QUEST getQuest(String name) {
+    public QUEST getQuest(QUEST_NAME name) {
         for (QUEST quest : quests) {
-            if (quest.name.equals(name)) {
+            if (quest.logicName.equals(name)) {
                 return quest;
             }
         }
         return null;
     }
 
-    public void setQuestStage(String quest_name, int progressStage) {
+    public void setQuestStageAndObjective(QUEST_NAME quest_name, int progressStage, String... objective) {
         for (QUEST quest : quests) {
-            if (quest.name.equals(quest_name)) {
+            if (quest.logicName.equals(quest_name)) {
                 quest.progressStage = progressStage;
+                if (objective.length > 0) {
+                    String string;
+                    for (int i = 0; i < objective.length; i++) {
+                        string = objective[i];
+                        if (string != null) {
+                            quest.objectives[i] = string;
+                        }
+                    }
+                }
             }
         }
     }

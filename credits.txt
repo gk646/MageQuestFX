@@ -29,6 +29,7 @@ SOUNDS
  fireplace sound: https://freesound.org/people/leosalom/sounds/234288/
  dog bite sound: https://freesound.org/people/StephenSaldanha/sounds/121889/
  thunder strike sound: https://freesound.org/people/digifishmusic/sounds/42024/
+ Hillcrest music: https://freesound.org/people/Sirkoto51/sounds/349179/
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

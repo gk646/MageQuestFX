@@ -101,11 +101,15 @@ public class ENT_Mushroom extends ENTITY {
     }
 
     private void drawRun(GraphicsContext gc) {
-        switch (spriteCounter % 120 / 30) {
+        switch (spriteCounter % 224 / 28) {
             case 0 -> gc.drawImage(animation.run.get(0), screenX - 64, screenY - 64);
             case 1 -> gc.drawImage(animation.run.get(1), screenX - 64, screenY - 64);
             case 2 -> gc.drawImage(animation.run.get(2), screenX - 64, screenY - 64);
             case 3 -> gc.drawImage(animation.run.get(3), screenX - 64, screenY - 64);
+            case 4 -> gc.drawImage(animation.run.get(4), screenX - 64, screenY - 64);
+            case 5 -> gc.drawImage(animation.run.get(5), screenX - 64, screenY - 64);
+            case 6 -> gc.drawImage(animation.run.get(6), screenX - 64, screenY - 64);
+            case 7 -> gc.drawImage(animation.run.get(7), screenX - 64, screenY - 64);
         }
     }
 

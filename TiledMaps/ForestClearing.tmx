@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="31">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="32">
  <editorsettings>
   <export target="../src/resources/Maps/Clearing.csv" format="csv"/>
  </editorsettings>
@@ -345,5 +345,6 @@
   <object id="28" name="wolf2" x="1276" y="1026"/>
   <object id="29" name="mushroom2" x="1494" y="1107"/>
   <object id="30" name="mushroom2" x="1402" y="1022"/>
+  <object id="31" name="bossKnight2" x="904" y="1478.73"/>
  </objectgroup>
 </map>
