@@ -36,11 +36,13 @@ public class Sound {
     private MediaPlayer firePlace;
     final MainGame mg;
     public int currentTrackIndex = 0;
-    private boolean fadeOut = false;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
     private boolean forestPlaying, dungeonPlaying;
     private MediaPlayer waterAmbience;
+
+
+    boolean[] dumbMediaPplayer = new boolean[10];
 
     public Sound(MainGame mg) {
         this.mg = mg;
@@ -75,6 +77,9 @@ public class Sound {
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/epicChestOpen.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/levelup/getTalent.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/interact.wav")).toString())));
+        //16
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/lever.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/puzzle_error.wav")).toString())));
 
 
         loadAmbience();
@@ -108,22 +113,26 @@ public class Sound {
             updateProximityAmbience();
         } else {
             if (currentAmbient != null) {
-                fadeOut(currentAmbient, AMBIENCE_VOLUME);
+                fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
             }
             if (waterAmbience != null) {
-                fadeOut(waterAmbience, AMBIENCE_VOLUME);
+                fadeOut(waterAmbience, AMBIENCE_VOLUME, 1);
             }
             if (lava != null) {
-                fadeOut(lava, AMBIENCE_VOLUME);
+                fadeOut(lava, AMBIENCE_VOLUME, 2);
             }
             if (firePlace != null) {
-                fadeOut(firePlace, AMBIENCE_VOLUME);
+                fadeOut(firePlace, AMBIENCE_VOLUME, 3);
+            }
+            if (HillCrest.getStatus() != MediaPlayer.Status.STOPPED) {
+                fadeOut(HillCrest, 0.7f, 4);
             }
         }
     }
 
 
     public void fadeIn(MediaPlayer mediaPlayer, double volume) {
+        mediaPlayer.seek(Duration.ZERO);
         mediaPlayer.setVolume(0.0);
         mediaPlayer.play();
         Timeline fadeIn = new Timeline(
@@ -133,52 +142,54 @@ public class Sound {
         fadeIn.play();
     }
 
-    public void fadeOut(MediaPlayer mediaPlayer, double volume) {
-        Timeline fadeOut = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), volume)),
-                new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), 0))
-        );
-        fadeOut.setOnFinished(event -> {
-            mediaPlayer.seek(Duration.ZERO);
-            mediaPlayer.stop();
-            this.fadeOut = false;
-        });
-        fadeOut.play();
-        this.fadeOut = true;
+    public void fadeOut(MediaPlayer mediaPlayer, double volume, int index) {
+        if (!dumbMediaPplayer[index]) {
+            dumbMediaPplayer[index] = true;
+            Timeline fadeOut = new Timeline(
+                    new KeyFrame(Duration.seconds(0), new KeyValue(mediaPlayer.volumeProperty(), volume)),
+                    new KeyFrame(Duration.seconds(fadeDuration), new KeyValue(mediaPlayer.volumeProperty(), 0))
+            );
+            fadeOut.setOnFinished(event -> {
+                mediaPlayer.seek(Duration.ZERO);
+                mediaPlayer.stop();
+                dumbMediaPplayer[index] = false;
+            });
+            fadeOut.play();
+        }
     }
 
     private void updateZoneAmbience() {
         if (WorldController.currentWorld.isDungeon()) {
             dungeonPlaying = true;
-            if (currentAmbient != null && forestPlaying && !fadeOut) {
-                fadeOut(currentAmbient, AMBIENCE_VOLUME);
+            if (currentAmbient != null && forestPlaying) {
+                fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
                 forestPlaying = false;
                 currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % dungeonAmbient.size();
                 currentAmbient = dungeonAmbient.get(currentTrackIndex);
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
-            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(currentAmbient, AMBIENCE_VOLUME);
+                    fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
                 }
             }
-        } else if (mg.tileBase.isInOpen()) {
+        } else if (WorldController.currentWorld == Zone.Hillcrest || WorldController.currentWorld == Zone.Woodland_Edge && mg.tileBase.isInOpen()) {
             forestPlaying = true;
-            if (currentAmbient != null && dungeonPlaying && !fadeOut) {
-                fadeOut(currentAmbient, AMBIENCE_VOLUME);
+            if (currentAmbient != null && dungeonPlaying) {
+                fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
                 dungeonPlaying = false;
             } else if (currentAmbient == null || currentAmbient.getStatus() != MediaPlayer.Status.PLAYING) {
                 currentTrackIndex = (currentTrackIndex + 1) % forestAmbient.size();
                 currentAmbient = forestAmbient.get(currentTrackIndex);
                 fadeIn(currentAmbient, AMBIENCE_VOLUME);
-            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING && !fadeOut) {
+            } else if (currentAmbient != null && currentAmbient.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (currentAmbient.getCurrentTime().toMillis() >= currentAmbient.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(currentAmbient, AMBIENCE_VOLUME);
+                    fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
                 }
             }
         } else if (currentAmbient != null) {
-            fadeOut(currentAmbient, AMBIENCE_VOLUME);
+            fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
         }
     }
 
@@ -188,45 +199,42 @@ public class Sound {
                 fadeIn(waterAmbience, waterVolume);
             } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (waterAmbience.getCurrentTime().toMillis() >= waterAmbience.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(currentAmbient, waterVolume);
+                    fadeOut(currentAmbient, waterVolume, 1);
                 }
             }
-        } else if (!fadeOut) {
-            fadeOut(waterAmbience, waterVolume);
+        } else if (waterAmbience.getStatus() == MediaPlayer.Status.PLAYING) {
+            fadeOut(waterAmbience, waterVolume, 1);
         }
         if (mg.tileBase.isLavaNearby()) {
             if (lava.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(lava, waterVolume);
             } else if (lava.getStatus() == MediaPlayer.Status.PLAYING) {
                 if (lava.getCurrentTime().toMillis() >= lava.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(lava, waterVolume);
+                    fadeOut(lava, waterVolume, 2);
                 }
             }
-        } else if (!fadeOut) {
-            fadeOut(lava, waterVolume);
+        } else if (lava.getStatus() == MediaPlayer.Status.PLAYING) {
+            fadeOut(lava, waterVolume, 2);
         }
         if (mg.tileBase.isFireNearby()) {
             if (firePlace.getStatus() != MediaPlayer.Status.PLAYING) {
                 fadeIn(firePlace, waterVolume + 0.2);
-            } else if (firePlace.getStatus() == MediaPlayer.Status.PLAYING) {
-                if (firePlace.getCurrentTime().toMillis() >= firePlace.getTotalDuration().toMillis() * 0.95f) {
-                    fadeOut(firePlace, waterVolume + 0.2);
-                }
+            } else if (firePlace.getStatus() == MediaPlayer.Status.PLAYING && firePlace.getCurrentTime().toMillis() >= firePlace.getTotalDuration().toMillis() * 0.95f) {
+                fadeOut(firePlace, waterVolume + 0.2, 3);
             }
-        } else if (!fadeOut) {
-            fadeOut(firePlace, waterVolume + 0.2);
+        } else {
+            fadeOut(firePlace, waterVolume + 0.2, 3);
         }
+
         if (WorldController.currentWorld == Zone.Hillcrest) {
             if (playerInsideRectangle(new Point(2, 14), new Point(46, 31))) {
                 if (HillCrest.getStatus() != MediaPlayer.Status.PLAYING) {
-                    fadeIn(HillCrest, 0.8);
-                } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING) {
-                    if (HillCrest.getCurrentTime().toMillis() >= HillCrest.getTotalDuration().toMillis() * 0.95f) {
-                        fadeOut(HillCrest, 0.8);
-                    }
+                    fadeIn(HillCrest, 0.7);
+                } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING && HillCrest.getCurrentTime().toMillis() >= HillCrest.getTotalDuration().toMillis() * 0.95f) {
+                    fadeOut(HillCrest, 0.7, 4);
                 }
-            } else if (!fadeOut) {
-                fadeOut(HillCrest, 0.8);
+            } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING) {
+                fadeOut(HillCrest, 0.7, 4);
             }
         }
     }

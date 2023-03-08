@@ -1,6 +1,7 @@
 package main.system.ui.questpanel;
 
 
+import gameworld.quest.Dialog;
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
@@ -87,7 +88,7 @@ public class UI_QuestPanel {
         y += 75;
         int x = 560;
         gc.setFont(FonT.antParty20);
-        gc.fillText("All Quests: " + numberOfQuests() + "/ 10", 545, y);
+        gc.fillText("All Quests: " + quests.size() + "/ 10", 545, y);
         for (int i = 0; i < quests.size(); i++) {
             if (activeQuest == null || quests.get(i).name.equals(activeQuest.name)) {
                 continue;
@@ -109,6 +110,7 @@ public class UI_QuestPanel {
                     gc.fillText(string, x + 25, y += 20);
                 }
             }
+            y += 25;
         }
     }
 
@@ -177,8 +179,10 @@ public class UI_QuestPanel {
                     }
                     quests.get(i).update();
                     if (quests.get(i).completed) {
+                        finishedQuests.add(quests.get(i));
                         if (activeQuest == quests.get(i)) {
                             activeQuest = null;
+
                         }
                     }
                 }
@@ -214,7 +218,7 @@ public class UI_QuestPanel {
                     for (int i = 0; i < objective.length; i++) {
                         string = objective[i];
                         if (string != null) {
-                            quest.objectives[i] = string;
+                            quest.objectives[i] = Dialog.insertNewLine(string, 28);
                         }
                     }
                 }
@@ -239,9 +243,9 @@ public class UI_QuestPanel {
         return false;
     }
 
-    public boolean questIsFinished(String name) {
+    public boolean questIsFinished(QUEST_NAME name) {
         for (QUEST quest : finishedQuests) {
-            if (quest.name.equals(name)) {
+            if (quest.logicName.equals(name)) {
                 return true;
             }
         }

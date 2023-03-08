@@ -112,7 +112,8 @@ public class LoadGameState {
                     mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 38, 61, Zone.Hillcrest));
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheFakeNecklace, 19, "Help Aria find the mountain top");
                 } else if (quest_num == 3) {
-
+                    mg.npcControl.NPC_Active.add(new NPC_Aria(mg, 90, 57, Zone.Hillcrest));
+                    mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheFakeNecklace, 25, "Take rest");
                 }
             }
             case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, true));

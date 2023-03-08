@@ -126,6 +126,10 @@ public class WorldRender {
 
     private void getTileImagesNew() {
         {
+            setupCollision(309);
+            setupCollision(803);
+            setupCollision(704);
+            setupCollision(311);
             setupCollision(2041);
             setupCollision(2042);
             setupCollision(1937);

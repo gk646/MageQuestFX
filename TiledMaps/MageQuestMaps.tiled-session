@@ -5,8 +5,8 @@
     },
     "activeFile": "ForestClearing.tmx",
     "expandedProjectPaths": [
-        "exports",
-        "."
+        ".",
+        "exports"
     ],
     "fileStates": {
         "": {
@@ -59,11 +59,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 800,
-                "y": 799
+                "y": 799.6666666666665
             }
         },
         "GrassLands.tmx": {

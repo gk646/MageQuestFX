@@ -300,12 +300,13 @@ public class MainGame {
             npcControl.draw(gc);
             playerPrompts.draw(gc);
             wAnim.drawLayerOneTwo(gc);
-            qPanel.draw(gc);
-            miniM.draw(gc);
-            sBar.draw(gc);
             if (player.drawDialog) {
                 player.dialog.drawDialogPlayer(gc);
             }
+            qPanel.draw(gc);
+            miniM.draw(gc);
+            sBar.draw(gc);
+
             ui.draw(gc);
             if (showAbilities) {
                 skillPanel.drawSkillPanel(gc);
@@ -341,6 +342,7 @@ public class MainGame {
             }
             player.setMana(player.maxMana);
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
+            gc.fillText(String.valueOf(TileBasedEffects.activeTile), 500, 750);
         }
     }
 
@@ -444,7 +446,7 @@ public class MainGame {
         for (int i = 0; i < 1; i++) {
             //ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }
-        sound.setVolumeAmbience(0);
+        //sound.setVolumeAmbience(0);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_VoidField(this);
@@ -462,7 +464,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest, 23, 23);
+        wControl.loadMap(Zone.Hillcrest, 38, 61);
         for (int i = 0; i < 20; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem((10 + i) * 48, 15 * 48, dropManager.getGuaranteedRandomItem(15), Zone.Hillcrest));
         }

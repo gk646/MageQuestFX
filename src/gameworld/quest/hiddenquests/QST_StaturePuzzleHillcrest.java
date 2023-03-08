@@ -48,26 +48,38 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
         } else if (progressStage > 1) {
             if (progressStage == 2) {
                 updateObjective("Solve the puzzle", 0);
-                mg.player.dialog.loadNewLine("Looks like theres something underneath. There are small levers built into the back of the statues. Maybe the inscriptions will give me a clue what to do with them.");
+                String text = "Looks like theres something underneath. There are small levers built into the back of the statues. Maybe the inscriptions will give me a clue what to do with them.";
+                mg.player.dialog.loadNewLine(text);
+                cacheDialog(text);
+                addQuestMarker("1", 68, 69, Zone.Hillcrest);
                 nextStage();
             } else if (progressStage == 3) {
                 if (Arrays.equals(user, correctSolution)) {
                     nextStage();
                 }
                 for (int i = 0; i < 4; i++) {
-                    if (new Point(mg.playerX, mg.playerY).equals(inscriptionPoints[i]) && mg.inputH.e_typed) {
-                        mg.inputH.e_typed = false;
-                        mg.player.dialog.loadNewLine(inscriptions[i]);
+                    if (new Point(mg.playerX, mg.playerY).equals(inscriptionPoints[i])) {
+                        mg.playerPrompts.E = true;
+                        if (mg.inputH.e_typed) {
+                            mg.inputH.e_typed = false;
+                            mg.player.dialog.loadNewLine(inscriptions[i]);
+                            cacheDialog(inscriptions[i]);
+                        }
                     }
-                    if (new Point(mg.playerX, mg.playerY).equals(activatePoints[i]) && mg.inputH.e_typed) {
-                        mg.inputH.e_typed = false;
-                        user[counter] = i;
-                        counter++;
+                    if (new Point(mg.playerX, mg.playerY).equals(activatePoints[i])) {
+                        mg.playerPrompts.E = true;
+                        if (mg.inputH.e_typed) {
+                            mg.inputH.e_typed = false;
+                            user[counter] = i;
+                            counter++;
+                            mg.sound.playEffectSound(16);
+                        }
                     }
                     if (user[i] != -1) {
                         if (user[i] == correctSolution[i]) {
                             continue;
                         } else {
+                            mg.sound.playEffectSound(17);
                             for (int k = 0; k < 4; k++) {
                                 user[i] = -1;
                             }
@@ -83,8 +95,15 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
                     WorldRender.worldData2[64][65] = -1;
                     WorldRender.worldData2[63][65] = 189;
                     WorldRender.worldData2[63][64] = 176;
-
                     objective1Progress = 1;
+                }
+                if (WorldController.currentWorld == Zone.Treasure_Cave) {
+                    objective3Progress = 1;
+                }
+                if (objective3Progress == 1 && WorldController.currentWorld == Zone.Hillcrest) {
+                    updateObjective("", 0);
+                    mg.sqLite.finishQuest(quest_id);
+                    completed = true;
                 }
                 updateObjective("Explore the hidden cavern", 0);
             }

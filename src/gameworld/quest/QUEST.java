@@ -55,7 +55,7 @@ abstract public class QUEST {
         return new Point((int) Player.worldX, (int) Player.worldY).distance(new Point(worldX, worldY)) < distance;
     }
 
-    private void cacheDialog(String text) {
+    protected void cacheDialog(String text) {
         for (int i = 0; i < questRecap.length; i++) {
             if (questRecap[i] == null) {
                 questRecap[i] = Dialog.insertNewLine(text, 42);
@@ -155,18 +155,20 @@ abstract public class QUEST {
     }
 
     public void updateObjective(String newText, int index) {
-        if (!checkDialogSimilarity(newText, index)) {
-            mg.sound.playEffectSound(1);
-        }
-        for (int i = 0; i < 50; i++) {
-            if (questRecap[i] == null) {
-                questRecap[i] = Dialog.insertNewLine(newText, 20);
-                break;
-            } else if (questRecap[i].equals(Dialog.insertNewLine(newText, 20))) {
-                break;
+        if (objectives[index] == null || !objectives[index].equals(newText)) {
+            if (!checkDialogSimilarity(newText, index)) {
+                mg.sound.playEffectSound(1);
             }
+            for (int i = 0; i < 150; i++) {
+                if (questRecap[i] == null) {
+                    questRecap[i] = Dialog.insertNewLine(newText, 29);
+                    break;
+                } else if (questRecap[i].equals(Dialog.insertNewLine(newText, 29))) {
+                    break;
+                }
+            }
+            objectives[index] = Dialog.insertNewLine(newText, 29);
         }
-        objectives[index] = Dialog.insertNewLine(newText, 20);
     }
 
     protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {

@@ -12,6 +12,7 @@ import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import main.MainGame;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 
 import java.awt.Point;
 
@@ -115,6 +116,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 }
             }
             if (npc instanceof NPC_Aria) {
+                System.out.println(progressStage);
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
                 if (progressStage == 13) {
                     if (objective3Progress == 0 && playerCloseToAbsolute((int) npc.worldX, (int) npc.worldY, 500)) {
@@ -174,11 +176,57 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     }
                 } else if (progressStage == 20) {
                     moveToTile(npc, 68, 73, new Point(49, 75));
-                } else if (progressStage == 21) {
-                    moveToTile(npc, 76, 71);
-                    mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                 } else if (progressStage == 22) {
-                    moveToTile(npc, 93, 59, new Point(86, 62));
+                    if (moveToTile(npc, 76, 71)) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 23);
+                    }
+                } else if (progressStage == 23) {
+                    if (mg.qPanel.questIsFinished(QUEST_NAME.HillcrestPuzzle)) {
+                        progressStage = 24;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 24);
+                    }
+                    int num = npc.dialog.drawChoice("Iam ready", null, null, null);
+                    if (num == 10) {
+                        progressStage = 25;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 25);
+                    }
+                } else if (progressStage == 24) {
+                    int num = npc.dialog.drawChoice("Iam ready", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 3);
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 25);
+                    }
+                } else if (progressStage == 25) {
+                    if (moveToTile(npc, 90, 57, new Point(86, 62))) {
+                        nextStage();
+                    }
+                } else if (progressStage == 28) {
+                    int num = npc.dialog.drawChoice("Danger is my second name!", "Loot, loot, LOOT!", "For the friends", null);
+                    if (num == 10) {
+                        progressStage = 29;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 29);
+                    } else if (num == 20) {
+                        progressStage = 30;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 30);
+                    } else if (num == 30) {
+                        progressStage = 31;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 31);
+                    }
+                } else if (progressStage == 29 || progressStage == 30 || progressStage == 31) {
+                    progressStage = 32;
+                } else if (progressStage == 32) {
+                    int num = npc.dialog.drawChoice("Tell me something about you", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 33);
+                    }
+                } else if (progressStage == 38) {
+                    moveToTile(npc, 97, 76);
+                } else if (progressStage == 39) {
+                    WorldRender.worldData1[97][77] = -1;
+                    moveToTile(npc, 91, 96);
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
                         nextStage();

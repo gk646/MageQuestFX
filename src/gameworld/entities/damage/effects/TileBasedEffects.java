@@ -109,7 +109,7 @@ public class TileBasedEffects {
     }
 
     public boolean isInOpen() {
-        return !(activeTile >= 9 && activeTile <= 300);
+        return (activeTile >= 338 && activeTile <= 402) || (activeTile >= 442 && activeTile <= 1338) || (activeTile >= 2086 && activeTile <= 2157);
     }
 
 
