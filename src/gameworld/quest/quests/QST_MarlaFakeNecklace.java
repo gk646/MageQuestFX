@@ -227,6 +227,23 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 39) {
                     WorldRender.worldData1[97][77] = -1;
                     moveToTile(npc, 91, 96);
+                } else if (progressStage == 40) {
+                    int num = npc.dialog.drawChoice("The necklace is fake!", "Its just you! *wink*", null, null);
+                    if (num == 10) {
+                        progressStage = 75;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, -1);
+                    } else if (num == 20) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 41);
+                    }
+                } else if (progressStage == 41) {
+                    objective1Progress++;
+                    if (objective1Progress == 200) {
+                        if (moveToTile(npc, 87, 94)) {
+                            npc.zone = Zone.Hillcrest_MountainCave;
+                        }
+                    }
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
                         nextStage();

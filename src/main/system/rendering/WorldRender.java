@@ -126,7 +126,27 @@ public class WorldRender {
 
     private void getTileImagesNew() {
         {
+            for (int i = 3653; i <= 3747; i += 13) {
+                setupCollision(i);
+                setupCollision(i + 1);
+                setupCollision(i + 2);
+                setupCollision(i + 3);
+            }
+            for (int i = 3645; i <= 3687; i += 13) {
+                setupCollision(i);
+                setupCollision(i + 1);
+                setupCollision(i + 2);
+                setupCollision(i + 3);
+            }
+            setupCollision(3914);
+            for (int i = 4329; i <= 4497; i++) {
+                setupCollision(i);
+            }
+            for (int i = 3445; i <= 3561; i++) {
+                setupCollision(i);
+            }
             setupCollision(309);
+            setupCollision(3975);
             setupCollision(803);
             setupCollision(704);
             setupCollision(311);
@@ -901,7 +921,7 @@ public class WorldRender {
             setupCollision(2945);
             setupCollision(2949);
         }
-        for (int i = 0; i < 4000; i++) {
+        for (int i = 0; i < 5000; i++) {
             setupTiles(i, i + ".png", trueCollision[i] == 1);
         }
     }

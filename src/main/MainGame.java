@@ -464,7 +464,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest, 38, 61);
+        wControl.loadMap(Zone.Hillcrest_MountainCave, 56, 57);
         for (int i = 0; i < 20; i++) {
             WORLD_DROPS.add(new DRP_DroppedItem((10 + i) * 48, 15 * 48, dropManager.getGuaranteedRandomItem(15), Zone.Hillcrest));
         }

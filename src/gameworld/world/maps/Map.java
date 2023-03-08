@@ -110,6 +110,7 @@ public class Map {
                             case "snake" -> type = Type.snake;
                             case "wolf" -> type = Type.wolf;
                             case "bossKnight" -> type = Type.KnightBoss;
+                            case "mushroom" -> type = Type.Mushroom;
                         }
                         if (type != null) {
                             level = Integer.parseInt(matcher.group(2));
