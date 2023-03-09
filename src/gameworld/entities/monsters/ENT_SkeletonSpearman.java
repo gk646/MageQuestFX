@@ -72,6 +72,13 @@ public class ENT_SkeletonSpearman extends ENTITY {
         } else if (hpBarOn) {
             hpBarCounter++;
         }
+        tickEffects();
+        activeTile.x = (int) ((worldX + 24) / 48);
+        activeTile.y = (int) ((worldY + 24) / 48);
+        if (health <= 0) {
+            dead = true;
+            playGetHitSound();
+        }
     }
 
 

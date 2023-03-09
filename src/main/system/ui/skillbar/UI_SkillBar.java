@@ -19,7 +19,7 @@ public class UI_SkillBar {
     private final int skillBarX = 614;
     private final int skillBarY = 1_005;
     public final Rectangle[] hitBoxes = new Rectangle[8];
-
+    private final Image xpBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/xpbar.png")));
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
 
     private final Image character = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/character.png")));
@@ -118,6 +118,12 @@ public class UI_SkillBar {
         gc.drawImage(abilities, skillBarX + 64 * 7 + 110, skillBarY + 28);
         gc.drawImage(map, skillBarX + 64 * 7 + 144, skillBarY + 28);
         gc.drawImage(settings, skillBarX + 64 * 7 + 178, skillBarY + 28);
+
+        gc.setFill(Colors.lightGreyMiddleAlpha);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, 700, 12);
+        gc.setFill(Colors.xpbarOrange);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 12);
+        gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
     }
 
 

@@ -17,8 +17,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
 
     public PRJ_ThunderSplash(float weapon_damage_percent) {
         this.weapon_damage_percent = weapon_damage_percent;
-        this.procEffects[0] = new DEBUF_Stun(180, 1, 1, false);
-        procEffects[0].sourceProjectile = this.getClass();
+        this.procEffects[0] = new DEBUF_Stun(180, 1, 1, false, this.getClass());
         this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;

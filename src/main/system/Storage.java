@@ -1,6 +1,7 @@
 package main.system;
 
 
+import gameworld.player.Player;
 import javafx.scene.image.Image;
 
 import java.awt.Rectangle;
@@ -18,6 +19,7 @@ public class Storage {
     public static Image acidBreath;
     public static Image shooterImage1;
     public static Image coin1, coin2, coin3, coin4;
+    public static Image[] effectImages = new Image[Player.effectsSizeTotal];
 
     public Storage() {
     }
@@ -25,6 +27,12 @@ public class Storage {
     public void loadImages() {
         loadAbilityImages();
         loadDropImages();
+        loadEffects();
+    }
+
+    private void loadEffects() {
+        effectImages[42] = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/effectIcons/fireWeak.png")));
+        effectImages[45] = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/effectIcons/movSpeed.png")));
     }
 
     private void loadDropImages() {

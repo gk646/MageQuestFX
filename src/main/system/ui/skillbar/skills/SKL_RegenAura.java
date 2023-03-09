@@ -42,7 +42,7 @@ public class SKL_RegenAura extends SKILL {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
-            mg.player.BuffsDebuffEffects.add(new BUF_RegenAura(1_200, mg.player.level * 2, 1, true));
+            mg.player.BuffsDebuffEffects.add(new BUF_RegenAura(1_200, mg.player.level * 2, 1, true, null));
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
         }

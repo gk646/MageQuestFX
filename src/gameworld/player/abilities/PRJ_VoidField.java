@@ -1,6 +1,8 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.effects.EffectType;
+import gameworld.entities.damage.effects.arraybased.Effect_ArrayBased;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
@@ -17,7 +19,8 @@ public class PRJ_VoidField extends PROJECTILE {
     public PRJ_VoidField(int durationInTicks, float weapon_damage_percent) {
         this.weapon_damage_percent = weapon_damage_percent;
         this.type = DamageType.DarkMagic;
-        // this.procEffects[0] = new Buff_Effect(180,50,true,)
+        this.procEffects[0] = new Effect_ArrayBased(180, 50, true, 42, EffectType.DEBUFF, this.getClass());
+        this.procEffects[1] = new Effect_ArrayBased(180, 50, true, 45, EffectType.DEBUFF, this.getClass());
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 32, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 32);

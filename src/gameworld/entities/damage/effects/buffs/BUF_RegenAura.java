@@ -3,6 +3,7 @@ package gameworld.entities.damage.effects.buffs;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.damage.effects.EffectType;
+import gameworld.player.PROJECTILE;
 
 
 public class BUF_RegenAura extends Effect {
@@ -14,8 +15,8 @@ public class BUF_RegenAura extends Effect {
      * @param tickRate
      * @param fromPlayer
      */
-    public BUF_RegenAura(float duration, float amount, int tickRate, boolean fromPlayer) {
-        super(duration, amount, fromPlayer);
+    public BUF_RegenAura(float duration, float amount, int tickRate, boolean fromPlayer, Class<? extends PROJECTILE> sourceProjectile) {
+        super(duration, amount, fromPlayer, sourceProjectile);
         name = "Regen Aura";
         description = "Heals you for" + amount + "every second";
         icon = setupPicture("health_regen");
@@ -30,6 +31,14 @@ public class BUF_RegenAura extends Effect {
     public void tick(ENTITY entity) {
         entity.setHealth(entity.getHealth() + amount / 60.0f);
         rest_duration--;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Effect clone() {
+        return new BUF_RegenAura(full_duration, amount, tickRate, fromPlayer, sourceProjectile);
     }
 }
 

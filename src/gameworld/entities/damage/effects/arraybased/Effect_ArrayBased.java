@@ -2,14 +2,17 @@ package gameworld.entities.damage.effects.arraybased;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Effect;
+import gameworld.entities.damage.effects.EffectType;
+import gameworld.player.PROJECTILE;
 
 public class Effect_ArrayBased extends Effect {
-    public final int effectIndexAffected;
+
     protected boolean activated;
 
-    public Effect_ArrayBased(float duration, float amount, boolean fromPlayer, int effectIndexAffected, String name, String description) {
-        super(duration, amount, fromPlayer);
-        this.effectIndexAffected = effectIndexAffected;
+    public Effect_ArrayBased(float duration, float amount, boolean fromPlayer, int effectIndexAffected, EffectType effecttype, Class<? extends PROJECTILE> sourceProjectile) {
+        super(duration, amount, fromPlayer, sourceProjectile);
+        this.indexAffected = effectIndexAffected;
+        this.effectType = effecttype;
     }
 
     @Override
@@ -19,6 +22,11 @@ public class Effect_ArrayBased extends Effect {
             entity.updateEquippedItems();
         }
         rest_duration--;
+    }
+
+    @Override
+    public Effect clone() {
+        return new Effect_ArrayBased(full_duration, amount, fromPlayer, indexAffected, effectType, sourceProjectile);
     }
 }
 

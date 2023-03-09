@@ -269,9 +269,7 @@ public class Player extends ENTITY {
             }
         }
         for (Effect effect : BuffsDebuffEffects) {
-            if (effect instanceof Effect_ArrayBased buffEffect) {
-                effects[buffEffect.effectIndexAffected] += buffEffect.amount;
-            }
+            effects[effect.indexAffected] += effect.amount;
         }
         for (TalentNode node : mg.talentP.talent_Nodes) {
             if (node != null && node.talent != null && node.activated) {

@@ -68,12 +68,6 @@ public class ENT_SkeletonWarrior extends ENTITY {
         }
         hitDelay++;
         searchTicks++;
-        if (hpBarCounter >= 600) {
-            hpBarOn = false;
-            hpBarCounter = 0;
-        } else if (hpBarOn) {
-            hpBarCounter++;
-        }
     }
 
 

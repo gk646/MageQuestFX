@@ -5,6 +5,7 @@ import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.damage.effects.EffectType;
+import gameworld.entities.damage.effects.arraybased.Effect_ArrayBased;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
@@ -13,6 +14,7 @@ import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.Storage;
 import main.system.enums.Zone;
 import main.system.ui.Colors;
 
@@ -73,7 +75,7 @@ abstract public class ENTITY {
     public String direction;
     public Rectangle collisionBox;
     public boolean hpBarOn;
-    protected int hpBarCounter;
+    public int hpBarCounter;
     public int nextCol1;
     public int nextRow1;
     public int nextCol2;
@@ -105,21 +107,21 @@ abstract public class ENTITY {
         collisionUp = false;
         mg.collisionChecker.checkEntityAgainstTile(this);
         if (enLeftX < nextX && !collisionRight) {
-            worldX += movementSpeed;
+            worldX += movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enLeftX > nextX && !collisionLeft) {
-            worldX -= movementSpeed;
+            worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enTopY < nextY && !collisionDown) {
-            worldY += movementSpeed;
+            worldY += movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enTopY > nextY && !collisionUp) {
-            worldY -= movementSpeed;
+            worldY -= movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enRightX > nextX) {
-            worldX -= movementSpeed;
+            worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enRightX < nextX) {
-            worldX += movementSpeed;
+            worldX += movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enBottomY > nextY) {
-            worldX -= movementSpeed;
+            worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enBottomY < nextX) {
-            worldX += movementSpeed;
+            worldX += movementSpeed * (1 - (effects[45] / 100.0f));
         }
     }
 
@@ -260,6 +262,9 @@ abstract public class ENTITY {
             effect.tick(this);
             if (effect.rest_duration <= 0) {
                 iter.remove();
+                if (effect instanceof Effect_ArrayBased) {
+                    updateEquippedItems();
+                }
             }
         }
     }
@@ -292,7 +297,12 @@ abstract public class ENTITY {
     }
 
     public void updateEquippedItems() {
-
+        for (int i = 0; i < Player.effectsSizeTotal; i++) {
+            effects[i] = 0;
+        }
+        for (Effect effect : BuffsDebuffEffects) {
+            effects[effect.indexAffected] += effect.amount;
+        }
     }
 
     public void getDamageFromPlayer(float damagePercent, DamageType type) {
@@ -304,6 +314,13 @@ abstract public class ENTITY {
             case Arcane -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
             case Poison -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
             case Ice -> flat_damage += (flat_damage / 100.0f) * effectsDouble[28];
+        }
+        switch (type) {
+            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * effects[42];
+            case Fire -> flat_damage += (flat_damage / 100.0f) * effects[44];
+            case Arcane -> flat_damage += (flat_damage / 100.0f) * effects[41];
+            case Poison -> flat_damage += (flat_damage / 100.0f) * effects[43];
+            case Ice -> flat_damage += (flat_damage / 100.0f) * effects[40];
         }
         amountedDamageSinceLastDamageNumber += flat_damage;
         if (MainGame.random.nextInt(0, 101) <= effectsDouble[21]) {
@@ -327,35 +344,44 @@ abstract public class ENTITY {
     public void drawBuffsAndDeBuffs(GraphicsContext gc) {
         if (BuffsDebuffEffects.size() > 0) {
             int x = screenX - 35;
-            int y = screenY - 30;
+            int y = screenY - 40;
             for (Effect effect : BuffsDebuffEffects) {
                 if (effect.effectType == EffectType.BUFF) {
                     gc.setStroke(Colors.map_green);
                     gc.strokeRoundRect(x, y, 16, 16, 6, 6);
+                    effect.drawCooldownSmall(gc, x, y);
+                    x += 20;
                     //effect.draw(gc, x += 20, y);
                 }
             }
             x += 32;
             for (Effect effect : BuffsDebuffEffects) {
                 if (effect.effectType == EffectType.DEBUFF) {
-                    gc.setStroke(Colors.Red);
-                    gc.strokeRoundRect(x, y, 16, 16, 6, 6);
-                    // effect.draw(gc, x += 20, y);
+                    //gc.setStroke(Colors.Red);
+                    //gc.strokeRoundRect(x, y, 16, 16, 6, 6);
+                    gc.drawImage(Storage.effectImages[effect.indexAffected], x, y, 16, 16);
+                    effect.drawCooldownSmall(gc, x, y);
+                    x += 20;
                 }
             }
         }
     }
 
     public void addEffects(Effect[] effects) {
+        boolean found;
         for (Effect effect : effects) {
             if (effect != null) {
-                for (Effect entityeffect : BuffsDebuffEffects) {
-                    if (effect.sourceProjectile == entityeffect.sourceProjectile) {
-                        entityeffect.rest_duration = effect.full_duration;
+                found = false;
+                for (Effect entityEffect : BuffsDebuffEffects) {
+                    if (effect.indexAffected == entityEffect.indexAffected && effect.sourceProjectile == entityEffect.sourceProjectile) {
+                        entityEffect.rest_duration = effect.full_duration;
+                        found = true;
                         break;
                     }
                 }
-                BuffsDebuffEffects.add(effect);
+                if (!found) {
+                    BuffsDebuffEffects.add(effect.clone());
+                }
             }
         }
     }

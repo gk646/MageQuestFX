@@ -439,7 +439,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
     }
 
     private void debug() {
@@ -448,6 +448,7 @@ public class MainGame {
         }
         player.coins = 2_000;
         //sound.setVolumeAmbience(0);
+        inventP.char_Slots[5].item = DRP_DroppedItem.cloneItemWithLevelQuality(TWOHANDS.get(2), 100, 60);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_RegenAura(this);
@@ -457,7 +458,6 @@ public class MainGame {
         for (Map map : wControl.MAPS) {
             map.mapCover = new int[map.mapSize.x][map.mapSize.x];
         }
-
         player.maxMana = 2000;
         for (ITEM item : CHEST) {
             for (Float f : item.effects) {
@@ -470,7 +470,10 @@ public class MainGame {
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
         wControl.loadMap(Zone.Hillcrest, 56, 24);
-        ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
+        for (int i = 0; i < 50; i++) {
+            ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
+        }
+
         for (int i = 0; i < 20; i++) {
             ITEM item = dropManager.getGuaranteedRandomItem(i);
             while (item.type != '2') {
