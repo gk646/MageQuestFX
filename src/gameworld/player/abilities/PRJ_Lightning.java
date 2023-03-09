@@ -24,7 +24,7 @@ public class PRJ_Lightning extends PROJECTILE {
         this.projectileHeight = 92;
         this.projectileWidth = 70;
         this.collisionBox = new Rectangle(30, 30, 40, 30);
-        this.damage = 25.0f;
+        this.weapon_damage_percent = 25.0f;
         projectileType = ProjectileType.OneHitNoDMG;
         resource = ProjectilePreloader.lightning;
         sounds[0] = resource.sounds.get(0);

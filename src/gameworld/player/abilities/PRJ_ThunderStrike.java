@@ -15,8 +15,8 @@ import java.awt.geom.Point2D;
 public class PRJ_ThunderStrike extends PROJECTILE {
 
 
-    public PRJ_ThunderStrike() {
-        this.damage = 35.0f;
+    public PRJ_ThunderStrike(float weapon_damage_percent) {
+        this.weapon_damage_percent = weapon_damage_percent;
         this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderStrike;

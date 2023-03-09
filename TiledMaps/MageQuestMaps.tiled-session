@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "ForestClearing.tmx",
+    "activeFile": "caveMarla.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -62,8 +62,8 @@
             "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 964,
-                "y": 1520
+                "x": 798,
+                "y": 802
             }
         },
         "GrassLands.tmx": {
@@ -120,16 +120,16 @@
             "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 119.5,
-                "y": 80.75
+                "x": 802,
+                "y": 790.375
             }
         },
         "caveMarla.tmx": {
-            "scale": 2,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 751,
-                "y": 896.5
+                "x": 479.33333333333326,
+                "y": 479.33333333333326
             }
         },
         "d.tsx": {
@@ -234,30 +234,24 @@
     "map.tileWidth": 16,
     "map.width": 50,
     "openFiles": [
-        "FirstDungeon.tmx",
-        "Tutorial.tmx",
-        "unbenannt.tmx",
-        "TIILESET.tsx",
-        "ForestClearing.tmx",
-        "DungeonTutorial.tmx",
-        "GrassLands.tmx",
         "caveMarla.tmx",
-        "HillCrestPuzzleCellar.tmx",
-        "City1.tmx"
+        "ForestClearing.tmx",
+        "TIILESET.tsx",
+        "Tutorial.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "Tutorial.tmx",
+        "TIILESET.tsx",
+        "ForestClearing.tmx",
+        "caveMarla.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
         "GrassLands.tmx",
         "FirstDungeon.tmx",
         "DungeonTutorial.tmx",
         "City1.tmx",
-        "ForestClearing.tmx",
-        "TIILESET.tsx",
         "unbenannt.tmx",
-        "caveMarla.tmx",
         "grassspritesheet16.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",

@@ -18,7 +18,8 @@ public class Colors {
     public static final Color epicColor = Color.rgb(168, 93, 218, 1);
     public static final Color legendaryColor = Color.rgb(239, 103, 3, 1);
     public static final Color LightGreyAlpha = Color.rgb(192, 203, 220, 0.85);
-    public static final Color LightGreyTransparent = Color.rgb(150, 150, 150, 0.25);
+    public static final Color LightGreyTransparent = Color.rgb(150, 150, 150, 0.30);
+    public static final Color LightGreyLessTransp = Color.rgb(150, 150, 150, 0.50);
     public static final Color darkBackground = Color.rgb(90, 105, 136, 1);
     public static final Color xpbarOrange = Color.rgb(254, 132, 23, 0.9);
     public static final Color LightGrey = Color.rgb(192, 203, 220, 1);

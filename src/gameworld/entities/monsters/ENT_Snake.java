@@ -81,6 +81,7 @@ public class ENT_Snake extends ENTITY {
             drawIdle(gc);
         }
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
 

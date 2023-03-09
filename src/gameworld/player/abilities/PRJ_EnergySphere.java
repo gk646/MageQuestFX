@@ -29,7 +29,7 @@ public class PRJ_EnergySphere extends CollisionProjectiles {
         projectileType = ProjectileType.Continuous;
         //-------VALUES-----------
         this.movementSpeed = 3;
-        this.damage = damage;
+        this.weapon_damage_percent = damage;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
         this.collisionBox = Storage.box_secondaryFire;
@@ -39,6 +39,7 @@ public class PRJ_EnergySphere extends CollisionProjectiles {
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + 24 - projectileWidth / 2.0f, Player.worldY + 24 - projectileHeight / 2.0f);
         this.updateVector = getTrajectory(InputHandler.instance.lastMousePosition);
         getProjectileImage();
+        playStartSound();
     }
 
     @Override

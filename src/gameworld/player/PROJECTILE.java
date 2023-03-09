@@ -2,6 +2,7 @@ package gameworld.player;
 
 
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -18,6 +19,8 @@ import java.awt.geom.Point2D;
  * Main inheritable class for all projectiles
  */
 public abstract class PROJECTILE {
+
+    public Effect[] procEffects = new Effect[3];
     protected GeneralResourceLoader resource;
     protected Point endPos;
     /**
@@ -30,7 +33,7 @@ public abstract class PROJECTILE {
     public DamageType type;
     protected Point2D.Double updateVector;
     public ProjectileType projectileType;
-    public float damage;
+    public float weapon_damage_percent;
     public int projectileHeight;
     protected int spriteCounter;
     protected Image projectileImage1;
@@ -78,7 +81,6 @@ public abstract class PROJECTILE {
             sounds[0].play();
         }
     }
-
 
 
     protected void outOfBoundsEnemy() {

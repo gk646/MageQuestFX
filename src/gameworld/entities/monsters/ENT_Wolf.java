@@ -85,6 +85,7 @@ public class ENT_Wolf extends ENTITY {
             }
         }
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
 

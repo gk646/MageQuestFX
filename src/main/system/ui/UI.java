@@ -223,9 +223,10 @@ public class UI {
     }
 
     private void drawGameUI(GraphicsContext gc) {
+        mg.player.drawBuffsAndDeBuffs(gc);
         gc.setEffect(lighting);
         gc.setFill(Colors.Red);
-        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, Math.min((int) ((mg.player.health / mg.player.maxHealth) * 225), 225), 10);
+        gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 68, Math.min((int) ((mg.player.getHealth() / mg.player.maxHealth) * 225), 225), 10);
         gc.setFill(Colors.Blue);
         gc.fillRect(MainGame.SCREEN_WIDTH * 0.063_5f, 96, Math.min((int) ((mg.player.getMana() / mg.player.maxMana) * 162), 162), 10);
         gc.setEffect(null);
@@ -233,7 +234,7 @@ public class UI {
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.editUndo18);
         gc.setEffect(shadow);
-        gc.fillText((int) mg.player.health + "/" + mg.player.maxHealth, 199, 72);
+        gc.fillText((int) mg.player.getHealth() + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.getMana() + "/" + mg.player.maxMana, 173, 97);
         gc.setEffect(null);
         gc.setFill(Colors.lightGreyMiddleAlpha);

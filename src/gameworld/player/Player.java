@@ -2,12 +2,12 @@ package gameworld.player;
 
 import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
-import gameworld.entities.damage.effects.Buff_Effect;
 import gameworld.entities.damage.effects.Effect;
+import gameworld.entities.damage.effects.EffectType;
+import gameworld.entities.damage.effects.arraybased.Effect_ArrayBased;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
-import gameworld.world.MapQuadrant;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
@@ -33,7 +33,6 @@ public class Player extends ENTITY {
     public int maxMana;
     public boolean interactingWithNPC;
     private float mana;
-    public float health;
     //STATS
     public int intellect;
     public int vitality;
@@ -54,14 +53,11 @@ public class Player extends ENTITY {
     public int armour;
     private int playerQuadrant;
     public int levelUpExperience = 10;
-    private int quadrantTimer;
-    private boolean respawnsDone, movingLeft;
+    public float weaponDamageUpper, weaponDamageLower;
     // PLAYER X AND Y ALWAYS +24
     public static float worldX, worldY;
     // screenX is half width -24
     public static int screenX, screenY;
-    private Image idle1, idle2, idle3, idle4, idle5, idle6, idle7, idle8;
-    private Image run1, run2, run3, run4, run5, run6, run7, run8;
     private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
     public static final int effectsSizeTotal = 50;
     public final Dialog dialog = new Dialog();
@@ -74,6 +70,7 @@ public class Player extends ENTITY {
     private int levelupCounter;
     public boolean drawDialog;
     private boolean attack1, attack2, attack3;
+    private boolean movingLeft;
     private final Rectangle player = new Rectangle(40, 40);
 
 
@@ -146,16 +143,16 @@ public class Player extends ENTITY {
 
     private void movement() {
         int worldSize = (mg.wRender.worldSize.x - 1) * 48;
-        if (mg.inputH.leftPressed && worldX > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerLeft()) {
+        if (!stunned && mg.inputH.leftPressed && worldX > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerLeft()) {
             worldX -= playerMovementSpeed;
         }
-        if (mg.inputH.upPressed && worldY > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerUp()) {
+        if (!stunned && mg.inputH.upPressed && worldY > 0 + playerMovementSpeed && !mg.collisionChecker.checkPlayerUp()) {
             worldY -= playerMovementSpeed;
         }
-        if (mg.inputH.downPressed && worldY < worldSize && !mg.collisionChecker.checkPlayerDown()) {
+        if (!stunned && mg.inputH.downPressed && worldY < worldSize && !mg.collisionChecker.checkPlayerDown()) {
             worldY += playerMovementSpeed;
         }
-        if (mg.inputH.rightPressed && worldX < worldSize && !mg.collisionChecker.checkPlayerRight()) {
+        if (!stunned && mg.inputH.rightPressed && worldX < worldSize && !mg.collisionChecker.checkPlayerRight()) {
             worldX += playerMovementSpeed;
         }
     }
@@ -172,42 +169,41 @@ public class Player extends ENTITY {
     }
 
     private void skills() {
-        if (mg.inputH.OnePressed) {
+        if (mg.inputH.OnePressed && !stunned) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[0].activate();
         }
-        if (mg.inputH.TwoPressed) {
+        if (mg.inputH.TwoPressed && !stunned) {
             mg.sBar.skills[1].activate();
             getDurabilityDamageWeapon();
         }
-        if (mg.inputH.ThreePressed) {
+        if (mg.inputH.ThreePressed && !stunned) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[2].activate();
         }
-        if (mg.inputH.FourPressed) {
+        if (mg.inputH.FourPressed && !stunned) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[3].activate();
         }
-        if (mg.inputH.FivePressed) {
+        if (mg.inputH.FivePressed && !stunned) {
             getDurabilityDamageWeapon();
             mg.sBar.skills[4].activate();
         }
-        if (mg.inputH.mouse1Pressed && mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null && mg.skillPanel.draggedSKILL == null) {
+        if (mg.inputH.mouse1Pressed) {
             Point mousePos = mg.inputH.lastMousePosition;
-            if (!mg.qPanel.wholeJournalWindow.contains(mousePos) && !mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.skillPanel.wholeSkillWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
+            if (mg.inventP.grabbedITEM == null && mg.inventP.activeTradingNPC == null && mg.skillPanel.draggedSKILL == null && !stunned && !mg.qPanel.wholeJournalWindow.contains(mousePos) && !mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.skillPanel.wholeSkillWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[5].activate();
             }
         }
-        if (mg.inputH.mouse2Pressed && mg.inventP.activeTradingNPC == null) {
+        if (mg.inputH.mouse2Pressed && mg.inventP.activeTradingNPC == null && !stunned) {
             Point mousePos = mg.inputH.lastMousePosition;
             if (!mg.sBar.wholeSkillBar.contains(mousePos) && !mg.inventP.wholeBagWindow.contains(mousePos) && !mg.inventP.wholeCharWindow.contains(mousePos) && !mg.showMap && !mg.showTalents) {
                 getDurabilityDamageWeapon();
                 mg.sBar.skills[6].activate();
             }
         }
-        if (mg.inputH.q_pressed && !interactingWithNPC) {
-            getDurabilityDamageWeapon();
+        if (mg.inputH.q_pressed && !interactingWithNPC && !stunned) {
             mg.sBar.skills[7].activate();
         }
         if (mana < maxMana) {
@@ -235,6 +231,21 @@ public class Player extends ENTITY {
         strength = 0;
         focus = 0;
         armour = 0;
+        if (mg.inventP.char_Slots[8].item != null && mg.inventP.char_Slots[8].item.type == '2') {
+            weaponDamageLower = (float) (mg.inventP.char_Slots[8].item.weapon_damage * 0.94);
+            weaponDamageUpper = (float) (mg.inventP.char_Slots[8].item.weapon_damage * 1.05);
+        } else if (mg.inventP.char_Slots[8].item != null && mg.inventP.char_Slots[8].item.type == 'W') {
+            weaponDamageUpper = (float) (mg.inventP.char_Slots[8].item.weapon_damage * 1.05);
+            weaponDamageLower = (float) (mg.inventP.char_Slots[8].item.weapon_damage * 0.94);
+            if (mg.inventP.char_Slots[9].item != null) {
+                weaponDamageUpper += (float) (mg.inventP.char_Slots[9].item.weapon_damage * 1.05);
+                weaponDamageLower += (float) (mg.inventP.char_Slots[9].item.weapon_damage * 0.94);
+            }
+        } else {
+            weaponDamageUpper = 0.755f;
+            weaponDamageLower = 0.75f;
+        }
+
         for (int i = 1; i < effectsSizeTotal; i++) {
             effects[i] = 0;
         }
@@ -258,7 +269,7 @@ public class Player extends ENTITY {
             }
         }
         for (Effect effect : BuffsDebuffEffects) {
-            if (effect instanceof Buff_Effect buffEffect) {
+            if (effect instanceof Effect_ArrayBased buffEffect) {
                 effects[buffEffect.effectIndexAffected] += buffEffect.amount;
             }
         }
@@ -325,7 +336,6 @@ public class Player extends ENTITY {
         carryWeight = effects[23];
         healthRegeneration = healthRegeneration + (healthRegeneration / 100.0f) * effects[24];
         manaRegeneration = manaRegeneration + (manaRegeneration / 100.0f) * effects[25];
-
 
         playerMovementSpeed += effects[45];
         effects[45] = playerMovementSpeed;
@@ -416,7 +426,7 @@ public class Player extends ENTITY {
             effect.tick(this);
             if (effect.rest_duration <= 0) {
                 iter.remove();
-                if (effect instanceof Buff_Effect) {
+                if (effect instanceof Effect_ArrayBased) {
                     updateEquippedItems();
                 }
             }
@@ -453,7 +463,7 @@ public class Player extends ENTITY {
             }
         }
     }
-
+/*
     private void dynamicSpawns() {
         MapQuadrant[] mapQuadrants = map.mapQuadrants;
         int[][] mapData = map.mapDataBackGround;
@@ -492,6 +502,8 @@ public class Player extends ENTITY {
             respawnsDone = true;
         }
     }
+
+ */
 
     @Override
     public void draw(GraphicsContext gc) {
@@ -532,6 +544,33 @@ public class Player extends ENTITY {
 
         spriteCounter++;
     }
+
+    @Override
+    public void drawBuffsAndDeBuffs(GraphicsContext gc) {
+        if (BuffsDebuffEffects.size() > 0) {
+            int x = 600;
+            int y = 923;
+            gc.setLineWidth(2);
+            for (Effect effect : BuffsDebuffEffects) {
+                if (effect.effectType == EffectType.BUFF) {
+                    effect.draw(gc, x, y);
+                    gc.setStroke(Colors.map_green);
+                    gc.strokeRoundRect(x, y, 32, 32, 6, 6);
+                    x += 40;
+                }
+            }
+            x += 32;
+            for (Effect effect : BuffsDebuffEffects) {
+                if (effect.effectType == EffectType.DEBUFF) {
+                    gc.setStroke(Colors.Red);
+                    effect.draw(gc, x, y);
+                    gc.strokeRoundRect(x, y, 32, 32, 6, 6);
+                    x += 40;
+                }
+            }
+        }
+    }
+
 
     public void checkPlayerIsMoving() {
         movingLeft = mg.inputH.leftPressed;
@@ -693,8 +732,14 @@ public class Player extends ENTITY {
         this.mana = mana;
     }
 
-    public void loseMana(float manaCost) {
-        mana -= manaCost - (manaCost / 100.0f) * effects[28];
+    public void loseMana(float baseCost) {
+        baseCost *= Math.sqrt(level);
+        mana -= baseCost - (baseCost / 100.0f) * effects[28];
+    }
+
+    public float getManaCost(int baseCost) {
+        baseCost *= Math.sqrt(level);
+        return baseCost - (baseCost / 100.0f) * effects[28];
     }
 
     private void getPlayerImage() {

@@ -1,7 +1,7 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.Buff_Effect;
+import gameworld.entities.damage.effects.buffs.BUF_RegenAura;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
@@ -13,7 +13,7 @@ public class SKL_RegenAura extends SKILL {
         super(mg);
         this.totalCoolDown = 3_600;
         this.actualCoolDown = 3_600;
-        castTimeTotal = 300;
+        castTimeTotal = 50;
         manaCost = 10;
         type = DamageType.Arcane;
         icon = setup("frostNova");
@@ -42,7 +42,7 @@ public class SKL_RegenAura extends SKILL {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
-            mg.player.BuffsDebuffEffects.add(new Buff_Effect(1_200, 100, true, 24));
+            mg.player.BuffsDebuffEffects.add(new BUF_RegenAura(1_200, mg.player.level * 2, 1, true));
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
         }

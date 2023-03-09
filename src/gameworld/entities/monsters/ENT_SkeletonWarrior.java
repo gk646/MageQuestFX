@@ -96,8 +96,8 @@ public class ENT_SkeletonWarrior extends ENTITY {
                 drawIdle(gc);
             }
         }
-
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
 

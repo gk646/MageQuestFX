@@ -24,7 +24,7 @@ public class PRJ_EnemyStandardShot extends EnemyProjectile {
         this.projectileWidth = 16;
         this.collisionBox = Storage.box_primaryFire;
         this.level = level;
-        this.damage = damage;
+        this.weapon_damage_percent = damage;
         this.direction = "downleftrightup";
 
         //------POSITION-----------

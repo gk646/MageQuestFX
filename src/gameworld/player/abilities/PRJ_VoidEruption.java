@@ -14,8 +14,8 @@ import java.awt.geom.Point2D;
 public class PRJ_VoidEruption extends PROJECTILE {
 
 
-    public PRJ_VoidEruption() {
-        this.damage = 50;
+    public PRJ_VoidEruption(float weapon_damage_percent) {
+        this.weapon_damage_percent = weapon_damage_percent;
         this.resource = ProjectilePreloader.voidEruption;
         this.sounds[0] = resource.sounds.get(0);
         type = DamageType.DarkMagic;
@@ -78,7 +78,7 @@ public class PRJ_VoidEruption extends PROJECTILE {
     @Override
     public void update() {
         if (dead) {
-            sounds[0].stop();
+            //sounds[0].stop();
         }
     }
 }

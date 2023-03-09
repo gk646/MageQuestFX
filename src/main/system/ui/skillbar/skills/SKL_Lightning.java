@@ -14,7 +14,7 @@ public class SKL_Lightning extends SKILL {
         super(mg);
         this.totalCoolDown = 600;
         this.actualCoolDown = 600;
-        this.damage = 25;
+        this.weapon_damage_percent = 25;
         manaCost = 15;
         icon = setup("lightning");
         name = "Lightning Strike";

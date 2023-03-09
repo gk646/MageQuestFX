@@ -16,6 +16,7 @@ public class ITEM {
     public int rarity;
     public String stats;
     public char type;
+    public float weapon_damage;
     /* H - Head slot
        C - chest
        P - pants
@@ -88,6 +89,7 @@ public class ITEM {
             this.stats = "a";
         }
         getStats();
+        getWeaponDamage();
     }
 
     public ITEM() {
@@ -112,6 +114,7 @@ public class ITEM {
         }
         getStats();
         applyMultipliers();
+        getWeaponDamage();
     }
 
 
@@ -119,6 +122,12 @@ public class ITEM {
         gc.drawImage(icon, x, y, slotSize, slotSize);
     }
 
+    private void getWeaponDamage() {
+        switch (type) {
+            case 'W' -> weapon_damage = (float) ((quality / 100.0f) * Math.sqrt(level)) * rarity;
+            case '2' -> weapon_damage = ((float) ((quality / 100.0f) * Math.sqrt(level)) * rarity) * 2;
+        }
+    }
 
     private void getStats() {
         Pattern p;

@@ -15,7 +15,7 @@ public class PRJ_FrostNova extends PROJECTILE {
 
     public PRJ_FrostNova() {
         projectileType = ProjectileType.OneHitNoDMG;
-        this.damage = 1.0f;
+        this.weapon_damage_percent = 1.0f;
         this.type = DamageType.Ice;
         this.resource = ProjectilePreloader.frostNova;
         //this.sounds[0] = resource.sounds.get(0);

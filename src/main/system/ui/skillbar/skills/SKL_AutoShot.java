@@ -14,7 +14,7 @@ public class SKL_AutoShot extends SKILL {
         this.totalCoolDown = 30;
         actualCoolDown = 30;
         this.coolDownCoefficient = 0;
-        this.damage = 1;
+        this.weapon_damage_percent = 100;
         this.type = DamageType.Poison;
         this.icon = setup("slimeBall");
         name = "Poison Ball";
@@ -36,9 +36,8 @@ public class SKL_AutoShot extends SKILL {
     @Override
     public void activate() {
         if (actualCoolDown == 30) {
-            mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y, damage));
+            mg.PROJECTILES.add(new PRJ_AutoShot(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y, weapon_damage_percent));
             actualCoolDown = 0;
-            mg.player.getDurabilityDamageWeapon();
         }
     }
 }

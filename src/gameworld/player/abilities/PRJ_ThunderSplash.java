@@ -1,6 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.effects.debuffs.DEBUF_Stun;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
@@ -14,8 +15,10 @@ import java.awt.geom.Point2D;
 public class PRJ_ThunderSplash extends PROJECTILE {
 
 
-    public PRJ_ThunderSplash() {
-        this.damage = 15.0f;
+    public PRJ_ThunderSplash(float weapon_damage_percent) {
+        this.weapon_damage_percent = weapon_damage_percent;
+        this.procEffects[0] = new DEBUF_Stun(180, 1, 1, false);
+        procEffects[0].sourceProjectile = this.getClass();
         this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;
@@ -82,7 +85,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
         // outOfBounds();
         //tileCollision();
         if (dead) {
-           // sounds[0].stop();
+            // sounds[0].stop();
         }
     }
 }

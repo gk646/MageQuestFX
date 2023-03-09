@@ -24,7 +24,7 @@ public class PRJ_AcidBreath extends EnemyProjectile {
         this.level = level;
         this.direction = "downleftrightup";
         type = DamageType.Poison;
-        this.damage = 1;
+        this.weapon_damage_percent = 1;
 
         //------POSITION-----------
         this.worldPos = new Point2D.Double(x + 24 - projectileWidth / 2.0f, y + 24 - projectileHeight / 2.0f);

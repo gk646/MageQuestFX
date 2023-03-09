@@ -17,7 +17,7 @@ public class SKL_VoidField extends SKILL {
         icon = setup("voidField");
         name = "Void Field";
         type = DamageType.DarkMagic;
-        damage = 0.1f;
+        weapon_damage_percent = 2.0f;
         description = "Creates a localized zone of darkness and destruction. Upon activation, the caster summons a swirling void, consuming everything in its path. Enemies caught in the Void Field are taking damage over time as they struggle to escape the field's grasp. They are also weakened against further dark magic damage";
     }
 
@@ -38,20 +38,18 @@ public class SKL_VoidField extends SKILL {
         super.updateCastTimer();
     }
 
+    @Override
     /**
      *
      */
+    public String toString() {
+        return weapon_damage_percent + "% Weapon Damage per Tick as" + type;
+    }
+
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= manaCost) {
-            castTimeActive++;
-            mg.player.playCastAnimation(3);
-        }
-        if (castTimeActive == castTimeTotal) {
-            mg.player.loseMana(manaCost);
-            castTimeActive = 0;
-            actualCoolDown = 0;
-            mg.PROJECTILES.add(new PRJ_VoidField(300));
+        if (checkForActivationCasting(3)) {
+            mg.PROJECTILES.add(new PRJ_VoidField(300, weapon_damage_percent));
         }
     }
 }

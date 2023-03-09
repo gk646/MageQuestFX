@@ -15,8 +15,8 @@ import java.awt.geom.Point2D;
 public class PRJ_SolarFlare extends PROJECTILE {
 
 
-    public PRJ_SolarFlare() {
-        this.damage = 50.0f;
+    public PRJ_SolarFlare(float weapon_damage_percent) {
+        this.weapon_damage_percent = weapon_damage_percent;
         this.type = DamageType.Fire;
         this.resource = ProjectilePreloader.solarFlare;
         this.sounds[0] = resource.sounds.get(0);
@@ -65,7 +65,7 @@ public class PRJ_SolarFlare extends PROJECTILE {
         // outOfBounds();
         //tileCollision();
         if (dead) {
-            sounds[0].stop();
+            //sounds[0].stop();
         }
     }
 }

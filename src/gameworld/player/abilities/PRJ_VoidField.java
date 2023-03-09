@@ -14,9 +14,10 @@ import java.awt.geom.Point2D;
 
 public class PRJ_VoidField extends PROJECTILE {
 
-    public PRJ_VoidField(int durationInTicks) {
-        this.damage = 0.1f;
+    public PRJ_VoidField(int durationInTicks, float weapon_damage_percent) {
+        this.weapon_damage_percent = weapon_damage_percent;
         this.type = DamageType.DarkMagic;
+        // this.procEffects[0] = new Buff_Effect(180,50,true,)
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 32, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 32);
@@ -28,6 +29,7 @@ public class PRJ_VoidField extends PROJECTILE {
     }
 
     /**
+     *
      */
     @Override
     public void draw(GraphicsContext gc) {

@@ -191,6 +191,10 @@ public class Dialog {
         if (drawChoice) {
             if (choicePointer == 10 || choicePointer == 20 || choicePointer == 30 || choicePointer == 40) {
                 drawChoice = false;
+                choice1 = null;
+                choice2 = null;
+                choice3 = null;
+                choice4 = null;
                 return choicePointer;
             } else {
                 return 0;

@@ -1,6 +1,5 @@
 package main.system.ui.skillbar.skills;
 
-import gameworld.entities.damage.effects.Buff_Effect;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
@@ -50,7 +49,7 @@ public class SKL_MagicShield extends SKILL {
             castTimeActive++;
         }
         if (castTimeActive >= castTimeTotal) {
-            mg.player.BuffsDebuffEffects.add(new Buff_Effect(1_200, 100, true, 24));
+            //mg.player.BuffsDebuffEffects.add(new Buff_Effect(1_200, 100, true, 45));
             mg.player.loseMana(manaCost);
             mg.player.playCastAnimation(2);
             actualCoolDown = 0;

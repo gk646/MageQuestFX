@@ -4,6 +4,7 @@ import gameworld.entities.companion.ENT_Owly;
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.Effect;
+import gameworld.entities.damage.effects.EffectType;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
@@ -12,8 +13,8 @@ import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
-import main.system.ai.Node;
 import main.system.enums.Zone;
+import main.system.ui.Colors;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -29,7 +30,7 @@ import java.util.Iterator;
  */
 abstract public class ENTITY {
     public boolean AfterAnimationDead;
-    public Node[][] pathFindArray = new Node[16][16];
+    public boolean stunned;
     public Dialog dialog;
     protected float health;
     public final ArrayList<Effect> BuffsDebuffEffects = new ArrayList<>();
@@ -50,8 +51,6 @@ abstract public class ENTITY {
     protected Image entityImage5;
     protected Image entityImage6;
     protected Image enemyImage;
-    public Image walk1, walk2, walk3, walk4, walk5, walk6;
-
     public int entityWidth;
     public int entityHeight;
     protected int searchTicks;
@@ -137,7 +136,7 @@ abstract public class ENTITY {
         int startCol = activeTile.x;
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
-        if (!(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
+        if (!stunned && !(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
@@ -253,6 +252,7 @@ abstract public class ENTITY {
         }
     }
 
+
     protected void tickEffects() {
         Iterator<Effect> iter = BuffsDebuffEffects.iterator();
         while (iter.hasNext()) {
@@ -295,7 +295,8 @@ abstract public class ENTITY {
 
     }
 
-    public void getDamageFromPlayer(float flat_damage, DamageType type) {
+    public void getDamageFromPlayer(float damagePercent, DamageType type) {
+        float flat_damage = MainGame.random.nextFloat(mg.player.weaponDamageLower, mg.player.weaponDamageUpper) * (damagePercent / 100.0f);
         float[] effectsDouble = mg.player.effects;
         switch (type) {
             case DarkMagic -> flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
@@ -304,9 +305,8 @@ abstract public class ENTITY {
             case Poison -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
             case Ice -> flat_damage += (flat_damage / 100.0f) * effectsDouble[28];
         }
-        flat_damage *= mg.random.nextDouble(0.95, 1.05);
         amountedDamageSinceLastDamageNumber += flat_damage;
-        if (mg.random.nextInt(0, 101) <= effectsDouble[21]) {
+        if (MainGame.random.nextInt(0, 101) <= effectsDouble[21]) {
             flat_damage += (flat_damage / 100.0f) * effectsDouble[22];
             mg.damageNumbers.add(new DamageNumber((int) flat_damage, type, this, true));
             timeSinceLastDamageNumber = System.currentTimeMillis();
@@ -323,4 +323,41 @@ abstract public class ENTITY {
     public void getDamage(float flat_damage) {
         this.health -= flat_damage;
     }
+
+    public void drawBuffsAndDeBuffs(GraphicsContext gc) {
+        if (BuffsDebuffEffects.size() > 0) {
+            int x = screenX - 35;
+            int y = screenY - 30;
+            for (Effect effect : BuffsDebuffEffects) {
+                if (effect.effectType == EffectType.BUFF) {
+                    gc.setStroke(Colors.map_green);
+                    gc.strokeRoundRect(x, y, 16, 16, 6, 6);
+                    //effect.draw(gc, x += 20, y);
+                }
+            }
+            x += 32;
+            for (Effect effect : BuffsDebuffEffects) {
+                if (effect.effectType == EffectType.DEBUFF) {
+                    gc.setStroke(Colors.Red);
+                    gc.strokeRoundRect(x, y, 16, 16, 6, 6);
+                    // effect.draw(gc, x += 20, y);
+                }
+            }
+        }
+    }
+
+    public void addEffects(Effect[] effects) {
+        for (Effect effect : effects) {
+            if (effect != null) {
+                for (Effect entityeffect : BuffsDebuffEffects) {
+                    if (effect.sourceProjectile == entityeffect.sourceProjectile) {
+                        entityeffect.rest_duration = effect.full_duration;
+                        break;
+                    }
+                }
+                BuffsDebuffEffects.add(effect);
+            }
+        }
+    }
 }
+

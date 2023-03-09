@@ -54,7 +54,7 @@ public class TileBasedEffects {
     private void checkForTileEffects() {
         mg.playerPrompts.E = false;
         if (activeTile == 225 && activeTile != previousTile) {
-            mg.player.health -= (mg.player.maxHealth * 0.4f);
+            mg.player.setHealth(mg.player.getHealth() - (mg.player.maxHealth * 0.4f));
             mg.sound.playEffectSound(6);
         } else if (activeTile1 == 137) {
             mg.playerPrompts.E = true;

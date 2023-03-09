@@ -15,7 +15,7 @@ public class SKL_ThunderStrike extends SKILL {
         totalCoolDown = 300;
         actualCoolDown = totalCoolDown;
         manaCost = 35;
-        this.damage = 50.0f;
+        this.weapon_damage_percent = 350;
         icon = setup("thunderStrike");
         type = DamageType.Arcane;
         name = "Thunder Strike";
@@ -52,7 +52,7 @@ public class SKL_ThunderStrike extends SKILL {
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
             mg.player.playCastAnimation(3);
-            mg.PROJECTILES.add(new PRJ_ThunderStrike());
+            mg.PROJECTILES.add(new PRJ_ThunderStrike(weapon_damage_percent));
         }
     }
 }

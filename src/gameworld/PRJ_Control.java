@@ -66,7 +66,7 @@ public class PRJ_Control {
                         }
                     }
                     if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
-                        mg.player.health -= projectile.damage;
+                        mg.player.setHealth(mg.player.getHealth() - projectile.weapon_damage_percent);
                         projectile.dead = true;
                     }
                     projectile.update();
@@ -99,15 +99,18 @@ public class PRJ_Control {
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
         if (projectile.projectileType == ProjectileType.OneHitCompletelyDead) {
             projectile.dead = true;
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
+            entity.addEffects(projectile.procEffects);
             entity.playGetHitSound();
         } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
+            entity.addEffects(projectile.procEffects);
             toBeDamageDead.add(projectile);
             entity.playGetHitSound();
         } else {
+            entity.addEffects(projectile.procEffects);
             entity.playGetHitSound();
-            entity.getDamageFromPlayer(projectile.damage, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
         }
         projectile.playHitSound();
         entity.hpBarOn = true;
@@ -119,8 +122,8 @@ public class PRJ_Control {
                 mg.dropManager.bossDieEvent((int) entity.worldX, (int) entity.worldY, entity.zone, entity.level);
             } else {
                 mg.dropManager.useDropChance((int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
-                if (mg.random.nextInt(101) > 20) {
-                    mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + mg.random.nextInt(41) - 20), (int) (entity.worldY + mg.random.nextInt(41) - 20), entity.level, WorldController.currentWorld));
+                if (MainGame.random.nextInt(101) > 20) {
+                    mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + MainGame.random.nextInt(41) - 20), (int) (entity.worldY + MainGame.random.nextInt(41) - 20), entity.level, WorldController.currentWorld));
                 }
             }
         }

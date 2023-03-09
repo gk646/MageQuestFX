@@ -15,7 +15,7 @@ public class SKL_VoidEruption extends SKILL {
         manaCost = 35;
         icon = setup("voidEruption");
         type = DamageType.DarkMagic;
-        this.damage = 50.0f;
+        this.weapon_damage_percent = 700;
         name = "Void Eruption";
         description = "Void Eruption is a powerful ability that channels the dark energies of the void to unleash a devastating blast on enemies in the area. After a short build-up, the energy explodes in a shockwave of pure void energy, dealing massive damage to all enemies within the radius.";
     }
@@ -50,7 +50,7 @@ public class SKL_VoidEruption extends SKILL {
             mg.player.loseMana(manaCost);
             mg.player.playCastAnimation(2);
             actualCoolDown = 0;
-            mg.PROJECTILES.add(new PRJ_VoidEruption());
+            mg.PROJECTILES.add(new PRJ_VoidEruption(weapon_damage_percent));
         }
     }
 }

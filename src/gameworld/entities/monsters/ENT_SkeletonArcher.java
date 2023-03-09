@@ -90,8 +90,8 @@ public class ENT_SkeletonArcher extends ENTITY {
                 drawIdle(gc);
             }
         }
-
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
     private void drawIdle(GraphicsContext gc) {

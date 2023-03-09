@@ -13,7 +13,7 @@ public class PRJ_AttackCone extends EnemyProjectile {
         this.worldPos = new Point2D.Double(worldX, worldY);
         this.duration = durationTicks;
         this.collisionBox = new Rectangle(offsetX, offsetY, sizeX, sizeY);
-        this.damage = damage;
+        this.weapon_damage_percent = damage;
     }
 
     /**

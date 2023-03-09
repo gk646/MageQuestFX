@@ -6,6 +6,7 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
+import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
@@ -48,8 +49,8 @@ import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.SKILL;
 import main.system.ui.skillbar.UI_SkillBar;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
+import main.system.ui.skillbar.skills.SKL_RegenAura;
 import main.system.ui.skillbar.skills.SKL_SolarFlare;
-import main.system.ui.skillbar.skills.SKL_VoidField;
 import main.system.ui.skillpanel.UI_SkillPanel;
 import main.system.ui.talentpanel.UI_TalentPanel;
 
@@ -73,7 +74,7 @@ public class MainGame {
     public final List<ENTITY> PROXIMITY_ENTITIES = Collections.synchronizedList(new ArrayList<>());
     public final List<DamageNumber> damageNumbers = Collections.synchronizedList(new ArrayList<>());
 
-    public Random random;
+    public static Random random;
     //ITEMS
     public final List<DROP> WORLD_DROPS = Collections.synchronizedList(new ArrayList<>());
     public final ArrayList<ITEM> AMULET = new ArrayList<>();
@@ -438,8 +439,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        //debug();
-
+        debug();
     }
 
     private void debug() {
@@ -450,10 +450,14 @@ public class MainGame {
         //sound.setVolumeAmbience(0);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
-        sBar.skills[2] = new SKL_VoidField(this);
+        sBar.skills[2] = new SKL_RegenAura(this);
+        for (SKILL skill : skillPanel.allSkills) {
+            skillPanel.addSKill(skill);
+        }
         for (Map map : wControl.MAPS) {
             map.mapCover = new int[map.mapSize.x][map.mapSize.x];
         }
+
         player.maxMana = 2000;
         for (ITEM item : CHEST) {
             for (Float f : item.effects) {
@@ -465,9 +469,14 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest_Mountain_Cave, 56, 57);
+        wControl.loadMap(Zone.Hillcrest, 56, 24);
+        ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
         for (int i = 0; i < 20; i++) {
-            WORLD_DROPS.add(new DRP_DroppedItem((10 + i) * 48, 15 * 48, dropManager.getGuaranteedRandomItem(15), Zone.Hillcrest));
+            ITEM item = dropManager.getGuaranteedRandomItem(i);
+            while (item.type != '2') {
+                item = dropManager.getGuaranteedRandomItem(i);
+            }
+            WORLD_DROPS.add(new DRP_DroppedItem((56 + i) * 48, 23 * 48, item, Zone.Hillcrest));
         }
         for (int i = 0; i < 2; i++) {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);

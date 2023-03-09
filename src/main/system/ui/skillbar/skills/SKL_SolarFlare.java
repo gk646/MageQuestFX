@@ -12,7 +12,7 @@ public class SKL_SolarFlare extends SKILL {
         totalCoolDown = 900;
         actualCoolDown = totalCoolDown;
         manaCost = 75;
-        damage = 50;
+        weapon_damage_percent = 500;
         type = DamageType.Fire;
         icon = setup("solarFlare");
         name = "Solar Flare";
@@ -43,11 +43,8 @@ public class SKL_SolarFlare extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
-            mg.player.playCastAnimation(1);
-            mg.PROJECTILES.add(new PRJ_SolarFlare());
+        if (checkForActivation(1)) {
+            mg.PROJECTILES.add(new PRJ_SolarFlare(weapon_damage_percent));
         }
     }
 }

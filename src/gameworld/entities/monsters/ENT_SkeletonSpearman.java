@@ -95,6 +95,7 @@ public class ENT_SkeletonSpearman extends ENTITY {
             }
         }
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
 

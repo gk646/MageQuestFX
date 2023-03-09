@@ -328,64 +328,66 @@ public class UI_SkillPanel {
     }
 
     public void addSKill(SKILL newSkill) {
-        if (newSkill.type == DamageType.Fire) {
-            for (int i = 0; i < fireSkills.size(); i++) {
-                if (fireSkills.get(i) instanceof SKL_Filler) {
-                    for (SKILL skill : fireSkills) {
-                        if (skill.name.equals(newSkill.name)) {
-                            return;
+        if (newSkill != null) {
+            if (newSkill.type == DamageType.Fire) {
+                for (int i = 0; i < fireSkills.size(); i++) {
+                    if (fireSkills.get(i) instanceof SKL_Filler) {
+                        for (SKILL skill : fireSkills) {
+                            if (skill.name.equals(newSkill.name)) {
+                                return;
+                            }
                         }
+                        fireSkills.set(i, newSkill);
+                        return;
                     }
-                    fireSkills.set(i, newSkill);
-                    return;
                 }
-            }
-        } else if (newSkill.type == DamageType.Arcane) {
-            for (int i = 0; i < arcaneSkills.size(); i++) {
-                if (arcaneSkills.get(i) instanceof SKL_Filler) {
-                    for (SKILL skill : arcaneSkills) {
-                        if (skill.name.equals(newSkill.name)) {
-                            return;
+            } else if (newSkill.type == DamageType.Arcane) {
+                for (int i = 0; i < arcaneSkills.size(); i++) {
+                    if (arcaneSkills.get(i) instanceof SKL_Filler) {
+                        for (SKILL skill : arcaneSkills) {
+                            if (skill.name.equals(newSkill.name)) {
+                                return;
+                            }
                         }
+                        arcaneSkills.set(i, newSkill);
+                        return;
                     }
-                    arcaneSkills.set(i, newSkill);
-                    return;
                 }
-            }
-        } else if (newSkill.type == DamageType.DarkMagic) {
-            for (int i = 0; i < darkSkills.size(); i++) {
-                if (darkSkills.get(i) instanceof SKL_Filler) {
-                    for (SKILL skill : darkSkills) {
-                        if (skill.name.equals(newSkill.name)) {
-                            return;
+            } else if (newSkill.type == DamageType.DarkMagic) {
+                for (int i = 0; i < darkSkills.size(); i++) {
+                    if (darkSkills.get(i) instanceof SKL_Filler) {
+                        for (SKILL skill : darkSkills) {
+                            if (skill.name.equals(newSkill.name)) {
+                                return;
+                            }
                         }
+                        darkSkills.set(i, newSkill);
+                        return;
                     }
-                    darkSkills.set(i, newSkill);
-                    return;
                 }
-            }
-        } else if (newSkill.type == DamageType.Poison) {
-            for (int i = 0; i < poisonSkills.size(); i++) {
-                if (poisonSkills.get(i) instanceof SKL_Filler) {
-                    for (SKILL skill : poisonSkills) {
-                        if (skill.name.equals(newSkill.name)) {
-                            return;
+            } else if (newSkill.type == DamageType.Poison) {
+                for (int i = 0; i < poisonSkills.size(); i++) {
+                    if (poisonSkills.get(i) instanceof SKL_Filler) {
+                        for (SKILL skill : poisonSkills) {
+                            if (skill.name.equals(newSkill.name)) {
+                                return;
+                            }
                         }
+                        poisonSkills.set(i, newSkill);
+                        return;
                     }
-                    poisonSkills.set(i, newSkill);
-                    return;
                 }
-            }
-        } else if (newSkill.type == DamageType.Ice) {
-            for (int i = 0; i < iceSkills.size(); i++) {
-                if (iceSkills.get(i) instanceof SKL_Filler) {
-                    for (SKILL skill : iceSkills) {
-                        if (skill.name.equals(newSkill.name)) {
-                            return;
+            } else if (newSkill.type == DamageType.Ice) {
+                for (int i = 0; i < iceSkills.size(); i++) {
+                    if (iceSkills.get(i) instanceof SKL_Filler) {
+                        for (SKILL skill : iceSkills) {
+                            if (skill.name.equals(newSkill.name)) {
+                                return;
+                            }
                         }
+                        iceSkills.set(i, newSkill);
+                        return;
                     }
-                    iceSkills.set(i, newSkill);
-                    return;
                 }
             }
         }

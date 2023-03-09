@@ -18,7 +18,7 @@ public class PRJ_IceLance extends CollisionProjectiles {
     private double angle;
 
     public PRJ_IceLance(int x, int y) {
-        this.damage = 1.0f;
+        this.weapon_damage_percent = 1.0f;
         this.type = DamageType.Ice;
         projectileType = ProjectileType.OneHitCompletelyDead;
         this.resource = ProjectilePreloader.iceLance;

@@ -117,7 +117,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 }
             }
             if (npc instanceof NPC_Aria) {
-                System.out.println(progressStage);
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
                 if (progressStage == 13) {
                     if (objective3Progress == 0 && playerCloseToAbsolute((int) npc.worldX, (int) npc.worldY, 500)) {
@@ -158,10 +157,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 16) {
                     int num = npc.dialog.drawChoice("Ill come along!", null, null, null);
                     if (num == 10) {
-                        progressStage = 75;
-                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
-                        mg.sqLite.updateQuestFacts(quest_id, 1, -1);
-                    } else if (num == 20) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, progressStage);
                     }
@@ -174,6 +169,10 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     if (num == 10) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 20);
+                    } else if (num == 20) {
+                        progressStage = 75;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, -1);
                     }
                 } else if (progressStage == 20) {
                     moveToTile(npc, 68, 73, new Point(49, 75));

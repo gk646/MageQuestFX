@@ -1,12 +1,13 @@
-package gameworld.entities.damage.effects;
+package gameworld.entities.damage.effects.arraybased;
 
 import gameworld.entities.ENTITY;
+import gameworld.entities.damage.effects.Effect;
 
-public class Buff_Effect extends Effect {
+public class Effect_ArrayBased extends Effect {
     public final int effectIndexAffected;
     protected boolean activated;
 
-    public Buff_Effect(float duration, float amount, boolean fromPlayer, int effectIndexAffected) {
+    public Effect_ArrayBased(float duration, float amount, boolean fromPlayer, int effectIndexAffected, String name, String description) {
         super(duration, amount, fromPlayer);
         this.effectIndexAffected = effectIndexAffected;
     }
@@ -19,6 +20,5 @@ public class Buff_Effect extends Effect {
         }
         rest_duration--;
     }
-
 }
 

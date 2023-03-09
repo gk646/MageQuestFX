@@ -13,7 +13,7 @@ public class SKL_RingSalvo extends SKILL {
         super(mg);
         this.totalCoolDown = 120;
         actualCoolDown = 120;
-        this.damage = 0.5f;
+        this.weapon_damage_percent = 0.5f;
         manaCost = 15;
         type = DamageType.Fire;
         this.coolDownCoefficient = 0;

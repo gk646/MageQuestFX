@@ -88,6 +88,7 @@ public class ENT_Mushroom extends ENTITY {
         }
 
         spriteCounter++;
+        drawBuffsAndDeBuffs(gc);
     }
 
 

@@ -16,11 +16,10 @@ public class PRJ_AutoShot extends CollisionProjectiles {
      * What happens when you press main mouse button
      */
     public PRJ_AutoShot(int x, int y, float damage) {
-
         //-------VALUES-----------
         projectileType = ProjectileType.OneHitCompletelyDead;
         this.movementSpeed = 5;
-        this.damage = damage;
+        this.weapon_damage_percent = damage;
         this.type = DamageType.Poison;
         this.projectileHeight = 16;
         this.projectileWidth = 16;

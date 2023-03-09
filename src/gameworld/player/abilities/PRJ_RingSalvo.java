@@ -28,7 +28,7 @@ public class PRJ_RingSalvo extends CollisionProjectiles {
         this.collisionBox = new Rectangle(0, 0, 25, 25);
         this.version = version;
         this.type = DamageType.Fire;
-        this.damage = 0.5f;
+        this.weapon_damage_percent = 0.5f;
 
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX, Player.worldY);

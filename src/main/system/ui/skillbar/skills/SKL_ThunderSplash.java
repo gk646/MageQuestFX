@@ -14,7 +14,7 @@ public class SKL_ThunderSplash extends SKILL {
         totalCoolDown = 300;
         actualCoolDown = totalCoolDown;
         manaCost = 35;
-        this.damage = 15.0f;
+        this.weapon_damage_percent = 150;
         icon = setup("thunderSplash");
         type = DamageType.Arcane;
         name = "Thunder Clap";
@@ -51,7 +51,7 @@ public class SKL_ThunderSplash extends SKILL {
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
             mg.player.playCastAnimation(3);
-            mg.PROJECTILES.add(new PRJ_ThunderSplash());
+            mg.PROJECTILES.add(new PRJ_ThunderSplash(weapon_damage_percent));
         }
     }
 }

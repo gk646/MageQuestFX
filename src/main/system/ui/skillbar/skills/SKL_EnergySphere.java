@@ -1,7 +1,6 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
 import gameworld.player.abilities.PRJ_EnergySphere;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -19,7 +18,7 @@ public class SKL_EnergySphere extends SKILL {
         type = DamageType.Arcane;
         name = "Energy Sphere";
         manaCost = 10;
-        damage = 0.5f;
+        weapon_damage_percent = 10;
         i_id = 0;
         description = "EnergySphere is an arcane ability that conjures a pulsing orb of crackling energy. Upon activation, the sphere begins to radiate powerful arcane energy in all directions, inflicting continuous damage to all nearby enemies within a certain radius. ";
     }
@@ -37,14 +36,8 @@ public class SKL_EnergySphere extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 120 && mg.player.getMana() >= 10) {
-            PROJECTILE projectile = new PRJ_EnergySphere(0.3f);
-            projectile.playStartSound();
-            mg.PROJECTILES.add(projectile);
-            mg.player.playCastAnimation(2);
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
-            mg.player.getDurabilityDamageWeapon();
+        if (checkForActivation(2)) {
+            mg.PROJECTILES.add(new PRJ_EnergySphere(weapon_damage_percent));
         }
     }
 }

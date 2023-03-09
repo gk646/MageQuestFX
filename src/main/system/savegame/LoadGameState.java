@@ -7,6 +7,7 @@ import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.entities.props.DeadWolf;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
+import gameworld.quest.dialog.DialogStorage;
 import gameworld.quest.hiddenquests.QST_StaturePuzzleHillcrest;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import gameworld.quest.quests.QST_TheAudition;
@@ -97,6 +98,8 @@ public class LoadGameState {
                 for (NPC npc : mg.npcControl.NPC_Active) {
                     if (npc instanceof NPC_Marla) {
                         ((NPC_Marla) npc).gotQuest = true;
+                        npc.blockInteraction = true;
+                        npc.dialog.loadNewLine(DialogStorage.MarlaNecklace[11]);
                     }
                 }
                 if (quest_num == -1) {
@@ -159,7 +162,7 @@ public class LoadGameState {
             mg.sqLite.readPlayerInventory(stmt);
             mg.sqLite.readPlayerBags(stmt);
             mg.player.updateEquippedItems();
-            mg.player.health = mg.player.maxHealth;
+            mg.player.setHealth(mg.player.maxHealth);
             mg.player.setMana(mg.player.maxMana);
         } catch (SQLException e) {
             throw new RuntimeException();

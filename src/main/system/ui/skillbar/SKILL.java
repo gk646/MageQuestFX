@@ -21,20 +21,15 @@ abstract public class SKILL {
 
     public Image icon;
     protected final MainGame mg;
-    protected Effects[] procEffects = new Effects[5];
+    protected Effects[] procEffects = new Effects[3];
     public float totalCoolDown;
     protected int manaCost;
     public float coolDownCoefficient;
     public DamageType type;
-    public float damage;
+    public float weapon_damage_percent;
     protected int castTimeTotal;
     protected int castTimeActive;
     public final Rectangle hitBox = new Rectangle(53, 53);
-    private int side1;
-    private int side2;
-    private int side3;
-    private int side4;
-    private int side5;
     public String imagePath;
     public float actualCoolDown;
     protected int i_id;
@@ -63,6 +58,11 @@ abstract public class SKILL {
     }
 
     protected void drawCooldown(GraphicsContext gc, int skillBarX, int skillBarY) {
+        int side1;
+        int side2;
+        int side3;
+        int side4;
+        int side5;
         if (actualCoolDown != totalCoolDown) {
             coolDownCoefficient = (actualCoolDown * (200.0f / totalCoolDown));
             side1 = 25;
@@ -138,6 +138,30 @@ abstract public class SKILL {
         }
     }
 
+    protected boolean checkForActivation(int animationNumber) {
+        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
+            mg.player.loseMana(manaCost);
+            actualCoolDown = 0;
+            mg.player.playCastAnimation(animationNumber);
+            return true;
+        }
+        return false;
+    }
+
+    protected boolean checkForActivationCasting(int animationNumber) {
+        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
+            castTimeActive++;
+            mg.player.playCastAnimation(animationNumber);
+        }
+        if (castTimeActive == castTimeTotal) {
+            mg.player.loseMana(manaCost);
+            castTimeActive = 0;
+            actualCoolDown = 0;
+            return true;
+        }
+        return false;
+    }
+
     protected void updateCastTimer() {
         if (castTimeActive > 0) {
             castTimeActive++;
@@ -169,9 +193,9 @@ abstract public class SKILL {
             setTypeColor(gc);
             drawCenteredTextToolTip(gc, name, (float) (startY - (MainGame.SCREEN_HEIGHT * 0.206)), (int) (startX - (MainGame.SCREEN_HEIGHT * 0.238)));
             gc.setFont(FonT.minecraftBoldItalic14);
-            gc.fillText("DMG: " + getSkillDamage(), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.145));
+            gc.fillText("DMG: " + this, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.145));
             gc.setFill(Colors.Blue);
-            gc.fillText("Mana Cost: " + manaCost, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.165));
+            gc.fillText("Mana Cost: " + mg.player.getManaCost(manaCost), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.165));
             gc.setFill(Colors.darkBackground);
             gc.fillText("CD: " + df.format(totalCoolDown / 60.0f) + "s", startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.125));
             gc.setFont(FonT.minecraftItalic11);
@@ -220,15 +244,16 @@ abstract public class SKILL {
         gc.fillText(text, x, y);
     }
 
-    private String getSkillDamage() {
-
-        float flat_damage = damage;
+    @Override
+    public String toString() {
+        float flat_damage = weapon_damage_percent;
         switch (type) {
             case DarkMagic -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[2];
             case Fire -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[19];
             case Arcane -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[1];
             case Poison -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[18];
+            case Ice -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[28];
         }
-        return df.format(flat_damage * 0.95f) + " - " + df.format(flat_damage * 1.05f) + " " + type;
+        return weapon_damage_percent + "% Weapon Damage as" + type;
     }
 }
