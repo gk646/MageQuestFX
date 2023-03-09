@@ -1,6 +1,8 @@
-java.lang.NullPointerException: Cannot read field "type" because "newSkill" is null
-	at main.system.ui.skillpanel.UI_SkillPanel.addSKill(UI_SkillPanel.java:331)
-	at main.MainGame.debug(MainGame.java:455)
-	at main.MainGame.loadGame(MainGame.java:442)
-	at main.MainGame.run(MainGame.java:163)
+java.lang.NullPointerException: Cannot invoke "com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMedia.getNativeMediaRef()" because "this.gstMedia" is null
+	at com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMediaPlayer.playerGetPresentationTime(GSTMediaPlayer.java:160)
+	at com.sun.media.jfxmediaimpl.NativeMediaPlayer.getPresentationTime(NativeMediaPlayer.java:1083)
+	at javafx.scene.media.MediaPlayer.getCurrentTime(MediaPlayer.java:1337)
+	at main.system.sound.Sound.updateZoneAmbience(Sound.java:187)
+	at main.system.sound.Sound.update(Sound.java:112)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:213)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

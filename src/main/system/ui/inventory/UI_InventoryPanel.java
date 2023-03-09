@@ -9,6 +9,8 @@ import gameworld.world.objects.items.ITM_SpellBook;
 import gameworld.world.objects.items.ITM_Usable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import main.MainGame;
 import main.system.enums.State;
 import main.system.ui.Colors;
@@ -601,12 +603,12 @@ public class UI_InventoryPanel {
     //TODO prevent windows off screen dragging
     private void drawCharacterBackGroundMain(GraphicsContext gc, int startX, int startY) {
         //inventory background
-        wholeCharWindow.x = startX - 47;
-        wholeCharWindow.y = startY - 78;
-        firstPanelButton.x = startX - 30;
-        firstPanelButton.y = startY - 80 + 615;
-        secondPanelButton.x = startX + 90;
-        secondPanelButton.y = startY - 80 + 615;
+        wholeCharWindow.x = (int) (startX - 0.043f * MainGame.SCREEN_HEIGHT);
+        wholeCharWindow.y = (int) (startY - 0.072_2f * MainGame.SCREEN_HEIGHT);
+        firstPanelButton.x = (int) (startX - 0.027f * MainGame.SCREEN_HEIGHT);
+        firstPanelButton.y = (int) (startY + 0.487f * MainGame.SCREEN_HEIGHT);
+        secondPanelButton.x = (int) (startX + 0.083_3f * MainGame.SCREEN_HEIGHT);
+        secondPanelButton.y = (int) (startY + 0.497f * MainGame.SCREEN_HEIGHT);
         //big background
 
         gc.setFill(Colors.LightGrey);
@@ -624,12 +626,24 @@ public class UI_InventoryPanel {
         gc.setLineWidth(4);
         gc.drawImage(character_bottom, startX - 52, startY - 80 + 606);
         gc.setFill(Colors.darkBackground);
-        gc.setFont(FonT.minecraftBold13);
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.setFont(FonT.minecraftBold16);
+        gc.fillText(String.valueOf(mg.player.intellect), startX + 165, startY + 393);
+        gc.fillText(String.valueOf(mg.player.wisdom), startX + 165, startY + 408);
+        gc.fillText(String.valueOf(mg.player.vitality), startX + 165, startY + 423);
+        gc.fillText(String.valueOf(mg.player.agility), startX + 165, startY + 438);
+        gc.fillText(String.valueOf(mg.player.luck), startX + 165, startY + 453);
+        gc.fillText(String.valueOf(mg.player.charisma), startX + 165, startY + 468);
+        gc.fillText(String.valueOf(mg.player.endurance), startX + 165, startY + 483);
+        gc.fillText(String.valueOf(mg.player.strength), startX + 165, startY + 498);
+        gc.fillText(String.valueOf(mg.player.focus), startX + 165, startY + 513);
+        gc.setTextAlign(TextAlignment.LEFT);
+        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
+        gc.setFont(FonT.minecraftBold14);
         gc.fillText("Character", startX + 138, startY - 61);
         gc.fillText("Character", startX - 17, startY - 80 + 629);
         gc.fillText("Currency", startX + 100, startY - 80 + 629);
-        gc.fillText("No Title", startX + 147, startY);
-        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
+        //gc.fillText("No Title", startX + 147, startY);
 
         //character image outline
         gc.setLineWidth(2);
@@ -640,19 +654,20 @@ public class UI_InventoryPanel {
         //Stats Text
         gc.strokeRoundRect(startX - 14, startY + 375, 187, 150, 15, 15);
         gc.strokeRoundRect(startX + 177, startY + 375, 187, 150, 15, 15);
+
         gc.fillText("Base  Stats", startX - 5, startY + 370);
-
         //stats
-        gc.fillText("Intelligence: " + mg.player.intellect, startX - 5, startY + 393);
-        gc.fillText("Wisdom: " + mg.player.wisdom, startX - 5, startY + 408);
-        gc.fillText("Vitality: " + mg.player.vitality, startX - 5, startY + 423);
-        gc.fillText("Agility: " + mg.player.agility, startX - 5, startY + 438);
+        gc.fillText("Intelligence: ", startX - 5, startY + 393);
+        gc.fillText("Wisdom: ", startX - 5, startY + 408);
+        gc.fillText("Vitality: ", startX - 5, startY + 423);
+        gc.fillText("Agility: ", startX - 5, startY + 438);
 
-        gc.fillText("Luck: " + mg.player.luck, startX - 5, startY + 453);
-        gc.fillText("Charisma: " + mg.player.charisma, startX - 5, startY + 468);
-        gc.fillText("Endurance: " + mg.player.endurance, startX - 5, startY + 483);
-        gc.fillText("Strength: " + mg.player.strength, startX - 5, startY + 498);
-        gc.fillText("Focus: " + mg.player.focus, startX - 5, startY + 513);
+        gc.fillText("Luck: ", startX - 5, startY + 453);
+        gc.fillText("Charisma: ", startX - 5, startY + 468);
+        gc.fillText("Endurance: ", startX - 5, startY + 483);
+        gc.fillText("Strength: ", startX - 5, startY + 498);
+        gc.fillText("Focus: ", startX - 5, startY + 513);
+
 
         // second panel stats
         gc.fillText("Combat Stats", startX + 185, startY + 372);
@@ -688,17 +703,39 @@ public class UI_InventoryPanel {
         }
     }
 
+    private void drawCenteredText(GraphicsContext gc, String text, float y, int x) {
+        Text textNode = new Text(text);
+        textNode.setFont(gc.getFont());
+        gc.fillText(text, x, y);
+    }
+
     private void drawCombatStats(GraphicsContext gc, int startX, int startY) {
         gc.setFill(Colors.darkBackground);
-        gc.fillText("Max-Health: " + mg.player.maxHealth, startX + 182, startY + 393);
-        gc.fillText("Max-Mana: " + mg.player.maxMana, startX + 182, startY + 408);
-        gc.fillText("ManaREG: " + df.format(mg.player.manaRegeneration * 60) + "/s", startX + 182, startY + 423);
-        gc.fillText("HealthREG: " + df.format(mg.player.healthRegeneration * 60) + "/s", startX + 182, startY + 438);
-        gc.fillText("Armour: " + mg.player.armour, startX + 182, startY + 453);
-        gc.fillText("Critchance: " + mg.player.critChance, startX + 182, startY + 468);
-        gc.fillText("Resist %: " + mg.player.resistChance, startX + 182, startY + 483);
-        gc.fillText("Carry-weight: " + mg.player.carryWeight, startX + 182, startY + 498);
-        gc.fillText("MovementSpeed: " + mg.player.playerMovementSpeed, startX + 182, startY + 512);
+        gc.setFont(FonT.minecraftBold14);
+        int yInterval = (int) (MainGame.SCREEN_HEIGHT * 0.01388f);
+        startX += 190;
+        double xOffset = 165;
+        gc.fillText("Max-Health: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f);
+        gc.fillText("Max-Mana: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + yInterval);
+        gc.fillText("ManaREG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
+        gc.fillText("HealthREG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
+        gc.fillText("Armour: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 4 * yInterval);
+        gc.fillText("Critchance: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
+        gc.fillText("Resist %: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
+        gc.fillText("Carry-weight: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
+        gc.fillText("MovementSpeed: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
+        gc.setTextAlign(TextAlignment.RIGHT);
+        gc.setFont(FonT.minecraftBold16);
+        gc.fillText(String.valueOf(mg.player.maxHealth), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f);
+        gc.fillText(String.valueOf(mg.player.maxMana), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + yInterval);
+        gc.fillText(df.format(mg.player.manaRegeneration * 60) + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
+        gc.fillText(df.format(mg.player.healthRegeneration * 60) + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
+        gc.fillText(String.valueOf(mg.player.armour), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 4 * yInterval);
+        gc.fillText(String.valueOf(mg.player.critChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
+        gc.fillText(String.valueOf(mg.player.resistChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
+        gc.fillText(String.valueOf(mg.player.carryWeight), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
+        gc.fillText(String.valueOf(mg.player.playerMovementSpeed), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
+        gc.setTextAlign(TextAlignment.LEFT);
     }
 
     private void drawCharacterSecondPanel(GraphicsContext gc, int startX, int startY) {

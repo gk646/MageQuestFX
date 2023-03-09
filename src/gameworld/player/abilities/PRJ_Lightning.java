@@ -6,6 +6,7 @@ import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
+import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
 import main.system.Storage;
 import main.system.ui.Effects;
@@ -19,19 +20,19 @@ public class PRJ_Lightning extends PROJECTILE {
      * What happens when you press "2". Part of
      * {@link PRJ_Control}
      */
-    public PRJ_Lightning(int x, int y) {
+    public PRJ_Lightning(float weapon_damage_percent) {
         //-------VALUES-----------
         this.projectileHeight = 92;
         this.projectileWidth = 70;
         this.collisionBox = new Rectangle(30, 30, 40, 30);
-        this.weapon_damage_percent = 25.0f;
+        this.weapon_damage_percent = weapon_damage_percent;
         projectileType = ProjectileType.OneHitNoDMG;
         resource = ProjectilePreloader.lightning;
         sounds[0] = resource.sounds.get(0);
         type = DamageType.Arcane;
 
         //------POSITION-----------
-        this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + x - Player.screenX - 24, Player.worldY + y - Player.screenY - 24);
+        this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX + InputHandler.instance.lastMousePosition.x - Player.screenX - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
         getImages();
         playStartSound();
     }
@@ -39,7 +40,7 @@ public class PRJ_Lightning extends PROJECTILE {
     @Override
     public void draw(GraphicsContext gc) {
         gc.setEffect(Effects.blueGlow);
-        spriteCounter++;
+
         int spriteIndex = spriteCounter / 6;
         switch (spriteIndex) {
             case 0 ->
@@ -69,6 +70,7 @@ public class PRJ_Lightning extends PROJECTILE {
             case 13 -> dead = true;
         }
         gc.setEffect(null);
+        spriteCounter++;
     }
 
     public void update() {

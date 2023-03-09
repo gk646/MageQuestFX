@@ -1,7 +1,6 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
 import gameworld.player.abilities.PRJ_Lightning;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -14,7 +13,7 @@ public class SKL_Lightning extends SKILL {
         super(mg);
         this.totalCoolDown = 600;
         this.actualCoolDown = 600;
-        this.weapon_damage_percent = 25;
+        this.weapon_damage_percent = 450;
         manaCost = 15;
         icon = setup("lightning");
         name = "Lightning Strike";
@@ -35,13 +34,8 @@ public class SKL_Lightning extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == 600 && mg.player.getMana() >= 15) {
-            PROJECTILE projectile = new PRJ_Lightning(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y);
-            projectile.playStartSound();
-            mg.PROJECTILES.add(projectile);
-            mg.player.playCastAnimation(3);
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
+        if (checkForActivation(3)) {
+            mg.PROJECTILES.add(new PRJ_Lightning(weapon_damage_percent));
         }
     }
 }
