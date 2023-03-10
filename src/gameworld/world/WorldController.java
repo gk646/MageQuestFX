@@ -41,9 +41,9 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
+                mg.wRender.worldSize = map.mapSize;
                 currentWorld = zone;
                 mg.player.map = map;
-                mg.wRender.worldSize = map.mapSize;
                 mg.player.setPosition(xTile, yTile);
                 mg.getPlayerTile();
                 clearWorldArrays();

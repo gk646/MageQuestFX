@@ -1,6 +1,8 @@
 package gameworld.quest.quests;
 
+import gameworld.entities.ENTITY;
 import gameworld.entities.NPC;
+import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.monsters.ENT_Mushroom;
 import gameworld.entities.monsters.ENT_Snake;
 import gameworld.entities.monsters.ENT_Wolf;
@@ -118,6 +120,11 @@ public class QST_MarlaFakeNecklace extends QUEST {
             }
             if (npc instanceof NPC_Aria) {
                 interactWithNpc(npc, DialogStorage.MarlaNecklace);
+                if (progressStage >= 50 && progressStage <= 53) {
+                    if (playerInsideRectangle(new Point(51, 88), new Point(61, 93))) {
+                        progressStage = 54;
+                    }
+                }
                 if (progressStage == 13) {
                     if (objective3Progress == 0 && playerCloseToAbsolute((int) npc.worldX, (int) npc.worldY, 500)) {
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 13);
@@ -238,6 +245,9 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         mg.sqLite.updateQuestFacts(quest_id, 1, -1);
                     } else if (num == 20) {
                         nextStage();
+                        if (WorldController.currentWorld != Zone.Hillcrest) {
+                            npc.update();
+                        }
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 41);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     }
@@ -262,27 +272,86 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         }
                     }
                 } else if (progressStage == 43) {
-                    moveToTile(npc, 22, 30, new Point(36, 50), new Point(11, 45));
+                    if (moveToTile(npc, 10, 53, new Point(36, 50))) {
+                        if (objective3Progress == 0) {
+                            loadDialogStage(npc, DialogStorage.MarlaNecklace, 44);
+                            objective3Progress++;
+                        }
+                        if (npc.dialog.dialogRenderCounter == 2000) {
+                            objective3Progress++;
+                            if (objective3Progress >= 160) {
+                                WorldRender.worldData1[9][53] = -1;
+                                mg.sound.playEffectSound(8);
+                                nextStage();
+                            }
+                        }
+                    }
                 } else if (progressStage == 44) {
+                    moveToTile(npc, 22, 30, new Point(11, 45));
+                } else if (progressStage == 45) {
                     int num = npc.dialog.drawChoice("Sure thing!", "I hereby give you full rights to go first", null, null);
                     if (num == 10) {
                         nextStage();
-                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 45);
-                    } else if (num == 20) {
-                        progressStage = 46;
+                        objective1Progress = 0;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 46);
+                    } else if (num == 20) {
+                        progressStage = 47;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 47);
                     }
-                } else if (progressStage == 45) {
-                    if (playerInsideRectangle(new Point(33, 27), new Point(36, 39))) {
+                } else if (progressStage == 46) {
+                    if (playerInsideRectangle(new Point(33, 27), new Point(36, 31))) {
                         objective1Progress = 1;
                     }
                     if (objective1Progress == 1) {
-                        moveToTile(npc, 36, 8);
+                        moveToTile(npc, 35, 28);
+                        progressStage = 48;
                     }
-                } else if (progressStage == 46) {
-
                 } else if (progressStage == 47) {
+                    moveToTile(npc, 35, 28);
+                } else if (progressStage == 48) {
                     moveToTile(npc, 20, 9, new Point(39, 22), new Point(29, 9));
+                } else if (progressStage == 49) {
+                    if (moveToTile(npc, 0, 14)) {
+                        npc.zone = Zone.Hillcrest;
+                        npc.setPosition(75, 85);
+                        nextStage();
+                        objective1Progress = 0;
+                        objective2Progress = 0;
+                        objective3Progress = 0;
+                    }
+                } else if (progressStage == 50) {
+                    if (WorldController.currentWorld == Zone.Hillcrest && objective2Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 50);
+                        objective2Progress++;
+                    }
+                    if (objective1Progress == 0) {
+                        mg.ENTITIES.add(new BOSS_Knight(mg, 56 * 48, 91 * 48, 3, 3, Zone.Hillcrest));
+                        objective1Progress++;
+                    }
+                } else if (progressStage == 51) {
+                    moveToTile(npc, 69, 92);
+                } else if (progressStage == 52) {
+                    int num = npc.dialog.drawChoice("Into battle!", "Give me one more second", null, null);
+                    if (num == 10) {
+                        progressStage = 54;
+                        objective1Progress = 0;
+                        objective2Progress = 0;
+                        objective3Progress = 0;
+                    } else if (num == 20) {
+                        progressStage = 53;
+                        objective1Progress = 0;
+                        objective2Progress = 0;
+                        objective3Progress = 0;
+                    }
+                } else if (progressStage == 53) {
+                    loadDialogStage(npc, DialogStorage.MarlaNecklace, 53);
+                    progressStage = 52;
+                } else if (progressStage == 54) {
+                    for (ENTITY entity : mg.ENTITIES) {
+                        if (entity instanceof BOSS_Knight) {
+                            ((BOSS_Knight) entity).activate = true;
+                        }
+                    }
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
                         nextStage();
@@ -355,6 +424,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
         }
     }
 }
+
 
 
 

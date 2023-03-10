@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import main.MainGame;
 import main.system.enums.State;
 
@@ -241,8 +242,10 @@ public class UI {
         gc.setFill(Colors.white);
         gc.setFont(FonT.varnished16);
         gc.fillText(LocalTime.now().format(formatter), 1_860, 23);
+        gc.setTextAlign(TextAlignment.RIGHT);
         gc.setFont(FonT.antParty18);
-        gc.fillText(WorldController.currentWorld.toString(), 1_600, 25);
+        gc.fillText(WorldController.currentWorld.toString(), 1_750, 25);
+        gc.setTextAlign(TextAlignment.LEFT);
     }
 
 

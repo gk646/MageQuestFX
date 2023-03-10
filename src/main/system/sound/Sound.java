@@ -40,7 +40,7 @@ public class Sound {
     public static Media energySphereHit;
     private boolean forestPlaying, dungeonPlaying;
     private MediaPlayer waterAmbience;
-
+    public MediaPlayer BossMusic1;
 
     boolean[] dumbMediaPplayer = new boolean[10];
 
@@ -55,7 +55,7 @@ public class Sound {
         HillCrest = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/townAmbience/town1.mp3")).toString()));
         INTRO = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro.wav")).toString()));
         INTRO.setVolume(0.8);
-
+        BossMusic1 = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/bossMusic/0.mp3")).toString()));
         //EFFECTS
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/equip.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav")).toString())));
@@ -80,8 +80,6 @@ public class Sound {
         //16
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/lever.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/puzzle_error.wav")).toString())));
-
-
         loadAmbience();
     }
 

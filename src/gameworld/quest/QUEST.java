@@ -173,6 +173,9 @@ abstract public class QUEST {
 
     protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
         try {
+            if (npc.dialog.dialogLine.equals(Dialog.insertNewLine(array[stageNumber], 47))) {
+                return;
+            }
             npc.dialog.loadNewLine(array[stageNumber]);
             npc.dialogHideDelay = 0;
             npc.show_dialog = true;

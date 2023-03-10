@@ -93,7 +93,7 @@ public class ENT_Mushroom extends ENTITY {
 
 
     private void drawIdle(GraphicsContext gc) {
-        switch (spriteCounter % 210 / 30) {
+        switch (spriteCounter % 120 / 30) {
             case 0 -> gc.drawImage(animation.idle.get(0), screenX - 64, screenY - 64);
             case 1 -> gc.drawImage(animation.idle.get(1), screenX - 64, screenY - 64);
             case 2 -> gc.drawImage(animation.idle.get(2), screenX - 64, screenY - 64);
