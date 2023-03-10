@@ -17,14 +17,15 @@ import java.awt.Rectangle;
 
 public class BOSS_Knight extends BOSS {
     public boolean active;
-    private int healthPackCounter = 0;
+    public int healthPackCounter = 0;
     public boolean activate;
     String[] fightComments = new String[]{"Got enough yet?", "DIE!", "Got enough yet?", "You are a fool for even facing me!"};
-    private boolean attack1, attack2, attack3, attack4, attack5;
+    public boolean attack1, attack2, attack3, attack4, attack5;
     int counter = 0;
     private boolean attack1Sound, attack4Sound, attackSound2, attack3Sound, attack5Sound;
-    private boolean special, special_once, drawDialog;
-    private boolean special_two;
+    public boolean special, special_once, drawDialog;
+    public boolean autoPilot;
+    private boolean special_two = false;
 
     public BOSS_Knight(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
@@ -34,24 +35,23 @@ public class BOSS_Knight extends BOSS {
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 3;
         name = "Stone Knight";
-        //animation.playRandomSoundFromXToIndex(7, 7);
     }
 
     @Override
     public void update() {
-        super.update();
         if (!active) {
             health = maxHealth;
         }
         hpBarOn = false;
         if (active) {
-            if (searchTicks % 750 == 0) {
+            super.update();
+            if (!autoPilot && searchTicks % 750 == 0) {
                 dialog.loadNewLine(fightComments[counter++]);
                 if (counter > fightComments.length - 1) {
                     counter = (int) (Math.random() * fightComments.length);
                 }
             }
-            if (health < 0.75 * maxHealth && !special_once) {
+            if (!autoPilot && health < 0.75 * maxHealth && !special_once) {
                 this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 50, 10, false, null));
                 special = true;
                 spriteCounter = 0;
@@ -60,19 +60,21 @@ public class BOSS_Knight extends BOSS {
                 animation.playRandomSoundFromXToIndex(3, 3);
                 healthPackCounter = 0;
                 special_once = true;
-            } else if (health < 0.5 * maxHealth) {
+            } else if (health < 0.25 * maxHealth && !special_two) {
+                special_two = true;
+                dialog.loadNewLine("Rise, my minions!");
+                summonSkeletons();
+                animation.playRandomSoundFromXToIndex(3, 3);
+            } else if (!autoPilot && health < 0.5 * maxHealth) {
                 if (healthPackCounter >= 600) {
                     special = true;
                     this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 75, 10, false, null));
                     spriteCounter = 0;
                     healthPackCounter = 0;
                 }
-            } else if (health < 0.25 * maxHealth && !special_two) {
-                special_two = true;
-                summonSkeletons();
             }
             standardAttackScript();
-            if (!special && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
+            if (!autoPilot && !special && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
                 onPath = true;
                 getNearestPlayer();
                 searchPathBigEnemies(goalCol, goalRow, 30);
@@ -84,11 +86,11 @@ public class BOSS_Knight extends BOSS {
     }
 
     private void standardAttackScript() {
-        if (!special && collidingWithPlayer && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
-            float num = MainGame.random.nextFloat(1);
-            if (num < 0.2f) {
+        if (!autoPilot && collidingWithPlayer && !onPath && !attack2 && !attack3 && !attack1 && !attack5 && !attack4) {
+            double num = Math.random();
+            if (num < 0.2) {
                 attack1 = true;
-            } else if (num < 0.4f) {
+            } else if (num < 0.4) {
                 attack2 = true;
             } else if (num < 0.6) {
                 attack3 = true;
@@ -97,6 +99,8 @@ public class BOSS_Knight extends BOSS {
             } else {
                 attack5 = true;
             }
+            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 70, 64, 64, -8, -8, 3 * level));
+            //animation.playGetHitSound(3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
@@ -108,6 +112,8 @@ public class BOSS_Knight extends BOSS {
      */
     @Override
     public void draw(GraphicsContext gc) {
+        screenX = (int) (worldX - Player.worldX + Player.screenX - 87);
+        screenY = (int) (worldY - Player.worldY + Player.screenY - 47);
         drawBuffsAndDeBuffs(gc);
         if (!dialog.dialogLine.equals("...")) {
             drawDialog = true;
@@ -121,8 +127,6 @@ public class BOSS_Knight extends BOSS {
         if (drawDialog) {
             dialog.drawDialog(gc, this);
         }
-        screenX = (int) (worldX - Player.worldX + Player.screenX - 87);
-        screenY = (int) (worldY - Player.worldY + Player.screenY - 47);
         if (!active) {
             drawPray(gc);
         } else if (!activate) {
@@ -184,7 +188,7 @@ public class BOSS_Knight extends BOSS {
             case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY);
             case 2 -> {
                 if (!attack1Sound) {
-                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 64, 64, -8, -8, 3 * level));
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 64, 64, -8, 0, 3 * level));
                     animation.playRandomSoundFromXToIndex(1, 1);
                     attack1Sound = true;
                 }
@@ -271,7 +275,7 @@ public class BOSS_Knight extends BOSS {
             case 1 -> {
                 if (!attack5Sound) {
                     attack5Sound = true;
-                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 80, 40, -20, +10, 6 * level));
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 80, 40, -20, +10, 5 * level));
                     animation.playRandomSoundFromXToIndex(2, 2);
                 }
                 gc.drawImage(animation.attack5.get(1), screenX, screenY);
@@ -350,7 +354,6 @@ public class BOSS_Knight extends BOSS {
     }
 
     private void summonSkeletons() {
-        activate = false;
         for (int j = 89; j <= 94; j += 5) {
             for (int i = 51; i <= 61; i += 10) {
                 if (Math.random() > 0.5) {

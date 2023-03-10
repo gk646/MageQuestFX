@@ -375,11 +375,7 @@ public class SQLite {
     public void saveGame() {
         Thread saveThread = new Thread(() -> {
             mg.ui.drawSaveMessage = true;
-            try {
-                saveGameData();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            saveGameData();
             mg.ui.saveMessageStage = 400;
         });
         saveThread.start();
@@ -388,11 +384,7 @@ public class SQLite {
     public void saveGameAndExit() {
         Thread saveThread = new Thread(() -> {
             mg.ui.drawSaveMessage = true;
-            try {
-                saveGameData();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            saveGameData();
             mg.ui.saveMessageStage = 400;
             System.exit(0);
         });

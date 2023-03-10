@@ -23,7 +23,7 @@ abstract public class BOSS extends ENTITY {
         this.worldX = x;
         this.worldY = y;
         this.level = level;
-        this.maxHealth = ((9 + level) * (level + level - 1)) * 15;
+        this.maxHealth = ((9 + level) * (level + level - 1)) * 12;
         movementSpeed = 2;
         this.health = maxHealth;
         this.direction = "leftrightdownup";

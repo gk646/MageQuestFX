@@ -3,6 +3,7 @@ package gameworld;
 
 import gameworld.entities.BOSS;
 import gameworld.entities.ENTITY;
+import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.CollisionProjectiles;
@@ -32,6 +33,7 @@ public class PRJ_Control {
     public long lastHitTime;
     public int ENEMIES_KILLED;
     private int ShooterKilledCounter;
+    public int stoneKnightKilled;
     private final ArrayList<PROJECTILE> toBeDamageDead = new ArrayList<>();
 
     /**
@@ -55,7 +57,7 @@ public class PRJ_Control {
     public void update() {
         toBeDamageDead.clear();
         synchronized (mg.PROJECTILES) {
-            synchronized (mg.ENTITIES) {
+            // synchronized (mg.ENTITIES) {
                 Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
                 while (iterator.hasNext()) {
                     PROJECTILE projectile = iterator.next();
@@ -74,6 +76,7 @@ public class PRJ_Control {
                         iterator.remove();
                         continue;
                     }
+
                     Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
@@ -89,7 +92,7 @@ public class PRJ_Control {
                         }
                     }
                 }
-            }
+            // }
         }
         for (PROJECTILE projectile : toBeDamageDead) {
             projectile.damageDead = true;
@@ -134,6 +137,8 @@ public class PRJ_Control {
             GruntKilledCounter++;
         } else if (entity instanceof ENT_SkeletonArcher) {
             ShooterKilledCounter++;
+        } else if (entity instanceof BOSS_Knight) {
+            stoneKnightKilled++;
         }
         ENEMIES_KILLED++;
     }

@@ -1,9 +1,7 @@
 package main;
 
-import java.io.FileNotFoundException;
-
 public class Launcher {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         Runner.main(args);
     }
 }

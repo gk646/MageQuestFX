@@ -130,6 +130,7 @@ public class MainGame {
     public LoadGameState loadGameState;
     public UI_SkillPanel skillPanel;
     public boolean showJournal;
+    public int cutSceneX, cutSceneY;
 
     //---------System---------
     private MiniMap miniM;
@@ -186,7 +187,7 @@ public class MainGame {
                         difference = 0;
                     }
                     if (difference2 >= 1) {
-                        if (gameState == State.PLAY) {
+                        if (gameState == State.PLAY || gameState == State.CUT_SCENE) {
                             if (showMap) {
                                 gameMap.dragMap();
                                 gameMap.getImage();
@@ -258,7 +259,7 @@ public class MainGame {
                     difference += (firstTimeGate1 - lastTime1) / logicCounter;
                     lastTime1 = firstTimeGate1;
                     if (difference >= 1) {
-                        if (gameState == State.PLAY || gameState == State.OPTION) {
+                        if (gameState == State.PLAY || gameState == State.OPTION || gameState == State.CUT_SCENE) {
                             prj_control.update();
                             ent_control.update();
                             npcControl.update();
@@ -326,6 +327,21 @@ public class MainGame {
             if (showTalents) {
                 talentP.drawTalentWindow(gc);
             }
+        } else if (gameState == State.CUT_SCENE) {
+            wRender.draw(gc);
+            drawDroppedItems(gc);
+            prj_control.draw(gc);
+            ent_control.draw(gc);
+            //ENTPlayer2.draw(gc);
+            player.drawCutscene(gc, cutSceneX, cutSceneY);
+            drawDamageNumber(gc);
+            wRender.drawSecondLayer(gc);
+            npcControl.draw(gc);
+            playerPrompts.draw(gc);
+            wAnim.drawLayerOneTwo(gc);
+            gc.setFill(Color.BLACK);
+            gc.fillRect(0, 0, 1920, 200);
+            gc.fillRect(0, 880, 1920, 200);
         } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
             ui.draw(gc);
         }

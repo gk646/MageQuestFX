@@ -16,6 +16,7 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class NPC_Control {
 
@@ -42,9 +43,18 @@ public class NPC_Control {
 
     public void update() {
         synchronized (NPC_Active) {
-            for (ENTITY entity : NPC_Active) {
+            Iterator<NPC> entityIterator = NPC_Active.iterator();
+            while (entityIterator.hasNext()) {
+                ENTITY entity = entityIterator.next();
                 if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 4_500) {
-                    entity.update();
+                    if (!entity.dead) {
+                        entity.update();
+                    } else {
+                        ((NPC) entity).dialogHideDelay++;
+                        if (((NPC) entity).dialogHideDelay > 600) {
+                            ((NPC) entity).show_dialog = false;
+                        }
+                    }
                 }
             }
         }

@@ -759,4 +759,18 @@ public class Player extends ENTITY {
         runM7 = setupRunM("7.png");
         runM8 = setupRunM("8.png");
     }
+
+    public void drawCutscene(GraphicsContext gc, int centerX, int centerY) {
+        switch (spriteCounter % 200 / 25) {
+            case 0 -> gc.drawImage(resource.idle.get(0), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 1 -> gc.drawImage(resource.idle.get(1), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 2 -> gc.drawImage(resource.idle.get(2), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 3 -> gc.drawImage(resource.idle.get(3), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 4 -> gc.drawImage(resource.idle.get(4), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 5 -> gc.drawImage(resource.idle.get(5), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 6 -> gc.drawImage(resource.idle.get(6), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+            case 7 -> gc.drawImage(resource.idle.get(7), Player.worldX - centerX + 960 - 24, Player.worldY - centerY + 540 + 48);
+        }
+        spriteCounter++;
+    }
 }

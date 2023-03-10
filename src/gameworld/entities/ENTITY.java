@@ -41,8 +41,8 @@ abstract public class ENTITY {
     public boolean collidingWithPlayer;
     public Zone zone;
     public int spriteCounter;
-    protected int goalCol;
-    protected int goalRow;
+    public int goalCol;
+    public int goalRow;
     protected float amountedDamageSinceLastDamageNumber;
     protected long timeSinceLastDamageNumber;
     protected long timeSinceLastDamageSound;
@@ -166,8 +166,6 @@ abstract public class ENTITY {
             int nextX = mg.pathF.pathList.get(0).col * 48;
             int nextY = mg.pathF.pathList.get(0).row * 48;
             decideMovement(nextX, nextY);
-            nextCol1 = mg.pathF.pathList.get(0).col;
-            nextRow1 = mg.pathF.pathList.get(0).row;
             if (mg.pathF.pathList.size() >= 2) {
                 nextCol2 = mg.pathF.pathList.get(1).col;
                 nextRow2 = mg.pathF.pathList.get(1).row;
@@ -289,6 +287,8 @@ abstract public class ENTITY {
             hpBarCounter = 0;
         } else if (hpBarOn) {
             hpBarCounter++;
+        }
+        if (stunned) {
         }
     }
 

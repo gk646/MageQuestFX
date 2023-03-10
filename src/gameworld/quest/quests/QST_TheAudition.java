@@ -16,7 +16,7 @@ public class QST_TheAudition extends QUEST {
         logicName = QUEST_NAME.TheAudition;
         quest_id = logicName.val;
         name = "The Audition";
-        updateObjective("Talk to the mayor", 0);
+        progressStage = 1;
         if (!completed) {
             mg.sqLite.setQuestActive(quest_id);
         } else {
@@ -33,6 +33,7 @@ public class QST_TheAudition extends QUEST {
             if (npc instanceof NPC_HillcrestMayor) {
                 interactWithNpc(npc, DialogStorage.AuditionMayor);
                 if (progressStage == 1) {
+                    updateObjective("Talk to the mayor", 0);
                     addQuestMarker("1", 8, 37, Zone.Hillcrest);
                     if (playerInsideRectangle(new Point(10, 36), new Point(14, 37))) {
                         removeQuestMarker("1");

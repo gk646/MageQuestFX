@@ -12,7 +12,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 public class NPC_Aria extends NPC {
-    private boolean attack1;
+    public boolean attack1;
 
     public NPC_Aria(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
@@ -53,7 +53,9 @@ public class NPC_Aria extends NPC {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (dead) {
+        if (AfterAnimationDead) {
+            gc.drawImage(animation.dead.get(5), screenX, screenY - 20);
+        } else if (dead) {
             drawDeath(gc);
         } else if (attack1) {
             drawAttack1(gc);
@@ -62,11 +64,13 @@ public class NPC_Aria extends NPC {
         } else {
             drawIdle(gc);
         }
-
         if (show_dialog) {
             dialog.drawDialog(gc, this);
         }
-        spriteCounter++;
+        if (!AfterAnimationDead) {
+            spriteCounter++;
+        }
+
         drawNPCName(gc, "Aria");
     }
 
@@ -91,7 +95,7 @@ public class NPC_Aria extends NPC {
     }
 
     private void drawAttack1(GraphicsContext gc) {
-        switch (spriteCounter % 160) {
+        switch (spriteCounter % 175 / 25) {
             case 0 -> gc.drawImage(animation.attack1.get(0), screenX, screenY - 20);
             case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY - 20);
             case 2 -> gc.drawImage(animation.attack1.get(2), screenX, screenY - 20);
@@ -103,13 +107,14 @@ public class NPC_Aria extends NPC {
     }
 
     private void drawDeath(GraphicsContext gc) {
-        switch (spriteCounter % 240 / 35) {
+        switch (spriteCounter % 245 / 35) {
             case 0 -> gc.drawImage(animation.dead.get(0), screenX, screenY - 20);
             case 1 -> gc.drawImage(animation.dead.get(1), screenX, screenY - 20);
             case 2 -> gc.drawImage(animation.dead.get(2), screenX, screenY - 20);
             case 3 -> gc.drawImage(animation.dead.get(3), screenX, screenY - 20);
             case 4 -> gc.drawImage(animation.dead.get(4), screenX, screenY - 20);
             case 5 -> gc.drawImage(animation.dead.get(5), screenX, screenY - 20);
+            case 6 -> AfterAnimationDead = true;
         }
     }
 }

@@ -14,6 +14,7 @@ import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
 import main.MainGame;
+import main.system.enums.State;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
 
@@ -21,6 +22,8 @@ import java.awt.Point;
 
 public class QST_MarlaFakeNecklace extends QUEST {
     private int enemiesKilled;
+    private boolean KilledAria;
+    private boolean cutscenefinish;
 
     public QST_MarlaFakeNecklace(MainGame mg, boolean completed) {
         super(mg);
@@ -123,6 +126,9 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 if (progressStage >= 50 && progressStage <= 53) {
                     if (playerInsideRectangle(new Point(51, 88), new Point(61, 93))) {
                         progressStage = 54;
+                        objective1Progress = 0;
+                        objective2Progress = 0;
+                        objective3Progress = 0;
                     }
                 }
                 if (progressStage == 13) {
@@ -347,10 +353,111 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     loadDialogStage(npc, DialogStorage.MarlaNecklace, 53);
                     progressStage = 52;
                 } else if (progressStage == 54) {
-                    for (ENTITY entity : mg.ENTITIES) {
-                        if (entity instanceof BOSS_Knight) {
-                            ((BOSS_Knight) entity).activate = true;
+                    npc.blockInteraction = true;
+                    if (objective1Progress == 0) {
+                        enemiesKilled = mg.prj_control.stoneKnightKilled;
+                        loadDialogStage(npc, DialogStorage.MarlaNecklace, 54);
+                        for (ENTITY entity : mg.ENTITIES) {
+                            if (entity instanceof BOSS_Knight) {
+                                objective1Progress = 1;
+                                ((BOSS_Knight) entity).activate = true;
+                            }
                         }
+                    }
+                    synchronized (mg.ENTITIES) {
+                        for (ENTITY entity : mg.ENTITIES) {
+                            if (entity instanceof BOSS_Knight) {
+                                if (!cutscenefinish && (entity.getHealth() <= entity.maxHealth * 0.5)) {
+                                    entity.BuffsDebuffEffects.clear();
+                                    ((BOSS_Knight) entity).autoPilot = true;
+                                    ((BOSS_Knight) entity).healthPackCounter = 0;
+                                    if (objective1Progress == 1) {
+                                        entity.animation.playRandomSoundFromXToIndex(3, 3);
+                                        objective1Progress = 2;
+                                        ((BOSS_Knight) entity).attack5 = false;
+                                        ((BOSS_Knight) entity).attack4 = false;
+                                        ((BOSS_Knight) entity).attack3 = false;
+                                        ((BOSS_Knight) entity).attack2 = false;
+                                        ((BOSS_Knight) entity).attack1 = false;
+                                    }
+                                    mg.gameState = State.CUT_SCENE;
+                                    mg.cutSceneX = (int) entity.worldX;
+                                    mg.cutSceneY = (int) entity.worldY;
+                                    for (ENTITY entity1 : mg.ENTITIES) {
+                                        entity1.stunned = true;
+                                    }
+                                    mg.player.stunned = true;
+                                    if (!entity.activeTile.equals(npc.activeTile)) {
+                                        entity.searchPathUncapped(npc.activeTile.x, npc.activeTile.y, 30);
+                                    } else {
+                                        objective3Progress++;
+                                        if (objective3Progress == 60) {
+                                            npc.dialogHideDelay = 600;
+                                            entity.dialog.loadNewLine("Puny human! You will die!");
+                                        } else if (objective3Progress == 150) {
+                                            ((BOSS_Knight) entity).drawDialog = false;
+                                            entity.dialog.dialogRenderCounter = 2500;
+                                            loadDialogStage(npc, DialogStorage.MarlaNecklace, 55);
+                                        }
+                                        if (objective3Progress > 210) {
+                                            if (KilledAria && !((BOSS_Knight) entity).attack5 && objective3Progress == 1100) {
+                                                for (ENTITY entity1 : mg.ENTITIES) {
+                                                    entity1.stunned = false;
+                                                }
+                                                mg.player.stunned = false;
+                                                mg.gameState = State.PLAY;
+                                                npc.show_dialog = false;
+                                                entity.dialog.loadNewLine("Now, back to you!");
+                                                cutscenefinish = true;
+                                                ((BOSS_Knight) entity).autoPilot = false;
+                                            } else if (!KilledAria) {
+                                                entity.animation.playRandomSoundFromXToIndex(1, 1);
+                                                entity.spriteCounter = 0;
+                                                ((BOSS_Knight) entity).attack5 = true;
+                                                npc.dead = true;
+                                                loadDialogStage(npc, DialogStorage.MarlaNecklace, 56);
+                                                KilledAria = true;
+                                                objective3Progress = 1000;
+                                            }
+                                        }
+                                    }
+                                } else if (moveToTile(npc, entity.activeTile.x, entity.activeTile.y)) {
+                                    ((NPC_Aria) npc).attack1 = true;
+                                }
+                            }
+                        }
+                    }
+                    if (enemiesKilled + 1 == mg.prj_control.stoneKnightKilled) {
+                        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 9)) {
+                            mg.playerPrompts.E = true;
+                            if (mg.inputH.e_typed) {
+                                mg.inputH.e_typed = false;
+                                nextStage();
+                                objective1Progress = 0;
+                            }
+                        }
+                    }
+                } else if (progressStage == 55) {
+                    if (objective1Progress == 0) {
+                        //play music
+                    }
+                    objective1Progress++;
+                    if (objective1Progress < 150) {
+                        mg.player.dialog.loadNewLine("I won, but at what cost");
+                    } else if (objective1Progress < 320) {
+                        mg.player.dialog.loadNewLine("Was it worth it in the end? Did it make the right decisions?");
+                    } else if (objective1Progress < 550) {
+                        mg.player.dialog.loadNewLine("Well, now its too late anyway. I have to move on...");
+                    } else if (objective1Progress > 700) {
+                        nextStage();
+                    }
+                } else if (progressStage == 56) {
+                    int num = mg.player.dialog.drawChoice("*Go back to town*", "*Stay here bit longer to think*", null, null);
+                    if (num == 10) {
+                        mg.player.setPosition(20, 20);
+                        //stop music
+                    } else if (num == 20) {
+
                     }
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
