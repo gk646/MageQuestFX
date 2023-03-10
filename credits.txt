@@ -31,6 +31,7 @@ SOUNDS
  Hillcrest Music: "Hillcrest" by [Sirkoto51] from freesound.org, licensed under CC BY 4.0. Source: https://freesound.org/people/Sirkoto51/sounds/349179/
  Shield Bash Impact Sound: "Sword clash 2" by [Hybrid_V] from freesound.org, licensed under CC BY 4.0. Source: https://freesound.org/people/Hybrid_V/sounds/319590/
  Boss Music: "Lively Meadow" by [Sirkoto51] from freesound.org, licensed under CC BY 4.0. Source: https://freesound.org/people/Sirkoto51/sounds/416632/
+ laughter : https://freesound.org/people/lalazzylee1/sounds/322459/
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

@@ -18,6 +18,7 @@ public class TileBasedEffects {
     int previousTile;
     final ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
     final MainGame mg;
+    public boolean spawnSkeletons;
 
     public TileBasedEffects(MainGame mg) {
         this.mg = mg;
@@ -39,6 +40,9 @@ public class TileBasedEffects {
                     list.progress();
                 }
             }
+        }
+        if (spawnSkeletons) {
+
         }
     }
 

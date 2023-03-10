@@ -1,9 +1,13 @@
 package gameworld.entities.boss;
 
 import gameworld.entities.BOSS;
+import gameworld.entities.damage.effects.buffs.BUF_RegenAura;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
+import gameworld.entities.monsters.ENT_SkeletonArcher;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
 import gameworld.player.abilities.PRJ_AttackCone;
+import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;
 import main.MainGame;
@@ -15,10 +19,16 @@ public class BOSS_Knight extends BOSS {
     public boolean active;
     private int healthPackCounter = 0;
     public boolean activate;
+    String[] fightComments = new String[]{"Got enough yet?", "DIE!", "Got enough yet?", "You are a fool for even facing me!"};
     private boolean attack1, attack2, attack3, attack4, attack5;
+    int counter = 0;
+    private boolean attack1Sound, attack4Sound, attackSound2, attack3Sound, attack5Sound;
+    private boolean special, special_once, drawDialog;
+    private boolean special_two;
 
     public BOSS_Knight(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
+        this.dialog = new Dialog();
         this.animation = new ResourceLoaderEntity("enemies/BOSSKnight");
         animation.load();
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
@@ -30,20 +40,39 @@ public class BOSS_Knight extends BOSS {
     @Override
     public void update() {
         super.update();
+        if (!active) {
+            health = maxHealth;
+        }
         hpBarOn = false;
         if (active) {
-            if (health < 0.5 * maxHealth) {
-                healthPackCounter = 0;
-                if (searchTicks % 240 == 0) {
+            if (searchTicks % 750 == 0) {
+                dialog.loadNewLine(fightComments[counter++]);
+                if (counter > fightComments.length - 1) {
+                    counter = (int) (Math.random() * fightComments.length);
                 }
-                if (searchTicks % 480 == 0) {
-
-                }
-                standardAttackScript();
-            } else {
-                standardAttackScript();
             }
-            if (!attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
+            if (health < 0.75 * maxHealth && !special_once) {
+                this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 50, 10, false, null));
+                special = true;
+                spriteCounter = 0;
+                summonSkeletons();
+                dialog.loadNewLine("Rise, my minions!");
+                animation.playRandomSoundFromXToIndex(3, 3);
+                healthPackCounter = 0;
+                special_once = true;
+            } else if (health < 0.5 * maxHealth) {
+                if (healthPackCounter >= 600) {
+                    special = true;
+                    this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 75, 10, false, null));
+                    spriteCounter = 0;
+                    healthPackCounter = 0;
+                }
+            } else if (health < 0.25 * maxHealth && !special_two) {
+                special_two = true;
+                summonSkeletons();
+            }
+            standardAttackScript();
+            if (!special && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
                 onPath = true;
                 getNearestPlayer();
                 searchPathBigEnemies(goalCol, goalRow, 30);
@@ -55,16 +84,19 @@ public class BOSS_Knight extends BOSS {
     }
 
     private void standardAttackScript() {
-        if (closeToPlayer(40) && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
-            if (Math.random() < 0.33f) {
+        if (!special && collidingWithPlayer && !attack2 && !attack3 && !attack1 && !attack4 && !attack5) {
+            float num = MainGame.random.nextFloat(1);
+            if (num < 0.2f) {
                 attack1 = true;
-                animation.playRandomSoundFromXToIndex(1, 1);
-            } else {
+            } else if (num < 0.4f) {
+                attack2 = true;
+            } else if (num < 0.6) {
+                attack3 = true;
+            } else if (num < 0.8) {
                 attack4 = true;
-                animation.playRandomSoundFromXToIndex(0, 0);
+            } else {
+                attack5 = true;
             }
-            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 70, 64, 64, -8, -8, 3 * level));
-            //animation.playGetHitSound(3);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
@@ -76,10 +108,27 @@ public class BOSS_Knight extends BOSS {
      */
     @Override
     public void draw(GraphicsContext gc) {
-        screenX = (int) (worldX - Player.worldX + Player.screenX - 28);
-        screenY = (int) (worldY - Player.worldY + Player.screenY - 75);
+        drawBuffsAndDeBuffs(gc);
+        if (!dialog.dialogLine.equals("...")) {
+            drawDialog = true;
+            if (dialog.dialogRenderCounter >= 2_000) {
+                dialog.dialogRenderCounter++;
+                if (dialog.dialogRenderCounter >= 2_500) {
+                    drawDialog = false;
+                }
+            }
+        }
+        if (drawDialog) {
+            dialog.drawDialog(gc, this);
+        }
+        screenX = (int) (worldX - Player.worldX + Player.screenX - 87);
+        screenY = (int) (worldY - Player.worldY + Player.screenY - 47);
         if (!active) {
             drawPray(gc);
+        } else if (!activate) {
+            drawPray(gc);
+        } else if (special) {
+            drawSpecial(gc);
         } else if (dead) {
             drawDeath(gc);
         } else if (attack1) {
@@ -118,14 +167,14 @@ public class BOSS_Knight extends BOSS {
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 200 / 25) {
-            case 0 -> gc.drawImage(animation.attack1.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.attack1.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(animation.attack1.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(animation.attack1.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(animation.attack1.get(5), screenX, screenY);
-            case 6 -> gc.drawImage(animation.attack1.get(6), screenX, screenY);
-            case 7 -> gc.drawImage(animation.attack1.get(7), screenX, screenY);
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX, screenY);
+            case 4 -> gc.drawImage(animation.idle.get(4), screenX, screenY);
+            case 5 -> gc.drawImage(animation.idle.get(5), screenX, screenY);
+            case 6 -> gc.drawImage(animation.idle.get(6), screenX, screenY);
+            case 7 -> gc.drawImage(animation.idle.get(7), screenX, screenY);
         }
     }
 
@@ -133,12 +182,22 @@ public class BOSS_Knight extends BOSS {
         switch (spriteCounter % 160 / 20) {
             case 0 -> gc.drawImage(animation.attack1.get(0), screenX, screenY);
             case 1 -> gc.drawImage(animation.attack1.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.attack1.get(2), screenX, screenY);
+            case 2 -> {
+                if (!attack1Sound) {
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 64, 64, -8, -8, 3 * level));
+                    animation.playRandomSoundFromXToIndex(1, 1);
+                    attack1Sound = true;
+                }
+                gc.drawImage(animation.attack1.get(2), screenX, screenY);
+            }
             case 3 -> gc.drawImage(animation.attack1.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.attack1.get(4), screenX, screenY);
             case 5 -> gc.drawImage(animation.attack1.get(5), screenX, screenY);
             case 6 -> gc.drawImage(animation.attack1.get(6), screenX, screenY);
-            case 7 -> attack1 = false;
+            case 7 -> {
+                attack1 = false;
+                attack1Sound = false;
+            }
         }
     }
 
@@ -146,45 +205,85 @@ public class BOSS_Knight extends BOSS {
         switch (spriteCounter % 180 / 30) {
             case 0 -> gc.drawImage(animation.attack2.get(0), screenX, screenY);
             case 1 -> gc.drawImage(animation.attack2.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.attack2.get(2), screenX, screenY);
+            case 2 -> {
+                if (!attackSound2) {
+                    animation.playRandomSoundFromXToIndex(1, 1);
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 64, 64, 0, 0, 3 * level));
+                    attackSound2 = true;
+                }
+                gc.drawImage(animation.attack2.get(2), screenX, screenY);
+            }
             case 3 -> gc.drawImage(animation.attack2.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.attack2.get(4), screenX, screenY);
-            case 5 -> attack2 = false;
+            case 5 -> {
+                attack2 = false;
+                attackSound2 = false;
+            }
         }
     }
 
     private void drawAttack3(GraphicsContext gc) {
         switch (spriteCounter % 150 / 30) {
-            case 0 -> gc.drawImage(animation.attack3.get(0), screenX, screenY);
+            case 0 -> {
+                if (!attack3Sound) {
+                    animation.playRandomSoundFromXToIndex(1, 1);
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 60, 20, -20, 0, 2 * level));
+                    attack3Sound = true;
+                }
+                gc.drawImage(animation.attack3.get(0), screenX, screenY);
+            }
             case 1 -> gc.drawImage(animation.attack3.get(1), screenX, screenY);
             case 2 -> gc.drawImage(animation.attack3.get(2), screenX, screenY);
             case 3 -> gc.drawImage(animation.attack3.get(3), screenX, screenY);
-            case 4 -> attack3 = false;
+            case 4 -> {
+                attack3 = false;
+                attack3Sound = false;
+            }
         }
     }
 
     private void drawAttack4(GraphicsContext gc) {
         switch (spriteCounter % 160 / 20) {
             case 0 -> gc.drawImage(animation.attack4.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.attack4.get(1), screenX, screenY);
+            case 1 -> {
+                if (!attack4Sound) {
+                    animation.playRandomSoundFromXToIndex(0, 0);
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 80, 40, -20, +10, 6 * level));
+                    attack4Sound = true;
+                }
+                gc.drawImage(animation.attack4.get(1), screenX, screenY);
+            }
             case 2 -> gc.drawImage(animation.attack4.get(2), screenX, screenY);
             case 3 -> gc.drawImage(animation.attack4.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.attack4.get(4), screenX, screenY);
             case 5 -> gc.drawImage(animation.attack4.get(5), screenX, screenY);
             case 6 -> gc.drawImage(animation.attack4.get(6), screenX, screenY);
-            case 7 -> attack4 = false;
+            case 7 -> {
+                attack4Sound = false;
+                attack4 = false;
+            }
         }
     }
 
     private void drawAttack5(GraphicsContext gc) {
         switch (spriteCounter % 140 / 20) {
             case 0 -> gc.drawImage(animation.attack5.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.attack5.get(1), screenX, screenY);
+            case 1 -> {
+                if (!attack5Sound) {
+                    attack5Sound = true;
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 30, 80, 40, -20, +10, 6 * level));
+                    animation.playRandomSoundFromXToIndex(2, 2);
+                }
+                gc.drawImage(animation.attack5.get(1), screenX, screenY);
+            }
             case 2 -> gc.drawImage(animation.attack5.get(2), screenX, screenY);
             case 3 -> gc.drawImage(animation.attack5.get(3), screenX, screenY);
             case 4 -> gc.drawImage(animation.attack5.get(4), screenX, screenY);
             case 5 -> gc.drawImage(animation.attack5.get(5), screenX, screenY);
-            case 6 -> attack5 = false;
+            case 6 -> {
+                attack5 = false;
+                attack5Sound = false;
+            }
         }
     }
 
@@ -234,16 +333,32 @@ public class BOSS_Knight extends BOSS {
     }
 
     private void drawSpecial(GraphicsContext gc) {
-        switch (spriteCounter % 180 / 20) {
-            case 0 -> gc.drawImage(animation.attack5.get(0), screenX, screenY);
-            case 1 -> gc.drawImage(animation.attack5.get(1), screenX, screenY);
-            case 2 -> gc.drawImage(animation.attack5.get(2), screenX, screenY);
-            case 3 -> gc.drawImage(animation.attack5.get(3), screenX, screenY);
-            case 4 -> gc.drawImage(animation.attack5.get(4), screenX, screenY);
-            case 5 -> gc.drawImage(animation.attack5.get(5), screenX, screenY);
-            case 6 -> gc.drawImage(animation.attack5.get(6), screenX, screenY);
-            case 7 -> gc.drawImage(animation.attack5.get(7), screenX, screenY);
-            case 8 -> healthPackCounter = 0;
+        switch (spriteCounter % 270 / 30) {
+            case 0 -> gc.drawImage(animation.special.get(0), screenX, screenY);
+            case 1 -> gc.drawImage(animation.special.get(1), screenX, screenY);
+            case 2 -> gc.drawImage(animation.special.get(2), screenX, screenY);
+            case 3 -> gc.drawImage(animation.special.get(3), screenX, screenY);
+            case 4 -> gc.drawImage(animation.special.get(4), screenX, screenY);
+            case 5 -> gc.drawImage(animation.special.get(5), screenX, screenY);
+            case 6 -> gc.drawImage(animation.special.get(6), screenX, screenY);
+            case 7 -> gc.drawImage(animation.special.get(7), screenX, screenY);
+            case 8 -> {
+                special = false;
+                healthPackCounter = 0;
+            }
+        }
+    }
+
+    private void summonSkeletons() {
+        activate = false;
+        for (int j = 89; j <= 94; j += 5) {
+            for (int i = 51; i <= 61; i += 10) {
+                if (Math.random() > 0.5) {
+                    mg.ent_control.addToEntities.add(new ENT_SkeletonArcher(mg, i * 48, j * 48, 3, Zone.Hillcrest));
+                } else {
+                    mg.ent_control.addToEntities.add(new ENT_SkeletonWarrior(mg, i * 48, j * 48, 3, Zone.Hillcrest));
+                }
+            }
         }
     }
 }

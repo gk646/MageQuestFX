@@ -240,6 +240,7 @@ public class Sound {
     public void setVolumeMusic(float value) {
         INTRO.setVolume(0.8 * (value / 100.0f));
         HillCrest.setVolume(0.8 * (value / 100.0f));
+        BossMusic1.setVolume(1 * (value / 100.0f));
     }
 
     public void setVolumeEffects(float value) {

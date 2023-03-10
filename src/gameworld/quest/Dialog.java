@@ -112,7 +112,7 @@ public class Dialog {
             for (String string : dialogLine.substring(0, Math.min(dialogLine.length(), dialogRenderCounter / 4)).split("\n")) {
                 gc.fillText(string, x, stringY += 16);
             }
-            if (dialogRenderCounter / 4 >= dialogLine.length()) {
+            if (dialogRenderCounter / 4 >= dialogLine.length() && dialogRenderCounter < 2000) {
                 dialogRenderCounter = 2_000;
             } else {
                 if (dialogRenderCounter % 8 == 0) {

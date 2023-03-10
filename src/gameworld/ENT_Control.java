@@ -10,6 +10,7 @@ import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
  */
 public class ENT_Control {
 
-
+    public final ArrayList<ENTITY> addToEntities = new ArrayList<>();
     private final MainGame mg;
     Image healthBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/healthbars.png")));
 
@@ -72,6 +73,10 @@ public class ENT_Control {
                         entityIterator.remove();
                     }
                 }
+            }
+            if (addToEntities.size() > 0) {
+                mg.ENTITIES.addAll(addToEntities);
+                addToEntities.clear();
             }
         }
     }

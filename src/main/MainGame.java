@@ -6,7 +6,6 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
-import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.multiplayer.ENT_Player2;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
@@ -136,7 +135,7 @@ public class MainGame {
     private MiniMap miniM;
     //private Multiplayer multiplayer;
     public TileBasedEffects tileBase;
-    private ENT_Control ent_control;
+    public ENT_Control ent_control;
     public Sound sound;
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
@@ -184,7 +183,6 @@ public class MainGame {
                     lastTime1 = firstTimeGate1;
                     if (difference >= 1) {
                         inventP.interactWithWindows();
-
                         difference = 0;
                     }
                     if (difference2 >= 1) {
@@ -307,7 +305,6 @@ public class MainGame {
             qPanel.draw(gc);
             miniM.draw(gc);
             sBar.draw(gc);
-
             ui.draw(gc);
             if (showAbilities) {
                 skillPanel.drawSkillPanel(gc);
@@ -471,7 +468,7 @@ public class MainGame {
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
         wControl.loadMap(Zone.Hillcrest, 75, 84);
         for (int i = 0; i < 50; i++) {
-            ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
+            //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
         }
 
         for (int i = 0; i < 20; i++) {
