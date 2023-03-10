@@ -448,7 +448,7 @@ public class MainGame {
         }
         player.coins = 2_000;
         //sound.setVolumeAmbience(0);
-        inventP.char_Slots[5].item = DRP_DroppedItem.cloneItemWithLevelQuality(TWOHANDS.get(2), 100, 60);
+        //inventP.char_Slots[5].item = DRP_DroppedItem.cloneItemWithLevelQuality(TWOHANDS.get(2), 100, 60);
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_RegenAura(this);

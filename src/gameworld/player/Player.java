@@ -58,7 +58,14 @@ public class Player extends ENTITY {
     public static float worldX, worldY;
     // screenX is half width -24
     public static int screenX, screenY;
-    private Image runM1, runM2, runM3, runM4, runM5, runM6, runM7, runM8;
+    public Image runM1;
+    public Image runM2;
+    public Image runM3;
+    public Image runM4;
+    public Image runM5;
+    public Image runM6;
+    public Image runM7;
+    public Image runM8;
     public static final int effectsSizeTotal = 50;
     public final Dialog dialog = new Dialog();
     public static String[] effectNames = new String[effectsSizeTotal];
@@ -69,8 +76,10 @@ public class Player extends ENTITY {
     public final ResourceLoaderEntity resource = new ResourceLoaderEntity("player");
     private int levelupCounter;
     public boolean drawDialog;
-    private boolean attack1, attack2, attack3;
-    private boolean movingLeft;
+    public boolean attack1;
+    public boolean attack2;
+    public boolean attack3;
+    public boolean movingLeft;
     private final Rectangle player = new Rectangle(40, 40);
 
 

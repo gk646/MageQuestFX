@@ -1,5 +1,6 @@
 package main.system.ui.inventory;
 
+import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.entities.npcs.trader.MERCHANT;
 import gameworld.player.Player;
 import gameworld.world.WorldController;
@@ -27,6 +28,7 @@ public class UI_InventoryPanel {
     private static final int SLOT_SIZE = 45;
     public final Rectangle combatStatsHitBox;
     private static final int CHAR_SLOTS = 10;
+    private final ResourceLoaderEntity resource = new ResourceLoaderEntity("playerBig");
     public final UI_InventorySlot[] char_Slots;
     public final ArrayList<UI_InventorySlot> bag_Slots = new ArrayList<>();
     public final UI_InventorySlot[] bagEquipSlots;
@@ -68,9 +70,11 @@ public class UI_InventoryPanel {
     private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
     private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
     private boolean showTutorial;
+    private int spriteCounter = 0;
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
+        resource.load();
         char_Slots = new UI_InventorySlot[CHAR_SLOTS];
         bagEquipSlots = new UI_InventorySlot[4];
         grabbedITEM = null;
@@ -611,9 +615,9 @@ public class UI_InventoryPanel {
         secondPanelButton.y = (int) (startY + 0.497f * MainGame.SCREEN_HEIGHT);
         //big background
 
+
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
-
         //outline
         gc.setStroke(Colors.darkBackground);
         gc.setLineWidth(5);
@@ -625,6 +629,7 @@ public class UI_InventoryPanel {
         gc.strokeRoundRect(startX - 42, startY - 75, 434, 22, 15, 15);
         gc.setLineWidth(4);
         gc.drawImage(character_bottom, startX - 52, startY - 80 + 606);
+        drawCharacterAnimation(gc, startX, startY);
         gc.setFill(Colors.darkBackground);
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.setFont(FonT.minecraftBold16);
@@ -702,6 +707,93 @@ public class UI_InventoryPanel {
             drawEffects(gc, startX, startY);
         }
     }
+
+    private void drawCharacterAnimation(GraphicsContext gc, int startX, int startY) {
+        if (mg.player.attack1) {
+            switch (spriteCounter % 140 / 10) {
+                case 0 -> gc.drawImage(mg.player.resource.attack1.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(mg.player.resource.attack1.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(mg.player.resource.attack1.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(mg.player.resource.attack1.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(mg.player.resource.attack1.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(mg.player.resource.attack1.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(mg.player.resource.attack1.get(6), startX + 50, startY - 25);
+            }
+        } else if (mg.player.attack2) {
+            switch (spriteCounter % 140 / 8) {
+                case 0 -> gc.drawImage(mg.player.resource.attack2.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(mg.player.resource.attack2.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(mg.player.resource.attack2.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(mg.player.resource.attack2.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(mg.player.resource.attack2.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(mg.player.resource.attack2.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(mg.player.resource.attack2.get(6), startX + 50, startY - 25);
+                case 7 -> gc.drawImage(mg.player.resource.attack2.get(7), startX + 50, startY - 25);
+                case 8 -> gc.drawImage(mg.player.resource.attack2.get(8), startX + 50, startY - 25);
+            }
+        } else if (mg.player.attack3) {
+            switch (spriteCounter % 170 / 10) {
+                case 0 -> gc.drawImage(mg.player.resource.attack3.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(mg.player.resource.attack3.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(mg.player.resource.attack3.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(mg.player.resource.attack3.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(mg.player.resource.attack3.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(mg.player.resource.attack3.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(mg.player.resource.attack3.get(6), startX + 50, startY - 25);
+                case 7 -> gc.drawImage(mg.player.resource.attack3.get(7), startX + 50, startY - 25);
+                case 8 -> gc.drawImage(mg.player.resource.attack3.get(8), startX + 50, startY - 25);
+                case 9 -> gc.drawImage(mg.player.resource.attack3.get(9), startX + 50, startY - 25);
+                case 10 -> gc.drawImage(mg.player.resource.attack3.get(10), startX + 50, startY - 25);
+                case 11 -> gc.drawImage(mg.player.resource.attack3.get(11), startX + 50, startY - 25);
+                case 12 -> gc.drawImage(mg.player.resource.attack3.get(12), startX + 50, startY - 25);
+                case 13 -> gc.drawImage(mg.player.resource.attack3.get(13), startX + 50, startY - 25);
+                case 14 -> gc.drawImage(mg.player.resource.attack3.get(14), startX + 50, startY - 25);
+                case 15 -> gc.drawImage(mg.player.resource.attack3.get(15), startX + 50, startY - 25);
+            }
+        } else {
+            if (mg.player.isMoving) {
+                if (mg.player.movingLeft) {
+                    switch (spriteCounter % 136 / 17) {
+                        /*
+                        case 0 -> gc.drawImage(runM1, startX, startY,192,194);
+                        case 1 -> gc.drawImage(runM2, startX, startY,192,194);
+                        case 2 -> gc.drawImage(runM3, startX, startY,192,194);
+                        case 3 -> gc.drawImage(runM4, startX, startY,192,194);
+                        case 4 -> gc.drawImage(runM5, startX, startY,192,194);
+                        case 5 -> gc.drawImage(runM6, startX, startY,192,194);
+                        case 6 -> gc.drawImage(runM7, startX, startY,192,194);
+                        case 7 -> gc.drawImage(runM8, startX, startY,192,194);
+
+                         */
+                    }
+                } else {
+                    switch (spriteCounter % 136 / 17) {
+                        case 0 -> gc.drawImage(mg.player.resource.run.get(0), startX + 50, startY - 25);
+                        case 1 -> gc.drawImage(mg.player.resource.run.get(1), startX + 50, startY - 25);
+                        case 2 -> gc.drawImage(mg.player.resource.run.get(2), startX + 50, startY - 25);
+                        case 3 -> gc.drawImage(mg.player.resource.run.get(3), startX + 50, startY - 25);
+                        case 4 -> gc.drawImage(mg.player.resource.run.get(4), startX + 50, startY - 25);
+                        case 5 -> gc.drawImage(mg.player.resource.run.get(5), startX + 50, startY - 25);
+                        case 6 -> gc.drawImage(mg.player.resource.run.get(6), startX + 50, startY - 25);
+                        case 7 -> gc.drawImage(mg.player.resource.run.get(7), startX + 50, startY - 25);
+                    }
+                }
+            } else {
+                switch (spriteCounter % 200 / 25) {
+                    case 0 -> gc.drawImage(resource.idle.get(0), startX + 50, startY - 25);
+                    case 1 -> gc.drawImage(resource.idle.get(1), startX + 50, startY - 25);
+                    case 2 -> gc.drawImage(resource.idle.get(2), startX + 50, startY - 25);
+                    case 3 -> gc.drawImage(resource.idle.get(3), startX + 50, startY - 25);
+                    case 4 -> gc.drawImage(resource.idle.get(4), startX + 50, startY - 25);
+                    case 5 -> gc.drawImage(resource.idle.get(5), startX + 50, startY - 25);
+                    case 6 -> gc.drawImage(resource.idle.get(6), startX + 50, startY - 25);
+                    case 7 -> gc.drawImage(resource.idle.get(7), startX + 50, startY - 25);
+                }
+            }
+        }
+        spriteCounter++;
+    }
+
 
     private void drawCenteredText(GraphicsContext gc, String text, float y, int x) {
         Text textNode = new Text(text);
