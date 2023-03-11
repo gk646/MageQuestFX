@@ -124,7 +124,7 @@ public class ITEM {
 
     private void getWeaponDamage() {
         switch (type) {
-            case 'W' -> weapon_damage = (float) ((quality / 100.0f) * Math.sqrt(level)) * rarity;
+            case 'W', 'O' -> weapon_damage = (float) ((quality / 100.0f) * Math.sqrt(level)) * rarity;
             case '2' -> weapon_damage = ((float) ((quality / 100.0f) * Math.sqrt(level)) * rarity) * 2;
         }
     }

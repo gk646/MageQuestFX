@@ -50,10 +50,10 @@ public class UI {
     private final Image enter2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter2.png")));
     private final Image enter3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter3.png")));
     private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
+    private final Image keyMap = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/keymap.png")));
     final Light.Distant light = new Light.Distant();
     final Lighting lighting = new Lighting();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
     public float ambientSlider = 75;
@@ -91,6 +91,10 @@ public class UI {
         } else if (mg.credits) {
             drawCredits(gc);
         } else if (mg.gameState == State.TITLE) {
+            if (mg.drawKeybindings) {
+                gc.drawImage(keyMap, 0, 0);
+                return;
+            }
             drawTitleScreen(gc);
         } else if (mg.gameState == State.GAME_OVER) {
             drawGameOver(gc);
@@ -305,9 +309,12 @@ public class UI {
     }
 
     private void drawKeyBindings(GraphicsContext gc) {
-        String text = "C - open character window";
-        float y = 0.332f;
-        gc.fillText(text, MainGame.SCREEN_HEIGHT * 0.452f, MainGame.SCREEN_HEIGHT * (y + 0.013));
+        gc.drawImage(keyMap, 0, 0);
+        gc.setFill(Colors.LightGrey);
+        gc.fillRect(1480, 950, 400, 100);
+        gc.setFill(Colors.darkBackground);
+        gc.setFont(FonT.antParty30);
+        gc.fillText("ESC to back", 1515, 963);
     }
 
     private void drawGamePlaySettings(GraphicsContext gc) {

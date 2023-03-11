@@ -493,8 +493,8 @@ public class MainGame {
 
         for (int i = 0; i < 20; i++) {
             ITEM item = dropManager.getGuaranteedRandomItem(i);
-            while (item.type != '2') {
-                item = dropManager.getGuaranteedRandomItem(i);
+            while (!(item.type == '2' || item.type == 'O' || item.type == 'W')) {
+                item = dropManager.getGuaranteedRandomItem(5);
             }
             WORLD_DROPS.add(new DRP_DroppedItem((56 + i) * 48, 23 * 48, item, Zone.Hillcrest));
         }

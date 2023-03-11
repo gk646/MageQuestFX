@@ -67,6 +67,7 @@ public class InputHandler {
     public void handleKeyType(KeyEvent e) {
         String code = e.getCharacter();
         if (mg.gameState == State.TITLE) {
+
             if (code.equals(("w"))) {
                 mg.sound.playEffectSound(2);
                 mg.ui.commandNum--;
@@ -82,9 +83,13 @@ public class InputHandler {
                 }
             }
             if (code.equals("\r")) {
-                if (mg.ui.commandNum == 0) {
+                if (mg.drawKeybindings) {
                     mg.gameState = State.PLAY;
                     mg.sound.INTRO.stop();
+                    mg.drawKeybindings = false;
+                    return;
+                } else if (mg.ui.commandNum == 0) {
+                    mg.drawKeybindings = true;
                     scene.setCursor(Runner.crosshair);
                     return;
                 } else if (mg.ui.commandNum == 1) {
@@ -216,6 +221,8 @@ public class InputHandler {
                     mg.drawKeybindings = false;
                 } else if (mg.drawGameplay) {
                     mg.drawGameplay = false;
+                } else if (mg.drawVideoSettings) {
+                    mg.drawVideoSettings = false;
                 } else {
                     scene.setCursor(Runner.crosshair);
                     mg.gameState = State.PLAY;

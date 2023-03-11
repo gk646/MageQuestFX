@@ -41,6 +41,7 @@ public class FonT {
     public static Font minecraftBoldItalic18;
     public static Font antParty18;
     public static Font antParty20;
+    public static Font antParty30;
     public static Font varnished16;
 
     public static void loadFonts() {
@@ -74,5 +75,6 @@ public class FonT {
         antParty16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 16);
         varnished14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Varnished.ttf"), 14);
         varnished16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Varnished.ttf"), 16);
+        antParty30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 30);
     }
 }

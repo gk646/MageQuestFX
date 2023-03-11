@@ -44,6 +44,7 @@ public class GameMap {
         yTile = mg.playerY;
         hideMapCollision();
         dragMap();
+        mg.sBar.showNoticeMap = false;
     }
 
     public void draw(GraphicsContext gc) {

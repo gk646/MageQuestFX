@@ -35,7 +35,7 @@ public class UI_InventoryPanel {
     public final Rectangle wholeCharWindow;
     public final Rectangle wholeBagWindow;
     private final MainGame mg;
-    private final DecimalFormat df = new DecimalFormat("#.##");
+    private final DecimalFormat df = new DecimalFormat("#.#");
     public final Rectangle bagEquipSlotsBox;
     public final Rectangle charPanelMover, secondPanelButton, firstPanelButton;
     public final Rectangle bagPanelMover;
@@ -322,6 +322,7 @@ public class UI_InventoryPanel {
                         mg.WORLD_DROPS.add(new DRP_DroppedItem((int) (Player.worldX - 50), (int) Player.worldY, char_Slots[i].item, WorldController.currentWorld));
                         char_Slots[i].item = null;
                         mg.inputH.X_pressed = false;
+                        mg.player.updateEquippedItems();
                     } else if (mg.inputH.mouse1Pressed) {
                         if (mg.inputH.shift_pressed && mg.showBag) {
                             for (UI_InventorySlot slot : bag_Slots) {
@@ -339,8 +340,8 @@ public class UI_InventoryPanel {
                         grabbedITEM = char_Slots[i].item;
                         grabbedIndexChar = i;
                         char_Slots[i].item = null;
+                        mg.player.updateEquippedItems();
                     }
-                    mg.player.updateEquippedItems();
                 }
             }
         }
@@ -361,6 +362,15 @@ public class UI_InventoryPanel {
                                     mg.sound.playEffectSound(0);
                                     break;
                                 } else if (slot.type.contains(String.valueOf(bag_Slots.get(i).item.type))) {
+                                    if (bag_Slots.get(i).item.type == '2') {
+                                        for (UI_InventorySlot charItem : char_Slots) {
+                                            if (charItem.item != null) {
+                                                if (charItem.item.type == 'O') {
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                    }
                                     ITEM placeholder = slot.item;
                                     slot.item = bag_Slots.get(i).item;
                                     bag_Slots.get(i).item = placeholder;
@@ -441,10 +451,57 @@ public class UI_InventoryPanel {
                         mg.sound.playEffectSound(0);
                         if (invSlot.item != null) {
                             if (grabbedIndexChar != -1) {
+                                if (grabbedITEM.type == '2') {
+                                    for (UI_InventorySlot slot : char_Slots) {
+                                        if (slot.item != null) {
+                                            if (slot.item.type == 'O') {
+                                                char_Slots[grabbedIndexChar].item = grabbedITEM;
+                                                char_Slots[grabbedIndexChar].grabbed = false;
+                                                grabbedIndexChar = -1;
+                                                grabbedITEM = null;
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
                                 char_Slots[grabbedIndexChar].item = invSlot.item;
                             }
                             if (grabbedIndexBag != -1) {
+                                if (grabbedITEM.type == '2') {
+                                    for (UI_InventorySlot slot : char_Slots) {
+                                        if (slot.item != null) {
+                                            if (slot.item.type == 'O') {
+                                                bag_Slots.get(grabbedIndexBag).item = grabbedITEM;
+                                                bag_Slots.get(grabbedIndexBag).grabbed = false;
+                                                grabbedITEM = null;
+                                                grabbedIndexBag = -1;
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
                                 bag_Slots.get(grabbedIndexBag).item = invSlot.item;
+                            }
+                        }
+                        if (grabbedITEM.type == '2') {
+                            for (UI_InventorySlot slot : char_Slots) {
+                                if (slot.item != null) {
+                                    if (slot.item.type == 'O') {
+                                        if (grabbedIndexBag != -1) {
+                                            bag_Slots.get(grabbedIndexBag).item = grabbedITEM;
+                                            bag_Slots.get(grabbedIndexBag).grabbed = false;
+                                            grabbedITEM = null;
+                                            grabbedIndexBag = -1;
+                                            return;
+                                        } else if (grabbedIndexChar != -1) {
+                                            char_Slots[grabbedIndexChar].item = grabbedITEM;
+                                            char_Slots[grabbedIndexChar].grabbed = false;
+                                            grabbedITEM = null;
+                                            grabbedIndexChar = -1;
+                                            return;
+                                        }
+                                    }
+                                }
                             }
                         }
                         invSlot.item = grabbedITEM;
@@ -459,8 +516,13 @@ public class UI_InventoryPanel {
                     if (bagSlot.boundBox.contains(mg.inputH.lastMousePosition)) {
                         mg.sound.playEffectSound(0);
                         if (bagSlot.item != null) {
-                            if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(grabbedITEM.type))) {
+                            if (grabbedIndexChar != -1 && char_Slots[grabbedIndexChar].type.equals(String.valueOf(bagSlot.item.type))) {
                                 char_Slots[grabbedIndexChar].item = bagSlot.item;
+                            } else if (grabbedIndexChar != -1) {
+                                char_Slots[grabbedIndexChar].item = grabbedITEM;
+                                grabbedIndexChar = -1;
+                                grabbedITEM = null;
+                                return;
                             }
                             if (grabbedIndexBag != -1) {
                                 bag_Slots.get(grabbedIndexBag).item = bagSlot.item;
@@ -501,6 +563,7 @@ public class UI_InventoryPanel {
             grabbedBagEquipIndex = -1;
             if (grabbedITEM != null) {
                 grabbedITEM = null;
+                mg.player.updateEquippedItems();
             }
         }
     }
@@ -816,17 +879,19 @@ public class UI_InventoryPanel {
         gc.fillText("Resist %: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
         gc.fillText("Carry-weight: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
         gc.fillText("MovementSpeed: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
+        gc.fillText("Wpn DMG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.setFont(FonT.minecraftBold16);
         gc.fillText(String.valueOf(mg.player.maxHealth), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f);
         gc.fillText(String.valueOf(mg.player.maxMana), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + yInterval);
-        gc.fillText(df.format(mg.player.manaRegeneration * 60) + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
-        gc.fillText(df.format(mg.player.healthRegeneration * 60) + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
+        gc.fillText(Math.round(mg.player.manaRegeneration * 60 * 100.0f) / 100.0f + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
+        gc.fillText(Math.round(mg.player.healthRegeneration * 60 * 100.0f) / 100.0f + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
         gc.fillText(String.valueOf(mg.player.armour), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 4 * yInterval);
         gc.fillText(String.valueOf(mg.player.critChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
         gc.fillText(String.valueOf(mg.player.resistChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
         gc.fillText(String.valueOf(mg.player.carryWeight), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
         gc.fillText(String.valueOf(mg.player.playerMovementSpeed), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
+        gc.fillText(Math.round(mg.player.weaponDamageLower * 100.0f) / 100.0f + "-" + Math.round(mg.player.weaponDamageUpper * 100.0f) / 100.0f, startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
         gc.setTextAlign(TextAlignment.LEFT);
     }
 

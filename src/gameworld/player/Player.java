@@ -250,6 +250,9 @@ public class Player extends ENTITY {
                 weaponDamageUpper += (float) (mg.inventP.char_Slots[9].item.weapon_damage * 1.05);
                 weaponDamageLower += (float) (mg.inventP.char_Slots[9].item.weapon_damage * 0.94);
             }
+        } else if (mg.inventP.char_Slots[9].item != null) {
+            weaponDamageUpper = (float) (mg.inventP.char_Slots[9].item.weapon_damage * 1.05);
+            weaponDamageLower = (float) (mg.inventP.char_Slots[9].item.weapon_damage * 0.94);
         } else {
             weaponDamageUpper = 0.755f;
             weaponDamageLower = 0.75f;
