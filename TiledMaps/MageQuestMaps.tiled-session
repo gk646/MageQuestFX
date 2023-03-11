@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "caveMarla.tmx",
+    "activeFile": "DeadPlains.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -37,8 +37,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1728,
-                "y": 1484
+                "x": 2224,
+                "y": 1480
             }
         },
         "DungeonTutorial.tmx": {
@@ -67,11 +67,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.25,
-            "selectedLayer": 1,
+            "scale": 0.33,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1008,
-                "y": 488
+                "x": 781.8181818181818,
+                "y": 724.2424242424241
             }
         },
         "GrassLands.tmx": {
@@ -245,22 +245,23 @@
         "caveMarla.tmx",
         "ForestClearing.tmx",
         "TIILESET.tsx",
-        "Tutorial.tmx"
+        "Tutorial.tmx",
+        "DeadPlains.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
-        "Tutorial.tmx",
-        "TIILESET.tsx",
-        "ForestClearing.tmx",
         "caveMarla.tmx",
+        "ForestClearing.tmx",
+        "TIILESET.tsx",
+        "Tutorial.tmx",
+        "DeadPlains.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
         "GrassLands.tmx",
         "FirstDungeon.tmx",
         "DungeonTutorial.tmx",
         "City1.tmx",
-        "unbenannt.tmx",
-        "grassspritesheet16.tsx"
+        "unbenannt.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
