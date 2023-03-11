@@ -282,7 +282,7 @@ public class UI_TalentPanel {
         for (TalentNode node : talent_Nodes) {
             if (node != null) {
                 if (node.talent.imagePath.contains(name)) {
-                    node.talent.description += "\n\n" + insertNewLine(text.split("\n")[mg.random.nextInt(0, text.split("\n").length)]);
+                    node.talent.description += "\n\n" + insertNewLine(text.split("\n")[MainGame.random.nextInt(0, text.split("\n").length)]);
                 }
             }
         }
@@ -326,6 +326,7 @@ public class UI_TalentPanel {
     public void resetTalentCollision() {
         wholeTalentWindow.x = 0;
         wholeTalentWindow.y = 0;
+        mg.sBar.showNoticeTalent = false;
     }
 
     public void hideTalentCollision() {

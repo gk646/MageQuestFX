@@ -300,5 +300,6 @@ public class GameMap {
 
     public void resetMapCollision() {
         mapMover.y = 75;
+        mg.sBar.showNoticeMap = false;
     }
 }

@@ -228,7 +228,7 @@ public class Sound {
         }
 
         if (WorldController.currentWorld == Zone.Hillcrest) {
-            if (playerInsideRectangle(new Point(2, 14), new Point(46, 31))) {
+            if (playerInsideRectangle(new Point(21, 4), new Point(56, 34))) {
                 if (HillCrest.getStatus() != MediaPlayer.Status.PLAYING) {
                     fadeIn(HillCrest, 0.7);
                 } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING && HillCrest.getCurrentTime().toMillis() >= HillCrest.getTotalDuration().toMillis() * 0.95f) {

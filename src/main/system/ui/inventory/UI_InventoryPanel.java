@@ -54,7 +54,6 @@ public class UI_InventoryPanel {
     public int activeCharacterPanel = 1;
     private int grabbedBagEquipIndex = -1;
     public boolean showBagEquipSlots;
-
     private final Image bag = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/bag.png")));
     private final Image sort = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/sort.png")));
     private final Image character_bottom = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/characterpanel_picture.png")));
@@ -69,6 +68,7 @@ public class UI_InventoryPanel {
     private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
     private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
     private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
+
     private boolean showTutorial;
     private int spriteCounter = 0;
 
@@ -1071,12 +1071,14 @@ public class UI_InventoryPanel {
         wholeCharWindow.x = lastCharPosition.x;
         wholeCharWindow.y = lastCharPosition.y;
         charPanelMover.y = wholeCharWindow.y - 75;
+        mg.sBar.showNoticeChar = false;
     }
 
     public void resetBagCollision() {
         wholeBagWindow.x = lastBagPosition.x;
         wholeBagWindow.y = lastBagPosition.y;
         bagPanelMover.y = wholeBagWindow.y;
+        mg.sBar.showNoticeBag = false;
     }
 
     private void createCharSlots() {

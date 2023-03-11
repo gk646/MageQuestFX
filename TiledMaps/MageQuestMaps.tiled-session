@@ -34,11 +34,11 @@
             "scaleInDock": 1
         },
         "DeadPlains.tmx": {
-            "scale": 0.25,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2224,
-                "y": 1480
+                "x": 1458.6666666666665,
+                "y": 1098.6666666666665
             }
         },
         "DungeonTutorial.tmx": {
@@ -70,8 +70,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 781.8181818181818,
-                "y": 724.2424242424241
+                "x": 798.4848484848485,
+                "y": 801.5151515151515
             }
         },
         "GrassLands.tmx": {
@@ -136,8 +136,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 516,
-                "y": 372
+                "x": 482,
+                "y": 478
             }
         },
         "d.tsx": {

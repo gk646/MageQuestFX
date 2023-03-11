@@ -1,6 +1,7 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
+import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
@@ -52,6 +53,7 @@ public class QST_TheAudition extends QUEST {
                 } else if (progressStage == 6) {
                     if (!mg.qPanel.PlayerHasQuests(QUEST_NAME.IntoTheGrassLands)) {
                         mg.qPanel.quests.add(new QST_IntoTheGrassLands(mg, false));
+                        mg.npcControl.NPC_Active.add(new NPC_Grim(mg, 4, 90, Zone.Hillcrest));
                     }
                 } else if (progressStage == 7) {
                     int num = npc.dialog.drawChoice("Didn't ask!", null, null, null);

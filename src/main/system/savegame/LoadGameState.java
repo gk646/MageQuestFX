@@ -2,6 +2,7 @@ package main.system.savegame;
 
 import gameworld.entities.NPC;
 import gameworld.entities.npcs.quests.NPC_Aria;
+import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.entities.props.DeadWolf;
@@ -151,9 +152,13 @@ public class LoadGameState {
             }
             case "active" -> {
                 mg.qPanel.quests.add(new QST_IntoTheGrassLands(mg, false));
-                if (quest_num == 1) {
+                if (quest_num == 0) {
+                    mg.npcControl.NPC_Active.add(new NPC_Grim(mg, 4, 90, Zone.Hillcrest));
+                } else if (quest_num == 1) {
+                    mg.npcControl.NPC_Active.add(new NPC_Grim(mg, 4, 90, Zone.Hillcrest));
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.IntoTheGrassLands, 12, "Reach level 5 or", "Kill a Stone Knight");
                 } else if (quest_num == 2) {
+                    mg.npcControl.NPC_Active.add(new NPC_Grim(mg, 4, 90, Zone.Hillcrest));
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.IntoTheGrassLands, 13, "Talk to Grim about the GrassLands");
                 }
             }

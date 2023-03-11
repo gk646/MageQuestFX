@@ -17,7 +17,7 @@ public class NPC_Grim extends NPC {
 
     public NPC_Grim(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
-        this.animation = new ResourceLoaderEntity("npc/Knight");
+        this.animation = new ResourceLoaderEntity("enemies/Knight");
         animation.load();
         this.zone = zone;
         this.mg = mainGame;

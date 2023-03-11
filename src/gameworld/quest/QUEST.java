@@ -19,6 +19,7 @@ abstract public class QUEST {
     public String[] questRecap = new String[50];
     public int progressStage = 1;
     public int quest_id;
+    public boolean DontConsumeETyped;
     public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
     protected final MainGame mg;
     public boolean completed;
@@ -227,6 +228,9 @@ abstract public class QUEST {
         }
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
             npc.show_dialog = true;
+            if (!DontConsumeETyped) {
+                mg.inputH.e_typed = false;
+            }
             npc.dialogHideDelay = 0;
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
         }
@@ -238,6 +242,7 @@ abstract public class QUEST {
                 return;
             }
         }
+        mg.sBar.showNoticeMap = true;
         questMarkers.add(new QuestMarker(name, x, y, zone));
     }
 

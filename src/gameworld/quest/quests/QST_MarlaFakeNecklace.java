@@ -441,6 +441,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     }
                     if (enemiesKilled + 1 == mg.prj_control.stoneKnightKilled) {
                         npc.dialog.loadNewLine("   ");
+                        DontConsumeETyped = true;
                         updateObjective("Look at Aria's body", 0);
                         addQuestMarker("body", npc.activeTile.x, npc.activeTile.y, Zone.Hillcrest);
                         npc.show_dialog = false;
@@ -453,6 +454,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                             npc.show_dialog = false;
                             mg.inputH.e_typed = false;
                             nextStage();
+                            DontConsumeETyped = false;
                             objective1Progress = 0;
                         }
                     }

@@ -40,7 +40,9 @@ public class UI_SkillBar {
     public final Rectangle abilitiesBox = new Rectangle(skillBarX + 64 * 7 + 110, skillBarY + 28, 32, 32);
     public final Rectangle mapBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY + 28, 32, 32);
     public final Rectangle settingsBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY + 28, 32, 32);
+    public boolean showNoticeBag, showNoticeChar, showNoticeTalent, showNoticeAbilities;
     final MainGame mg;
+    public boolean showNoticeMap;
 
     public UI_SkillBar(MainGame mg) {
         this.mg = mg;
@@ -124,6 +126,22 @@ public class UI_SkillBar {
         gc.setFill(Colors.xpbarOrange);
         gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 12);
         gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
+        gc.setFill(Colors.notificationOrange);
+        if (showNoticeChar) {
+            gc.fillRect(skillBarX + 64 * 7 + 110 + 26, skillBarY - 6 - 2, 5, 5);
+        }
+        if (showNoticeBag) {
+            gc.fillRect(skillBarX + 64 * 7 + 144 + 26, skillBarY - 6 - 2, 5, 5);
+        }
+        if (mg.talentP.pointsToSpend > 0) {
+            gc.fillRect(skillBarX + 64 * 7 + 178 + 26, skillBarY - 6 - 2, 5, 5);
+        }
+        if (showNoticeAbilities) {
+            gc.fillRect(skillBarX + 64 * 7 + 110 + 26, skillBarY + 30, 5, 5);
+        }
+        if (showNoticeMap) {
+            gc.fillRect(skillBarX + 64 * 7 + 144 + 26, skillBarY + 30, 5, 5);
+        }
     }
 
 

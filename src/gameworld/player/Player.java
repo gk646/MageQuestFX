@@ -372,6 +372,7 @@ public class Player extends ENTITY {
                             for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {
                                 if (bagSlot.item == null && !bagSlot.grabbed) {
                                     bagSlot.item = drop.item;
+                                    mg.sBar.showNoticeBag = true;
                                     mg.sound.playEffectSound(9);
                                     iter.remove();
                                     break;
@@ -449,6 +450,7 @@ public class Player extends ENTITY {
         if (experience >= levelUpExperience) {
             level++;
             levelup = true;
+            mg.sBar.showNoticeChar = true;
             animation.playSound(0);
             mg.talentP.pointsToSpend++;
             updateEquippedItems();

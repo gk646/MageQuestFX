@@ -2,6 +2,7 @@ package main.system.ui;
 
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Colors {
 
@@ -56,4 +57,5 @@ public class Colors {
 
     //MISC
     public static final Color transparent = Color.rgb(0, 0, 0, 0.3);
+    public static Paint notificationOrange = Color.rgb(247, 118, 34);
 }

@@ -329,6 +329,7 @@ public class UI_SkillPanel {
 
     public void addSKill(SKILL newSkill) {
         if (newSkill != null) {
+            mg.sBar.showNoticeAbilities = true;
             if (newSkill.type == DamageType.Fire) {
                 for (int i = 0; i < fireSkills.size(); i++) {
                     if (fireSkills.get(i) instanceof SKL_Filler) {
@@ -400,6 +401,7 @@ public class UI_SkillPanel {
 
     public void resetSkillPanelCollision() {
         wholeSkillWindow.y = lastY;
+        mg.sBar.showNoticeAbilities = false;
     }
 }
 

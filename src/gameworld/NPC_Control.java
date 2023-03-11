@@ -21,12 +21,9 @@ import java.util.Iterator;
 public class NPC_Control {
 
 
-    private final MainGame mg;
-
     public final ArrayList<NPC> NPC_Active = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {
-        this.mg = mg;
 
         NPC_Active.add(new NPC_ArmourTrader(mg, 27, 31, Zone.Hillcrest));
 
@@ -38,6 +35,7 @@ public class NPC_Control {
         NPC_Active.add(new NPC_Marla(mg, 41, 28));
 
         NPC_Active.add(new NPC_HillcrestMayor(mg, 4, 36));
+
     }
 
 
@@ -45,14 +43,14 @@ public class NPC_Control {
         synchronized (NPC_Active) {
             Iterator<NPC> entityIterator = NPC_Active.iterator();
             while (entityIterator.hasNext()) {
-                ENTITY entity = entityIterator.next();
+                NPC entity = entityIterator.next();
                 if (entity.zone == WorldController.currentWorld && Math.sqrt(Math.pow(entity.worldX - Player.worldX, 2) + Math.pow(entity.worldY - Player.worldY, 2)) < 4_500) {
                     if (!entity.dead) {
                         entity.update();
                     } else {
-                        ((NPC) entity).dialogHideDelay++;
-                        if (((NPC) entity).dialogHideDelay > 600) {
-                            ((NPC) entity).show_dialog = false;
+                        entity.dialogHideDelay++;
+                        if (entity.dialogHideDelay > 600) {
+                            entity.show_dialog = false;
                         }
                     }
                 }

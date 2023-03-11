@@ -51,11 +51,11 @@ public class QST_IntoTheGrassLands extends QUEST {
                         mg.player.dialog.loadNewLine("What do you call a bard who can't play music?");
                     }
                     objective1Progress++;
-                    if (objective1Progress > 400) {
+                    if (objective1Progress > 360) {
                         nextStage();
-                        loadDialogStage(npc, DialogStorage.AuditionMayor, 2);
-                    } else if (objective1Progress > 200) {
-                        mg.player.dialog.loadNewLine(" A note-worthy failure");
+                        loadDialogStage(npc, DialogStorage.IntoTheGrassLands, 2);
+                    } else if (objective1Progress == 220) {
+                        mg.player.dialog.loadNewLine(" A note-worthy failure!");
                     }
                 } else if (progressStage == 3) {
                     int num = npc.dialog.drawChoice("Ok, iam serious now", "Sure, what do you...", null, null);
@@ -73,15 +73,55 @@ public class QST_IntoTheGrassLands extends QUEST {
                         mg.player.dialog.loadNewLine("What do you call a group of orcs playing music together?");
                     }
                     objective1Progress++;
-                    if (objective1Progress > 400) {
+                    if (objective1Progress > 360) {
                         nextStage();
-                        loadDialogStage(npc, DialogStorage.AuditionMayor, 2);
-                    } else if (objective1Progress > 200) {
+                        objective1Progress = 1;
+                        loadDialogStage(npc, DialogStorage.IntoTheGrassLands, 3);
+                    } else if (objective1Progress == 220) {
                         mg.player.dialog.loadNewLine("An orchestra!");
+                    }
+                } else if (progressStage == 5) {
+                    int num = npc.dialog.drawChoice("Iam sorry", "I got one more!", null, null);
+                    if (num == 10) {
+                        progressStage = 8;
+                        loadDialogStage(npc, DialogStorage.IntoTheGrassLands, 8);
+                    } else if (num == 20) {
+                        nextStage();
+                        objective1Progress = 1;
+                    }
+                } else if (progressStage == 6) {
+                    npc.blockInteraction = true;
+                    npc.show_dialog = false;
+                    if (objective1Progress == 1) {
+                        mg.player.dialog.loadNewLine("Why do wizard's get jobs as teacher?");
+                    }
+                    objective1Progress++;
+                    if (objective1Progress > 360) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.IntoTheGrassLands, 7);
+                        objective1Progress = 0;
+                    } else if (objective1Progress == 220) {
+                        mg.player.dialog.loadNewLine("Because they are great a spell-checking!");
+                    }
+                } else if (progressStage == 7) {
+                    if (objective1Progress == 0) {
+                        updateObjective("Give Grim time to cool off", 0);
+                        objective1Progress = 17800;
+                    }
+                    objective1Progress++;
+                    if (objective1Progress == 18000) {
+                        updateObjective("Talk to Grim about the GrassLands", 0);
+                        npc.blockInteraction = false;
                     }
                 } else if (progressStage == 12) {
                     npc.blockInteraction = true;
-                    mg.sqLite.updateQuestFacts(quest_id, 1, 1);
+                    if (objective2Progress == 0) {
+                        updateObjective("Reach level 5", 0);
+                        updateObjective("Kill a Stone Knight", 1);
+                        objective2Progress = 1;
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 1);
+                    }
+
                     if (mg.prj_control.stoneKnightKilled >= 1 || mg.player.level >= 5) {
                         nextStage();
                     }
