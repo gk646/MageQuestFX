@@ -225,7 +225,9 @@ public class QST_Tutorial extends QUEST {
                         mg.player.coins += 25;
                         mg.sound.playEffectSound(9);
                         once = true;
-                        mg.qPanel.quests.add(new QST_TheAudition(mg, false));
+                        if (!mg.qPanel.PlayerHasQuests(QUEST_NAME.TheAudition)) {
+                            mg.qPanel.quests.add(new QST_TheAudition(mg, false));
+                        }
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
                     moveToTile(npc, 44, 21, new Point(25, 23));

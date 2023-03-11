@@ -24,6 +24,7 @@ import input.InputHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -58,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -89,6 +91,7 @@ public class MainGame {
     public final ArrayList<ITEM> BAGS = new ArrayList<>();
     public final ArrayList<ITEM> MISC = new ArrayList<>();
 
+
     public final int tileSize = 48;
     public final UI ui = new UI(this);
 
@@ -110,6 +113,7 @@ public class MainGame {
 
     public Storage imageSto;
     public SQLite sqLite;
+    private final Image vignette = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/vignette.png")));
     public boolean client = false, showBag, showChar, showTalents, loadingScreen, showMap;
     public PRJ_Control prj_control;
     public UI_InventoryPanel inventP;
@@ -300,6 +304,7 @@ public class MainGame {
             npcControl.draw(gc);
             playerPrompts.draw(gc);
             wAnim.drawLayerOneTwo(gc);
+            gc.drawImage(vignette, 0, 0);
             if (player.drawDialog) {
                 player.dialog.drawDialogPlayer(gc);
             }
@@ -433,7 +438,6 @@ public class MainGame {
             //84%
             ui.updateLoadingScreen(12, gc);
             //multiplayer = new Multiplayer(this, ENTPlayer2);
-
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
             FonT.loadFonts();
@@ -452,7 +456,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
     }
 
     private void debug() {

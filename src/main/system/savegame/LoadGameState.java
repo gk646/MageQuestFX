@@ -9,6 +9,7 @@ import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.quest.hiddenquests.QST_StaturePuzzleHillcrest;
+import gameworld.quest.quests.QST_IntoTheGrassLands;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import gameworld.quest.quests.QST_TheAudition;
 import gameworld.quest.quests.QST_Tutorial;
@@ -38,6 +39,7 @@ public class LoadGameState {
         loadMarla();
         loadAudition();
         loadHiddenQuests();
+        loadIntoGrassLands();
         if (mg.qPanel.quests.size() > 0) {
             mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
         }
@@ -88,7 +90,7 @@ public class LoadGameState {
 
     private void loadMarla() {
         int quest_num = mg.sqLite.readQuestFacts(QUEST_NAME.TheFakeNecklace.val, 1);
-        String description = mg.sqLite.readQuestDescription(2);
+        String description = mg.sqLite.readQuestDescription(QUEST_NAME.TheFakeNecklace.val);
         switch (description) {
             case "null" -> {
             }
@@ -132,20 +134,30 @@ public class LoadGameState {
     }
 
     private void loadAudition() {
-        int quest_num = mg.sqLite.readQuestFacts(2, 1);
-        String description = mg.sqLite.readQuestDescription(2);
+        String description = mg.sqLite.readQuestDescription(QUEST_NAME.TheAudition.val);
+        switch (description) {
+            case "null" -> {
+            }
+            case "active" -> mg.qPanel.quests.add(new QST_TheAudition(mg, false));
+            case "finished" -> mg.qPanel.finishedQuests.add(new QST_TheAudition(mg, true));
+        }
+    }
+
+    private void loadIntoGrassLands() {
+        int quest_num = mg.sqLite.readQuestFacts(QUEST_NAME.IntoTheGrassLands.val, 1);
+        String description = mg.sqLite.readQuestDescription(QUEST_NAME.IntoTheGrassLands.val);
         switch (description) {
             case "null" -> {
             }
             case "active" -> {
-                mg.qPanel.quests.add(new QST_TheAudition(mg, false));
-                if (quest_num == 0) {
-
+                mg.qPanel.quests.add(new QST_IntoTheGrassLands(mg, false));
+                if (quest_num == 1) {
+                    mg.qPanel.setQuestStageAndObjective(QUEST_NAME.IntoTheGrassLands, 12, "Reach level 5 or", "Kill a Stone Knight");
+                } else if (quest_num == 2) {
+                    mg.qPanel.setQuestStageAndObjective(QUEST_NAME.IntoTheGrassLands, 13, "Talk to Grim about the GrassLands");
                 }
             }
-            case "finished" -> {
-                mg.qPanel.finishedQuests.add(new QST_TheAudition(mg, true));
-            }
+            case "finished" -> mg.qPanel.finishedQuests.add(new QST_IntoTheGrassLands(mg, true));
         }
     }
 

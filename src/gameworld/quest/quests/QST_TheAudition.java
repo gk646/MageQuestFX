@@ -33,6 +33,7 @@ public class QST_TheAudition extends QUEST {
             if (npc instanceof NPC_HillcrestMayor) {
                 interactWithNpc(npc, DialogStorage.AuditionMayor);
                 if (progressStage == 1) {
+                    mg.sqLite.setQuestActive(quest_id);
                     updateObjective("Talk to the mayor", 0);
                     addQuestMarker("1", 8, 37, Zone.Hillcrest);
                     if (playerInsideRectangle(new Point(10, 36), new Point(14, 37))) {
@@ -46,7 +47,23 @@ public class QST_TheAudition extends QUEST {
                     } else if (num == 20) {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.AuditionMayor, 3);
+                        progressStage = 4;
                     }
+                } else if (progressStage == 6) {
+                    if (!mg.qPanel.PlayerHasQuests(QUEST_NAME.IntoTheGrassLands)) {
+                        mg.qPanel.quests.add(new QST_IntoTheGrassLands(mg, false));
+                    }
+                } else if (progressStage == 7) {
+                    int num = npc.dialog.drawChoice("Didn't ask!", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                        loadDialogStage(npc, DialogStorage.AuditionMayor, 8);
+                    }
+                } else if (progressStage == 9) {
+
+                } else if (progressStage == 10) {
+                    mg.sqLite.finishQuest(quest_id);
+                    this.completed = true;
                 }
             }
         }

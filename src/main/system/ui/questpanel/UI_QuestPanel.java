@@ -182,7 +182,6 @@ public class UI_QuestPanel {
                         finishedQuests.add(quests.get(i));
                         if (activeQuest == quests.get(i)) {
                             activeQuest = null;
-
                         }
                     }
                 }
@@ -234,9 +233,9 @@ public class UI_QuestPanel {
         wholeJournalWindow.y = 260;
     }
 
-    public boolean PlayerHasQuests(String name) {
+    public boolean PlayerHasQuests(QUEST_NAME name) {
         for (QUEST quest : quests) {
-            if (quest.name.equals(name)) {
+            if (quest.logicName.equals(name)) {
                 return true;
             }
         }

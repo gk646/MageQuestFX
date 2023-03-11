@@ -229,7 +229,6 @@ abstract public class QUEST {
             npc.show_dialog = true;
             npc.dialogHideDelay = 0;
             npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
-            mg.inputH.e_typed = false;
         }
     }
 

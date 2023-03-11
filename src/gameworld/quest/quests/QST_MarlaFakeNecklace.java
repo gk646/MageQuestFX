@@ -13,6 +13,7 @@ import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
+import javafx.util.Duration;
 import main.MainGame;
 import main.system.enums.State;
 import main.system.enums.Zone;
@@ -146,6 +147,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     npc.blockInteraction = true;
                     if (npc.dialog.dialogRenderCounter == 2000) {
                         nextStage();
+                        updateObjective("Help Aria through the ambush", 0);
                         enemiesKilled = mg.prj_control.ENEMIES_KILLED;
                         mg.ENTITIES.add(new ENT_Wolf(mg, 52, 52, 2, Zone.Hillcrest));
                         mg.ENTITIES.add(new ENT_Mushroom(mg, 49, 58, 2, Zone.Hillcrest));
@@ -171,6 +173,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     int num = npc.dialog.drawChoice("Ill come along!", null, null, null);
                     if (num == 10) {
                         nextStage();
+                        updateObjective("Accompany Aria", 0);
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, progressStage);
                     }
                 } else if (progressStage == 17) {
@@ -185,6 +188,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     } else if (num == 20) {
                         progressStage = 75;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
+                        updateObjective("Meet Aria in town to confront Marla", 0);
                         mg.sqLite.updateQuestFacts(quest_id, 1, -1);
                     }
                 } else if (progressStage == 20) {
@@ -208,6 +212,8 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     int num = npc.dialog.drawChoice("Iam ready", null, null, null);
                     if (num == 10) {
                         nextStage();
+                        updateObjective("Rest and talk with Aria", 0);
+                        addQuestMarker("rest", 90, 56, Zone.Hillcrest);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 25);
                     }
@@ -236,6 +242,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 33);
                     }
                 } else if (progressStage == 38) {
+                    removeQuestMarker("rest");
                     moveToTile(npc, 97, 76);
                 } else if (progressStage == 39) {
                     WorldRender.worldData1[97][77] = -1;
@@ -249,8 +256,12 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         progressStage = 75;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 75);
                         mg.sqLite.updateQuestFacts(quest_id, 1, -1);
+                        updateObjective("Meet Aria back in town", 0);
+                        addQuestMarker("cave", 41, 29, Zone.Hillcrest);
                     } else if (num == 20) {
                         nextStage();
+                        updateObjective("Find a way through the cave", 0);
+                        addQuestMarker("cave", 20, 9, Zone.Hillcrest_Mountain_Cave);
                         if (WorldController.currentWorld != Zone.Hillcrest) {
                             npc.update();
                         }
@@ -355,6 +366,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 54) {
                     npc.blockInteraction = true;
                     if (objective1Progress == 0) {
+                        updateObjective("Kill the Stone Knight!", 0);
                         enemiesKilled = mg.prj_control.stoneKnightKilled;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 54);
                         for (ENTITY entity : mg.ENTITIES) {
@@ -391,15 +403,15 @@ public class QST_MarlaFakeNecklace extends QUEST {
                                         entity.searchPathUncapped(npc.activeTile.x, npc.activeTile.y, 30);
                                     } else {
                                         objective3Progress++;
-                                        if (objective3Progress == 60) {
+                                        if (objective3Progress == 80) {
                                             npc.dialogHideDelay = 600;
                                             entity.dialog.loadNewLine("Puny human! You will die!");
-                                        } else if (objective3Progress == 150) {
+                                        } else if (objective3Progress == 190) {
                                             ((BOSS_Knight) entity).drawDialog = false;
                                             entity.dialog.dialogRenderCounter = 2500;
                                             loadDialogStage(npc, DialogStorage.MarlaNecklace, 55);
                                         }
-                                        if (objective3Progress > 210) {
+                                        if (objective3Progress > 290) {
                                             if (KilledAria && !((BOSS_Knight) entity).attack5 && objective3Progress == 1100) {
                                                 for (ENTITY entity1 : mg.ENTITIES) {
                                                     entity1.stunned = false;
@@ -428,34 +440,47 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         }
                     }
                     if (enemiesKilled + 1 == mg.prj_control.stoneKnightKilled) {
-                        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 9)) {
-                            mg.playerPrompts.E = true;
-                            if (mg.inputH.e_typed) {
-                                mg.inputH.e_typed = false;
-                                nextStage();
-                                objective1Progress = 0;
-                            }
-                        }
-                    }
-                } else if (progressStage == 55) {
-                    if (objective1Progress == 0) {
-                        //play music
-                    }
-                    objective1Progress++;
-                    if (objective1Progress < 150) {
-                        mg.player.dialog.loadNewLine("I won, but at what cost");
-                    } else if (objective1Progress < 320) {
-                        mg.player.dialog.loadNewLine("Was it worth it in the end? Did it make the right decisions?");
-                    } else if (objective1Progress < 550) {
-                        mg.player.dialog.loadNewLine("Well, now its too late anyway. I have to move on...");
-                    } else if (objective1Progress > 700) {
+                        npc.dialog.loadNewLine("   ");
+                        updateObjective("Look at Aria's body", 0);
+                        addQuestMarker("body", npc.activeTile.x, npc.activeTile.y, Zone.Hillcrest);
+                        npc.show_dialog = false;
                         nextStage();
                     }
+                } else if (progressStage == 55) {
+                    if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 9)) {
+                        mg.playerPrompts.E = true;
+                        if (mg.inputH.e_typed) {
+                            npc.show_dialog = false;
+                            mg.inputH.e_typed = false;
+                            nextStage();
+                            objective1Progress = 0;
+                        }
+                    }
                 } else if (progressStage == 56) {
-                    int num = mg.player.dialog.drawChoice("*Go back to town*", "*Stay here bit longer to think*", null, null);
+                    if (objective1Progress == 0) {
+                        mg.sound.Sonata.setVolume(0.3);
+                        mg.sound.Sonata.seek(Duration.ZERO);
+                        mg.sound.Sonata.play();
+                    }
+                    mg.player.dialog.dialogRenderCounter = 2001;
+                    objective1Progress++;
+                    if (objective1Progress == 1) {
+                        mg.player.dialog.loadNewLine("I won, but at what cost");
+                    } else if (objective1Progress == 320) {
+                        mg.player.dialog.loadNewLine("Was it worth it in the end? Did I make the right decisions?");
+                    } else if (objective1Progress == 700) {
+                        mg.player.dialog.loadNewLine("Well, now its too late anyway. I have to move on...");
+                    } else if (objective1Progress == 960) {
+                        nextStage();
+                    }
+                } else if (progressStage == 57) {
+                    int num = npc.dialog.drawChoice("*Go back to town*", "*Stay here bit longer to think*", null, null);
                     if (num == 10) {
+                        mg.sound.fadeOut(mg.sound.Sonata, 0.3, 6);
                         mg.player.setPosition(20, 20);
-                        //stop music
+                        nextStage();
+                        removeQuestMarker("body");
+                        updateObjective("Report back to Marla", 0);
                     } else if (num == 20) {
 
                     }

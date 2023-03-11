@@ -5,6 +5,7 @@ import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -70,7 +71,7 @@ public class NPC_Marla extends NPC {
                     twice = false;
                 }
             }
-            if (mg.collisionChecker.checkEntityAgainstPlayer(this, 8) && mg.inputH.e_typed && !mg.qPanel.PlayerHasQuests("The Fake Necklace")) {
+            if (mg.collisionChecker.checkEntityAgainstPlayer(this, 8) && mg.inputH.e_typed && !mg.qPanel.PlayerHasQuests(QUEST_NAME.TheFakeNecklace)) {
                 show_dialog = true;
                 mg.inputH.e_typed = false;
                 mg.qPanel.quests.add(new QST_MarlaFakeNecklace(mg, false));

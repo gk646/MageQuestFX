@@ -26,6 +26,7 @@ public class Sound {
     public static float EFFECTS_VOLUME = 0.5f;
     public final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
+    public MediaPlayer Sonata;
     public MediaPlayer HillCrest;
     public static float AMBIENCE_VOLUME = 0.7f;
     private final double fadeDuration = 2;
@@ -56,6 +57,8 @@ public class Sound {
         INTRO = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/intro.wav")).toString()));
         INTRO.setVolume(0.8);
         BossMusic1 = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/bossMusic/0.mp3")).toString()));
+        Sonata = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/music/moonlight_sonata.wav")).toString()));
+        Sonata.setVolume(0.3);
         //EFFECTS
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/inventory/equip.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/finish_objective.wav")).toString())));
@@ -241,6 +244,7 @@ public class Sound {
         INTRO.setVolume(0.8 * (value / 100.0f));
         HillCrest.setVolume(0.8 * (value / 100.0f));
         BossMusic1.setVolume(1 * (value / 100.0f));
+        Sonata.setVolume(1 * (value / 100.0f));
     }
 
     public void setVolumeEffects(float value) {
