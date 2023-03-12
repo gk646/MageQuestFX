@@ -10,7 +10,7 @@ public class SKL_VoidEruption extends SKILL {
 
     public SKL_VoidEruption(MainGame mg) {
         super(mg);
-        totalCoolDown = 300;
+        totalCoolDown = 500;
         actualCoolDown = totalCoolDown;
         manaCost = 35;
         icon = setup("voidEruption");

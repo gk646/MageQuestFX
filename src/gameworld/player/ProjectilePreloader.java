@@ -17,7 +17,8 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader iceLance;
 
     public static GeneralResourceLoader lightning;
-
+    public static GeneralResourceLoader pyroBlast;
+    public static GeneralResourceLoader fireBurst;
     public static ArrayList<GeneralResourceLoader> projectileSounds = new ArrayList<>();
 
     public static void load() {
@@ -38,6 +39,7 @@ public class ProjectilePreloader {
         projectileSounds.add(voidEruption);
 
         thunderSplash = new GeneralResourceLoader("projectiles/thunderSplash");
+        thunderSplash.loadProjectilesSounds();
         projectileSounds.add(thunderSplash);
 
         frostNova = new GeneralResourceLoader("projectiles/frostNova");
@@ -50,5 +52,13 @@ public class ProjectilePreloader {
         lightning = new GeneralResourceLoader("projectiles/lightning");
         lightning.loadProjectilesSounds();
         projectileSounds.add(lightning);
+
+        pyroBlast = new GeneralResourceLoader("projectiles/pyroBlast");
+        pyroBlast.loadProjectilesSounds();
+        projectileSounds.add(pyroBlast);
+
+        fireBurst = new GeneralResourceLoader("projectiles/fireBurst");
+        fireBurst.loadProjectilesSounds();
+        projectileSounds.add(fireBurst);
     }
 }

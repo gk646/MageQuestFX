@@ -38,13 +38,8 @@ public class SKL_RegenAura extends SKILL {
 
     @Override
     public void activate() {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= manaCost) {
-            castTimeActive++;
-        }
-        if (castTimeActive >= castTimeTotal) {
+        if (checkForActivationCasting(3)) {
             mg.player.BuffsDebuffEffects.add(new BUF_RegenAura(1_200, mg.player.level * 2, 1, true, null));
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
         }
     }
 }

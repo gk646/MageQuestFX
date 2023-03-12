@@ -2,7 +2,7 @@ package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
+import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
@@ -14,7 +14,7 @@ import main.system.ui.Effects;
 import java.awt.Rectangle;
 
 @SuppressWarnings("DuplicateBranchesInSwitch")
-public class PRJ_Lightning extends PROJECTILE {
+public class PRJ_Lightning extends CollisionProjectiles {
 
     /**
      * What happens when you press "2". Part of

@@ -38,7 +38,7 @@ public class ITM_SpellBook extends ITM_Usable {
             case "Solar Flare" -> mg.skillPanel.addSKill(new SKL_SolarFlare(mg));
             case "Energy Sphere" -> mg.skillPanel.addSKill(new SKL_EnergySphere(mg));
             case "Thunder Strike" -> mg.skillPanel.addSKill(new SKL_ThunderStrike(mg));
-            case "Ring Salvo" -> mg.skillPanel.addSKill(new SKL_RingSalvo(mg));
+            case "Ring Salvo" -> mg.skillPanel.addSKill(new SKL_FireBurst(mg));
             case "Frost Nova" -> mg.skillPanel.addSKill(new SKL_FrostNova(mg));
             case "Thunder Splash" -> mg.skillPanel.addSKill(new SKL_ThunderSplash(mg));
             case "Void Eruption" -> mg.skillPanel.addSKill(new SKL_VoidEruption(mg));

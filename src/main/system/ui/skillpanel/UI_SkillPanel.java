@@ -62,12 +62,13 @@ public class UI_SkillPanel {
         allSkills[7] = new SKL_MagicShield(mg);
         allSkills[8] = new SKL_ManaShield(mg);
         allSkills[9] = new SKL_RegenAura(mg);
-        allSkills[10] = new SKL_RingSalvo(mg);
+        allSkills[10] = new SKL_FireBurst(mg);
         allSkills[11] = new SKL_SolarFlare(mg);
         allSkills[12] = new SKL_ThunderSplash(mg);
         allSkills[13] = new SKL_ThunderStrike(mg);
         allSkills[14] = new SKL_VoidEruption(mg);
         allSkills[15] = new SKL_VoidField(mg);
+        allSkills[16] = new SKL_PyroBlast(mg);
         hideSkillPanelCollision();
         mg.sBar.showNoticeAbilities = false;
     }

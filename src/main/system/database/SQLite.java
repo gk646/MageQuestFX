@@ -360,14 +360,14 @@ public class SQLite {
             if (rs.wasNull()) {
                 break;
             } else {
-                mg.skillPanel.addSKill(mg.skillPanel.allSkills[rs.getInt("skill_Index")]);
+                mg.skillPanel.addSKill(mg.skillPanel.allSkills[num]);
             }
         }
         rs = stmt.executeQuery("SELECT activeSkills FROM  SKL_Skills ");
         while (rs.next()) {
             int num = rs.getInt("activeSkills");
             if (!rs.wasNull()) {
-                mg.sBar.skills[rs.getRow() - 1] = mg.skillPanel.allSkills[rs.getInt("activeSkills")];
+                mg.sBar.skills[rs.getRow() - 1] = mg.skillPanel.allSkills[num];
             }
         }
     }

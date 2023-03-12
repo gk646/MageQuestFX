@@ -80,7 +80,7 @@ public class PRJ_ThunderStrike extends PROJECTILE {
         // outOfBounds();
         //tileCollision();
         if (dead) {
-            sounds[0].stop();
+            //sounds[0].stop();
         }
     }
 }

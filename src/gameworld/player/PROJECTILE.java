@@ -53,7 +53,7 @@ public abstract class PROJECTILE {
     public boolean collisionRight;
     public String direction;
     public Rectangle collisionBox;
-    public int movementSpeed;
+    public float movementSpeed;
     public Point2D.Double worldPos;
     public long lastHitTime;
     public int level;

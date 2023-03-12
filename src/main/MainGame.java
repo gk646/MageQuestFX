@@ -6,7 +6,9 @@ import gameworld.PRJ_Control;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.dmg_numbers.DamageNumber;
 import gameworld.entities.damage.effects.TileBasedEffects;
+import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.multiplayer.ENT_Player2;
+import gameworld.entities.props.ENT_TargetDummy;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.PlayerPrompts;
@@ -427,7 +429,6 @@ public class MainGame {
             ui.updateLoadingScreen(12, gc);
             ENTPlayer2 = new ENT_Player2(this);
             map_utils = new MAP_UTILS(this);
-
             talentP.createTalentNodes();
             //72%
             ui.updateLoadingScreen(12, gc);
@@ -487,10 +488,10 @@ public class MainGame {
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
         wControl.loadMap(Zone.TheGrove, 163, 168);
+        ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.TheGrove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
         }
-
         for (int i = 0; i < 20; i++) {
             ITEM item = dropManager.getGuaranteedRandomItem(i);
             while (!(item.type == '2' || item.type == 'O' || item.type == 'W')) {
@@ -502,6 +503,13 @@ public class MainGame {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
+        testRoom();
+    }
+
+    private void testRoom() {
+        wControl.loadMap(Zone.TestRoom, 25, 25);
+        ENTITIES.add(new ENT_TargetDummy(this, 25, 25, 100000, Zone.TestRoom));
+        ENTITIES.add(new ENT_TargetDummy(this, 10, 22, 100000, Zone.TestRoom));
     }
 
     /**

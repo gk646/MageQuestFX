@@ -1,7 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.PROJECTILE;
+import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
@@ -10,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
-public class PRJ_FrostNova extends PROJECTILE {
+public class PRJ_FrostNova extends CollisionProjectiles {
 
 
     public PRJ_FrostNova() {

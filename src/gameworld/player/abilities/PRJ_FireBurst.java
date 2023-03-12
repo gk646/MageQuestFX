@@ -4,50 +4,60 @@ import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
+import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
-import java.awt.Point;
 import java.awt.Rectangle;
 
-public class PRJ_RingSalvo extends CollisionProjectiles {
+public class PRJ_FireBurst extends CollisionProjectiles {
 
     private final int version;
+    private double RightAngle;
 
     /**
      * What happens when you press (1). Part of
      * {@link PRJ_Control}
      */
-    public PRJ_RingSalvo(int version) {
+    public PRJ_FireBurst(int version, float weapon_damage) {
         //-------VALUES-----------
-        this.movementSpeed = 5;
+        this.movementSpeed = 3.2f;
         this.projectileHeight = 25;
         this.projectileWidth = 25;
         projectileType = ProjectileType.Continuous;
-        this.collisionBox = new Rectangle(0, 0, 25, 25);
+        this.resource = ProjectilePreloader.fireBurst;
+        this.sounds[0] = resource.sounds.get(0);
+        this.collisionBox = new Rectangle(12, 7, 23, 23);
         this.version = version;
         this.type = DamageType.Fire;
-        this.weapon_damage_percent = 0.5f;
-
+        this.weapon_damage_percent = weapon_damage;
+        damageDead = false;
         //------POSITION-----------
         this.worldPos = new java.awt.geom.Point2D.Double(Player.worldX, Player.worldY);
-        this.endPos = new Point((int) (worldPos.x + 650), (int) (worldPos.y + 650));
         this.direction = "downleftrightup";
         this.updateVector = new java.awt.geom.Point2D.Double(1, 1);
         getUpdateVector();
+        playStartSound();
     }
 
     @Override
-    public void draw(GraphicsContext g2) {
-        g2.setStroke(Color.RED);
-        g2.strokeRect((int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY, projectileWidth, projectileHeight);
+    public void draw(GraphicsContext gc) {
+        gc.save();
+        gc.translate(worldPos.x - Player.worldX + Player.screenX + 23, worldPos.y - Player.worldY + Player.screenY + 16);
+        gc.rotate(RightAngle);
+        switch (spriteCounter % 60 / 15) {
+            case 0 -> gc.drawImage(resource.images1.get(0), -23, -16);
+            case 1 -> gc.drawImage(resource.images1.get(1), -23, -16);
+            case 2 -> gc.drawImage(resource.images1.get(2), -23, -16);
+            case 3 -> gc.drawImage(resource.images1.get(3), -23, -16);
+        }
+        spriteCounter++;
+        gc.restore();
     }
 
     @Override
     public void update() {
         outOfBounds();
-
         worldPos.x += updateVector.x;
         worldPos.y += updateVector.y;
     }
@@ -65,34 +75,42 @@ public class PRJ_RingSalvo extends CollisionProjectiles {
         if (version == 0) {
             this.updateVector.x = movementSpeed;
             this.updateVector.y = movementSpeed;
+            RightAngle = 45;
         }
         if (version == 1) {
             this.updateVector.x = -1 * movementSpeed;
             this.updateVector.y = -1 * movementSpeed;
+            RightAngle = -135;
         }
         if (version == 2) {
             this.updateVector.x = -1 * movementSpeed;
             this.updateVector.y = movementSpeed;
+            RightAngle = 135;
         }
         if (version == 3) {
             this.updateVector.x = movementSpeed;
             this.updateVector.y = -1 * movementSpeed;
+            RightAngle = -45;
         }
         if (version == 4) {
             this.updateVector.x = 0;
             this.updateVector.y = movementSpeed;
+            RightAngle = 90;
         }
         if (version == 5) {
             this.updateVector.x = -1 * movementSpeed;
             this.updateVector.y = 0;
+            RightAngle = -179.9;
         }
         if (version == 6) {
             this.updateVector.x = movementSpeed;
             this.updateVector.y = 0;
+            RightAngle = 0;
         }
         if (version == 7) {
             this.updateVector.x = 0;
             this.updateVector.y = -1 * movementSpeed;
+            RightAngle = -90;
         }
     }
 }

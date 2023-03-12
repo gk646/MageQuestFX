@@ -8,6 +8,7 @@ import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
@@ -21,13 +22,13 @@ public class PRJ_ThunderSplash extends PROJECTILE {
         this.type = DamageType.Arcane;
         damageDead = true;
         this.resource = ProjectilePreloader.thunderSplash;
-        //this.sounds[0] = resource.sounds.get(0);
+        this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
+        this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
         collisionBox = new Rectangle(0, 0, 48, 48);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
-        //playStartSound();
-        //TODO sound
+        playStartSound();
     }
 
 
@@ -81,11 +82,7 @@ public class PRJ_ThunderSplash extends PROJECTILE {
      */
     @Override
     public void update() {
-        // outOfBounds();
-        //tileCollision();
-        if (dead) {
-            // sounds[0].stop();
-        }
+
     }
 }
 

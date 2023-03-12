@@ -28,7 +28,7 @@ public class PRJ_EnergySphere extends CollisionProjectiles {
         this.type = DamageType.Arcane;
         projectileType = ProjectileType.Continuous;
         //-------VALUES-----------
-        this.movementSpeed = 3;
+        this.movementSpeed = 2.5f;
         this.weapon_damage_percent = damage;
         this.projectileHeight = 32;
         this.projectileWidth = 32;
@@ -69,10 +69,9 @@ public class PRJ_EnergySphere extends CollisionProjectiles {
         worldPos.x += updateVector.x * movementSpeed;
         worldPos.y += updateVector.y * movementSpeed;
         if (dead) {
-            sounds[0].stop();
             sounds[0].dispose();
-            sounds[1].setOnEndOfMedia(() -> sounds[1].dispose());
             sounds[1].play();
+            sounds[1].setOnEndOfMedia(() -> sounds[1].dispose());
         }
     }
 

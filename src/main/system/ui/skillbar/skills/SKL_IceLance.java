@@ -1,5 +1,6 @@
 package main.system.ui.skillbar.skills;
 
+import gameworld.entities.damage.DamageType;
 import gameworld.player.abilities.PRJ_IceLance;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -11,7 +12,9 @@ public class SKL_IceLance extends SKILL {
         super(mg);
         totalCoolDown = 40;
         actualCoolDown = totalCoolDown;
+        weapon_damage_percent = 75;
         manaCost = 1;
+        type = DamageType.Ice;
         icon = setup("solarFlare");
         name = "Ice Lance";
         description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";
@@ -40,10 +43,8 @@ public class SKL_IceLance extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
-            mg.PROJECTILES.add(new PRJ_IceLance(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y));
+        if (checkForActivation(0)) {
+            mg.PROJECTILES.add(new PRJ_IceLance(mg.inputH.lastMousePosition.x, mg.inputH.lastMousePosition.y, weapon_damage_percent));
         }
     }
 }

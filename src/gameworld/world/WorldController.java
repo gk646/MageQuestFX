@@ -24,6 +24,7 @@ public class WorldController {
     }
 
     public void loadWorldData() {
+        MAPS.add(new Map("TestRoom", new Point(50, 50), Zone.TestRoom));
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Woodland_Edge, GameMapType.MapCover));
         MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Ruin_Dungeon));
         MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Hillcrest, GameMapType.MapCover));

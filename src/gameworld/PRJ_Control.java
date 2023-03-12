@@ -76,7 +76,6 @@ public class PRJ_Control {
                         iterator.remove();
                         continue;
                     }
-
                     Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
                     while (entityIterator.hasNext()) {
                         ENTITY entity = entityIterator.next();
@@ -88,6 +87,7 @@ public class PRJ_Control {
                             }
                             if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && !entity.dead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
+
                             }
                         }
                     }
@@ -102,6 +102,7 @@ public class PRJ_Control {
     private void calcProjectileDamage(PROJECTILE projectile, ENTITY entity) {
         if (projectile.projectileType == ProjectileType.OneHitCompletelyDead) {
             projectile.dead = true;
+            projectile.damageDead = true;
             entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
             entity.playGetHitSound();
         } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
