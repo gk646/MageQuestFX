@@ -46,6 +46,7 @@ public class Dialog {
     }
 
     public void drawDialog(GraphicsContext gc, ENTITY entity) {
+        Player.interactingWithNPC = true;
         gc.setFont(FonT.varnished14);
         gc.setFill(Colors.black_transparent);
         gc.fillRoundRect(entity.worldX - Player.worldX + Player.screenX - 24 - 124, entity.worldY - Player.worldY + Player.screenY - 24 - 115, 373, 120, 25, 25);

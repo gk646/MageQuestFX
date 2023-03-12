@@ -14,7 +14,7 @@ public class SKL_AutoShot extends SKILL {
         this.totalCoolDown = 30;
         actualCoolDown = 30;
         this.coolDownCoefficient = 0;
-        this.weapon_damage_percent = 100;
+        this.weapon_damage_percent = 50;
         this.type = DamageType.Poison;
         this.icon = setup("slimeBall");
         name = "Poison Ball";

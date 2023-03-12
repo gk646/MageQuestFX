@@ -306,6 +306,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 44) {
                     moveToTile(npc, 22, 30, new Point(11, 45));
                 } else if (progressStage == 45) {
+                    npc.blockInteraction = true;
                     int num = npc.dialog.drawChoice("Sure thing!", "I hereby give you full rights to go first", null, null);
                     if (num == 10) {
                         nextStage();
@@ -313,9 +314,11 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 46);
                     } else if (num == 20) {
                         progressStage = 47;
+                        npc.blockInteraction = false;
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 47);
                     }
                 } else if (progressStage == 46) {
+                    npc.blockInteraction = false;
                     if (playerInsideRectangle(new Point(33, 27), new Point(36, 31))) {
                         objective1Progress = 1;
                     }
@@ -328,6 +331,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 48) {
                     moveToTile(npc, 20, 9, new Point(39, 22), new Point(29, 9));
                 } else if (progressStage == 49) {
+                    npc.update();
                     if (moveToTile(npc, 0, 14)) {
                         npc.zone = Zone.Hillcrest;
                         npc.setPosition(75, 85);

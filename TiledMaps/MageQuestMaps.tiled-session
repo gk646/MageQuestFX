@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "DeadPlains.tmx",
+    "activeFile": "ForestClearing.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -34,11 +34,11 @@
             "scaleInDock": 1
         },
         "DeadPlains.tmx": {
-            "scale": 0.75,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1458.6666666666665,
-                "y": 1098.6666666666665
+                "x": 1748,
+                "y": 1604
             }
         },
         "DungeonTutorial.tmx": {
@@ -67,11 +67,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 798.4848484848485,
-                "y": 801.5151515151515
+                "x": 978,
+                "y": 380
             }
         },
         "GrassLands.tmx": {
@@ -97,8 +97,16 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 1.5,
             "scaleInEditor": 2
+        },
+        "TheGrove.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2502.6666666666665,
+                "y": 2658
+            }
         },
         "TileSet.tsx": {
             "dynamicWrapping": false,
@@ -251,10 +259,10 @@
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "caveMarla.tmx",
-        "ForestClearing.tmx",
-        "TIILESET.tsx",
-        "Tutorial.tmx",
         "DeadPlains.tmx",
+        "Tutorial.tmx",
+        "TIILESET.tsx",
+        "ForestClearing.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
         "GrassLands.tmx",

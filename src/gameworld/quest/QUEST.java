@@ -211,7 +211,7 @@ abstract public class QUEST {
             }
         }
         if (npc.show_dialog) {
-            mg.player.interactingWithNPC = true;
+            Player.interactingWithNPC = true;
             if (mg.inputH.e_typed && !npc.blockInteraction && !npc.onPath && !npc.dialog.drawChoice && npc.dialog.dialogRenderCounter == 2_000 && mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
                 try {
                     nextStage();
@@ -228,6 +228,7 @@ abstract public class QUEST {
         }
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
             npc.show_dialog = true;
+            Player.interactingWithNPC = true;
             if (!DontConsumeETyped) {
                 mg.inputH.e_typed = false;
             }

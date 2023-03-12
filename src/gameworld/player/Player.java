@@ -31,7 +31,7 @@ public class Player extends ENTITY {
     public Map map;
     public boolean isMoving;
     public int maxMana;
-    public boolean interactingWithNPC;
+    public static boolean interactingWithNPC;
     private float mana;
     //STATS
     public int intellect;

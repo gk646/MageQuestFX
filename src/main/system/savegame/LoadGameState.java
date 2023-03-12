@@ -6,10 +6,12 @@ import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.entities.props.DeadWolf;
+import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.quest.hiddenquests.QST_StaturePuzzleHillcrest;
+import gameworld.quest.hiddenquests.QST_TheGrovesSecret;
 import gameworld.quest.quests.QST_IntoTheGrassLands;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
 import gameworld.quest.quests.QST_TheAudition;
@@ -41,6 +43,7 @@ public class LoadGameState {
         loadAudition();
         loadHiddenQuests();
         loadIntoGrassLands();
+        loadGroveSecret();
         if (mg.qPanel.quests.size() > 0) {
             mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
         }
@@ -163,6 +166,22 @@ public class LoadGameState {
                 }
             }
             case "finished" -> mg.qPanel.finishedQuests.add(new QST_IntoTheGrassLands(mg, true));
+        }
+    }
+
+    private void loadGroveSecret() {
+        int quest_num = mg.sqLite.readQuestFacts(QUEST_NAME.TheGrovesSecret.val, 1);
+        String description = mg.sqLite.readQuestDescription(QUEST_NAME.TheGrovesSecret.val);
+        if (description.equals("finished")) {
+            mg.qPanel.finishedQuests.add(new QST_TheGrovesSecret(mg, true));
+            if (quest_num > 0) {
+                ((HiddenQUEST) mg.qPanel.getQuest(QUEST_NAME.TheGrovesSecret)).activated = true;
+            }
+            if (quest_num == 1) {
+                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 10, "Talk to people to get clues");
+            }
+        } else {
+            mg.qPanel.hiddenQuests.add(new QST_TheGrovesSecret(mg, false));
         }
     }
 
