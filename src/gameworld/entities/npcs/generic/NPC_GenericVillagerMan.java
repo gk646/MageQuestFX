@@ -1,6 +1,5 @@
 package gameworld.entities.npcs.generic;
 
-import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,7 +9,7 @@ import main.system.enums.Zone;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-public class NPC_GenericVillagerMan extends NPC {
+public class NPC_GenericVillagerMan extends NPC_Generic {
     public NPC_GenericVillagerMan(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
         this.animation = new ResourceLoaderEntity("npc/man");

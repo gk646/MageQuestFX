@@ -435,19 +435,17 @@ public class InputHandler {
         Point mousePos = lastMousePosition;
         if (event.getButton() == MouseButton.PRIMARY) {
             if (mg.gameState == State.PLAY) {
-                if (mg.qPanel.expandButton.contains(mousePos)) {
-                    mg.qPanel.expanded = !mg.qPanel.expanded;
-                } else if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
-                    mg.inventP.showCombatStats = true;
-                } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
-                    mg.inventP.showCombatStats = false;
-                } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
-                    mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
-                    mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
-                } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
-                    mg.inventP.sortBagsRarity();
-                } else if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
-                    mg.inventP.activeCharacterPanel = 2;
+               if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
+                   mg.inventP.showCombatStats = true;
+               } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
+                   mg.inventP.showCombatStats = false;
+               } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
+                   mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+                   mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
+               } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
+                   mg.inventP.sortBagsRarity();
+               } else if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
+                   mg.inventP.activeCharacterPanel = 2;
                 } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
                     mg.inventP.activeCharacterPanel = 1;
                 } else if (mg.sBar.characterBox.contains(mousePos)) {

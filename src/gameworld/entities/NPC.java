@@ -9,6 +9,7 @@ import java.awt.Point;
 
 abstract public class NPC extends ENTITY {
     public boolean blockInteraction;
+    public String displayName;
     public boolean show_dialog;
     public Point playerTalkLocation = new Point();
     public int dialogHideDelay;
@@ -36,7 +37,6 @@ abstract public class NPC extends ENTITY {
             moveToTileSuperVised(goalX, goalY);
         } else {
             onPath = false;
-
             checkpointIndex = 0;
         }
     }

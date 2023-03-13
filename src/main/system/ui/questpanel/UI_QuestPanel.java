@@ -23,9 +23,7 @@ public class UI_QuestPanel {
     public final List<QUEST> quests = Collections.synchronizedList(new ArrayList<>());
     public final ArrayList<HiddenQUEST> hiddenQuests = new ArrayList<>();
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
-
     public QUEST activeQuest;
-    public final Rectangle expandButton = new Rectangle(1_870, 350, 21, 21);
     private final MainGame mg;
     private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
     private final Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
@@ -127,42 +125,28 @@ public class UI_QuestPanel {
     }
 
     private void drawQuestBar(GraphicsContext gc) {
-        if (expanded) {
-            gc.fillRoundRect(1_649, 335, 251, 400, 15, 15);
-        } else {
-            gc.drawImage(sideBar, 1649, 335);
-        }
+        gc.drawImage(sideBar, 1649, 350);
         gc.setFont(FonT.antParty20);
         gc.setFill(Colors.white);
-        gc.fillText("OBJECTIVES", 1_715, 361);
+        gc.fillText("OBJECTIVES", 1_680, 390);
         gc.setFont(FonT.antParty18);
-        int y = 390;
+        int y = 430;
         gc.setFill(Colors.questNameBeige);
         if (activeQuest != null) {
-            gc.fillText(activeQuest.name, 1_670, y += 30);
+            gc.fillText(activeQuest.name, 1_673, y);
             gc.setFill(Colors.white);
             gc.setFont(FonT.antParty16);
-            y += 10;
+            y += 25;
             for (int i = 0; i < 3; i++) {
                 if (activeQuest.objectives[i] != null) {
                     for (String string : activeQuest.objectives[i].split("\n")) {
-                        gc.fillText(string, 1_680, y += 15);
+                        gc.fillText(string, 1_680, y);
                     }
                     y += 20;
                 }
             }
         } else {
             gc.fillText("Find new quests!", 1_670, y += 30);
-        }
-        if (expanded) {
-            gc.drawImage(collapseImage, 1_870, 350);
-            for (QUEST quest : quests) {
-                if (quest != null) {
-                    gc.fillText(quest.name, 1_685, y += 30);
-                }
-            }
-        } else {
-            gc.drawImage(expandImage, 1_870, 350);
         }
     }
 

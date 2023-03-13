@@ -68,9 +68,8 @@ public class LoadGameState {
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Tutorial, 13, "Talk to the old man");
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Woodland_Edge));
                     mg.player.setPosition(39, 34);
-
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(4), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(1), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(2), Zone.Woodland_Edge));
                 } else if (quest_num == 2) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Woodland_Edge));
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Tutorial, 26, "Search the ruins for a way out");

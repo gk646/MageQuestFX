@@ -1,6 +1,7 @@
 package gameworld.world;
 
 
+import gameworld.entities.npcs.generic.zonescripts.NPCScript;
 import gameworld.player.Player;
 import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class WorldController {
     private final MainGame mg;
     public static Zone currentWorld = Zone.Woodland_Edge;
+    public static NPCScript currentScript = null;
     public static int[][] currentMapCover;
     public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public final ArrayList<Map> MAPS = new ArrayList<>();
@@ -51,6 +53,7 @@ public class WorldController {
                 WorldRender.worldData1 = map.mapDataBackGround2;
                 WorldRender.worldData2 = map.mapDataForeGround;
                 mg.wAnim.cacheMapEnhancements();
+                mg.npcControl.loadGenerics(zone);
                 return;
             }
         }

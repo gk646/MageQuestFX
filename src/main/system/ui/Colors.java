@@ -32,7 +32,7 @@ public class Colors {
 
     public static final Color button = Color.rgb(77, 19, 2, 0.9);
     public static final Color lightGreyMiddleAlpha = Color.rgb(192, 203, 220, 0.6);
-    public static final Color questNameBeige = Color.rgb(170, 156, 117, 1);
+    public static final Color questNameBeige = Color.rgb(228, 166, 114, 1);
     public static final Color bossNamePurple = Color.rgb(114, 69, 144, 1);
     public static final Color questMarkerYellow = Color.rgb(254, 231, 97, 1);
     public static final Color journalBrown = Color.rgb(165, 120, 85, 1);

@@ -9,12 +9,13 @@ import main.system.enums.Zone;
 
 import java.awt.Rectangle;
 
-public class NPC_GenericVillagerWoman extends NPC_Generic {
+
+public class NPC_GenericVillagerBoy extends NPC_Generic {
 
 
-    public NPC_GenericVillagerWoman(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_GenericVillagerBoy(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
-        this.animation = new ResourceLoaderEntity("npc/woman");
+        this.animation = new ResourceLoaderEntity("npc/boy");
         animation.load();
         this.mg = mainGame;
         this.zone = zone;
@@ -26,6 +27,7 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
         this.collisionBox = new Rectangle(0, 0, 42, 42);
         direction = "updownleftright";
         spriteCounter = (int) (Math.random() * 20);
+        displayName = "Village Boy";
     }
 
     @Override
@@ -48,7 +50,7 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
             drawIdle(gc);
         }
         spriteCounter++;
-        drawNPCName(gc, "Villager");
+        drawNPCName(gc, displayName);
     }
 
     private void drawIdle(GraphicsContext gc) {

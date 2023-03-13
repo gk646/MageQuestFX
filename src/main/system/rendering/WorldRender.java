@@ -126,7 +126,9 @@ public class WorldRender {
 
     private void getTileImagesNew() {
         {
-
+            for (int i = 0; i < 4; i++) {
+                setupCollision(i + 1528);
+            }
             for (int j = 704; j <= 886; j += 91) {
                 for (int i = 0; i <= 8; i += 4) {
                     setupCollision(i + j);
