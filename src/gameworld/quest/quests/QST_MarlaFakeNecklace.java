@@ -332,7 +332,6 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 48) {
                     moveToTile(npc, 20, 9, new Point(39, 22), new Point(29, 9));
                 } else if (progressStage == 49) {
-                    npc.update();
                     if (moveToTile(npc, 0, 14)) {
                         npc.zone = Zone.Hillcrest;
                         npc.setPosition(75, 85);
@@ -567,8 +566,8 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 }
             }
         }
-        if (progressStage >= 75 || mg.sqLite.readQuestFacts(quest_id, 1) == -1) {
-            if (!once && WorldController.currentWorld == Zone.Hillcrest) {
+        if (!once && progressStage >= 40 || mg.sqLite.readQuestFacts(quest_id, 1) == -1) {
+            if (WorldController.currentWorld == Zone.Hillcrest) {
                 WorldRender.worldData1[97][77] = -1;
                 once = true;
             }

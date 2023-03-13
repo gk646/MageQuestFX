@@ -184,7 +184,7 @@ public class Dialog {
     }
 
     public void loadNewLine(String dialogLine) {
-        this.dialogLine = insertNewLine(dialogLine, 47);
+        this.dialogLine = insertNewLine(dialogLine, 45);
         this.dialogRenderCounter = 0;
     }
 
