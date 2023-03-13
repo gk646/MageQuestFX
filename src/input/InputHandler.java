@@ -67,7 +67,6 @@ public class InputHandler {
     public void handleKeyType(KeyEvent e) {
         String code = e.getCharacter();
         if (mg.gameState == State.TITLE) {
-
             if (code.equals(("w"))) {
                 mg.sound.playEffectSound(2);
                 mg.ui.commandNum--;
@@ -360,9 +359,11 @@ public class InputHandler {
     public void handleKeyPressed(KeyEvent e) {
         KeyCode code = e.getCode();
         switch (code) {
-            case A -> leftPressed = true;
+            case A, LEFT -> leftPressed = true;
+            case UP, W -> upPressed = true;
+            case DOWN, S -> downPressed = true;
+            case RIGHT, D -> rightPressed = true;
             case C -> c_pressed = true;
-            case D -> rightPressed = true;
             case DIGIT1 -> OnePressed = true;
             case DIGIT2 -> TwoPressed = true;
             case DIGIT3 -> ThreePressed = true;
@@ -376,9 +377,7 @@ public class InputHandler {
             case P -> p_pressed = true;
             case Q -> q_pressed = true;
             case R -> r_pressed = true;
-            case S -> downPressed = true;
             case SHIFT -> shift_pressed = true;
-            case W -> upPressed = true;
             case X -> X_pressed = true;
             case Y -> y_pressed = true;
             default -> {
@@ -389,9 +388,11 @@ public class InputHandler {
     public void handleKeyReleased(KeyEvent e) {
         KeyCode code = e.getCode();
         switch (code) {
-            case A -> leftPressed = false;
+            case A, LEFT -> leftPressed = false;
+            case UP, W -> upPressed = false;
+            case DOWN, S -> downPressed = false;
+            case RIGHT, D -> rightPressed = false;
             case C -> c_pressed = false;
-            case D -> rightPressed = false;
             case DIGIT1 -> OnePressed = false;
             case DIGIT2 -> TwoPressed = false;
             case DIGIT3 -> ThreePressed = false;
@@ -415,9 +416,7 @@ public class InputHandler {
                 q_typed = false;
             }
             case R -> r_pressed = false;
-            case S -> downPressed = false;
             case SHIFT -> shift_pressed = false;
-            case W -> upPressed = false;
             case X -> X_pressed = false;
             case Y -> y_pressed = false;
             default -> {
@@ -435,17 +434,17 @@ public class InputHandler {
         Point mousePos = lastMousePosition;
         if (event.getButton() == MouseButton.PRIMARY) {
             if (mg.gameState == State.PLAY) {
-               if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
-                   mg.inventP.showCombatStats = true;
-               } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
-                   mg.inventP.showCombatStats = false;
-               } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
-                   mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
-                   mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
-               } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
-                   mg.inventP.sortBagsRarity();
-               } else if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
-                   mg.inventP.activeCharacterPanel = 2;
+                if (mg.inventP.combatStatsHitBox.contains(mousePos)) {
+                    mg.inventP.showCombatStats = true;
+                } else if (mg.inventP.effectsHitBox.contains(mousePos)) {
+                    mg.inventP.showCombatStats = false;
+                } else if (mg.showBag && mg.inventP.bagEquipSlotsBox.contains(mousePos)) {
+                    mg.inventP.showBagEquipSlots = !mg.inventP.showBagEquipSlots;
+                    mg.inventP.bagPanelMover.y += mg.inventP.showBagEquipSlots ? -30 : 30;
+                } else if (mg.showBag && mg.inventP.bagSortButton.contains(mousePos)) {
+                    mg.inventP.sortBagsRarity();
+                } else if (mg.showChar && mg.inventP.secondPanelButton.contains(mousePos)) {
+                    mg.inventP.activeCharacterPanel = 2;
                 } else if (mg.showChar && mg.inventP.firstPanelButton.contains(mousePos)) {
                     mg.inventP.activeCharacterPanel = 1;
                 } else if (mg.sBar.characterBox.contains(mousePos)) {

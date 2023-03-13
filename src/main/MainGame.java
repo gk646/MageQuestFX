@@ -67,6 +67,7 @@ import java.util.Random;
 
 public class MainGame {
 
+    private static boolean CHEATS = false;
     public static int SCREEN_WIDTH = 1_920;
     public static int SCREEN_HEIGHT = 1_080;
     public final int HALF_WIDTH;
@@ -358,12 +359,15 @@ public class MainGame {
             gc.setFill(Color.BLACK);
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + (System.nanoTime() - drawStart)), 500, 600);
-            for (SKILL skill : sBar.skills) {
-                skill.actualCoolDown = skill.totalCoolDown;
-            }
-            player.setMana(player.maxMana);
+
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
             gc.fillText(String.valueOf(TileBasedEffects.activeTile), 500, 750);
+            if (CHEATS) {
+                for (SKILL skill : sBar.skills) {
+                    skill.actualCoolDown = skill.totalCoolDown;
+                }
+                player.setMana(player.maxMana);
+            }
         }
     }
 
@@ -457,10 +461,11 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-       // debug();
+        // debug();
     }
 
     private void debug() {
+        CHEATS = true;
         for (int i = 0; i < 1; i++) {
             //ENTITIES.add(new ENT_SkeletonWarrior(this, 58 * 48, 44 * 48, 100, Zone.Tutorial));
         }

@@ -80,7 +80,7 @@ public class QST_Tutorial extends QUEST {
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     } else if (choice == 20) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Pyro Blast", 2, null, null, DamageType.Arcane));
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Pyro Blast", 2, "A powerful spell that unleashes a powerul fireball upon enemies, dealing big damage upon impact. Enemies hit by Pyroblast also suffer a small burn effect, causing them to take additional fire damage over time.", null, DamageType.Fire));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     }
