@@ -35,6 +35,7 @@ public class UI_QuestPanel {
     private final Image journal = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/journal.png"))));
     private final Image trackBox = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBox.png"))));
     private final Image trackBoxHover = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBoxHover.png"))));
+    private final Image sideBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/sideBar.png"))));
     public double scroll = 280;
     Rectangle[] trackBoxes = new Rectangle[10];
     private int lastY;
@@ -127,12 +128,9 @@ public class UI_QuestPanel {
 
     private void drawQuestBar(GraphicsContext gc) {
         if (expanded) {
-            gc.setFill(Colors.lightGreyMiddleAlpha);
             gc.fillRoundRect(1_649, 335, 251, 400, 15, 15);
         } else {
-            gc.setFill(Colors.lightGreyMiddleAlpha);
-            gc.fillRoundRect(1_655, 340, 245, 145, 15, 15);
-            gc.drawImage(small, 1_649, 335);
+            gc.drawImage(sideBar, 1649, 335);
         }
         gc.setFont(FonT.antParty20);
         gc.setFill(Colors.white);

@@ -45,6 +45,15 @@ public class ITM_SpellBook extends ITM_Usable {
             case "Void Field" -> mg.skillPanel.addSKill(new SKL_VoidField(mg));
             case "Lightning Strike" -> mg.skillPanel.addSKill(new SKL_Lightning(mg));
             case "Regenerative Aura" -> mg.skillPanel.addSKill(new SKL_RegenAura(mg));
+            case "Auto Shot" -> mg.skillPanel.addSKill(new SKL_AutoShot(mg));
+            case "Energy Sphere 2" -> mg.skillPanel.addSKill(new SKL_EnergySphere_2(mg));
+            case "Filler" -> mg.skillPanel.addSKill(new SKL_Filler(mg));
+            case "Ice Lance" -> mg.skillPanel.addSKill(new SKL_IceLance(mg));
+            case "Magic Shield" -> mg.skillPanel.addSKill(new SKL_MagicShield(mg));
+            case "Mana Shield" -> mg.skillPanel.addSKill(new SKL_ManaShield(mg));
+            case "Pyro Blast" -> mg.skillPanel.addSKill(new SKL_PyroBlast(mg));
+            case "Power Surge" -> mg.skillPanel.addSKill(new SKL_PowerSurge(mg));
+            default -> System.out.println("Unknown spell: " + spellName);
         }
     }
 }

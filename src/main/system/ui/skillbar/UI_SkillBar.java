@@ -122,9 +122,9 @@ public class UI_SkillBar {
         gc.drawImage(settings, skillBarX + 64 * 7 + 178, skillBarY + 28);
 
         gc.setFill(Colors.lightGreyMiddleAlpha);
-        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, 700, 12);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.911f, 699, 9);
         gc.setFill(Colors.xpbarOrange);
-        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.908f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 12);
+        gc.fillRect(MainGame.SCREEN_HEIGHT * 0.567f, MainGame.SCREEN_HEIGHT * 0.911f, (mg.player.experience / (float) mg.player.levelUpExperience) * 700, 9);
         gc.drawImage(xpBar, MainGame.SCREEN_HEIGHT * 0.564f, MainGame.SCREEN_HEIGHT * 0.908f);
         gc.setFill(Colors.notificationOrange);
         if (showNoticeChar) {

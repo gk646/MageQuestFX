@@ -24,7 +24,7 @@ public class PRJ_Lightning extends CollisionProjectiles {
         //-------VALUES-----------
         this.projectileHeight = 92;
         this.projectileWidth = 70;
-        this.collisionBox = new Rectangle(30, 30, 40, 30);
+        this.collisionBox = new Rectangle(10, 15, 40, 30);
         this.weapon_damage_percent = weapon_damage_percent;
         projectileType = ProjectileType.OneHitNoDMG;
         resource = ProjectilePreloader.lightning;

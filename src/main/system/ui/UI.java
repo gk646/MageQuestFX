@@ -191,7 +191,7 @@ public class UI {
         y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         gc.fillText(text, x, y);
 
-        text = "v4.0.0";
+        text = "v0.9.1";
         x = (int) (MainGame.SCREEN_HEIGHT * 0.138f);
         y = (int) (MainGame.SCREEN_HEIGHT * 0.903f);
         gc.fillText(text, x, y);

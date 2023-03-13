@@ -15,7 +15,7 @@ public class SKL_IceLance extends SKILL {
         weapon_damage_percent = 75;
         manaCost = 1;
         type = DamageType.Ice;
-        icon = setup("solarFlare");
+        icon = setup("iceLance");
         name = "Ice Lance";
         description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";
     }

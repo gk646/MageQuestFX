@@ -33,7 +33,7 @@ public class PRJ_IceLance extends CollisionProjectiles {
         projectileHeight = 64;
         projectileWidth = 64;
         playStartSound();
-        movementSpeed = 3;
+        movementSpeed = 3.3f;
         double dx = InputHandler.instance.lastMousePosition.getX() - (Player.screenX + 32);
         double dy = InputHandler.instance.lastMousePosition.getY() - (Player.screenY + 32);
         RightAngle = Math.toDegrees(Math.atan2(dy, dx));

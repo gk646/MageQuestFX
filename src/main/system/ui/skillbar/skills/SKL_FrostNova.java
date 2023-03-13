@@ -12,6 +12,7 @@ public class SKL_FrostNova extends SKILL {
         name = "Frost Nova";
         description = "";
         totalCoolDown = 600;
+        weapon_damage_percent = 50;
         icon = setup("frostNova");
         actualCoolDown = totalCoolDown;
         type = DamageType.Ice;
@@ -47,7 +48,7 @@ public class SKL_FrostNova extends SKILL {
         if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
-            mg.PROJECTILES.add(new PRJ_FrostNova());
+            mg.PROJECTILES.add(new PRJ_FrostNova(weapon_damage_percent));
         }
     }
 }

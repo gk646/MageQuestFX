@@ -74,13 +74,13 @@ public class QST_Tutorial extends QUEST {
                     moveToTile(npc, 58, 35);
                 }
                 if (progressStage == 19) {
-                    int choice = npc.dialog.drawChoice("Energy Sphere", "Regen Aura", null, null);
+                    int choice = npc.dialog.drawChoice("Energy Sphere", "Pyro Blast", null, null);
                     if (choice == 10) {
                         mg.inventP.addItemToBag(new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.Arcane));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     } else if (choice == 20) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Regenerative Aura", 2, null, null, DamageType.Arcane));
+                        mg.inventP.addItemToBag(new ITM_SpellBook("Pyro Blast", 2, null, null, DamageType.Arcane));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     }

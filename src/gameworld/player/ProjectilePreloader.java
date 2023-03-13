@@ -44,6 +44,7 @@ public class ProjectilePreloader {
         projectileSounds.add(thunderSplash);
 
         frostNova = new GeneralResourceLoader("projectiles/frostNova");
+        frostNova.loadProjectilesSounds();
         projectileSounds.add(frostNova);
 
         iceLance = new GeneralResourceLoader("projectiles/iceLance");
@@ -63,7 +64,7 @@ public class ProjectilePreloader {
         projectileSounds.add(fireBurst);
 
         powerSurge = new GeneralResourceLoader("projectiles/powerSurge");
-        //powerSurge.loadProjectilesSounds();
+        powerSurge.loadProjectilesSounds();
         projectileSounds.add(powerSurge);
     }
 }

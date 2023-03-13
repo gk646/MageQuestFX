@@ -71,6 +71,7 @@ public class SKL_PowerSurge extends SKILL {
             mg.player.BuffsDebuffEffects.add(new Effect_ArrayBased(1900000, 15, true, 28, EffectType.BUFF, null));
             mg.player.BuffsDebuffEffects.add(new Effect_ArrayBased(1900000, -30, true, 26, EffectType.BUFF, null));
             active = true;
+            resource.playSoundFromSounds(0);
             actualCoolDown = 0;
         } else if (active && actualCoolDown >= totalCoolDown) {
             synchronized (mg.player.BuffsDebuffEffects) {
@@ -78,6 +79,7 @@ public class SKL_PowerSurge extends SKILL {
                 mg.player.manaBarrier = mg.player.maxMana;
                 mg.player.updateEquippedItems();
                 active = false;
+                resource.playSoundFromSounds(1);
                 actualCoolDown = 0;
             }
         }

@@ -77,6 +77,11 @@ public class GeneralResourceLoader {
         }
     }
 
+    public void playSoundFromSounds(int index) {
+        sounds.get(index).seek(Duration.ZERO);
+        sounds.get(index).play();
+    }
+
     public void playSound(int index) {
         getHitSound.get(index).seek(Duration.ZERO);
         getHitSound.get(index).play();
