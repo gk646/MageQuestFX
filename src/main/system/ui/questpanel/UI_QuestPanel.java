@@ -25,9 +25,7 @@ public class UI_QuestPanel {
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
     public QUEST activeQuest;
     private final MainGame mg;
-    private final Image collapseImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/collapse.png"))));
-    private final Image expandImage = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/expand.png"))));
-    private final Image small = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/questpanel_small.png"))));
+
     public final Rectangle wholeJournalWindow = new Rectangle(480, 260, 960, 563);
     public final Rectangle leftSide = new Rectangle(508 + 480, 260 + 11, 414, 510);
     private final Image journal = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/journal.png"))));
@@ -36,7 +34,6 @@ public class UI_QuestPanel {
     private final Image sideBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/sideBar.png"))));
     public double scroll = 280;
     Rectangle[] trackBoxes = new Rectangle[10];
-    private int lastY;
 
 
     public UI_QuestPanel(MainGame mg) {
@@ -114,15 +111,6 @@ public class UI_QuestPanel {
     }
 
 
-    private int numberOfQuests() {
-        int counter = 0;
-        for (QUEST quest : quests) {
-            if (quest != null) {
-                counter++;
-            }
-        }
-        return counter;
-    }
 
     private void drawQuestBar(GraphicsContext gc) {
         gc.drawImage(sideBar, 1649, 350);

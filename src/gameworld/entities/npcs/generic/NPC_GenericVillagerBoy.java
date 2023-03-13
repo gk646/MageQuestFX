@@ -23,7 +23,7 @@ public class NPC_GenericVillagerBoy extends NPC_Generic {
         worldY = yTile * 48;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.movementSpeed = 2;
+        this.movementSpeed = 1.8f;
         this.collisionBox = new Rectangle(0, 0, 42, 42);
         direction = "updownleftright";
         spriteCounter = (int) (Math.random() * 20);

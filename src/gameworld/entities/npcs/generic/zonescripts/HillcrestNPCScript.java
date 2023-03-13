@@ -19,7 +19,7 @@ public class HillcrestNPCScript extends NPCScript {
                 new Point(45, 9), new Point(27, 14), new Point(33, 14), new Point(48, 26), new Point(53, 26),
                 new Point(53, 32), new Point(48, 32), new Point(13, 27), new Point(26, 20), new Point(32, 20)};
         this.entranceTaken = new boolean[houseEntrances.length];
-        amountOfNPCs = 5;
+        amountOfNPCs = 6;
     }
 
 

@@ -38,7 +38,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1598
+                "y": 1600
             }
         },
         "DungeonTutorial.tmx": {
@@ -64,11 +64,11 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 0.5,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 799,
-                "y": 799
+                "x": 1222,
+                "y": 1303
             }
         },
         "GrassLands.tmx": {
@@ -110,7 +110,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1598.4848484848483
+                "y": 1596.969696969697
             }
         },
         "TileSet.tsx": {
@@ -146,11 +146,11 @@
             }
         },
         "caveMarla.tmx": {
-            "scale": 0.25,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 484,
-                "y": 480
+                "x": 231,
+                "y": 139
             }
         },
         "d.tsx": {

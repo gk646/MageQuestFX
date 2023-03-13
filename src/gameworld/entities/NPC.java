@@ -13,7 +13,7 @@ abstract public class NPC extends ENTITY {
     public boolean show_dialog;
     public Point playerTalkLocation = new Point();
     public int dialogHideDelay;
-    public int checkpointIndex;
+    public int checkpointIndex = 0;
     public Point[] checkPoints;
 
     public Point goalTile;

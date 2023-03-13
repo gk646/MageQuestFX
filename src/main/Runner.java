@@ -15,7 +15,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Objects;
 
 public class Runner extends Application {
@@ -83,5 +85,17 @@ public class Runner extends Application {
         scene.setOnKeyReleased(event -> mainGame.inputH.handleKeyReleased(event));
 
         stage.setOnCloseRequest(e -> mainGame.sqLite.saveGameAndExit());
+
+        Thread.setDefaultUncaughtExceptionHandler((s, throwable) -> {
+            PrintWriter writer;
+            try {
+                writer = new PrintWriter("error.log");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            throwable.printStackTrace(writer);
+            writer.close();
+            throwable.printStackTrace();
+        });
     }
 }

@@ -170,7 +170,6 @@ public class GameMap {
                 }
             }
         }
-
         int y = 470 + yOffset + (mg.playerY - yTile_i) * zoom_i;
         int x = 785 + xOffset + (mg.playerX - xTile_i) * zoom_i;
         for (int i = y; i < y + zoom_i; i++) {
@@ -195,7 +194,6 @@ public class GameMap {
                 }
             }
         }
-
         synchronized (mg.PROJECTILES) {
             for (PROJECTILE projectile : mg.PROJECTILES) {
                 entityX = (int) ((projectile.worldPos.x + 24) / 48);
@@ -211,17 +209,19 @@ public class GameMap {
                 }
             }
         }
-        for (ENTITY entity : mg.npcControl.NPC_Active) {
-            if (entity.zone == WorldController.currentWorld) {
-                entityX = (int) ((entity.worldX + 24) / 48);
-                entityY = (int) ((entity.worldY + 24) / 48);
-                y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
-                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
-                if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                    for (float i = y; i < y + zoom_i; i++) {
-                        for (float b = x; b < x + zoom_i; b++) {
-                            if (i < 935 && b < 1_570 && i > 0 && b > 0) {
-                                image.setRGB((int) b, (int) i, 0xD012_4E89);
+        synchronized (mg.ENTITIES) {
+            for (ENTITY entity : mg.npcControl.NPC_Active) {
+                if (entity.zone == WorldController.currentWorld) {
+                    entityX = (int) ((entity.worldX + 24) / 48);
+                    entityY = (int) ((entity.worldY + 24) / 48);
+                    y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+                    x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
+                    if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
+                        for (float i = y; i < y + zoom_i; i++) {
+                            for (float b = x; b < x + zoom_i; b++) {
+                                if (i < 935 && b < 1_570 && i > 0 && b > 0) {
+                                    image.setRGB((int) b, (int) i, 0xD012_4E89);
+                                }
                             }
                         }
                     }

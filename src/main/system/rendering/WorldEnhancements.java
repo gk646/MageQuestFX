@@ -105,12 +105,12 @@ public class WorldEnhancements {
         for (StaticLightSource lightSource : lightList) {
             for (Point point : lightSource.tilesIndices) {
                 if (Math.abs(mg.playerX - point.x) + (mg.playerY - point.y) < 35) {
-                    gc.drawImage(torchs, point.x * 48 - 11 - Player.worldX + Player.screenX, point.y * 48 - 11 - Player.worldY + Player.screenY);
+                    gc.drawImage(torchs, point.x * 48 - 16 - Player.worldX + Player.screenX, point.y * 48 - 16 - Player.worldY + Player.screenY);
                 }
             }
             for (Point point : lightSource.tilesIndices1) {
                 if (Math.abs(mg.playerX - point.x) + (mg.playerY - point.y) < 35) {
-                    gc.drawImage(torchs, point.x * 48 - 11 - Player.worldX + Player.screenX, point.y * 48 - 11 - Player.worldY + Player.screenY);
+                    gc.drawImage(torchs, point.x * 48 - 16 - Player.worldX + Player.screenX, point.y * 48 - 16 - Player.worldY + Player.screenY);
                 }
             }
         }

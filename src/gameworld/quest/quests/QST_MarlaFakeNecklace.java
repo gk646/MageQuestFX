@@ -24,6 +24,7 @@ import java.awt.Point;
 public class QST_MarlaFakeNecklace extends QUEST {
     private int enemiesKilled;
     private boolean KilledAria;
+    boolean once;
     private boolean cutscenefinish;
 
     public QST_MarlaFakeNecklace(MainGame mg, boolean completed) {
@@ -536,12 +537,15 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     objective1Progress++;
                     if (objective1Progress >= 500) {
                         nextStage();
+                        updateObjective("Everyone can't be happy!", 0);
                         objective1Progress = 0;
                     }
                 } else if (progressStage == 85) {
                     if (moveToTile(npc, 0, 99, new Point(31, 26), new Point(23, 29), new Point(18, 34), new Point(18, 83))) {
+                        mg.sqLite.updateQuestFacts(quest_id, 1, -5);
                         npc.zone = Zone.Woodland_Edge;
                         mg.sqLite.finishQuest(quest_id);
+                        this.completed = true;
                     }
                 } else if (progressStage == 100) {
                     if (objective1Progress == 0) {
@@ -549,15 +553,24 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     }
                     if (objective1Progress >= 600) {
                         nextStage();
+                        updateObjective("Everyone can't be happy!", 0);
                         objective1Progress = 0;
                     }
                     objective1Progress++;
                 } else if (progressStage == 101) {
                     if (moveToTile(npc, 0, 99, new Point(31, 26), new Point(23, 29), new Point(18, 34), new Point(18, 83))) {
                         npc.zone = Zone.Woodland_Edge;
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 10);
                         mg.sqLite.finishQuest(quest_id);
+                        this.completed = true;
                     }
                 }
+            }
+        }
+        if (progressStage >= 75 || mg.sqLite.readQuestFacts(quest_id, 1) == -1) {
+            if (!once && WorldController.currentWorld == Zone.Hillcrest) {
+                WorldRender.worldData1[97][77] = -1;
+                once = true;
             }
         }
     }

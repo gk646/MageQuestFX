@@ -59,9 +59,9 @@ public class NPC_Control {
                     }
                 }
             }
-        }
-        for (NPCScript script : zoneScripts) {
-            script.update();
+            for (NPCScript script : zoneScripts) {
+                script.update();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
-java.util.ConcurrentModificationException
-	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013)
-	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967)
-	at gameworld.ENT_Control.update(ENT_Control.java:62)
-	at main.MainGame.lambda$startThreads$3(MainGame.java:266)
+java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 5000
+	at gameworld.entities.npcs.generic.NPC_Generic.getRandomCheckpoint(NPC_Generic.java:57)
+	at gameworld.entities.npcs.generic.NPC_Generic.scriptMovement(NPC_Generic.java:31)
+	at gameworld.entities.npcs.generic.NPC_GenericVillagerWoman.update(NPC_GenericVillagerWoman.java:36)
+	at gameworld.NPC_Control.update(NPC_Control.java:48)
+	at main.MainGame.lambda$startThreads$3(MainGame.java:272)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

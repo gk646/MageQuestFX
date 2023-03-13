@@ -22,10 +22,11 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
         worldY = yTile * 48;
         this.entityHeight = 48;
         this.entityWidth = 48;
-        this.movementSpeed = 2;
+        this.movementSpeed = 1.5f;
         this.collisionBox = new Rectangle(0, 0, 42, 42);
         direction = "updownleftright";
         spriteCounter = (int) (Math.random() * 20);
+
     }
 
     @Override
@@ -33,7 +34,7 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
         super.update();
         scriptMovement();
         if (onPath) {
-            moveTo(goalTile.x, goalTile.y);
+            moveTo(goalTile.x, goalTile.y, checkPoints);
         }
     }
 

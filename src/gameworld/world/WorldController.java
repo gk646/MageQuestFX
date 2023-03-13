@@ -1,8 +1,11 @@
 package gameworld.world;
 
 
+import gameworld.entities.ENTITY;
+import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.npcs.generic.zonescripts.NPCScript;
 import gameworld.player.Player;
+import gameworld.quest.QUEST_NAME;
 import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
 import main.MainGame;
@@ -125,6 +128,8 @@ public class WorldController {
                     mg.inputH.e_typed = false;
                     loadMap(Zone.Treasure_Cave, 26, 18);
                 }
+            } else if (mg.playerX == 75 && mg.playerY == 83) {
+                loadMap(Zone.Hillcrest_Mountain_Cave, 3, 14);
             } else if (mg.playerX == 87 && mg.playerY == 94) {
                 loadMap(Zone.Hillcrest_Mountain_Cave, 56, 57);
             }
@@ -140,6 +145,18 @@ public class WorldController {
                 loadMap(Zone.Hillcrest, 88, 96);
             } else if (mg.playerX == 0 && (mg.playerY == 13 || mg.playerY == 14 || mg.playerY == 15 || mg.playerY == 16)) {
                 loadMap(Zone.Hillcrest, 75, 85);
+                if (!mg.qPanel.PlayerHasQuests(QUEST_NAME.TheFakeNecklace) || mg.sqLite.readQuestFacts(QUEST_NAME.TheFakeNecklace.val, 1) == -1) {
+                    if (mg.prj_control.stoneKnightKilled == 0) {
+                        synchronized (mg.ENTITIES) {
+                            for (ENTITY entity : mg.ENTITIES) {
+                                if (entity instanceof BOSS_Knight) {
+                                    break;
+                                }
+                            }
+                            mg.ENTITIES.add(new BOSS_Knight(mg, 56 * 48, 91 * 48, mg.player.level, 1, Zone.Hillcrest));
+                        }
+                    }
+                }
             }
         }
     }
@@ -180,33 +197,13 @@ public class WorldController {
         }
     }
 
-   /* public void addMapMarker(String name, int xTile, int yTile, MarkerType type) {
-        for (Map map : MAPS) {
-            if (map.zone == currentWorld) {
-                for (MapMarker marker : map.mapMarkers) {
-                    if (marker.name().equals(name)) {
-                        return;
-                    }
-                }
-                map.mapMarkers.add(new MapMarker(name, xTile, yTile, type));
-            }
-        }
+    private boolean playerInsideRectangle(Point p1, Point p2) {
+        int x1 = Math.min(p1.x, p2.x);
+        int x2 = Math.max(p1.x, p2.x);
+        int y1 = Math.min(p1.y, p2.y);
+        int y2 = Math.max(p1.y, p2.y);
+        return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
     }
-
-    public void removeMapMarker(String s) {
-        for (Map map : MAPS) {
-            if (map.zone == currentWorld) {
-                for (MapMarker marker : map.mapMarkers) {
-                    if (marker.name().equals(s)) {
-                        map.mapMarkers.remove(marker);
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
-    */
 }
 
 

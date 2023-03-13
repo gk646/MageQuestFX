@@ -201,6 +201,7 @@ abstract public class QUEST {
         return mg.playerX >= x1 && mg.playerX <= x2 && mg.playerY >= y1 && mg.playerY <= y2;
     }
 
+
     protected void interactWithNpc(NPC npc, String[] array) {
         if (npc.dialog.dialogLine.equals("...")) {
             try {

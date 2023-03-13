@@ -132,7 +132,23 @@ public class LoadGameState {
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheFakeNecklace, 50, "Explore the mountain top!");
                 }
             }
-            case "finished" -> mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, true));
+            case "finished" -> {
+                mg.qPanel.finishedQuests.add(new QST_MarlaFakeNecklace(mg, true));
+                for (NPC npc : mg.npcControl.NPC_Active) {
+                    if (npc instanceof NPC_Marla) {
+                        if (quest_num == -5) {
+                            npc.dialog.loadNewLine("You brought me ruin! Away with you!");
+                        } else if (quest_num == 10) {
+                            npc.dialog.loadNewLine("Thanks for helping me again! Hope you stick around.");
+                        } else if (quest_num == 100) {
+                            npc.dialog.loadNewLine("I still can't believe she's dead. And to think I was a big part of it... ... ");
+                        }
+                        ((NPC_Marla) npc).gotQuest = true;
+                        npc.blockInteraction = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 

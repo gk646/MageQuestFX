@@ -17,7 +17,7 @@ public class SKL_PyroBlast extends SKILL {
         type = DamageType.Fire;
         icon = setup("pyroBlast");
         name = "Pyro Blast";
-        description = "A powerful spell that unleashes a powerul fireball upon enemies, dealing big damage upon impact. Enemies hit by Pyroblast also suffer a small burn effect, causing them to take additional fire damage over time.";
+        description = "A powerful spell that unleashes a powerful fireball upon enemies, dealing big damage upon impact. Enemies hit by Pyro Blast also suffer a small burn effect, causing them to take additional fire damage over time.";
     }
 
     /**
