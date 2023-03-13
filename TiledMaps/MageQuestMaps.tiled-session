@@ -3,10 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "ForestClearing.tmx",
+    "activeFile": "TestRomm.tmx",
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
         "": {
@@ -37,8 +37,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1748,
-                "y": 1604
+                "x": 1600,
+                "y": 1598
             }
         },
         "DungeonTutorial.tmx": {
@@ -64,14 +64,11 @@
             }
         },
         "ForestClearing.tmx": {
-            "expandedObjectLayers": [
-                5
-            ],
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 978,
-                "y": 380
+                "x": 799,
+                "y": 799
             }
         },
         "GrassLands.tmx": {
@@ -98,14 +95,22 @@
         "TIILESET.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.5,
-            "scaleInEditor": 2
+            "scaleInEditor": 1.5
+        },
+        "TestRomm.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 293,
+                "y": 438
+            }
         },
         "TheGrove.tmx": {
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1166.6666666666667,
-                "y": 2172.7272727272725
+                "x": 1600,
+                "y": 1598.4848484848483
             }
         },
         "TileSet.tsx": {
@@ -254,22 +259,24 @@
         "ForestClearing.tmx",
         "TIILESET.tsx",
         "Tutorial.tmx",
-        "DeadPlains.tmx"
+        "DeadPlains.tmx",
+        "TheGrove.tmx",
+        "TestRomm.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "caveMarla.tmx",
-        "DeadPlains.tmx",
-        "Tutorial.tmx",
-        "TIILESET.tsx",
         "ForestClearing.tmx",
+        "TIILESET.tsx",
+        "Tutorial.tmx",
+        "DeadPlains.tmx",
+        "TheGrove.tmx",
+        "TestRomm.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
         "GrassLands.tmx",
         "FirstDungeon.tmx",
-        "DungeonTutorial.tmx",
-        "City1.tmx",
-        "unbenannt.tmx"
+        "DungeonTutorial.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

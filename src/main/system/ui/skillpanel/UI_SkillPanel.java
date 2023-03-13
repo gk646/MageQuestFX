@@ -69,6 +69,7 @@ public class UI_SkillPanel {
         allSkills[14] = new SKL_VoidEruption(mg);
         allSkills[15] = new SKL_VoidField(mg);
         allSkills[16] = new SKL_PyroBlast(mg);
+        allSkills[17] = new SKL_PowerSurge(mg);
         hideSkillPanelCollision();
         mg.sBar.showNoticeAbilities = false;
     }

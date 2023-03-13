@@ -133,13 +133,17 @@ abstract public class SKILL {
     abstract public void update();
 
     protected void updateCooldown() {
-        if (actualCoolDown < totalCoolDown) {
+        if (actualCoolDown < getCoolDown()) {
             actualCoolDown++;
         }
     }
 
+    protected float getCoolDown() {
+        return totalCoolDown - (totalCoolDown * mg.player.effects[17]);
+    }
+
     protected boolean checkForActivation(int animationNumber) {
-        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
+        if (actualCoolDown >= getCoolDown() && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
             mg.player.loseMana(manaCost);
             actualCoolDown = 0;
             mg.player.playCastAnimation(animationNumber);

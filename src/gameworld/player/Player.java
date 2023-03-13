@@ -30,6 +30,7 @@ public class Player extends ENTITY {
     public static final int effectsSizeRollable = 35;
     public Map map;
     public boolean isMoving;
+    public float manaBarrier;
     public int maxMana;
     public static boolean interactingWithNPC;
     private float mana;
@@ -139,6 +140,7 @@ public class Player extends ENTITY {
         this.entityHeight = 48;
         this.entityWidth = 48;
         resource.load();
+        manaBarrier = maxMana;
         worldX = 24;
         worldY = 24;
         direction = "";
@@ -215,10 +217,10 @@ public class Player extends ENTITY {
         if (mg.inputH.q_pressed && !interactingWithNPC && !stunned) {
             mg.sBar.skills[7].activate();
         }
-        if (mana < maxMana) {
+        if (mana < manaBarrier) {
             mana += manaRegeneration;
-        } else if (mana > maxMana) {
-            mana = maxMana;
+        } else if (mana > manaBarrier) {
+            mana = manaBarrier;
         }
         if (health < maxHealth) {
             health += healthRegeneration;
@@ -350,6 +352,9 @@ public class Player extends ENTITY {
         playerMovementSpeed += effects[45];
         effects[45] = playerMovementSpeed;
         maxMana += effects[46];
+
+
+        manaBarrier = maxMana;
     }
 
     public void setPosition(int x, int y) {
@@ -564,7 +569,7 @@ public class Player extends ENTITY {
             int y = 923;
             gc.setLineWidth(2);
             for (Effect effect : BuffsDebuffEffects) {
-                if (effect.effectType == EffectType.BUFF) {
+                if (effect.effectType == EffectType.BUFF && effect.rest_duration < 50000) {
                     effect.draw(gc, x, y);
                     gc.setStroke(Colors.map_green);
                     gc.strokeRoundRect(x, y, 32, 32, 6, 6);
@@ -573,7 +578,7 @@ public class Player extends ENTITY {
             }
             x += 32;
             for (Effect effect : BuffsDebuffEffects) {
-                if (effect.effectType == EffectType.DEBUFF) {
+                if (effect.effectType == EffectType.DEBUFF && effect.rest_duration < 50000) {
                     gc.setStroke(Colors.Red);
                     effect.draw(gc, x, y);
                     gc.strokeRoundRect(x, y, 32, 32, 6, 6);
@@ -746,12 +751,13 @@ public class Player extends ENTITY {
 
     public void loseMana(float baseCost) {
         baseCost *= Math.sqrt(level);
-        mana -= baseCost - (baseCost / 100.0f) * effects[28];
+        mana -= baseCost - ((baseCost / 100.0f) * effects[26]);
     }
+
 
     public float getManaCost(int baseCost) {
         baseCost *= Math.sqrt(level);
-        return baseCost - (baseCost / 100.0f) * effects[28];
+        return baseCost - ((baseCost / 100.0f) * effects[26]);
     }
 
     private void getPlayerImage() {

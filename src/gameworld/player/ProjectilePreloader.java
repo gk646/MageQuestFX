@@ -19,6 +19,7 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader lightning;
     public static GeneralResourceLoader pyroBlast;
     public static GeneralResourceLoader fireBurst;
+    public static GeneralResourceLoader powerSurge;
     public static ArrayList<GeneralResourceLoader> projectileSounds = new ArrayList<>();
 
     public static void load() {
@@ -60,5 +61,9 @@ public class ProjectilePreloader {
         fireBurst = new GeneralResourceLoader("projectiles/fireBurst");
         fireBurst.loadProjectilesSounds();
         projectileSounds.add(fireBurst);
+
+        powerSurge = new GeneralResourceLoader("projectiles/powerSurge");
+        //powerSurge.loadProjectilesSounds();
+        projectileSounds.add(powerSurge);
     }
 }

@@ -12,7 +12,9 @@ import java.awt.Rectangle;
 
 
 public class ENT_TargetDummy extends ENTITY {
-    private boolean attack1, attack2, attack3;
+    private final boolean move;
+    private boolean attack2;
+    private boolean attack3;
 
     /**
      * Standard enemy  / hits you when he's close
@@ -21,11 +23,12 @@ public class ENT_TargetDummy extends ENTITY {
      * @param worldX coordinates X
      * @param worldY coordinates Y
      */
-    public ENT_TargetDummy(MainGame mg, int worldX, int worldY, int health, Zone zone) {
+    public ENT_TargetDummy(MainGame mg, int worldX, int worldY, int health, Zone zone, boolean move) {
         this.mg = mg;
         this.animation = new ResourceLoaderEntity("enemies/skeletonWarrior");
         animation.load();
         this.zone = zone;
+        this.move = move;
         //Setting default values
         this.maxHealth = health;
         this.health = maxHealth;
@@ -48,11 +51,11 @@ public class ENT_TargetDummy extends ENTITY {
         if (health < maxHealth) {
             health += 20;
         }
-        if (isInsideRectangle(activeTile.x, activeTile.y, new Point(8, 20), new Point(13, 25))) {
+        if (move && isInsideRectangle(activeTile.x, activeTile.y, new Point(8, 20), new Point(13, 25))) {
             onPath = true;
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
-        } else {
+        } else if (move) {
             onPath = false;
             worldX = 10 * 48;
             worldY = 22 * 48;
@@ -117,7 +120,6 @@ public class ENT_TargetDummy extends ENTITY {
             case 2 -> gc.drawImage(animation.attack1.get(2), screenX - 20, screenY - 14);
             case 3 -> gc.drawImage(animation.attack1.get(3), screenX - 20, screenY - 14);
             case 4 -> gc.drawImage(animation.attack1.get(4), screenX - 20, screenY - 14);
-            case 5 -> attack1 = false;
         }
     }
 

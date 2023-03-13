@@ -11,8 +11,8 @@ public class SKL_FireBurst extends SKILL {
 
     public SKL_FireBurst(MainGame mg) {
         super(mg);
-        this.totalCoolDown = 120;
-        actualCoolDown = 480;
+        this.totalCoolDown = 600;
+        actualCoolDown = totalCoolDown;
         this.weapon_damage_percent = 15;
         manaCost = 15;
         type = DamageType.Fire;

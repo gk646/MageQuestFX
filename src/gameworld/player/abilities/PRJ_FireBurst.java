@@ -2,6 +2,7 @@ package gameworld.player.abilities;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.damage.effects.DamageEffect;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
@@ -27,6 +28,7 @@ public class PRJ_FireBurst extends CollisionProjectiles {
         projectileType = ProjectileType.Continuous;
         this.resource = ProjectilePreloader.fireBurst;
         this.sounds[0] = resource.sounds.get(0);
+        this.procEffects[0] = new DamageEffect(300, 5, true, DamageType.Fire, 30, this.getClass());
         this.collisionBox = new Rectangle(12, 7, 23, 23);
         this.version = version;
         this.type = DamageType.Fire;

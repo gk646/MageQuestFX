@@ -487,7 +487,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.TheGrove, 163, 168);
+        wControl.loadMap(Zone.DeadPlains, 163, 168);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.TheGrove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
@@ -508,8 +508,8 @@ public class MainGame {
 
     private void testRoom() {
         wControl.loadMap(Zone.TestRoom, 25, 25);
-        ENTITIES.add(new ENT_TargetDummy(this, 25, 25, 100000, Zone.TestRoom));
-        ENTITIES.add(new ENT_TargetDummy(this, 10, 22, 100000, Zone.TestRoom));
+        ENTITIES.add(new ENT_TargetDummy(this, 25, 25, 100000, Zone.TestRoom, false));
+        ENTITIES.add(new ENT_TargetDummy(this, 10, 22, 100000, Zone.TestRoom, true));
     }
 
     /**
