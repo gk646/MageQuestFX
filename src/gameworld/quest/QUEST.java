@@ -227,16 +227,22 @@ abstract public class QUEST {
                 npc.dialog.dialogRenderCounter = 2_000;
             }
         }
-        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5) && mg.inputH.e_typed) {
-            npc.show_dialog = true;
-            Player.interactingWithNPC = true;
-            if (!DontConsumeETyped) {
-                mg.inputH.e_typed = false;
+        if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
+            if (!npc.show_dialog && !npc.blockInteraction) {
+                mg.playerPrompts.E = true;
             }
-            npc.dialogHideDelay = 0;
-            npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+            if (mg.inputH.e_typed) {
+                npc.show_dialog = true;
+                Player.interactingWithNPC = true;
+                if (!DontConsumeETyped) {
+                    mg.inputH.e_typed = false;
+                }
+                npc.dialogHideDelay = 0;
+                npc.playerTalkLocation = new Point((int) Player.worldX + 24, (int) Player.worldY + 24);
+            }
         }
     }
+
 
     protected void addQuestMarker(String name, int x, int y, Zone zone) {
         for (QuestMarker marker : questMarkers) {

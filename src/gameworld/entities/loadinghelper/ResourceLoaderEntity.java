@@ -25,7 +25,7 @@ public class ResourceLoaderEntity {
     public ArrayList<Image> attack5 = new ArrayList<>();
 
     public ArrayList<Image> idle2 = new ArrayList<>();
-    public ArrayList<Image> WalkingLeft = new ArrayList<>();
+    public ArrayList<Image> runMirror = new ArrayList<>();
     public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
     final String name;
 
@@ -118,6 +118,15 @@ public class ResourceLoaderEntity {
             is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
             if (is != null) {
                 run.add(new Image(is));
+            } else {
+                break;
+            }
+        }
+        folderName = "runMirror";
+        for (int i = 0; i < 15; i++) {
+            is = getClass().getResourceAsStream("/resources/Entitys/" + name + "/" + folderName + "/" + i + ".png");
+            if (is != null) {
+                runMirror.add(new Image(is));
             } else {
                 break;
             }

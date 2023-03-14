@@ -19,6 +19,7 @@ public class PlayerPrompts {
 
     public void draw(GraphicsContext gc) {
         if (E) {
+            spriteCounter++;
             switch (spriteCounter % 120 / 30) {
                 case 0 -> gc.drawImage(resc.images1.get(0), Player.screenX, Player.screenY - 48);
                 case 1 -> gc.drawImage(resc.images1.get(1), Player.screenX, Player.screenY - 48);
@@ -28,6 +29,5 @@ public class PlayerPrompts {
         } else if (F) {
 
         }
-        spriteCounter++;
     }
 }

@@ -70,7 +70,7 @@ public class UI_InventoryPanel {
     private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
 
     private boolean showTutorial;
-    private int spriteCounter = 0;
+    private final int spriteCounter = 0;
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -773,76 +773,73 @@ public class UI_InventoryPanel {
 
     private void drawCharacterAnimation(GraphicsContext gc, int startX, int startY) {
         if (mg.player.attack1) {
-            switch (spriteCounter % 140 / 10) {
-                case 0 -> gc.drawImage(mg.player.resource.attack1.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(mg.player.resource.attack1.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(mg.player.resource.attack1.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(mg.player.resource.attack1.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(mg.player.resource.attack1.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(mg.player.resource.attack1.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(mg.player.resource.attack1.get(6), startX + 50, startY - 25);
+            switch (mg.player.spriteCounter % 80 / 10) {
+                case 0 -> gc.drawImage(resource.attack1.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(resource.attack1.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(resource.attack1.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(resource.attack1.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(resource.attack1.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(resource.attack1.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(resource.attack1.get(6), startX + 50, startY - 25);
             }
         } else if (mg.player.attack2) {
-            switch (spriteCounter % 140 / 8) {
-                case 0 -> gc.drawImage(mg.player.resource.attack2.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(mg.player.resource.attack2.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(mg.player.resource.attack2.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(mg.player.resource.attack2.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(mg.player.resource.attack2.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(mg.player.resource.attack2.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(mg.player.resource.attack2.get(6), startX + 50, startY - 25);
-                case 7 -> gc.drawImage(mg.player.resource.attack2.get(7), startX + 50, startY - 25);
-                case 8 -> gc.drawImage(mg.player.resource.attack2.get(8), startX + 50, startY - 25);
+            switch (mg.player.spriteCounter % 100 / 10) {
+                case 0 -> gc.drawImage(resource.attack2.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(resource.attack2.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(resource.attack2.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(resource.attack2.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(resource.attack2.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(resource.attack2.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(resource.attack2.get(6), startX + 50, startY - 25);
+                case 7 -> gc.drawImage(resource.attack2.get(7), startX + 50, startY - 25);
+                case 8 -> gc.drawImage(resource.attack2.get(8), startX + 50, startY - 25);
             }
         } else if (mg.player.attack3) {
-            switch (spriteCounter % 170 / 10) {
-                case 0 -> gc.drawImage(mg.player.resource.attack3.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(mg.player.resource.attack3.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(mg.player.resource.attack3.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(mg.player.resource.attack3.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(mg.player.resource.attack3.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(mg.player.resource.attack3.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(mg.player.resource.attack3.get(6), startX + 50, startY - 25);
-                case 7 -> gc.drawImage(mg.player.resource.attack3.get(7), startX + 50, startY - 25);
-                case 8 -> gc.drawImage(mg.player.resource.attack3.get(8), startX + 50, startY - 25);
-                case 9 -> gc.drawImage(mg.player.resource.attack3.get(9), startX + 50, startY - 25);
-                case 10 -> gc.drawImage(mg.player.resource.attack3.get(10), startX + 50, startY - 25);
-                case 11 -> gc.drawImage(mg.player.resource.attack3.get(11), startX + 50, startY - 25);
-                case 12 -> gc.drawImage(mg.player.resource.attack3.get(12), startX + 50, startY - 25);
-                case 13 -> gc.drawImage(mg.player.resource.attack3.get(13), startX + 50, startY - 25);
-                case 14 -> gc.drawImage(mg.player.resource.attack3.get(14), startX + 50, startY - 25);
-                case 15 -> gc.drawImage(mg.player.resource.attack3.get(15), startX + 50, startY - 25);
+            switch (mg.player.spriteCounter % 170 / 10) {
+                case 0 -> gc.drawImage(resource.attack3.get(0), startX + 50, startY - 25);
+                case 1 -> gc.drawImage(resource.attack3.get(1), startX + 50, startY - 25);
+                case 2 -> gc.drawImage(resource.attack3.get(2), startX + 50, startY - 25);
+                case 3 -> gc.drawImage(resource.attack3.get(3), startX + 50, startY - 25);
+                case 4 -> gc.drawImage(resource.attack3.get(4), startX + 50, startY - 25);
+                case 5 -> gc.drawImage(resource.attack3.get(5), startX + 50, startY - 25);
+                case 6 -> gc.drawImage(resource.attack3.get(6), startX + 50, startY - 25);
+                case 7 -> gc.drawImage(resource.attack3.get(7), startX + 50, startY - 25);
+                case 8 -> gc.drawImage(resource.attack3.get(8), startX + 50, startY - 25);
+                case 9 -> gc.drawImage(resource.attack3.get(9), startX + 50, startY - 25);
+                case 10 -> gc.drawImage(resource.attack3.get(10), startX + 50, startY - 25);
+                case 11 -> gc.drawImage(resource.attack3.get(11), startX + 50, startY - 25);
+                case 12 -> gc.drawImage(resource.attack3.get(12), startX + 50, startY - 25);
+                case 13 -> gc.drawImage(resource.attack3.get(13), startX + 50, startY - 25);
+                case 14 -> gc.drawImage(resource.attack3.get(14), startX + 50, startY - 25);
+                case 15 -> gc.drawImage(resource.attack3.get(15), startX + 50, startY - 25);
             }
         } else {
             if (mg.player.isMoving) {
                 if (mg.player.movingLeft) {
-                    switch (spriteCounter % 136 / 17) {
-                        /*
-                        case 0 -> gc.drawImage(runM1, startX, startY,192,194);
-                        case 1 -> gc.drawImage(runM2, startX, startY,192,194);
-                        case 2 -> gc.drawImage(runM3, startX, startY,192,194);
-                        case 3 -> gc.drawImage(runM4, startX, startY,192,194);
-                        case 4 -> gc.drawImage(runM5, startX, startY,192,194);
-                        case 5 -> gc.drawImage(runM6, startX, startY,192,194);
-                        case 6 -> gc.drawImage(runM7, startX, startY,192,194);
-                        case 7 -> gc.drawImage(runM8, startX, startY,192,194);
-
-                         */
+                    switch (mg.player.spriteCounter % 136 / 17) {
+                        case 0 -> gc.drawImage(resource.runMirror.get(7), startX + 90, startY - 25);
+                        case 1 -> gc.drawImage(resource.runMirror.get(6), startX + 90, startY - 25);
+                        case 2 -> gc.drawImage(resource.runMirror.get(5), startX + 90, startY - 25);
+                        case 3 -> gc.drawImage(resource.runMirror.get(4), startX + 90, startY - 25);
+                        case 4 -> gc.drawImage(resource.runMirror.get(3), startX + 90, startY - 25);
+                        case 5 -> gc.drawImage(resource.runMirror.get(2), startX + 90, startY - 25);
+                        case 6 -> gc.drawImage(resource.runMirror.get(1), startX + 90, startY - 25);
+                        case 7 -> gc.drawImage(resource.runMirror.get(0), startX + 90, startY - 25);
                     }
                 } else {
-                    switch (spriteCounter % 136 / 17) {
-                        case 0 -> gc.drawImage(mg.player.resource.run.get(0), startX + 50, startY - 25);
-                        case 1 -> gc.drawImage(mg.player.resource.run.get(1), startX + 50, startY - 25);
-                        case 2 -> gc.drawImage(mg.player.resource.run.get(2), startX + 50, startY - 25);
-                        case 3 -> gc.drawImage(mg.player.resource.run.get(3), startX + 50, startY - 25);
-                        case 4 -> gc.drawImage(mg.player.resource.run.get(4), startX + 50, startY - 25);
-                        case 5 -> gc.drawImage(mg.player.resource.run.get(5), startX + 50, startY - 25);
-                        case 6 -> gc.drawImage(mg.player.resource.run.get(6), startX + 50, startY - 25);
-                        case 7 -> gc.drawImage(mg.player.resource.run.get(7), startX + 50, startY - 25);
+                    switch (mg.player.spriteCounter % 136 / 17) {
+                        case 0 -> gc.drawImage(resource.run.get(0), startX + 70, startY - 25);
+                        case 1 -> gc.drawImage(resource.run.get(1), startX + 70, startY - 25);
+                        case 2 -> gc.drawImage(resource.run.get(2), startX + 70, startY - 25);
+                        case 3 -> gc.drawImage(resource.run.get(3), startX + 70, startY - 25);
+                        case 4 -> gc.drawImage(resource.run.get(4), startX + 70, startY - 25);
+                        case 5 -> gc.drawImage(resource.run.get(5), startX + 70, startY - 25);
+                        case 6 -> gc.drawImage(resource.run.get(6), startX + 70, startY - 25);
+                        case 7 -> gc.drawImage(resource.run.get(7), startX + 70, startY - 25);
                     }
                 }
             } else {
-                switch (spriteCounter % 200 / 25) {
+                switch (mg.player.spriteCounter % 200 / 25) {
                     case 0 -> gc.drawImage(resource.idle.get(0), startX + 50, startY - 25);
                     case 1 -> gc.drawImage(resource.idle.get(1), startX + 50, startY - 25);
                     case 2 -> gc.drawImage(resource.idle.get(2), startX + 50, startY - 25);
@@ -854,7 +851,6 @@ public class UI_InventoryPanel {
                 }
             }
         }
-        spriteCounter++;
     }
 
 

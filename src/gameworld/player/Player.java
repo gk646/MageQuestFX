@@ -12,7 +12,6 @@ import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import main.MainGame;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
@@ -22,7 +21,6 @@ import main.system.ui.talentpanel.TalentNode;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Iterator;
-import java.util.Objects;
 
 
 public class Player extends ENTITY {
@@ -52,21 +50,12 @@ public class Player extends ENTITY {
     public float healthRegeneration = 0.002f;
     public float playerMovementSpeed;
     public int armour;
-    private int playerQuadrant;
     public int levelUpExperience = 10;
     public float weaponDamageUpper, weaponDamageLower;
     // PLAYER X AND Y ALWAYS +24
     public static float worldX, worldY;
     // screenX is half width -24
     public static int screenX, screenY;
-    public Image runM1;
-    public Image runM2;
-    public Image runM3;
-    public Image runM4;
-    public Image runM5;
-    public Image runM6;
-    public Image runM7;
-    public Image runM8;
     public static final int effectsSizeTotal = 50;
     public final Dialog dialog = new Dialog();
     public static String[] effectNames = new String[effectsSizeTotal];
@@ -144,7 +133,6 @@ public class Player extends ENTITY {
         worldX = 24;
         worldY = 24;
         direction = "";
-        getPlayerImage();
         this.collisionBox = new Rectangle(18, 8, 10, 32);
         this.level = 1;
         screenX = MainGame.SCREEN_WIDTH / 2 - 24;
@@ -480,47 +468,6 @@ public class Player extends ENTITY {
             }
         }
     }
-/*
-    private void dynamicSpawns() {
-        MapQuadrant[] mapQuadrants = map.mapQuadrants;
-        int[][] mapData = map.mapDataBackGround;
-        getPlayerQuadrant(mapQuadrants);
-        respawnCloseQuadrants(mapData, mapQuadrants);
-    }
-
-    private void getPlayerQuadrant(MapQuadrant[] mapQuadrants) {
-        for (int i = 99; i >= 0; i--) {
-            if (worldX / mg.tileSize > mapQuadrants[i].startTileX && worldY / mg.tileSize > mapQuadrants[i].startTileY && worldX / mg.tileSize < mapQuadrants[i].startTileX + 50 && worldY / mg.tileSize < mapQuadrants[i].startTileY + 50) {
-                playerQuadrant = i;
-                break;
-            }
-        }
-    }
-
-
-    private void respawnCloseQuadrants(int[][] mapData, MapQuadrant[] mapQuadrants) {
-        mapQuadrants[playerQuadrant].spawnEnemies(mapData);
-        if (quadrantTimer < 210) {
-            mapQuadrants[Math.min(playerQuadrant + 1, 99)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 220) {
-            mapQuadrants[Math.max(playerQuadrant - 1, 0)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 230) {
-            mapQuadrants[Math.min(playerQuadrant + 9, 99)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 240) {
-            mapQuadrants[Math.min(playerQuadrant + 10, 99)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 250) {
-            mapQuadrants[Math.min(playerQuadrant + 11, 99)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 260) {
-            mapQuadrants[Math.max(playerQuadrant - 9, 0)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 270) {
-            mapQuadrants[Math.max(playerQuadrant - 10, 0)].spawnEnemies(mapData);
-        } else if (quadrantTimer < 280) {
-            mapQuadrants[Math.max(playerQuadrant - 11, 0)].spawnEnemies(mapData);
-            respawnsDone = true;
-        }
-    }
-
- */
 
     @Override
     public void draw(GraphicsContext gc) {
@@ -627,14 +574,14 @@ public class Player extends ENTITY {
 
     private void drawRunLeft(GraphicsContext gc) {
         switch (spriteCounter % 136 / 17) {
-            case 0 -> gc.drawImage(runM1, screenX, screenY);
-            case 1 -> gc.drawImage(runM2, screenX, screenY);
-            case 2 -> gc.drawImage(runM3, screenX, screenY);
-            case 3 -> gc.drawImage(runM4, screenX, screenY);
-            case 4 -> gc.drawImage(runM5, screenX, screenY);
-            case 5 -> gc.drawImage(runM6, screenX, screenY);
-            case 6 -> gc.drawImage(runM7, screenX, screenY);
-            case 7 -> gc.drawImage(runM8, screenX, screenY);
+            case 0 -> gc.drawImage(resource.runMirror.get(7), screenX, screenY - 48);
+            case 1 -> gc.drawImage(resource.runMirror.get(6), screenX, screenY - 48);
+            case 2 -> gc.drawImage(resource.runMirror.get(5), screenX, screenY - 48);
+            case 3 -> gc.drawImage(resource.runMirror.get(4), screenX, screenY - 48);
+            case 4 -> gc.drawImage(resource.runMirror.get(3), screenX, screenY - 48);
+            case 5 -> gc.drawImage(resource.runMirror.get(2), screenX, screenY - 48);
+            case 6 -> gc.drawImage(resource.runMirror.get(1), screenX, screenY - 48);
+            case 7 -> gc.drawImage(resource.runMirror.get(0), screenX, screenY - 48);
         }
     }
 
@@ -666,7 +613,7 @@ public class Player extends ENTITY {
     }
 
     private void drawAttack2(GraphicsContext gc) {
-        switch (spriteCounter % 80 / 8) {
+        switch (spriteCounter % 100 / 10) {
             case 0 -> gc.drawImage(resource.attack2.get(0), screenX - 24, screenY - 48);
             case 1 -> gc.drawImage(resource.attack2.get(1), screenX - 24, screenY - 48);
             case 2 -> gc.drawImage(resource.attack2.get(2), screenX - 24, screenY - 48);
@@ -702,10 +649,6 @@ public class Player extends ENTITY {
         }
     }
 
-
-    private Image setupRunM(String imagePath) {
-        return new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Entitys/player/runMirrored/" + imagePath)));
-    }
 
     private void setupEffectNames() {
         effectNames = new String[]{
@@ -760,16 +703,6 @@ public class Player extends ENTITY {
         return baseCost - ((baseCost / 100.0f) * effects[26]);
     }
 
-    private void getPlayerImage() {
-        runM1 = setupRunM("1.png");
-        runM2 = setupRunM("2.png");
-        runM3 = setupRunM("3.png");
-        runM4 = setupRunM("4.png");
-        runM5 = setupRunM("5.png");
-        runM6 = setupRunM("6.png");
-        runM7 = setupRunM("7.png");
-        runM8 = setupRunM("8.png");
-    }
 
     public void drawCutscene(GraphicsContext gc, int centerX, int centerY) {
         switch (spriteCounter % 200 / 25) {
