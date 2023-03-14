@@ -162,13 +162,13 @@ abstract public class QUEST {
             }
             for (int i = 0; i < 150; i++) {
                 if (questRecap[i] == null) {
-                    questRecap[i] = Dialog.insertNewLine(newText, 29);
+                    questRecap[i] = Dialog.insertNewLine(newText, 27);
                     break;
-                } else if (questRecap[i].equals(Dialog.insertNewLine(newText, 29))) {
+                } else if (questRecap[i].equals(Dialog.insertNewLine(newText, 27))) {
                     break;
                 }
             }
-            objectives[index] = Dialog.insertNewLine(newText, 29);
+            objectives[index] = Dialog.insertNewLine(newText, 27);
         }
     }
 

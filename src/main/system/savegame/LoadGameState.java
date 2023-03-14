@@ -3,6 +3,7 @@ package main.system.savegame;
 import gameworld.entities.NPC;
 import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Grim;
+import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.entities.props.DeadWolf;
@@ -158,7 +159,14 @@ public class LoadGameState {
             case "null" -> {
             }
             case "active" -> mg.qPanel.quests.add(new QST_TheAudition(mg, false));
-            case "finished" -> mg.qPanel.finishedQuests.add(new QST_TheAudition(mg, true));
+            case "finished" -> {
+                mg.qPanel.finishedQuests.add(new QST_TheAudition(mg, true));
+                for (NPC npc : mg.npcControl.NPC_Active) {
+                    if (npc instanceof NPC_HillcrestMayor) {
+
+                    }
+                }
+            }
         }
     }
 

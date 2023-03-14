@@ -30,7 +30,8 @@ public class QST_TheAudition extends QUEST {
      */
     @Override
     public void update() {
-        for (NPC npc : mg.npcControl.NPC_Active) {
+        for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
+            NPC npc = mg.npcControl.NPC_Active.get(i);
             if (npc instanceof NPC_HillcrestMayor) {
                 interactWithNpc(npc, DialogStorage.AuditionMayor);
                 if (progressStage == 1) {
@@ -64,6 +65,7 @@ public class QST_TheAudition extends QUEST {
                 } else if (progressStage == 9) {
 
                 } else if (progressStage == 10) {
+                    updateObjective("", 0);
                     mg.sqLite.finishQuest(quest_id);
                     this.completed = true;
                 }

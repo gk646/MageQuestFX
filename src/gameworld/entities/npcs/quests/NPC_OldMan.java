@@ -43,6 +43,7 @@ public class NPC_OldMan extends NPC {
             dialog.drawDialog(gc, this);
         }
         spriteCounter++;
+        drawNPCName(gc, "Deckard");
     }
 
     private void drawIdle(GraphicsContext gc) {

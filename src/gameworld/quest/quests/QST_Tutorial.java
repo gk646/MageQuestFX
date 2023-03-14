@@ -13,6 +13,7 @@ import gameworld.world.objects.items.ITM_SpellBook;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
+import main.system.ui.inventory.UI_InventorySlot;
 
 import java.awt.Point;
 
@@ -135,6 +136,11 @@ public class QST_Tutorial extends QUEST {
                     npc.blockInteraction = true;
                     if (npc.show_dialog && playerBagsContainItem("Booze") && playerBagsContainItem("Silver Key")) {
                         nextStage();
+                        for (UI_InventorySlot slot : mg.inventP.char_Slots) {
+                            if (slot.item != null && (slot.item.name.equals("Booze") || slot.item.name.equals("Silver Key"))) {
+                                slot.item = null;
+                            }
+                        }
                         loadDialogStage(npc, DialogStorage.Tutorial, 22);
                         mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                     }

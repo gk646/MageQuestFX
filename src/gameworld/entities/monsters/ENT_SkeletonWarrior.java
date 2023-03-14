@@ -28,6 +28,9 @@ public class ENT_SkeletonWarrior extends ENTITY {
         this.zone = zone;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);
+        if (level == 1) {
+            maxHealth = 5;
+        }
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;

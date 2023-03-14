@@ -109,11 +109,11 @@
             }
         },
         "TheGrove.tmx": {
-            "scale": 3,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 61.66666666666666,
-                "y": 149.66666666666666
+                "x": 1039.3939393939395,
+                "y": 1660.6060606060607
             }
         },
         "TileSet.tsx": {
@@ -187,11 +187,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.75,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 183.99999999999994,
-                "y": 700
+                "x": 854.5454545454547,
+                "y": 948.4848484848486
             }
         },
         "grassspritesheet.tsx": {
@@ -263,7 +263,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 100,
-    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,

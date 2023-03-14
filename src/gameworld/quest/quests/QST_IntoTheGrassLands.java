@@ -28,7 +28,8 @@ public class QST_IntoTheGrassLands extends QUEST {
      */
     @Override
     public void update() {
-        for (NPC npc : mg.npcControl.NPC_Active) {
+        for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
+            NPC npc = mg.npcControl.NPC_Active.get(i);
             if (npc instanceof NPC_Grim) {
                 interactWithNpc(npc, DialogStorage.IntoTheGrassLands);
                 if (progressStage == 1) {
@@ -93,7 +94,7 @@ public class QST_IntoTheGrassLands extends QUEST {
                     npc.blockInteraction = true;
                     npc.show_dialog = false;
                     if (objective1Progress == 1) {
-                        mg.player.dialog.loadNewLine("Why do wizard's get jobs as teacher?");
+                        mg.player.dialog.loadNewLine("Why do wizard's get jobs as teachers?");
                     }
                     objective1Progress++;
                     if (objective1Progress > 360) {
@@ -101,12 +102,11 @@ public class QST_IntoTheGrassLands extends QUEST {
                         loadDialogStage(npc, DialogStorage.IntoTheGrassLands, 7);
                         objective1Progress = 0;
                     } else if (objective1Progress == 220) {
-                        mg.player.dialog.loadNewLine("Because they are great a spell-checking!");
+                        mg.player.dialog.loadNewLine("Because they are great at spell-checking!");
                     }
                 } else if (progressStage == 7) {
                     if (objective1Progress == 0) {
                         updateObjective("Give Grim time to cool off", 0);
-                        objective1Progress = 17800;
                     }
                     objective1Progress++;
                     if (objective1Progress == 18000) {

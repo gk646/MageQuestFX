@@ -111,7 +111,6 @@ public class UI_QuestPanel {
     }
 
 
-
     private void drawQuestBar(GraphicsContext gc) {
         gc.drawImage(sideBar, 1649, 350);
         gc.setFont(FonT.antParty20);
@@ -127,9 +126,14 @@ public class UI_QuestPanel {
             y += 25;
             for (int i = 0; i < 3; i++) {
                 if (activeQuest.objectives[i] != null) {
+                    gc.setFont(FonT.antParty15);
                     for (String string : activeQuest.objectives[i].split("\n")) {
                         gc.fillText(string, 1_680, y);
+                        if (activeQuest.objectives[i].contains("\n")) {
+                            y += 20;
+                        }
                     }
+
                     y += 20;
                 }
             }
