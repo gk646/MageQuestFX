@@ -38,7 +38,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1600
+                "y": 1598
             }
         },
         "DungeonTutorial.tmx": {
@@ -67,8 +67,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1163.5,
-                "y": 1021.5
+                "x": 799.75,
+                "y": 799.75
             }
         },
         "GrassLands.tmx": {
@@ -101,8 +101,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 161.33333333333331,
-                "y": 485.3333333333333
+                "x": 400,
+                "y": 399.66666666666663
             }
         },
         "TheGrove.tmx": {
@@ -110,7 +110,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1596.969696969697
+                "y": 1598.4848484848483
             }
         },
         "TileSet.tsx": {
@@ -149,8 +149,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 231,
-                "y": 139
+                "x": 479.5,
+                "y": 479.5
             }
         },
         "d.tsx": {

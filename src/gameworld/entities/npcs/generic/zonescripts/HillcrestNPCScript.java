@@ -17,7 +17,7 @@ public class HillcrestNPCScript extends NPCScript {
         this.mg = mg;
         this.houseEntrances = new Point[]{new Point(30, 8), new Point(38, 8),
                 new Point(45, 9), new Point(27, 14), new Point(33, 14), new Point(48, 26), new Point(53, 26),
-                new Point(53, 32), new Point(48, 32), new Point(13, 27), new Point(26, 20), new Point(32, 20)};
+                new Point(53, 32), new Point(48, 32), new Point(23, 27), new Point(26, 20), new Point(32, 20), new Point(36, 24)};
         this.entranceTaken = new boolean[houseEntrances.length];
         amountOfNPCs = 6;
     }
@@ -38,9 +38,7 @@ public class HillcrestNPCScript extends NPCScript {
                 }
             }
             if (genericCounter < amountOfNPCs) {
-                for (int i = 0; i <= amountOfNPCs - genericCounter; i++) {
-                    respawnGeneric();
-                }
+                respawnGeneric();
             }
         }
     }

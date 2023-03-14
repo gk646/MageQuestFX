@@ -202,7 +202,6 @@ public class MainGame {
                             getPlayerTile();
                             player.pickupDroppedItem();
                             player.checkPlayerIsMoving();
-                            tileBase.update();
                             WORLD_SIZE = wRender.worldSize.x * 48;
                             wAnim.animateTiles();
                             wControl.uncoverWorldMap();
@@ -212,6 +211,7 @@ public class MainGame {
                         difference2 = 0;
                     }
                     if (difference1 >= 0.5) {
+                        tileBase.update();
                         synchronized (PROXIMITY_ENTITIES) {
                             proximitySorterENTITIES();
                         }
@@ -461,7 +461,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        //debug();
+        debug();
     }
 
     private void debug() {
@@ -495,7 +495,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest_Mountain_Cave, 3, 15);
+        wControl.loadMap(Zone.Hillcrest, 20, 20);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.TheGrove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));

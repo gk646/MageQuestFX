@@ -14,6 +14,7 @@ abstract public class DialogStorage {
 
     public static String[] AuditionMayor;
     public static String[] IntoTheGrassLands;
+    public static String[] NPCComments;
 
     public static void loadDialogs() {
         try {
@@ -22,6 +23,7 @@ abstract public class DialogStorage {
             MarlaNecklace = loadDialogByName("MarlaQuest");
             AuditionMayor = loadDialogByName("mayor_audition");
             IntoTheGrassLands = loadDialogByName("IntoTheGrassLands");
+            NPCComments = loadDialogByName("VillagerComments");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
