@@ -7,7 +7,6 @@ import gameworld.world.MapQuadrant;
 import main.system.database.SQLite;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
-import main.system.ui.maps.MapMarker;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -30,7 +29,6 @@ public class Map {
     public final int[][] mapDataBackGround2;
     public final int[][] mapDataForeGround;
     public final Point mapSize;
-    public final ArrayList<MapMarker> mapMarkers = new ArrayList<>();
     public final ArrayList<SpawnTrigger> spawnTriggers;
     public final MapQuadrant[] mapQuadrants;
     public int[][] mapCover;
@@ -88,16 +86,33 @@ public class Map {
         ArrayList<SpawnTrigger> spawnTriggers = new ArrayList<>();
         Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
+        Pattern widthfinder = Pattern.compile("\"width\":(\\d{0,4})");
+        Pattern heightfinder = Pattern.compile("\"height\":(\\d{0,4})");
         Pattern namefinder = Pattern.compile("\"name\":\"(\\D+)(\\d{0,3})");
         try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             Matcher matcher;
             String line;
+            int width = 0, height = 0;
             int level = 0;
             Type type = null;
             int newTriggerx = 0, newTriggery;
-            boolean xfound = false, typefound = false;
+            boolean xfound = false, typefound = false, heightfound = false, widthfound = false;
             while ((line = bufferedReader.readLine()) != null) {
+                if (!heightfound) {
+                    matcher = heightfinder.matcher(line);
+                    if (matcher.find()) {
+                        height = Integer.parseInt(matcher.group(1));
+                        heightfound = true;
+                    }
+                }
+                if (!widthfound) {
+                    matcher = widthfinder.matcher(line);
+                    if (matcher.find()) {
+                        width = Integer.parseInt(matcher.group(1));
+                        widthfound = true;
+                    }
+                }
                 if (!typefound) {
                     matcher = namefinder.matcher(line);
                     if (matcher.find()) {
@@ -111,13 +126,13 @@ public class Map {
                             case "wolf" -> type = Type.wolf;
                             case "bossKnight" -> type = Type.KnightBoss;
                             case "mushroom" -> type = Type.Mushroom;
+                            case "mixedGoblin" -> type = Type.MixedGoblin;
                         }
                         if (type != null) {
                             level = Integer.parseInt(matcher.group(2));
                         } else {
                             level = 1;
                         }
-
                         typefound = true;
                     }
                 } else if (!xfound) {
@@ -132,8 +147,14 @@ public class Map {
                         newTriggery = Integer.parseInt(matcher.group(1));
                         xfound = false;
                         typefound = false;
-                        spawnTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SINGULAR, type, zone));
+                        if (type != Type.MixedGoblin) {
+                            spawnTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SINGULAR, type, zone, width * 3, height * 3));
+                        } else {
+                            spawnTriggers.add(new SpawnTrigger(newTriggerx / 16, newTriggery / 16, level, Trigger.SPREAD_Random, type, zone, width * 3, height * 3));
+                        }
                         type = null;
+                        widthfound = false;
+                        heightfound = false;
                     }
                 }
             }

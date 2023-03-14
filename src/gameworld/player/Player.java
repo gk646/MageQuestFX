@@ -25,6 +25,7 @@ import java.util.Iterator;
 
 public class Player extends ENTITY {
     public boolean levelup;
+    public static int LEVEL;
     public static final int effectsSizeRollable = 35;
     public Map map;
     public boolean isMoving;
@@ -116,6 +117,7 @@ public class Player extends ENTITY {
      */
     public Player(MainGame mainGame) {
         this.mg = mainGame;
+
         playerEffects = effects;
         dialog.dialogLine = null;
         //-------VALUES-----------

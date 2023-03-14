@@ -17,17 +17,21 @@ import java.awt.Point;
 public class SpawnTrigger {
     private final int x;
     private final int y;
-    private final int level;
+    private final int width, height;
     private final Trigger trigger;
     private final Type type;
+    private int level;
+
     public final Zone zone;
     public boolean triggered;
 
-    public SpawnTrigger(int x, int y, int level, Trigger trigger, Type type, Zone zone) {
+    public SpawnTrigger(int x, int y, int level, Trigger trigger, Type type, Zone zone, int width, int height) {
         this.x = x;
         this.y = y;
         this.zone = zone;
         this.level = level;
+        this.width = width;
+        this.height = height;
         this.trigger = trigger;
         this.type = type;
         this.triggered = false;
@@ -35,33 +39,54 @@ public class SpawnTrigger {
 
 
     public void activate(MainGame mg) {
-        if (!triggered && playerXCloseToTile(14, x, y)) {
-            if (trigger == Trigger.SINGULAR) {
-                if (type == Type.Grunt) {
-                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
-                } else if (type == Type.Shooter) {
-                    mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
-                } else if (type == Type.BOSS_Slime) {
-                    mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
-                } else if (type == Type.Spear) {
-                    mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
-                } else if (type == Type.snake) {
-                    mg.ENTITIES.add(new ENT_Snake(mg, x, y, level, zone));
-                } else if (type == Type.wolf) {
-                    mg.ENTITIES.add(new ENT_Wolf(mg, x, y, level, zone));
-                } else if (type == Type.Mushroom) {
-                    mg.ENTITIES.add(new ENT_Mushroom(mg, x, y, level, zone));
-                } else if (type == Type.WizardBoss1) {
 
-                } else if (type == Type.WizardBoss2) {
+        if (trigger == Trigger.SINGULAR && playerXCloseToTile(14, x, y)) {
+            if (level == 0) {
+                level = mg.player.level;
+            }
+            if (type == Type.Grunt) {
+                mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
+            } else if (type == Type.Shooter) {
+                mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
+            } else if (type == Type.BOSS_Slime) {
+                mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
+            } else if (type == Type.Spear) {
+                mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
+            } else if (type == Type.snake) {
+                mg.ENTITIES.add(new ENT_Snake(mg, x, y, level, zone));
+            } else if (type == Type.wolf) {
+                mg.ENTITIES.add(new ENT_Wolf(mg, x, y, level, zone));
+            } else if (type == Type.Mushroom) {
+                mg.ENTITIES.add(new ENT_Mushroom(mg, x, y, level, zone));
+            } else if (type == Type.WizardBoss1) {
 
-                } else if (type == Type.KnightBoss) {
-                    mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
+            } else if (type == Type.WizardBoss2) {
+
+            } else if (type == Type.KnightBoss) {
+                mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
+            }
+            triggered = true;
+        } else if (trigger == Trigger.SPREAD_Random && isPointWithinDistanceOfRectangle(500)) {
+            if (type == Type.MixedGoblin) {
+                double num;
+                int worldX, worldY;
+                for (int i = 0; i < level; i++) {
+                    num = Math.random();
+                    worldX = (int) ((Math.random() * width + x * 48));
+                    worldY = (int) ((Math.random() * height + y * 48));
+                    if (num < 0.2) {
+                        mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, worldX, worldY, mg.player.level, zone));
+                    } else if (num < 0.4) {
+                        mg.ENTITIES.add(new ENT_SkeletonArcher(mg, worldX, worldY, mg.player.level, zone));
+                    } else if (num < 1) {
+                        mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, worldX, worldY, mg.player.level, zone));
+                    }
                 }
             }
             triggered = true;
         }
     }
+
 
     /**
      * @param distance distance
@@ -71,6 +96,15 @@ public class SpawnTrigger {
      */
     private boolean playerXCloseToTile(int distance, int tilex, int tily) {
         return new Point((int) ((Player.worldX + 24) / 48), (int) ((Player.worldY + 24) / 48)).distance(tilex, tily) <= distance;
+    }
+
+    public boolean isPointWithinDistanceOfRectangle(int distance) {
+        int playerX = (int) Player.worldX;
+        int playerY = (int) Player.worldY;
+        return (Math.abs(playerX - x * 48) <= distance
+                || Math.abs(playerX - x * 48 - width) <= distance
+                || Math.abs(playerY - y * 48) <= distance
+                || Math.abs(playerY - y * 48 - height) <= distance);
     }
 }
 

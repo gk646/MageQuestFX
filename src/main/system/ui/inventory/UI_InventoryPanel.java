@@ -65,12 +65,13 @@ public class UI_InventoryPanel {
     private final Image ring = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
     private final Image amulet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/amulet.png")));
     private final Image offhand = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/offhand.png")));
-    private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/ring.png")));
+    private final Image relic = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/relic.png")));
     private final Image weapon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/weapon.png")));
+
     private final Image coin = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/coin.png")));
 
     private boolean showTutorial;
-    private final int spriteCounter = 0;
+
 
     public UI_InventoryPanel(MainGame mainGame) {
         mg = mainGame;
@@ -947,7 +948,7 @@ public class UI_InventoryPanel {
                 if (char_Slots[i].type.equals("H")) {
                     gc.drawImage(helm, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
                 } else if (char_Slots[i].type.equals("C")) {
-                    gc.drawImage(chest, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                    gc.drawImage(chest, 21 + startX + 2, ((i * 50) + 65 + startY));
                 } else if (char_Slots[i].type.equals("P")) {
                     gc.drawImage(pants, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
                 } else if (char_Slots[i].type.equals("B")) {

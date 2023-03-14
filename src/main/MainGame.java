@@ -51,8 +51,11 @@ import main.system.ui.questpanel.UI_QuestPanel;
 import main.system.ui.skillbar.SKILL;
 import main.system.ui.skillbar.UI_SkillBar;
 import main.system.ui.skillbar.skills.SKL_EnergySphere;
+import main.system.ui.skillbar.skills.SKL_PyroBlast;
 import main.system.ui.skillbar.skills.SKL_RegenAura;
 import main.system.ui.skillbar.skills.SKL_SolarFlare;
+import main.system.ui.skillbar.skills.SKL_VoidEruption;
+import main.system.ui.skillbar.skills.SKL_VoidField;
 import main.system.ui.skillpanel.UI_SkillPanel;
 import main.system.ui.talentpanel.UI_TalentPanel;
 
@@ -466,6 +469,7 @@ public class MainGame {
 
     private void debug() {
         CHEATS = true;
+        player.level = 60;
         player.manaBarrier = 2000;
         player.maxMana = 2000;
         player.intellect = 2000;
@@ -478,12 +482,21 @@ public class MainGame {
         sBar.skills[5] = new SKL_EnergySphere(this);
         sBar.skills[4] = new SKL_SolarFlare(this);
         sBar.skills[2] = new SKL_RegenAura(this);
+        sBar.skills[0] = new SKL_PyroBlast(this);
+        sBar.skills[1] = new SKL_VoidField(this);
+        sBar.skills[3] = new SKL_VoidEruption(this);
         for (SKILL skill : skillPanel.allSkills) {
             skillPanel.addSKill(skill);
         }
         for (Map map : wControl.MAPS) {
-            map.mapCover = new int[map.mapSize.x][map.mapSize.x];
+            for (int i = 0; i < map.mapSize.x; i++) {
+                for (int j = 0; j < map.mapSize.x; j++) {
+                    map.mapCover[i][j] = 1;
+                }
+            }
         }
+        inventP.char_Slots[8].item = DRP_DroppedItem.cloneItemWithLevelQuality(TWOHANDS.get(2), 100, 60);
+        player.updateEquippedItems();
         player.maxMana = 2000;
         for (ITEM item : CHEST) {
             for (Float f : item.effects) {
@@ -495,7 +508,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest, 20, 20);
+        wControl.loadMap(Zone.GoblinCave, 10, 26);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.TheGrove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
@@ -511,7 +524,7 @@ public class MainGame {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
-        // testRoom();
+        //testRoom();
     }
 
     private void testRoom() {
