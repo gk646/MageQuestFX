@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "ForestClearing.tmx",
+    "activeFile": "goblinCave.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -59,16 +59,16 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 162.5,
-                "y": 427
+                "x": 480,
+                "y": 479.75
             }
         },
         "ForestClearing.tmx": {
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 748,
-                "y": 794
+                "x": 930.3030303030303,
+                "y": 603.030303030303
             }
         },
         "GrassLands.tmx": {
@@ -98,19 +98,22 @@
             "scaleInEditor": 1.5
         },
         "TestRomm.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 352,
-                "y": 432
+                "x": 400,
+                "y": 399.5
             }
         },
         "TheGrove.tmx": {
-            "scale": 0.33,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1600,
-                "y": 1598.4848484848483
+                "x": 61.66666666666666,
+                "y": 149.66666666666666
             }
         },
         "TileSet.tsx": {
@@ -184,11 +187,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 560.6060606060606,
-                "y": 442.4242424242424
+                "x": 183.99999999999994,
+                "y": 700
             }
         },
         "grassspritesheet.tsx": {
@@ -260,7 +263,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 100,
-    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
+    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
@@ -272,22 +275,24 @@
         "Tutorial.tmx",
         "DeadPlains.tmx",
         "TheGrove.tmx",
-        "TestRomm.tmx"
+        "TestRomm.tmx",
+        "goblinCave.tmx",
+        "FirstDungeon.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "caveMarla.tmx",
-        "TestRomm.tmx",
-        "TheGrove.tmx",
-        "DeadPlains.tmx",
-        "Tutorial.tmx",
-        "TIILESET.tsx",
         "ForestClearing.tmx",
+        "TIILESET.tsx",
+        "Tutorial.tmx",
+        "DeadPlains.tmx",
+        "TheGrove.tmx",
+        "TestRomm.tmx",
+        "FirstDungeon.tmx",
+        "goblinCave.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
-        "GrassLands.tmx",
-        "FirstDungeon.tmx",
-        "DungeonTutorial.tmx"
+        "GrassLands.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

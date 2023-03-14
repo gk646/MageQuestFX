@@ -99,13 +99,25 @@ public class WorldController {
         }
         if (currentWorld == Zone.Woodland_Edge) {
             if (mg.playerX == 71 && mg.playerY == 56) {
-                loadMap(Zone.Ruin_Dungeon, 28, 4);
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Ruin_Dungeon, 28, 4);
+                }
             } else if (mg.playerX == 99 && mg.playerY == 99) {
-                loadMap(Zone.Hillcrest, 1, 1);
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Hillcrest, 1, 1);
+                }
             }
         } else if (currentWorld == Zone.GrassLands) {
             if (mg.playerX == 499 && mg.playerY == 499) {
-                loadMap(Zone.Hillcrest, 4, 94);
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Hillcrest, 4, 94);
+                }
             }
         } else if (currentWorld == Zone.City1) {
             if (mg.playerX == 32 && mg.playerY == 0 ||
@@ -121,13 +133,23 @@ public class WorldController {
                 loadMap(Zone.Woodland_Edge, 71, 55);
             }
         } else if (currentWorld == Zone.Hillcrest) {
-            if (mg.playerX == 0 && mg.playerY == 99) {
-                loadMap(Zone.GrassLands, 495, 495);
+            if (mg.playerX == 0 && mg.playerY == 99 && mg.sqLite.readQuestFacts(QUEST_NAME.IntoTheGrassLands.val, 1) == 5) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.GrassLands, 495, 495);
+                }
             } else if (mg.playerX == 64 && mg.playerY == 66) {
                 mg.playerPrompts.E = true;
                 if (mg.inputH.e_typed) {
                     mg.inputH.e_typed = false;
                     loadMap(Zone.Treasure_Cave, 26, 18);
+                }
+            } else if (mg.playerX == 99 && mg.playerY == 37) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.TheGrove, 1, 100);
                 }
             } else if (mg.playerX == 75 && mg.playerY == 83) {
                 loadMap(Zone.Hillcrest_Mountain_Cave, 3, 14);
@@ -157,6 +179,28 @@ public class WorldController {
                             mg.ENTITIES.add(new BOSS_Knight(mg, 56 * 48, 91 * 48, mg.player.level, 1, Zone.Hillcrest));
                         }
                     }
+                }
+            }
+        } else if (currentWorld == Zone.TheGrove) {
+            if (mg.playerX == 0 && (mg.playerY == 99 || mg.playerY == 100 || mg.playerY == 101)) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Hillcrest, 97, 37);
+                }
+            } else if (mg.playerX == 3 && mg.playerY == 5) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.GoblinCave, 10, 26);
+                }
+            }
+        } else if (currentWorld == Zone.GoblinCave) {
+            if (mg.playerX == 12 && mg.playerY == 25) {
+                mg.playerPrompts.E = true;
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.TheGrove, 3, 5);
                 }
             }
         }
