@@ -151,7 +151,7 @@ public class MainGame {
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
     public boolean showAbilities;
-    public float counter;
+
 
 
     /**
@@ -464,7 +464,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
     }
 
     private void debug() {
