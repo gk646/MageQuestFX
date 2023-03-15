@@ -1,6 +1,7 @@
 package main.system.savegame;
 
 import gameworld.entities.NPC;
+import gameworld.entities.npcs.quests.ENT_GroveReceptionist;
 import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
@@ -69,8 +70,8 @@ public class LoadGameState {
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Tutorial, 13, "Talk to the old man");
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 45, 34, Zone.Woodland_Edge));
                     mg.player.setPosition(39, 34);
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(1), Zone.Woodland_Edge));
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(2), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(3), Zone.Woodland_Edge));
                 } else if (quest_num == 2) {
                     mg.npcControl.NPC_Active.add(new NPC_OldMan(mg, 58, 48, Zone.Woodland_Edge));
                     mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Tutorial, 26, "Search the ruins for a way out");
@@ -195,16 +196,20 @@ public class LoadGameState {
     private void loadGroveSecret() {
         int quest_num = mg.sqLite.readQuestFacts(QUEST_NAME.TheGrovesSecret.val, 1);
         String description = mg.sqLite.readQuestDescription(QUEST_NAME.TheGrovesSecret.val);
-        if (description.equals("finished")) {
-            mg.qPanel.finishedQuests.add(new QST_TheGrovesSecret(mg, true));
+        if (!description.equals("finished")) {
+            mg.qPanel.quests.add(new QST_TheGrovesSecret(mg, false));
             if (quest_num > 0) {
                 ((HiddenQUEST) mg.qPanel.getQuest(QUEST_NAME.TheGrovesSecret)).activated = true;
+                mg.npcControl.NPC_Active.add(new ENT_GroveReceptionist(mg, 55, 108, Zone.The_Grove));
             }
             if (quest_num == 1) {
-                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 10, "Talk to people to get clues");
+                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 2, "Follow the path to \"The Grove\"");
+            }
+            if (quest_num == 2) {
+
             }
         } else {
-            mg.qPanel.hiddenQuests.add(new QST_TheGrovesSecret(mg, false));
+            mg.qPanel.finishedQuests.add(new QST_TheGrovesSecret(mg, true));
         }
     }
 

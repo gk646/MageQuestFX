@@ -18,7 +18,7 @@ abstract public class NPC_Generic extends NPC {
     protected void scriptMovement() {
         if (collidingWithPlayer()) {
             if (!show_dialog) {
-                mg.playerPrompts.E = true;
+                mg.playerPrompts.setETrue();
             }
             if (mg.inputH.e_typed) {
                 mg.inputH.e_typed = false;

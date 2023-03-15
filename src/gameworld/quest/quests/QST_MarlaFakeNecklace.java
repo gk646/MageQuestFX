@@ -453,7 +453,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     }
                 } else if (progressStage == 55) {
                     if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 9)) {
-                        mg.playerPrompts.E = true;
+                        mg.playerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             npc.show_dialog = false;
                             mg.inputH.e_typed = false;

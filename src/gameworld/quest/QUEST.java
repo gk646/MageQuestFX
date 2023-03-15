@@ -229,7 +229,7 @@ abstract public class QUEST {
         }
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
             if (!npc.show_dialog && !npc.blockInteraction) {
-                mg.playerPrompts.E = true;
+                mg.playerPrompts.setETrue();
             }
             if (mg.inputH.e_typed) {
                 npc.show_dialog = true;

@@ -55,8 +55,8 @@ public class QST_Tutorial extends QUEST {
                     mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, 48 * 46, 48 * 38, 1, Zone.Woodland_Edge));
                     nextStage();
                     npc.blockInteraction = true;
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(1), Zone.Woodland_Edge));
-                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(2), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 94, 48 * 44, mg.MISC.get(2), Zone.Woodland_Edge));
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(48 * 96, 48 * 13, mg.MISC.get(3), Zone.Woodland_Edge));
                 } else if (progressStage == 11) {
                     updateObjective("Kill enemies: " + (mg.prj_control.GruntKilledCounter - gruntKillCounter) + "/3", 0);
                 }
@@ -130,12 +130,17 @@ public class QST_Tutorial extends QUEST {
                         objective3Progress = 3;
                         removeQuestMarker("path3");
                     }
-                    if (objective1Progress == 3 && objective2Progress == 3 && objective3Progress == 3) {
+                    if (objective2Progress == 3 && objective3Progress == 3) {
                         updateObjective("Return the stuff you found", 0);
                     }
                     npc.blockInteraction = true;
                     if (npc.show_dialog && playerBagsContainItem("Booze") && playerBagsContainItem("Silver Key")) {
                         nextStage();
+                        removeQuestMarker("path1");
+                        removeQuestMarker("path3");
+                        removeQuestMarker("path2");
+                        updateObjective(null, 1);
+                        updateObjective(null, 2);
                         for (UI_InventorySlot slot : mg.inventP.char_Slots) {
                             if (slot.item != null && (slot.item.name.equals("Booze") || slot.item.name.equals("Silver Key"))) {
                                 slot.item = null;
@@ -238,6 +243,7 @@ public class QST_Tutorial extends QUEST {
                 } else if (progressStage == 60 || progressStage == 47) {
                     moveToTile(npc, 44, 21, new Point(25, 23));
                     updateObjective("Quest Finished", 0);
+                    mg.player.experience += 25;
                     mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     mg.sqLite.finishQuest(quest_id);
                     npc.show_dialog = false;

@@ -175,7 +175,7 @@ public class Sound {
                     fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);
                 }
             }
-        } else if (WorldController.currentWorld == Zone.Hillcrest || WorldController.currentWorld == Zone.Woodland_Edge && mg.tileBase.isInOpen()) {
+        } else if (mg.tileBase.isInOpen()) {
             forestPlaying = true;
             if (currentAmbient != null && dungeonPlaying) {
                 fadeOut(currentAmbient, AMBIENCE_VOLUME, 0);

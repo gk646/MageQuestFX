@@ -15,23 +15,39 @@ abstract public class DialogStorage {
     public static String[] AuditionMayor;
     public static String[] IntoTheGrassLands;
     public static String[] NPCComments;
-
+    public static String[] TheGroveSecret;
     public static void loadDialogs() {
         try {
-            Tutorial = loadDialogByName("Tutorial");
-            Trading = loadDialogByName("Trading");
-            MarlaNecklace = loadDialogByName("MarlaQuest");
-            AuditionMayor = loadDialogByName("mayor_audition");
-            IntoTheGrassLands = loadDialogByName("IntoTheGrassLands");
-            NPCComments = loadDialogByName("VillagerComments");
+            Tutorial = loadDialogByNameQUEST("Tutorial");
+            Trading = loadDialogByNameMISC("Trading");
+            MarlaNecklace = loadDialogByNameQUEST("MarlaQuest");
+            AuditionMayor = loadDialogByNameQUEST("mayor_audition");
+            IntoTheGrassLands = loadDialogByNameQUEST("IntoTheGrassLands");
+            NPCComments = loadDialogByNameMISC("VillagerComments");
+            TheGroveSecret = loadDialogByNameQUEST("TheGroveSecret");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static String[] loadDialogByName(String txtName) throws IOException {
+    private static String[] loadDialogByNameQUEST(String txtName) throws IOException {
         String text;
-        InputStream inputStream = DialogStorage.class.getResourceAsStream("/Dialog/" + txtName + ".txt");
+        InputStream inputStream = DialogStorage.class.getResourceAsStream("/Dialog/Quests/" + txtName + ".txt");
+        assert inputStream != null;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder("\n");
+        text = bufferedReader.readLine();
+        while (text != null) {
+            stringBuilder.append(text);
+            stringBuilder.append("\n");
+            text = bufferedReader.readLine();
+        }
+        return stringBuilder.toString().split("\\n");
+    }
+
+    private static String[] loadDialogByNameMISC(String txtName) throws IOException {
+        String text;
+        InputStream inputStream = DialogStorage.class.getResourceAsStream("/Dialog/misc/" + txtName + ".txt");
         assert inputStream != null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder("\n");

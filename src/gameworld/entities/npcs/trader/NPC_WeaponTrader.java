@@ -38,7 +38,7 @@ public class NPC_WeaponTrader extends MERCHANT {
         direction = "updownleftright";
     }
 
-    //TODO make misc items and display value / make quest item type
+
     @Override
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
@@ -71,7 +71,7 @@ public class NPC_WeaponTrader extends MERCHANT {
         super.update();
         if (mg.inputH.e_typed && collidingWithPlayer()) {
             if (dialog.dialogRenderCounter == 0) {
-                dialog.loadNewLine(DialogStorage.Trading[mg.random.nextInt(0, DialogStorage.Trading.length)]);
+                dialog.loadNewLine(DialogStorage.Trading[MainGame.random.nextInt(0, DialogStorage.Trading.length)]);
                 show_dialog = true;
             } else if (dialog.dialogRenderCounter < 2_000) {
                 dialog.dialogRenderCounter = 2_000;

@@ -7,10 +7,11 @@ import main.MainGame;
 
 public class PlayerPrompts {
 
-    public boolean E, F;
+    public boolean F;
     final MainGame mg;
     final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
+    int Ecounter = 0;
 
     public PlayerPrompts(MainGame mg) {
         this.mg = mg;
@@ -18,7 +19,8 @@ public class PlayerPrompts {
 
 
     public void draw(GraphicsContext gc) {
-        if (E) {
+        if (Ecounter < 60) {
+            Ecounter++;
             spriteCounter++;
             switch (spriteCounter % 120 / 30) {
                 case 0 -> gc.drawImage(resc.images1.get(0), Player.screenX, Player.screenY - 48);
@@ -29,5 +31,9 @@ public class PlayerPrompts {
         } else if (F) {
 
         }
+    }
+
+    public void setETrue() {
+        Ecounter = 0;
     }
 }

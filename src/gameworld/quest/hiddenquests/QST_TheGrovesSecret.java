@@ -1,11 +1,16 @@
 package gameworld.quest.hiddenquests;
 
 import gameworld.entities.NPC;
+import gameworld.entities.npcs.quests.ENT_GroveReceptionist;
+import gameworld.entities.npcs.quests.NPC_DyingHermit;
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST_NAME;
+import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.enums.Zone;
+import main.system.rendering.WorldRender;
 
 public class QST_TheGrovesSecret extends HiddenQUEST {
     private boolean gotQuest;
@@ -27,13 +32,67 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
      */
     @Override
     public void update() {
-        for (NPC npc : mg.npcControl.NPC_Active) {
-
+        if (objective3Progress == 0 && progressStage < 20 && progressStage != 8 && WorldController.currentWorld == Zone.The_Grove) {
+            WorldRender.worldData1[61][108] = 1096;
+            objective3Progress = 1;
         }
         if (progressStage == 1) {
-            if (WorldController.currentWorld == Zone.TheGrove && !gotQuest) {
+            if (WorldController.currentWorld == Zone.The_Grove && !activated) {
                 this.activated = true;
                 mg.sqLite.updateQuestFacts(quest_id, 1, 1);
+                updateObjective("Follow the path to \"The Grove\"", 0);
+            }
+        }
+        for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
+            NPC npc = mg.npcControl.NPC_Active.get(i);
+            if (npc instanceof ENT_GroveReceptionist) {
+                interactWithNpc(npc, DialogStorage.TheGroveSecret);
+                if (progressStage == 2) {
+                    int num = npc.dialog.drawChoice("What is this place?", null, null, null);
+                    if (num == 10) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 3);
+                        nextStage();
+                    }
+                } else if (progressStage == 7) {
+                    int num = npc.dialog.drawChoice("I want to get in!", null, null, null);
+                    if (num == 10) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 8);
+                        nextStage();
+                    }
+                } else if (progressStage == 8) {
+                    int num = npc.dialog.drawChoice("Pay 150 coins", "I don't have the money!", null, null);
+                    if (num == 10 && mg.player.coins >= 150) {
+                        mg.player.coins -= 150;
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 9);
+                        updateObjective("Step onto the island", 0);
+                        addQuestMarker("island", 114, 106, Zone.The_Grove);
+                        npc.blockInteraction = true;
+                        progressStage = 20;
+                        removeQuestMarker("forest");
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 2);
+                        nextStage();
+                    } else if (num == 20) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 10);
+                        progressStage = 13;
+                        npc.blockInteraction = true;
+                        mg.npcControl.NPC_Active.add(new NPC_DyingHermit(mg, 3, 156, Zone.The_Grove));
+                        updateObjective("Check if tickets dont grow on trees", 0);
+                        addQuestMarker("forest", 7, 139, Zone.The_Grove);
+                    }
+                } else if (playerBagsContainItem("\"The Grove\" Ticket")) {
+                    progressStage = 8;
+                }
+            } else if (npc instanceof NPC_DyingHermit) {
+                interactWithNpc(npc, DialogStorage.TheGroveSecret);
+                if (progressStage == 17) {
+                    npc.blockInteraction = true;
+                    //npc.dead = true;
+                    //TODO death animation
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(3 * 48 + 20, 156 * 48, mg.MISC.get(1), Zone.The_Grove));
+                    nextStage();
+                    updateObjective("Go back to the reception", 0);
+                    removeQuestMarker("forest");
+                }
             }
         }
     }

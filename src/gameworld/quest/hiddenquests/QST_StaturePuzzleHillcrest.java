@@ -59,7 +59,7 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
                 }
                 for (int i = 0; i < 4; i++) {
                     if (new Point(mg.playerX, mg.playerY).equals(inscriptionPoints[i])) {
-                        mg.playerPrompts.E = true;
+                        mg.playerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             mg.inputH.e_typed = false;
                             mg.player.dialog.loadNewLine(inscriptions[i]);
@@ -67,7 +67,7 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
                         }
                     }
                     if (new Point(mg.playerX, mg.playerY).equals(activatePoints[i])) {
-                        mg.playerPrompts.E = true;
+                        mg.playerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             mg.inputH.e_typed = false;
                             user[counter] = i;

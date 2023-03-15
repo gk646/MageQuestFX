@@ -179,6 +179,11 @@ public class UI_QuestPanel {
                 return quest;
             }
         }
+        for (QUEST quest : hiddenQuests) {
+            if (quest.logicName.equals(name)) {
+                return quest;
+            }
+        }
         return null;
     }
 
