@@ -152,6 +152,7 @@ public class WorldEnhancements {
         for (StaticLightSource lightSource : lightList) {
             lightSource.tilesIndices.clear();
             lightSource.tilesIndices1.clear();
+            lightSource.tilesIndices2.clear();
         }
     }
 

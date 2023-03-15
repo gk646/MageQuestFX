@@ -29,6 +29,7 @@ public class WorldController {
     }
 
     public void loadWorldData() {
+        MAPS.add(new Map("hermitCaveHillcrest", new Point(70, 70), Zone.Hillcrest_Hermit_Cave));
         MAPS.add(new Map("goblinCave", new Point(120, 120), Zone.Goblin_Cave));
         MAPS.add(new Map("TestRoom", new Point(50, 50), Zone.TestRoom));
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Woodland_Edge, GameMapType.MapCover));
@@ -145,6 +146,12 @@ public class WorldController {
                     mg.inputH.e_typed = false;
                     loadMap(Zone.Treasure_Cave, 26, 18);
                 }
+            } else if (mg.playerX == 89 && mg.playerY == 1) {
+                mg.playerPrompts.setETrue();
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Hillcrest_Hermit_Cave, 35, 68);
+                }
             } else if (mg.playerX == 99 && mg.playerY == 37) {
                 mg.playerPrompts.setETrue();
                 if (mg.inputH.e_typed) {
@@ -201,6 +208,14 @@ public class WorldController {
                 if (mg.inputH.e_typed) {
                     mg.inputH.e_typed = false;
                     loadMap(Zone.The_Grove, 3, 5);
+                }
+            }
+        } else if (currentWorld == Zone.Hillcrest_Hermit_Cave) {
+            if (mg.playerY == 69 && (mg.playerX == 34 || mg.playerX == 35 || mg.playerX == 36)) {
+                mg.playerPrompts.setETrue();
+                if (mg.inputH.e_typed) {
+                    mg.inputH.e_typed = false;
+                    loadMap(Zone.Hillcrest, 89, 2);
                 }
             }
         }

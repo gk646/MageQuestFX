@@ -74,7 +74,7 @@ public class NPC_Nietzsche extends NPC {
     @Override
     public void update() {
         super.update();
-        if (QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 200) && !show_dialog) {
+        if (QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 150) && !show_dialog) {
             mg.playerPrompts.setETrue();
             if (mg.inputH.e_typed) {
                 mg.inputH.e_typed = false;

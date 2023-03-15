@@ -139,8 +139,8 @@ public class QST_Tutorial extends QUEST {
                         removeQuestMarker("path1");
                         removeQuestMarker("path3");
                         removeQuestMarker("path2");
-                        updateObjective(null, 1);
-                        updateObjective(null, 2);
+                        removeObjective(1);
+                        removeObjective(2);
                         for (UI_InventorySlot slot : mg.inventP.char_Slots) {
                             if (slot.item != null && (slot.item.name.equals("Booze") || slot.item.name.equals("Silver Key"))) {
                                 slot.item = null;
