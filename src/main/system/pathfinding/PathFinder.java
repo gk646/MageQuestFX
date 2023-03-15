@@ -1,4 +1,4 @@
-package main.system.ai;
+package main.system.pathfinding;
 
 import main.MainGame;
 import main.system.rendering.WorldRender;

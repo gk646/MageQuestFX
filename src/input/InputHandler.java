@@ -1,6 +1,7 @@
 package input;
 
 
+import gameworld.entities.npcs.quests.NPC_Nietzsche;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -39,7 +40,7 @@ public class InputHandler {
     public boolean X_pressed;
     public boolean mouse1Pressed, mouse2Pressed;
     public boolean shift_pressed;
-
+    public String lastTypedString;
 
     public InputHandler(MainGame mg, Scene scene) {
         this.mg = mg;
@@ -66,6 +67,18 @@ public class InputHandler {
 
     public void handleKeyType(KeyEvent e) {
         String code = e.getCharacter();
+        if (NPC_Nietzsche.typeMode) {
+            if (code.equals("\u001B")) {
+                NPC_Nietzsche.typeMode = false;
+                NPC_Nietzsche.prompt = new StringBuilder();
+                return;
+            } else if (code.equals("\r")) {
+                NPC_Nietzsche.generateResponse = true;
+            }
+            NPC_Nietzsche.prompt.append(e.getCharacter());
+            return;
+        }
+        lastTypedString = e.getCharacter();
         if (mg.gameState == State.TITLE) {
             if (code.equals(("w"))) {
                 mg.sound.playEffectSound(2);
@@ -208,6 +221,7 @@ public class InputHandler {
             }
         }
         if (code.equals("\u001B")) {
+
             mg.sound.playEffectSound(3);
             if (mg.gameState == State.OPTION) {
                 if (mg.drawCodex) {
@@ -358,29 +372,31 @@ public class InputHandler {
 
     public void handleKeyPressed(KeyEvent e) {
         KeyCode code = e.getCode();
-        switch (code) {
-            case A, LEFT -> leftPressed = true;
-            case UP, W -> upPressed = true;
-            case DOWN, S -> downPressed = true;
-            case RIGHT, D -> rightPressed = true;
-            case C -> c_pressed = true;
-            case DIGIT1 -> OnePressed = true;
-            case DIGIT2 -> TwoPressed = true;
-            case DIGIT3 -> ThreePressed = true;
-            case DIGIT4 -> FourPressed = true;
-            case DIGIT5 -> FivePressed = true;
-            case F -> f_pressed = true;
-            case H -> debugFps = true;
-            case J -> j_pressed = true;
-            case L -> l_pressed = true;
-            case M -> multiplayer = true;
-            case P -> p_pressed = true;
-            case Q -> q_pressed = true;
-            case R -> r_pressed = true;
-            case SHIFT -> shift_pressed = true;
-            case X -> X_pressed = true;
-            case Y -> y_pressed = true;
-            default -> {
+        if (!NPC_Nietzsche.typeMode) {
+            switch (code) {
+                case A, LEFT -> leftPressed = true;
+                case UP, W -> upPressed = true;
+                case DOWN, S -> downPressed = true;
+                case RIGHT, D -> rightPressed = true;
+                case C -> c_pressed = true;
+                case DIGIT1 -> OnePressed = true;
+                case DIGIT2 -> TwoPressed = true;
+                case DIGIT3 -> ThreePressed = true;
+                case DIGIT4 -> FourPressed = true;
+                case DIGIT5 -> FivePressed = true;
+                case F -> f_pressed = true;
+                case H -> debugFps = true;
+                case J -> j_pressed = true;
+                case L -> l_pressed = true;
+                case M -> multiplayer = true;
+                case P -> p_pressed = true;
+                case Q -> q_pressed = true;
+                case R -> r_pressed = true;
+                case SHIFT -> shift_pressed = true;
+                case X -> X_pressed = true;
+                case Y -> y_pressed = true;
+                default -> {
+                }
             }
         }
     }

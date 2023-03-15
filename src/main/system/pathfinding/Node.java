@@ -1,4 +1,4 @@
-package main.system.ai;
+package main.system.pathfinding;
 
 
 public class Node {

@@ -8,9 +8,9 @@ import gameworld.world.WorldController;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import main.system.ai.PathFinder;
 import main.system.database.SQLite;
 import main.system.enums.Zone;
+import main.system.pathfinding.PathFinder;
 import main.system.rendering.WorldRender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ class MainGameTest {
         mg.wControl.loadMap(Zone.Woodland_Edge, 15, 15);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
-        mg.random = new Random(seed);
+        MainGame.random = new Random(seed);
     }
 
     @Test

@@ -33,10 +33,11 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import main.system.CollisionChecker;
 import main.system.Storage;
-import main.system.ai.PathFinder;
+import main.system.ai.OpenAIHelper;
 import main.system.database.SQLite;
 import main.system.enums.State;
 import main.system.enums.Zone;
+import main.system.pathfinding.PathFinder;
 import main.system.rendering.WorldEnhancements;
 import main.system.rendering.WorldRender;
 import main.system.savegame.LoadGameState;
@@ -151,7 +152,7 @@ public class MainGame {
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
     public boolean showAbilities;
-
+    public OpenAIHelper openAIHelper;
 
 
     /**
@@ -382,6 +383,7 @@ public class MainGame {
      */
     private void loadGame(GraphicsContext gc) {
         {
+            openAIHelper = new OpenAIHelper();
             sqLite = new SQLite(this);
             sqLite.getConnection();
             dropManager = new DropManager(this);
@@ -464,7 +466,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-       debug();
+        debug();
     }
 
     private void debug() {
@@ -508,7 +510,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest, 99, 37);
+        wControl.loadMap(Zone.Hillcrest, 88, 6);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.The_Grove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));

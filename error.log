@@ -1,7 +1,12 @@
-java.util.ConcurrentModificationException
-	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013)
-	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967)
-	at gameworld.quest.hiddenquests.QST_TheGrovesSecret.update(QST_TheGrovesSecret.java:42)
-	at main.system.ui.questpanel.UI_QuestPanel.update(UI_QuestPanel.java:154)
-	at main.MainGame.lambda$startThreads$0(MainGame.java:213)
+java.lang.RuntimeException: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.openai.com/v1/completions
+	at main.system.ai.OpenAIHelper.getAIResponse(OpenAIHelper.java:49)
+	at gameworld.entities.npcs.quests.NPC_Nietzsche.update(NPC_Nietzsche.java:93)
+	at gameworld.NPC_Control.update(NPC_Control.java:49)
+	at main.MainGame.lambda$startThreads$3(MainGame.java:276)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
+Caused by: java.io.IOException: Server returned HTTP response code: 400 for URL: https://api.openai.com/v1/completions
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1993)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1585)
+	at java.base/sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:224)
+	at main.system.ai.OpenAIHelper.getAIResponse(OpenAIHelper.java:42)
+	... 4 more
