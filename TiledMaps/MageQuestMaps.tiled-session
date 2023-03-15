@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "goblinCave.tmx",
+    "activeFile": "Tutorial.tmx",
     "expandedProjectPaths": [
         ".",
         "exports"
@@ -95,7 +95,7 @@
         "TIILESET.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 2,
-            "scaleInEditor": 1.5
+            "scaleInEditor": 0.75
         },
         "TestRomm.tmx": {
             "expandedObjectLayers": [
@@ -109,6 +109,9 @@
             }
         },
         "TheGrove.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
@@ -141,11 +144,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 4,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 802,
-                "y": 790.375
+                "x": 1048,
+                "y": 1290.5
             }
         },
         "caveMarla.tmx": {
@@ -284,12 +287,12 @@
         "caveMarla.tmx",
         "ForestClearing.tmx",
         "TIILESET.tsx",
-        "Tutorial.tmx",
-        "DeadPlains.tmx",
-        "TheGrove.tmx",
-        "TestRomm.tmx",
         "FirstDungeon.tmx",
         "goblinCave.tmx",
+        "TestRomm.tmx",
+        "TheGrove.tmx",
+        "DeadPlains.tmx",
+        "Tutorial.tmx",
         "second floor_tutorial_castle.tmx",
         "HillCrestPuzzleCellar.tmx",
         "GrassLands.tmx"
