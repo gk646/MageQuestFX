@@ -64,19 +64,19 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 1,
+            "scale": 2,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1027,
-                "y": 777.3333333333333
+                "x": 1448.25,
+                "y": 672
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.125,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 5428,
-                "y": 6496
+                "x": 7586,
+                "y": 7604
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -104,19 +104,19 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 400,
-                "y": 399.5
+                "x": 400.5,
+                "y": 400
             }
         },
         "TheGrove.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 0.25,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1025.7575757575758,
-                "y": 1254.5454545454547
+                "x": 1578,
+                "y": 1180
             }
         },
         "TileSet.tsx": {
@@ -144,11 +144,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1048,
-                "y": 1256
+                "x": 879,
+                "y": 730
             }
         },
         "caveMarla.tmx": {
@@ -191,10 +191,10 @@
                 4
             ],
             "scale": 0.33,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1057.5757575757575,
-                "y": 969.6969696969696
+                "x": 795.4545454545455,
+                "y": 724.2424242424241
             }
         },
         "grassspritesheet.tsx": {

@@ -85,6 +85,9 @@ public class NPC_Nietzsche extends NPC {
             }
         }
         if (show_dialog) {
+            if (prompt.length() > 0) {
+                mg.player.dialog.dialogRenderCounter = 2000;
+            }
             if (length != prompt.length()) {
                 mg.player.dialog.loadNewLine(prompt.toString());
                 mg.player.dialog.dialogRenderCounter = 2000;

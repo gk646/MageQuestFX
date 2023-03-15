@@ -66,7 +66,7 @@ abstract public class BOSS extends ENTITY {
         return (int) (worldX + 24) / 48 == mg.playerX && (int) (worldY + 24) / 48 == mg.playerY;
     }
 
-    protected boolean closeToPlayer(int distance) {
+    protected boolean closeToPlayerAbsolute(int distance) {
         return new Point((int) Player.worldX, (int) Player.worldY).distance(worldX, worldY) < distance;
     }
 

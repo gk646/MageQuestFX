@@ -20,7 +20,6 @@ public class OpenAIHelper {
 
 
     public OpenAIHelper() {
-
     }
 
     public static CompletableFuture<String> getAIResponseAsync(String inputstr, String API_KEY) {
@@ -76,7 +75,4 @@ public class OpenAIHelper {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(getAIResponse("hello", API_KEY));
-    }
 }

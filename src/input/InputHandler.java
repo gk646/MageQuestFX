@@ -74,6 +74,9 @@ public class InputHandler {
                 return;
             } else if (code.equals("\r")) {
                 NPC_Nietzsche.generateResponse = true;
+            } else if (code.equals("\b")) {
+                NPC_Nietzsche.prompt.deleteCharAt(NPC_Nietzsche.prompt.length() - 1);
+                return;
             }
             NPC_Nietzsche.prompt.append(e.getCharacter());
             return;

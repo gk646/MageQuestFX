@@ -42,7 +42,7 @@ public class BOSS_Knight extends BOSS {
         if (!active) {
             health = maxHealth;
         }
-        if (closeToPlayer(500)) {
+        if (closeToPlayerAbsolute(500)) {
             activate = true;
         }
         hpBarOn = false;
