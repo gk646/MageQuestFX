@@ -1,7 +1,7 @@
 package gameworld.world.objects.items;
 
-import gameworld.player.Player;
 import gameworld.world.WorldController;
+import gameworld.world.objects.DropManager;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -26,11 +26,11 @@ class DRPDroppedItemTest {
         this.mg = new MainGame(1, 1, gc);
         mg.sqLite = new SQLite(mg);
         mg.sqLite.readItemsOnly();
-        mg.player = new Player(mg);
-
+        //mg.player = new Player(mg);
+        mg.dropManager = new DropManager(mg);
         SecureRandom secureRandom = new SecureRandom();
         long seed = secureRandom.nextLong();
-        mg.random = new Random(seed);
+        MainGame.random = new Random(seed);
     }
 
     @Test
@@ -43,7 +43,7 @@ class DRPDroppedItemTest {
         int rarity5 = 0;
         int fail = 0;
         for (int i = 0; i < 10_000; i++) {
-            DRP_DroppedItem drop = new DRP_DroppedItem(1, 1, mg.AMULET.get(1), WorldController.currentWorld);
+            DRP_DroppedItem drop = new DRP_DroppedItem(1, 1, mg.dropManager.getGuaranteedRandomItem(1), WorldController.currentWorld);
             if (drop.item == null) {
                 nullitems++;
             } else if (drop.item.rarity == 1) {

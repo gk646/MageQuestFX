@@ -12,6 +12,19 @@ public class DRP_DroppedItem extends DROP {
 
     private final Image droppedIcon;
 
+    /**
+     * Rarity 1: 58.87%
+     * Rarity 2: 31.86%
+     * Rarity 3: 7.68%
+     * Rarity 4: 1.39%
+     * Rarity 5: 0.20%
+     *
+     * @param worldX
+     * @param worldY
+     * @param item
+     * @param zone
+     */
+
     public DRP_DroppedItem(int worldX, int worldY, ITEM item, Zone zone) {
         this.zone = zone;
         this.size = 32;
