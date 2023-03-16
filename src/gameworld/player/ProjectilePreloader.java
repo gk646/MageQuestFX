@@ -20,6 +20,11 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader pyroBlast;
     public static GeneralResourceLoader fireBurst;
     public static GeneralResourceLoader powerSurge;
+    public static GeneralResourceLoader blastHammer;
+    public static GeneralResourceLoader gateTeleporter;
+    public static GeneralResourceLoader infernoRay;
+    public static GeneralResourceLoader fireSword;
+
     public static ArrayList<GeneralResourceLoader> projectileSounds = new ArrayList<>();
 
     public static void load() {
@@ -66,5 +71,24 @@ public class ProjectilePreloader {
         powerSurge = new GeneralResourceLoader("projectiles/powerSurge");
         powerSurge.loadProjectilesSounds();
         projectileSounds.add(powerSurge);
+
+        blastHammer = new GeneralResourceLoader("projectiles/blastHammer");
+        //blastHammer.loadProjectilesSounds();
+        //projectileSounds.add(blastHammer);
+
+
+        fireSword = new GeneralResourceLoader("projectiles/fireSword");
+        //fireSword.loadProjectilesSounds();
+        //projectileSounds.add(fireSword);
+
+        infernoRay = new GeneralResourceLoader("projectiles/infernoRay");
+        //infernoRay.loadProjectilesSounds();
+        //projectileSounds.add(infernoRay);
+
+        gateTeleporter = new GeneralResourceLoader("projectiles/infernoRay");
+        //gateTeleporter.loadProjectilesSounds();
+        //projectileSounds.add(gateTeleporter);
+
+        //TODO SOUNDS
     }
 }

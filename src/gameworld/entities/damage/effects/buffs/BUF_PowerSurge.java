@@ -9,7 +9,6 @@ import gameworld.player.Player;
 
 public class BUF_PowerSurge extends Effect {
     Player player;
-    private boolean activated;
 
     /**
      * amount is per second!
@@ -28,7 +27,6 @@ public class BUF_PowerSurge extends Effect {
         this.tickRate = tickRate;
         this.effectType = EffectType.BUFF;
     }
-//TODO buff lenght multiplier
 
     /**
      *

@@ -1,1 +1,6 @@
-java.lang.ArrayIndexOutOfBoundsException
+java.util.ConcurrentModificationException
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013)
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967)
+	at main.MainGame.proximitySorterENTITIES(MainGame.java:554)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:220)
+	at java.base/java.lang.Thread.run(Thread.java:1589)

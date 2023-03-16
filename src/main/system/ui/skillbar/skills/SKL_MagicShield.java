@@ -45,6 +45,7 @@ public class SKL_MagicShield extends SKILL {
      */
     @Override
     public void activate() {
+
         if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= 50) {
             castTimeActive++;
         }

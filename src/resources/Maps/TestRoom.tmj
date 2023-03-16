@@ -211,39 +211,6 @@
                  "width":95,
                  "x":313,
                  "y":198
-                }, 
-                {
-                 "class":"",
-                 "height":98.5,
-                 "id":10,
-                 "name":"mixedGoblin15",
-                 "rotation":0,
-                 "visible":true,
-                 "width":95,
-                 "x":500.5,
-                 "y":190.75
-                }, 
-                {
-                 "class":"",
-                 "height":98.5,
-                 "id":11,
-                 "name":"mixedGoblin15",
-                 "rotation":0,
-                 "visible":true,
-                 "width":95,
-                 "x":522.5,
-                 "y":362.75
-                }, 
-                {
-                 "class":"",
-                 "height":98.5,
-                 "id":12,
-                 "name":"mixedGoblin15",
-                 "rotation":0,
-                 "visible":true,
-                 "width":95,
-                 "x":207.5,
-                 "y":486.75
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -252,7 +219,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":13,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

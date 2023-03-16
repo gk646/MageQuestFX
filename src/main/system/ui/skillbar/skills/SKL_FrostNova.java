@@ -45,9 +45,7 @@ public class SKL_FrostNova extends SKILL {
      */
     @Override
     public void activate() {
-        if (actualCoolDown >= totalCoolDown && mg.player.getMana() >= manaCost) {
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
+        if (checkForActivation(0)) {
             mg.PROJECTILES.add(new PRJ_FrostNova(weapon_damage_percent));
         }
     }
