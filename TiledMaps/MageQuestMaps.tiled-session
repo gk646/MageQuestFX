@@ -101,11 +101,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 400,
-                "y": 399.5
+                "x": 370,
+                "y": 456
             }
         },
         "TheGrove.tmx": {
@@ -115,8 +115,8 @@
             "scale": 0.25,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1600,
-                "y": 1598
+                "x": 1602,
+                "y": 1600
             }
         },
         "TileSet.tsx": {
@@ -191,10 +191,10 @@
                 4
             ],
             "scale": 0.33,
-            "selectedLayer": 3,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 957.5757575757575,
-                "y": 962.1212121212121
+                "x": 625.7575757575758,
+                "y": 793.9393939393941
             }
         },
         "grassspritesheet.tsx": {

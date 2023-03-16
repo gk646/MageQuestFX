@@ -1,7 +1,6 @@
 package main.system.savegame;
 
 import gameworld.entities.NPC;
-import gameworld.entities.npcs.quests.ENT_GroveReceptionist;
 import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
@@ -200,7 +199,6 @@ public class LoadGameState {
             mg.qPanel.quests.add(new QST_TheGrovesSecret(mg, false));
             if (quest_num > 0) {
                 ((HiddenQUEST) mg.qPanel.getQuest(QUEST_NAME.TheGrovesSecret)).activated = true;
-                mg.npcControl.NPC_Active.add(new ENT_GroveReceptionist(mg, 55, 108, Zone.The_Grove));
             }
             if (quest_num == 1) {
                 mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 2, "Follow the path to \"The Grove\"");

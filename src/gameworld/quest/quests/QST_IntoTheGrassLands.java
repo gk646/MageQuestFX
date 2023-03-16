@@ -126,6 +126,7 @@ public class QST_IntoTheGrassLands extends QUEST {
                         nextStage();
                     }
                 } else if (progressStage == 13) {
+                    npc.blockInteraction = false;
                     mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                 }
             }

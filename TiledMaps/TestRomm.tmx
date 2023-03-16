@@ -168,6 +168,5 @@
  </layer>
  <objectgroup id="2" name="Objektebene 1">
   <object id="8" x="104" y="72"/>
-  <object id="9" name="mixedGoblin15" x="313" y="198" width="95" height="98.5"/>
  </objectgroup>
 </map>
