@@ -189,7 +189,13 @@ public class UI_InventoryPanel {
         //STATS
         gc.setFill(Colors.darkBackground);
         if ((invSlot.item.type == 'M') || invSlot.item.type == 'X') {
-
+            if (invSlot.item.type == 'X') {
+                gc.setFont(FonT.minecraftItalic14);
+                int stringY = (int) (startY - MainGame.SCREEN_HEIGHT * 0.22f);
+                for (String string : invSlot.item.stats.split("\n")) {
+                    gc.fillText(string, startX - MainGame.SCREEN_HEIGHT * 0.231f, stringY += MainGame.SCREEN_HEIGHT * 0.010f);
+                }
+            }
         } else if ((invSlot.item.type == 'G')) {
             gc.setFont(FonT.minecraftItalic15);
           /*  INT - Int

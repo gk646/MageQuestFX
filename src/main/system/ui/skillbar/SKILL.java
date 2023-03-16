@@ -23,7 +23,7 @@ abstract public class SKILL {
     protected final MainGame mg;
     protected Effects[] procEffects = new Effects[3];
     public float totalCoolDown;
-    protected int manaCost;
+    public int manaCost;
     public float coolDownCoefficient;
     public DamageType type;
     public float weapon_damage_percent;
@@ -35,7 +35,7 @@ abstract public class SKILL {
     protected int i_id;
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
     private final Image fancy = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/tooltip_fancy.png")));
-    protected String description;
+    public String description;
     public String name;
     public int toolTipTimer = 0;
 

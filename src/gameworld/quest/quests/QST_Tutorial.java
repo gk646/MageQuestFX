@@ -1,7 +1,6 @@
 package gameworld.quest.quests;
 
 import gameworld.entities.NPC;
-import gameworld.entities.damage.DamageType;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.npcs.quests.NPC_OldMan;
 import gameworld.quest.QUEST;
@@ -77,11 +76,11 @@ public class QST_Tutorial extends QUEST {
                 if (progressStage == 19) {
                     int choice = npc.dialog.drawChoice("Energy Sphere", "Pyro Blast", null, null);
                     if (choice == 10) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Energy Sphere", 2, null, null, DamageType.Arcane));
+                        mg.inventP.addItemToBag(new ITM_SpellBook(mg.player.level, mg.skillPanel.allSkills, 1));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     } else if (choice == 20) {
-                        mg.inventP.addItemToBag(new ITM_SpellBook("Pyro Blast", 2, "A powerful spell that unleashes a powerul fireball upon enemies, dealing big damage upon impact. Enemies hit by Pyroblast also suffer a small burn effect, causing them to take additional fire damage over time.", null, DamageType.Fire));
+                        mg.inventP.addItemToBag(new ITM_SpellBook(mg.player.level, mg.skillPanel.allSkills, 16));
                         nextStage();
                         loadDialogStage(npc, DialogStorage.Tutorial, 20);
                     }

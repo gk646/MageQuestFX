@@ -17,6 +17,7 @@ public class SKL_FrostNova extends SKILL {
         actualCoolDown = totalCoolDown;
         type = DamageType.Ice;
         manaCost = 75;
+        description = "Unleash a chilling wave of frost emanating from the player, instantly freezing all enemies within a circular area around the caster. Frozen foes become immobilized, their movements halted by the encasing ice. Frozen enemies struck by Glacial Thorns shatter and suffer 1000% Weapon damage as ice.";
     }
 
     /**

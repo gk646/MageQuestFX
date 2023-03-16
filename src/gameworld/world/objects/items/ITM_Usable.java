@@ -11,6 +11,10 @@ public class ITM_Usable extends ITEM {
         this.description = description;
     }
 
+    ITM_Usable() {
+
+    }
+
     public void activate(MainGame mg) {
 
     }

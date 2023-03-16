@@ -15,12 +15,12 @@ public class SKL_FlameWhirl extends SKILL {
         this.totalCoolDown = 600;
         actualCoolDown = totalCoolDown;
         this.weapon_damage_percent = 25;
-        manaCost = 15;
+        manaCost = 35;
         i_id = 17;
         type = DamageType.Fire;
         this.icon = setup("fireSword");
         name = "Flame Whirl";
-        description = "";
+        description = "Unleash a furious maelstrom of fire as you swing your blazing sword in a wide arc, creating a devastating whirlwind of flame. The sheer power of the Flame Whirl sends out a palpable heatwave, momentarily staggering foes and leaving them vulnerable to follow-up attacks.";
     }
 
     @Override
