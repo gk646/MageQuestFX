@@ -1,7 +1,6 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.DamageEffect;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
@@ -26,7 +25,6 @@ public class PRJ_PyroBlast extends CollisionProjectiles {
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitCompletelyDead;
         projectileHeight = 32;
-        this.procEffects[0] = new DamageEffect(180, 5, true, DamageType.Fire, 30, this.getClass());
         damageDead = false;
         projectileWidth = 64;
         this.updateVector = getTrajectory(new Point(x, y));

@@ -15,7 +15,7 @@ public class SKL_BlastHammer extends SKILL {
         this.totalCoolDown = 1200;
         actualCoolDown = totalCoolDown;
         this.coolDownCoefficient = 0;
-        this.icon = setup("energy_sphere");
+        this.icon = setup("blastHammer");
         type = DamageType.Fire;
         name = "Blast Hammer";
         manaCost = 50;

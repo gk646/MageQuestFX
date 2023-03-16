@@ -28,7 +28,7 @@ public class PRJ_FireBurst extends CollisionProjectiles {
         projectileType = ProjectileType.Continuous;
         this.resource = ProjectilePreloader.fireBurst;
         this.sounds[0] = resource.sounds.get(0);
-        this.procEffects[0] = new DamageEffect(300, 5, true, DamageType.Fire, 30, this.getClass());
+        this.procEffects[0] = new DamageEffect(300, 10, true, DamageType.Fire, 30, PRJ_InfernoRay.class);
         this.collisionBox = new Rectangle(12, 7, 23, 23);
         this.version = version;
         this.type = DamageType.Fire;

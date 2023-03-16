@@ -1,26 +1,26 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.abilities.PRJ_InfernoRay;
+import gameworld.player.abilities.PRJ_FlameWhirl;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;
 
 
-public class SKL_InfernoRay extends SKILL {
+public class SKL_FlameWhirl extends SKILL {
 
 
-    public SKL_InfernoRay(MainGame mg) {
+    public SKL_FlameWhirl(MainGame mg) {
         super(mg);
         this.totalCoolDown = 600;
         actualCoolDown = totalCoolDown;
-        this.weapon_damage_percent = 750;
+        this.weapon_damage_percent = 25;
         manaCost = 15;
         i_id = 17;
         type = DamageType.Fire;
-        this.icon = setup("infernoRay");
-        name = "Inferno Ray";
-        description = "Inferno Ray: Unleash a devastating beam of searing flames that incinerates your enemies in its path. Channel the raw power of the inferno to deal massive fire damage to all foes caught within the fiery torrent, leaving only smoldering ashes in your wake.";
+        this.icon = setup("fireSword");
+        name = "Flame Whirl";
+        description = "";
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SKL_InfernoRay extends SKILL {
     @Override
     public void activate() {
         if (checkForActivation(2)) {
-            mg.PROJECTILES.add(new PRJ_InfernoRay(weapon_damage_percent));
+            mg.PROJECTILES.add(new PRJ_FlameWhirl(weapon_damage_percent));
         }
     }
 }

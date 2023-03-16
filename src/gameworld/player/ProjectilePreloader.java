@@ -22,6 +22,7 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader powerSurge;
     public static GeneralResourceLoader blastHammer;
     public static GeneralResourceLoader gateTeleporter;
+    public static GeneralResourceLoader gateTeleporter1;
     public static GeneralResourceLoader infernoRay;
     public static GeneralResourceLoader fireSword;
 
@@ -85,10 +86,10 @@ public class ProjectilePreloader {
         //infernoRay.loadProjectilesSounds();
         //projectileSounds.add(infernoRay);
 
-        gateTeleporter = new GeneralResourceLoader("projectiles/infernoRay");
+        gateTeleporter = new GeneralResourceLoader("projectiles/gate1");
         //gateTeleporter.loadProjectilesSounds();
         //projectileSounds.add(gateTeleporter);
-
+        gateTeleporter = new GeneralResourceLoader("projectiles/gate2");
         //TODO SOUNDS
     }
 }

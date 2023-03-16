@@ -18,7 +18,7 @@ public class SKL_EnergySphere extends SKILL {
         type = DamageType.Arcane;
         name = "Energy Sphere";
         manaCost = 10;
-        weapon_damage_percent = 10;
+        weapon_damage_percent = 15;
         i_id = 0;
         description = "EnergySphere is an arcane ability that conjures a pulsing orb of crackling energy. Upon activation, the sphere begins to radiate powerful arcane energy in all directions, inflicting continuous damage to all nearby enemies within a certain radius. ";
     }

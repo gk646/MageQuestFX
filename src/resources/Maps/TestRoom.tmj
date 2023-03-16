@@ -200,17 +200,6 @@
                  "width":0,
                  "x":104,
                  "y":72
-                }, 
-                {
-                 "class":"",
-                 "height":98.5,
-                 "id":9,
-                 "name":"mixedGoblin15",
-                 "rotation":0,
-                 "visible":true,
-                 "width":95,
-                 "x":313,
-                 "y":198
                 }],
          "opacity":1,
          "type":"objectgroup",
