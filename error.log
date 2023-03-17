@@ -1,9 +1,4 @@
-java.lang.NullPointerException: Cannot invoke "com.sun.javafx.sg.prism.GrowableDataBuffer.putByte(byte)" because "<parameter1>" is null
-	at javafx.scene.canvas.GraphicsContext.writeRectParams(GraphicsContext.java:673)
-	at javafx.scene.canvas.GraphicsContext.writeOp4(GraphicsContext.java:682)
-	at javafx.scene.canvas.GraphicsContext.fillRect(GraphicsContext.java:2393)
-	at main.system.ui.UI.drawLoadingScreen(UI.java:399)
-	at main.system.ui.UI.updateLoadingScreen(UI.java:417)
-	at main.MainGame.loadGame(MainGame.java:442)
-	at main.MainGame.run(MainGame.java:174)
+java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 5000
+	at main.system.ui.maps.GameMap.getImage(GameMap.java:136)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:204)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

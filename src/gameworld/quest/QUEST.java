@@ -132,6 +132,15 @@ abstract public class QUEST {
         return similarity >= 0.8;
     }
 
+    protected void removeItemFromBag(String name) {
+        for (UI_InventorySlot slot : mg.inventP.char_Slots) {
+            if (slot.item != null && (slot.item.name.equals(name))) {
+                slot.item = null;
+                return;
+            }
+        }
+    }
+
     /**
      * Move the npc to a tile and proceed when he gets there
      *

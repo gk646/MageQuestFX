@@ -15,6 +15,7 @@ import gameworld.quest.hiddenquests.QST_StaturePuzzleHillcrest;
 import gameworld.quest.hiddenquests.QST_TheGrovesSecret;
 import gameworld.quest.quests.QST_IntoTheGrassLands;
 import gameworld.quest.quests.QST_MarlaFakeNecklace;
+import gameworld.quest.quests.QST_Nietzsche;
 import gameworld.quest.quests.QST_TheAudition;
 import gameworld.quest.quests.QST_Tutorial;
 import gameworld.world.objects.drops.DRP_DroppedItem;
@@ -45,6 +46,7 @@ public class LoadGameState {
         loadHiddenQuests();
         loadIntoGrassLands();
         loadGroveSecret();
+        loadNietzsche();
         if (mg.qPanel.quests.size() > 0) {
             mg.qPanel.activeQuest = mg.qPanel.quests.get(0);
         }
@@ -208,6 +210,20 @@ public class LoadGameState {
             }
         } else {
             mg.qPanel.finishedQuests.add(new QST_TheGrovesSecret(mg, true));
+        }
+    }
+
+    private void loadNietzsche() {
+        int quest_num = mg.sqLite.readQuestFacts(QUEST_NAME.Nietzsche.val, 1);
+        String description = mg.sqLite.readQuestDescription(QUEST_NAME.Nietzsche.val);
+        if (description.equals("active")) {
+            mg.qPanel.quests.add(new QST_Nietzsche(mg, false));
+            if (quest_num == 2) {
+                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.Nietzsche, 5, "Clear the cave");
+                mg.qPanel.getQuest(QUEST_NAME.Nietzsche).objectives[1] = "Recover the book";
+            }
+        } else if (description.equals("finished")) {
+            mg.qPanel.finishedQuests.add(new QST_Nietzsche(mg, true));
         }
     }
 

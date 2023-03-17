@@ -5,6 +5,8 @@ import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
 import gameworld.quest.Dialog;
 import gameworld.quest.QUEST;
+import gameworld.quest.QUEST_NAME;
+import gameworld.quest.quests.QST_Nietzsche;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ai.OpenAIHelper;
@@ -74,35 +76,41 @@ public class NPC_Nietzsche extends NPC {
     @Override
     public void update() {
         super.update();
-        if (QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 150) && !show_dialog) {
-            mg.playerPrompts.setETrue();
-            if (mg.inputH.e_typed) {
-                mg.inputH.e_typed = false;
-                typeMode = true;
-                length = prompt.length();
-                dialog.loadNewLine("What do you want to ask?");
-                playerTalkLocation = new Point((int) Player.worldX, (int) Player.worldY);
+        if (QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 150)) {
+            if (mg.qPanel.questIsFinished(QUEST_NAME.Nietzsche)) {
+                if (!show_dialog) {
+                    mg.playerPrompts.setETrue();
+                    if (mg.inputH.e_typed) {
+                        mg.inputH.e_typed = false;
+                        typeMode = true;
+                        length = prompt.length();
+                        dialog.loadNewLine("Present me with a question, and let us delve into the abyss of knowledge together.");
+                        playerTalkLocation = new Point((int) Player.worldX, (int) Player.worldY);
+                    }
+                }
+                if (show_dialog) {
+                    if (prompt.length() > 0) {
+                        mg.player.dialog.dialogRenderCounter = 2000;
+                    }
+                    if (length != prompt.length()) {
+                        mg.player.dialog.loadNewLine(prompt.toString());
+                        mg.player.dialog.dialogRenderCounter = 2000;
+                        length = prompt.length();
+                    }
+                    if (generateResponse) {
+                        OpenAIHelper.getAIResponseAsync(prompt.toString(), OpenAIHelper.API_KEY)
+                                .thenAccept(response -> {
+                                    dialog.loadNewLine(OpenAIHelper.extractGeneratedText(response));
+                                    prompt = new StringBuilder();
+                                    generateResponse = false;
+                                });
+                        generateResponse = false;
+                    }
+                }
+                show_dialog = typeMode;
+            } else if (!mg.qPanel.PlayerHasQuests(QUEST_NAME.Nietzsche)) {
+                mg.qPanel.quests.add(new QST_Nietzsche(mg, false));
             }
         }
-        if (show_dialog) {
-            if (prompt.length() > 0) {
-                mg.player.dialog.dialogRenderCounter = 2000;
-            }
-            if (length != prompt.length()) {
-                mg.player.dialog.loadNewLine(prompt.toString());
-                mg.player.dialog.dialogRenderCounter = 2000;
-                length = prompt.length();
-            }
-            if (generateResponse) {
-                OpenAIHelper.getAIResponseAsync(prompt.toString(), OpenAIHelper.API_KEY)
-                        .thenAccept(response -> {
-                            dialog.loadNewLine(OpenAIHelper.extractGeneratedText(response));
-                            prompt = new StringBuilder();
-                            generateResponse = false;
-                        });
-                generateResponse = false;
-            }
-        }
-        show_dialog = typeMode;
     }
 }

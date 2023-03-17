@@ -37,8 +37,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1600,
-                "y": 1598
+                "x": 1712,
+                "y": 1612
             }
         },
         "DungeonTutorial.tmx": {
@@ -64,19 +64,19 @@
             }
         },
         "ForestClearing.tmx": {
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 0.33,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 799.75,
-                "y": 799.75
+                "x": 663.6363636363636,
+                "y": 657.5757575757577
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.75,
+            "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 4000,
-                "y": 3999.333333333333
+                "x": 4656,
+                "y": 3264
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -104,19 +104,19 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 370,
-                "y": 456
+                "x": 433.3333333333333,
+                "y": 454.66666666666663
             }
         },
         "TheGrove.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.25,
-            "selectedLayer": 3,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1602,
-                "y": 1600
+                "x": 237.33333333333331,
+                "y": 1190
             }
         },
         "TileSet.tsx": {
@@ -144,19 +144,19 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.25,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 952,
-                "y": 790
+                "x": 905.3333333333333,
+                "y": 1112
             }
         },
         "caveMarla.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.5,
-                "y": 479.5
+                "x": 610.6666666666666,
+                "y": 558.6666666666666
             }
         },
         "d.tsx": {
@@ -193,7 +193,7 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 625.7575757575758,
+                "x": 772.7272727272727,
                 "y": 793.9393939393941
             }
         },
@@ -209,10 +209,10 @@
         },
         "hermitCaveHillcrest.tmx": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 456.6666666666666,
-                "y": 680
+                "x": 364.6666666666667,
+                "y": 681.3333333333333
             }
         },
         "map1.tmj": {
@@ -274,7 +274,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 70,
-    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
