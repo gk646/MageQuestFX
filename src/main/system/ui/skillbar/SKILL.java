@@ -139,7 +139,7 @@ abstract public class SKILL {
     }
 
     protected float getCoolDown() {
-        return totalCoolDown - (totalCoolDown * mg.player.effects[17]);
+        return totalCoolDown - (totalCoolDown * (mg.player.effects[17] / 100.0f));
     }
 
     protected boolean checkForActivation(int animationNumber) {

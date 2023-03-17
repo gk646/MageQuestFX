@@ -94,7 +94,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 2,
+            "scaleInDock": 1.5,
             "scaleInEditor": 0.75
         },
         "TestRomm.tmx": {
@@ -208,11 +208,11 @@
             "scaleInEditor": 1
         },
         "hermitCaveHillcrest.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 573.6666666666666,
-                "y": 900
+                "x": 456.6666666666666,
+                "y": 680
             }
         },
         "map1.tmj": {

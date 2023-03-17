@@ -363,7 +363,6 @@ public class MainGame {
             gc.setFill(Color.BLACK);
             gc.setFont(ui.maruMonica30);
             gc.fillText(("Draw Time" + (System.nanoTime() - drawStart)), 500, 600);
-
             gc.fillText((int) (Player.worldX + 24) / 48 + " " + (int) (Player.worldY + 24) / 48, 500, 700);
             gc.fillText(String.valueOf(TileBasedEffects.activeTile), 500, 750);
             if (CHEATS) {
@@ -488,7 +487,7 @@ public class MainGame {
         sBar.skills[1] = new SKL_VoidField(this);
         sBar.skills[3] = new SKL_VoidEruption(this);
         for (SKILL skill : skillPanel.allSkills) {
-            // skillPanel.addSKill(skill);
+            skillPanel.addSKill(skill);
         }
         for (Map map : wControl.MAPS) {
             for (int i = 0; i < map.mapSize.x; i++) {

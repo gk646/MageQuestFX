@@ -222,7 +222,7 @@ public class LoadGameState {
 
     private void loadPlayerSave() {
         try {
-            Statement stmt = mg.sqLite.conn.createStatement();
+            Statement stmt = mg.sqLite.PLAYER_SAVE.createStatement();
             mg.sqLite.readSKillPanel(stmt);
             mg.sqLite.readPlayerInventory(stmt);
             mg.sqLite.readPlayerBags(stmt);

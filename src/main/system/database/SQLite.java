@@ -27,8 +27,10 @@ import java.util.Objects;
 public class SQLite {
 
     private final MainGame mg;
-    public Connection conn;
+    public Connection DataBase;
     public static Connection mapCoverConn;
+
+    public Connection PLAYER_SAVE;
 
     public SQLite(MainGame mg) {
         this.mg = mg;
@@ -37,8 +39,9 @@ public class SQLite {
     public void getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
+            this.DataBase = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
             mapCoverConn = DriverManager.getConnection("jdbc:sqlite:MageQuestMapCoverDB.sqlite");
+            PLAYER_SAVE = DriverManager.getConnection("jdbc:sqlite:GameSave.sqlite");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +49,7 @@ public class SQLite {
 
     public void readAllGameData() {
         try {
-            Statement stmt = this.conn.createStatement();
+            Statement stmt = this.DataBase.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
             searchCHEST(stmt);
@@ -59,9 +62,9 @@ public class SQLite {
             searchTWOHANDS(stmt);
             searchBAGS(stmt);
             searchMISC(stmt);
-            readPlayerBagEquip(stmt);
+            readPlayerBagEquip();
             inverseArrayLists();
-            readPlayerStats(stmt);
+            readPlayerStats();
             readSkillTree(stmt);
             readSettings();
         } catch (SQLException e) {
@@ -73,8 +76,8 @@ public class SQLite {
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
-            this.conn = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
-            Statement stmt = this.conn.createStatement();
+            this.DataBase = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
+            Statement stmt = this.DataBase.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
             searchCHEST(stmt);
@@ -116,7 +119,7 @@ public class SQLite {
         String columnName = "FACT_" + Fact_ID;
         try {
             String sql = "UPDATE QUEST_FACTS SET " + columnName + " = ? where _ROWID_ = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = PLAYER_SAVE.prepareStatement(sql);
             ps.setInt(1, Fact_Value);
             ps.setInt(2, Quest_ID);
             ps.executeUpdate();
@@ -128,7 +131,7 @@ public class SQLite {
     public void setQuestActive(int Quest_ID) {
         try {
             String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?  where _ROWID_ = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = PLAYER_SAVE.prepareStatement(sql);
             ps.setString(1, "active");
             ps.setInt(2, Quest_ID);
             ps.executeUpdate();
@@ -140,7 +143,7 @@ public class SQLite {
     public void finishQuest(int Quest_ID) {
         try {
             String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?  where _ROWID_ = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = PLAYER_SAVE.prepareStatement(sql);
             ps.setString(1, "finished");
             ps.setInt(2, Quest_ID);
             ps.executeUpdate();
@@ -159,7 +162,7 @@ public class SQLite {
         ResultSet rs;
         try {
             String sql = " SELECT " + columnName + " FROM  QUEST_FACTS  WHERE _ROWID_ = " + Quest_id;
-            rs = conn.createStatement().executeQuery(sql);
+            rs = PLAYER_SAVE.createStatement().executeQuery(sql);
             return rs.getInt(columnName);
         } catch (SQLException ignored) {
             // mg.ui.sqlException();
@@ -171,7 +174,7 @@ public class SQLite {
         ResultSet rs;
         try {
             String sql = "SELECT DESCRIPTION FROM QUEST_FACTS WHERE _ROWID_ = " + Quest_id;
-            rs = conn.createStatement().executeQuery(sql);
+            rs = PLAYER_SAVE.createStatement().executeQuery(sql);
             if (rs.next()) {
                 String description = rs.getString("DESCRIPTION");
                 if (rs.wasNull()) {
@@ -192,7 +195,7 @@ public class SQLite {
         ResultSet rs;
         try {
             String sql = "SELECT * FROM PLAYER_STATS LIMIT 1 ";
-            rs = conn.createStatement().executeQuery(sql);
+            rs = PLAYER_SAVE.createStatement().executeQuery(sql);
             return rs.getInt("startLevel");
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -221,7 +224,7 @@ public class SQLite {
 
     private void saveSettings() throws SQLException {
         String sql = "UPDATE SETTINGS_SAVE SET AudioSettings = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         stmt.setInt(1, (int) mg.ui.musicSlider);
         stmt.setInt(2, 1);
         stmt.executeUpdate();
@@ -237,7 +240,7 @@ public class SQLite {
 
         for (int i = 1; i < 4; i++) {
             String sql = "SELECT AudioSettings FROM  SETTINGS_SAVE WHERE _ROWID_ =" + i;
-            ResultSet rs = conn.createStatement().executeQuery(sql);
+            ResultSet rs = PLAYER_SAVE.createStatement().executeQuery(sql);
             if (i == 1) {
                 mg.ui.musicSlider = rs.getInt("AudioSettings") > 0 ? rs.getInt("AudioSettings") : 100;
                 mg.ui.musicSliderHitBox.x = (int) (650 + mg.ui.musicSlider * 2 - 12);
@@ -253,7 +256,7 @@ public class SQLite {
 
     private void saveQuests() throws SQLException {
         String sql = "UPDATE QUEST_FACTS SET JournalText = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         String delimiter;
         String myString;
         for (QUEST quest : mg.qPanel.quests) {
@@ -271,7 +274,7 @@ public class SQLite {
     public String[] readQuestJournal(int questID, int fixedSize) {
         try {
             String sql = "SELECT JournalText FROM QUEST_FACTS WHERE _ROWID_ = " + questID;
-            ResultSet rs = conn.prepareStatement(sql).executeQuery();
+            ResultSet rs = PLAYER_SAVE.prepareStatement(sql).executeQuery();
             String[] entries = rs.getString("JournalText").split(">");
             String[] result = new String[fixedSize];
             System.arraycopy(entries, 0, result, 0, entries.length);
@@ -286,7 +289,7 @@ public class SQLite {
 
     private void saveSkillPanel() throws SQLException {
         String sql = "UPDATE SKL_Skills SET skill_index = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         int counter = 1;
         for (SKILL skill : mg.skillPanel.arcaneSkills) {
             if (!(skill instanceof SKL_Filler)) {
@@ -329,7 +332,7 @@ public class SQLite {
             }
         }
         sql = "UPDATE SKL_Skills SET activeSkills = ? WHERE _ROWID_ = ?";
-        stmt = conn.prepareStatement(sql);
+        stmt = PLAYER_SAVE.prepareStatement(sql);
         counter = 1;
         for (SKILL skill : mg.sBar.skills) {
             if (skill instanceof SKL_Filler) {
@@ -394,7 +397,7 @@ public class SQLite {
 
     public void savePlayerStats() throws SQLException {
         String sql = "UPDATE PLAYER_STATS SET coins = ?, experience = ?,startLevel = ? , talentPointsToSpend = ? WHERE _ROWID_ = 1";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         stmt.setInt(1, mg.player.coins);
         stmt.setInt(2, (int) mg.player.experience);
         stmt.setInt(3, mg.player.spawnLevel);
@@ -404,7 +407,7 @@ public class SQLite {
 
     private void saveBagInventory() throws SQLException {
         String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i <= mg.inventP.bag_Slots.size(); i++) {
             if (mg.inventP.bag_Slots.get(i - 1).item == null) {
                 stmt.setNull(1, Types.INTEGER);
@@ -442,7 +445,7 @@ public class SQLite {
 
     private void savePlayerInventory() throws SQLException {
         String sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?, level = ?, effect = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 0; i < 10; i++) {
             if (mg.inventP.char_Slots[i].item == null) {
                 stmt.setNull(1, Types.INTEGER);
@@ -485,7 +488,7 @@ public class SQLite {
 
     private void saveTalentTree() throws SQLException {
         String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
             if (mg.talentP.talent_Nodes[i] != null) {
                 if (mg.talentP.talent_Nodes[i].activated) {
@@ -493,7 +496,7 @@ public class SQLite {
                 } else {
                     stmt.setInt(1, 0);
                 }
-                stmt.setString(2, String.valueOf(i));
+                stmt.setInt(2, mg.talentP.talent_Nodes[i].id);
                 stmt.executeUpdate();
             }
         }
@@ -541,7 +544,8 @@ public class SQLite {
         }
     }
 
-    private void readPlayerBagEquip(Statement stmt) throws SQLException {
+    private void readPlayerBagEquip() throws SQLException {
+        Statement stmt = PLAYER_SAVE.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM  PLAYER_INV");
         while (rs.next()) {
             if (rs.getRow() < 12 || rs.getString("i_id") == null) {
@@ -561,7 +565,15 @@ public class SQLite {
                 continue;
             }
             mg.talentP.talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description"), rs.getString("effect")),
-                    rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), rs.getInt("activated"));
+                    rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), 0);
+        }
+        PreparedStatement stmt2 = PLAYER_SAVE.prepareStatement("SELECT * FROM TALENTS");
+        rs = stmt2.executeQuery();
+
+        while (rs.next()) {
+            if (rs.getInt("activated") == 1) {
+                mg.talentP.talent_Nodes[rs.getInt("id")].activated = true;
+            }
         }
     }
 
@@ -578,7 +590,8 @@ public class SQLite {
         }
     }
 
-    private void readPlayerStats(Statement stmt) throws SQLException {
+    private void readPlayerStats() throws SQLException {
+        Statement stmt = PLAYER_SAVE.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_STATS");
         mg.player.spawnLevel = rs.getInt("startLevel");
         mg.player.coins = rs.getInt("coins");
@@ -1004,14 +1017,14 @@ public class SQLite {
 
     private void resetSKills() throws SQLException {
         String sql = "UPDATE SKL_Skills SET skill_index = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i < 50; i++) {
             stmt.setNull(1, Types.INTEGER);
             stmt.setInt(2, i);
             stmt.executeUpdate();
         }
         sql = "UPDATE SKL_Skills SET activeSkills = ? WHERE _ROWID_ = ?";
-        stmt = conn.prepareStatement(sql);
+        stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i < 50; i++) {
             stmt.setNull(1, Types.INTEGER);
             stmt.setInt(2, i);
@@ -1021,7 +1034,7 @@ public class SQLite {
 
     private void resetInventory() throws SQLException {
         String sql = "UPDATE PLAYER_BAG SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i <= 41; i++) {
             stmt.setNull(1, Types.INTEGER);
             stmt.setString(2, null);
@@ -1032,7 +1045,7 @@ public class SQLite {
             stmt.executeUpdate();
         }
         sql = "UPDATE PLAYER_INV SET i_id = ?, type = ?, quality = ?,level = ?, effect = ? WHERE _ROWID_ = ?";
-        stmt = conn.prepareStatement(sql);
+        stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i <= 15; i++) {
             stmt.setNull(1, Types.INTEGER);
             stmt.setString(2, null);
@@ -1046,7 +1059,7 @@ public class SQLite {
 
     private void resetTalents() throws SQLException {
         String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+        PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
             if (mg.talentP.talent_Nodes[i] != null) {
                 stmt.setInt(1, 0);
@@ -1058,7 +1071,7 @@ public class SQLite {
 
     private void resetQuests() throws SQLException {
         String sql = "UPDATE QUEST_FACTS SET DESCRIPTION = ?, JournalText = NULL , FACT_1 = NULL, FACT_2 = NULL, FACT_3 = NULL WHERE _ROWID_ = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
+        PreparedStatement ps = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 1; i < 29; i++) {
             ps.setString(1, "null");
             ps.setInt(2, i);
