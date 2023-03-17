@@ -74,17 +74,17 @@ public class ProjectilePreloader {
         projectileSounds.add(powerSurge);
 
         blastHammer = new GeneralResourceLoader("projectiles/blastHammer");
-        //blastHammer.loadProjectilesSounds();
-        //projectileSounds.add(blastHammer);
+        blastHammer.loadProjectilesSounds();
+        projectileSounds.add(blastHammer);
 
 
         fireSword = new GeneralResourceLoader("projectiles/fireSword");
-        //fireSword.loadProjectilesSounds();
-        //projectileSounds.add(fireSword);
+        fireSword.loadProjectilesSounds();
+        projectileSounds.add(fireSword);
 
         infernoRay = new GeneralResourceLoader("projectiles/infernoRay");
-        //infernoRay.loadProjectilesSounds();
-        //projectileSounds.add(infernoRay);
+        infernoRay.loadProjectilesSounds();
+        projectileSounds.add(infernoRay);
 
         gateTeleporter = new GeneralResourceLoader("projectiles/gate1");
         //gateTeleporter.loadProjectilesSounds();

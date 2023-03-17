@@ -2,18 +2,19 @@ package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.DamageEffect;
-import gameworld.player.CollisionProjectiles;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
 
-public class PRJ_InfernoRay extends CollisionProjectiles {
+public class PRJ_InfernoRay extends PROJECTILE {
     double RightAngle;
 
     public PRJ_InfernoRay(float weapon_damage_percent) {
@@ -21,8 +22,8 @@ public class PRJ_InfernoRay extends CollisionProjectiles {
         this.type = DamageType.Fire;
         damageDead = true;
         this.resource = ProjectilePreloader.infernoRay;
-        //this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
-        //this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
+        this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
+        this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
         this.worldPos = new Point2D.Double(Player.worldX, Player.worldY);
         this.procEffects[0] = new DamageEffect(300, 10, true, DamageType.Fire, 30, this.getClass());
         direction = "leftrightdownup";
@@ -39,8 +40,7 @@ public class PRJ_InfernoRay extends CollisionProjectiles {
         } else if (RightAngle == 180) {
             collisionBox = new Rectangle(-262, 0, 262, 61);
         }
-
-        //playStartSound();
+        playStartSound();
     }
 
     public int getClosestRightAngle(int calculatedAngle) {
@@ -64,7 +64,7 @@ public class PRJ_InfernoRay extends CollisionProjectiles {
         gc.save();
         gc.translate(worldPos.x - Player.worldX + Player.screenX + 24, worldPos.y - Player.worldY + Player.screenY + 31);
         gc.rotate(RightAngle);
-        switch (spriteCounter % 120 / 10) {
+        switch (spriteCounter % 144 / 12) {
             case 0 -> gc.drawImage(resource.images1.get(0), 0, -31);
             case 1 -> gc.drawImage(resource.images1.get(1), 0, -31);
             case 2 -> gc.drawImage(resource.images1.get(2), 0, -31);

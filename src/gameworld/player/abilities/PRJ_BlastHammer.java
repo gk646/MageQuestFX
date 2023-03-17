@@ -7,6 +7,7 @@ import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
@@ -20,13 +21,13 @@ public class PRJ_BlastHammer extends PROJECTILE {
         this.type = DamageType.Fire;
         damageDead = true;
         this.resource = ProjectilePreloader.blastHammer;
-        //this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
-        //this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
+        this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
+        this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
         collisionBox = new Rectangle(-30, -10, 108, 58);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
-        // playStartSound();
+        playStartSound();
     }
 
 

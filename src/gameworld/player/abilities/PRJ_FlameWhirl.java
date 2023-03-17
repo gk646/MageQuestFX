@@ -1,7 +1,7 @@
 package gameworld.player.abilities;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.CollisionProjectiles;
+import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
 
-public class PRJ_FlameWhirl extends CollisionProjectiles {
+public class PRJ_FlameWhirl extends PROJECTILE {
 
 
     public PRJ_FlameWhirl(float weapon_damage_percetn) {
@@ -19,11 +19,11 @@ public class PRJ_FlameWhirl extends CollisionProjectiles {
         this.weapon_damage_percent = weapon_damage_percetn;
         this.type = DamageType.Fire;
         this.resource = ProjectilePreloader.fireSword;
-        //this.sounds[0] = resource.sounds.get(0);
+        this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX + 24, Player.worldY + 24);
         collisionBox = new Rectangle(-96, -75, 185, 150);
         direction = "leftrightdownup";
-        //playStartSound();
+        playStartSound();
     }
 
 
@@ -68,7 +68,6 @@ public class PRJ_FlameWhirl extends CollisionProjectiles {
 
     @Override
     public void playHitSound() {
-
     }
 
     /**

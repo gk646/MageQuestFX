@@ -317,7 +317,6 @@ public class Player extends ENTITY {
         dotDamageMultiplier = Math.round(((focus * 1.5) * (1.0f - (level / 75.0f))) * 100.0f) / 100.0f;
         dotLengthMultiplier = (dotDamageMultiplier * 1.25f);
 
-
         DMG_Arcane_Absolute = effects[1];
         DMG_Dark__Absolute = effects[2];
         effects[3] += buffLengthMultiplier;

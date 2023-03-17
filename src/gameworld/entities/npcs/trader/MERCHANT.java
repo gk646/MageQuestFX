@@ -25,7 +25,7 @@ abstract public class MERCHANT extends NPC {
 
     public boolean sellItem(ITEM item) {
         addItemSold(item);
-        mg.player.coins += item.level * item.rarity;
+        mg.player.coins += (item.cost * mg.player.speechSkill / 100.0f) / 3.0f;
         mg.sound.playEffectSound(5);
         return true;
     }
@@ -59,7 +59,7 @@ abstract public class MERCHANT extends NPC {
             slot.drawSlot(gc, i % 7 * 50 + startX + 10, 60 + y + startY);
             if (slot.item != null && !slot.grabbed) {
                 slot.drawIcon(gc, i % 7 * 50 + startX + 10, 60 + y + startY, 45);
-                gc.fillText(String.valueOf(slot.item.cost), i % 7 * 50 + startX + 22, 120 + y + startY);
+                gc.fillText(String.valueOf((int) (slot.item.cost * (1 - mg.player.speechSkill / 100.0f))), i % 7 * 50 + startX + 22, 120 + y + startY);
             }
             i++;
         }
@@ -98,7 +98,7 @@ abstract public class MERCHANT extends NPC {
             for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
                 if (slot.item == null) {
                     slot.item = item;
-                    mg.player.coins -= item.cost;
+                    mg.player.coins -= item.cost * (1 - mg.player.speechSkill / 100.0f);
                     mg.sound.playEffectSound(7);
                     return true;
                 }
@@ -113,7 +113,7 @@ abstract public class MERCHANT extends NPC {
             for (UI_InventorySlot slot : mg.inventP.bag_Slots) {
                 if (slot.item == null) {
                     slot.item = item;
-                    mg.player.coins -= item.level + item.rarity;
+                    mg.player.coins -= item.cost * (1 - mg.player.speechSkill / 100.0f);
                     mg.sound.playEffectSound(7);
                     return true;
                 }
