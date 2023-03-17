@@ -685,7 +685,6 @@ public class UI_InventoryPanel {
         secondPanelButton.y = (int) (startY + 0.497f * MainGame.SCREEN_HEIGHT);
         //big background
 
-
         gc.setFill(Colors.LightGrey);
         gc.fillRoundRect(startX - 50, startY - 80, 450, 620, 35, 35);
         //outline
@@ -702,78 +701,80 @@ public class UI_InventoryPanel {
         drawCharacterAnimation(gc, startX, startY);
         gc.setFill(Colors.darkBackground);
         gc.setTextAlign(TextAlignment.RIGHT);
+        int distance1 = 15; // The distance between each line of text
+        int startY2 = startY + 382; // The starting Y position for the first line of text
+
         gc.setFont(FonT.minecraftBold16);
-        gc.fillText(String.valueOf(mg.player.intellect), startX + 165, startY + 393);
-        gc.fillText(String.valueOf(mg.player.wisdom), startX + 165, startY + 408);
-        gc.fillText(String.valueOf(mg.player.vitality), startX + 165, startY + 423);
-        gc.fillText(String.valueOf(mg.player.agility), startX + 165, startY + 438);
-        gc.fillText(String.valueOf(mg.player.luck), startX + 165, startY + 453);
-        gc.fillText(String.valueOf(mg.player.charisma), startX + 165, startY + 468);
-        gc.fillText(String.valueOf(mg.player.endurance), startX + 165, startY + 483);
-        gc.fillText(String.valueOf(mg.player.strength), startX + 165, startY + 498);
-        gc.fillText(String.valueOf(mg.player.focus), startX + 165, startY + 513);
+        gc.fillText(String.valueOf(mg.player.intellect), startX + 172, startY2);
+        gc.fillText(String.valueOf(mg.player.wisdom), startX + 172, startY2 + distance1);
+        gc.fillText(String.valueOf(mg.player.vitality), startX + 172, startY2 + 2 * distance1);
+        gc.fillText(String.valueOf(mg.player.agility), startX + 172, startY2 + 3 * distance1);
+        gc.fillText(String.valueOf(mg.player.luck), startX + 172, startY2 + 4 * distance1);
+        gc.fillText(String.valueOf(mg.player.charisma), startX + 172, startY2 + 5 * distance1);
+        gc.fillText(String.valueOf(mg.player.endurance), startX + 172, startY2 + 6 * distance1);
+        gc.fillText(String.valueOf(mg.player.strength), startX + 172, startY2 + 7 * distance1);
+        gc.fillText(String.valueOf(mg.player.focus), startX + 172, startY2 + 8 * distance1);
+        gc.setFont(FonT.minecraftBold15);
+        gc.fillText(((Math.round(mg.player.weaponDamageLower * 10.0f) / 10.0f) + "-" + Math.round(mg.player.weaponDamageUpper * 10.0f) / 10.0f), startX + 172, startY2 + 9 * distance1);
         gc.setTextAlign(TextAlignment.LEFT);
-        gc.fillText("Level " + mg.player.level, 135 + startX, 20 + startY);
+
+        gc.fillText("Level " + mg.player.level, 135 + startX, startY - 15);
         gc.setFont(FonT.minecraftBold14);
         gc.fillText("Character", startX + 138, startY - 61);
         gc.fillText("Character", startX - 17, startY - 80 + 629);
-        gc.fillText("Currency", startX + 100, startY - 80 + 629);
-        //gc.fillText("No Title", startX + 147, startY);
+        gc.fillText("All Stats", startX + 105, startY - 80 + 629);
+        gc.fillText("Statistics", startX + 218, startY - 80 + 629);
 
         //character image outline
         gc.setLineWidth(2);
-        gc.strokeRoundRect(75 + startX, startY + 40, 200, 250, 25, 25);
+        gc.strokeRoundRect(75 + startX, startY + 15, 200, 250, 25, 25);
 
-        //game world.player image
-        gc.drawImage(mg.player.entityImage1, startX + 135, startY + 135, 60, 120);
         //Stats Text
-        gc.strokeRoundRect(startX - 14, startY + 375, 187, 150, 15, 15);
-        gc.strokeRoundRect(startX + 177, startY + 375, 187, 150, 15, 15);
+        gc.strokeRoundRect(startX - 32, startY + 365, 207, 160, 15, 15);
+        gc.strokeRoundRect(startX + 176, startY + 365, 207, 160, 15, 15);
 
-        gc.fillText("Base  Stats", startX - 5, startY + 370);
+        int startYtext = 367;
+        int distance = 15;
         //stats
-        gc.fillText("Intelligence: ", startX - 5, startY + 393);
-        gc.fillText("Wisdom: ", startX - 5, startY + 408);
-        gc.fillText("Vitality: ", startX - 5, startY + 423);
-        gc.fillText("Agility: ", startX - 5, startY + 438);
-
-        gc.fillText("Luck: ", startX - 5, startY + 453);
-        gc.fillText("Charisma: ", startX - 5, startY + 468);
-        gc.fillText("Endurance: ", startX - 5, startY + 483);
-        gc.fillText("Strength: ", startX - 5, startY + 498);
-        gc.fillText("Focus: ", startX - 5, startY + 513);
-
+        gc.fillText("Intelligence: ", startX - 25, startY + startYtext + distance);
+        gc.fillText("Wisdom: ", startX - 25, startY + startYtext + distance * 2);
+        gc.fillText("Vitality: ", startX - 25, startY + startYtext + distance * 3);
+        gc.fillText("Agility: ", startX - 25, startY + startYtext + distance * 4);
+        gc.fillText("Luck: ", startX - 25, startY + startYtext + distance * 5);
+        gc.fillText("Charisma: ", startX - 25, startY + startYtext + distance * 6);
+        gc.fillText("Endurance: ", startX - 25, startY + startYtext + distance * 7);
+        gc.fillText("Strength: ", startX - 25, startY + startYtext + distance * 8);
+        gc.fillText("Focus: ", startX - 25, startY + startYtext + distance * 9);
+        gc.fillText("Weapon DMG: ", startX - 25, startY + startYtext + distance * 10);
 
         // second panel stats
-        gc.fillText("Combat Stats", startX + 185, startY + 372);
-        gc.fillText("Effects", startX + 292, startY + 372);
-
-        gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
-        gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+        gc.setFill(Colors.mediumLightGreyTransparent);
+        gc.fillRoundRect(startX - 25, startY + 350, 107, 15, 10, 10);
+        gc.setFill(Colors.darkBackground);
+        gc.fillText("Base Stats", startX - 17, startY + 362);
+        gc.strokeRoundRect(startX - 25, startY + 350, 107, 15, 10, 10);
         combatStatsHitBox.x = startX + 180;
-        combatStatsHitBox.y = startY + 360;
-        effectsHitBox.x = startX + 287;
-        effectsHitBox.y = startY + 360;
+        combatStatsHitBox.y = startY + 350;
+        effectsHitBox.x = startX + 294;
+        effectsHitBox.y = startY + 350;
         if (showCombatStats) {
             gc.setStroke(Colors.darkBackground);
-            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
-            gc.fillText("Combat Stats", startX + 185, startY + 372);
+            gc.strokeRoundRect(startX + 180, startY + 350, 114, 15, 10, 10);
+            gc.fillText("Combat Stats", startX + 186, startY + 362);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
+            gc.fillRoundRect(startX + 294, startY + 350, 75, 15, 10, 10);
             gc.setFill(Colors.darkBackground);
-            gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
-            gc.fillText("Effects", startX + 292, startY + 372);
+            gc.strokeRoundRect(startX + 294, startY + 350, 75, 15, 10, 10);
+            gc.fillText("Effects", startX + 301, startY + 362);
             drawCombatStats(gc, startX, startY);
         } else {
-            gc.setStroke(Colors.darkBackground);
-            gc.strokeRoundRect(startX + 287, startY + 360, 68, 15, 10, 10);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.fillRoundRect(startX + 180, startY + 350, 114, 15, 10, 10);
             gc.setFill(Colors.darkBackground);
-            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
-            gc.fillText("Effects", startX + 292, startY + 372);
-            gc.fillText("Combat Stats", startX + 185, startY + 372);
-            gc.strokeRoundRect(startX + 180, startY + 360, 107, 15, 10, 10);
+            gc.strokeRoundRect(startX + 180, startY + 350, 114, 15, 10, 10);
+            gc.fillText("Combat Stats", startX + 186, startY + 362);
+            gc.strokeRoundRect(startX + 294, startY + 350, 75, 15, 10, 10);
+            gc.fillText("Effects", startX + 301, startY + 362);
             drawEffects(gc, startX, startY);
         }
     }
@@ -781,80 +782,80 @@ public class UI_InventoryPanel {
     private void drawCharacterAnimation(GraphicsContext gc, int startX, int startY) {
         if (mg.player.attack1) {
             switch (mg.player.spriteCounter % 80 / 10) {
-                case 0 -> gc.drawImage(resource.attack1.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(resource.attack1.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(resource.attack1.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(resource.attack1.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(resource.attack1.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(resource.attack1.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(resource.attack1.get(6), startX + 50, startY - 25);
+                case 0 -> gc.drawImage(resource.attack1.get(0), startX + 50, startY - 50);
+                case 1 -> gc.drawImage(resource.attack1.get(1), startX + 50, startY - 50);
+                case 2 -> gc.drawImage(resource.attack1.get(2), startX + 50, startY - 50);
+                case 3 -> gc.drawImage(resource.attack1.get(3), startX + 50, startY - 50);
+                case 4 -> gc.drawImage(resource.attack1.get(4), startX + 50, startY - 50);
+                case 5 -> gc.drawImage(resource.attack1.get(5), startX + 50, startY - 50);
+                case 6 -> gc.drawImage(resource.attack1.get(6), startX + 50, startY - 50);
             }
         } else if (mg.player.attack2) {
             switch (mg.player.spriteCounter % 100 / 10) {
-                case 0 -> gc.drawImage(resource.attack2.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(resource.attack2.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(resource.attack2.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(resource.attack2.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(resource.attack2.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(resource.attack2.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(resource.attack2.get(6), startX + 50, startY - 25);
-                case 7 -> gc.drawImage(resource.attack2.get(7), startX + 50, startY - 25);
-                case 8 -> gc.drawImage(resource.attack2.get(8), startX + 50, startY - 25);
+                case 0 -> gc.drawImage(resource.attack2.get(0), startX + 50, startY - 50);
+                case 1 -> gc.drawImage(resource.attack2.get(1), startX + 50, startY - 50);
+                case 2 -> gc.drawImage(resource.attack2.get(2), startX + 50, startY - 50);
+                case 3 -> gc.drawImage(resource.attack2.get(3), startX + 50, startY - 50);
+                case 4 -> gc.drawImage(resource.attack2.get(4), startX + 50, startY - 50);
+                case 5 -> gc.drawImage(resource.attack2.get(5), startX + 50, startY - 50);
+                case 6 -> gc.drawImage(resource.attack2.get(6), startX + 50, startY - 50);
+                case 7 -> gc.drawImage(resource.attack2.get(7), startX + 50, startY - 50);
+                case 8 -> gc.drawImage(resource.attack2.get(8), startX + 50, startY - 50);
             }
         } else if (mg.player.attack3) {
             switch (mg.player.spriteCounter % 170 / 10) {
-                case 0 -> gc.drawImage(resource.attack3.get(0), startX + 50, startY - 25);
-                case 1 -> gc.drawImage(resource.attack3.get(1), startX + 50, startY - 25);
-                case 2 -> gc.drawImage(resource.attack3.get(2), startX + 50, startY - 25);
-                case 3 -> gc.drawImage(resource.attack3.get(3), startX + 50, startY - 25);
-                case 4 -> gc.drawImage(resource.attack3.get(4), startX + 50, startY - 25);
-                case 5 -> gc.drawImage(resource.attack3.get(5), startX + 50, startY - 25);
-                case 6 -> gc.drawImage(resource.attack3.get(6), startX + 50, startY - 25);
-                case 7 -> gc.drawImage(resource.attack3.get(7), startX + 50, startY - 25);
-                case 8 -> gc.drawImage(resource.attack3.get(8), startX + 50, startY - 25);
-                case 9 -> gc.drawImage(resource.attack3.get(9), startX + 50, startY - 25);
-                case 10 -> gc.drawImage(resource.attack3.get(10), startX + 50, startY - 25);
-                case 11 -> gc.drawImage(resource.attack3.get(11), startX + 50, startY - 25);
-                case 12 -> gc.drawImage(resource.attack3.get(12), startX + 50, startY - 25);
-                case 13 -> gc.drawImage(resource.attack3.get(13), startX + 50, startY - 25);
-                case 14 -> gc.drawImage(resource.attack3.get(14), startX + 50, startY - 25);
-                case 15 -> gc.drawImage(resource.attack3.get(15), startX + 50, startY - 25);
+                case 0 -> gc.drawImage(resource.attack3.get(0), startX + 50, startY - 50);
+                case 1 -> gc.drawImage(resource.attack3.get(1), startX + 50, startY - 50);
+                case 2 -> gc.drawImage(resource.attack3.get(2), startX + 50, startY - 50);
+                case 3 -> gc.drawImage(resource.attack3.get(3), startX + 50, startY - 50);
+                case 4 -> gc.drawImage(resource.attack3.get(4), startX + 50, startY - 50);
+                case 5 -> gc.drawImage(resource.attack3.get(5), startX + 50, startY - 50);
+                case 6 -> gc.drawImage(resource.attack3.get(6), startX + 50, startY - 50);
+                case 7 -> gc.drawImage(resource.attack3.get(7), startX + 50, startY - 50);
+                case 8 -> gc.drawImage(resource.attack3.get(8), startX + 50, startY - 50);
+                case 9 -> gc.drawImage(resource.attack3.get(9), startX + 50, startY - 50);
+                case 10 -> gc.drawImage(resource.attack3.get(10), startX + 50, startY - 50);
+                case 11 -> gc.drawImage(resource.attack3.get(11), startX + 50, startY - 50);
+                case 12 -> gc.drawImage(resource.attack3.get(12), startX + 50, startY - 50);
+                case 13 -> gc.drawImage(resource.attack3.get(13), startX + 50, startY - 50);
+                case 14 -> gc.drawImage(resource.attack3.get(14), startX + 50, startY - 50);
+                case 15 -> gc.drawImage(resource.attack3.get(15), startX + 50, startY - 50);
             }
         } else {
             if (mg.player.isMoving) {
                 if (mg.player.movingLeft) {
                     switch (mg.player.spriteCounter % 136 / 17) {
-                        case 0 -> gc.drawImage(resource.runMirror.get(7), startX + 90, startY - 25);
-                        case 1 -> gc.drawImage(resource.runMirror.get(6), startX + 90, startY - 25);
-                        case 2 -> gc.drawImage(resource.runMirror.get(5), startX + 90, startY - 25);
-                        case 3 -> gc.drawImage(resource.runMirror.get(4), startX + 90, startY - 25);
-                        case 4 -> gc.drawImage(resource.runMirror.get(3), startX + 90, startY - 25);
-                        case 5 -> gc.drawImage(resource.runMirror.get(2), startX + 90, startY - 25);
-                        case 6 -> gc.drawImage(resource.runMirror.get(1), startX + 90, startY - 25);
-                        case 7 -> gc.drawImage(resource.runMirror.get(0), startX + 90, startY - 25);
+                        case 0 -> gc.drawImage(resource.runMirror.get(7), startX + 90, startY - 50);
+                        case 1 -> gc.drawImage(resource.runMirror.get(6), startX + 90, startY - 50);
+                        case 2 -> gc.drawImage(resource.runMirror.get(5), startX + 90, startY - 50);
+                        case 3 -> gc.drawImage(resource.runMirror.get(4), startX + 90, startY - 50);
+                        case 4 -> gc.drawImage(resource.runMirror.get(3), startX + 90, startY - 50);
+                        case 5 -> gc.drawImage(resource.runMirror.get(2), startX + 90, startY - 50);
+                        case 6 -> gc.drawImage(resource.runMirror.get(1), startX + 90, startY - 50);
+                        case 7 -> gc.drawImage(resource.runMirror.get(0), startX + 90, startY - 50);
                     }
                 } else {
                     switch (mg.player.spriteCounter % 136 / 17) {
-                        case 0 -> gc.drawImage(resource.run.get(0), startX + 70, startY - 25);
-                        case 1 -> gc.drawImage(resource.run.get(1), startX + 70, startY - 25);
-                        case 2 -> gc.drawImage(resource.run.get(2), startX + 70, startY - 25);
-                        case 3 -> gc.drawImage(resource.run.get(3), startX + 70, startY - 25);
-                        case 4 -> gc.drawImage(resource.run.get(4), startX + 70, startY - 25);
-                        case 5 -> gc.drawImage(resource.run.get(5), startX + 70, startY - 25);
-                        case 6 -> gc.drawImage(resource.run.get(6), startX + 70, startY - 25);
-                        case 7 -> gc.drawImage(resource.run.get(7), startX + 70, startY - 25);
+                        case 0 -> gc.drawImage(resource.run.get(0), startX + 70, startY - 50);
+                        case 1 -> gc.drawImage(resource.run.get(1), startX + 70, startY - 50);
+                        case 2 -> gc.drawImage(resource.run.get(2), startX + 70, startY - 50);
+                        case 3 -> gc.drawImage(resource.run.get(3), startX + 70, startY - 50);
+                        case 4 -> gc.drawImage(resource.run.get(4), startX + 70, startY - 50);
+                        case 5 -> gc.drawImage(resource.run.get(5), startX + 70, startY - 50);
+                        case 6 -> gc.drawImage(resource.run.get(6), startX + 70, startY - 50);
+                        case 7 -> gc.drawImage(resource.run.get(7), startX + 70, startY - 50);
                     }
                 }
             } else {
                 switch (mg.player.spriteCounter % 200 / 25) {
-                    case 0 -> gc.drawImage(resource.idle.get(0), startX + 50, startY - 25);
-                    case 1 -> gc.drawImage(resource.idle.get(1), startX + 50, startY - 25);
-                    case 2 -> gc.drawImage(resource.idle.get(2), startX + 50, startY - 25);
-                    case 3 -> gc.drawImage(resource.idle.get(3), startX + 50, startY - 25);
-                    case 4 -> gc.drawImage(resource.idle.get(4), startX + 50, startY - 25);
-                    case 5 -> gc.drawImage(resource.idle.get(5), startX + 50, startY - 25);
-                    case 6 -> gc.drawImage(resource.idle.get(6), startX + 50, startY - 25);
-                    case 7 -> gc.drawImage(resource.idle.get(7), startX + 50, startY - 25);
+                    case 0 -> gc.drawImage(resource.idle.get(0), startX + 50, startY - 50);
+                    case 1 -> gc.drawImage(resource.idle.get(1), startX + 50, startY - 50);
+                    case 2 -> gc.drawImage(resource.idle.get(2), startX + 50, startY - 50);
+                    case 3 -> gc.drawImage(resource.idle.get(3), startX + 50, startY - 50);
+                    case 4 -> gc.drawImage(resource.idle.get(4), startX + 50, startY - 50);
+                    case 5 -> gc.drawImage(resource.idle.get(5), startX + 50, startY - 50);
+                    case 6 -> gc.drawImage(resource.idle.get(6), startX + 50, startY - 50);
+                    case 7 -> gc.drawImage(resource.idle.get(7), startX + 50, startY - 50);
                 }
             }
         }
@@ -870,19 +871,20 @@ public class UI_InventoryPanel {
     private void drawCombatStats(GraphicsContext gc, int startX, int startY) {
         gc.setFill(Colors.darkBackground);
         gc.setFont(FonT.minecraftBold14);
-        int yInterval = (int) (MainGame.SCREEN_HEIGHT * 0.01388f);
+        int yInterval = (int) (MainGame.SCREEN_HEIGHT * 0.0148f);
+        startY -= 10;
         startX += 190;
-        double xOffset = 165;
+        double xOffset = 188;
         gc.fillText("Max-Health: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f);
         gc.fillText("Max-Mana: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + yInterval);
         gc.fillText("ManaREG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
         gc.fillText("HealthREG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
         gc.fillText("Armour: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 4 * yInterval);
-        gc.fillText("Critchance: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
-        gc.fillText("Resist %: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
+        gc.fillText("Crit-Chance: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
+        gc.fillText("Crit-Damage: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
         gc.fillText("Carry-weight: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
         gc.fillText("MovementSpeed: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
-        gc.fillText("Wpn DMG: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
+        gc.fillText("CD-Reduction: ", startX - 5, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
         gc.setTextAlign(TextAlignment.RIGHT);
         gc.setFont(FonT.minecraftBold16);
         gc.fillText(String.valueOf(mg.player.maxHealth), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f);
@@ -890,11 +892,11 @@ public class UI_InventoryPanel {
         gc.fillText(Math.round(mg.player.manaRegeneration * 60 * 100.0f) / 100.0f + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 2 * yInterval);
         gc.fillText(Math.round(mg.player.healthRegeneration * 60 * 100.0f) / 100.0f + "/s", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 3 * yInterval);
         gc.fillText(String.valueOf(mg.player.armour), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 4 * yInterval);
-        gc.fillText(String.valueOf(mg.player.critChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
-        gc.fillText(String.valueOf(mg.player.resistChance), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
+        gc.fillText(mg.player.critChance + "%", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 5 * yInterval);
+        gc.fillText(mg.player.effects[22] + "%", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 6 * yInterval);
         gc.fillText(String.valueOf(mg.player.carryWeight), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 7 * yInterval);
         gc.fillText(String.valueOf(mg.player.playerMovementSpeed), startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 8 * yInterval);
-        gc.fillText(Math.round(mg.player.weaponDamageLower * 100.0f) / 100.0f + "-" + Math.round(mg.player.weaponDamageUpper * 100.0f) / 100.0f, startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
+        gc.fillText(mg.player.effects[17] + "%", startX + xOffset, startY + MainGame.SCREEN_HEIGHT * 0.363f + 9 * yInterval);
         gc.setTextAlign(TextAlignment.LEFT);
     }
 
@@ -929,6 +931,11 @@ public class UI_InventoryPanel {
         int y = startY + 50;
         float[] playerEffects = mg.player.effects;
         for (int i = 1; i < 26; i++) {
+            if (i == 23) {
+                gc.fillText(Player.effectNames[i] + playerEffects[i], 100 + startX, y);
+                y += 18;
+                continue;
+            }
             gc.fillText(Player.effectNames[i] + playerEffects[i] + "%", 100 + startX, y);
             y += 18;
         }
@@ -942,59 +949,59 @@ public class UI_InventoryPanel {
     private void drawCharacterSlots(GraphicsContext gc, int startX, int startY) {
         gc.setLineWidth(2);
         for (int i = 0; i <= 3; i++) {
-            char_Slots[i].boundBox.x = 21 + startX;
-            char_Slots[i].boundBox.y = (i * 50 + 65 + startY);
+            char_Slots[i].boundBox.x = 15 + startX;
+            char_Slots[i].boundBox.y = (i * 50 + 45 + startY);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(21 + startX, i * 50 + 65 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(15 + startX, i * 50 + 45 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, 21 + startX, (i * 50 + 65 + startY));
+            char_Slots[i].drawSlot(gc, 15 + startX, (i * 50 + 45 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, 21 + startX, ((i * 50) + 65 + startY), SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, 15 + startX, ((i * 50) + 45 + startY), SLOT_SIZE);
             } else {
                 if (char_Slots[i].type.equals("H")) {
-                    gc.drawImage(helm, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                    gc.drawImage(helm, 15 + startX + 2, ((i * 50) + 45 + startY) + 2);
                 } else if (char_Slots[i].type.equals("C")) {
-                    gc.drawImage(chest, 21 + startX + 2, ((i * 50) + 65 + startY));
+                    gc.drawImage(chest, 15 + startX + 2, ((i * 50) + 45 + startY));
                 } else if (char_Slots[i].type.equals("P")) {
-                    gc.drawImage(pants, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                    gc.drawImage(pants, 15 + startX + 2, ((i * 50) + 45 + startY) + 2);
                 } else if (char_Slots[i].type.equals("B")) {
-                    gc.drawImage(boots, 21 + startX + 2, ((i * 50) + 65 + startY) + 2);
+                    gc.drawImage(boots, 15 + startX + 2, ((i * 50) + 45 + startY) + 2);
                 }
             }
         }
         for (int i = 4; i <= 7; i++) {
-            char_Slots[i].boundBox.x = 283 + startX;
-            char_Slots[i].boundBox.y = (((i - 4) * 50) + 65 + startY);
+            char_Slots[i].boundBox.x = 289 + startX;
+            char_Slots[i].boundBox.y = (((i - 4) * 50) + 45 + startY);
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(283 + startX, ((i - 4) * 50) + 65 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(289 + startX, ((i - 4) * 50) + 45 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, 283 + startX, (((i - 4) * 50) + 65 + startY));
+            char_Slots[i].drawSlot(gc, 289 + startX, (((i - 4) * 50) + 45 + startY));
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, 283 + startX, ((i - 4) * 50) + 65 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, 289 + startX, ((i - 4) * 50) + 45 + startY, SLOT_SIZE);
             } else {
                 if (char_Slots[i].type.equals("R")) {
-                    gc.drawImage(ring, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                    gc.drawImage(ring, 289 + startX + 2, ((i - 4) * 50) + 45 + startY + 2);
                 } else if (char_Slots[i].type.equals("A")) {
-                    gc.drawImage(amulet, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                    gc.drawImage(amulet, 289 + startX + 2, ((i - 4) * 50) + 45 + startY + 2);
                 } else if (char_Slots[i].type.equals("T")) {
-                    gc.drawImage(relic, 283 + startX + 2, ((i - 4) * 50) + 65 + startY + 2);
+                    gc.drawImage(relic, 289 + startX + 2, ((i - 4) * 50) + 45 + startY + 2);
                 }
             }
         }
         for (int i = 8; i <= 9; i++) {
             char_Slots[i].boundBox.x = ((i - 8) * 57) + 124 + startX;
-            char_Slots[i].boundBox.y = 297 + startY;
+            char_Slots[i].boundBox.y = 275 + startY;
             gc.setFill(Colors.mediumVeryLight);
-            gc.fillRoundRect(((i - 8) * 57) + 124 + startX, 297 + startY, 45, 45, 20, 20);
+            gc.fillRoundRect(((i - 8) * 57) + 124 + startX, 275 + startY, 45, 45, 20, 20);
             setRarityColor(gc, char_Slots[i]);
-            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 124 + startX, 297 + startY);
+            char_Slots[i].drawSlot(gc, ((i - 8) * 57) + 124 + startX, 275 + startY);
             if (char_Slots[i].item != null && !char_Slots[i].grabbed) {
-                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 124 + startX, 297 + startY, SLOT_SIZE);
+                char_Slots[i].drawIcon(gc, ((i - 8) * 57) + 124 + startX, 275 + startY, SLOT_SIZE);
             } else {
                 if (char_Slots[i].type.contains("2") || char_Slots[i].type.contains("W")) {
-                    gc.drawImage(weapon, ((i - 8) * 57) + 124 + startX + 2, 297 + startY + 2);
+                    gc.drawImage(weapon, ((i - 8) * 57) + 124 + startX + 2, 275 + startY + 2);
                 } else if (char_Slots[i].type.equals("O")) {
-                    gc.drawImage(offhand, ((i - 8) * 57) + 124 + startX + 2, 297 + startY + 2);
+                    gc.drawImage(offhand, ((i - 8) * 57) + 124 + startX + 2, 275 + startY + 2);
                 }
             }
         }

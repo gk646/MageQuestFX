@@ -11,6 +11,7 @@ public class FonT {
     public static Font antParty16;
     public static Font varnished14;
     public static Font antParty15;
+    public static Font minecraftBold15;
     private static Font minecraftRegular14;
     public static Font minecraftItalic15;
     private static Font minecraftItalic17;
@@ -57,6 +58,7 @@ public class FonT {
         minecraftItalic30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftItalic-R8Mo.otf"), 30);
         minecraftBold13 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 13);
         minecraftBold16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 16);
+        minecraftBold15 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 15);
         minecraftBold17 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 17);
         minecraftBold20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 25);
         minecraftBold14 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 14);
