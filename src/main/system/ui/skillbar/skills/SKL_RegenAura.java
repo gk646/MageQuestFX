@@ -19,7 +19,7 @@ public class SKL_RegenAura extends SKILL {
         icon = setup("regenAura");
         castTimeActive = 0;
         name = "Regenerative Aura";
-        description = "Regenerative Aura creates a soothing aura around the character, stimulating the natural healing processes of the body and allowing them to gradually recover from any wounds or injuries sustained in battle. As long as the aura remains active, the character will experience a steady stream of rejuvenation, gradually restoring their health over time.";
+        description = "Regenerative Aura creates a soothing aura around the character, stimulating the natural healing processes of the body and allowing them to gradually recover from any wounds or injuries sustained in battle.";
     }
 
     @Override

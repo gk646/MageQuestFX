@@ -18,7 +18,7 @@ public class SKL_VoidField extends SKILL {
         name = "Void Field";
         type = DamageType.DarkMagic;
         weapon_damage_percent = 2.0f;
-        description = "Creates a localized zone of darkness and destruction. Upon activation, the caster summons a swirling void, consuming everything in its path. Enemies caught in the Void Field are taking damage over time as they struggle to escape the field's grasp. They are also weakened against further dark magic damage";
+        description = "Creates a localized zone of darkness and destruction. Upon activation, the caster summons a swirling void, consuming everything in its path. Enemies caught in the Void Field are taking damage over time and are weakened against further dark magic damage";
     }
 
 
@@ -43,7 +43,7 @@ public class SKL_VoidField extends SKILL {
      *
      */
     public String toString() {
-        return weapon_damage_percent + "% Weapon Damage per Tick as" + type;
+        return weapon_damage_percent + "% Weapon Damage per Tick as " + type;
     }
 
     @Override

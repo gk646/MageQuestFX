@@ -16,7 +16,7 @@ public class SKL_SolarFlare extends SKILL {
         type = DamageType.Fire;
         icon = setup("solarFlare");
         name = "Solar Flare";
-        description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. The Solar Flare is capable of dealing massive damage to any foes caught in its radius, with a blinding flash that temporarily disorients those who survive the initial impact.";
+        description = "Channels the raw energy of the sun, creating a powerful beam of yellow light that burns through enemies in its path. If the target is burning, consumes all burn stacks and deals the remaining damage at once as critical hit.";
     }
 
     /**

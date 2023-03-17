@@ -187,24 +187,29 @@ abstract public class SKILL {
         if (toolTipTimer > 30) {
             gc.setFont(FonT.editUndo19);
             gc.setFill(Colors.LightGrey);
-            gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.238), startY - (MainGame.SCREEN_HEIGHT * 0.234), MainGame.SCREEN_HEIGHT * 0.231, MainGame.SCREEN_HEIGHT * 0.224f, 15, 15);
+            gc.fillRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.238), startY - (MainGame.SCREEN_HEIGHT * 0.334), MainGame.SCREEN_HEIGHT * 0.231, MainGame.SCREEN_HEIGHT * 0.324f, 15, 15);
             //OUTLINE
-            gc.drawImage(fancy, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.224));
+            gc.drawImage(fancy, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.324));
             gc.setLineWidth(1);
             setStrokeTypeColor(gc);
-            gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.235), startY - (MainGame.SCREEN_HEIGHT * 0.231), MainGame.SCREEN_HEIGHT * 0.225, MainGame.SCREEN_HEIGHT * 0.218f, 15, 15);
+            gc.strokeRoundRect(startX - (MainGame.SCREEN_HEIGHT * 0.235), startY - (MainGame.SCREEN_HEIGHT * 0.331), MainGame.SCREEN_HEIGHT * 0.225, MainGame.SCREEN_HEIGHT * 0.318f, 15, 15);
             //NAME
             setTypeColor(gc);
-            drawCenteredTextToolTip(gc, name, (float) (startY - (MainGame.SCREEN_HEIGHT * 0.206)), (int) (startX - (MainGame.SCREEN_HEIGHT * 0.238)));
+            drawCenteredTextToolTip(gc, name, (float) (startY - (MainGame.SCREEN_HEIGHT * 0.306)), (int) (startX - (MainGame.SCREEN_HEIGHT * 0.238)));
             gc.setFont(FonT.minecraftBoldItalic14);
-            gc.fillText("DMG: " + this, startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.145));
+            gc.fillText("DMG:", startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.245));
+            int y1 = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.245));
+            for (String string : Dialog.insertNewLine(this.toString(), 22).split("\n")) {
+                gc.fillText(string, startX - (MainGame.SCREEN_HEIGHT * 0.19), y1);
+                y1 += 14;
+            }
             gc.setFill(Colors.Blue);
-            gc.fillText("Mana Cost: " + mg.player.getManaCost(manaCost), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.165));
+            gc.fillText("Mana Cost: " + mg.player.getManaCost(manaCost), startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.265));
             gc.setFill(Colors.darkBackground);
-            gc.fillText("CD: " + df.format(totalCoolDown / 60.0f) + "s", startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.125));
-            gc.setFont(FonT.minecraftItalic11);
-            int y = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.120));
-            for (String string : Dialog.insertNewLine(description, 40).split("\n")) {
+            gc.fillText("CD: " + df.format(totalCoolDown / 60.0f) + "s", startX - (MainGame.SCREEN_HEIGHT * 0.228), startY - (MainGame.SCREEN_HEIGHT * 0.215));
+            gc.setFont(FonT.minecraftItalic12);
+            int y = (int) (startY - (MainGame.SCREEN_HEIGHT * 0.12));
+            for (String string : Dialog.insertNewLine(description, 37).split("\n")) {
                 gc.fillText(string, startX - (MainGame.SCREEN_HEIGHT * 0.228), y += 12);
             }
         } else {
@@ -250,14 +255,6 @@ abstract public class SKILL {
 
     @Override
     public String toString() {
-        float flat_damage = weapon_damage_percent;
-        switch (type) {
-            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[2];
-            case Fire -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[19];
-            case Arcane -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[1];
-            case Poison -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[18];
-            case Ice -> flat_damage += (flat_damage / 100.0f) * mg.player.effects[28];
-        }
-        return weapon_damage_percent + "% Weapon Damage as" + type;
+        return weapon_damage_percent + "% Weapon Damage as " + type;
     }
 }
