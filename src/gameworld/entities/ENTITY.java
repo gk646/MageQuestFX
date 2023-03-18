@@ -274,6 +274,11 @@ abstract public class ENTITY {
 
     abstract public void draw(GraphicsContext gc);
 
+
+    public void drawDialog(GraphicsContext gc) {
+
+    }
+
     public void update() {
         tickEffects();
         activeTile.x = (int) ((worldX + 24) / 48);

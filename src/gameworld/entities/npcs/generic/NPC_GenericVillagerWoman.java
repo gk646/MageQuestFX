@@ -26,14 +26,20 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
         this.collisionBox = new Rectangle(0, 0, 42, 42);
         direction = "updownleftright";
         spriteCounter = (int) (Math.random() * 20);
-
     }
 
     @Override
     public void update() {
         super.update();
         scriptMovement();
+    }
 
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
     }
 
 
@@ -41,9 +47,7 @@ public class NPC_GenericVillagerWoman extends NPC_Generic {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         if (onPath) {
             drawWalk(gc);
         } else {

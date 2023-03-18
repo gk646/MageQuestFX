@@ -68,11 +68,21 @@ public class NPC_Control {
         }
     }
 
-    public void draw(GraphicsContext g2) {
+    public void draw(GraphicsContext gc) {
         synchronized (NPC_Active) {
             for (NPC npc : NPC_Active) {
                 if (npc.zone == WorldController.currentWorld && Math.sqrt(Math.pow(npc.worldX - Player.worldX, 2) + Math.pow(npc.worldY - Player.worldY, 2)) < 1_800) {
-                    npc.draw(g2);
+                    npc.draw(gc);
+                }
+            }
+        }
+    }
+
+    public void drawDialogs(GraphicsContext gc) {
+        synchronized (NPC_Active) {
+            for (NPC npc : NPC_Active) {
+                if (npc.zone == WorldController.currentWorld && npc.show_dialog && Math.sqrt(Math.pow(npc.worldX - Player.worldX, 2) + Math.pow(npc.worldY - Player.worldY, 2)) < 1_800) {
+                    npc.drawDialog(gc);
                 }
             }
         }

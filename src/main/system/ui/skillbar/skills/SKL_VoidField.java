@@ -39,7 +39,7 @@ public class SKL_VoidField extends SKILL {
     }
 
     @Override
-    /**
+    /*
      *
      */
     public String toString() {

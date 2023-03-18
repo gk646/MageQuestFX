@@ -34,7 +34,14 @@ public class NPC_GenericVillagerBoy1 extends NPC_Generic {
     public void update() {
         super.update();
         scriptMovement();
+    }
 
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
     }
 
 
@@ -42,9 +49,7 @@ public class NPC_GenericVillagerBoy1 extends NPC_Generic {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         if (onPath) {
             drawWalk(gc);
         } else {

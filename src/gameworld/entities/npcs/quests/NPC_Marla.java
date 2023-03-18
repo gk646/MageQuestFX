@@ -81,6 +81,10 @@ public class NPC_Marla extends NPC {
         }
     }
 
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
+    }
+
     /**
      *
      */
@@ -92,9 +96,7 @@ public class NPC_Marla extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         spriteCounter++;
         drawNPCName(gc, "Marla");
     }

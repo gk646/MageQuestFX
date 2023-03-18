@@ -49,6 +49,14 @@ public class NPC_HillcrestMayor extends NPC {
     }
 
     /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
+    }
+
+    /**
      *
      */
     public void draw(GraphicsContext gc) {
@@ -59,9 +67,7 @@ public class NPC_HillcrestMayor extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         spriteCounter++;
         drawNPCName(gc, "Mayor Flitwick");
     }

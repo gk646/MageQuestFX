@@ -47,6 +47,11 @@ public class NPC_Aria extends NPC {
         }
     }
 
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
+    }
+
     /**
      *
      */
@@ -64,9 +69,7 @@ public class NPC_Aria extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         if (!AfterAnimationDead) {
             spriteCounter++;
         }

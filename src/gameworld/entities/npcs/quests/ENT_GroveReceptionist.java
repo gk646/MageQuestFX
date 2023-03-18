@@ -43,14 +43,16 @@ public class ENT_GroveReceptionist extends NPC_Generic {
         }
     }
 
+    public void drawDialog(GraphicsContext gc) {
+
+        dialog.drawDialog(gc, this);
+    }
 
     @Override
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         if (onPath) {
             drawWalk(gc);
         } else {

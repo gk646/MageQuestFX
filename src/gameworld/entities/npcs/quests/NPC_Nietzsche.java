@@ -46,9 +46,7 @@ public class NPC_Nietzsche extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         spriteCounter++;
         drawNPCName(gc, "Zarathustra");
     }
@@ -71,6 +69,11 @@ public class NPC_Nietzsche extends NPC {
             case 4 -> gc.drawImage(animation.walk.get(4), screenX + 17, screenY - 5);
             case 5 -> gc.drawImage(animation.walk.get(5), screenX + 17, screenY - 5);
         }
+    }
+
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
     }
 
     @Override

@@ -84,5 +84,13 @@ public class NPC_WeaponTrader extends MERCHANT {
             mg.inputH.e_typed = false;
         }
     }
+
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+
+    }
 }
 

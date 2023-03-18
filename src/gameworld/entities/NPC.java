@@ -52,6 +52,8 @@ abstract public class NPC extends ENTITY {
         activeTile.y = (int) ((worldY + 24) / 48);
     }
 
+    abstract public void drawDialog(GraphicsContext gc);
+
     protected boolean collidingWithPlayer() {
         return activeTile.x == mg.playerX && activeTile.y == mg.playerY;
     }

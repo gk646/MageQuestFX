@@ -71,7 +71,7 @@ public class NPC_AccessoriesTrader extends MERCHANT {
         super.update();
         if (mg.inputH.e_typed && collidingWithPlayer()) {
             if (dialog.dialogRenderCounter == 0) {
-                dialog.loadNewLine(DialogStorage.Trading[mg.random.nextInt(0, DialogStorage.Trading.length)]);
+                dialog.loadNewLine(DialogStorage.Trading[MainGame.random.nextInt(0, DialogStorage.Trading.length)]);
                 show_dialog = true;
             } else if (dialog.dialogRenderCounter < 2_000) {
                 dialog.dialogRenderCounter = 2_000;
@@ -83,6 +83,14 @@ public class NPC_AccessoriesTrader extends MERCHANT {
             }
             mg.inputH.e_typed = false;
         }
+    }
+
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+
     }
 }
 

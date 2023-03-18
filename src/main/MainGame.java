@@ -304,14 +304,15 @@ public class MainGame {
             drawDroppedItems(gc);
             prj_control.draw(gc);
             ent_control.draw(gc);
+            npcControl.draw(gc);
             //ENTPlayer2.draw(gc);
             player.draw(gc);
             drawDamageNumber(gc);
             wRender.drawSecondLayer(gc);
-            npcControl.draw(gc);
             playerPrompts.draw(gc);
             wAnim.drawLayerOneTwo(gc);
             gc.drawImage(vignette, 0, 0);
+            npcControl.drawDialogs(gc);
             if (player.drawDialog) {
                 player.dialog.drawDialogPlayer(gc);
             }
@@ -509,7 +510,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.GrassLands, 388, 170);
+        wControl.loadMap(Zone.Hillcrest, 24, 24);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.The_Grove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));

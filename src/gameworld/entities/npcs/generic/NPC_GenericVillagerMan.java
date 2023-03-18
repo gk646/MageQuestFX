@@ -40,4 +40,12 @@ public class NPC_GenericVillagerMan extends NPC_Generic {
     public void update() {
 
     }
+
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
+    }
 }

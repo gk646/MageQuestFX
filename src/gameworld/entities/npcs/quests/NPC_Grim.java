@@ -49,6 +49,14 @@ public class NPC_Grim extends NPC {
     }
 
     /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
+    }
+
+    /**
      *
      */
     public void draw(GraphicsContext gc) {
@@ -65,9 +73,7 @@ public class NPC_Grim extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         if (!AfterAnimationDead) {
             spriteCounter++;
         }

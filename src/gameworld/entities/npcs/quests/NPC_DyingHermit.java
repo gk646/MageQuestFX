@@ -38,9 +38,7 @@ public class NPC_DyingHermit extends NPC {
         } else {
             drawIdle(gc);
         }
-        if (show_dialog) {
-            dialog.drawDialog(gc, this);
-        }
+
         spriteCounter++;
         drawNPCName(gc, "Dying Man");
     }
@@ -79,5 +77,13 @@ public class NPC_DyingHermit extends NPC {
         if (onPath) {
             moveTo(goalTile.x, goalTile.y, checkPoints);
         }
+    }
+
+    /**
+     * @param gc
+     */
+    @Override
+    public void drawDialog(GraphicsContext gc) {
+        dialog.drawDialog(gc, this);
     }
 }
