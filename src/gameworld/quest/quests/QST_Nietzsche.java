@@ -80,6 +80,7 @@ public class QST_Nietzsche extends QUEST {
                     npc.blockInteraction = false;
                 } else if (progressStage == 8) {
                     updateObjective("", 0);
+                    mg.player.experience += 15;
                     mg.sqLite.finishQuest(quest_id);
                     completed = true;
                 }

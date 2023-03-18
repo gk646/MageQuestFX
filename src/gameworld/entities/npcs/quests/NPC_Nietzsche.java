@@ -112,5 +112,14 @@ public class NPC_Nietzsche extends NPC {
                 mg.qPanel.quests.add(new QST_Nietzsche(mg, false));
             }
         }
+        if (!mg.qPanel.questIsFinished(QUEST_NAME.Nietzsche)) {
+            if (show_dialog) {
+                dialogHideDelay++;
+                if (dialogHideDelay > 600) {
+                    show_dialog = false;
+                    dialogHideDelay = 0;
+                }
+            }
+        }
     }
 }

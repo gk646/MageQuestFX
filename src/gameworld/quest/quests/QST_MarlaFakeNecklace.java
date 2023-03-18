@@ -488,8 +488,26 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         removeQuestMarker("body");
                         updateObjective("Report back to Marla", 0);
                     } else if (num == 20) {
-
+                        npc.show_dialog = false;
                     }
+                } else if (progressStage == 58) {
+                    int num = npc.dialog.drawChoice("Aria is dead!", null, null, null);
+                    if (num == 10) {
+                        nextStage();
+                    }
+                } else if (progressStage == 60) {
+                    int num = npc.dialog.drawChoice("I DONT want it!", "*say nothing and go your way", null, null);
+                    if (num == 10) {
+                        nextStage();
+                        //TODO add item unique with magic shield
+                    } else if (num == 20) {
+                        nextStage();
+                    }
+                } else if (progressStage == 62) {
+                    mg.sqLite.finishQuest(quest_id);
+                    mg.player.experience += 35;
+                    completed = true;
+                    mg.sqLite.updateQuestFacts(quest_id, 1, 100);
                 } else if (progressStage == 77) {
                     if (moveToTile(npc, 43, 31, new Point(40, 60), new Point(59, 59), new Point(70, 49), new Point(70, 56), new Point(83, 37), new Point(43, 34)) && npc.show_dialog) {
                         nextStage();
@@ -559,6 +577,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                 } else if (progressStage == 101) {
                     if (moveToTile(npc, 0, 99, new Point(31, 26), new Point(23, 29), new Point(18, 34), new Point(18, 83))) {
                         npc.zone = Zone.Woodland_Edge;
+                        mg.player.experience += 25;
                         mg.sqLite.updateQuestFacts(quest_id, 1, 10);
                         mg.sqLite.finishQuest(quest_id);
                         this.completed = true;

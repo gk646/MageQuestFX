@@ -425,7 +425,7 @@ public class UI {
         playerUI = setup();
     }
 
-    private void drawCenteredText(GraphicsContext gc, String text, float y) {
+    public void drawCenteredText(GraphicsContext gc, String text, float y) {
         Text textNode = new Text(text);
         textNode.setFont(gc.getFont());
         double textWidth = textNode.getLayoutBounds().getWidth();

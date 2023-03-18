@@ -153,6 +153,9 @@ public class UI_QuestPanel {
                     }
                     quests.get(i).update();
                     if (quests.get(i).completed) {
+                        mg.player.questCompleted = true;
+                        mg.player.lastQuest = quests.get(i).name;
+                        mg.sound.playEffectSound(18);
                         finishedQuests.add(quests.get(i));
                         if (activeQuest == quests.get(i)) {
                             activeQuest = null;

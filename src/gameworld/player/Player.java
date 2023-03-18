@@ -70,9 +70,11 @@ public class Player extends ENTITY {
     public boolean attack1;
     public boolean attack2;
     public boolean attack3;
+    public boolean questCompleted;
     public boolean movingLeft;
+    public String lastQuest;
     private final Rectangle player = new Rectangle(40, 40);
-
+    public int questCompleteCounter;
 
     /*
     1. DMG_Arcane_Absolute
@@ -489,6 +491,14 @@ public class Player extends ENTITY {
                 levelupCounter = 0;
             }
         }
+        if (questCompleted) {
+            drawQuestComplete(gc);
+            questCompleteCounter++;
+            if (questCompleteCounter >= 480) {
+                questCompleted = false;
+                questCompleteCounter = 0;
+            }
+        }
         if (attack1) {
             drawAttack1(gc);
         } else if (attack2) {
@@ -704,6 +714,15 @@ public class Player extends ENTITY {
         return baseCost - ((baseCost / 100.0f) * effects[26]);
     }
 
+    private void drawQuestComplete(GraphicsContext gc) {
+        gc.setFont(FonT.antParty30);
+        gc.setFill(Colors.questNameBeige);
+        String text = "Quest Completed:";
+        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 320);
+        gc.setFont(FonT.antParty20);
+        text = lastQuest;
+        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 280);
+    }
 
     public void drawCutscene(GraphicsContext gc, int centerX, int centerY) {
         switch (spriteCounter % 200 / 25) {

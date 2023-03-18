@@ -237,8 +237,7 @@ public class QST_Tutorial extends QUEST {
                     }
                 } else if (progressStage == 60 || progressStage == 47) {
                     moveToTile(npc, 44, 21, new Point(25, 23));
-                    updateObjective("Quest Finished", 0);
-                    mg.player.experience += 25;
+                    mg.player.experience += 15;
                     mg.sqLite.updateQuestFacts(quest_id, 1, 4);
                     mg.sqLite.finishQuest(quest_id);
                     npc.show_dialog = false;

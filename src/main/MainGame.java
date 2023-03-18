@@ -506,6 +506,8 @@ public class MainGame {
                 }
             }
         }
+        player.lastQuest = "The Fake Necklace";
+        player.questCompleted = true;
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);

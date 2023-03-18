@@ -83,6 +83,7 @@ public class Sound {
         //16
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/lever.wav")).toString())));
         effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/environment/puzzle_error.wav")).toString())));
+        effectSounds.add(new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/resources/sound/effects/quest/complete.wav")).toString())));
         loadAmbience();
     }
 
