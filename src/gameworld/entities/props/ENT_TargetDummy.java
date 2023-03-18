@@ -3,6 +3,7 @@ package gameworld.entities.props;
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
+import gameworld.player.abilities.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -14,7 +15,7 @@ import java.awt.Rectangle;
 public class ENT_TargetDummy extends ENTITY {
     private final boolean move;
     private boolean attack2;
-    private boolean attack3;
+    private boolean attack3, attack1;
 
     /**
      * Standard enemy  / hits you when he's close
@@ -52,9 +53,26 @@ public class ENT_TargetDummy extends ENTITY {
             health += 20;
         }
         if (move && isInsideRectangle(activeTile.x, activeTile.y, new Point(8, 20), new Point(13, 25))) {
-            onPath = true;
-            getNearestPlayer();
-            searchPath(goalCol, goalRow, 16);
+            if (collidingWithPlayer && !onPath && !attack2 && !attack3 && !attack1) {
+                if (Math.random() < 0.33f) {
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * 60));
+                    attack1 = true;
+                } else if (Math.random() < 0.66f) {
+                    attack2 = true;
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * 60));
+                } else {
+                    attack3 = true;
+                    mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2.3f * 60));
+                }
+                animation.playRandomSoundFromXToIndex(0, 3);
+                spriteCounter = 0;
+                collidingWithPlayer = false;
+            }
+            if (!attack2 && !attack3 && !attack1) {
+                onPath = true;
+                getNearestPlayer();
+                searchPath(goalCol, goalRow, 16);
+            }
         } else if (move) {
             onPath = false;
             worldX = 10 * 48;
@@ -71,7 +89,23 @@ public class ENT_TargetDummy extends ENTITY {
         screenY = (int) (worldY - Player.worldY + Player.screenY);
         spriteCounter++;
         drawBuffsAndDeBuffs(gc);
-        drawIdle(gc);
+
+        if (dead) {
+            drawDeath(gc);
+        } else if (attack1) {
+            drawAttack1(gc);
+        } else if (attack2) {
+            drawAttack2(gc);
+        } else if (attack3) {
+            drawAttack3(gc);
+        } else {
+            if (onPath) {
+                drawWalk(gc);
+            } else {
+                drawIdle(gc);
+            }
+        }
+        spriteCounter++;
     }
 
     public boolean isInsideRectangle(double x, double y, Point rectPoint1, Point rectPoint2) {
@@ -120,6 +154,7 @@ public class ENT_TargetDummy extends ENTITY {
             case 2 -> gc.drawImage(animation.attack1.get(2), screenX - 20, screenY - 14);
             case 3 -> gc.drawImage(animation.attack1.get(3), screenX - 20, screenY - 14);
             case 4 -> gc.drawImage(animation.attack1.get(4), screenX - 20, screenY - 14);
+            case 5 -> attack1 = false;
         }
     }
 

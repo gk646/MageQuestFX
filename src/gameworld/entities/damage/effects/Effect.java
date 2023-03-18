@@ -3,6 +3,7 @@ package gameworld.entities.damage.effects;
 import gameworld.entities.ENTITY;
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;
+import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.system.ui.Colors;
@@ -25,7 +26,11 @@ abstract public class Effect {
     public float full_duration, rest_duration;
 
     protected Effect(float duration, float amount, boolean fromPlayer, Class<? extends PROJECTILE> sourceProjectile) {
-        this.full_duration = duration;
+        full_duration = duration;
+        if (fromPlayer) {
+            this.full_duration = duration + duration / 100.0f * Player.playerEffects[3];
+        }
+        rest_duration = full_duration;
         this.amount = amount;
         this.fromPlayer = fromPlayer;
         this.rest_duration = full_duration;

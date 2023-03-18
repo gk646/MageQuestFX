@@ -29,7 +29,11 @@ public class BUF_RegenAura extends Effect {
      */
     @Override
     public void tick(ENTITY entity) {
-        entity.setHealth(entity.getHealth() + amount / full_duration);
+        ticker++;
+        if (ticker == 10) {
+            entity.setHealth(entity.getHealth() + (entity.maxHealth / 100.0f) * amount / 6);
+            ticker = 0;
+        }
         rest_duration--;
     }
 

@@ -11,7 +11,6 @@ public class DamageEffect extends Effect {
         super(duration, amount, fromPlayer, sourceProjectile);
         if (fromPlayer) {
             this.full_duration += (this.full_duration / 100.0f) * Player.playerEffects[5];
-            this.amount += (this.amount / 100.0f) * Player.playerEffects[4];
         }
         this.type = type;
         this.tickRate = tickRate;
@@ -22,7 +21,7 @@ public class DamageEffect extends Effect {
         if (ticker >= tickRate) {
             ticker = 0;
             if (fromPlayer) {
-                entity.getDamageFromPlayer(amount, type);
+                entity.getDamageFromPlayer(amount, type, true);
             } else {
                 entity.getDamage(amount);
             }

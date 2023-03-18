@@ -17,7 +17,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 abstract public class SKILL {
-    private final DecimalFormat df = new DecimalFormat("#.##");
+    public final DecimalFormat df = new DecimalFormat("#.#");
 
     public Image icon;
     protected final MainGame mg;
@@ -34,7 +34,7 @@ abstract public class SKILL {
     public float actualCoolDown;
     protected int i_id;
     private final Image skillSlot = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/slot.png")));
-    private final Image fancy = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/tooltip_fancy.png")));
+    protected final Image fancy = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/tooltip_fancy.png")));
     public String description;
     public String name;
     public int toolTipTimer = 0;
@@ -217,7 +217,7 @@ abstract public class SKILL {
         }
     }
 
-    private void setTypeColor(GraphicsContext gc) {
+    protected void setTypeColor(GraphicsContext gc) {
         if (type == DamageType.Fire) {
             gc.setFill(Colors.fire_red);
         } else if (type == DamageType.Arcane) {
@@ -231,7 +231,7 @@ abstract public class SKILL {
         }
     }
 
-    private void setStrokeTypeColor(GraphicsContext gc) {
+    protected void setStrokeTypeColor(GraphicsContext gc) {
         if (type == DamageType.Fire) {
             gc.setStroke(Colors.fire_red);
         } else if (type == DamageType.Arcane) {
@@ -245,7 +245,7 @@ abstract public class SKILL {
         }
     }
 
-    private void drawCenteredTextToolTip(GraphicsContext gc, String text, float y, int offsetx) {
+    protected void drawCenteredTextToolTip(GraphicsContext gc, String text, float y, int offsetx) {
         Text textNode = new Text(text);
         textNode.setFont(gc.getFont());
         double textWidth = textNode.getLayoutBounds().getWidth();

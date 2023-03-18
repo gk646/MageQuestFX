@@ -19,7 +19,7 @@ public class PRJ_VoidField extends PROJECTILE {
     public PRJ_VoidField(int durationInTicks, float weapon_damage_percent) {
         this.weapon_damage_percent = weapon_damage_percent;
         this.type = DamageType.DarkMagic;
-        this.procEffects[0] = new Effect_ArrayBased(180, 50, true, 42, EffectType.DEBUFF, this.getClass());
+        this.procEffects[0] = new Effect_ArrayBased(180, 30, true, 42, EffectType.DEBUFF, this.getClass());
         this.procEffects[1] = new Effect_ArrayBased(180, 50, true, 45, EffectType.DEBUFF, this.getClass());
         this.resource = ProjectilePreloader.voidField;
         this.sounds[0] = resource.sounds.get(0);

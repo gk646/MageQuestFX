@@ -310,7 +310,7 @@ abstract public class ENTITY {
         }
     }
 
-    public void getDamageFromPlayer(float damagePercent, DamageType type) {
+    public void getDamageFromPlayer(float damagePercent, DamageType type, boolean isDOT) {
         float flat_damage = MainGame.random.nextFloat(mg.player.weaponDamageLower, mg.player.weaponDamageUpper) * (damagePercent / 100.0f);
         float[] effectsDouble = mg.player.effects;
         switch (type) {
@@ -326,6 +326,9 @@ abstract public class ENTITY {
             case Arcane -> flat_damage += (flat_damage / 100.0f) * effects[41];
             case Poison -> flat_damage += (flat_damage / 100.0f) * effects[43];
             case Ice -> flat_damage += (flat_damage / 100.0f) * effects[40];
+        }
+        if (isDOT) {
+            flat_damage += (flat_damage / 100.0f) * effectsDouble[4];
         }
         amountedDamageSinceLastDamageNumber += flat_damage;
         if (MainGame.random.nextInt(0, 101) <= effectsDouble[21]) {

@@ -103,15 +103,15 @@ public class PRJ_Control {
         if (projectile.projectileType == ProjectileType.OneHitCompletelyDead) {
             projectile.dead = true;
             projectile.damageDead = true;
-            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type, false);
             entity.playGetHitSound();
         } else if (projectile.projectileType == ProjectileType.OneHitNoDMG) {
-            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type, false);
             toBeDamageDead.add(projectile);
             entity.playGetHitSound();
         } else {
             entity.playGetHitSound();
-            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type);
+            entity.getDamageFromPlayer(projectile.weapon_damage_percent, projectile.type, false);
         }
         entity.addEffects(projectile.procEffects);
         projectile.playHitSound();
