@@ -1,4 +1,4 @@
-java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 5000
+java.lang.ArrayIndexOutOfBoundsException: Index -2147483642 out of bounds for length 5000
 	at main.system.ui.maps.GameMap.getImage(GameMap.java:136)
 	at main.MainGame.lambda$startThreads$0(MainGame.java:204)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

@@ -3,7 +3,8 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "hermitCaveHillcrest.tmx",
+    "activeFile": "TIILESET.tsx",
+    "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "exports",
         "."
@@ -37,8 +38,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1712,
-                "y": 1612
+                "x": 1600,
+                "y": 1598
             }
         },
         "DungeonTutorial.tmx": {
@@ -67,16 +68,16 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 663.6363636363636,
-                "y": 657.5757575757577
+                "x": 798.4848484848485,
+                "y": 801.5151515151515
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.0625,
-            "selectedLayer": 0,
+            "scale": 0.33,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 4656,
-                "y": 3264
+                "x": 6818.181818181818,
+                "y": 7103.030303030303
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -94,8 +95,8 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
-            "scaleInEditor": 0.75
+            "scaleInDock": 2,
+            "scaleInEditor": 3
         },
         "TestRomm.tmx": {
             "expandedObjectLayers": [
@@ -104,8 +105,8 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 433.3333333333333,
-                "y": 454.66666666666663
+                "x": 400,
+                "y": 400.6666666666667
             }
         },
         "TheGrove.tmx": {
@@ -115,8 +116,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 237.33333333333331,
-                "y": 1190
+                "x": 1600,
+                "y": 1599.6666666666665
             }
         },
         "TileSet.tsx": {
@@ -147,16 +148,16 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 905.3333333333333,
-                "y": 1112
+                "x": 845.3333333333333,
+                "y": 788.6666666666665
             }
         },
         "caveMarla.tmx": {
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 610.6666666666666,
-                "y": 558.6666666666666
+                "x": 479.33333333333326,
+                "y": 479.33333333333326
             }
         },
         "d.tsx": {
@@ -193,8 +194,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 772.7272727272727,
-                "y": 793.9393939393941
+                "x": 957.5757575757575,
+                "y": 962.1212121212121
             }
         },
         "grassspritesheet.tsx": {
@@ -208,11 +209,14 @@
             "scaleInEditor": 1
         },
         "hermitCaveHillcrest.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.33,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 364.6666666666667,
-                "y": 681.3333333333333
+                "x": 312.12121212121224,
+                "y": 803.0303030303032
             }
         },
         "map1.tmj": {
@@ -274,7 +278,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 70,
-    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
+    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
@@ -295,14 +299,14 @@
     "recentFiles": [
         "caveMarla.tmx",
         "ForestClearing.tmx",
-        "TIILESET.tsx",
-        "Tutorial.tmx",
-        "DeadPlains.tmx",
-        "TheGrove.tmx",
-        "TestRomm.tmx",
-        "goblinCave.tmx",
-        "GrassLands.tmx",
         "hermitCaveHillcrest.tmx",
+        "GrassLands.tmx",
+        "goblinCave.tmx",
+        "TestRomm.tmx",
+        "TheGrove.tmx",
+        "DeadPlains.tmx",
+        "Tutorial.tmx",
+        "TIILESET.tsx",
         "FirstDungeon.tmx",
         "second floor_tutorial_castle.tmx"
     ],

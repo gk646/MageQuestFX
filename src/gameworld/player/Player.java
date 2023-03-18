@@ -718,10 +718,10 @@ public class Player extends ENTITY {
         gc.setFont(FonT.antParty30);
         gc.setFill(Colors.questNameBeige);
         String text = "Quest Completed:";
-        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 320);
+        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 420);
         gc.setFont(FonT.antParty20);
         text = lastQuest;
-        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 280);
+        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 380);
     }
 
     public void drawCutscene(GraphicsContext gc, int centerX, int centerY) {
