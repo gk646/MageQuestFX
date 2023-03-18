@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -165,9 +163,10 @@ public class Map {
     }
 
     public int[][] getMapCover() {
+        /*
         Statement stmt;
         try {
-            stmt = SQLite.mapCoverConn.createStatement();
+            stmt = SQLite.PLAYER_SAVE.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + name);
             int[][] temp = new int[mapSize.x][mapSize.x];
             int i = 0, j = 1;
@@ -188,11 +187,16 @@ public class Map {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+         */
+        return new int[mapSize.x][mapSize.y];
     }
 
     public void saveMapCover() throws SQLException {
-        String sql = "UPDATE " + name + " SET value = ? WHERE _ROWID_ = ?";
-        PreparedStatement stmt = SQLite.mapCoverConn.prepareStatement(sql);
+        String prefix = "Z_MAPCOVER_";
+        String sql = "UPDATE " + prefix + name + " SET value = ? WHERE _ROWID_ = ?";
+        PreparedStatement stmt = SQLite.PLAYER_SAVE.prepareStatement(sql);
+        /*
         for (int i = 0; i < mapCover.length; i++) {
             for (int j = 0; j < mapCover[i].length; j++) {
                 stmt.setInt(1, mapCover[i][j]);
@@ -200,6 +204,8 @@ public class Map {
                 stmt.executeUpdate();
             }
         }
+
+         */
         stmt.close();
     }
 }

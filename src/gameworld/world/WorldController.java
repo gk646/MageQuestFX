@@ -34,8 +34,8 @@ public class WorldController {
         MAPS.add(new Map("TestRoom", new Point(50, 50), Zone.TestRoom));
         MAPS.add(new Map("Tutorial", new Point(100, 100), Zone.Woodland_Edge, GameMapType.MapCover));
         MAPS.add(new Map("FirstDungeon", new Point(60, 60), Zone.Ruin_Dungeon));
-        MAPS.add(new Map("Clearing", new Point(100, 100), Zone.Hillcrest, GameMapType.MapCover));
-        MAPS.add(new Map("OverWorld", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
+        MAPS.add(new Map("Hillcrest", new Point(100, 100), Zone.Hillcrest, GameMapType.MapCover));
+        MAPS.add(new Map("GrassLands", new Point(500, 500), Zone.GrassLands, GameMapType.MapCover));
         MAPS.add(new Map("HillCrestPuzzleCellar", new Point(50, 50), Zone.Treasure_Cave));
         MAPS.add(new Map("caveMarla", new Point(60, 60), Zone.Hillcrest_Mountain_Cave));
         MAPS.add(new Map("TheGrove", new Point(200, 200), Zone.The_Grove, GameMapType.MapCover));

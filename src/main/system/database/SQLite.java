@@ -28,9 +28,9 @@ public class SQLite {
 
     private final MainGame mg;
     public Connection DataBase;
-    public static Connection mapCoverConn;
 
-    public Connection PLAYER_SAVE;
+
+    public static Connection PLAYER_SAVE;
 
     public SQLite(MainGame mg) {
         this.mg = mg;
@@ -39,8 +39,7 @@ public class SQLite {
     public void getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.DataBase = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
-            mapCoverConn = DriverManager.getConnection("jdbc:sqlite:MageQuestMapCoverDB.sqlite");
+            this.DataBase = DriverManager.getConnection("jdbc:sqlite:DataBase.sqlite");
             PLAYER_SAVE = DriverManager.getConnection("jdbc:sqlite:GameSave.sqlite");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -76,7 +75,7 @@ public class SQLite {
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
-            this.DataBase = DriverManager.getConnection("jdbc:sqlite:MageQuestDB.sqlite");
+            this.DataBase = DriverManager.getConnection("jdbc:sqlite:DataBase.sqlite");
             Statement stmt = this.DataBase.createStatement();
             searchAMULET(stmt);
             searchBOOTS(stmt);
@@ -559,7 +558,7 @@ public class SQLite {
     }
 
     private void readSkillTree(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_TALENTS");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM TALENTS");
         while (rs.next()) {
             if (rs.getString("id") == null) {
                 continue;

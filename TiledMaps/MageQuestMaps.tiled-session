@@ -39,7 +39,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1598
+                "y": 1600
             }
         },
         "DungeonTutorial.tmx": {
@@ -49,7 +49,7 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 373,
+                "x": 374,
                 "y": 203
             }
         },
@@ -60,24 +60,24 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 442,
-                "y": 678.6666666666666
+                "x": 442.66666666666674,
+                "y": 861.3333333333334
             }
         },
         "ForestClearing.tmx": {
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 798.4848484848485,
-                "y": 801.5151515151515
+                "x": 800.0000000000001,
+                "y": 803.0303030303032
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 6818.181818181818,
-                "y": 7103.030303030303
+                "x": 4968,
+                "y": 5352
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -91,6 +91,14 @@
             "viewCenter": {
                 "x": 437.5,
                 "y": 422
+            }
+        },
+        "Hillcrest.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 754.5454545454546,
+                "y": 784.8484848484848
             }
         },
         "TIILESET.tsx": {
@@ -113,11 +121,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1600,
-                "y": 1599.6666666666665
+                "x": 1502,
+                "y": 1584
             }
         },
         "TileSet.tsx": {
@@ -156,8 +164,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.33333333333326,
-                "y": 479.33333333333326
+                "x": 479.99999999999994,
+                "y": 480
             }
         },
         "d.tsx": {
@@ -215,8 +223,8 @@
             "scale": 0.33,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 312.12121212121224,
-                "y": 803.0303030303032
+                "x": 560.6060606060606,
+                "y": 562.1212121212121
             }
         },
         "map1.tmj": {
@@ -278,7 +286,7 @@
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "map.height": 70,
-    "map.lastUsedExportFilter": "JSON-Kartendateien (*.tmj *.json)",
+    "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
