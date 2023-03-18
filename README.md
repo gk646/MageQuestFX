@@ -1,65 +1,29 @@
-# Mage Quest FX
+⚜️═══════════════⚜️𝔐𝔞𝔤𝔢 𝔔𝔲𝔢𝔰𝔱⚜️═══════════════⚜️
 
-![Screenshot](thumbnail.png)
+📜 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟:  
+Discord:  
+https://discord.gg/STCdEcBzUv
 
-Welcome to Mage QuestFX my second Java game project!  
-Now rewritten in Java FX!
+itch.io  
+https://gk646.itch.io/mage-quest
 
-Thanks to www.youtube.com/@RyiSnow for making a great beginners tutorial which allowed me to start initially.  
-I took some inspiration from his implementation but started to develop my own ideas early on.
+Original GitHub:  
+https://github.com/gk646/MageQuestFX
 
-## FEATURES:
+═════════════════  
+🔮 𝕋𝕖𝕔𝕙𝕟𝕚𝕒𝕝 𝔻𝕖𝕥𝕒𝕚𝕝𝕤:
 
-### AI assisted programming
+GameSave.sqlite is your save game. Don't delete it, you won't ever need to replace it when updating.  
+DataBase.sqlite should be updated regularly to access the newest items etc.
 
-Starting with the release of Chat GPT from OpenAI, I began including AI in performance testing and optimizations,
-generating comments, generating first drafts of new ideas etc.
-As of late I also started to use AI generated images from the Dall E 2 model. It's great!
+══════════════════  
+🔧 𝕊𝕦𝕡𝕡𝕠𝕣𝕥 𝕒𝕟𝕕 𝔹𝕦𝕘𝕣𝕖𝕡𝕠𝕣𝕥𝕤:
 
-### Multiplayer (not updated since v2.+):
+When you encounter a bug, please make a new thread in the bug report forum and I will look work on it.  
+Just post the error.log that is in your installation directory and include a small description.
 
-You can start the same programm twice on the same PC (localhost) or different PC's ( in the same network) and play
-together!  
-The host needs to press h + m (ingame) and the client needs to input the hosts local IP (eg. 192.168.x.xx) and the press
-h + f.  
-I used java sockets with a static port (60069).  
-**I didn't yet update it to work correctly with the newest pathfinding updates.**
+Also, if you happen to lose items from bugs you can post there, and I'll do my best to replace them.
 
-## Movement:
+══════════════════
 
-W - UP  
-A - LEFT  
-S - DOWN  
-D - RIGHT
-
-E - Talk to NPC's
-
-## Combat:
-
-Left Mouse Button - Primary Fire (1 Damage)  
-Right Mouse Button - Secondary Fire (5 Damage)  
-1 - Ability 1 (5 Damage)  
-2 - Lightning (about 60 Damage)  
-N - opens talent window (stub for now)
-
-## Inventory
-
-C - opens character panel  
-B - opens bag panel  
-N - talent panel  
-You can drag and drop Items to different slots and swap them in place
-
-## Graphics:
-
-I made most of the background tiles myself, I did take inspiration from @RyiSnow's textures and games like
-HeroSiege and other sources for some abilities etc. The pixel font called x12y16pxMaruMonica was made by hicc.
-I started making the game in Swing but rewrote it to JavaFX which improved rendering time by about 15x.
-
-## Roadmap:
-
-Level system  
-skills / skill pane
-NPC's / bartering  
-
-
-
+@made by Lukas Gilch
