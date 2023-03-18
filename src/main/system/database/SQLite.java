@@ -487,7 +487,7 @@ public class SQLite {
     }
 
     private void saveTalentTree() throws SQLException {
-        String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
+        String sql = "UPDATE PLAYER_TALENTS SET activated = ? WHERE id = ?";
         PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
             if (mg.talentP.talent_Nodes[i] != null) {
@@ -559,7 +559,7 @@ public class SQLite {
     }
 
     private void readSkillTree(Statement stmt) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM TALENTS");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYER_TALENTS");
         while (rs.next()) {
             if (rs.getString("id") == null) {
                 continue;
@@ -567,7 +567,7 @@ public class SQLite {
             mg.talentP.talent_Nodes[rs.getInt("id")] = new TalentNode(new TALENT(rs.getInt("id"), rs.getString("name"), rs.getString("imagePath"), rs.getString("description"), rs.getString("effect")),
                     rs.getInt("xCoordinate"), rs.getInt("yCoordinate"), rs.getInt("size"), 0);
         }
-        PreparedStatement stmt2 = PLAYER_SAVE.prepareStatement("SELECT * FROM TALENTS");
+        PreparedStatement stmt2 = PLAYER_SAVE.prepareStatement("SELECT * FROM PLAYER_TALENTS");
         rs = stmt2.executeQuery();
 
         while (rs.next()) {
@@ -1058,7 +1058,7 @@ public class SQLite {
     }
 
     private void resetTalents() throws SQLException {
-        String sql = "UPDATE TALENTS SET activated = ? WHERE id = ?";
+        String sql = "UPDATE PLAYER_TALENTS SET activated = ? WHERE id = ?";
         PreparedStatement stmt = PLAYER_SAVE.prepareStatement(sql);
         for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
             if (mg.talentP.talent_Nodes[i] != null) {
