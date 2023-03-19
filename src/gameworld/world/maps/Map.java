@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -163,49 +165,81 @@ public class Map {
     }
 
     public int[][] getMapCover() {
-        /*
-        Statement stmt;
+
+        String prefix = "Z_MAPCOVER_";
         try {
+            Statement stmt;
             stmt = SQLite.PLAYER_SAVE.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM " + name);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM " + prefix
+
+                    + name);
             int[][] temp = new int[mapSize.x][mapSize.x];
-            int i = 0, j = 1;
-            while (rs.next()) {
-                temp[i][j] = rs.getInt("value");
-                j++;
-                if (j == mapSize.x) {
-                    i++;
-                    j = 0;
+            int length = mapSize.x;
+            if (length > 100) {
+                int i = 0, j = 0;
+                int value;
+                while (rs.next()) {
+                    value = rs.getInt("value");
+                    if (value == 1) {
+                        for (int k = i; k < Math.min(length, i + 10); k++) {
+                            for (int l = j; l < Math.min(length, j + 10); l++) {
+                                temp[l][k] = 1;
+                            }
+                        }
+                    }
+                    j += 10;
+                    if (j >= length) {
+                        j = 0;
+                        i += 10;
+                    }
                 }
-                if (i == mapSize.x) {
-                    break;
+            } else {
+                int i = 0, j = 1;
+                while (rs.next()) {
+                    temp[i][j] = rs.getInt("value");
+                    j++;
+                    if (j == length) {
+                        i++;
+                        j = 0;
+                    }
+                    if (i == length) {
+                        break;
+                    }
                 }
             }
             rs.close();
             stmt.close();
             return temp;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
-
-         */
-        return new int[mapSize.x][mapSize.y];
     }
 
     public void saveMapCover() throws SQLException {
+
         String prefix = "Z_MAPCOVER_";
         String sql = "UPDATE " + prefix + name + " SET value = ? WHERE _ROWID_ = ?";
         PreparedStatement stmt = SQLite.PLAYER_SAVE.prepareStatement(sql);
-        /*
-        for (int i = 0; i < mapCover.length; i++) {
-            for (int j = 0; j < mapCover[i].length; j++) {
-                stmt.setInt(1, mapCover[i][j]);
-                stmt.setInt(2, (i * mapCover.length) + j + 1);
-                stmt.executeUpdate();
+        int length = mapSize.x;
+        if (length > 100) {
+            int counter = 1;
+            for (int i = 0; i < length; i += 10) {
+                for (int j = 0; j < length; j += 10) {
+                    stmt.setInt(1, mapCover[j][i]);
+                    stmt.setInt(2, counter);
+                    stmt.executeUpdate();
+                    counter++;
+                }
+            }
+        } else {
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < length; j++) {
+                    stmt.setInt(1, mapCover[i][j]);
+                    stmt.setInt(2, (i * length) + j + 1);
+                    stmt.executeUpdate();
+                }
             }
         }
-
-         */
         stmt.close();
     }
 }

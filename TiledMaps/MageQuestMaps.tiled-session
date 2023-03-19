@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TIILESET.tsx",
+    "activeFile": "Tutorial.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "exports",
@@ -49,8 +49,8 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 374,
-                "y": 203
+                "x": 480,
+                "y": 205
             }
         },
         "FirstDungeon.tmx": {
@@ -60,8 +60,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 442.66666666666674,
-                "y": 861.3333333333334
+                "x": 479.99999999999994,
+                "y": 479.3333333333333
             }
         },
         "ForestClearing.tmx": {
@@ -73,11 +73,11 @@
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.25,
+            "scale": 0.125,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 4968,
-                "y": 5352
+                "x": 4864,
+                "y": 5320
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -94,11 +94,11 @@
             }
         },
         "Hillcrest.tmx": {
-            "scale": 0.33,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 754.5454545454546,
-                "y": 784.8484848484848
+                "x": 802,
+                "y": 888
             }
         },
         "TIILESET.tsx": {
@@ -113,8 +113,8 @@
             "scale": 0.75,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 400,
-                "y": 400.6666666666667
+                "x": 399.99999999999994,
+                "y": 400
             }
         },
         "TheGrove.tmx": {
@@ -124,8 +124,8 @@
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1502,
-                "y": 1584
+                "x": 1600,
+                "y": 1600
             }
         },
         "TileSet.tsx": {
@@ -153,11 +153,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.75,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 845.3333333333333,
-                "y": 788.6666666666665
+                "x": 727.2727272727271,
+                "y": 1387.8787878787878
             }
         },
         "caveMarla.tmx": {
@@ -202,8 +202,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 957.5757575757575,
-                "y": 962.1212121212121
+                "x": 960.6060606060607,
+                "y": 960.6060606060607
             }
         },
         "grassspritesheet.tsx": {
@@ -224,7 +224,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 560.6060606060606,
-                "y": 562.1212121212121
+                "y": 563.6363636363637
             }
         },
         "map1.tmj": {
@@ -301,22 +301,25 @@
         "TestRomm.tmx",
         "goblinCave.tmx",
         "GrassLands.tmx",
-        "hermitCaveHillcrest.tmx"
+        "hermitCaveHillcrest.tmx",
+        "DungeonTutorial.tmx",
+        "FirstDungeon.tmx",
+        "Hillcrest.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "caveMarla.tmx",
         "ForestClearing.tmx",
+        "TIILESET.tsx",
+        "Hillcrest.tmx",
+        "FirstDungeon.tmx",
+        "DungeonTutorial.tmx",
         "hermitCaveHillcrest.tmx",
         "GrassLands.tmx",
         "goblinCave.tmx",
         "TestRomm.tmx",
         "TheGrove.tmx",
-        "DeadPlains.tmx",
-        "Tutorial.tmx",
-        "TIILESET.tsx",
-        "FirstDungeon.tmx",
-        "second floor_tutorial_castle.tmx"
+        "DeadPlains.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

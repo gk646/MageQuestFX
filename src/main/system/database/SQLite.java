@@ -1062,7 +1062,7 @@ public class SQLite {
         for (int i = 0; i < mg.talentP.talent_Nodes.length; i++) {
             if (mg.talentP.talent_Nodes[i] != null) {
                 stmt.setInt(1, 0);
-                stmt.setString(2, String.valueOf(i));
+                stmt.setInt(2, i);
                 stmt.executeUpdate();
             }
         }

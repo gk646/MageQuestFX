@@ -33,7 +33,6 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import main.system.CollisionChecker;
 import main.system.Storage;
-import main.system.ai.OpenAIHelper;
 import main.system.database.SQLite;
 import main.system.enums.State;
 import main.system.enums.Zone;
@@ -152,7 +151,6 @@ public class MainGame {
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
     public boolean showAbilities;
-    public OpenAIHelper openAIHelper;
 
 
     /**
@@ -383,7 +381,6 @@ public class MainGame {
      */
     private void loadGame(GraphicsContext gc) {
         {
-            openAIHelper = new OpenAIHelper();
             sqLite = new SQLite(this);
             sqLite.getConnection();
             dropManager = new DropManager(this);
@@ -452,7 +449,7 @@ public class MainGame {
             gameMap = new GameMap(this);
             FonT.loadFonts();
             //100%
-            // sqLite.resetGame();
+            //sqLite.resetGame();
             loadGameState.loadGame();
             ui.updateLoadingScreen(16, gc);
             countItems();
@@ -493,7 +490,7 @@ public class MainGame {
         for (Map map : wControl.MAPS) {
             for (int i = 0; i < map.mapSize.x; i++) {
                 for (int j = 0; j < map.mapSize.x; j++) {
-                    map.mapCover[i][j] = 1;
+                    //map.mapCover[i][j] = 1;
                 }
             }
         }
@@ -510,7 +507,7 @@ public class MainGame {
         // inventP.bag_Slots.get(4).item = DRP_DroppedItem.cloneItemWithLevelQuality(BAGS.get(1), 100, 60);
         //ENTITIES.add(new ENT_Shooter(this, 35 * 48, 19 * 48, 111));
         // wControl.loadMap(Zone.Woodland_Edge, 74, 84);
-        wControl.loadMap(Zone.Hillcrest, 24, 24);
+        wControl.loadMap(Zone.GrassLands, 444, 444);
         ENTITIES.add(new ENT_SkeletonWarrior(this, 160 * 48, 160 * 48, 2, Zone.The_Grove));
         for (int i = 0; i < 50; i++) {
             //  ENTITIES.add(new ENT_SkeletonSpearman(this, 56 * 48, 24 * 48, 30, Zone.Hillcrest));
@@ -526,7 +523,7 @@ public class MainGame {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
-        testRoom();
+        //testRoom();
     }
 
     private void testRoom() {
