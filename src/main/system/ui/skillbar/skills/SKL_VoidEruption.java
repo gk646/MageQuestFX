@@ -1,7 +1,7 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.abilities.PRJ_VoidEruption;
+import gameworld.player.abilities.DARK.PRJ_VoidEruption;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;

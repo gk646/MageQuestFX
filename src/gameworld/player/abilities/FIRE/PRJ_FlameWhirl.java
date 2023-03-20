@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.FIRE;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.player.PROJECTILE;

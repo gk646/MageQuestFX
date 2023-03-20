@@ -1,7 +1,7 @@
 package main.system.ui.skillbar.skills;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.player.abilities.PRJ_EnergySphere;
+import gameworld.player.abilities.ARCANE.PRJ_EnergySphere;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.skillbar.SKILL;

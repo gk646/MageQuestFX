@@ -1,40 +1,34 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.DARK;
 
 import gameworld.entities.damage.DamageType;
-import gameworld.entities.damage.effects.debuffs.DEBUF_Stun;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.MediaPlayer;
 
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
-public class PRJ_ThunderSplash extends PROJECTILE {
+public class PRJ_VoidEruption extends PROJECTILE {
 
 
-    public PRJ_ThunderSplash(float weapon_damage_percent) {
+    public PRJ_VoidEruption(float weapon_damage_percent) {
         this.weapon_damage_percent = weapon_damage_percent;
-        this.procEffects[0] = new DEBUF_Stun(180, 1, 1, false, this.getClass());
-        this.type = DamageType.Arcane;
-        damageDead = true;
-        this.resource = ProjectilePreloader.thunderSplash;
-        this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
-        this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
-        this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 24, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 24);
-        collisionBox = new Rectangle(0, 0, 48, 48);
+        this.resource = ProjectilePreloader.voidEruption;
+        this.sounds[0] = resource.sounds.get(0);
+        type = DamageType.DarkMagic;
+        this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 36, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 36);
+        collisionBox = new Rectangle(-3, -3, 76, 76);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
         playStartSound();
     }
 
-
     @Override
     public void draw(GraphicsContext gc) {
-        switch (spriteCounter % 160 / 10) {
+        switch ((spriteCounter % 170 / 10)) {
             case 0 ->
                     gc.drawImage(resource.images1.get(0), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 1 ->
@@ -63,12 +57,13 @@ public class PRJ_ThunderSplash extends PROJECTILE {
                     gc.drawImage(resource.images1.get(12), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
             case 13 ->
                     gc.drawImage(resource.images1.get(13), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
-            case 14 -> dead = true;
+            case 14 ->
+                    gc.drawImage(resource.images1.get(14), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
+            case 15 ->
+                    gc.drawImage(resource.images1.get(15), (int) worldPos.x - Player.worldX + Player.screenX, (int) worldPos.y - Player.worldY + Player.screenY);
+            case 16 -> dead = true;
         }
 
-        if (spriteCounter == 60) {
-            damageDead = false;
-        }
         spriteCounter++;
     }
 
@@ -82,7 +77,8 @@ public class PRJ_ThunderSplash extends PROJECTILE {
      */
     @Override
     public void update() {
-
+        if (dead) {
+            //sounds[0].stop();
+        }
     }
 }
-

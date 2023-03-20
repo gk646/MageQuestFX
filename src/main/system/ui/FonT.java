@@ -36,6 +36,7 @@ public class FonT {
     public static Font editUndo16;
     public static Font editUndo19;
     public static Font editUndo22;
+    public static Font editUndo24;
     public static Font minecraftItalic14;
     public static Font minecraftBold17;
     public static Font minecraftItalic11;
@@ -73,6 +74,7 @@ public class FonT {
         editUndo16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 16);
         editUndo19 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 19);
         editUndo22 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 22);
+        editUndo24 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/EditUndoBrk-RwaV.ttf"), 24);
         antParty18 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 18);
         antParty20 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 20);
         antParty16 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/Ant Party.ttf"), 16);

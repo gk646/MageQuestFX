@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.ARCANE;
 
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;

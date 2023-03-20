@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.DARK;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.EffectType;

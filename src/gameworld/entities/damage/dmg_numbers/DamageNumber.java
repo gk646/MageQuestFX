@@ -41,7 +41,7 @@ public class DamageNumber {
             gc.setFill(Colors.physical_grey);
         }
         if (crit) {
-            gc.setFont(FonT.editUndo22);
+            gc.setFont(FonT.editUndo24);
             gc.fillText(String.valueOf(damage), entity.worldX + offSetX - Player.worldX + Player.screenX, entity.worldY + offSetY - Player.worldY + Player.screenY);
         } else {
             gc.setFont(FonT.editUndo19);

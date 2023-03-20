@@ -27,6 +27,7 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader fireSword;
 
     public static ArrayList<GeneralResourceLoader> projectileSounds = new ArrayList<>();
+    public static GeneralResourceLoader fireExplosion;
 
     public static void load() {
         solarFlare = new GeneralResourceLoader("projectiles/solarFlare");
@@ -89,7 +90,11 @@ public class ProjectilePreloader {
         gateTeleporter = new GeneralResourceLoader("projectiles/gate1");
         //gateTeleporter.loadProjectilesSounds();
         //projectileSounds.add(gateTeleporter);
-        gateTeleporter = new GeneralResourceLoader("projectiles/gate2");
+        gateTeleporter1 = new GeneralResourceLoader("projectiles/gate2");
         //TODO SOUNDS
+
+        fireExplosion = new GeneralResourceLoader("projectiles/fireExplosion");
+        //fireExplosion.loadProjectilesSounds();
+        //fireExplosion.add(fireExplosion);
     }
 }

@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.ARCANE;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;

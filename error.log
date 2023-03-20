@@ -1,7 +1,1 @@
-java.lang.ArrayIndexOutOfBoundsException: Index 200 out of bounds for length 200
-	at gameworld.world.maps.Map.getMapCover(Map.java:186)
-	at gameworld.world.maps.Map.<init>(Map.java:62)
-	at gameworld.world.WorldController.loadWorldData(WorldController.java:41)
-	at main.MainGame.loadGame(MainGame.java:413)
-	at main.MainGame.run(MainGame.java:173)
-	at java.base/java.lang.Thread.run(Thread.java:1589)
+java.lang.NullPointerException

@@ -43,7 +43,7 @@ abstract public class ENTITY {
     public int spriteCounter;
     public int goalCol;
     public int goalRow;
-    protected float amountedDamageSinceLastDamageNumber;
+    protected float amountSinceLastARCANE, amountSinceLastICE, amountSinceLastPOISON, amountSinceLastDARK, amountSinceLastFIRE;
     protected long timeSinceLastDamageNumber;
     protected long timeSinceLastDamageSound;
     public Image entityImage1;
@@ -313,36 +313,48 @@ abstract public class ENTITY {
     public void getDamageFromPlayer(float damagePercent, DamageType type, boolean isDOT) {
         float flat_damage = MainGame.random.nextFloat(mg.player.weaponDamageLower, mg.player.weaponDamageUpper) * (damagePercent / 100.0f);
         float[] effectsDouble = mg.player.effects;
-        switch (type) {
-            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
-            case Fire -> flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
-            case Arcane -> flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
-            case Poison -> flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
-            case Ice -> flat_damage += (flat_damage / 100.0f) * effectsDouble[28];
-        }
-        switch (type) {
-            case DarkMagic -> flat_damage += (flat_damage / 100.0f) * effects[42];
-            case Fire -> flat_damage += (flat_damage / 100.0f) * effects[44];
-            case Arcane -> flat_damage += (flat_damage / 100.0f) * effects[41];
-            case Poison -> flat_damage += (flat_damage / 100.0f) * effects[43];
-            case Ice -> flat_damage += (flat_damage / 100.0f) * effects[40];
-        }
         if (isDOT) {
             flat_damage += (flat_damage / 100.0f) * effectsDouble[4];
         }
-        amountedDamageSinceLastDamageNumber += flat_damage;
+        switch (type) {
+            case DarkMagic -> {
+                flat_damage += (flat_damage / 100.0f) * effectsDouble[2];
+                flat_damage += (flat_damage / 100.0f) * effects[42];
+            }
+            case Fire -> {
+                flat_damage += (flat_damage / 100.0f) * effectsDouble[19];
+                flat_damage += (flat_damage / 100.0f) * effects[44];
+            }
+            case Arcane -> {
+                flat_damage += (flat_damage / 100.0f) * effectsDouble[1];
+                flat_damage += (flat_damage / 100.0f) * effects[41];
+            }
+            case Poison -> {
+                flat_damage += (flat_damage / 100.0f) * effectsDouble[18];
+                flat_damage += (flat_damage / 100.0f) * effects[43];
+            }
+            case Ice -> {
+                flat_damage += (flat_damage / 100.0f) * effectsDouble[28];
+                flat_damage += (flat_damage / 100.0f) * effects[40];
+            }
+        }
         if (MainGame.random.nextInt(0, 101) <= effectsDouble[21]) {
             flat_damage += (flat_damage / 100.0f) * effectsDouble[22];
             mg.damageNumbers.add(new DamageNumber((int) flat_damage, type, this, true));
             timeSinceLastDamageNumber = System.currentTimeMillis();
-            amountedDamageSinceLastDamageNumber = 0;
-        }
-        if (System.currentTimeMillis() - timeSinceLastDamageNumber >= 100 && amountedDamageSinceLastDamageNumber > 0.99) {
-            mg.damageNumbers.add(new DamageNumber((int) amountedDamageSinceLastDamageNumber, type, this, false));
-            amountedDamageSinceLastDamageNumber = 0;
-            timeSinceLastDamageNumber = System.currentTimeMillis();
+            this.health -= flat_damage;
+            return;
         }
         this.health -= flat_damage;
+        if (damagePercent > 50) {
+            mg.damageNumbers.add(new DamageNumber((int) flat_damage, type, this, false));
+        } else if (System.currentTimeMillis() - timeSinceLastDamageNumber >= 100) {
+            mg.damageNumbers.add(new DamageNumber((int) amountSinceLastARCANE, type, this, false));
+            timeSinceLastDamageNumber = System.currentTimeMillis();
+            amountSinceLastARCANE = 0;
+        } else {
+            amountSinceLastARCANE += flat_damage;
+        }
     }
 
     public void getDamage(float flat_damage) {

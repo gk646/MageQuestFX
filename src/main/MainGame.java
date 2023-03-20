@@ -463,7 +463,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        //debug();
+        debug();
     }
 
     private void debug() {
@@ -523,7 +523,7 @@ public class MainGame {
             //  dropI.dropEpicItem(this, (10 - i) * 48, 85 * 48, 1, Zone.Hillcrest);
         }
         // ENTITIES.add(new BOS_Slime(this, 490 * 48, 490 * 48, 1, 140));
-        //testRoom();
+        testRoom();
     }
 
     private void testRoom() {

@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.FIRE;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.DamageEffect;
@@ -25,7 +25,7 @@ public class PRJ_InfernoRay extends PROJECTILE {
         this.sounds[0] = new MediaPlayer(resource.sounds.get(0).getMedia());
         this.sounds[0].setOnEndOfMedia(() -> sounds[0].dispose());
         this.worldPos = new Point2D.Double(Player.worldX, Player.worldY);
-        this.procEffects[0] = new DamageEffect(300, 10, true, DamageType.Fire, 30, this.getClass());
+        this.procEffects[0] = new DamageEffect(300, 10, true, DamageType.Fire, 30, PRJ_BurnSource.class);
         direction = "leftrightdownup";
         projectileType = ProjectileType.OneHitNoDMG;
         double dx = InputHandler.instance.lastMousePosition.getX() - (Player.screenX + 24);
