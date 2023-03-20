@@ -73,6 +73,7 @@ public class PRJ_Control {
                     }
                     projectile.update();
                     if (projectile.dead) {
+                        System.out.println("hey");
                         iterator.remove();
                         continue;
                     }
@@ -87,7 +88,6 @@ public class PRJ_Control {
                             }
                             if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && !entity.dead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
                                 calcProjectileDamage(projectile, entity);
-
                             }
                         }
                     }

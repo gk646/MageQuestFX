@@ -20,6 +20,7 @@ import gameworld.quest.quests.QST_TheAudition;
 import gameworld.quest.quests.QST_Tutorial;
 import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
+import main.system.database.SQLite;
 import main.system.enums.Zone;
 
 import java.sql.SQLException;
@@ -238,7 +239,7 @@ public class LoadGameState {
 
     private void loadPlayerSave() {
         try {
-            Statement stmt = mg.sqLite.PLAYER_SAVE.createStatement();
+            Statement stmt = SQLite.PLAYER_SAVE.createStatement();
             mg.sqLite.readSKillPanel(stmt);
             mg.sqLite.readPlayerInventory(stmt);
             mg.sqLite.readPlayerBags(stmt);
@@ -250,7 +251,7 @@ public class LoadGameState {
         }
     }
 
-    private void loadSpawnLevel() {
+    public void loadSpawnLevel() {
         int num = mg.sqLite.readStartLevel();
         if (num == 1) {
             mg.wControl.loadMap(Zone.Hillcrest, 20, 20);

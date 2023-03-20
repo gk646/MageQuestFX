@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.enemies;
 
 import gameworld.entities.damage.DamageType;
 import gameworld.player.EnemyProjectile;

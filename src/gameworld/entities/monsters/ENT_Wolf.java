@@ -3,7 +3,7 @@ package gameworld.entities.monsters;
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
-import gameworld.player.abilities.PRJ_AttackCone;
+import gameworld.player.abilities.enemies.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;

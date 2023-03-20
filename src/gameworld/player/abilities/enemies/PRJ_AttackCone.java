@@ -1,4 +1,4 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.enemies;
 
 import gameworld.player.EnemyProjectile;
 import javafx.scene.canvas.GraphicsContext;

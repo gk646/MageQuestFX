@@ -11,7 +11,7 @@ public class PlayerPrompts {
     final MainGame mg;
     final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
-    int Ecounter = 0;
+    public static int Ecounter = 0;
 
     public PlayerPrompts(MainGame mg) {
         this.mg = mg;
@@ -33,7 +33,7 @@ public class PlayerPrompts {
         }
     }
 
-    public void setETrue() {
+    public static void setETrue() {
         Ecounter = 0;
     }
 }

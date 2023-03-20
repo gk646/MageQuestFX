@@ -6,7 +6,7 @@ import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.player.Player;
-import gameworld.player.abilities.PRJ_AttackCone;
+import gameworld.player.abilities.enemies.PRJ_AttackCone;
 import gameworld.quest.Dialog;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;

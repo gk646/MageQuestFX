@@ -1,7 +1,5 @@
-package gameworld.player.abilities;
+package gameworld.player.abilities.portals;
 
-import gameworld.entities.damage.DamageType;
-import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.player.EnemyProjectile;
 import gameworld.player.Player;
 import gameworld.player.ProjectilePreloader;
@@ -13,13 +11,11 @@ import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
 
-public class PRJ_Teleporter extends EnemyProjectile {
-    GeneralResourceLoader gate1 = ProjectilePreloader.gateTeleporter1;
+public class PRJ_EtherPortal extends EnemyProjectile {
 
-    public PRJ_Teleporter() {
-        this.type = DamageType.DarkMagic;
-        this.resource = ProjectilePreloader.gateTeleporter;
-        this.sounds[0] = resource.sounds.get(0);
+    public PRJ_EtherPortal() {
+        this.resource = ProjectilePreloader.etherPortal;
+        //this.sounds[0] = resource.sounds.get(0);
         this.worldPos = new Point2D.Double(Player.worldX - Player.screenX + InputHandler.instance.lastMousePosition.x - 32, Player.worldY + InputHandler.instance.lastMousePosition.y - Player.screenY - 32);
         collisionBox = new Rectangle(-5, -5, 74, 74);
         direction = "leftrightdownup";

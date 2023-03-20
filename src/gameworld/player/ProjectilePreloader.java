@@ -22,12 +22,13 @@ public class ProjectilePreloader {
     public static GeneralResourceLoader powerSurge;
     public static GeneralResourceLoader blastHammer;
     public static GeneralResourceLoader gateTeleporter;
-    public static GeneralResourceLoader gateTeleporter1;
+
     public static GeneralResourceLoader infernoRay;
     public static GeneralResourceLoader fireSword;
 
     public static ArrayList<GeneralResourceLoader> projectileSounds = new ArrayList<>();
     public static GeneralResourceLoader fireExplosion;
+    public static GeneralResourceLoader etherPortal;
 
     public static void load() {
         solarFlare = new GeneralResourceLoader("projectiles/solarFlare");
@@ -90,11 +91,14 @@ public class ProjectilePreloader {
         gateTeleporter = new GeneralResourceLoader("projectiles/gate1");
         //gateTeleporter.loadProjectilesSounds();
         //projectileSounds.add(gateTeleporter);
-        gateTeleporter1 = new GeneralResourceLoader("projectiles/gate2");
         //TODO SOUNDS
 
         fireExplosion = new GeneralResourceLoader("projectiles/fireExplosion");
         //fireExplosion.loadProjectilesSounds();
         //fireExplosion.add(fireExplosion);
+
+        etherPortal = new GeneralResourceLoader("projectiles/etherPortal");
+        //etherPortal.loadProjectilesSounds();
+        //projectileSounds.add(etherPortal);
     }
 }
