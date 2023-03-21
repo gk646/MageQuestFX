@@ -198,9 +198,9 @@ public class GameMap {
             for (PROJECTILE projectile : mg.PROJECTILES) {
                 entityX = (int) ((projectile.worldPos.x + 24) / 48);
                 entityY = (int) ((projectile.worldPos.y + 24) / 48);
+                y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
+                x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                 if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
-                    y = 465 + yOffset + (entityY - yTile_i) * zoom_i;
-                    x = 785 + xOffset + (entityX - xTile_i) * zoom_i;
                     for (float i = y; i < y + 2; i++) {
                         for (float b = x; b < x + 2; b++) {
                             image.setRGB((int) b, (int) i, 0xD0FF_0044);

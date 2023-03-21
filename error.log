@@ -1,14 +1,6 @@
-java.lang.RuntimeException: java.lang.ClassNotFoundException: org.sqlite.JDBC
-	at main.system.database.SQLite.getConnection(SQLite.java:45)
-	at main.MainGame.loadGame(MainGame.java:385)
-	at main.MainGame.run(MainGame.java:172)
+java.lang.ArrayIndexOutOfBoundsException: Coordinate out of bounds!
+	at java.desktop/sun.awt.image.IntegerInterleavedRaster.setDataElements(IntegerInterleavedRaster.java:298)
+	at java.desktop/java.awt.image.BufferedImage.setRGB(BufferedImage.java:1017)
+	at main.system.ui.maps.GameMap.getImage(GameMap.java:207)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:202)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
-Caused by: java.lang.ClassNotFoundException: org.sqlite.JDBC
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Class.java:390)
-	at java.base/java.lang.Class.forName(Class.java:381)
-	at main.system.database.SQLite.getConnection(SQLite.java:41)
-	... 3 more
