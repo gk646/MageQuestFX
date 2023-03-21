@@ -57,6 +57,7 @@ public class Map {
         this.mapDataBackGround2 = BG1;
         this.mapDataBackGround = BG;
         this.mapCover = new int[mapSize.x][mapSize.x];
+        openMap();
     }
 
     public int[][] loadMapData(String filename, int worldSize) {
@@ -237,6 +238,15 @@ public class Map {
             }
         }
         stmt.close();
+    }
+
+    private void openMap() {
+        int length = mapCover.length;
+        for (int i = 0; i < length; i++) {
+            for (int l = 0; l < length; l++) {
+                mapCover[i][l] = 1;
+            }
+        }
     }
 }
 

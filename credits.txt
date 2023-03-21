@@ -4,6 +4,13 @@ OpenJDK
  The open source implementation of the Java Platform Standard Edition (Java SE). 
 Map Editor 
  Tiled - Copyright © 2008-2021 Thorbjørn Lindeijer 
+DATABASE 
+ SQLite JDBC driver 3.4 - developed by Xerial 
+ SQLite database - developed by D. Richard Hipp 
+FastNoise
+ https://github.com/Auburn/FastNoiseLite
+ Copyright(c) 2020 Jordan Peck (jordan.me2@gmail.com)
+ Copyright(c) 2020 Contributors
 TEXTURES 
  Character textures: craftpix.net / Full copyright with their Freebie License 
  Effect textures from: craftpix.net / Full copyright with their Freebie License 
@@ -48,6 +55,3 @@ Sounds from SilverIllusionist:{
  }
 
 Various soundeffects / public domain from freesound.org 
-DATABASE 
- SQLite JDBC driver 3.4 - developed by Xerial 
- SQLite database - developed by D. Richard Hipp 

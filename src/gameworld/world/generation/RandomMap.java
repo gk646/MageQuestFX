@@ -35,13 +35,40 @@ public class RandomMap {
         int[][] BG1 = getBlankMap(sizeX);
         int[][] BG = getBlackMap(sizeX);
         generateEntrance(BG, entrance);
+        FastNoiseLite fastNoise = new FastNoiseLite();
+        fastNoise.SetFrequency(0.02f);
+        fastNoise.SetFractalOctaves(6);
+        fastNoise.SetFractalGain(0.5f);
+        fastNoise.SetFractalLacunarity(2.0f);
+        fastNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+        float[][] noiseData = getNoise(sizeX, fastNoise);
+        getFloor(BG, noiseData, sizeX);
+
         generateWalls(BG);
         return new Map(new Point(sizeX, sizeX), Zone.EtherRealm, FG, BG1, BG);
     }
 
+    private float[][] getNoise(int size, FastNoiseLite fastNoise) {
+        float[][] noiseMap = new float[size][size];
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                float value = fastNoise.GetNoise(x, y);
+                noiseMap[x][y] = value;
+            }
+        }
 
-    private void generateRoom() {
 
+        return noiseMap;
+    }
+
+    private void getFloor(int[][] floorArr, float[][] arr, int length) {
+        for (int i = 0; i < length; i++) {
+            for (int l = 0; l < length; l++) {
+                if (arr[l][i] > 0) {
+                    floorArr[l][i] = getRandomArrayEntry(floorPaletV1_4Enhanced);
+                }
+            }
+        }
     }
 
 
@@ -122,5 +149,25 @@ public class RandomMap {
             }
         }
         return temp;
+    }
+
+    private void printMinMaxValue(float[][] noiseMap) {
+        float min = Float.MAX_VALUE;
+        float max = Float.MIN_VALUE;
+
+        // Loop through the array and update the min and max values
+        for (float[] row : noiseMap) {
+            for (float value : row) {
+                if (value < min) {
+                    min = value;
+                }
+                if (value > max) {
+                    max = value;
+                }
+            }
+        }
+
+        System.out.println("Max value: " + max);
+        System.out.println("Min value: " + min);
     }
 }

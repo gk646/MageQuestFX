@@ -86,6 +86,8 @@ public class PRJ_Teleporter extends EnemyProjectile {
      */
     @Override
     public void update() {
+        worldPos.x = Player.worldX;
+        worldPos.y = Player.worldY;
         if (dead) {
             if (PlayerPrompts.Ecounter < 60 && InputHandler.instance.e_typed) {
                 InputHandler.instance.e_typed = false;
