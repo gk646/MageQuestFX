@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GrassLands.tmx",
+    "activeFile": "Hillcrest.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "exports",
@@ -39,18 +39,18 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1600
+                "y": 1598
             }
         },
         "DungeonTutorial.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 428,
-                "y": 206
+                "x": 546.6666666666665,
+                "y": 267.3333333333333
             }
         },
         "FirstDungeon.tmx": {
@@ -58,10 +58,10 @@
                 4
             ],
             "scale": 0.75,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 480,
-                "y": 479.99999999999994
+                "x": 477.33333333333337,
+                "y": 478.66666666666663
             }
         },
         "ForestClearing.tmx": {
@@ -76,8 +76,8 @@
             "scale": 0.015625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -9344,
-                "y": 3328
+                "x": 4032,
+                "y": 4000
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -94,11 +94,11 @@
             }
         },
         "Hillcrest.tmx": {
-            "scale": 0.33,
+            "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 800,
-                "y": 801.5151515151515
+                "x": 314,
+                "y": 353.66666666666663
             }
         },
         "TIILESET.tsx": {
@@ -125,7 +125,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1600
+                "y": 1599
             }
         },
         "TileSet.tsx": {
@@ -156,8 +156,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 775.7575757575758,
-                "y": 1384.8484848484848
+                "x": 912.1212121212121,
+                "y": 789.3939393939395
             }
         },
         "caveMarla.tmx": {
@@ -199,11 +199,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 957.5757575757575,
-                "y": 962.1212121212121
+                "x": 646,
+                "y": 888
             }
         },
         "grassspritesheet.tsx": {
@@ -276,8 +276,8 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 202.66666666666663,
-                "y": -22.666666666666686
+                "x": 202.66666666666669,
+                "y": -22
             }
         }
     },
@@ -285,12 +285,12 @@
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
-    "map.height": 70,
+    "map.height": 83,
     "map.lastUsedExportFilter": "CSV-Dateien (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 70,
+    "map.width": 90,
     "openFiles": [
         "caveMarla.tmx",
         "TIILESET.tsx",
@@ -308,6 +308,7 @@
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
+        "unbenannt.tmx",
         "caveMarla.tmx",
         "TIILESET.tsx",
         "Tutorial.tmx",
@@ -315,11 +316,10 @@
         "TheGrove.tmx",
         "TestRomm.tmx",
         "goblinCave.tmx",
-        "unbenannt.tmx",
-        "Hillcrest.tmx",
-        "FirstDungeon.tmx",
+        "GrassLands.tmx",
+        "hermitCaveHillcrest.tmx",
         "DungeonTutorial.tmx",
-        "hermitCaveHillcrest.tmx"
+        "FirstDungeon.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

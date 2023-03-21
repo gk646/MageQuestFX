@@ -73,7 +73,6 @@ public class PRJ_Control {
                     }
                     projectile.update();
                     if (projectile.dead) {
-                        System.out.println("hey");
                         iterator.remove();
                         continue;
                     }

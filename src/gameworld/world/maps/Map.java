@@ -3,7 +3,6 @@ package gameworld.world.maps;
 import gameworld.quest.SpawnTrigger;
 import gameworld.quest.Trigger;
 import gameworld.quest.Type;
-import gameworld.world.MapQuadrant;
 import main.system.database.SQLite;
 import main.system.enums.GameMapType;
 import main.system.enums.Zone;
@@ -30,22 +29,9 @@ public class Map {
     public final int[][] mapDataForeGround;
     public final Point mapSize;
     public final ArrayList<SpawnTrigger> spawnTriggers;
-    public final MapQuadrant[] mapQuadrants;
+    // public final MapQuadrant[] mapQuadrants;
     public int[][] mapCover;
-    public final String name;
-
-    public Map(String name, Point mapSize, Zone zone) {
-        this.name = name;
-        this.zone = zone;
-        this.gameMapType = GameMapType.NoMapCover;
-        this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
-        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
-        this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
-        this.spawnTriggers = getTriggers(name, zone);
-        this.mapQuadrants = new MapQuadrant[100];
-        this.mapSize = mapSize;
-        this.mapCover = new int[mapSize.x][mapSize.x];
-    }
+    public String name;
 
     public Map(String name, Point mapSize, Zone zone, GameMapType gameMapType) {
         this.mapSize = mapSize;
@@ -53,20 +39,30 @@ public class Map {
         this.zone = zone;
         this.name = name;
         this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
-        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
         this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
+        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
         this.spawnTriggers = getTriggers(name, zone);
-        this.mapQuadrants = new MapQuadrant[100];
         this.mapCover = new int[mapSize.x][mapSize.x];
         if (gameMapType == GameMapType.MapCover) {
             mapCover = getMapCover();
         }
     }
 
+    public Map(Point mapSize, Zone zone, int[][] FG, int[][] BG1, int[][] BG) {
+        this.mapSize = mapSize;
+        this.gameMapType = GameMapType.NoMapCover;
+        this.zone = zone;
+        this.spawnTriggers = new ArrayList<>();
+        this.mapDataForeGround = FG;
+        this.mapDataBackGround2 = BG1;
+        this.mapDataBackGround = BG;
+        this.mapCover = new int[mapSize.x][mapSize.x];
+    }
+
     public int[][] loadMapData(String filename, int worldSize) {
         int[][] worldData = new int[worldSize][worldSize];
         String[] numbers;
-        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + filename + ".csv")) {
+        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + name + "/" + filename + ".csv")) {
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)), 32_768)) {
                 for (int i = 0; i < worldSize; i++) {
                     numbers = bufferedReader.readLine().split(",");
@@ -89,7 +85,7 @@ public class Map {
         Pattern widthfinder = Pattern.compile("\"width\":(\\d{0,4})");
         Pattern heightfinder = Pattern.compile("\"height\":(\\d{0,4})");
         Pattern namefinder = Pattern.compile("\"name\":\"(\\D+)(\\d{0,3})");
-        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + fileName + ".tmj");
+        try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + name + "/" + fileName + ".tmj");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             Matcher matcher;
             String line;

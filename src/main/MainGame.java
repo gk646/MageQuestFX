@@ -14,9 +14,9 @@ import gameworld.player.Player;
 import gameworld.player.PlayerPrompts;
 import gameworld.player.ProjectilePreloader;
 import gameworld.quest.dialog.DialogStorage;
-import gameworld.world.MAP_UTILS;
 import gameworld.world.WorldController;
 import gameworld.world.effects.DayNightCycle;
+import gameworld.world.generation.RandomMap;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.DropManager;
@@ -125,7 +125,6 @@ public class MainGame {
     public UI_InventoryPanel inventP;
     public UI_TalentPanel talentP;
     public NPC_Control npcControl;
-    public MAP_UTILS map_utils;
     public GameMap gameMap;
     private final DayNightCycle cycle = new DayNightCycle(this);
     public UI_SkillBar sBar;
@@ -151,7 +150,7 @@ public class MainGame {
     public PlayerPrompts playerPrompts;
     public static int WORLD_SIZE;
     public boolean showAbilities;
-
+    public RandomMap generator;
 
     /**
      * Main class for the game logic and center point for information
@@ -386,6 +385,7 @@ public class MainGame {
             dropManager = new DropManager(this);
             FonT.minecraftBold30 = Font.loadFont(FonT.class.getResourceAsStream("/Fonts/MinecraftBold-nMK1.otf"), 30);
             loadGameState = new LoadGameState(this);
+            generator = new RandomMap(this);
             ProjectilePreloader.load();
             tileBase = new TileBasedEffects(this);
             qPanel = new UI_QuestPanel(this);
@@ -397,10 +397,8 @@ public class MainGame {
             long seed = secureRandom.nextLong();
             random = new Random(seed);
             // 0 %
-
             playerPrompts = new PlayerPrompts(this);
             sound = new Sound(this);
-
             sound.loadSounds();
             inventP = new UI_InventoryPanel(this);
             wControl = new WorldController(this);
@@ -434,7 +432,6 @@ public class MainGame {
             //60%
             ui.updateLoadingScreen(12, gc);
             ENTPlayer2 = new ENT_Player2(this);
-            map_utils = new MAP_UTILS(this);
             talentP.createTalentNodes();
             //72%
             ui.updateLoadingScreen(12, gc);
