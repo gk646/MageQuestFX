@@ -8,6 +8,7 @@ import gameworld.entities.damage.effects.arraybased.Effect_ArrayBased;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
+import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
@@ -361,7 +362,7 @@ public class Player extends ENTITY {
             Iterator<DROP> iter = mg.WORLD_DROPS.iterator();
             while (iter.hasNext()) {
                 DROP drop = iter.next();
-                if (Math.abs(drop.worldPos.x - worldX) + Math.abs(drop.worldPos.y - worldY) < 200) {
+                if (drop.zone == WorldController.currentWorld && Math.abs(drop.worldPos.x - worldX) + Math.abs(drop.worldPos.y - worldY) < 200) {
                     if (player.intersects(new Rectangle(drop.worldPos.x, drop.worldPos.y, drop.size, drop.size))) {
                         if (drop instanceof DRP_Coin) {
                             mg.player.coins += ((DRP_Coin) drop).amount;

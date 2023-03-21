@@ -20,7 +20,7 @@ public class RandomMap {
 
     public void loadRandomMap() {
         int entrance = (int) (Math.random() * 3);
-        int mapSize = (int) (100 + Math.random() * 50);
+        int mapSize = (int) (150 + Math.random() * 75);
         if (entrance == 0) {
             mg.wControl.loadMap(getRandomMap(mapSize, 0, 0, 1), 1, mapSize / 2);
         } else if (entrance == 1) {
@@ -37,7 +37,7 @@ public class RandomMap {
         generateEntrance(BG, entrance);
         FastNoiseLite fastNoise = new FastNoiseLite();
         fastNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
-        fastNoise.SetFrequency(0.13f);
+        fastNoise.SetFrequency(0.12f);
         fastNoise.SetSeed(mg.secureRandom.nextInt());
         fastNoise.SetFractalOctaves(1);
         fastNoise.SetFractalLacunarity(0.7f);
@@ -67,7 +67,7 @@ public class RandomMap {
     private void getFloor(int[][] floorArr, float[][] arr, int length) {
         for (int i = 0; i < length; i++) {
             for (int l = 0; l < length; l++) {
-                if (arr[l][i] > 0.057057114) {
+                if (arr[l][i] < 0.022) {
                     floorArr[l][i] = getRandomArrayEntry(floorPaletV1_4Enhanced);
                 }
             }

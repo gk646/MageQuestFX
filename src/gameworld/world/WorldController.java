@@ -110,31 +110,29 @@ public class WorldController {
     public void loadMap(Map map, int xTile, int yTile) {
         State currentState = mg.gameState;
         mg.gameState = State.LOADING_SCREEN;
-        mg.ui.setLoadingScreen(0);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        mg.wRender.worldSize = map.mapSize;
-        currentWorld = map.zone;
-        mg.player.map = map;
-        mg.ui.setLoadingScreen(20);
-        mg.player.setPosition(xTile, yTile);
-        mg.getPlayerTile();
-        clearWorldArrays();
-        mg.ui.setLoadingScreen(40);
-        mg.wAnim.emptyAnimationLists();
-        currentMapCover = map.mapCover;
-        mg.ui.setLoadingScreen(60);
-        WorldRender.worldData = map.mapDataBackGround;
-        WorldRender.worldData1 = map.mapDataBackGround2;
-        mg.ui.setLoadingScreen(80);
-        WorldRender.worldData2 = map.mapDataForeGround;
-        mg.wAnim.cacheMapEnhancements();
-        mg.npcControl.loadGenerics(map.zone);
-        mg.ui.setLoadingScreen(100);
-        mg.gameState = currentState;
+        Thread thread = new Thread(() -> {
+            mg.ui.setLoadingScreen(0);
+            mg.wRender.worldSize = map.mapSize;
+            currentWorld = map.zone;
+            mg.player.map = map;
+            mg.ui.setLoadingScreen(20);
+            mg.player.setPosition(xTile, yTile);
+            mg.getPlayerTile();
+            clearWorldArrays();
+            mg.ui.setLoadingScreen(40);
+            mg.wAnim.emptyAnimationLists();
+            currentMapCover = map.mapCover;
+            mg.ui.setLoadingScreen(60);
+            WorldRender.worldData = map.mapDataBackGround;
+            WorldRender.worldData1 = map.mapDataBackGround2;
+            mg.ui.setLoadingScreen(80);
+            WorldRender.worldData2 = map.mapDataForeGround;
+            mg.wAnim.cacheMapEnhancements();
+            mg.npcControl.loadGenerics(map.zone);
+            mg.ui.setLoadingScreen(100);
+            mg.gameState = currentState;
+        });
+        thread.start();
     }
 
     public Map getMap(Zone zone) {
