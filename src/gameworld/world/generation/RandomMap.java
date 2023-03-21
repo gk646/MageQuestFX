@@ -11,8 +11,11 @@ public class RandomMap {
 
     MainGame mg;
 
-    int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146};
-    int[] wallPaletV1_4Enhanced = new int[]{93};
+    int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
+    int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
+    int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
+
+    int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
 
     public RandomMap(MainGame mg) {
         this.mg = mg;
@@ -30,11 +33,20 @@ public class RandomMap {
         }
     }
 
-    public Map getRandomMap(int sizeX, int roomSize, int corridorLength, int entrance) {
+    public Map getRandomMap(int sizeX, int roomSize, int corridorLength, int entranceNUm) {
         int[][] FG = getBlankMap(sizeX);
         int[][] BG1 = getBlankMap(sizeX);
         int[][] BG = getBlackMap(sizeX);
-        generateEntrance(BG, entrance);
+
+        generateEntrance(BG, entranceNUm);
+        float[][] noiseData = getNoise(sizeX);
+        getFloor(BG, noiseData, sizeX);
+        generateWalls(BG);
+        generateWallTop(BG, FG);
+        return new Map(new Point(sizeX, sizeX), Zone.EtherRealm, FG, BG1, BG);
+    }
+
+    private float[][] getNoise(int size) {
         FastNoiseLite fastNoise = new FastNoiseLite();
         fastNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
         fastNoise.SetFrequency(0.12f);
@@ -44,15 +56,6 @@ public class RandomMap {
         fastNoise.SetFractalGain(0);
         fastNoise.SetFractalWeightedStrength(0);
         fastNoise.SetFractalPingPongStrength(2);
-
-
-        float[][] noiseData = getNoise(sizeX, fastNoise);
-        getFloor(BG, noiseData, sizeX);
-        generateWalls(BG);
-        return new Map(new Point(sizeX, sizeX), Zone.EtherRealm, FG, BG1, BG);
-    }
-
-    private float[][] getNoise(int size, FastNoiseLite fastNoise) {
         float[][] noiseMap = new float[size][size];
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
@@ -109,6 +112,41 @@ public class RandomMap {
                         arr[x][y - 1] = getRandomArrayEntry(wallPaletV1_4Enhanced);
                     } else if (arr[x][Math.min(arrLength - 1, y + 1)] == 2215) {
                         arr[x][y] = getRandomArrayEntry(wallPaletV1_4Enhanced);
+                    }
+                }
+            }
+        }
+    }
+
+    private void generateWallTop(int[][] arr, int[][] toparr) {
+        int arrLength = arr.length;
+        int val;
+        for (int y = 0; y < arrLength; y++) {
+            for (int x = 0; x < arrLength; x++) {
+                val = arr[x][y];
+                if (arrContainsNum(wallPaletV1_4Enhanced, val)) {
+                    if (x >= 1 && y >= 1) {
+                        toparr[x][y - 1] = getRandomArrayEntry(wallTopPaletV1_4Enhanced);
+                        if (arrContainsNum(floorPaletV1_4Enhanced, arr[x - 1][y]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x][y + 1])) {
+                            toparr[x][y - 1] = 187;
+                        } else if (x < arrLength - 1 && arrContainsNum(floorPaletV1_4Enhanced, arr[x + 1][y]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x][y + 1])) {
+                            toparr[x][y - 1] = 186;
+                        }
+                        if (x < arrLength - 1 && arrContainsNum(floorPaletV1_4Enhanced, arr[x - 1][y]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x - 1][y - 1]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x][y - 1])
+                                && arr[x + 1][y + 1] == 2215 && arr[x][y + 1] == 2215) {
+                            toparr[x][y] = 200;
+                        } else if (x < arrLength - 1 && arrContainsNum(floorPaletV1_4Enhanced, arr[x + 1][y]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x + 1][y + 1]) && arrContainsNum(floorPaletV1_4Enhanced, arr[x][y + 1])
+                                && arr[x - 1][y - 1] == 2215 && arr[x][y - 1] == 2215) {
+                            toparr[x][y] = 199;
+                        }
+                    }
+                }
+                if (arrContainsNum(floorPaletV1_4Enhanced, val)) {
+                    if (x >= 1 && arr[x - 1][y] == 2215) {
+                        toparr[x - 1][y] = wallSidesPaletV1_4Enhanced[0];
+                    }
+                    if (x < arrLength - 1 && arr[x + 1][y] == 2215) {
+                        toparr[x + 1][y] = wallSidesPaletV1_4Enhanced[1];
                     }
                 }
             }

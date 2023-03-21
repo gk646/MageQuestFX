@@ -1,6 +1,9 @@
-java.lang.ArrayIndexOutOfBoundsException: Coordinate out of bounds!
-	at java.desktop/sun.awt.image.IntegerInterleavedRaster.setDataElements(IntegerInterleavedRaster.java:298)
-	at java.desktop/java.awt.image.BufferedImage.setRGB(BufferedImage.java:1017)
-	at main.system.ui.maps.GameMap.getImage(GameMap.java:206)
-	at main.MainGame.lambda$startThreads$0(MainGame.java:201)
+java.lang.ArrayIndexOutOfBoundsException: Index 165 out of bounds for length 165
+	at gameworld.world.generation.RandomMap.generateWallTop(RandomMap.java:132)
+	at gameworld.world.generation.RandomMap.getRandomMap(RandomMap.java:45)
+	at gameworld.world.generation.RandomMap.loadRandomMap(RandomMap.java:30)
+	at gameworld.player.abilities.portals.PRJ_Teleporter.teleportPlayer(PRJ_Teleporter.java:104)
+	at gameworld.player.abilities.portals.PRJ_Teleporter.update(PRJ_Teleporter.java:94)
+	at gameworld.PRJ_Control.update(PRJ_Control.java:74)
+	at main.MainGame.lambda$startThreads$3(MainGame.java:272)
 	at java.base/java.lang.Thread.run(Thread.java:1589)

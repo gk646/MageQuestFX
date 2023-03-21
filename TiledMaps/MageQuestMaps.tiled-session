@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "test.tmx",
+    "activeFile": "goblinCave.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
-        "exports"
+        "exports",
+        "."
     ],
     "fileStates": {
         "": {
@@ -103,7 +103,7 @@
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.75,
+            "scaleInDock": 4,
             "scaleInEditor": 3
         },
         "TestRomm.tmx": {
@@ -199,11 +199,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.5,
-            "selectedLayer": 3,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 960,
-                "y": 959
+                "x": 571.5,
+                "y": 511.25
             }
         },
         "grassspritesheet.tsx": {
@@ -224,7 +224,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 560.6060606060606,
-                "y": 562.1212121212121
+                "y": 563.6363636363637
             }
         },
         "map1.tmj": {
@@ -265,11 +265,11 @@
             "scaleInDock": 1
         },
         "test.tmx": {
-            "scale": 2,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 124,
-                "y": 664
+                "x": 584,
+                "y": 736
             }
         },
         "tileset16.tsx": {
@@ -322,12 +322,12 @@
         "DeadPlains.tmx",
         "TheGrove.tmx",
         "TestRomm.tmx",
-        "goblinCave.tmx",
-        "GrassLands.tmx",
-        "hermitCaveHillcrest.tmx",
-        "DungeonTutorial.tmx",
+        "test.tmx",
+        "Hillcrest.tmx",
         "FirstDungeon.tmx",
-        "Hillcrest.tmx"
+        "DungeonTutorial.tmx",
+        "hermitCaveHillcrest.tmx",
+        "GrassLands.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
