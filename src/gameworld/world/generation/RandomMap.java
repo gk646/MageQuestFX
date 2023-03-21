@@ -154,7 +154,7 @@ public class RandomMap {
     }
 
     private boolean isEdgeTile(int[][] arr, int x, int y, int arrLength) {
-        return true;
+        return false;
     }
 
     private boolean arrContainsNum(int[] arr, int val) {
