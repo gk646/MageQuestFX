@@ -1,1 +1,4 @@
-java.lang.NullPointerException
+java.lang.ArrayIndexOutOfBoundsException: Index 87 out of bounds for length 87
+	at main.system.ui.maps.GameMap.getImage(GameMap.java:133)
+	at main.MainGame.lambda$startThreads$0(MainGame.java:201)
+	at java.base/java.lang.Thread.run(Thread.java:1589)

@@ -37,7 +37,6 @@ public class LoadGameState {
     public void loadGame() {
         loadQuests();
         loadPlayerSave();
-        loadSpawnLevel();
     }
 
     private void loadQuests() {

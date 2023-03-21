@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Hillcrest.tmx",
+    "activeFile": "test.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "exports",
@@ -49,8 +49,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 546.6666666666665,
-                "y": 267.3333333333333
+                "x": 445.3333333333333,
+                "y": 297.33333333333337
             }
         },
         "FirstDungeon.tmx": {
@@ -60,8 +60,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 477.33333333333337,
-                "y": 478.66666666666663
+                "x": 480,
+                "y": 479.99999999999994
             }
         },
         "ForestClearing.tmx": {
@@ -97,13 +97,13 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 314,
-                "y": 353.66666666666663
+                "x": 800,
+                "y": 799.8333333333333
             }
         },
         "TIILESET.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1.5,
+            "scaleInDock": 0.75,
             "scaleInEditor": 3
         },
         "TestRomm.tmx": {
@@ -202,8 +202,8 @@
             "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 646,
-                "y": 888
+                "x": 960,
+                "y": 959
             }
         },
         "grassspritesheet.tsx": {
@@ -264,6 +264,14 @@
         "second floor_tutorial_castle.tmx#TileSet": {
             "scaleInDock": 1
         },
+        "test.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 142.66666666666669,
+                "y": 973.3333333333334
+            }
+        },
         "tileset16.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 2,
@@ -304,11 +312,10 @@
         "DungeonTutorial.tmx",
         "FirstDungeon.tmx",
         "Hillcrest.tmx",
-        "unbenannt.tmx"
+        "test.tmx"
     ],
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
-        "unbenannt.tmx",
         "caveMarla.tmx",
         "TIILESET.tsx",
         "Tutorial.tmx",
@@ -319,7 +326,8 @@
         "GrassLands.tmx",
         "hermitCaveHillcrest.tmx",
         "DungeonTutorial.tmx",
-        "FirstDungeon.tmx"
+        "FirstDungeon.tmx",
+        "Hillcrest.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

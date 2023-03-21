@@ -161,8 +161,8 @@ public class MainGame {
         SCREEN_HEIGHT = height;
         HALF_WIDTH = SCREEN_WIDTH / 2;
         HALF_HEIGHT = SCREEN_HEIGHT / 2;
-        this.loadingScreen = true;
-        gameState = State.START;
+        gameState = State.LOADING_SCREEN;
+
         cycle.start();
     }
 
@@ -352,7 +352,7 @@ public class MainGame {
             gc.setFill(Color.BLACK);
             gc.fillRect(0, 0, 1920, 200);
             gc.fillRect(0, 880, 1920, 200);
-        } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || loadingScreen) {
+        } else if (gameState == State.TITLE || gameState == State.TITLE_OPTION || gameState == State.LOADING_SCREEN) {
             ui.draw(gc);
         }
         //RENDER END
@@ -392,7 +392,7 @@ public class MainGame {
             sBar = new UI_SkillBar(this);
             wAnim = new WorldEnhancements(this);
             skillPanel = new UI_SkillPanel(this);
-            ui.updateLoadingScreen(0, gc);
+            ui.updateLoadingScreen(12, gc);
             SecureRandom secureRandom = new SecureRandom();
             long seed = secureRandom.nextLong();
             random = new Random(seed);
@@ -404,7 +404,7 @@ public class MainGame {
             wControl = new WorldController(this);
 
             //12 %
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(24, gc);
             // ob_control = new OBJ_Control(this);
             wRender = new WorldRender(this);
             wControl.loadWorldData();
@@ -413,34 +413,34 @@ public class MainGame {
             DialogStorage.loadDialogs();
 
             //24%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(36, gc);
             miniM = new MiniMap(this);
             ent_control = new ENT_Control(this);
             collisionChecker = new CollisionChecker(this);
 
             //36%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(48, gc);
             imageSto = new Storage();
             imageSto.loadImages();
             prj_control = new PRJ_Control(this);
             player = new Player(this);
 
             //48%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(58, gc);
             sqLite.readAllGameData();
             talentP.assignDescriptions();
             //60%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(70, gc);
             ENTPlayer2 = new ENT_Player2(this);
             talentP.createTalentNodes();
             //72%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(82, gc);
             pathF = new PathFinder(this);
             pathF.instantiateNodes();
             Effects.loadEffects();
 
             //84%
-            ui.updateLoadingScreen(12, gc);
+            ui.updateLoadingScreen(94, gc);
             //multiplayer = new Multiplayer(this, ENTPlayer2);
             npcControl = new NPC_Control(this);
             gameMap = new GameMap(this);
@@ -448,11 +448,10 @@ public class MainGame {
             //100%
             //sqLite.resetGame();
             loadGameState.loadGame();
-            ui.updateLoadingScreen(16, gc);
+            ui.updateLoadingScreen(100, gc);
             countItems();
             gameMap.getImage();
             gameState = State.TITLE;
-            loadingScreen = false;
             sound.setVolumeMusic(ui.musicSlider);
             sound.setVolumeAmbience(ui.ambientSlider);
             sound.setVolumeEffects(ui.effectsSlider);

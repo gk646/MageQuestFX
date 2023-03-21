@@ -12,6 +12,7 @@ import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
 import main.MainGame;
 import main.system.enums.GameMapType;
+import main.system.enums.State;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
 
@@ -46,40 +47,69 @@ public class WorldController {
     }
 
     public void loadMap(Zone zone, int xTile, int yTile) {
+        State currentState = mg.gameState;
+        mg.gameState = State.LOADING_SCREEN;
+        mg.ui.setLoadingScreen(0);
         for (Map map : MAPS) {
             if (map.zone == zone) {
-                mg.wRender.worldSize = map.mapSize;
-                currentWorld = zone;
-                mg.player.map = map;
-                mg.player.setPosition(xTile, yTile);
-                mg.getPlayerTile();
-                clearWorldArrays();
-                mg.wAnim.emptyAnimationLists();
-                currentMapCover = map.mapCover;
-                WorldRender.worldData = map.mapDataBackGround;
-                WorldRender.worldData1 = map.mapDataBackGround2;
-                WorldRender.worldData2 = map.mapDataForeGround;
-                mg.wAnim.cacheMapEnhancements();
-                mg.npcControl.loadGenerics(zone);
+                try {
+                    Thread.sleep(100);
+                    mg.wRender.worldSize = map.mapSize;
+                    mg.ui.setLoadingScreen(20);
+                    currentWorld = zone;
+                    mg.player.map = map;
+                    mg.ui.setLoadingScreen(40);
+                    mg.player.setPosition(xTile, yTile);
+                    mg.getPlayerTile();
+                    clearWorldArrays();
+                    mg.ui.setLoadingScreen(60);
+                    mg.wAnim.emptyAnimationLists();
+                    currentMapCover = map.mapCover;
+                    WorldRender.worldData = map.mapDataBackGround;
+                    WorldRender.worldData1 = map.mapDataBackGround2;
+                    mg.ui.setLoadingScreen(80);
+                    WorldRender.worldData2 = map.mapDataForeGround;
+                    mg.wAnim.cacheMapEnhancements();
+                    mg.npcControl.loadGenerics(zone);
+                    mg.ui.setLoadingScreen(100);
+                    mg.gameState = currentState;
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 return;
             }
         }
+        mg.gameState = currentState;
     }
 
     public void loadMap(Map map, int xTile, int yTile) {
+        State currentState = mg.gameState;
+        mg.gameState = State.LOADING_SCREEN;
+        mg.ui.setLoadingScreen(0);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         mg.wRender.worldSize = map.mapSize;
         currentWorld = map.zone;
         mg.player.map = map;
+        mg.ui.setLoadingScreen(20);
         mg.player.setPosition(xTile, yTile);
         mg.getPlayerTile();
         clearWorldArrays();
+        mg.ui.setLoadingScreen(40);
         mg.wAnim.emptyAnimationLists();
         currentMapCover = map.mapCover;
+        mg.ui.setLoadingScreen(60);
         WorldRender.worldData = map.mapDataBackGround;
         WorldRender.worldData1 = map.mapDataBackGround2;
+        mg.ui.setLoadingScreen(80);
         WorldRender.worldData2 = map.mapDataForeGround;
         mg.wAnim.cacheMapEnhancements();
         mg.npcControl.loadGenerics(map.zone);
+        mg.ui.setLoadingScreen(100);
+        mg.gameState = currentState;
     }
 
     public Map getMap(Zone zone) {

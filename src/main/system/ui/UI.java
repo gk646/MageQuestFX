@@ -66,6 +66,7 @@ public class UI {
     public UI(MainGame mainGame) {
         this.mg = mainGame;
         getUIImage();
+        loadingProgress = 0;
         light.setAzimuth(-135.0);
         lighting.setLight(light);
         lighting.setDiffuseConstant(1.9);
@@ -98,7 +99,7 @@ public class UI {
             drawTitleScreen(gc);
         } else if (mg.gameState == State.GAME_OVER) {
             drawGameOver(gc);
-        } else if (mg.loadingScreen) {
+        } else if (mg.gameState == State.LOADING_SCREEN) {
             drawLoadingScreen(gc);
         }
         if (drawSaveMessage) {
@@ -413,8 +414,17 @@ public class UI {
     }
 
     public void updateLoadingScreen(int x, GraphicsContext gc) {
-        loadingProgress += x;
+        loadingProgress = x;
         drawLoadingScreen(gc);
+    }
+
+    public void setLoadingScreen(int x) {
+        loadingProgress = x;
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void drawGameOver(GraphicsContext gc) {

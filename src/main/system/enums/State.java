@@ -1,7 +1,7 @@
 package main.system.enums;
 
 public enum State {
-    START(), TITLE_OPTION(), TITLE(), PLAY(), OPTION(), TALENT(), GAME_OVER(), CUT_SCENE;
+    TITLE_OPTION(), TITLE(), PLAY(), OPTION(), TALENT(), GAME_OVER(), CUT_SCENE, LOADING_SCREEN;
 
     State() {
     }

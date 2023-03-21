@@ -100,7 +100,8 @@ public class InputHandler {
             if (code.equals("\r")) {
                 if (mg.drawKeybindings) {
                     mg.gameState = State.PLAY;
-                    mg.sound.INTRO.stop();
+                    mg.sound.fadeOut(mg.sound.INTRO, 1, 6);
+                    mg.loadGameState.loadSpawnLevel();
                     mg.drawKeybindings = false;
                     return;
                 } else if (mg.ui.commandNum == 0) {
