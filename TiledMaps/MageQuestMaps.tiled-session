@@ -6,8 +6,8 @@
     "activeFile": "test.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "exports",
-        "."
+        ".",
+        "exports"
     ],
     "fileStates": {
         "": {
@@ -265,11 +265,11 @@
             "scaleInDock": 1
         },
         "test.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 142.66666666666669,
-                "y": 973.3333333333334
+                "x": 124,
+                "y": 664
             }
         },
         "tileset16.tsx": {

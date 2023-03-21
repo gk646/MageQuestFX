@@ -20,7 +20,7 @@ public class RandomMap {
 
     public void loadRandomMap() {
         int entrance = (int) (Math.random() * 3);
-        int mapSize = (int) (50 + Math.random() * 75);
+        int mapSize = (int) (100 + Math.random() * 50);
         if (entrance == 0) {
             mg.wControl.loadMap(getRandomMap(mapSize, 0, 0, 1), 1, mapSize / 2);
         } else if (entrance == 1) {
@@ -36,14 +36,18 @@ public class RandomMap {
         int[][] BG = getBlackMap(sizeX);
         generateEntrance(BG, entrance);
         FastNoiseLite fastNoise = new FastNoiseLite();
-        fastNoise.SetFrequency(0.02f);
-        fastNoise.SetFractalOctaves(6);
-        fastNoise.SetFractalGain(0.5f);
-        fastNoise.SetFractalLacunarity(2.0f);
-        fastNoise.SetNoiseType(FastNoiseLite.NoiseType.Perlin);
+        fastNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
+        fastNoise.SetFrequency(0.13f);
+        fastNoise.SetSeed(mg.secureRandom.nextInt());
+        fastNoise.SetFractalOctaves(1);
+        fastNoise.SetFractalLacunarity(0.7f);
+        fastNoise.SetFractalGain(0);
+        fastNoise.SetFractalWeightedStrength(0);
+        fastNoise.SetFractalPingPongStrength(2);
+
+
         float[][] noiseData = getNoise(sizeX, fastNoise);
         getFloor(BG, noiseData, sizeX);
-
         generateWalls(BG);
         return new Map(new Point(sizeX, sizeX), Zone.EtherRealm, FG, BG1, BG);
     }
@@ -57,14 +61,13 @@ public class RandomMap {
             }
         }
 
-
         return noiseMap;
     }
 
     private void getFloor(int[][] floorArr, float[][] arr, int length) {
         for (int i = 0; i < length; i++) {
             for (int l = 0; l < length; l++) {
-                if (arr[l][i] > 0) {
+                if (arr[l][i] > 0.057057114) {
                     floorArr[l][i] = getRandomArrayEntry(floorPaletV1_4Enhanced);
                 }
             }

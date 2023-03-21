@@ -151,6 +151,7 @@ public class MainGame {
     public static int WORLD_SIZE;
     public boolean showAbilities;
     public RandomMap generator;
+    public SecureRandom secureRandom;
 
     /**
      * Main class for the game logic and center point for information
@@ -393,7 +394,7 @@ public class MainGame {
             wAnim = new WorldEnhancements(this);
             skillPanel = new UI_SkillPanel(this);
             ui.updateLoadingScreen(12, gc);
-            SecureRandom secureRandom = new SecureRandom();
+            secureRandom = new SecureRandom();
             long seed = secureRandom.nextLong();
             random = new Random(seed);
             // 0 %

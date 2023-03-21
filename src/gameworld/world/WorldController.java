@@ -49,10 +49,10 @@ public class WorldController {
     public void loadMap(Zone zone, int xTile, int yTile) {
         State currentState = mg.gameState;
         mg.gameState = State.LOADING_SCREEN;
-        mg.ui.setLoadingScreen(0);
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 try {
+                    mg.ui.setLoadingScreen(0);
                     Thread.sleep(100);
                     mg.wRender.worldSize = map.mapSize;
                     mg.ui.setLoadingScreen(20);
@@ -76,6 +76,31 @@ public class WorldController {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                return;
+            }
+        }
+        mg.gameState = currentState;
+    }
+
+    public void loadMapNoDelay(Zone zone, int xTile, int yTile) {
+        State currentState = mg.gameState;
+        mg.gameState = State.LOADING_SCREEN;
+        for (Map map : MAPS) {
+            if (map.zone == zone) {
+                mg.wRender.worldSize = map.mapSize;
+                currentWorld = zone;
+                mg.player.map = map;
+                mg.player.setPosition(xTile, yTile);
+                mg.getPlayerTile();
+                clearWorldArrays();
+                mg.wAnim.emptyAnimationLists();
+                currentMapCover = map.mapCover;
+                WorldRender.worldData = map.mapDataBackGround;
+                WorldRender.worldData1 = map.mapDataBackGround2;
+                WorldRender.worldData2 = map.mapDataForeGround;
+                mg.wAnim.cacheMapEnhancements();
+                mg.npcControl.loadGenerics(zone);
+                mg.gameState = currentState;
                 return;
             }
         }

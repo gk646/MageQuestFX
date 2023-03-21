@@ -253,7 +253,7 @@ public class LoadGameState {
     public void loadSpawnLevel() {
         int num = mg.sqLite.readStartLevel();
         if (num == 1) {
-            mg.wControl.loadMap(Zone.Hillcrest, 20, 20);
+            mg.wControl.loadMapNoDelay(Zone.Hillcrest, 20, 20);
         }
     }
 }
