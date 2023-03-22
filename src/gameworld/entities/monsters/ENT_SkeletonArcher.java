@@ -57,9 +57,8 @@ public class ENT_SkeletonArcher extends ENTITY {
             spriteCounter = 0;
             animation.playRandomSoundFromXToIndex(0, 0);
         }
-
-        if (!attack1) {
-            onPath = true;
+        onPath = !attack1;
+        if (onPath) {
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
         }
@@ -161,26 +160,6 @@ public class ENT_SkeletonArcher extends ENTITY {
         enemyImage = Storage.shooterImage1;
     }
 
-
-    private void shooterMovement() {
-        if (mg.client) {
-            if (onPath && searchTicks >= Math.random() * 55) {
-                getNearestPlayerMultiplayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else if (onPath) {
-                trackPath();
-            }
-        } else {
-            if (onPath && searchTicks >= Math.random() * 55) {
-                getNearestPlayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else if (onPath) {
-                trackPath();
-            }
-        }
-    }
 
     private void getNearestCircularTile() {
 

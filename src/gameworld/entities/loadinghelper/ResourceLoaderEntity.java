@@ -3,6 +3,7 @@ package gameworld.entities.loadinghelper;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import main.system.sound.Sound;
 
 import java.io.InputStream;
@@ -26,6 +27,7 @@ public class ResourceLoaderEntity {
     public ArrayList<Image> idle2 = new ArrayList<>();
     public ArrayList<Image> runMirror = new ArrayList<>();
     public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
+    public final ArrayList<MediaPlayer> sounds2 = new ArrayList<>();
     final String name;
 
     public ResourceLoaderEntity(String entityName) {
@@ -171,6 +173,7 @@ public class ResourceLoaderEntity {
             URL url = getClass().getResource("/resources/sound/effects/entities/" + name + "/" + i + ".wav");
             if (url != null) {
                 sounds.add(new MediaPlayer(new Media(url.toString())));
+                sounds2.add(new MediaPlayer(new Media(url.toString())));
             } else {
                 break;
             }
@@ -182,9 +185,16 @@ public class ResourceLoaderEntity {
 
     public void playRandomSoundFromXToIndex(int startIndex, int hitSoundLimit) {
         int num = Math.max(startIndex, (int) (Math.random() * hitSoundLimit));
-        MediaPlayer mediaPlayer = new MediaPlayer(sounds.get(num).getMedia());
-        mediaPlayer.play();
-        mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
+        if (sounds.get(num).getStatus() != MediaPlayer.Status.PLAYING) {
+            sounds.get(num).play();
+        } else {
+            if (sounds2.get(num).getStatus() != MediaPlayer.Status.PLAYING) {
+                sounds2.get(num).play();
+            } else {
+                sounds2.get(num).seek(Duration.ZERO);
+                sounds2.get(num).play();
+            }
+        }
     }
 }
 

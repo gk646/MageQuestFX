@@ -64,8 +64,8 @@ public class ENT_SkeletonWarrior extends ENTITY {
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
-        if (!attack2 && !attack3 && !attack1) {
-            onPath = true;
+        onPath = !attack2 && !attack3 && !attack1;
+        if (onPath) {
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
         }
@@ -172,5 +172,4 @@ public class ENT_SkeletonWarrior extends ENTITY {
             //animation.playGetHitSound(4);
         }
     }
-
 }

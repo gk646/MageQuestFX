@@ -33,7 +33,7 @@ public class ENT_Goblin extends ENTITY {
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
-        movementSpeed = 2;
+        movementSpeed = 3.1f;
         this.level = level;
         direction = "updownleftright";
         this.entityHeight = 48;

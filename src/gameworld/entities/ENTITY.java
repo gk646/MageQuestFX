@@ -97,10 +97,10 @@ abstract public class ENTITY {
 
 
     private void decideMovement(int nextX, int nextY) {
-        float enLeftX = worldX;
-        float enRightX = (worldX + entityWidth);
-        float enTopY = worldY;
-        float enBottomY = (worldY + entityHeight);
+        int enLeftX = (int) ((worldX + 24) / 48);
+
+        int enTopY = (int) ((worldY + 24) / 48);
+
         collisionRight = false;
         collisionLeft = false;
         collisionDown = false;
@@ -110,18 +110,18 @@ abstract public class ENTITY {
             worldX += movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enLeftX > nextX && !collisionLeft) {
             worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
-        } else if (enTopY < nextY && !collisionDown) {
-            worldY += movementSpeed * (1 - (effects[45] / 100.0f));
         } else if (enTopY > nextY && !collisionUp) {
             worldY -= movementSpeed * (1 - (effects[45] / 100.0f));
-        } else if (enRightX > nextX) {
+        } else if (enTopY < nextY && !collisionDown) {
+            worldY += movementSpeed * (1 - (effects[45] / 100.0f));
+        } else if (enLeftX > nextX) {
             worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
-        } else if (enRightX < nextX) {
+        } else if (enLeftX < nextX) {
             worldX += movementSpeed * (1 - (effects[45] / 100.0f));
-        } else if (enBottomY > nextY) {
-            worldX -= movementSpeed * (1 - (effects[45] / 100.0f));
-        } else if (enBottomY < nextX) {
-            worldX += movementSpeed * (1 - (effects[45] / 100.0f));
+        } else if (enTopY > nextY) {
+            worldY -= movementSpeed * (1 - (effects[45] / 100.0f));
+        } else if (enTopY < nextX) {
+            worldY += movementSpeed * (1 - (effects[45] / 100.0f));
         }
     }
 
@@ -139,8 +139,8 @@ abstract public class ENTITY {
         int startRow = activeTile.y;
         mg.pathF.setNodes(startCol, startRow, goalCol, goalRow, maxDistance);
         if (!stunned && !(startCol == goalCol && startRow == goalRow) && mg.pathF.search()) {
-            int nextX = mg.pathF.pathList.get(0).col * 48;
-            int nextY = mg.pathF.pathList.get(0).row * 48;
+            int nextX = mg.pathF.pathList.get(0).col;
+            int nextY = mg.pathF.pathList.get(0).row;
             decideMovement(nextX, nextY);
         } else {
             onPath = false;
@@ -163,8 +163,8 @@ abstract public class ENTITY {
         if (startCol == goalCol && startRow == goalRow) {
             onPath = false;
         } else if (mg.pathF.searchUncapped()) {
-            int nextX = mg.pathF.pathList.get(0).col * 48;
-            int nextY = mg.pathF.pathList.get(0).row * 48;
+            int nextX = mg.pathF.pathList.get(0).col;
+            int nextY = mg.pathF.pathList.get(0).row;
             decideMovement(nextX, nextY);
             if (mg.pathF.pathList.size() >= 2) {
                 nextCol2 = mg.pathF.pathList.get(1).col;
@@ -214,16 +214,6 @@ abstract public class ENTITY {
         searchPathUncapped(x, y, 100);
     }
 
-    protected void standardSeekPlayer() {
-        onPath = mg.pathF.search();
-        if (onPath && searchTicks >= Math.random() * 15) {
-            getNearestPlayer();
-            searchPath(goalCol, goalRow, 16);
-            searchTicks = 0;
-        } else if (onPath) {
-            trackPath();
-        }
-    }
 
     protected void getNearestPlayer() {
         /*  if (Math.abs(Player.worldX - this.worldX + Player.worldY - this.worldY) < Math.abs(mg.ENTPlayer2.worldX - this.worldX + mg.ENTPlayer2.worldY - this.worldY)) {

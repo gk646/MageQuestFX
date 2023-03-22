@@ -107,7 +107,7 @@ public class ENT_SkeletonShield extends ENTITY {
     }
 
     private void drawWalk(GraphicsContext gc) {
-        switch (spriteCounter % 120 / 30) {
+        switch (spriteCounter % 80 / 20) {
             case 0 -> gc.drawImage(animation.walk.get(0), screenX - 57, screenY - 48);
             case 1 -> gc.drawImage(animation.walk.get(1), screenX - 57, screenY - 48);
             case 2 -> gc.drawImage(animation.walk.get(2), screenX - 57, screenY - 48);

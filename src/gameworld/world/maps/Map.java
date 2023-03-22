@@ -57,7 +57,6 @@ public class Map {
         this.mapDataBackGround2 = BG1;
         this.mapDataBackGround = BG;
         this.mapCover = new int[mapSize.x][mapSize.x];
-        openMap();
     }
 
     public int[][] loadMapData(String filename, int worldSize) {

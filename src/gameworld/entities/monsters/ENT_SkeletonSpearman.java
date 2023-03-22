@@ -40,7 +40,6 @@ public class ENT_SkeletonSpearman extends ENTITY {
         this.entityWidth = 48;
         this.collisionBox = new Rectangle(3, 3, 42, 42);
         this.onPath = false;
-        this.searchTicks = 60;
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
     }
@@ -56,18 +55,17 @@ public class ENT_SkeletonSpearman extends ENTITY {
             } else {
                 attack3 = true;
             }
-            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 60, 48, 48, 0, 0, level));
-            //animation.playRandomSoundFromXToIndex(0, 3);
+            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 60, 58, 30, 0, -8, level));
+            animation.playRandomSoundFromXToIndex(0, 1);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
-        if (!attack2 && !attack3 && !attack1) {
-            onPath = true;
+        onPath = !attack2 && !attack3 && !attack1;
+        if (onPath) {
             getNearestPlayer();
             searchPath(goalCol, goalRow, 16);
         }
         hitDelay++;
-        searchTicks++;
         if (hpBarCounter >= 600) {
             hpBarOn = false;
             hpBarCounter = 0;
@@ -179,19 +177,6 @@ public class ENT_SkeletonSpearman extends ENTITY {
         if (System.currentTimeMillis() - timeSinceLastDamageSound >= 3_500) {
             timeSinceLastDamageSound = System.currentTimeMillis();
             //animation.playGetHitSound(4);
-        }
-    }
-
-    private void gruntMovement() {
-        if (mg.client && onPath) {
-        } else if (onPath) {
-            if (searchTicks >= Math.random() * 45) {
-                getNearestPlayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else {
-                trackPath();
-            }
         }
     }
 }

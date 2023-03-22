@@ -145,19 +145,6 @@ public class ENT_Mushroom extends ENTITY {
             //animation.playGetHitSound(4);
         }
     }
-
-    private void gruntMovement() {
-        if (mg.client && onPath) {
-        } else if (onPath) {
-            if (searchTicks >= Math.random() * 45) {
-                getNearestPlayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else {
-                trackPath();
-            }
-        }
-    }
 }
 
 

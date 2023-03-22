@@ -20,7 +20,7 @@ public class StatusMessage {
 
 
     public void draw(GraphicsContext gc) {
-        if (levelUpCounter < 660) {
+        if (levelUpCounter < 860) {
             drawLevelUp(gc);
             levelUpCounter++;
         } else if (questComplete < 480) {

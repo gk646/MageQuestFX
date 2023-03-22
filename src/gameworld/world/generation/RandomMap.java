@@ -55,7 +55,6 @@ public class RandomMap {
             map = generateMap(mapSize, roomSize, corridorLength, entranceNUm);
         }
         spawnEntities(map.mapDataBackGround, entrancePoint);
-
         return map;
     }
 
