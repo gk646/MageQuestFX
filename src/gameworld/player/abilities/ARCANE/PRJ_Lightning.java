@@ -2,9 +2,9 @@ package gameworld.player.abilities.ARCANE;
 
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
-import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;

@@ -1,7 +1,7 @@
 package gameworld.entities.monsters;
 
 import gameworld.entities.ENTITY;
-import gameworld.entities.loadinghelper.ResourceLoaderEntity;
+import gameworld.entities.loadinghelper.EntityPreloader;
 import gameworld.player.Player;
 import gameworld.player.abilities.enemies.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,8 +23,7 @@ public class ENT_SkeletonSpearman extends ENTITY {
      */
     public ENT_SkeletonSpearman(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         this.mg = mg;
-        this.animation = new ResourceLoaderEntity("enemies/skeletonSpear");
-        animation.load();
+        this.animation = EntityPreloader.skeletonSpear;
         this.zone = zone;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);

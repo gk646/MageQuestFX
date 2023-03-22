@@ -1,6 +1,4 @@
-package gameworld.player;
-
-import gameworld.entities.loadinghelper.GeneralResourceLoader;
+package gameworld.entities.loadinghelper;
 
 import java.util.ArrayList;
 

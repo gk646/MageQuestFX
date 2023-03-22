@@ -54,6 +54,9 @@ public class WorldController {
                 try {
                     mg.ui.setLoadingScreen(0);
                     Thread.sleep(100);
+                    if(zone!= Zone.EtherRealm){
+                        mg.ENTITIES.removeIf(entity -> entity.zone == Zone.EtherRealm);
+                    }
                     mg.wRender.worldSize = map.mapSize;
                     mg.ui.setLoadingScreen(20);
                     currentWorld = zone;
@@ -84,6 +87,7 @@ public class WorldController {
 
     public void loadMapNoDelay(Zone zone, int xTile, int yTile) {
         State currentState = mg.gameState;
+
         mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
@@ -111,7 +115,6 @@ public class WorldController {
         State currentState = mg.gameState;
         mg.gameState = State.LOADING_SCREEN;
         Thread thread = new Thread(() -> {
-            mg.ui.setLoadingScreen(0);
             mg.wRender.worldSize = map.mapSize;
             currentWorld = map.zone;
             mg.player.map = map;

@@ -1,9 +1,9 @@
 package gameworld.player.abilities.FIRE;
 
 import gameworld.entities.damage.DamageType;
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
-import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;

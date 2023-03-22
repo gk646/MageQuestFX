@@ -1,8 +1,8 @@
 package gameworld.player.abilities.ARCANE;
 
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
-import gameworld.player.ProjectilePreloader;
 import javafx.scene.canvas.GraphicsContext;
 
 public class PRJ_PowerSurge extends PROJECTILE {

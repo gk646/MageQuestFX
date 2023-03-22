@@ -31,6 +31,7 @@ public class ResourceLoaderEntity {
 
     public ResourceLoaderEntity(String entityName) {
         this.name = entityName;
+        load();
     }
 
     public void load() {

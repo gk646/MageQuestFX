@@ -9,6 +9,7 @@ import gameworld.entities.monsters.ENT_Wolf;
 import gameworld.entities.npcs.quests.NPC_Aria;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.props.DeadWolf;
+import gameworld.player.PlayerPrompts;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
@@ -32,9 +33,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
         logicName = QUEST_NAME.TheFakeNecklace;
         quest_id = logicName.val;
         name = "The Fake Necklace";
-        if (!completed) {
-            mg.sqLite.setQuestActive(quest_id);
-        } else {
+        if (completed) {
             mg.sqLite.finishQuest(quest_id);
         }
     }
@@ -57,6 +56,8 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     int num = npc.dialog.drawChoice("Sure, ill help you out", "Maybe later", null, null);
                     if (num == 10) {
                         progressStage = 10;
+                        mg.sqLite.setQuestActive(quest_id);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 1);
                         loadDialogStage(npc, DialogStorage.MarlaNecklace, 10);
                     } else if (num == 20) {
                         nextStage();
@@ -86,7 +87,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                         progressStage = 13;
                         updateObjective("Look around", 0);
                         removeQuestMarker(quest_id + "" + 11);
-                        mg.sqLite.updateQuestFacts(quest_id, 1, 1);
+
                         objective3Progress = 0;
                     }
                 } else if (progressStage == 75) {
@@ -453,7 +454,7 @@ public class QST_MarlaFakeNecklace extends QUEST {
                     }
                 } else if (progressStage == 55) {
                     if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 9)) {
-                        mg.playerPrompts.setETrue();
+                        PlayerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             npc.show_dialog = false;
                             mg.inputH.e_typed = false;

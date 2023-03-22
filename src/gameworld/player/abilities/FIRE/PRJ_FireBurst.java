@@ -3,9 +3,9 @@ package gameworld.player.abilities.FIRE;
 import gameworld.PRJ_Control;
 import gameworld.entities.damage.DamageType;
 import gameworld.entities.damage.effects.DamageEffect;
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.Player;
-import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import javafx.scene.canvas.GraphicsContext;
 

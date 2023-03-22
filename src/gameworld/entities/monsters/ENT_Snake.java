@@ -1,7 +1,7 @@
 package gameworld.entities.monsters;
 
 import gameworld.entities.ENTITY;
-import gameworld.entities.loadinghelper.ResourceLoaderEntity;
+import gameworld.entities.loadinghelper.EntityPreloader;
 import gameworld.player.Player;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -22,8 +22,7 @@ public class ENT_Snake extends ENTITY {
      */
     public ENT_Snake(MainGame mg, int worldX, int worldY, int level, Zone zone) {
         this.mg = mg;
-        this.animation = new ResourceLoaderEntity("enemies/snake");
-        animation.load();
+        this.animation = EntityPreloader.snake;
         this.zone = zone;
         //Setting default values
         this.maxHealth = (9 + level) * (level + level - 1);

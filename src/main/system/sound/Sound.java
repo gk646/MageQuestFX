@@ -2,7 +2,7 @@ package main.system.sound;
 
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.GeneralResourceLoader;
-import gameworld.player.ProjectilePreloader;
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.world.WorldController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;

@@ -1,8 +1,8 @@
 package gameworld.player.abilities.portals;
 
+import gameworld.entities.loadinghelper.ProjectilePreloader;
 import gameworld.player.EnemyProjectile;
 import gameworld.player.Player;
-import gameworld.player.ProjectilePreloader;
 import gameworld.player.ProjectileType;
 import input.InputHandler;
 import javafx.scene.canvas.GraphicsContext;

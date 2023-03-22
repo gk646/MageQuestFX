@@ -1,7 +1,7 @@
 package gameworld.entities.monsters;
 
 import gameworld.entities.ENTITY;
-import gameworld.entities.loadinghelper.ResourceLoaderEntity;
+import gameworld.entities.loadinghelper.EntityPreloader;
 import gameworld.player.Player;
 import gameworld.player.abilities.enemies.PRJ_EnemyStandardShot;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,8 +31,7 @@ public class ENT_SkeletonArcher extends ENTITY {
         if (level == 1) {
             maxHealth = 5;
         }
-        this.animation = new ResourceLoaderEntity("enemies/skeletonArcher");
-        animation.load();
+        this.animation = EntityPreloader.skeletonArcher;
         this.health = maxHealth;
         this.worldX = worldX;
         this.worldY = worldY;
