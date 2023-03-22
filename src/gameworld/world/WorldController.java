@@ -160,7 +160,7 @@ public class WorldController {
 
     private void clearWorldArrays() {
         mg.PROJECTILES.clear();
-        mg.PROJECTILES.add(new PRJ_Teleporter(mg, 20, 21));
+        mg.PROJECTILES.add(new PRJ_Teleporter(mg, (int) (Player.worldX / 48), (int) (Player.worldY / 48)));
     }
 
     public void update() {

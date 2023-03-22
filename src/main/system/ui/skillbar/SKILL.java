@@ -143,24 +143,44 @@ abstract public class SKILL {
     }
 
     protected boolean checkForActivation(int animationNumber) {
-        if (actualCoolDown >= getCoolDown() && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
-            mg.player.loseMana(manaCost);
-            actualCoolDown = 0;
-            mg.player.playCastAnimation(animationNumber);
-            return true;
+        if (mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
+            if (actualCoolDown >= getCoolDown()) {
+                mg.player.loseMana(manaCost);
+                actualCoolDown = 0;
+                mg.player.playCastAnimation(animationNumber);
+                setAbilityKeysFalse();
+                return true;
+            } else {
+                mg.statusMessage.setOnCooldownTrue();
+                return false;
+            }
+        } else {
+            mg.statusMessage.setNotEnoughManaTrue();
+            return false;
         }
-        return false;
     }
 
     protected boolean checkForActivationCasting(int animationNumber) {
-        if (actualCoolDown == totalCoolDown && castTimeActive == 0 && mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
-            castTimeActive++;
-            mg.player.playCastAnimation(animationNumber);
+        if (mg.player.getMana() >= mg.player.getManaCost(manaCost)) {
+            if (actualCoolDown == totalCoolDown) {
+                if (castTimeActive == 0) {
+                    castTimeActive++;
+                    mg.player.playCastAnimation(animationNumber);
+                    setAbilityKeysFalse();
+                }
+            } else {
+                mg.statusMessage.setOnCooldownTrue();
+                return false;
+            }
+        } else {
+            mg.statusMessage.setNotEnoughManaTrue();
+            return false;
         }
         if (castTimeActive == castTimeTotal) {
             mg.player.loseMana(manaCost);
             castTimeActive = 0;
             actualCoolDown = 0;
+            setAbilityKeysFalse();
             return true;
         }
         return false;
@@ -256,5 +276,16 @@ abstract public class SKILL {
     @Override
     public String toString() {
         return weapon_damage_percent + "% Weapon Damage as " + type;
+    }
+
+    private void setAbilityKeysFalse() {
+        mg.inputH.OnePressed = false;
+        mg.inputH.TwoPressed = false;
+        mg.inputH.ThreePressed = false;
+        mg.inputH.FourPressed = false;
+        mg.inputH.FivePressed = false;
+        mg.inputH.q_pressed = false;
+        mg.inputH.mouse1Pressed = false;
+        mg.inputH.mouse2Pressed = false;
     }
 }

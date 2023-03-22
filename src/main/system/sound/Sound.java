@@ -250,7 +250,7 @@ public class Sound {
 
     public void setVolumeEffects(float value) {
         EFFECTS_VOLUME = 0.3f * (value / 100.0f);
-        for (MediaPlayer player : mg.player.animation.getHitSound) {
+        for (MediaPlayer player : mg.statusMessage.animation.getHitSound) {
             player.setVolume(0.8 * (value / 100.0f));
         }
         for (MediaPlayer player : effectSounds) {

@@ -5,7 +5,6 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.damage.effects.Effect;
 import gameworld.entities.damage.effects.EffectType;
 import gameworld.entities.damage.effects.arraybased.Effect_ArrayBased;
-import gameworld.entities.loadinghelper.GeneralResourceLoader;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.quest.Dialog;
 import gameworld.world.WorldController;
@@ -15,7 +14,6 @@ import gameworld.world.objects.drops.DRP_Coin;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.ui.Colors;
-import main.system.ui.FonT;
 import main.system.ui.inventory.UI_InventorySlot;
 import main.system.ui.talentpanel.TalentNode;
 
@@ -64,7 +62,6 @@ public class Player extends ENTITY {
     public static float[] playerEffects;
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
-    public final GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
     public final ResourceLoaderEntity resource = new ResourceLoaderEntity("player");
     private int levelupCounter;
     public boolean drawDialog;
@@ -125,7 +122,7 @@ public class Player extends ENTITY {
         dialog.dialogLine = null;
         //-------VALUES-----------
         this.playerMovementSpeed = 3;
-        animation.loadSound("levelup", "levelup");
+
         this.movementSpeed = 3;
         this.maxHealth = 10;
         this.maxMana = 20;
@@ -449,9 +446,9 @@ public class Player extends ENTITY {
         }
         if (experience >= levelUpExperience) {
             level++;
-            levelup = true;
+            mg.statusMessage.setLevelUpTrue();
             mg.sBar.showNoticeChar = true;
-            animation.playSound(0);
+            mg.statusMessage.animation.playSound(0);
             mg.talentP.pointsToSpend++;
             updateEquippedItems();
             for (int i = 1; i <= level; i++) {
@@ -484,22 +481,6 @@ public class Player extends ENTITY {
                 }
             }
         }
-        if (levelup) {
-            drawLevelUp(gc);
-            levelupCounter++;
-            if (levelupCounter >= 1_440) {
-                levelup = false;
-                levelupCounter = 0;
-            }
-        }
-        if (questCompleted) {
-            drawQuestComplete(gc);
-            questCompleteCounter++;
-            if (questCompleteCounter >= 480) {
-                questCompleted = false;
-                questCompleteCounter = 0;
-            }
-        }
         if (attack1) {
             drawAttack1(gc);
         } else if (attack2) {
@@ -517,7 +498,6 @@ public class Player extends ENTITY {
                 drawIdle(gc);
             }
         }
-
         spriteCounter++;
     }
 
@@ -597,19 +577,6 @@ public class Player extends ENTITY {
         }
     }
 
-    private void drawLevelUp(GraphicsContext gc) {
-        gc.setFont(FonT.minecraftBold30);
-        gc.setFill(Colors.darkBackground);
-        gc.fillText("LEVEL UP", screenX - 60, screenY - 150);
-        switch (Math.abs(spriteCounter / 12 % (2 * 6 - 2) - 6 + 1)) {
-            case 0 -> gc.drawImage(animation.images1.get(0), screenX - 118 + 24, screenY - 150);
-            case 1 -> gc.drawImage(animation.images1.get(1), screenX - 118 + 24, screenY - 150);
-            case 2 -> gc.drawImage(animation.images1.get(2), screenX - 118 + 24, screenY - 150);
-            case 3 -> gc.drawImage(animation.images1.get(3), screenX - 118 + 24, screenY - 150);
-            case 4 -> gc.drawImage(animation.images1.get(4), screenX - 118 + 24, screenY - 150);
-            case 5 -> gc.drawImage(animation.images1.get(5), screenX - 118 + 24, screenY - 150);
-        }
-    }
 
     private void drawAttack1(GraphicsContext gc) {
         switch (spriteCounter % 80 / 10) {
@@ -715,15 +682,6 @@ public class Player extends ENTITY {
         return baseCost - ((baseCost / 100.0f) * effects[26]);
     }
 
-    private void drawQuestComplete(GraphicsContext gc) {
-        gc.setFont(FonT.antParty30);
-        gc.setFill(Colors.questNameBeige);
-        String text = "Quest Completed:";
-        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 420);
-        gc.setFont(FonT.antParty20);
-        text = lastQuest;
-        mg.ui.drawCenteredText(gc, text, MainGame.SCREEN_HEIGHT / 2.0f - 380);
-    }
 
     public void drawCutscene(GraphicsContext gc, int centerX, int centerY) {
         switch (spriteCounter % 200 / 25) {

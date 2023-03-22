@@ -57,6 +57,7 @@ import main.system.ui.skillbar.skills.SKL_SolarFlare;
 import main.system.ui.skillbar.skills.SKL_VoidEruption;
 import main.system.ui.skillbar.skills.SKL_VoidField;
 import main.system.ui.skillpanel.UI_SkillPanel;
+import main.system.ui.statusmessages.StatusMessage;
 import main.system.ui.talentpanel.UI_TalentPanel;
 
 import java.security.SecureRandom;
@@ -152,6 +153,7 @@ public class MainGame {
     public boolean showAbilities;
     public RandomMap generator;
     public SecureRandom secureRandom;
+    public StatusMessage statusMessage;
 
     /**
      * Main class for the game logic and center point for information
@@ -316,6 +318,7 @@ public class MainGame {
             }
             qPanel.draw(gc);
             miniM.draw(gc);
+            statusMessage.draw(gc);
             sBar.draw(gc);
             ui.draw(gc);
             if (showAbilities) {
@@ -397,6 +400,7 @@ public class MainGame {
             secureRandom = new SecureRandom();
             long seed = secureRandom.nextLong();
             random = new Random(seed);
+            statusMessage = new StatusMessage(this);
             // 0 %
             playerPrompts = new PlayerPrompts(this);
             sound = new Sound(this);

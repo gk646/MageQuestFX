@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class UI_QuestPanel {
-    public boolean expanded = false;
     public final List<QUEST> quests = Collections.synchronizedList(new ArrayList<>());
     public final ArrayList<HiddenQUEST> hiddenQuests = new ArrayList<>();
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
@@ -153,7 +152,7 @@ public class UI_QuestPanel {
                     }
                     quests.get(i).update();
                     if (quests.get(i).completed) {
-                        mg.player.questCompleted = true;
+                        mg.statusMessage.setQuestCompleteTrue();
                         mg.player.lastQuest = quests.get(i).name;
                         mg.sound.playEffectSound(18);
                         finishedQuests.add(quests.get(i));
