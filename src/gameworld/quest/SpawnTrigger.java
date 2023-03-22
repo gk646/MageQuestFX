@@ -2,8 +2,10 @@ package gameworld.quest;
 
 import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.boss.BOSS_Slime;
+import gameworld.entities.monsters.ENT_Goblin;
 import gameworld.entities.monsters.ENT_Mushroom;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
+import gameworld.entities.monsters.ENT_SkeletonShield;
 import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.monsters.ENT_Snake;
@@ -74,12 +76,16 @@ public class SpawnTrigger {
                     num = Math.random();
                     worldX = (int) ((Math.random() * width + x * 48));
                     worldY = (int) ((Math.random() * height + y * 48));
-                    if (num < 0.2) {
+                    if (num < 0.15) {
                         mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, worldX, worldY, mg.player.level, zone));
-                    } else if (num < 0.4) {
+                    } else if (num < 0.3) {
                         mg.ENTITIES.add(new ENT_SkeletonArcher(mg, worldX, worldY, mg.player.level, zone));
-                    } else if (num < 1) {
+                    } else if (num < 0.45) {
+                        mg.ENTITIES.add(new ENT_SkeletonShield(mg, worldX, worldY, mg.player.level, zone));
+                    } else if (num < 0.6) {
                         mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, worldX, worldY, mg.player.level, zone));
+                    } else {
+                        mg.ENTITIES.add(new ENT_Goblin(mg, worldX, worldY, mg.player.level, zone));
                     }
                 }
             }

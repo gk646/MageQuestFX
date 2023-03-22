@@ -7,7 +7,11 @@ public class EntityPreloader {
     public static ResourceLoaderEntity skeletonSpear;
     public static ResourceLoaderEntity snake;
     public static ResourceLoaderEntity wolf;
-    // public static ResourceLoaderEntity skeletonWarrior;
+
+    public static ResourceLoaderEntity skeletonShield;
+    public static ResourceLoaderEntity deathBringer;
+    public static ResourceLoaderEntity goblin;
+    public static ResourceLoaderEntity stoneKnight;
 
     public static void load() {
         mushroom = new ResourceLoaderEntity("enemies/mushroom");
@@ -16,5 +20,9 @@ public class EntityPreloader {
         skeletonSpear = new ResourceLoaderEntity("enemies/skeletonSpear");
         snake = new ResourceLoaderEntity("enemies/snake");
         wolf = new ResourceLoaderEntity("enemies/wolf");
+        goblin = new ResourceLoaderEntity("enemies/goblin");
+        deathBringer = new ResourceLoaderEntity("enemies/BOSSDeathBringer");
+        skeletonShield = new ResourceLoaderEntity("enemies/skeletonShield");
+        stoneKnight = new ResourceLoaderEntity("enemies/BOSSKnight");
     }
 }
