@@ -37,10 +37,10 @@ public class QST_Tutorial extends QUEST {
      */
     @Override
     public void update() {
-        for (NPC npc : mg.npcControl.NPC_Active) {
+        for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
+            NPC npc = mg.npcControl.NPC_Active.get(i);
             if (npc instanceof NPC_OldMan) {
                 interactWithNpc(npc, DialogStorage.Tutorial);
-
                 if (progressStage == 6) {
                     updateObjective("Follow the old man!", 0);
                     moveToTile(npc, 34, 34, new Point(24, 4), new Point(24, 14), new Point(12, 14), new Point(12, 33));
@@ -247,6 +247,7 @@ public class QST_Tutorial extends QUEST {
         }
     }
 }
+
 
 
 

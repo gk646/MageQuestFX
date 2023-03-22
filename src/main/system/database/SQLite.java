@@ -402,6 +402,11 @@ public class SQLite {
         stmt.setInt(3, mg.player.spawnLevel);
         stmt.setInt(4, mg.talentP.pointsToSpend);
         stmt.executeUpdate();
+
+        sql = "UPDATE PLAYER_STATS SET coins = ? WHERE _ROWID_ = 2";
+        stmt = PLAYER_SAVE.prepareStatement(sql);
+        stmt.setInt(1, 1);
+        stmt.executeUpdate();
     }
 
     private void saveBagInventory() throws SQLException {
@@ -596,6 +601,9 @@ public class SQLite {
         mg.player.coins = rs.getInt("coins");
         mg.player.setLevel(rs.getInt("experience"));
         mg.talentP.pointsToSpend = rs.getInt("talentPointsToSpend");
+        rs.next();
+        rs.next();
+        mg.ui.sawKeyBindings = rs.getInt("coins") == 1;
     }
 
     private ITEM getItemWithQuality(int i_id, String type, int quality, int level) {

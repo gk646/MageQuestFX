@@ -18,6 +18,7 @@ import main.system.enums.State;
 import java.awt.Desktop;
 import java.awt.Point;
 import java.net.URI;
+import java.sql.SQLException;
 
 public class InputHandler {
     public static InputHandler instance;
@@ -103,9 +104,22 @@ public class InputHandler {
                     mg.sound.fadeOut(mg.sound.INTRO, 1, 6);
                     mg.loadGameState.loadSpawnLevel();
                     mg.drawKeybindings = false;
+                    mg.ui.sawKeyBindings = true;
+                    try {
+                        mg.sqLite.savePlayerStats();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     return;
                 } else if (mg.ui.commandNum == 0) {
                     mg.drawKeybindings = true;
+                    if (mg.ui.sawKeyBindings) {
+                        mg.gameState = State.PLAY;
+                        mg.sound.fadeOut(mg.sound.INTRO, 1, 6);
+                        mg.loadGameState.loadSpawnLevel();
+                        mg.drawKeybindings = false;
+                        mg.ui.sawKeyBindings = true;
+                    }
                     scene.setCursor(Runner.crosshair);
                     return;
                 } else if (mg.ui.commandNum == 1) {

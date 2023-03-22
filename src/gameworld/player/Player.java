@@ -63,7 +63,6 @@ public class Player extends ENTITY {
     public float DMG_Arcane_Absolute, DMG_Dark__Absolute, buffLength_Absolute, DoT_Damage_Absolute, DoT_Length_Absolute, Mana_Percent, Health_Percent;
     public float CDR_Absolute, DMG_Poison_Percent, DMG_Fire_Percent, CritDMG_Absolute;
     public final ResourceLoaderEntity resource = new ResourceLoaderEntity("player");
-    private int levelupCounter;
     public boolean drawDialog;
     public boolean attack1;
     public boolean attack2;

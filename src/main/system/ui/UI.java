@@ -28,6 +28,7 @@ public class UI {
     public final DropShadow shadow = new DropShadow(1, 1, 2, Color.BLACK);
     public final Rectangle discord_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.475), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
     public final Rectangle github_button = new Rectangle((int) (MainGame.SCREEN_WIDTH * 0.505), (int) (MainGame.SCREEN_HEIGHT * 0.803f), 42, 42);
+    public boolean sawKeyBindings;
 
     private Image playerUI;
     private int loadingProgress = 0;
@@ -92,7 +93,7 @@ public class UI {
         } else if (mg.credits) {
             drawCredits(gc);
         } else if (mg.gameState == State.TITLE) {
-            if (mg.drawKeybindings) {
+            if (mg.drawKeybindings && !sawKeyBindings) {
                 gc.drawImage(keyMap, 0, 0);
                 return;
             }
@@ -243,7 +244,6 @@ public class UI {
         gc.fillText((int) mg.player.getHealth() + "/" + mg.player.maxHealth, 199, 72);
         gc.fillText((int) mg.player.getMana() + "/" + mg.player.maxMana, 173, 97);
         gc.setEffect(null);
-
         gc.setFill(Colors.white);
         gc.setFont(FonT.varnished16);
         gc.fillText(LocalTime.now().format(formatter), 1_860, 23);

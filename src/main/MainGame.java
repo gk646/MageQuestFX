@@ -495,6 +495,7 @@ public class MainGame {
                 }
             }
         }
+        inventP.bag_Slots.get(2).item = DRP_DroppedItem.cloneItemWithLevelQuality(CHEST.get(8), 100, 60);
         inventP.char_Slots[8].item = DRP_DroppedItem.cloneItemWithLevelQuality(TWOHANDS.get(2), 100, 60);
         player.updateEquippedItems();
         player.maxMana = 2000;
