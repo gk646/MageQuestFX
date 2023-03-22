@@ -3,6 +3,7 @@ package gameworld.entities.monsters;
 import gameworld.entities.ENTITY;
 import gameworld.entities.loadinghelper.EntityPreloader;
 import gameworld.player.Player;
+import gameworld.player.abilities.enemies.PRJ_AttackCone;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -49,8 +50,9 @@ public class ENT_Snake extends ENTITY {
         super.update();
         if (collidingWithPlayer && !onPath && !attack1) {
             attack1 = true;
-            //animation.playRandomSoundFromXToIndex(0, 3);
+            animation.playRandomSoundFromXToIndex(0, 1);
             spriteCounter = 0;
+            mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 1.25f * level));
             collidingWithPlayer = false;
         }
         if (!attack1) {

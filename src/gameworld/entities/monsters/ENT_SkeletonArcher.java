@@ -55,6 +55,7 @@ public class ENT_SkeletonArcher extends ENTITY {
             attack1 = true;
             shotCooldown = 0;
             spriteCounter = 0;
+            animation.playRandomSoundFromXToIndex(0, 0);
         }
 
         if (!attack1) {

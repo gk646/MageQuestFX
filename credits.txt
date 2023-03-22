@@ -42,6 +42,7 @@ SOUNDS
  boss laughter : https://freesound.org/people/lalazzylee1/sounds/322459/
  ice impatc: https://freesound.org/people/EminYILDIRIM/sounds/550267/
  fireball: https://freesound.org/people/NoahBangs/sounds/636082/
+ spear:https://freesound.org/people/SoundFlakes/sounds/492252/
 Sounds from SilverIllusionist:{
  levelup sound: https://freesound.org/people/SilverIllusionist/sounds/669323/
  energy burst sound: https://freesound.org/people/SilverIllusionist/sounds/668645/

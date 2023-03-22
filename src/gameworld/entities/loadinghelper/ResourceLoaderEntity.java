@@ -3,7 +3,6 @@ package gameworld.entities.loadinghelper;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import main.system.sound.Sound;
 
 import java.io.InputStream;
@@ -183,8 +182,9 @@ public class ResourceLoaderEntity {
 
     public void playRandomSoundFromXToIndex(int startIndex, int hitSoundLimit) {
         int num = Math.max(startIndex, (int) (Math.random() * hitSoundLimit));
-        sounds.get(num).seek(Duration.ZERO);
-        sounds.get(num).play();
+        MediaPlayer mediaPlayer = new MediaPlayer(sounds.get(num).getMedia());
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
     }
 }
 

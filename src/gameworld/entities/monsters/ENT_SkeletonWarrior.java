@@ -60,7 +60,7 @@ public class ENT_SkeletonWarrior extends ENTITY {
                 attack3 = true;
                 mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2.3f * level));
             }
-            animation.playRandomSoundFromXToIndex(0, 3);
+            animation.playRandomSoundFromXToIndex(0, 2);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
@@ -173,16 +173,4 @@ public class ENT_SkeletonWarrior extends ENTITY {
         }
     }
 
-    private void gruntMovement() {
-        if (mg.client && onPath) {
-        } else if (onPath) {
-            if (searchTicks >= Math.random() * 45) {
-                getNearestPlayer();
-                searchPath(goalCol, goalRow, 16);
-                searchTicks = 0;
-            } else {
-                trackPath();
-            }
-        }
-    }
 }

@@ -50,10 +50,10 @@ public class ENT_Goblin extends ENTITY {
         super.update();
         if (collidingWithPlayer && !onPath && !attack1) {
             if (Math.random() < 0.33f) {
-                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 2 * level));
+                mg.PROJECTILES.add(new PRJ_AttackCone((int) worldX, (int) worldY, 75, 48, 48, 0, 0, 1.75f * level));
                 attack1 = true;
             }
-            //animation.playRandomSoundFromXToIndex(0, 3);
+            animation.playRandomSoundFromXToIndex(0, 1);
             spriteCounter = 0;
             collidingWithPlayer = false;
         }
