@@ -1,11 +1,1 @@
-java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 0
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:100)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
-	at java.base/java.util.Objects.checkIndex(Objects.java:385)
-	at java.base/java.util.ArrayList.get(ArrayList.java:427)
-	at gameworld.entities.loadinghelper.ResourceLoaderEntity.playRandomSoundFromXToIndex(ResourceLoaderEntity.java:186)
-	at gameworld.entities.monsters.ENT_SkeletonShield.update(ENT_SkeletonShield.java:64)
-	at gameworld.ENT_Control.update(ENT_Control.java:66)
-	at main.MainGame.lambda$startThreads$3(MainGame.java:276)
-	at java.base/java.lang.Thread.run(Thread.java:1589)
+java.lang.NullPointerException

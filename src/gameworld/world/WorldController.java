@@ -6,7 +6,6 @@ import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.npcs.generic.zonescripts.NPCScript;
 import gameworld.player.Player;
 import gameworld.player.PlayerPrompts;
-import gameworld.player.abilities.portals.PRJ_Teleporter;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
@@ -51,38 +50,40 @@ public class WorldController {
         mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
-                try {
-                    mg.ui.setLoadingScreen(0);
-                    Thread.sleep(100);
-                    if(zone!= Zone.EtherRealm){
-                        mg.ENTITIES.removeIf(entity -> entity.zone == Zone.EtherRealm);
+                Thread thread = new Thread(() -> {
+                    try {
+                        mg.ui.setLoadingScreen(0);
+                        Thread.sleep(100);
+                        if (zone != Zone.EtherRealm) {
+                            mg.ENTITIES.removeIf(entity -> entity.zone == Zone.EtherRealm);
+                        }
+                        mg.wRender.worldSize = map.mapSize;
+                        mg.ui.setLoadingScreen(20);
+                        currentWorld = zone;
+                        mg.player.map = map;
+                        mg.ui.setLoadingScreen(40);
+                        mg.player.setPosition(xTile, yTile);
+                        mg.getPlayerTile();
+                        clearWorldArrays();
+                        mg.ui.setLoadingScreen(60);
+                        mg.wAnim.emptyAnimationLists();
+                        currentMapCover = map.mapCover;
+                        WorldRender.worldData = map.mapDataBackGround;
+                        WorldRender.worldData1 = map.mapDataBackGround2;
+                        mg.ui.setLoadingScreen(80);
+                        WorldRender.worldData2 = map.mapDataForeGround;
+                        mg.wAnim.cacheMapEnhancements();
+                        mg.npcControl.loadGenerics(zone);
+                        mg.ui.setLoadingScreen(100);
+                        mg.gameState = currentState;
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
-                    mg.wRender.worldSize = map.mapSize;
-                    mg.ui.setLoadingScreen(20);
-                    currentWorld = zone;
-                    mg.player.map = map;
-                    mg.ui.setLoadingScreen(40);
-                    mg.player.setPosition(xTile, yTile);
-                    mg.getPlayerTile();
-                    clearWorldArrays();
-                    mg.ui.setLoadingScreen(60);
-                    mg.wAnim.emptyAnimationLists();
-                    currentMapCover = map.mapCover;
-                    WorldRender.worldData = map.mapDataBackGround;
-                    WorldRender.worldData1 = map.mapDataBackGround2;
-                    mg.ui.setLoadingScreen(80);
-                    WorldRender.worldData2 = map.mapDataForeGround;
-                    mg.wAnim.cacheMapEnhancements();
-                    mg.npcControl.loadGenerics(zone);
-                    mg.ui.setLoadingScreen(100);
-                    mg.gameState = currentState;
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                });
+                thread.start();
                 return;
             }
         }
-        mg.gameState = currentState;
     }
 
     public void loadMapNoDelay(Zone zone, int xTile, int yTile) {
@@ -162,8 +163,9 @@ public class WorldController {
     }
 
     private void clearWorldArrays() {
-        mg.PROJECTILES.clear();
-        mg.PROJECTILES.add(new PRJ_Teleporter(mg, (int) (Player.worldX / 48), (int) (Player.worldY / 48)));
+        synchronized (mg.PROJECTILES) {
+            mg.PROJECTILES.clear();
+        }
     }
 
     public void update() {

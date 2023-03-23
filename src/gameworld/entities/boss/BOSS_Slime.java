@@ -1,7 +1,7 @@
 package gameworld.entities.boss;
 
 import gameworld.entities.BOSS;
-import gameworld.entities.loadinghelper.ResourceLoaderEntity;
+import gameworld.entities.loadinghelper.EntityPreloader;
 import gameworld.player.Player;
 import gameworld.player.abilities.enemies.PRJ_AcidBreath;
 import gameworld.player.abilities.enemies.PRJ_AttackCone;
@@ -19,12 +19,11 @@ public class BOSS_Slime extends BOSS {
 
     public BOSS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
         super(mg, x, y, level, health, zone);
-        this.animation = new ResourceLoaderEntity("enemies/BossSlime");
+        this.animation = EntityPreloader.bigBloated;
         this.collisionBox = new Rectangle(-15, -15, 63, 63);
         movementSpeed = 2;
         name = "Big Bloated";
         this.enemyImage = Storage.BigSLimewalk1;
-        animation.load();
         animation.playRandomSoundFromXToIndex(7, 7);
     }
 

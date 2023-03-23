@@ -55,7 +55,7 @@ public class BOSS_Knight extends BOSS {
                 }
             }
             if (!autoPilot && health < 0.75 * maxHealth && !special_once) {
-                this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 50, 10, false, null));
+                this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 2, 1, false, null));
                 special = true;
                 spriteCounter = 0;
                 summonSkeletons();
@@ -71,7 +71,7 @@ public class BOSS_Knight extends BOSS {
             } else if (!autoPilot && health < 0.5 * maxHealth) {
                 if (healthPackCounter >= 600) {
                     special = true;
-                    this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 75, 10, false, null));
+                    this.BuffsDebuffEffects.add(new BUF_RegenAura(240, 2, 1, false, null));
                     spriteCounter = 0;
                     healthPackCounter = 0;
                 }

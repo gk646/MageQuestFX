@@ -5,9 +5,11 @@ import gameworld.quest.Dialog;
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
+import gameworld.world.WorldController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import main.MainGame;
+import main.system.enums.Zone;
 import main.system.ui.Colors;
 import main.system.ui.FonT;
 
@@ -24,13 +26,13 @@ public class UI_QuestPanel {
     public final ArrayList<QUEST> finishedQuests = new ArrayList<>();
     public QUEST activeQuest;
     private final MainGame mg;
-
     public final Rectangle wholeJournalWindow = new Rectangle(480, 260, 960, 563);
     public final Rectangle leftSide = new Rectangle(508 + 480, 260 + 11, 414, 510);
     private final Image journal = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/journal.png"))));
     private final Image trackBox = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBox.png"))));
     private final Image trackBoxHover = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/trackBoxHover.png"))));
     private final Image sideBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/sideBar.png"))));
+    private final Image etherBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/etherBar.png"))));
     public double scroll = 280;
     Rectangle[] trackBoxes = new Rectangle[10];
 
@@ -43,11 +45,21 @@ public class UI_QuestPanel {
         hideJournalCollision();
     }
 
+
     public void draw(GraphicsContext gc) {
         drawQuestBar(gc);
         if (mg.showJournal) {
             drawJournal(gc);
         }
+        if (WorldController.currentWorld == Zone.EtherRealm) {
+            drawEtherRealm(gc);
+        }
+    }
+
+    private void drawEtherRealm(GraphicsContext gc) {
+        gc.setFill(Colors.dark_magic_purple);
+        gc.fillRect(1683, 570, ((mg.generator.etherRealmProgress / 100.0f) * 88.0f), 25);
+        gc.drawImage(etherBar, 1649, 560);
     }
 
     private void drawJournal(GraphicsContext gc) {

@@ -235,11 +235,12 @@ public class Sound {
                 } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING && HillCrest.getCurrentTime().toMillis() >= HillCrest.getTotalDuration().toMillis() * 0.95f) {
                     fadeOut(HillCrest, 0.7, 4);
                 }
-            } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING) {
-                fadeOut(HillCrest, 0.7, 4);
             }
+        } else if (HillCrest.getStatus() == MediaPlayer.Status.PLAYING) {
+            fadeOut(HillCrest, 0.7, 4);
         }
     }
+
 
     public void setVolumeMusic(float value) {
         INTRO.setVolume(0.8 * (value / 100.0f));

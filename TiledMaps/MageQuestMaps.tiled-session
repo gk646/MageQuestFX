@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "goblinCave.tmx",
+    "activeFile": "TIILESET.tsx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "exports",
@@ -104,7 +104,7 @@
         "TIILESET.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 4,
-            "scaleInEditor": 3
+            "scaleInEditor": 2
         },
         "TestRomm.tmx": {
             "expandedObjectLayers": [
@@ -317,17 +317,17 @@
     "project": "MageQuestMaps.tiled-project",
     "recentFiles": [
         "caveMarla.tmx",
-        "TIILESET.tsx",
-        "Tutorial.tmx",
-        "DeadPlains.tmx",
-        "TheGrove.tmx",
-        "TestRomm.tmx",
         "test.tmx",
         "Hillcrest.tmx",
         "FirstDungeon.tmx",
         "DungeonTutorial.tmx",
         "hermitCaveHillcrest.tmx",
-        "GrassLands.tmx"
+        "GrassLands.tmx",
+        "goblinCave.tmx",
+        "TestRomm.tmx",
+        "TheGrove.tmx",
+        "DeadPlains.tmx",
+        "Tutorial.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled-Kachelsatzdateien (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

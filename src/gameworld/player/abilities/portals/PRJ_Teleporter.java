@@ -100,8 +100,7 @@ public class PRJ_Teleporter extends EnemyProjectile {
     }
 
     public void teleportPlayer() {
-        //mg.loadGameState.loadSpawnLevel();
-        mg.generator.loadRandomMap();
+        mg.loadGameState.loadSpawnLevel();
     }
 }
 

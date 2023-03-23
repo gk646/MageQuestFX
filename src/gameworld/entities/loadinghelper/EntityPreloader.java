@@ -12,6 +12,8 @@ public class EntityPreloader {
     public static ResourceLoaderEntity deathBringer;
     public static ResourceLoaderEntity goblin;
     public static ResourceLoaderEntity stoneKnight;
+    public static ResourceLoaderEntity realmKeeper;
+    public static ResourceLoaderEntity bigBloated;
 
     public static void load() {
         mushroom = new ResourceLoaderEntity("enemies/mushroom");
@@ -24,5 +26,7 @@ public class EntityPreloader {
         deathBringer = new ResourceLoaderEntity("enemies/BOSSDeathBringer");
         skeletonShield = new ResourceLoaderEntity("enemies/skeletonShield");
         stoneKnight = new ResourceLoaderEntity("enemies/BOSSKnight");
+        bigBloated = new ResourceLoaderEntity("enemies/BossSlime");
+        realmKeeper = new ResourceLoaderEntity("npc/realmKeeper");
     }
 }

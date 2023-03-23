@@ -1,8 +1,12 @@
 package gameworld.world.generation;
 
+import gameworld.entities.boss.BOSS_Knight;
+import gameworld.entities.boss.BOSS_Slime;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
+import gameworld.entities.monsters.ENT_SkeletonShield;
 import gameworld.entities.monsters.ENT_SkeletonSpearman;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
+import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import main.MainGame;
 import main.system.enums.Zone;
@@ -13,6 +17,7 @@ import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomMap {
+    public boolean bossKilled;
     MainGame mg;
 
     int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
@@ -20,6 +25,9 @@ public class RandomMap {
     int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
 
     int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
+    public boolean bossSpawned;
+    public float etherRealmProgress = 100.0f;
+    private int bossCountdown;
 
     public RandomMap(MainGame mg) {
         this.mg = mg;
@@ -42,7 +50,6 @@ public class RandomMap {
         return bfs(arr, entrancePoint.x, entrancePoint.y) > 15000;
     }
 
-
     private Map getRandomMap(int mapSize, int roomSize, int corridorLength, int entranceNUm) {
         Point entrancePoint = new Point();
         switch (entranceNUm) {
@@ -54,6 +61,8 @@ public class RandomMap {
         while (!testMap(map.mapDataBackGround, entrancePoint)) {
             map = generateMap(mapSize, roomSize, corridorLength, entranceNUm);
         }
+        //etherRealmProgress = 0;
+        bossSpawned = false;
         spawnEntities(map.mapDataBackGround, entrancePoint);
         return map;
     }
@@ -74,8 +83,10 @@ public class RandomMap {
                             mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, mg.player.level, Zone.EtherRealm));
                         } else if (num < 0.4) {
                             mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, mg.player.level, Zone.EtherRealm));
-                        } else if (num < 1) {
+                        } else if (num < 0.6) {
                             mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, mg.player.level, Zone.EtherRealm));
+                        } else if (num < 0.8) {
+                            mg.ENTITIES.add(new ENT_SkeletonShield(mg, x * 48, y * 48, mg.player.level, Zone.EtherRealm));
                         }
                     }
                 }
@@ -84,9 +95,6 @@ public class RandomMap {
         mg.ENTITIES.removeIf(entity -> Math.abs(entity.worldX - xstart) + Math.abs(entity.worldY - ystart) < 500);
     }
 
-    private void spawnBoss() {
-
-    }
 
     private Map generateMap(int sizeX, int roomSize, int corridorLength, int entranceNUm) {
         int[][] FG = getBlankMap(sizeX);
@@ -313,6 +321,35 @@ public class RandomMap {
             }
         }
         return reachableTiles;
+    }
+
+    public void spawnBoss(int[][] arr) {
+        if (WorldController.currentWorld == Zone.EtherRealm && !bossSpawned) {
+            int num = 20 - (int) (Math.random() * 40);
+            int num2 = 20 - (int) (Math.random() * 40);
+            int xCo = mg.playerX + num;
+            int yCo = mg.playerY + num2;
+            int arrLength = arr.length;
+            while (true) {
+                if (xCo < arrLength && yCo < arrLength && xCo > 0 && yCo > 0 && arrContainsNum(floorPaletV1_4Enhanced, arr[xCo][yCo])) {
+                    mg.pathF.setNodes(mg.playerX, mg.playerY, mg.playerX + num, mg.playerY + num2, 150);
+                    if (mg.pathF.search()) {
+                        num = (int) (Math.random() * 10);
+                        if (num < 5) {
+                            mg.ENTITIES.add(new BOSS_Knight(mg, xCo * 48, yCo * 48, mg.player.level, 23, Zone.EtherRealm));
+                        } else if (num < 10) {
+                            mg.ENTITIES.add(new BOSS_Slime(mg, xCo * 48, yCo * 48, mg.player.level, 23, Zone.EtherRealm));
+                        }
+                        bossSpawned = true;
+                        break;
+                    }
+                }
+                num = 20 - (int) (Math.random() * 40);
+                num2 = 20 - (int) (Math.random() * 40);
+                xCo = mg.playerX + num;
+                yCo = mg.playerY + num2;
+            }
+        }
     }
 
     private void printMinMaxValue(float[][] noiseMap) {

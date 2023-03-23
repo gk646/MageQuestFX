@@ -6,15 +6,19 @@ import gameworld.entities.ENTITY;
 import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.monsters.ENT_SkeletonArcher;
 import gameworld.entities.monsters.ENT_SkeletonWarrior;
+import gameworld.entities.npcs.quests.ENT_RealmKeeper;
 import gameworld.player.CollisionProjectiles;
 import gameworld.player.EnemyProjectile;
 import gameworld.player.PROJECTILE;
 import gameworld.player.Player;
 import gameworld.player.ProjectileType;
+import gameworld.player.abilities.portals.PRJ_EtherPortal;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_Coin;
+import gameworld.world.objects.drops.DRP_EtherMark;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.enums.Zone;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,6 +39,7 @@ public class PRJ_Control {
     private int ShooterKilledCounter;
     public int stoneKnightKilled;
     private final ArrayList<PROJECTILE> toBeDamageDead = new ArrayList<>();
+    public final ArrayList<PROJECTILE> toBeAdded = new ArrayList<>();
 
     /**
      * Used for handling projectiles
@@ -57,40 +62,46 @@ public class PRJ_Control {
     public void update() {
         toBeDamageDead.clear();
         synchronized (mg.PROJECTILES) {
+            if (toBeAdded.size() > 0) {
+                mg.PROJECTILES.addAll(toBeAdded);
+                toBeAdded.clear();
+            }
+
             // synchronized (mg.ENTITIES) {
-                Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
-                while (iterator.hasNext()) {
-                    PROJECTILE projectile = iterator.next();
-                    if (projectile instanceof CollisionProjectiles || projectile instanceof EnemyProjectile) {
-                        mg.collisionChecker.checkProjectileAgainstTile(projectile);
-                        if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
-                            projectile.dead = true;
-                        }
-                    }
-                    if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
-                        mg.player.setHealth(mg.player.getHealth() - projectile.weapon_damage_percent);
+            Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
+            while (iterator.hasNext()) {
+                PROJECTILE projectile = iterator.next();
+                if (projectile instanceof CollisionProjectiles || projectile instanceof EnemyProjectile) {
+                    mg.collisionChecker.checkProjectileAgainstTile(projectile);
+                    if (projectile.collisionUp || projectile.collisionDown || projectile.collisionLeft || projectile.collisionRight) {
                         projectile.dead = true;
                     }
-                    projectile.update();
-                    if (projectile.dead) {
-                        iterator.remove();
-                        continue;
-                    }
-                    Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
-                    while (entityIterator.hasNext()) {
-                        ENTITY entity = entityIterator.next();
-                        if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
-                            if (entity.AfterAnimationDead) {
-                                recordDeath(entity);
-                                entityIterator.remove();
-                                continue;
-                            }
-                            if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && !entity.dead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
-                                calcProjectileDamage(projectile, entity);
-                            }
+                }
+                if (projectile instanceof EnemyProjectile && mg.collisionChecker.checkPlayerAgainstProjectile(projectile)) {
+                    mg.player.setHealth(mg.player.getHealth() - projectile.weapon_damage_percent);
+                    projectile.dead = true;
+                }
+                projectile.update();
+
+                if (projectile.dead) {
+                    iterator.remove();
+                    continue;
+                }
+                Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();
+                while (entityIterator.hasNext()) {
+                    ENTITY entity = entityIterator.next();
+                    if (entity.zone == WorldController.currentWorld && Math.abs(entity.worldX - Player.worldX) + Math.abs(entity.worldY - Player.worldY) < 1_800) {
+                        if (entity.AfterAnimationDead) {
+                            recordDeath(entity);
+                            entityIterator.remove();
+                            continue;
+                        }
+                        if (!(projectile instanceof EnemyProjectile) && !projectile.damageDead && !entity.dead && mg.collisionChecker.checkEntityAgainstProjectile(entity, projectile)) {
+                            calcProjectileDamage(projectile, entity);
                         }
                     }
                 }
+            }
             // }
         }
         for (PROJECTILE projectile : toBeDamageDead) {
@@ -121,11 +132,21 @@ public class PRJ_Control {
             entity.dead = true;
             entity.spriteCounter = 0;
             if (entity instanceof BOSS) {
-                mg.dropManager.bossDieEvent((int) entity.worldX, (int) entity.worldY, entity.zone, entity.level);
+                if (WorldController.currentWorld == Zone.EtherRealm) {
+                    toBeAdded.add(new PRJ_EtherPortal(mg, (int) (entity.worldX / 48), (int) (entity.worldY / 48)));
+                    ENT_RealmKeeper.ETHER_ACTIVE = false;
+                } else {
+                    mg.dropManager.bossDieEvent((int) entity.worldX, (int) entity.worldY, entity.zone, entity.level);
+                }
             } else {
                 mg.dropManager.useDropChance((int) entity.worldX, (int) entity.worldY, entity.level, entity.zone);
                 if (MainGame.random.nextInt(101) > 20) {
-                    mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + MainGame.random.nextInt(41) - 20), (int) (entity.worldY + MainGame.random.nextInt(41) - 20), entity.level, WorldController.currentWorld));
+                    mg.WORLD_DROPS.add(new DRP_Coin((int) (entity.worldX + MainGame.random.nextInt(21) - 10), (int) (entity.worldY + MainGame.random.nextInt(21) - 10), entity.level, WorldController.currentWorld));
+                }
+            }
+            if (WorldController.currentWorld == Zone.EtherRealm) {
+                if (MainGame.random.nextInt(101) > 10) {
+                    mg.WORLD_DROPS.add(new DRP_EtherMark((int) (entity.worldX + MainGame.random.nextInt(21) - 10), (int) (entity.worldY + MainGame.random.nextInt(21) - 10), 5, WorldController.currentWorld));
                 }
             }
         }

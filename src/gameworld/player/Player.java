@@ -11,8 +11,10 @@ import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
+import gameworld.world.objects.drops.DRP_EtherMark;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
+import main.system.rendering.WorldRender;
 import main.system.ui.Colors;
 import main.system.ui.inventory.UI_InventorySlot;
 import main.system.ui.talentpanel.TalentNode;
@@ -363,6 +365,14 @@ public class Player extends ENTITY {
                         if (drop instanceof DRP_Coin) {
                             mg.player.coins += ((DRP_Coin) drop).amount;
                             mg.sound.playEffectSound(9);
+                            iter.remove();
+                        } else if (drop instanceof DRP_EtherMark) {
+                            if (mg.generator.etherRealmProgress < 100) {
+                                mg.generator.etherRealmProgress += ((DRP_EtherMark) drop).amount;
+                            } else if (!mg.generator.bossSpawned) {
+                                mg.generator.spawnBoss(WorldRender.worldData);
+                                mg.generator.bossSpawned = true;
+                            }
                             iter.remove();
                         } else if (!drop.blockPickup) {
                             for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {

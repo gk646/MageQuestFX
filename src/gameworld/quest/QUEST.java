@@ -2,6 +2,7 @@ package gameworld.quest;
 
 import gameworld.entities.NPC;
 import gameworld.player.Player;
+import gameworld.player.PlayerPrompts;
 import main.MainGame;
 import main.system.enums.Zone;
 import main.system.rendering.WorldRender;
@@ -23,6 +24,7 @@ abstract public class QUEST {
     public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
     protected final MainGame mg;
     public boolean completed;
+
 
     public QUEST(MainGame mg) {
         this.mg = mg;
@@ -238,7 +240,7 @@ abstract public class QUEST {
         }
         if (mg.collisionChecker.checkEntityAgainstPlayer(npc, 5)) {
             if (!npc.show_dialog && !npc.blockInteraction) {
-                mg.playerPrompts.setETrue();
+                PlayerPrompts.setETrue();
             }
             if (mg.inputH.e_typed) {
                 npc.show_dialog = true;

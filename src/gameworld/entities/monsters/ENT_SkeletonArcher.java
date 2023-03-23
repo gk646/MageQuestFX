@@ -51,11 +51,10 @@ public class ENT_SkeletonArcher extends ENTITY {
     @Override
     public void update() {
         super.update();
-        if (shotCooldown >= 80 && !playerTooFarAbsolute()) {
+        if (shotCooldown >= 130 && !playerTooFarAbsolute()) {
             attack1 = true;
             shotCooldown = 0;
             spriteCounter = 0;
-            animation.playRandomSoundFromXToIndex(0, 0);
         }
         onPath = !attack1;
         if (onPath) {
@@ -140,6 +139,7 @@ public class ENT_SkeletonArcher extends ENTITY {
             case 14 -> gc.drawImage(animation.attack1.get(14), screenX - 20, screenY - 14);
             case 15 -> {
                 attack1 = false;
+                animation.playRandomSoundFromXToIndex(0, 0);
                 mg.PROJECTILES.add(new PRJ_EnemyStandardShot((int) worldX, (int) worldY, level, (int) Player.worldX, (int) Player.worldY, level));
             }
         }
