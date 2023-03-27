@@ -29,12 +29,8 @@ import java.util.Iterator;
  * Main inheritable class for all projectiles
  */
 public class PRJ_Control {
-
-
     protected final MainGame mg;
-
     public int GruntKilledCounter;
-    public long lastHitTime;
     public int ENEMIES_KILLED;
     private int ShooterKilledCounter;
     public int stoneKnightKilled;
@@ -53,7 +49,7 @@ public class PRJ_Control {
 
     public void draw(GraphicsContext gc) {
         synchronized (mg.PROJECTILES) {
-            for (PROJECTILE projectile : mg.PROJECTILES) {
+            for (var projectile : mg.PROJECTILES) {
                 projectile.draw(gc);
             }
         }
@@ -66,9 +62,8 @@ public class PRJ_Control {
                 mg.PROJECTILES.addAll(toBeAdded);
                 toBeAdded.clear();
             }
-
             // synchronized (mg.ENTITIES) {
-            Iterator<PROJECTILE> iterator = mg.PROJECTILES.iterator();
+            var iterator = mg.PROJECTILES.iterator();
             while (iterator.hasNext()) {
                 PROJECTILE projectile = iterator.next();
                 if (projectile instanceof CollisionProjectiles || projectile instanceof EnemyProjectile) {
@@ -104,7 +99,7 @@ public class PRJ_Control {
             }
             // }
         }
-        for (PROJECTILE projectile : toBeDamageDead) {
+        for (var projectile : toBeDamageDead) {
             projectile.damageDead = true;
         }
     }

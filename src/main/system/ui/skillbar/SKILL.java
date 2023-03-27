@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import main.MainGame;
 import main.system.ui.Colors;
-import main.system.ui.Effects;
 import main.system.ui.FonT;
 import main.system.ui.skillbar.skills.SKL_Filler;
 
@@ -21,7 +20,6 @@ abstract public class SKILL {
 
     public Image icon;
     protected final MainGame mg;
-    protected Effects[] procEffects = new Effects[3];
     public float totalCoolDown;
     public int manaCost;
     public float coolDownCoefficient;

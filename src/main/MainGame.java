@@ -571,10 +571,10 @@ public class MainGame {
 
     private void drawDamageNumber(GraphicsContext gc) {
         synchronized (damageNumbers) {
-            Iterator<DamageNumber> iterator = damageNumbers.iterator();
+            var iterator = damageNumbers.iterator();
             gc.setEffect(ui.shadow);
             while (iterator.hasNext()) {
-                DamageNumber dmgN = iterator.next();
+                var dmgN = iterator.next();
                 dmgN.draw(gc);
                 if (dmgN.offSetY <= -30) {
                     iterator.remove();

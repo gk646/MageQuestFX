@@ -14,7 +14,9 @@ import java.awt.Rectangle;
 
 public class BOSS_Slime extends BOSS {
 
-    private boolean attack1, attack2, attack3, spitting;
+    private boolean attack1;
+    private boolean attack2;
+    private boolean attack3;
 
 
     public BOSS_Slime(MainGame mg, int x, int y, int level, int health, Zone zone) {
@@ -36,7 +38,7 @@ public class BOSS_Slime extends BOSS {
     public void update() {
         super.update();
         hpBarOn = false;
-        spitting = false;
+        var spitting = false;
         if (health < 0.5 * maxHealth) {
             if (searchTicks % 240 == 0) {
                 slimeCone();

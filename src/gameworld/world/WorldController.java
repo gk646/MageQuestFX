@@ -50,7 +50,7 @@ public class WorldController {
         mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
-                Thread thread = new Thread(() -> {
+                var thread = new Thread(() -> {
                     try {
                         mg.ui.setLoadingScreen(0);
                         Thread.sleep(100);
