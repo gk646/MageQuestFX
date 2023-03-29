@@ -15,9 +15,12 @@ public class Dialog {
     public int dialogRenderCounter = 0;
     public String dialogLine = "...";
     public boolean drawChoice;
-    public String choice1, choice2, choice3, choice4;
-    public int choicePointer = 0;
-    public int maxChoices;
+    private String choice1;
+    private String choice2;
+    private String choice3;
+    private String choice4;
+    private int choicePointer = 0;
+    private int maxChoices;
 
     /**
      * The dialog framework
@@ -126,7 +129,7 @@ public class Dialog {
         }
     }
 
-    public void drawDialogPlayer(GraphicsContext gc) {
+    public void drawDialog(GraphicsContext gc) {
         gc.setFont(FonT.varnished14);
         gc.setFill(Colors.black_transparent);
         gc.fillRoundRect(Player.screenX - 24 - 124, Player.screenY - 24 - 115, 373, 120, 25, 25);

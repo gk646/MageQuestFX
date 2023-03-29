@@ -1,6 +1,7 @@
 package gameworld.entities.npcs.generic;
 
 import gameworld.entities.NPC;
+import gameworld.player.PlayerPrompts;
 import gameworld.quest.dialog.DialogStorage;
 import gameworld.world.WorldController;
 import main.MainGame;
@@ -10,15 +11,16 @@ import java.awt.Point;
 
 abstract public class NPC_Generic extends NPC {
     public boolean despawn;
-    public boolean finished;
-    Point previousTile = new Point();
-    int counter1, counter2;
-    String dialogLine = DialogStorage.NPCComments[MainGame.random.nextInt(0, DialogStorage.NPCComments.length - 1)];
+    private boolean finished;
+    private final Point previousTile = new Point();
+    private int counter1;
+    private int counter2;
+    private final String dialogLine = DialogStorage.NPCComments[MainGame.random.nextInt(0, DialogStorage.NPCComments.length - 1)];
 
-    protected void scriptMovement() {
+    void scriptMovement() {
         if (collidingWithPlayer()) {
             if (!show_dialog) {
-                mg.playerPrompts.setETrue();
+                PlayerPrompts.setETrue();
             }
             if (mg.inputH.e_typed) {
                 mg.inputH.e_typed = false;

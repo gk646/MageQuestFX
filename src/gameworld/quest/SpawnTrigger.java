@@ -104,7 +104,7 @@ public class SpawnTrigger {
         return new Point((int) ((Player.worldX + 24) / 48), (int) ((Player.worldY + 24) / 48)).distance(tilex, tily) <= distance;
     }
 
-    public boolean isPointWithinDistanceOfRectangle(int distance) {
+    private boolean isPointWithinDistanceOfRectangle(int distance) {
         int playerX = (int) Player.worldX;
         int playerY = (int) Player.worldY;
         return (Math.abs(playerX - x * 48) <= distance

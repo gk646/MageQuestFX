@@ -13,7 +13,7 @@ import main.system.ui.skillbar.SKILL;
 
 
 public class SKL_PowerSurge extends SKILL {
-    GeneralResourceLoader resource;
+    private final GeneralResourceLoader resource;
     private boolean active;
     private int spriteCounter;
 

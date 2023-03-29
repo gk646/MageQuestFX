@@ -85,36 +85,23 @@ public class ITEM {
         this.stats = stats;
         this.level = 1;
         this.icon = setup(imagePath);
-        if (this.stats == null) {
-            this.stats = "a";
-        }
         getStats();
         getWeaponDamage();
     }
 
-    public ITEM() {
+    ITEM() {
 
     }
 
     public ITEM(int i_id, String name, int rarity, char type, String imagePath, String description, String stats, int quality, int level, float[] effects) {
-        this.i_id = i_id;
-        this.name = name;
-        this.rarity = rarity;
-        this.type = type;
+        this(i_id, name, rarity, type, imagePath, "", stats, "");
         this.effects = effects;
-        this.imagePath = imagePath;
-        this.description = description;
-        this.stats = stats;
         this.level = level;
+        this.description = description;
         this.icon = setup(imagePath);
         this.quality = quality;
         this.cost = level * 25 + rarity * 25;
-        if (this.stats == null) {
-            this.stats = "a";
-        }
-        getStats();
         applyMultipliers();
-        getWeaponDamage();
     }
 
 
@@ -130,6 +117,9 @@ public class ITEM {
     }
 
     private void getStats() {
+        if (stats == null) {
+            return;
+        }
         Pattern p;
         Matcher m;
         if (stats.contains("INT")) {

@@ -19,7 +19,7 @@ public class ResourceLoaderEntity {
     public final ArrayList<Image> idle = new ArrayList<>();
 
     public final ArrayList<Image> dead = new ArrayList<>();
-    public final ArrayList<Image> hurt = new ArrayList<>();
+    private final ArrayList<Image> hurt = new ArrayList<>();
     public final ArrayList<Image> walk = new ArrayList<>();
     public final ArrayList<Image> run = new ArrayList<>();
     public ArrayList<Image> attack5 = new ArrayList<>();
@@ -27,8 +27,8 @@ public class ResourceLoaderEntity {
     public ArrayList<Image> idle2 = new ArrayList<>();
     public ArrayList<Image> runMirror = new ArrayList<>();
     public final ArrayList<MediaPlayer> sounds = new ArrayList<>();
-    public final ArrayList<MediaPlayer> sounds2 = new ArrayList<>();
-    final String name;
+    private final ArrayList<MediaPlayer> sounds2 = new ArrayList<>();
+    private final String name;
 
     public ResourceLoaderEntity(String entityName) {
         this.name = entityName;

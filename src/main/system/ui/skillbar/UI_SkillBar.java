@@ -41,7 +41,7 @@ public class UI_SkillBar {
     public final Rectangle mapBox = new Rectangle(skillBarX + 64 * 7 + 144, skillBarY + 28, 32, 32);
     public final Rectangle settingsBox = new Rectangle(skillBarX + 64 * 7 + 178, skillBarY + 28, 32, 32);
     public boolean showNoticeBag, showNoticeChar, showNoticeTalent, showNoticeAbilities;
-    final MainGame mg;
+    private final MainGame mg;
     public boolean showNoticeMap;
 
     public UI_SkillBar(MainGame mg) {

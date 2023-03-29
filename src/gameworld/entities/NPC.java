@@ -9,17 +9,17 @@ import java.awt.Point;
 
 abstract public class NPC extends ENTITY {
     public boolean blockInteraction;
-    public String displayName;
+    protected String displayName;
     public boolean show_dialog;
     public Point playerTalkLocation = new Point();
     public int dialogHideDelay;
-    public int checkpointIndex = 0;
+    protected int checkpointIndex = 0;
     public Point[] checkPoints;
 
     public Point goalTile;
     public int stuckCounter;
 
-    public void moveTo(int goalX, int goalY, Point... checkpoints) {
+    protected void moveTo(int goalX, int goalY, Point... checkpoints) {
         if (checkpoints != null && checkpoints.length > 0) {
             if (checkpointIndex < checkpoints.length) {
                 if (checkpoints[checkpointIndex].equals(activeTile)) {
@@ -66,7 +66,7 @@ abstract public class NPC extends ENTITY {
         gc.setEffect(null);
     }
 
-    protected void drawCenteredTextAroundX(int x, GraphicsContext gc, String text, float y) {
+    private void drawCenteredTextAroundX(int x, GraphicsContext gc, String text, float y) {
         Text textNode = new Text(text);
         textNode.setFont(gc.getFont());
         double textWidth = textNode.getLayoutBounds().getWidth();

@@ -119,7 +119,7 @@ public class MainGame {
     public State gameState;
     public PathFinder pathF;
 
-    public Storage imageSto;
+    private Storage imageSto;
     public SQLite sqLite;
     private final Image vignette = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/vignette.png")));
     public boolean client = false, showBag, showChar, showTalents, loadingScreen, showMap;
@@ -150,7 +150,7 @@ public class MainGame {
     public ENT_Control ent_control;
     public Sound sound;
     public PlayerPrompts playerPrompts;
-    public static int WORLD_SIZE;
+    private static int WORLD_SIZE;
     public boolean showAbilities;
     public RandomMap generator;
     public SecureRandom secureRandom;

@@ -29,7 +29,7 @@ import java.util.Iterator;
  * Main inheritable class for all projectiles
  */
 public class PRJ_Control {
-    protected final MainGame mg;
+    private final MainGame mg;
     public int GruntKilledCounter;
     public int ENEMIES_KILLED;
     private int ShooterKilledCounter;

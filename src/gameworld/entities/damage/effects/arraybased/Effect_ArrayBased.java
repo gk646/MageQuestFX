@@ -7,7 +7,7 @@ import gameworld.player.PROJECTILE;
 
 public class Effect_ArrayBased extends Effect {
 
-    protected boolean activated;
+    private boolean activated;
 
     public Effect_ArrayBased(float duration, float amount, boolean fromPlayer, int effectIndexAffected, EffectType effecttype, Class<? extends PROJECTILE> sourceProjectile) {
         super(duration, amount, fromPlayer, sourceProjectile);

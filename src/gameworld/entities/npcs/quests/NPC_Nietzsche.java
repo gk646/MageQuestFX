@@ -3,6 +3,7 @@ package gameworld.entities.npcs.quests;
 import gameworld.entities.NPC;
 import gameworld.entities.loadinghelper.ResourceLoaderEntity;
 import gameworld.player.Player;
+import gameworld.player.PlayerPrompts;
 import gameworld.quest.Dialog;
 import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
@@ -19,7 +20,7 @@ import java.awt.Rectangle;
 public class NPC_Nietzsche extends NPC {
     public static StringBuilder prompt = new StringBuilder();
     public static boolean typeMode, generateResponse;
-    int length;
+    private int length;
 
     public NPC_Nietzsche(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
@@ -82,7 +83,7 @@ public class NPC_Nietzsche extends NPC {
         if (QUEST.playerCloseToAbsolute((int) worldX, (int) worldY, 150)) {
             if (mg.qPanel.questIsFinished(QUEST_NAME.Nietzsche)) {
                 if (!show_dialog) {
-                    mg.playerPrompts.setETrue();
+                    PlayerPrompts.setETrue();
                     if (mg.inputH.e_typed) {
                         mg.inputH.e_typed = false;
                         typeMode = true;

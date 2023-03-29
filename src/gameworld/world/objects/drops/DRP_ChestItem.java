@@ -20,7 +20,7 @@ public class DRP_ChestItem extends DROP {
     private final int controlY;
     private final int endX;
     private final int endY;
-    final Image icon;
+    private final Image icon;
     private float arcPosition = 0;
 
 

@@ -16,14 +16,16 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 public class BOSS_Knight extends BOSS {
-    public boolean active;
+    private boolean active;
     public int healthPackCounter = 0;
     public boolean activate;
-    String[] fightComments = new String[]{"Got enough yet?", "DIE!", "Got enough yet?", "You are a fool for even facing me!"};
+    private final String[] fightComments = new String[]{"Got enough yet?", "DIE!", "Got enough yet?", "You are a fool for even facing me!"};
     public boolean attack1, attack2, attack3, attack4, attack5;
-    int counter = 0;
+    private int counter = 0;
     private boolean attack1Sound, attack4Sound, attackSound2, attack3Sound, attack5Sound;
-    public boolean special, special_once, drawDialog;
+    private boolean special;
+    private boolean special_once;
+    public boolean drawDialog;
     public boolean autoPilot;
     private boolean special_two = false;
 

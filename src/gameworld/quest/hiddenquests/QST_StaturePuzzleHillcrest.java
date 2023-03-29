@@ -1,5 +1,6 @@
 package gameworld.quest.hiddenquests;
 
+import gameworld.player.PlayerPrompts;
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.world.WorldController;
@@ -16,7 +17,7 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
     private final Point[] activatePoints = new Point[]{new Point(64, 65), new Point(71, 65), new Point(64, 70), new Point(71, 70)};
     private final Point[] inscriptionPoints = new Point[]{new Point(64, 67), new Point(71, 67), new Point(64, 72), new Point(71, 72)};
     private final String[] inscriptions = new String[]{"I am shorter than the statue below", "Iam taller then the statue to the left, but shorter then the tallest", "Iam the oldest", "Iam the least tall statue"};
-    int counter = 0;
+    private int counter = 0;
 
     public QST_StaturePuzzleHillcrest(MainGame mg, boolean completed) {
         super(mg);
@@ -59,7 +60,7 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
                 }
                 for (int i = 0; i < 4; i++) {
                     if (new Point(mg.playerX, mg.playerY).equals(inscriptionPoints[i])) {
-                        mg.playerPrompts.setETrue();
+                        PlayerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             mg.inputH.e_typed = false;
                             mg.player.dialog.loadNewLine(inscriptions[i]);
@@ -67,7 +68,7 @@ public class QST_StaturePuzzleHillcrest extends HiddenQUEST {
                         }
                     }
                     if (new Point(mg.playerX, mg.playerY).equals(activatePoints[i])) {
-                        mg.playerPrompts.setETrue();
+                        PlayerPrompts.setETrue();
                         if (mg.inputH.e_typed) {
                             mg.inputH.e_typed = false;
                             user[counter] = i;

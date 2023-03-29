@@ -11,12 +11,12 @@ import main.system.ui.Colors;
 import java.util.Objects;
 
 abstract public class Effect {
-    protected DamageType type;
+    DamageType type;
     public float amount;
     protected boolean fromPlayer = false;
     public int indexAffected;
-    protected float coolDownCoefficient;
-    public String name;
+    private float coolDownCoefficient;
+    protected String name;
     protected Image icon;
     protected String description;
     public Class<? extends PROJECTILE> sourceProjectile;
@@ -37,7 +37,7 @@ abstract public class Effect {
         this.sourceProjectile = sourceProjectile;
     }
 
-    public Effect() {
+    protected Effect() {
 
     }
 
@@ -52,7 +52,7 @@ abstract public class Effect {
         drawCooldown(gc, x, y);
     }
 
-    protected void drawCooldown(GraphicsContext gc, int skillBarX, int skillBarY) {
+    private void drawCooldown(GraphicsContext gc, int skillBarX, int skillBarY) {
         int side1;
         int side2;
         int side3;

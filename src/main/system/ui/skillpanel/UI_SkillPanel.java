@@ -22,7 +22,7 @@ public class UI_SkillPanel {
     private final Image a3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_3.png")));
     private final Image a4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_4.png")));
     private final Image a5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/spellbook_5.png")));
-    public final MainGame mg;
+    private final MainGame mg;
     public final Rectangle wholeSkillWindow;
     public final Rectangle[] hitBoxesSideButtons = new Rectangle[5];
     public int skillPanelX = 500, skillPanelY = 250;

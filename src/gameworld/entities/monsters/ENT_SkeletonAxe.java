@@ -1,4 +1,4 @@
 package gameworld.entities.monsters;
 
-public class ENT_SkeletonAxe {
+class ENT_SkeletonAxe {
 }

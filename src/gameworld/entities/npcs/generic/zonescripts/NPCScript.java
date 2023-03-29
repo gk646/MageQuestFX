@@ -9,16 +9,16 @@ import main.system.enums.Zone;
 import java.awt.Point;
 
 abstract public class NPCScript {
-    protected MainGame mg;
-    public int respawnCounter;
-    public int amountOfNPCs;
+    MainGame mg;
+    int respawnCounter;
+    int amountOfNPCs;
     public Zone zone;
     public Point[] houseEntrances;
     public boolean[] entranceTaken;
 
     abstract public void update();
 
-    protected void respawnGeneric() {
+    void respawnGeneric() {
         double num = Math.random();
         Point point = houseEntrances[(int) (Math.random() * houseEntrances.length)];
         if (num < 0.15) {

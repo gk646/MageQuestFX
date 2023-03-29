@@ -15,7 +15,7 @@ import java.awt.geom.Point2D;
 
 
 public class PRJ_InfernoRay extends PROJECTILE {
-    double RightAngle;
+    private double RightAngle;
 
     public PRJ_InfernoRay(float weapon_damage_percent) {
         this.weapon_damage_percent = weapon_damage_percent;
@@ -43,7 +43,7 @@ public class PRJ_InfernoRay extends PROJECTILE {
         playStartSound();
     }
 
-    public int getClosestRightAngle(int calculatedAngle) {
+    private int getClosestRightAngle(int calculatedAngle) {
         // Normalize the calculated angle to be between 0 and 359
         calculatedAngle = (calculatedAngle % 360 + 360) % 360;
 

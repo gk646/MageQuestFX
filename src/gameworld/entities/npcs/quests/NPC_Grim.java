@@ -13,7 +13,7 @@ import java.awt.Rectangle;
 
 
 public class NPC_Grim extends NPC {
-    public boolean attack1;
+    private boolean attack1;
 
     public NPC_Grim(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();

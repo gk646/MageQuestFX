@@ -12,9 +12,9 @@ public class DamageNumber {
     private final int damage;
     private final DamageType type;
     private final int offSetX;
-    public final boolean crit;
+    private final boolean crit;
     public float offSetY = 35;
-    final ENTITY entity;
+    private final ENTITY entity;
 
     public DamageNumber(int damage, DamageType type, ENTITY entity, boolean critical_Hit) {
         this.crit = critical_Hit;

@@ -9,7 +9,7 @@ import main.system.ui.FonT;
 
 public class StatusMessage {
     public final GeneralResourceLoader animation = new GeneralResourceLoader("ui/levelup");
-    MainGame mg;
+    private final MainGame mg;
     private int spriteCounter;
     private int levelUpCounter = 1000, questComplete = 1000, notEnoughMana = 1000, onCooldown = 1000;
 

@@ -27,7 +27,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LoadGameState {
-    final MainGame mg;
+    private final MainGame mg;
 
 
     public LoadGameState(MainGame mg) {

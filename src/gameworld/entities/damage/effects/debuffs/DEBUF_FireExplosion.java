@@ -9,7 +9,7 @@ import gameworld.player.abilities.FIRE.PRJ_FireExplosion;
 import java.util.List;
 
 public class DEBUF_FireExplosion extends Effect {
-    List<PROJECTILE> projectiles;
+    private final List<PROJECTILE> projectiles;
 
     public DEBUF_FireExplosion(List<PROJECTILE> projectiles) {
         this.projectiles = projectiles;

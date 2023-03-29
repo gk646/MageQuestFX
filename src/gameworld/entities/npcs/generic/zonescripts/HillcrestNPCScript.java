@@ -9,7 +9,7 @@ import java.awt.Point;
 
 public class HillcrestNPCScript extends NPCScript {
 
-    int upCounter;
+    private int upCounter;
 
     public HillcrestNPCScript(MainGame mg) {
         this.respawnCounter = 300;

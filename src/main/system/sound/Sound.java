@@ -19,31 +19,31 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Sound {
-    public final ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>();
-    public final ArrayList<MediaPlayer> forestAmbient = new ArrayList<>();
+    private final ArrayList<MediaPlayer> dungeonAmbient = new ArrayList<>();
+    private final ArrayList<MediaPlayer> forestAmbient = new ArrayList<>();
     public static final Media dialogBeep = new Media(Objects.requireNonNull(Sound.class.getResource("/resources/sound/effects/quest/speak.wav")).toString());
 
     public static float EFFECTS_VOLUME = 0.5f;
-    public final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
+    private final ArrayList<MediaPlayer> effectSounds = new ArrayList<>();
     public MediaPlayer INTRO;
     public MediaPlayer Sonata;
-    public MediaPlayer HillCrest;
-    public static float AMBIENCE_VOLUME = 0.7f;
+    private MediaPlayer HillCrest;
+    private static float AMBIENCE_VOLUME = 0.7f;
     private final double fadeDuration = 2;
 
-    public MediaPlayer currentAmbient;
+    private MediaPlayer currentAmbient;
     private double waterVolume = 0.3f;
     private MediaPlayer lava;
     private MediaPlayer firePlace;
-    final MainGame mg;
-    public int currentTrackIndex = 0;
+    private final MainGame mg;
+    private int currentTrackIndex = 0;
     public static Media energySphereBeginning;
     public static Media energySphereHit;
     private boolean forestPlaying, dungeonPlaying;
     private MediaPlayer waterAmbience;
     public MediaPlayer BossMusic1;
 
-    boolean[] dumbMediaPplayer = new boolean[10];
+    private final boolean[] dumbMediaPplayer = new boolean[10];
 
     public Sound(MainGame mg) {
         this.mg = mg;
@@ -133,7 +133,7 @@ public class Sound {
     }
 
 
-    public void fadeIn(MediaPlayer mediaPlayer, double volume) {
+    private void fadeIn(MediaPlayer mediaPlayer, double volume) {
         mediaPlayer.seek(Duration.ZERO);
         mediaPlayer.setVolume(0.0);
         mediaPlayer.play();

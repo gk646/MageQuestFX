@@ -1,4 +1,4 @@
 package gameworld.entities.props;
 
-public class Props {
+class Props {
 }

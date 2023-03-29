@@ -2432,9 +2432,9 @@ public class FastNoiseLite {
         DefaultOpenSimplex2
     }
 
-    public static class Vector2 {
-        public /*FNLfloat*/ float x;
-        public /*FNLfloat*/ float y;
+    static class Vector2 {
+        /*FNLfloat*/ float x;
+        /*FNLfloat*/ float y;
 
         public Vector2(/*FNLfloat*/ float x, /*FNLfloat*/ float y) {
             this.x = x;
@@ -2442,10 +2442,10 @@ public class FastNoiseLite {
         }
     }
 
-    public static class Vector3 {
-        public /*FNLfloat*/ float x;
-        public /*FNLfloat*/ float y;
-        public /*FNLfloat*/ float z;
+    static class Vector3 {
+        /*FNLfloat*/ float x;
+        /*FNLfloat*/ float y;
+        /*FNLfloat*/ float z;
 
         public Vector3(/*FNLfloat*/ float x, /*FNLfloat*/ float y, /*FNLfloat*/ float z) {
             this.x = x;

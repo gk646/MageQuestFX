@@ -25,7 +25,7 @@ import java.awt.Point;
 public class QST_MarlaFakeNecklace extends QUEST {
     private int enemiesKilled;
     private boolean KilledAria;
-    boolean once;
+    private boolean once;
     private boolean cutscenefinish;
 
     public QST_MarlaFakeNecklace(MainGame mg, boolean completed) {

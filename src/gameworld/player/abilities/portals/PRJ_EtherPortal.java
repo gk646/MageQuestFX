@@ -16,8 +16,8 @@ import java.awt.geom.Point2D;
 
 
 public class PRJ_EtherPortal extends EnemyProjectile {
-    public boolean remove;
-    MainGame mg;
+    private boolean remove;
+    private final MainGame mg;
 
     public PRJ_EtherPortal(MainGame mg, int x, int y) {
         this.mg = mg;
@@ -100,7 +100,7 @@ public class PRJ_EtherPortal extends EnemyProjectile {
         dead = remove;
     }
 
-    public void teleportPlayer() {
+    private void teleportPlayer() {
         if (WorldController.currentWorld != Zone.EtherRealm) {
             mg.generator.loadRandomMap();
         } else {

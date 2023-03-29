@@ -17,7 +17,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class GameMap {
-    public final Rectangle mapMover;
+    private final Rectangle mapMover;
     private final MainGame mg;
     private final int mapPanelX = 175;
     private final int mapPanelY = 75;

@@ -5,14 +5,14 @@ import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import main.MainGame;
 import main.system.enums.Zone;
 
-public class MapQuadrant {
+class MapQuadrant {
 
-    public final int startTileX;
-    public final int startTileY;
+    private final int startTileX;
+    private final int startTileY;
     private final int size;
     private final MainGame mg;
     private final Zone zone;
-    boolean spawned;
+    private boolean spawned;
     private int difficulty;
     private int numberOfEnemies;
 

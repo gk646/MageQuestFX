@@ -14,7 +14,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 
-public class Multiplayer {
+class Multiplayer {
     private static final int portNumber = 60_069;
     private static DataOutputStream outputStream;
     private static String ipAddress;

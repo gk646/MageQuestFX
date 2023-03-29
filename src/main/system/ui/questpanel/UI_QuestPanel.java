@@ -34,7 +34,7 @@ public class UI_QuestPanel {
     private final Image sideBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/sideBar.png"))));
     private final Image etherBar = new Image((Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/questpanel/etherBar.png"))));
     public double scroll = 280;
-    Rectangle[] trackBoxes = new Rectangle[10];
+    private final Rectangle[] trackBoxes = new Rectangle[10];
 
 
     public UI_QuestPanel(MainGame mg) {

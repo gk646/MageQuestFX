@@ -19,9 +19,10 @@ abstract public class MERCHANT extends NPC {
     public final ArrayList<UI_InventorySlot> buySlots = new ArrayList<>();
     public final ArrayList<UI_InventorySlot> soldSlots = new ArrayList<>();
     public boolean show_buyback;
-    protected int tradeWindowX, tradeWindowY;
-    protected final Image tradeWindow = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_first.png")));
-    protected final Image buyback = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_second.png")));
+    int tradeWindowX;
+    int tradeWindowY;
+    private final Image tradeWindow = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_first.png")));
+    private final Image buyback = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/inventory/merchant_second.png")));
 
     public boolean sellItem(ITEM item) {
         addItemSold(item);
@@ -35,7 +36,7 @@ abstract public class MERCHANT extends NPC {
         soldSlots.add(0, new UI_InventorySlot(item, 123, 123));
     }
 
-    protected void drawMerchantWindow(GraphicsContext gc, int startX, int startY) {
+    void drawMerchantWindow(GraphicsContext gc, int startX, int startY) {
         gc.drawImage(tradeWindow, startX - 50, startY - 50);
         gc.setFont(FonT.minecraftBold14);
         gc.setFill(Colors.darkBackground);
@@ -65,7 +66,7 @@ abstract public class MERCHANT extends NPC {
         }
     }
 
-    protected void drawBuyBack(GraphicsContext gc, int startX, int startY) {
+    void drawBuyBack(GraphicsContext gc, int startX, int startY) {
         gc.drawImage(buyback, startX - 50, startY - 50);
         gc.setFont(FonT.minecraftBold14);
         gc.setFill(Colors.darkBackground);
@@ -123,7 +124,7 @@ abstract public class MERCHANT extends NPC {
         return false;
     }
 
-    protected void drawMerchantTooltip(GraphicsContext gc) {
+    void drawMerchantTooltip(GraphicsContext gc) {
         if (show_trade) {
             for (UI_InventorySlot invSlot : buySlots) {
                 if (invSlot.item != null && invSlot.toolTipTimer >= 30) {

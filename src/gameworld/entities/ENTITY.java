@@ -41,10 +41,14 @@ abstract public class ENTITY {
     public boolean collidingWithPlayer;
     public Zone zone;
     public int spriteCounter;
-    public int goalCol;
-    public int goalRow;
-    protected float amountSinceLastARCANE, amountSinceLastICE, amountSinceLastPOISON, amountSinceLastDARK, amountSinceLastFIRE;
-    protected long timeSinceLastDamageNumber;
+    protected int goalCol;
+    protected int goalRow;
+    private float amountSinceLastARCANE;
+    protected float amountSinceLastICE;
+    protected float amountSinceLastPOISON;
+    protected float amountSinceLastDARK;
+    protected float amountSinceLastFIRE;
+    private long timeSinceLastDamageNumber;
     protected long timeSinceLastDamageSound;
     public Image entityImage1;
     protected Image entityImage2;
@@ -66,24 +70,24 @@ abstract public class ENTITY {
     public float movementSpeed;
     public int level;
 
-    public int hitDelay;
+    protected int hitDelay;
     public boolean collisionUp, collisionDown;
     public boolean collisionLeft;
     public boolean collisionRight;
     public boolean dead;
     public MainGame mg;
-    public String direction;
+    protected String direction;
     public Rectangle collisionBox;
     public boolean hpBarOn;
     public int hpBarCounter;
-    public int nextCol1;
-    public int nextRow1;
-    public int nextCol2;
-    public int nextRow2;
-    public int nextCol3;
-    public int nextRow3;
-    public int nextCol4;
-    public int nextRow4;
+    private int nextCol1;
+    private int nextRow1;
+    private int nextCol2;
+    private int nextRow2;
+    private int nextCol3;
+    private int nextRow3;
+    private int nextCol4;
+    private int nextRow4;
 
     /**
      * Returns boolean value of: Is the player further than 650 worldPixels away
@@ -91,7 +95,7 @@ abstract public class ENTITY {
      * @return the player being away more than 650 worldPixels
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean playerTooFarAbsolute() {
+    protected boolean playerTooFarAbsolute() {
         return Math.abs(worldX - Player.worldX) >= 650 || Math.abs(worldY - Player.worldY) >= 650;
     }
 
@@ -210,7 +214,7 @@ abstract public class ENTITY {
     }
 
 
-    public void moveToTileSuperVised(int x, int y) {
+    void moveToTileSuperVised(int x, int y) {
         searchPathUncapped(x, y, 100);
     }
 
@@ -351,7 +355,7 @@ abstract public class ENTITY {
         this.health -= flat_damage;
     }
 
-    public void drawBuffsAndDeBuffs(GraphicsContext gc) {
+    protected void drawBuffsAndDeBuffs(GraphicsContext gc) {
         if (BuffsDebuffEffects.size() > 0) {
             int x = screenX - 35;
             int y = screenY - 40;

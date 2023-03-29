@@ -26,7 +26,7 @@ public class OpenAIHelper {
         return CompletableFuture.supplyAsync(() -> getAIResponse(inputstr, API_KEY), executorService);
     }
 
-    public static String getAIResponse(String inputstr, String API_KEY) {
+    private static String getAIResponse(String inputstr, String API_KEY) {
         String prompt = inputstr.trim() + "Respond like Nietzsche";
         HttpURLConnection connection;
         StringBuilder response;

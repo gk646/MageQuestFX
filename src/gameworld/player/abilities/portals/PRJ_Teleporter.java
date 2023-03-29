@@ -13,8 +13,8 @@ import java.awt.geom.Point2D;
 
 
 public class PRJ_Teleporter extends EnemyProjectile {
-    public boolean remove;
-    MainGame mg;
+    private boolean remove;
+    private final MainGame mg;
 
     public PRJ_Teleporter(MainGame mg, int x, int y) {
         this.mg = mg;
@@ -99,7 +99,7 @@ public class PRJ_Teleporter extends EnemyProjectile {
         dead = remove;
     }
 
-    public void teleportPlayer() {
+    private void teleportPlayer() {
         mg.loadGameState.loadSpawnLevel();
     }
 }

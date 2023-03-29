@@ -1,5 +1,6 @@
 package gameworld.entities.damage.effects;
 
+import gameworld.player.PlayerPrompts;
 import gameworld.world.WorldController;
 import gameworld.world.objects.drops.DRP_ChestItem;
 import main.MainGame;
@@ -13,12 +14,14 @@ import java.util.Iterator;
 
 public class TileBasedEffects {
     public static int activeTile = 0;
-    public static int activeTile1 = 0;
-    int[] tilesData, tilesData1, tilesData2;
-    int previousTile;
-    final ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
-    final MainGame mg;
-    public boolean spawnSkeletons;
+    private static int activeTile1 = 0;
+    private int[] tilesData;
+    private int[] tilesData1;
+    private int[] tilesData2;
+    private int previousTile;
+    private final ArrayList<ScriptedAnimationList> animationList = new ArrayList<>();
+    private final MainGame mg;
+    private boolean spawnSkeletons;
 
     public TileBasedEffects(MainGame mg) {
         this.mg = mg;
@@ -61,19 +64,19 @@ public class TileBasedEffects {
             mg.player.setHealth(mg.player.getHealth() - (mg.player.maxHealth * 0.4f));
             mg.sound.playEffectSound(6);
         } else if (activeTile1 == 137) {
-            mg.playerPrompts.setETrue();
+            PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level, false));
                 mg.sound.playEffectSound(4);
                 animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
         } else if (activeTile1 == 1_382) {
-            mg.playerPrompts.setETrue();
+            PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 animationList.add(new ScriptedAnimationList(new int[]{1_382, 1_383}, 15, new Point(mg.playerX, mg.playerY), 0));
             }
         } else if (activeTile1 == 2_191) {
-            mg.playerPrompts.setETrue();
+            PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.dropManager.epicChestEvent(mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level);
                 mg.sound.playEffectSound(13);

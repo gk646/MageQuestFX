@@ -16,7 +16,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 abstract public class SKILL {
-    public final DecimalFormat df = new DecimalFormat("#.#");
+    protected final DecimalFormat df = new DecimalFormat("#.#");
 
     public Image icon;
     protected final MainGame mg;
@@ -136,7 +136,7 @@ abstract public class SKILL {
         }
     }
 
-    protected float getCoolDown() {
+    private float getCoolDown() {
         return totalCoolDown - (totalCoolDown * (mg.player.effects[17] / 100.0f));
     }
 

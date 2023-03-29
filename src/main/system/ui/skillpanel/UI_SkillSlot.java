@@ -5,12 +5,12 @@ import main.system.ui.skillbar.SKILL;
 
 import java.awt.Rectangle;
 
-public class UI_SkillSlot {
+class UI_SkillSlot {
 
-    public final Rectangle boundBox;
+    private final Rectangle boundBox;
     private final int SLOT_SIZE = 45;
     public boolean grabbed;
-    public final SKILL skill;
+    private final SKILL skill;
     public int toolTipTimer;
     public String type = "+";
 

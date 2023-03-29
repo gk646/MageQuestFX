@@ -15,7 +15,7 @@ import java.util.Objects;
 
 abstract public class BOSS extends ENTITY {
     protected String name;
-    protected final Image bossBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/bossbar.png")));
+    private final Image bossBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/skillbar/ui/bossbar.png")));
 
     public BOSS(MainGame mg, int x, int y, int level, int health, Zone zone) {
         this.mg = mg;

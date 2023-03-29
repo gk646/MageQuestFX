@@ -24,23 +24,21 @@ import java.util.regex.Pattern;
 public class Map {
     public final GameMapType gameMapType;
     public final Zone zone;
-    public final int[][] mapDataBackGround;
-    public final int[][] mapDataBackGround2;
-    public final int[][] mapDataForeGround;
+    public int[][] mapDataBackGround;
+    public int[][] mapDataBackGround2;
+    public int[][] mapDataForeGround;
     public final Point mapSize;
     public final ArrayList<SpawnTrigger> spawnTriggers;
     // public final MapQuadrant[] mapQuadrants;
     public int[][] mapCover;
-    public String name;
+    private final String name;
 
     public Map(String name, Point mapSize, Zone zone, GameMapType gameMapType) {
         this.mapSize = mapSize;
         this.gameMapType = gameMapType;
         this.zone = zone;
         this.name = name;
-        this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
-        this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
-        this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
+        loadMap();
         this.spawnTriggers = getTriggers(name, zone);
         this.mapCover = new int[mapSize.x][mapSize.x];
         if (gameMapType == GameMapType.MapCover) {
@@ -49,17 +47,13 @@ public class Map {
     }
 
     public Map(Point mapSize, Zone zone, int[][] FG, int[][] BG1, int[][] BG) {
-        this.mapSize = mapSize;
-        this.gameMapType = GameMapType.NoMapCover;
-        this.zone = zone;
-        this.spawnTriggers = new ArrayList<>();
+        this("", mapSize, zone, GameMapType.NoMapCover);
         this.mapDataForeGround = FG;
         this.mapDataBackGround2 = BG1;
         this.mapDataBackGround = BG;
-        this.mapCover = new int[mapSize.x][mapSize.x];
     }
 
-    public int[][] loadMapData(String filename, int worldSize) {
+    private int[][] loadMapData(String filename, int worldSize) {
         int[][] worldData = new int[worldSize][worldSize];
         String[] numbers;
         try (InputStream inputStream = Map.class.getResourceAsStream("/Maps/" + name + "/" + filename + ".csv")) {
@@ -77,8 +71,15 @@ public class Map {
         return worldData;
     }
 
+    private void loadMap() {
+        if (!name.equals("")) {
+            this.mapDataForeGround = loadMapData(name + "_FG", mapSize.x);
+            this.mapDataBackGround2 = loadMapData(name + "_BG1", mapSize.x);
+            this.mapDataBackGround = loadMapData(name + "_BG", mapSize.x);
+        }
+    }
 
-    public ArrayList<SpawnTrigger> getTriggers(String fileName, Zone zone) {
+    private ArrayList<SpawnTrigger> getTriggers(String fileName, Zone zone) {
         ArrayList<SpawnTrigger> spawnTriggers = new ArrayList<>();
         Pattern xfinder = Pattern.compile("\"x\":(\\d{0,4})");
         Pattern yfinder = Pattern.compile("\"y\":(\\d{0,4})");
@@ -160,7 +161,7 @@ public class Map {
         }
     }
 
-    public int[][] getMapCover() {
+    private int[][] getMapCover() {
 
         String prefix = "Z_MAPCOVER_";
         try {

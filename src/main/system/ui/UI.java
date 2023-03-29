@@ -52,9 +52,9 @@ public class UI {
     private final Image enter3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter3.png")));
     private final Image enter4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/titleScreen/enter4.png")));
     private final Image keyMap = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/keymap.png")));
-    final Light.Distant light = new Light.Distant();
-    final Lighting lighting = new Lighting();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    private final Light.Distant light = new Light.Distant();
+    private final Lighting lighting = new Lighting();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
     private int spriteCounter1 = 0;
     public float musicSlider = 100;
     public float ambientSlider = 75;

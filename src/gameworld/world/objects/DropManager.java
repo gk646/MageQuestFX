@@ -8,7 +8,7 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 public class DropManager {
-    MainGame mg;
+    private final MainGame mg;
 
     /**
      * Dropchances:<p>

@@ -106,7 +106,7 @@ public class UI_TalentPanel {
     }
 
 
-    public void drawTooltip(GraphicsContext gc) {
+    private void drawTooltip(GraphicsContext gc) {
         for (TalentNode node : talent_Nodes) {
             if (node != null) {
                 if (node.boundBox.contains(mg.inputH.lastMousePosition)) {
@@ -116,7 +116,7 @@ public class UI_TalentPanel {
         }
     }
 
-    public static String insertNewLine(String str) {
+    private static String insertNewLine(String str) {
         StringBuilder sb = new StringBuilder();
         String[] words = str.split("\\s+");
         int count = 0;

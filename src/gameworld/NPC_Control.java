@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class NPC_Control {
-    MainGame mg;
-    ArrayList<NPCScript> zoneScripts = new ArrayList<>();
+    private final MainGame mg;
+    private final ArrayList<NPCScript> zoneScripts = new ArrayList<>();
     public final ArrayList<NPC> NPC_Active = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {

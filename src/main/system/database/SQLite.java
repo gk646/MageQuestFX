@@ -27,7 +27,7 @@ import java.util.Objects;
 public class SQLite {
 
     private final MainGame mg;
-    public Connection DataBase;
+    private Connection DataBase;
 
 
     public static Connection PLAYER_SAVE;

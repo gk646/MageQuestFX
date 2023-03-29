@@ -2,7 +2,7 @@ package gameworld.quest.generic;
 
 import main.MainGame;
 
-public class Trading {
+class Trading {
     /**
      * Trading dialog framework
      *

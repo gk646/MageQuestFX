@@ -14,40 +14,40 @@ import java.util.Objects;
 
 public class WorldEnhancements {
 
-    final Image torchs = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/effects/torch_effect.png")));
+    private final Image torchs = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/effects/torch_effect.png")));
 
-    final AnimationList bigFish = new AnimationList(new int[]{1_118, 1_119, 1_120, 1_121, 1_122, 1_123, 1_124, 1_125}, 20);
-    final AnimationList smallFish = new AnimationList(new int[]{1_131, 1_132, 1_133, 1_134, 1_135, 1_136, 1_137, 1_138}, 15);
-    final AnimationList lines3 = new AnimationList(new int[]{1_144, 1_145, 1_146, 1_147, 1_148, 1_149, 1_150, 1_151}, 20);
-    final AnimationList lines2 = new AnimationList(new int[]{1_157, 1_158, 1_159, 1_160, 1_161, 1_162, 1_163, 1_164}, 20);
-    final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 15);
-    final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 15);
-    final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
-    final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 8);
-    final AnimationList flowersred = new AnimationList(new int[]{1235, 1240, 1245, 2140}, 25);
-    final AnimationList flowersred1 = new AnimationList(new int[]{1236, 1241, 1246, 2141}, 25);
-    final AnimationList flowersred2 = new AnimationList(new int[]{1237, 1242, 1247, 2142}, 25);
-    final AnimationList flowersred3 = new AnimationList(new int[]{1238, 1243, 2138, 2143}, 25);
-    final AnimationList flowersred4 = new AnimationList(new int[]{1239, 1244, 2139, 2144}, 25);
+    private final AnimationList bigFish = new AnimationList(new int[]{1_118, 1_119, 1_120, 1_121, 1_122, 1_123, 1_124, 1_125}, 20);
+    private final AnimationList smallFish = new AnimationList(new int[]{1_131, 1_132, 1_133, 1_134, 1_135, 1_136, 1_137, 1_138}, 15);
+    private final AnimationList lines3 = new AnimationList(new int[]{1_144, 1_145, 1_146, 1_147, 1_148, 1_149, 1_150, 1_151}, 20);
+    private final AnimationList lines2 = new AnimationList(new int[]{1_157, 1_158, 1_159, 1_160, 1_161, 1_162, 1_163, 1_164}, 20);
+    private final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 15);
+    private final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 15);
+    private final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
+    private final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 8);
+    private final AnimationList flowersred = new AnimationList(new int[]{1235, 1240, 1245, 2140}, 25);
+    private final AnimationList flowersred1 = new AnimationList(new int[]{1236, 1241, 1246, 2141}, 25);
+    private final AnimationList flowersred2 = new AnimationList(new int[]{1237, 1242, 1247, 2142}, 25);
+    private final AnimationList flowersred3 = new AnimationList(new int[]{1238, 1243, 2138, 2143}, 25);
+    private final AnimationList flowersred4 = new AnimationList(new int[]{1239, 1244, 2139, 2144}, 25);
 
-    final AnimationList whiteflower1 = new AnimationList(new int[]{1248, 1253, 1258, 2153}, 25);
-    final AnimationList whiteflower2 = new AnimationList(new int[]{1249, 1254, 1259, 2154}, 25);
-    final AnimationList whiteflower3 = new AnimationList(new int[]{1250, 1255, 1260, 2155}, 25);
-    final AnimationList whiteflower4 = new AnimationList(new int[]{1251, 1256, 2151, 2156}, 25);
-    final AnimationList whiteflower5 = new AnimationList(new int[]{1252, 1257, 2152, 2157}, 25);
+    private final AnimationList whiteflower1 = new AnimationList(new int[]{1248, 1253, 1258, 2153}, 25);
+    private final AnimationList whiteflower2 = new AnimationList(new int[]{1249, 1254, 1259, 2154}, 25);
+    private final AnimationList whiteflower3 = new AnimationList(new int[]{1250, 1255, 1260, 2155}, 25);
+    private final AnimationList whiteflower4 = new AnimationList(new int[]{1251, 1256, 2151, 2156}, 25);
+    private final AnimationList whiteflower5 = new AnimationList(new int[]{1252, 1257, 2152, 2157}, 25);
 
-    final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 35);
-    final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 35);
-    final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 35);
-    final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 35);
-    final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 35);
-    final StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
-    final StaticLightSource torch = new StaticLightSource(new int[]{1_404, 1_405, 1_406, 1_407, 1_408, 1_409, 1_410, 1_411}, Colors.fire_red);
-    final StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
+    private final AnimationList lavaCasket = new AnimationList(new int[]{95, 96, 97}, 35);
+    private final AnimationList lavaBecken = new AnimationList(new int[]{108, 109, 110}, 35);
+    private final AnimationList waterCasket = new AnimationList(new int[]{121, 122, 123}, 35);
+    private final AnimationList waterBecken = new AnimationList(new int[]{134, 135, 136}, 35);
+    private final AnimationList spikes = new AnimationList(new int[]{222, 223, 224, 225}, 35);
+    private final StaticLightSource lava = new StaticLightSource(new int[]{95, 95, 97, 108, 109, 110}, Colors.fire_red);
+    private final StaticLightSource torch = new StaticLightSource(new int[]{1_404, 1_405, 1_406, 1_407, 1_408, 1_409, 1_410, 1_411}, Colors.fire_red);
+    private final StaticLightSource lantern = new StaticLightSource(new int[]{203, 190}, Colors.fire_red);
 
-    final ArrayList<AnimationList> animationList = new ArrayList<>();
-    final ArrayList<StaticLightSource> lightList = new ArrayList<>();
-    final MainGame mg;
+    private final ArrayList<AnimationList> animationList = new ArrayList<>();
+    private final ArrayList<StaticLightSource> lightList = new ArrayList<>();
+    private final MainGame mg;
 
     public WorldEnhancements(MainGame mg) {
         this.mg = mg;
@@ -187,7 +187,7 @@ public class WorldEnhancements {
         lightList.add(lava);
     }
 
-    public boolean contains(int[] arr, int value) {
+    private boolean contains(int[] arr, int value) {
         for (int arrValue : arr) {
             if (value == arrValue) {
                 return true;

@@ -9,9 +9,9 @@ public class EntityPreloader {
     public static ResourceLoaderEntity wolf;
 
     public static ResourceLoaderEntity skeletonShield;
-    public static ResourceLoaderEntity deathBringer;
+    private static ResourceLoaderEntity deathBringer;
     public static ResourceLoaderEntity goblin;
-    public static ResourceLoaderEntity stoneKnight;
+    private static ResourceLoaderEntity stoneKnight;
     public static ResourceLoaderEntity realmKeeper;
     public static ResourceLoaderEntity bigBloated;
 

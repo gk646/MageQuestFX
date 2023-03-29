@@ -22,7 +22,7 @@ public class ENT_Control {
 
     public final ArrayList<ENTITY> addToEntities = new ArrayList<>();
     private final MainGame mg;
-    Image healthBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/healthbars.png")));
+    private final Image healthBar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/resources/ui/healthbars.png")));
 
     public ENT_Control(MainGame mg) {
         this.mg = mg;

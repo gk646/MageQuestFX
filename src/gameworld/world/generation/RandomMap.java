@@ -18,13 +18,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomMap {
     public boolean bossKilled;
-    MainGame mg;
+    private final MainGame mg;
 
-    int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
-    int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
-    int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
+    private final int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
+    private final int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
+    private final int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
 
-    int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
+    private final int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
     public boolean bossSpawned;
     public float etherRealmProgress = 100.0f;
     private int bossCountdown;

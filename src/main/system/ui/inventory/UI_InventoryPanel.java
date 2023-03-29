@@ -37,7 +37,9 @@ public class UI_InventoryPanel {
     private final MainGame mg;
     private final DecimalFormat df = new DecimalFormat("#.#");
     public final Rectangle bagEquipSlotsBox;
-    public final Rectangle charPanelMover, secondPanelButton, firstPanelButton;
+    private final Rectangle charPanelMover;
+    public final Rectangle secondPanelButton;
+    public final Rectangle firstPanelButton;
     public final Rectangle bagPanelMover;
     public final Rectangle effectsHitBox;
     public boolean showCombatStats = true;
@@ -1187,7 +1189,7 @@ public class UI_InventoryPanel {
         }
     }
 
-    public void addBagSlots(int size) {
+    private void addBagSlots(int size) {
         for (int i = 0; i < size; i++) {
             bag_Slots.add(new UI_InventorySlot(null, 1, 1));
         }

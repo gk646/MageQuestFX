@@ -55,11 +55,11 @@ public abstract class PROJECTILE {
     public Rectangle collisionBox;
     public float movementSpeed;
     public Point2D.Double worldPos;
-    public long lastHitTime;
+    private long lastHitTime;
     public int level;
     public int duration;
 
-    public PROJECTILE() {
+    protected PROJECTILE() {
     }
 
 
@@ -75,7 +75,7 @@ public abstract class PROJECTILE {
         }
     }
 
-    public void playStartSound() {
+    protected void playStartSound() {
         if (sounds[0] != null) {
             sounds[0].seek(Duration.ZERO);
             sounds[0].play();

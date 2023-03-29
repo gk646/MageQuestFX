@@ -16,7 +16,9 @@ import java.awt.Rectangle;
 
 public class ENT_RealmKeeper extends NPC_Generic {
     public static boolean ETHER_ACTIVE, BOSS_KILLED;
-    int progressStage = 1, objective1Progress, objective2Progress;
+    private final int progressStage = 1;
+    int objective1Progress;
+    int objective2Progress;
     int portalX, portalY;
 
     public ENT_RealmKeeper(MainGame mainGame, int xTile, int yTile, Zone zone) {

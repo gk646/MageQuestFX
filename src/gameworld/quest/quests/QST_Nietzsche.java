@@ -11,7 +11,7 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 public class QST_Nietzsche extends QUEST {
-    int currentKills;
+    private int currentKills;
 
     public QST_Nietzsche(MainGame mg, boolean completed) {
         super(mg);

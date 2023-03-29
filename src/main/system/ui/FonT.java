@@ -26,22 +26,22 @@ public class FonT {
     public static Font minecraftBoldItalic15;
 
     //MARU MONICA
-    public static Font maruMonica;
+    private static Font maruMonica;
 
-    public static Font maruMonica90;
+    private static Font maruMonica90;
 
     //PUBLIC PIXEL
-    public static Font publicPixel20;
+    private static Font publicPixel20;
     public static Font editUndo18;
     public static Font editUndo16;
     public static Font editUndo19;
     public static Font editUndo22;
     public static Font editUndo24;
     public static Font minecraftItalic14;
-    public static Font minecraftBold17;
+    private static Font minecraftBold17;
     public static Font minecraftItalic11;
     public static Font minecraftBoldItalic14;
-    public static Font minecraftBoldItalic18;
+    private static Font minecraftBoldItalic18;
     public static Font antParty18;
     public static Font antParty20;
     public static Font antParty30;

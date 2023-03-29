@@ -20,8 +20,10 @@ abstract public class QUEST {
     public String[] questRecap = new String[50];
     public int progressStage = 1;
     public int quest_id;
-    public boolean DontConsumeETyped;
-    public int objective1Progress = 0, objective2Progress = 0, objective3Progress = 0;
+    protected boolean DontConsumeETyped;
+    protected int objective1Progress = 0;
+    protected int objective2Progress = 0;
+    public int objective3Progress = 0;
     protected final MainGame mg;
     public boolean completed;
 
@@ -104,7 +106,7 @@ abstract public class QUEST {
         WorldRender.worldData1[x][y + 1] = 1_340;
     }
 
-    protected boolean checkDialogSimilarity(String newObjective, int index) {
+    private boolean checkDialogSimilarity(String newObjective, int index) {
         if (objectives[index] == null) {
             return false;
         }
@@ -166,7 +168,7 @@ abstract public class QUEST {
         return false;
     }
 
-    public void updateObjective(String newText, int index) {
+    protected void updateObjective(String newText, int index) {
         if (objectives[index] == null || !objectives[index].equals(newText)) {
             if (!checkDialogSimilarity(newText, index)) {
                 mg.sound.playEffectSound(1);

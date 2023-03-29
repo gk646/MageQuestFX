@@ -7,9 +7,9 @@ import main.MainGame;
 
 public class PlayerPrompts {
 
-    public boolean F;
-    final MainGame mg;
-    final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
+    private boolean F;
+    private final MainGame mg;
+    private final GeneralResourceLoader resc = new GeneralResourceLoader("ui/prompts/e");
     private int spriteCounter;
     public static int Ecounter = 0;
 

@@ -23,7 +23,7 @@ public class WorldController {
     public static Zone currentWorld = Zone.Woodland_Edge;
     public static NPCScript currentScript = null;
     public static int[][] currentMapCover;
-    public static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
+    private static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public final ArrayList<Map> MAPS = new ArrayList<>();
 
     public WorldController(MainGame mg) {
@@ -139,7 +139,7 @@ public class WorldController {
         thread.start();
     }
 
-    public Map getMap(Zone zone) {
+    private Map getMap(Zone zone) {
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 return map;

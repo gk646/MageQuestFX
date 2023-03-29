@@ -28,12 +28,22 @@ public class InputHandler {
     //Keys
     public boolean upPressed;
     public boolean downPressed;
-    public boolean rightPressed, ThreePressed, FourPressed, FivePressed, j_pressed, r_pressed, c_pressed, l_pressed, p_pressed, q_pressed, y_pressed;
+    public boolean rightPressed;
+    public boolean ThreePressed;
+    public boolean FourPressed;
+    public boolean FivePressed;
+    private boolean j_pressed;
+    private boolean r_pressed;
+    private boolean c_pressed;
+    private boolean l_pressed;
+    private boolean p_pressed;
+    public boolean q_pressed;
+    private boolean y_pressed;
     public boolean leftPressed;
     public static boolean q_typed, f_typed;
     public boolean OnePressed;
     public boolean debugFps;
-    public boolean p_typed;
+    private boolean p_typed;
     public boolean multiplayer;
     public boolean f_pressed;
     public boolean TwoPressed;
@@ -41,7 +51,7 @@ public class InputHandler {
     public boolean X_pressed;
     public boolean mouse1Pressed, mouse2Pressed;
     public boolean shift_pressed;
-    public String lastTypedString;
+    private String lastTypedString;
 
     public InputHandler(MainGame mg, Scene scene) {
         this.mg = mg;

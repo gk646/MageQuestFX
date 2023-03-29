@@ -9,8 +9,8 @@ import main.system.ui.skillbar.SKILL;
 import java.util.Objects;
 
 public class ITM_SpellBook extends ITM_Usable {
-    int index;
-    SKILL skill;
+    private final int index;
+    private final SKILL skill;
 
     public ITM_SpellBook(int level, SKILL[] skills, int index) {
         this.skill = skills[index];

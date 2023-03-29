@@ -108,7 +108,7 @@ public class ENT_TargetDummy extends ENTITY {
         spriteCounter++;
     }
 
-    public boolean isInsideRectangle(double x, double y, Point rectPoint1, Point rectPoint2) {
+    private boolean isInsideRectangle(double x, double y, Point rectPoint1, Point rectPoint2) {
         // Calculate the left-most and top-most point
         double leftX = Math.min(rectPoint1.x, rectPoint2.x);
         double topY = Math.min(rectPoint1.y, rectPoint2.y);

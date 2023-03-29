@@ -8,7 +8,7 @@ import gameworld.player.Player;
 
 
 public class BUF_PowerSurge extends Effect {
-    Player player;
+    private final Player player;
 
     /**
      * amount is per second!
