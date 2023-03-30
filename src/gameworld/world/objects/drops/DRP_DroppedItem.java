@@ -13,11 +13,11 @@ public class DRP_DroppedItem extends DROP {
     private final Image droppedIcon;
 
     /**
-     * Rarity 1: 58.87%
-     * Rarity 2: 31.86%
-     * Rarity 3: 7.68%
-     * Rarity 4: 1.39%
-     * Rarity 5: 0.20%
+     * Rarity 1: 58.87% <p>
+     * Rarity 2: 31.86% <p>
+     * Rarity 3: 7.68% <p>
+     * Rarity 4: 1.39% <p>
+     * Rarity 5: 0.20% <p>
      *
      * @param worldX
      * @param worldY

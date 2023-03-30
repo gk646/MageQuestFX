@@ -315,7 +315,7 @@ public class MainGame {
             gc.drawImage(vignette, 0, 0);
             npcControl.drawDialogs(gc);
             if (player.drawDialog) {
-                player.dialog.drawDialogPlayer(gc);
+                player.dialog.drawDialog(gc);
             }
             qPanel.draw(gc);
             miniM.draw(gc);
