@@ -18,13 +18,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomMap {
     public boolean bossKilled;
-    private final MainGame mg;
+    MainGame mg;
 
-    private final int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
-    private final int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
-    private final int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
+    int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
+    int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
+    int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
 
-    private final int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
+    int[] wallSidesPaletV1_4Enhanced = new int[]{182, 183};
     public boolean bossSpawned;
     public float etherRealmProgress = 100.0f;
     private int bossCountdown;
@@ -47,7 +47,7 @@ public class RandomMap {
     }
 
     private boolean testMap(int[][] arr, Point entrancePoint) {
-        return bfs(arr, entrancePoint.x, entrancePoint.y) > 15000;
+        return myBFS(arr, entrancePoint.x, entrancePoint.y) > 15000;
     }
 
     private Map getRandomMap(int mapSize, int roomSize, int corridorLength, int entranceNUm) {
@@ -293,35 +293,37 @@ public class RandomMap {
         return temp;
     }
 
-    private int bfs(int[][] map, int startX, int startY) {
-        int floorTile = 2215;
-        int[] dx = {1, -1, 0, 0};
-        int[] dy = {0, 0, 1, -1};
-        int rows = map.length;
-        int cols = map[0].length;
-        boolean[][] visited = new boolean[rows][cols];
+
+    private int myBFS(int[][] map, int startX, int startY) {
+        int tileCounter = 0;
+        int outTile = 2_215;
+        int mapSize = map.length;
+        boolean[][] checked = new boolean[mapSize][mapSize];
         Queue<int[]> queue = new LinkedList<>();
-        if (map[startX][startY] != floorTile) {
-            queue.offer(new int[]{startX, startY});
-            visited[startX][startY] = true;
-        }
-        int reachableTiles = 0;
+        queue.add(new int[]{startX, startY});
+        checked[startX][startY] = true;
+        int[] checkArrX = new int[]{1, 0, -1, 0};
+        int[] checkArrY = new int[]{0, 1, 0, -1};
+        int[] temp;
+        int val, val1;
+        int newVal, newVal1;
         while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            int x = current[0];
-            int y = current[1];
-            reachableTiles++;
+            temp = queue.poll();
+            val = temp[0];
+            val1 = temp[1];
+            tileCounter++;
             for (int i = 0; i < 4; i++) {
-                int newX = x + dx[i];
-                int newY = y + dy[i];
-                if (newX >= 0 && newY >= 0 && newX < rows && newY < cols && !visited[newX][newY] && map[newX][newY] != floorTile) {
-                    queue.offer(new int[]{newX, newY});
-                    visited[newX][newY] = true;
+                newVal = val + checkArrX[i];
+                newVal1 = val1 + checkArrY[i];
+                if (newVal < mapSize && newVal1 < mapSize && newVal >= 0 && newVal1 >= 0 && !checked[newVal][newVal1] && map[newVal][newVal1] != outTile) {
+                    queue.offer(new int[]{newVal, newVal1});
+                    checked[newVal][newVal1] = true;
                 }
             }
         }
-        return reachableTiles;
+        return tileCounter;
     }
+
 
     public void spawnBoss(int[][] arr) {
         if (WorldController.currentWorld == Zone.EtherRealm && !bossSpawned) {

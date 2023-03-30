@@ -47,7 +47,7 @@ public class WorldController {
 
     public void loadMap(Zone zone, int xTile, int yTile) {
         State currentState = mg.gameState;
-        mg.gameState = State.LOADING_SCREEN;
+        //mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 var thread = new Thread(() -> {
@@ -81,17 +81,16 @@ public class WorldController {
                     }
                 });
                 thread.start();
-                return;
+                break;
             }
         }
     }
 
     public void loadMapNoDelay(Zone zone, int xTile, int yTile) {
         State currentState = mg.gameState;
-
-        mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
+                //mg.gameState = State.LOADING_SCREEN;
                 mg.wRender.worldSize = map.mapSize;
                 currentWorld = zone;
                 mg.player.map = map;
@@ -106,7 +105,7 @@ public class WorldController {
                 mg.wAnim.cacheMapEnhancements();
                 mg.npcControl.loadGenerics(zone);
                 mg.gameState = currentState;
-                return;
+                break;
             }
         }
         mg.gameState = currentState;
@@ -114,7 +113,7 @@ public class WorldController {
 
     public void loadMap(Map map, int xTile, int yTile) {
         State currentState = mg.gameState;
-        mg.gameState = State.LOADING_SCREEN;
+        //mg.gameState = State.LOADING_SCREEN;
         Thread thread = new Thread(() -> {
             mg.wRender.worldSize = map.mapSize;
             currentWorld = map.zone;

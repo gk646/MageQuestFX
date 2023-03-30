@@ -165,8 +165,7 @@ public class MainGame {
         SCREEN_HEIGHT = height;
         HALF_WIDTH = SCREEN_WIDTH / 2;
         HALF_HEIGHT = SCREEN_HEIGHT / 2;
-        gameState = State.LOADING_SCREEN;
-
+        gameState = State.TITLE;
         cycle.start();
     }
 
@@ -466,7 +465,7 @@ public class MainGame {
             sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
             sound.INTRO.play();
         }
-        debug();
+        //debug();
     }
 
     private void debug() {
