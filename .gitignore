@@ -11,5 +11,6 @@ out
 *.iml
 META-INF
 lib
-*.zip
-*.rar
+
+enemies
+new sounds
