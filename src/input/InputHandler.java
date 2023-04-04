@@ -242,6 +242,7 @@ public class InputHandler {
                     mg.gameState = State.TITLE;
                     mg.sound.INTRO.seek(Duration.ZERO);
                     mg.sound.INTRO.setCycleCount(MediaPlayer.INDEFINITE);
+                    mg.sound.INTRO.setVolume(mg.ui.musicSlider);
                     mg.sound.INTRO.play();
                     mg.ui.commandNum = 0;
                     return;

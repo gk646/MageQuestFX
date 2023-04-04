@@ -10,6 +10,7 @@ import main.system.ui.Colors;
 
 import java.util.Objects;
 
+
 abstract public class Effect {
     DamageType type;
     public float amount;

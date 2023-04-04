@@ -35,12 +35,7 @@ abstract public class QUEST {
     abstract public void update();
 
 
-    protected static void openRoundDoor(int x, int y) {
-        WorldRender.worldData2[x][y] = 1_304;
-        WorldRender.worldData2[x + 1][y] = 1_305;
-        WorldRender.worldData1[x][y + 1] = 1_317;
-        WorldRender.worldData1[x + 1][y + 1] = 1_318;
-    }
+
 
     protected void removeObjective(int index) {
         objectives[index] = null;
@@ -89,15 +84,25 @@ abstract public class QUEST {
         return false;
     }
 
-    protected static void closeRoundDoor(int x, int y) {
+    public static void closeRoundDoor(int x, int y) {
         WorldRender.worldData2[x][y] = 1_301;
         WorldRender.worldData2[x + 1][y] = 1_302;
         WorldRender.worldData1[x][y + 1] = 1_314;
         WorldRender.worldData1[x + 1][y + 1] = 1_315;
     }
 
+    public static void openRoundDoor(int x, int y) {
+        WorldRender.worldData2[x][y] = 1_304;
+        WorldRender.worldData2[x + 1][y] = 1_305;
+        WorldRender.worldData1[x][y] = -1;
+        WorldRender.worldData1[x + 1][y] = -1;
+        WorldRender.worldData1[x][y + 1] = 1_317;
+        WorldRender.worldData1[x + 1][y + 1] = 1_318;
+    }
+
     public static void openSquareDoor(int x, int y) {
         WorldRender.worldData2[x][y] = 1_353;
+        WorldRender.worldData1[x][y] = -1;
         WorldRender.worldData1[x][y + 1] = 1_366;
     }
 

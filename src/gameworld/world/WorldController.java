@@ -6,6 +6,7 @@ import gameworld.entities.boss.BOSS_Knight;
 import gameworld.entities.npcs.generic.zonescripts.NPCScript;
 import gameworld.player.Player;
 import gameworld.player.PlayerPrompts;
+import gameworld.quest.QUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.SpawnTrigger;
 import gameworld.world.maps.Map;
@@ -17,12 +18,14 @@ import main.system.rendering.WorldRender;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WorldController {
     private final MainGame mg;
     public static Zone currentWorld = Zone.Woodland_Edge;
     public static NPCScript currentScript = null;
     public static int[][] currentMapCover;
+    public HashMap<Zone, Boolean> playerHasEnteredZone = new HashMap<>();
     private static final ArrayList<SpawnTrigger> globalTriggers = new ArrayList<>();
     public final ArrayList<Map> MAPS = new ArrayList<>();
 
@@ -284,6 +287,12 @@ public class WorldController {
                     mg.inputH.e_typed = false;
                     loadMap(Zone.The_Grove, 3, 5);
                 }
+            }
+            if (WorldRender.worldData1[53][92] != 1382) {
+                QUEST.openRoundDoor(12, 67);
+            }
+            if (WorldRender.worldData1[73][37] != 1382) {
+                QUEST.openSquareDoor(72, 20);
             }
         } else if (currentWorld == Zone.Hillcrest_Hermit_Cave) {
             if (mg.playerY == 69 && (mg.playerX == 34 || mg.playerX == 35 || mg.playerX == 36)) {

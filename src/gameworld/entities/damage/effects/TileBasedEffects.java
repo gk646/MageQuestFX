@@ -60,22 +60,22 @@ public class TileBasedEffects {
 
     private void checkForTileEffects() {
 
-        if (activeTile == 225 && activeTile != previousTile) {
+        if (activeTile == 225 && activeTile != previousTile) { // SPIKES
             mg.player.setHealth(mg.player.getHealth() - (mg.player.maxHealth * 0.4f));
             mg.sound.playEffectSound(6);
-        } else if (activeTile1 == 137) {
+        } else if (activeTile1 == 137) { // CHEST COMMON
             PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.WORLD_DROPS.add(new DRP_ChestItem(mg, mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level, false));
                 mg.sound.playEffectSound(4);
                 animationList.add(new ScriptedAnimationList(new int[]{137, 138, 139}, 15, new Point(mg.playerX, mg.playerY), 8));
             }
-        } else if (activeTile1 == 1_382) {
+        } else if (activeTile1 == 1_382) { // LEVER
             PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 animationList.add(new ScriptedAnimationList(new int[]{1_382, 1_383}, 15, new Point(mg.playerX, mg.playerY), 0));
             }
-        } else if (activeTile1 == 2_191) {
+        } else if (activeTile1 == 2_191) { // CHEST EPIC
             PlayerPrompts.setETrue();
             if (mg.inputH.e_typed && animationList.size() == 0) {
                 mg.dropManager.epicChestEvent(mg.playerX * 48 + 24, mg.playerY * 48 + 24, WorldController.currentWorld, mg.player.level);

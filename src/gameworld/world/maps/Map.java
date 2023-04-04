@@ -124,6 +124,7 @@ public class Map {
                             case "bossKnight" -> type = Type.KnightBoss;
                             case "mushroom" -> type = Type.Mushroom;
                             case "mixedGoblin" -> type = Type.MixedGoblin;
+                            case "coinSack" -> type = Type.CoinSack;
                         }
                         if (type != null) {
                             level = Integer.parseInt(matcher.group(2));

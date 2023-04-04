@@ -39,7 +39,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1598
+                "y": 1600
             }
         },
         "DungeonTutorial.tmx": {
@@ -49,8 +49,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 445.3333333333333,
-                "y": 297.33333333333337
+                "x": 445.33333333333337,
+                "y": 418
             }
         },
         "FirstDungeon.tmx": {
@@ -61,7 +61,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 480,
-                "y": 479.99999999999994
+                "y": 480
             }
         },
         "ForestClearing.tmx": {
@@ -73,11 +73,11 @@
             }
         },
         "GrassLands.tmx": {
-            "scale": 0.015625,
-            "selectedLayer": 0,
+            "scale": 0.25,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 4032,
-                "y": 4000
+                "x": 6544,
+                "y": 7112
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -98,7 +98,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 800,
-                "y": 799.8333333333333
+                "y": 800
             }
         },
         "TIILESET.tsx": {
@@ -114,7 +114,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 400,
-                "y": 400.6666666666667
+                "y": 400
             }
         },
         "TheGrove.tmx": {
@@ -125,7 +125,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1599
+                "y": 1600
             }
         },
         "TileSet.tsx": {
@@ -156,16 +156,16 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 912.1212121212121,
-                "y": 789.3939393939395
+                "x": 793.939393939394,
+                "y": 790.9090909090909
             }
         },
         "caveMarla.tmx": {
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 479.33333333333326,
-                "y": 479.33333333333326
+                "x": 480,
+                "y": 480
             }
         },
         "d.tsx": {
@@ -203,7 +203,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 960,
-                "y": 959.875
+                "y": 960
             }
         },
         "grassspritesheet.tsx": {
@@ -224,7 +224,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 560.6060606060606,
-                "y": 562.1212121212121
+                "y": 560.6060606060607
             }
         },
         "map1.tmj": {
@@ -269,7 +269,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 720,
-                "y": 663.3333333333333
+                "y": 664
             }
         },
         "tileset16.tsx": {
@@ -289,7 +289,7 @@
             }
         }
     },
-    "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/src/resources/Maps",
+    "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Java/Mage-QuestFX/src/resources/Maps/goblinCave",
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",

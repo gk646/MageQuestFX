@@ -11,6 +11,7 @@ import gameworld.world.WorldController;
 import gameworld.world.maps.Map;
 import gameworld.world.objects.DROP;
 import gameworld.world.objects.drops.DRP_Coin;
+import gameworld.world.objects.drops.DRP_CoinSack;
 import gameworld.world.objects.drops.DRP_EtherMark;
 import javafx.scene.canvas.GraphicsContext;
 import main.MainGame;
@@ -382,6 +383,10 @@ public class Player extends ENTITY {
                                 mg.generator.spawnBoss(WorldRender.worldData);
                                 mg.generator.bossSpawned = true;
                             }
+                            iter.remove();
+                        } else if (drop instanceof DRP_CoinSack) {
+                            mg.player.coins += ((DRP_CoinSack) drop).amount;
+                            mg.sound.playEffectSound(9);
                             iter.remove();
                         } else if (!drop.blockPickup) {
                             for (UI_InventorySlot bagSlot : mg.inventP.bag_Slots) {

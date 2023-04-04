@@ -102,6 +102,7 @@ public class ITEM {
         this.quality = quality;
         this.cost = level * 25 + rarity * 25;
         applyMultipliers();
+        getWeaponDamage();
     }
 
 

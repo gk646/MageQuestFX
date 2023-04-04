@@ -11,6 +11,7 @@ import gameworld.entities.monsters.ENT_SkeletonWarrior;
 import gameworld.entities.monsters.ENT_Snake;
 import gameworld.entities.monsters.ENT_Wolf;
 import gameworld.player.Player;
+import gameworld.world.objects.drops.DRP_CoinSack;
 import main.MainGame;
 import main.system.enums.Zone;
 
@@ -41,7 +42,6 @@ public class SpawnTrigger {
 
 
     public void activate(MainGame mg) {
-
         if (trigger == Trigger.SINGULAR && playerXCloseToTile(14, x, y)) {
             if (level == 0) {
                 level = mg.player.level;
@@ -66,6 +66,8 @@ public class SpawnTrigger {
 
             } else if (type == Type.KnightBoss) {
                 mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
+            } else if (type == Type.CoinSack) {
+                mg.WORLD_DROPS.add(new DRP_CoinSack(x * 48, y * 48, level, zone));
             }
             triggered = true;
         } else if (trigger == Trigger.SPREAD_Random && isPointWithinDistanceOfRectangle(500)) {
