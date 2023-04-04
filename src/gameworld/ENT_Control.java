@@ -55,7 +55,6 @@ public class ENT_Control {
      * Updates all entity positions and gamestates
      */
 
-
     public void update() {
         synchronized (mg.ENTITIES) {
             Iterator<ENTITY> entityIterator = mg.ENTITIES.iterator();

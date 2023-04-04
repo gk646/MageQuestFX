@@ -11,3 +11,5 @@ out
 *.iml
 META-INF
 lib
+*.zip
+*.rar
