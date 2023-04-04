@@ -11,6 +11,7 @@ out
 *.iml
 META-INF
 lib
-
+usable effects
+Usable TileSets
 enemies
 new sounds
