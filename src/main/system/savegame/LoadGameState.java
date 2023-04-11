@@ -206,7 +206,7 @@ public class LoadGameState {
                 mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 2, "Follow the path to \"The Grove\"");
             }
             if (quest_num == 2) {
-                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 9, "Check if tickets dont grow on trees");
+                mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 13, "Check if tickets dont grow on trees");
             }
             if (quest_num == 3) {
                 mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 19, "Let the island manager show you around");

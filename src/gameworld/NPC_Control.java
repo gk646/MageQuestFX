@@ -26,6 +26,7 @@ public class NPC_Control {
     private final MainGame mg;
     private final ArrayList<NPCScript> zoneScripts = new ArrayList<>();
     public final ArrayList<NPC> NPC_Active = new ArrayList<>();
+    public final ArrayList<NPC> addToActive = new ArrayList<>();
 
     public NPC_Control(MainGame mg) {
         this.mg = mg;
@@ -40,12 +41,17 @@ public class NPC_Control {
         NPC_Active.add(new NPC_Marla(mg, 41, 28));
         NPC_Active.add(new NPC_HillcrestMayor(mg, 4, 36));
 
+
         NPC_Active.add(new ENT_RealmKeeper(mg, 29, 21, Zone.Hillcrest));
     }
 
 
     public void update() {
         synchronized (NPC_Active) {
+            if (addToActive.size() > 0) {
+                NPC_Active.addAll(addToActive);
+                addToActive.clear();
+            }
             Iterator<NPC> entityIterator = NPC_Active.iterator();
             while (entityIterator.hasNext()) {
                 NPC npc = entityIterator.next();

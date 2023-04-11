@@ -66,6 +66,15 @@ abstract public class NPC extends ENTITY {
         gc.setEffect(null);
     }
 
+    protected void drawNPCName(GraphicsContext gc, String name, String title) {
+        gc.setEffect(mg.ui.shadow);
+        gc.setFill(Color.WHITE);
+        gc.setFont(FonT.varnished14);
+        drawCenteredTextAroundX(screenX + 28, gc, name, screenY - 20);
+        drawCenteredTextAroundX(screenX + 28, gc, "<" + title + ">", screenY - 10);
+        gc.setEffect(null);
+    }
+
     private void drawCenteredTextAroundX(int x, GraphicsContext gc, String text, float y) {
         Text textNode = new Text(text);
         textNode.setFont(gc.getFont());

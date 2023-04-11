@@ -13,12 +13,14 @@ import java.awt.Rectangle;
 
 
 public class NPC_IslandLeader extends NPC {
+    private final String name;
 
-    public NPC_IslandLeader(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_IslandLeader(MainGame mainGame, int xTile, int yTile, Zone zone, String name) {
         this.dialog = new Dialog();
+        this.name = name;
         this.zone = zone;
         this.mg = mainGame;
-        this.animation = new ResourceLoaderEntity("npc/IslandLeader");
+        this.animation = new ResourceLoaderEntity("npc/DyingHermit");
         animation.load();
         goalTile = new Point(34, 34);
         worldX = xTile * 48;
@@ -41,7 +43,7 @@ public class NPC_IslandLeader extends NPC {
         }
 
         spriteCounter++;
-        drawNPCName(gc, "Island Leader");
+        drawNPCName(gc, name, "Host");
     }
 
     private void drawIdle(GraphicsContext gc) {

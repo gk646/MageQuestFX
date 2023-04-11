@@ -12,13 +12,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 
-public class NPC_GroveIntroduction extends NPC {
+public class NPC_GroveManager extends NPC {
 
-    public NPC_GroveIntroduction(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_GroveManager(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
         this.zone = zone;
         this.mg = mainGame;
-        this.animation = new ResourceLoaderEntity("npc/GroveIntroduction");
+        this.animation = new ResourceLoaderEntity("npc/DyingHermit");
         animation.load();
         goalTile = new Point(34, 34);
         worldX = xTile * 48;
@@ -39,9 +39,8 @@ public class NPC_GroveIntroduction extends NPC {
         } else {
             drawIdle(gc);
         }
-
         spriteCounter++;
-        drawNPCName(gc, "");
+        drawNPCName(gc, "Mr. Coral Reefchief", "Manager");
     }
 
     private void drawIdle(GraphicsContext gc) {
