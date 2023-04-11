@@ -50,7 +50,7 @@ public class WorldController {
 
     public void loadMap(Zone zone, int xTile, int yTile) {
         State currentState = mg.gameState;
-        //mg.gameState = State.LOADING_SCREEN;
+        mg.gameState = State.LOADING_SCREEN;
         for (Map map : MAPS) {
             if (map.zone == zone) {
                 var thread = new Thread(() -> {
@@ -116,7 +116,7 @@ public class WorldController {
 
     public void loadMap(Map map, int xTile, int yTile) {
         State currentState = mg.gameState;
-        //mg.gameState = State.LOADING_SCREEN;
+        mg.gameState = State.LOADING_SCREEN;
         Thread thread = new Thread(() -> {
             mg.wRender.worldSize = map.mapSize;
             currentWorld = map.zone;

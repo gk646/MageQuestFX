@@ -117,7 +117,7 @@ public class UI_QuestPanel {
                     gc.fillText(string, x + 25, y += 20);
                 }
             }
-            y += 25;
+            y += 35;
         }
     }
 

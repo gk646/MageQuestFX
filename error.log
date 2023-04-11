@@ -1,6 +1,8 @@
-java.lang.ArrayIndexOutOfBoundsException: Index 100 out of bounds for length 100
-	at main.system.rendering.WorldRender.drawSecondLayer(WorldRender.java:115)
-	at main.MainGame.drawGame(MainGame.java:311)
+java.util.ConcurrentModificationException
+	at java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1013)
+	at java.base/java.util.ArrayList$Itr.next(ArrayList.java:967)
+	at gameworld.NPC_Control.drawDialogs(NPC_Control.java:86)
+	at main.MainGame.drawGame(MainGame.java:315)
 	at main.MainGame.lambda$startThreads$1(MainGame.java:235)
 	at com.sun.scenario.animation.shared.TimelineClipCore.visitKeyFrame(TimelineClipCore.java:239)
 	at com.sun.scenario.animation.shared.TimelineClipCore.playTo(TimelineClipCore.java:180)

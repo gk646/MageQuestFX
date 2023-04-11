@@ -1,8 +1,10 @@
 package gameworld.quest.hiddenquests;
 
 import gameworld.entities.NPC;
-import gameworld.entities.npcs.quests.ENT_GroveReceptionist;
 import gameworld.entities.npcs.quests.NPC_DyingHermit;
+import gameworld.entities.npcs.quests.NPC_GroveIntroduction;
+import gameworld.entities.npcs.quests.NPC_GroveReceptionist;
+import gameworld.entities.npcs.quests.NPC_IslandLeader;
 import gameworld.quest.HiddenQUEST;
 import gameworld.quest.QUEST_NAME;
 import gameworld.quest.dialog.DialogStorage;
@@ -41,13 +43,15 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                 this.activated = true;
                 mg.sqLite.updateQuestFacts(quest_id, 1, 1);
                 updateObjective("Follow the path to \"The Grove\"", 0);
+                addQuestMarker("entrance", 57, 108, Zone.The_Grove);
             }
         }
         for (int i = 0; i < mg.npcControl.NPC_Active.size(); i++) {
             NPC npc = mg.npcControl.NPC_Active.get(i);
-            if (npc instanceof ENT_GroveReceptionist) {
+            if (npc instanceof NPC_GroveReceptionist) {
                 interactWithNpc(npc, DialogStorage.TheGroveSecret);
                 if (progressStage == 2) {
+                    removeQuestMarker("entrance");
                     int num = npc.dialog.drawChoice("What is this place?", null, null, null);
                     if (num == 10) {
                         loadDialogStage(npc, DialogStorage.TheGroveSecret, 3);
@@ -69,9 +73,10 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                         npc.blockInteraction = true;
                         progressStage = 20;
                         removeQuestMarker("forest");
-                        mg.sqLite.updateQuestFacts(quest_id, 1, 2);
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 3);
                         nextStage();
                     } else if (num == 20) {
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 2);
                         loadDialogStage(npc, DialogStorage.TheGroveSecret, 10);
                         progressStage = 13;
                         npc.blockInteraction = true;
@@ -79,8 +84,31 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                         updateObjective("Check if tickets dont grow on trees", 0);
                         addQuestMarker("forest", 7, 139, Zone.The_Grove);
                     }
-                } else if (playerBagsContainItem("\"The Grove\" Ticket")) {
-                    progressStage = 8;
+                } else if (progressStage == 18) {
+                    npc.blockInteraction = true;
+                    int num = npc.dialog.drawChoice("I have a ticket!", "Pay 150 coins", null, null);
+                    if (num == 10 && playerBagsContainItem("\"The Grove\" Ticket")) {
+                        nextStage();
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 3);
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 19);
+                        removeItemFromBag("\"The Grove\" Ticket");
+                    } else if (num == 20 && mg.player.coins >= 150) {
+                        nextStage();
+                        mg.player.coins -= 150;
+                        mg.sqLite.updateQuestFacts(quest_id, 1, 3);
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 19);
+                    }
+                    objective1Progress = 0;
+                    objective2Progress = 0;
+                    objective3Progress = 0;
+                } else if (progressStage == 19) {
+                    npc.blockInteraction = true;
+                    if (objective2Progress == 0) {
+                        objective2Progress++;
+                        if (WorldController.currentWorld == Zone.The_Grove) {
+                            WorldRender.worldData1[61][108] = -1;
+                        }
+                    }
                 }
             } else if (npc instanceof NPC_DyingHermit) {
                 interactWithNpc(npc, DialogStorage.TheGroveSecret);
@@ -92,7 +120,12 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                     nextStage();
                     updateObjective("Go back to the reception", 0);
                     removeQuestMarker("forest");
+                    addQuestMarker("entr", 57, 108, Zone.The_Grove);
                 }
+            } else if (npc instanceof NPC_GroveIntroduction) {
+
+            } else if (npc instanceof NPC_IslandLeader) {
+
             }
         }
     }

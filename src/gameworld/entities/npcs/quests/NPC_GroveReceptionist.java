@@ -11,10 +11,10 @@ import main.system.enums.Zone;
 import java.awt.Rectangle;
 
 
-public class ENT_GroveReceptionist extends NPC_Generic {
+public class NPC_GroveReceptionist extends NPC_Generic {
 
 
-    public ENT_GroveReceptionist(MainGame mainGame, int xTile, int yTile, Zone zone) {
+    public NPC_GroveReceptionist(MainGame mainGame, int xTile, int yTile, Zone zone) {
         this.dialog = new Dialog();
         this.animation = new ResourceLoaderEntity("npc/woman");
         animation.load();

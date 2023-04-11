@@ -4,8 +4,8 @@ import gameworld.entities.NPC;
 import gameworld.entities.npcs.generic.NPC_Generic;
 import gameworld.entities.npcs.generic.zonescripts.HillcrestNPCScript;
 import gameworld.entities.npcs.generic.zonescripts.NPCScript;
-import gameworld.entities.npcs.quests.ENT_GroveReceptionist;
 import gameworld.entities.npcs.quests.ENT_RealmKeeper;
+import gameworld.entities.npcs.quests.NPC_GroveReceptionist;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.entities.npcs.quests.NPC_Marla;
 import gameworld.entities.npcs.quests.NPC_Nietzsche;
@@ -35,7 +35,7 @@ public class NPC_Control {
         NPC_Active.add(new NPC_AbilityTrader(mg, 30, 31, Zone.Hillcrest));
         NPC_Active.add(new NPC_AccessoriesTrader(mg, 36, 31, Zone.Hillcrest));
 
-        NPC_Active.add(new ENT_GroveReceptionist(mg, 55, 108, Zone.The_Grove));
+        NPC_Active.add(new NPC_GroveReceptionist(mg, 55, 108, Zone.The_Grove));
         NPC_Active.add(new NPC_Nietzsche(mg, 88, 4, Zone.Hillcrest));
         NPC_Active.add(new NPC_Marla(mg, 41, 28));
         NPC_Active.add(new NPC_HillcrestMayor(mg, 4, 36));
