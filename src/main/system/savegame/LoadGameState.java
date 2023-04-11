@@ -2,6 +2,7 @@ package main.system.savegame;
 
 import gameworld.entities.NPC;
 import gameworld.entities.npcs.quests.NPC_Aria;
+import gameworld.entities.npcs.quests.NPC_DyingHermit;
 import gameworld.entities.npcs.quests.NPC_Grim;
 import gameworld.entities.npcs.quests.NPC_HillcrestMayor;
 import gameworld.entities.npcs.quests.NPC_Marla;
@@ -207,6 +208,7 @@ public class LoadGameState {
             }
             if (quest_num == 2) {
                 mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 13, "Check if tickets dont grow on trees");
+                mg.npcControl.addToActive.add(new NPC_DyingHermit(mg, 3, 156, Zone.The_Grove));
             }
             if (quest_num == 3) {
                 mg.qPanel.setQuestStageAndObjective(QUEST_NAME.TheGrovesSecret, 19, "Let the island manager show you around");

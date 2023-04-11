@@ -70,7 +70,7 @@ abstract public class NPC extends ENTITY {
         gc.setEffect(mg.ui.shadow);
         gc.setFill(Color.WHITE);
         gc.setFont(FonT.varnished14);
-        drawCenteredTextAroundX(screenX + 28, gc, name, screenY - 20);
+        drawCenteredTextAroundX(screenX + 28, gc, name, screenY - 25);
         drawCenteredTextAroundX(screenX + 28, gc, "<" + title + ">", screenY - 10);
         gc.setEffect(null);
     }

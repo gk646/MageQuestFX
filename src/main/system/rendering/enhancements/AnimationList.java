@@ -10,7 +10,7 @@ public class AnimationList {
     public final ArrayList<Point> tilesIndices1 = new ArrayList<>();
     public final ArrayList<Point> tilesIndices2 = new ArrayList<>();
     private final int speed;
-    private final int[][] speedCounters = new int[3][1000];
+    private final int[][] speedCounters = new int[3][1200];
 
 
     public AnimationList(int[] list, int speed) {

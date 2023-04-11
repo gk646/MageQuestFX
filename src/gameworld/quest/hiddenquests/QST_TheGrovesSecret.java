@@ -52,7 +52,9 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
             NPC npc = mg.npcControl.NPC_Active.get(i);
             if (npc instanceof NPC_GroveReceptionist) {
                 interactWithNpc(npc, DialogStorage.TheGroveSecret);
-                if (progressStage == 2) {
+                if (progressStage == 1) {
+                    loadDialogStage(npc, DialogStorage.TheGroveSecret, 2);
+                } else if (progressStage == 2) {
                     removeQuestMarker("entrance");
                     int num = npc.dialog.drawChoice("What is this place?", null, null, null);
                     if (num == 10) {
@@ -118,7 +120,7 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                         mg.npcControl.addToActive.add(new NPC_IslandLeader(mg, 66, 148, Zone.The_Grove, "Ms. Snoozy Shores"));
                         mg.npcControl.addToActive.add(new NPC_IslandLeader(mg, 152, 150, Zone.The_Grove, "Captain Buck McSplash"));
                         if (WorldController.currentWorld == Zone.The_Grove) {
-                            WorldRender.worldData1[61][108] = -1;
+                            WorldRender.worldData1[61][108] = 1139;
                         }
                         objective2Progress = 0;
                         nextStage();
@@ -139,20 +141,42 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
             } else if (npc instanceof NPC_GroveManager) {
                 interactWithNpc(npc, DialogStorage.TheGroveSecret);
                 if (progressStage == 22) {
+                    if (objective3Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 22);
+                        objective3Progress = 1;
+                    }
                     if (moveToTile(npc, 149, 111, new Point(123, 111))) {
                         nextStage();
+                        objective3Progress = 0;
                     }
                 } else if (progressStage == 23) {
-                    if (moveToTile(npc, 117, 102, new Point(149, 103))) {
-                        nextStage();
+                    if (objective3Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 23);
+                        objective3Progress = 1;
                     }
-                } else if (progressStage == 24) {
-                    if (moveToTile(npc, 110, 76)) {
+                    if (moveToTile(npc, 113, 107, new Point(149, 103))) {
                         nextStage();
+                        objective3Progress = 0;
+                    }
+                } else if (progressStage == 25) {
+                    if (objective3Progress == 0) {
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 25);
+                        objective3Progress = 1;
+                    }
+                    if (moveToTile(npc, 104, 142)) {
+                        nextStage();
+                        addQuestMarker("mcsplash", 152, 150, Zone.The_Grove);
+                        updateObjective("Talk to Captain Buck McSplash", 0);
+                        loadDialogStage(npc, DialogStorage.TheGroveSecret, 26);
+                        objective3Progress = 0;
                     }
                 }
             } else if (npc instanceof NPC_IslandLeader) {
+                if (name.equals("Captain Buck McSplash")) {
 
+                } else if (name.equals("Dr. Flex N. Stretch")) {
+
+                }
             }
         }
     }

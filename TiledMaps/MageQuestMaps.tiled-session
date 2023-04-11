@@ -39,7 +39,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 1600,
-                "y": 1600
+                "y": 1598
             }
         },
         "DungeonTutorial.tmx": {
@@ -50,7 +50,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 445.3333333333333,
-                "y": 296.66666666666663
+                "y": 297.33333333333337
             }
         },
         "FirstDungeon.tmx": {
@@ -61,7 +61,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 480,
-                "y": 479.3333333333333
+                "y": 479.99999999999994
             }
         },
         "ForestClearing.tmx": {
@@ -76,8 +76,8 @@
             "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 6544,
-                "y": 7112
+                "x": 4000,
+                "y": 3998
             }
         },
         "GrassLands.tmx#grassspritesheet": {
@@ -97,8 +97,8 @@
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1042.4242424242423,
-                "y": 1084.8484848484848
+                "x": 800,
+                "y": 801.5151515151515
             }
         },
         "TIILESET.tsx": {
@@ -114,18 +114,18 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 400,
-                "y": 400
+                "y": 400.6666666666667
             }
         },
         "TheGrove.tmx": {
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1600,
-                "y": 1600
+                "x": 1883.333333333333,
+                "y": 1745.3333333333333
             }
         },
         "TileSet.tsx": {
@@ -156,8 +156,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 915.1515151515151,
-                "y": 790.9090909090909
+                "x": 912.1212121212121,
+                "y": 789.3939393939395
             }
         },
         "caveMarla.tmx": {
@@ -165,7 +165,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 479.33333333333326,
-                "y": 478.66666666666663
+                "y": 479.33333333333326
             }
         },
         "d.tsx": {
@@ -202,8 +202,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 704.6666666666666,
-                "y": 958
+                "x": 960,
+                "y": 959.6666666666665
             }
         },
         "grassspritesheet.tsx": {
@@ -223,8 +223,8 @@
             "scale": 0.33,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 560.6060606060607,
-                "y": 563.6363636363637
+                "x": 560.6060606060606,
+                "y": 562.1212121212121
             }
         },
         "map1.tmj": {
@@ -269,7 +269,7 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 720,
-                "y": 664
+                "y": 663.3333333333333
             }
         },
         "tileset16.tsx": {

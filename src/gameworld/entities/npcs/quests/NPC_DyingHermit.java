@@ -33,12 +33,15 @@ public class NPC_DyingHermit extends NPC {
     public void draw(GraphicsContext gc) {
         screenX = (int) (worldX - Player.worldX + Player.screenX);
         screenY = (int) (worldY - Player.worldY + Player.screenY);
-        if (onPath) {
-            drawWalk(gc);
+        if (AfterAnimationDead) {
+            gc.drawImage(animation.dead.get(5), screenX, screenY - 20);
+        } else if (dead) {
+            drawDeath(gc);
+        } else if (onPath) {
+            drawIdle(gc);
         } else {
             drawIdle(gc);
         }
-
         spriteCounter++;
         drawNPCName(gc, "Dying Man");
     }
@@ -52,14 +55,13 @@ public class NPC_DyingHermit extends NPC {
         }
     }
 
-    private void drawWalk(GraphicsContext gc) {
-        switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX + 17, screenY - 5);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX + 17, screenY - 5);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX + 17, screenY - 5);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX + 17, screenY - 5);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX + 17, screenY - 5);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX + 17, screenY - 5);
+    private void drawDeath(GraphicsContext gc) {
+        switch (spriteCounter % 150 / 30) {
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX + 17, screenY - 5);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX + 17, screenY - 5);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX + 17, screenY - 5);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX + 17, screenY - 5);
+            case 4 -> AfterAnimationDead = true;
         }
     }
 

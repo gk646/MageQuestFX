@@ -18,7 +18,7 @@ public class NPC_GroveManager extends NPC {
         this.dialog = new Dialog();
         this.zone = zone;
         this.mg = mainGame;
-        this.animation = new ResourceLoaderEntity("npc/DyingHermit");
+        this.animation = new ResourceLoaderEntity("npc/GroveManager");
         animation.load();
         goalTile = new Point(34, 34);
         worldX = xTile * 48;

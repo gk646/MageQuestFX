@@ -1,7 +1,7 @@
 package gameworld.quest;
 
 public enum Type {
-    Grunt, Shooter, Mixed, BOSS_Slime, Spear, snake, wolf, Mushroom, WizardBoss1, WizardBoss2, KnightBoss, MixedGoblin, CoinSack;
+    Grunt, Shooter, Mixed, BOSS_Slime, Spear, snake, wolf, Mushroom, WizardBoss1, WizardBoss2, KnightBoss, MixedGoblin, CoinSack, GoblinGlobe;
 
 
     Type() {

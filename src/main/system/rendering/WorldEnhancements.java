@@ -23,7 +23,7 @@ public class WorldEnhancements {
     private final AnimationList lines1 = new AnimationList(new int[]{1_170, 1_171, 1_172, 1_173, 1_174, 1_175, 1_176, 1_177}, 15);
     private final AnimationList water = new AnimationList(new int[]{911, 1_262, 1_263, 1_264, 1_265, 1_266, 1_267, 1_268}, 15);
     private final AnimationList wall_torch = new AnimationList(new int[]{1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411}, 8);
-    private final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 8);
+    private final AnimationList campfire = new AnimationList(new int[]{1_528, 1_529, 1_530, 1_531}, 15);
     private final AnimationList flowersred = new AnimationList(new int[]{1235, 1240, 1245, 2140}, 25);
     private final AnimationList flowersred1 = new AnimationList(new int[]{1236, 1241, 1246, 2141}, 25);
     private final AnimationList flowersred2 = new AnimationList(new int[]{1237, 1242, 1247, 2142}, 25);

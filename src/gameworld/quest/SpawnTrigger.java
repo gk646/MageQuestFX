@@ -12,6 +12,7 @@ import gameworld.entities.monsters.ENT_Snake;
 import gameworld.entities.monsters.ENT_Wolf;
 import gameworld.player.Player;
 import gameworld.world.objects.drops.DRP_CoinSack;
+import gameworld.world.objects.drops.DRP_DroppedItem;
 import main.MainGame;
 import main.system.enums.Zone;
 
@@ -68,6 +69,8 @@ public class SpawnTrigger {
                 mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
             } else if (type == Type.CoinSack) {
                 mg.WORLD_DROPS.add(new DRP_CoinSack(x * 48, y * 48, level, zone));
+            } else if (type == Type.GoblinGlobe) {
+                mg.WORLD_DROPS.add(new DRP_DroppedItem(x * 48, y * 48, mg.MISC.get(5), zone));
             }
             triggered = true;
         } else if (trigger == Trigger.SPREAD_Random && isPointWithinDistanceOfRectangle(500)) {
