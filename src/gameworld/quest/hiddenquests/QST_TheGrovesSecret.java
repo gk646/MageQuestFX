@@ -165,7 +165,7 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                         loadDialogStage(npc, DialogStorage.TheGroveSecret, 25);
                         objective3Progress = 1;
                     }
-                    if (moveToTile(npc, 104, 142)) {
+                    if (moveToTile(npc, 104, 142, new Point(104, 121))) {
                         nextStage();
                         addQuestMarker("mcsplash", 152, 150, Zone.The_Grove);
                         updateObjective("Talk to Captain Buck McSplash", 0);

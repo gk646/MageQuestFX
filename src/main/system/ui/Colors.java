@@ -9,7 +9,6 @@ public class Colors {
 
     public static final Color Blue = Color.rgb(0, 153, 219, 1);
     //QUALITIES
-
     public static final Color setItem = Color.rgb(13, 210, 15, 1);
     public static final Color mediumQuality = Color.rgb(27, 178, 1, 1);
     public static final Color highQuality = Color.rgb(178, 14, 23, 1);

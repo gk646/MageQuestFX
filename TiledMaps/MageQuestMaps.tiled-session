@@ -105,11 +105,11 @@
             }
         },
         "LightsChapel.tmx": {
-            "scale": 2,
+            "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1556,
-                "y": 1507
+                "x": 1466.6666666666667,
+                "y": 1836.3636363636363
             }
         },
         "TIILESET.tsx": {
@@ -300,7 +300,7 @@
             }
         }
     },
-    "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Java/Mage-QuestFX/src/resources/Maps/LightsChapel",
+    "last.exportedFilePath": "C:/Users/Lukas/Documents/CodingProjects/Java/Mage-QuestFX/src/resources/Maps/TheGrove",
     "last.externalTilesetPath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.imagePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",
     "last.objectTemplatePath": "C:/Users/Lukas/Documents/CodingProjects/Mage-QuestFX/TiledMaps",

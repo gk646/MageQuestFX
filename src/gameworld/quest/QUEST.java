@@ -191,6 +191,7 @@ abstract public class QUEST {
     }
 
     protected void loadDialogStage(NPC npc, String[] array, int stageNumber) {
+        npc.playerTalkLocation = new Point(npc.activeTile.x * 48, npc.activeTile.y * 48);
         try {
             if (npc.dialog.dialogLine.equals(Dialog.insertNewLine(array[stageNumber], 45))) {
                 return;

@@ -26,7 +26,7 @@ public class NPC_GroveManager extends NPC {
         this.entityHeight = 48;
         this.entityWidth = 48;
         this.movementSpeed = 2;
-        this.collisionBox = new Rectangle(0, 0, 42, 42);
+        this.collisionBox = new Rectangle(0, 0, 40, 40);
         direction = "updownleftright";
     }
 
@@ -45,21 +45,21 @@ public class NPC_GroveManager extends NPC {
 
     private void drawIdle(GraphicsContext gc) {
         switch (spriteCounter % 120 / 30) {
-            case 0 -> gc.drawImage(animation.idle.get(0), screenX + 17, screenY - 5);
-            case 1 -> gc.drawImage(animation.idle.get(1), screenX + 17, screenY - 5);
-            case 2 -> gc.drawImage(animation.idle.get(2), screenX + 17, screenY - 5);
-            case 3 -> gc.drawImage(animation.idle.get(3), screenX + 17, screenY - 5);
+            case 0 -> gc.drawImage(animation.idle.get(0), screenX - 6, screenY - 20);
+            case 1 -> gc.drawImage(animation.idle.get(1), screenX - 6, screenY - 20);
+            case 2 -> gc.drawImage(animation.idle.get(2), screenX - 6, screenY - 20);
+            case 3 -> gc.drawImage(animation.idle.get(3), screenX - 6, screenY - 20);
         }
     }
 
     private void drawWalk(GraphicsContext gc) {
         switch (spriteCounter % 180 / 30) {
-            case 0 -> gc.drawImage(animation.walk.get(0), screenX + 17, screenY - 5);
-            case 1 -> gc.drawImage(animation.walk.get(1), screenX + 17, screenY - 5);
-            case 2 -> gc.drawImage(animation.walk.get(2), screenX + 17, screenY - 5);
-            case 3 -> gc.drawImage(animation.walk.get(3), screenX + 17, screenY - 5);
-            case 4 -> gc.drawImage(animation.walk.get(4), screenX + 17, screenY - 5);
-            case 5 -> gc.drawImage(animation.walk.get(5), screenX + 17, screenY - 5);
+            case 0 -> gc.drawImage(animation.walk.get(0), screenX - 6, screenY - 20);
+            case 1 -> gc.drawImage(animation.walk.get(1), screenX - 6, screenY - 20);
+            case 2 -> gc.drawImage(animation.walk.get(2), screenX - 6, screenY - 20);
+            case 3 -> gc.drawImage(animation.walk.get(3), screenX - 6, screenY - 20);
+            case 4 -> gc.drawImage(animation.walk.get(4), screenX - 6, screenY - 20);
+            case 5 -> gc.drawImage(animation.walk.get(5), screenX - 6, screenY - 20);
         }
     }
 
@@ -70,7 +70,7 @@ public class NPC_GroveManager extends NPC {
             dialogHideDelay++;
             show_dialog = !mg.wControl.player_went_away(playerTalkLocation, 500);
         }
-        if (dialogHideDelay > 600) {
+        if (dialogHideDelay > 800) {
             show_dialog = false;
             dialogHideDelay = 0;
         }

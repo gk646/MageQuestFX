@@ -49,7 +49,9 @@ public class GameMap {
 
     public void draw(GraphicsContext gc) {
         drawGameMapBackground(gc);
+        gc.setGlobalAlpha(0.75);
         gc.drawImage(mapImage, 175, 80);
+        gc.setGlobalAlpha(1);
         drawTop(gc);
     }
 
@@ -71,7 +73,6 @@ public class GameMap {
     }
 
     private void getOffset(int zoom) {
-
         if (zoom == 1) {
             yOffset = 0;
             xOffset = 0;
@@ -138,7 +139,7 @@ public class GameMap {
                         tileNum1 = WorldRender.worldData1[worldX][worldY];
 
                         boolean shouldDrawCollision = mg.wRender.tileStorage[tileNum].collision || (tileNum1 != -1 && mg.wRender.tileStorage[tileNum1].collision);
-                        Color fillColor = shouldDrawCollision ? Color.rgb(150, 150, 150, 0.8) : Color.rgb(99, 199, 77, 0.8);
+                        Color fillColor = shouldDrawCollision ? Colors.darkBackground : Colors.map_green;
 
                         if (!shouldDrawCollision) {
                             fillColor = WorldController.currentMapCover[worldX][worldY] == 0 ? Color.rgb(24, 24, 24, 0.8) : fillColor;
@@ -155,7 +156,7 @@ public class GameMap {
                         for (float i = y * zoom_i; i < y * zoom_i + zoom_i; i++) {
                             for (float b = x * zoom_i; b < x * zoom_i + zoom_i; b++) {
                                 if (i < 935 && b < 1570 && i >= 0 && b >= 0) {
-                                    pixelWriter.setColor((int) b, (int) i, Color.rgb(24, 20, 37, 0.596));
+                                    pixelWriter.setColor((int) b, (int) i, Colors.black);
                                 }
                             }
                         }
@@ -170,11 +171,10 @@ public class GameMap {
         for (int i = playerY; i < playerY + zoom_i; i++) {
             for (int b = playerX; b < playerX + zoom_i; b++) {
                 if (i < 935 && b < 1570 && i > 0 && b > 0) {
-                    pixelWriter.setColor(b, i, Color.rgb(0, 153, 219, 0.855));
+                    pixelWriter.setColor(b, i, Colors.Blue);
                 }
             }
         }
-
         // Proximity entities drawing
         synchronized (mg.PROXIMITY_ENTITIES) {
             for (gameworld.entities.ENTITY entity : mg.PROXIMITY_ENTITIES) {
@@ -185,7 +185,7 @@ public class GameMap {
                 for (float i = y; i < y + zoom_i; i++) {
                     for (float b = x; b < x + zoom_i; b++) {
                         if (i < 935 && b < 1570 && i > 75 && b > 175) {
-                            pixelWriter.setColor((int) b, (int) i, Color.rgb(255, 0, 68, 0.8));
+                            pixelWriter.setColor((int) b, (int) i, Colors.Red);
                         }
                     }
                 }
@@ -202,7 +202,7 @@ public class GameMap {
                 if ((entityX - xTile_i) < 157 && xTile_i - entityX <= 157 && (entityY - yTile_i) <= 93 && yTile_i - entityY < 93) {
                     for (float i = y; i < y + 2; i++) {
                         for (float b = x; b < x + 2; b++) {
-                            pixelWriter.setColor((int) b, (int) i, Color.rgb(255, 0, 68, 0.8));
+                            pixelWriter.setColor((int) b, (int) i, Colors.Red);
                         }
                     }
                 }
@@ -221,7 +221,7 @@ public class GameMap {
                         for (float i = y; i < y + zoom_i; i++) {
                             for (float b = x; b < x + zoom_i; b++) {
                                 if (i < 935 && b < 1570 && i > 0 && b > 0) {
-                                    pixelWriter.setColor((int) b, (int) i, Color.rgb(18, 78, 137, 0.8));
+                                    pixelWriter.setColor((int) b, (int) i, Colors.blue_npc);
                                 }
                             }
                         }
@@ -239,7 +239,7 @@ public class GameMap {
                     for (float i = y; i < y + zoom_i; i++) {
                         for (float b = x; b < x + zoom_i; b++) {
                             if (i < 935 && b < 1570 && i > 0 && b > 0) {
-                                pixelWriter.setColor((int) b, (int) i, Color.rgb(254, 231, 97, 0.8));
+                                pixelWriter.setColor((int) b, (int) i, Colors.questMarkerYellow);
                             }
                         }
                     }
