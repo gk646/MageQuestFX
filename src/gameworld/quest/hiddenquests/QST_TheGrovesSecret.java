@@ -140,7 +140,9 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                 }
             } else if (npc instanceof NPC_GroveManager) {
                 interactWithNpc(npc, DialogStorage.TheGroveSecret);
-                if (progressStage == 22) {
+                if (progressStage == 20) {
+                    updateObjective("Let Mr.Coral Reefchief show you around", 0);
+                } else if (progressStage == 22) {
                     if (objective3Progress == 0) {
                         loadDialogStage(npc, DialogStorage.TheGroveSecret, 22);
                         objective3Progress = 1;
@@ -170,6 +172,8 @@ public class QST_TheGrovesSecret extends HiddenQUEST {
                         loadDialogStage(npc, DialogStorage.TheGroveSecret, 26);
                         objective3Progress = 0;
                     }
+                } else if (progressStage == 26) {
+                    moveToTile(npc, 111, 105);
                 }
             } else if (npc instanceof NPC_IslandLeader) {
                 if (name.equals("Captain Buck McSplash")) {

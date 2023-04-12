@@ -47,30 +47,41 @@ public class SpawnTrigger {
             if (level == 0) {
                 level = mg.player.level;
             }
-            if (type == Type.Grunt) {
-                mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
-            } else if (type == Type.Shooter) {
-                mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
-            } else if (type == Type.BOSS_Slime) {
-                mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
-            } else if (type == Type.Spear) {
-                mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
-            } else if (type == Type.snake) {
-                mg.ENTITIES.add(new ENT_Snake(mg, x, y, level, zone));
-            } else if (type == Type.wolf) {
-                mg.ENTITIES.add(new ENT_Wolf(mg, x, y, level, zone));
-            } else if (type == Type.Mushroom) {
-                mg.ENTITIES.add(new ENT_Mushroom(mg, x, y, level, zone));
-            } else if (type == Type.WizardBoss1) {
-
-            } else if (type == Type.WizardBoss2) {
-
-            } else if (type == Type.KnightBoss) {
-                mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
-            } else if (type == Type.CoinSack) {
-                mg.WORLD_DROPS.add(new DRP_CoinSack(x * 48, y * 48, level, zone));
-            } else if (type == Type.GoblinGlobe) {
-                mg.WORLD_DROPS.add(new DRP_DroppedItem(x * 48, y * 48, mg.MISC.get(5), zone));
+            switch (type) {
+                case Grunt:
+                    mg.ENTITIES.add(new ENT_SkeletonWarrior(mg, x * 48, y * 48, level, zone));
+                    break;
+                case Shooter:
+                    mg.ENTITIES.add(new ENT_SkeletonArcher(mg, x * 48, y * 48, level, zone));
+                    break;
+                case BOSS_Slime:
+                    mg.ENTITIES.add(new BOSS_Slime(mg, x * 48, y * 48, level, 150, zone));
+                    break;
+                case Spear:
+                    mg.ENTITIES.add(new ENT_SkeletonSpearman(mg, x * 48, y * 48, level, zone));
+                    break;
+                case snake:
+                    mg.ENTITIES.add(new ENT_Snake(mg, x, y, level, zone));
+                    break;
+                case wolf:
+                    mg.ENTITIES.add(new ENT_Wolf(mg, x, y, level, zone));
+                    break;
+                case Mushroom:
+                    mg.ENTITIES.add(new ENT_Mushroom(mg, x, y, level, zone));
+                    break;
+                case WizardBoss1:
+                    break;
+                case WizardBoss2:
+                    break;
+                case KnightBoss:
+                    mg.ENTITIES.add(new BOSS_Knight(mg, x * 48, y * 48, level, 150, zone));
+                    break;
+                case CoinSack:
+                    mg.WORLD_DROPS.add(new DRP_CoinSack(x * 48, y * 48, level, zone));
+                    break;
+                case GoblinGlobe:
+                    mg.WORLD_DROPS.add(new DRP_DroppedItem(x * 48, y * 48, mg.MISC.get(5), zone));
+                    break;
             }
             triggered = true;
         } else if (trigger == Trigger.SPREAD_Random && isPointWithinDistanceOfRectangle(500)) {
