@@ -6,8 +6,8 @@
     "activeFile": "LightsChapel.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "exports",
-        "."
+        ".",
+        "exports"
     ],
     "fileStates": {
         "": {
