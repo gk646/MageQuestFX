@@ -12,14 +12,13 @@ import main.MainGame;
 import main.system.enums.Zone;
 
 import java.awt.Point;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomMap {
     public boolean bossKilled;
     MainGame mg;
-
+    ArrayList<Long> first = new ArrayList<>(), second = new ArrayList<>();
     int[] floorPaletV1_4Enhanced = new int[]{131, 132, 133, 144, 145, 146, 131, 132, 133, 131, 132, 133};
     int[] wallPaletV1_4Enhanced = new int[]{93, 107, 120, 93, 93, 93, 93, 93, 93};
     int[] wallTopPaletV1_4Enhanced = new int[]{80, 82, 80, 80, 80, 80, 80};
@@ -61,6 +60,7 @@ public class RandomMap {
         while (!testMap(map.mapDataBackGround, entrancePoint)) {
             map = generateMap(mapSize, roomSize, corridorLength, entranceNUm);
         }
+
         //etherRealmProgress = 0;
         bossSpawned = false;
         spawnEntities(map.mapDataBackGround, entrancePoint);
@@ -294,29 +294,27 @@ public class RandomMap {
     }
 
 
-    private int myBFS(int[][] map, int startX, int startY) {
-        int tileCounter = 0;
-        int outTile = 2_215;
-        int mapSize = map.length;
+    public int myBFS(int[][] map, int startX, int startY) {
+        int val, val1, tileCounter = 0, newVal, newVal1, outTile = 2_215, mapSize = map.length;
         boolean[][] checked = new boolean[mapSize][mapSize];
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{startX, startY});
-        checked[startX][startY] = true;
         int[] checkArrX = new int[]{1, 0, -1, 0};
         int[] checkArrY = new int[]{0, 1, 0, -1};
-        int[] temp;
-        int val, val1;
-        int newVal, newVal1;
-        while (!queue.isEmpty()) {
-            temp = queue.poll();
-            val = temp[0];
-            val1 = temp[1];
+        checked[startX][startY] = true;
+        glm_vec2 tempVec;
+
+        QueueMQ queueMQ = new QueueMQ(mapSize);
+        queueMQ.add(new glm_vec2(startX, startY));
+
+        while (!queueMQ.isEmpty()) {
+            tempVec = queueMQ.pop();
+            val = tempVec.x;
+            val1 = tempVec.y;
             tileCounter++;
             for (int i = 0; i < 4; i++) {
                 newVal = val + checkArrX[i];
                 newVal1 = val1 + checkArrY[i];
                 if (newVal < mapSize && newVal1 < mapSize && newVal >= 0 && newVal1 >= 0 && !checked[newVal][newVal1] && map[newVal][newVal1] != outTile) {
-                    queue.offer(new int[]{newVal, newVal1});
+                    queueMQ.add(new glm_vec2(newVal, newVal1));
                     checked[newVal][newVal1] = true;
                 }
             }
@@ -374,3 +372,34 @@ public class RandomMap {
         System.out.println("Min value: " + min);
     }
 }
+
+final class glm_vec2 {
+    public int x, y;
+
+    glm_vec2(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+final class QueueMQ {
+    int currentIndex = -1;
+    glm_vec2[] queue;
+
+    QueueMQ(int size) {
+        queue = new glm_vec2[size * size];
+    }
+
+    public void add(glm_vec2 vec2) {
+        queue[++currentIndex] = vec2;
+    }
+
+    public glm_vec2 pop() {
+        return queue[currentIndex--];
+    }
+
+    public boolean isEmpty() {
+        return currentIndex < 0;
+    }
+}
+

@@ -28,10 +28,10 @@ public class Map {
     public int[][] mapDataBackGround2;
     public int[][] mapDataForeGround;
     public final Point mapSize;
-    public final ArrayList<SpawnTrigger> spawnTriggers;
-    // public final MapQuadrant[] mapQuadrants;
+    public ArrayList<SpawnTrigger> spawnTriggers;
+
     public int[][] mapCover;
-    private final String name;
+    private String name;
 
     public Map(String name, Point mapSize, Zone zone, GameMapType gameMapType) {
         this.mapSize = mapSize;
@@ -47,7 +47,10 @@ public class Map {
     }
 
     public Map(Point mapSize, Zone zone, int[][] FG, int[][] BG1, int[][] BG) {
-        this("", mapSize, zone, GameMapType.NoMapCover);
+        this.mapSize = mapSize;
+        this.gameMapType = GameMapType.NoMapCover;
+        this.zone = zone;
+        this.mapCover = new int[mapSize.x][mapSize.x];
         this.mapDataForeGround = FG;
         this.mapDataBackGround2 = BG1;
         this.mapDataBackGround = BG;

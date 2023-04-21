@@ -1,5 +1,9 @@
-java.lang.ArrayIndexOutOfBoundsException: Index 1000 out of bounds for length 1000
-	at main.system.rendering.enhancements.AnimationList.progress(AnimationList.java:23)
-	at main.system.rendering.WorldEnhancements.animateTiles(WorldEnhancements.java:129)
-	at main.MainGame.lambda$startThreads$0(MainGame.java:211)
+java.lang.NullPointerException: Cannot invoke "com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMedia.getNativeMediaRef()" because "this.gstMedia" is null
+	at com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMediaPlayer.playerPlay(GSTMediaPlayer.java:109)
+	at com.sun.media.jfxmediaimpl.NativeMediaPlayer.play(NativeMediaPlayer.java:1033)
+	at javafx.scene.media.MediaPlayer.play(MediaPlayer.java:727)
+	at gameworld.entities.loadinghelper.ResourceLoaderEntity.playRandomSoundFromXToIndex(ResourceLoaderEntity.java:189)
+	at gameworld.entities.monsters.ENT_SkeletonSpearman.update(ENT_SkeletonSpearman.java:59)
+	at gameworld.ENT_Control.update(ENT_Control.java:65)
+	at main.MainGame.lambda$startThreads$3(MainGame.java:275)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
