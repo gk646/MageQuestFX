@@ -1,7 +1,7 @@
 ![Alt text](goblin_cave.png)
 
 ### To download the game head to [my itch.io page.](https://gk646.itch.io/mage-quest)
-### For support, bug reports talking head to [my discord server.](https://discord.gg/STCdEcBzUv)  
+### For support, bug reports and talking head to [my discord server.](https://discord.gg/STCdEcBzUv)  
 
 
 This is the source code of my game **Mage Quest**. This was my first real project and started only 1 1/2 months after I started learning Java so a lot
