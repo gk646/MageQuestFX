@@ -1,9 +1,0 @@
-java.lang.NullPointerException: Cannot invoke "com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMedia.getNativeMediaRef()" because "this.gstMedia" is null
-	at com.sun.media.jfxmediaimpl.platform.gstreamer.GSTMediaPlayer.playerPlay(GSTMediaPlayer.java:109)
-	at com.sun.media.jfxmediaimpl.NativeMediaPlayer.play(NativeMediaPlayer.java:1033)
-	at javafx.scene.media.MediaPlayer.play(MediaPlayer.java:727)
-	at gameworld.entities.loadinghelper.ResourceLoaderEntity.playRandomSoundFromXToIndex(ResourceLoaderEntity.java:189)
-	at gameworld.entities.monsters.ENT_SkeletonSpearman.update(ENT_SkeletonSpearman.java:59)
-	at gameworld.ENT_Control.update(ENT_Control.java:65)
-	at main.MainGame.lambda$startThreads$3(MainGame.java:275)
-	at java.base/java.lang.Thread.run(Thread.java:1589)
