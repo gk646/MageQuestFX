@@ -4,9 +4,8 @@
 ### For support, bug reports talking head to [my discord server.](https://discord.gg/STCdEcBzUv)  
 
 
-
-This is the source code of my game **Mage Quest**. 
-
+This is the source code of my game **Mage Quest**. This was my first real project and started only 1 1/2 months after I started learning Java so a lot
+of the times it might not be very efficient. Effectively it took about 3 months in total and is about 21k lines.
 
 Make sure to also look at the [credits](credits.txt), there's a ton of helpful resources out there.
 - special thanks to [FastNoiseLite](https://github.com/Auburn/FastNoiseLite) for the Java noise class
