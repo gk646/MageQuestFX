@@ -93,7 +93,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-
 public class MainGame {
 
     private static boolean CHEATS = false;
